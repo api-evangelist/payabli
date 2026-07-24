@@ -1,0 +1,2317 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Invoice API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Invoice
+paths:
+  /Invoice/{entry}:
+    post:
+      operationId: AddInvoice
+      summary: Add invoice
+      description: Creates an invoice in an entrypoint.
+      tags:
+      - Invoice
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: forceCustomerCreation
+        in: query
+        description: When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
+        required: false
+        schema:
+          $ref: '#/components/schemas/ForceCustomerCreation'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      - name: idempotencyKey
+        in: header
+        description: _Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.
+        required: false
+        schema:
+          $ref: '#/components/schemas/IdempotencyKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponseWithoutData'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceDataRequest'
+  /Invoice/{idInvoice}:
+    get:
+      operationId: GetInvoice
+      summary: Get invoice
+      description: Retrieves a single invoice by ID.
+      tags:
+      - Invoice
+      parameters:
+      - name: idInvoice
+        in: path
+        description: Invoice ID
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Fields marked optional may return `null` if not set.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInvoiceRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    put:
+      operationId: EditInvoice
+      summary: Update invoice
+      description: Updates details for a single invoice in an entrypoint.
+      tags:
+      - Invoice
+      parameters:
+      - name: idInvoice
+        in: path
+        description: Invoice ID
+        required: true
+        schema:
+          type: integer
+      - name: forceCustomerCreation
+        in: query
+        description: When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponseWithoutData'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceDataRequest'
+    delete:
+      operationId: DeleteInvoice
+      summary: Delete invoice
+      description: Deletes a single invoice from an entrypoint.
+      tags:
+      - Invoice
+      parameters:
+      - name: idInvoice
+        in: path
+        description: Invoice ID
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponseWithoutData'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Invoice/send/{idInvoice}:
+    get:
+      operationId: SendInvoice
+      summary: Send invoice via email
+      description: Sends an invoice from an entrypoint via email.
+      tags:
+      - Invoice
+      parameters:
+      - name: idInvoice
+        in: path
+        description: Invoice ID
+        required: true
+        schema:
+          type: integer
+      - name: attachfile
+        in: query
+        description: When `true`, attaches a PDF version of invoice to the email.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: mail2
+        in: query
+        description: Email address where the invoice will be sent to. If this parameter isn't included, Payabli uses the email address on file for the customer owner of the invoice.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendInvoiceResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Invoice/attachedFileFromInvoice/{idInvoice}/{filename}:
+    get:
+      operationId: GetAttachedFileFromInvoice
+      summary: Get attached file from an invoice
+      description: Retrieves a file attached to an invoice.
+      tags:
+      - Invoice
+      parameters:
+      - name: filename
+        in: path
+        description: 'The filename in Payabli. Get this from the `zipName` field
+
+          in the `DocumentsRef.filelist` array returned by
+
+          `/api/Invoice/{idInvoice}`. Example: `0_Bill.pdf`.'
+        required: true
+        schema:
+          type: string
+      - name: idInvoice
+        in: path
+        description: Invoice ID
+        required: true
+        schema:
+          type: integer
+      - name: returnObject
+        in: query
+        description: When `true`, the request returns the file content as a Base64-encoded string.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response returns a binary file when `returnObject` is `false`. When `returnObject` is `true`, the response contains the file content as a Base64-encoded string in an object. Due to technical limitations, only the object response is documented here.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileContent'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    delete:
+      operationId: deleteAttachedFromInvoice
+      summary: Delete attached file from invoice
+      description: Deletes a file attached to an invoice.
+      tags:
+      - Invoice
+      parameters:
+      - name: filename
+        in: path
+        description: 'The filename in Payabli. Get this from the `zipName` field
+
+          in the `DocumentsRef.filelist` array returned by
+
+          `/api/Invoice/{idInvoice}`. Example: `0_Bill.pdf`.'
+        required: true
+        schema:
+          type: string
+      - name: idInvoice
+        in: path
+        description: Invoice ID
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponseWithoutData'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Invoice/getNumber/{entry}:
+    get:
+      operationId: GetInvoiceNumber
+      summary: Get next InvoiceNumber for entrypoint
+      description: Retrieves the next available invoice number for a paypoint.
+      tags:
+      - Invoice
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceNumberResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Query/invoices/{entry}:
+    get:
+      operationId: ListInvoices
+      summary: Get list of invoices for an entrypoint
+      description: Returns a list of invoices for an entrypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
+      tags:
+      - Invoice
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: exportFormat
+        in: query
+        description: Export format for file downloads. When specified, returns data as a file instead of JSON.
+        required: false
+        schema:
+          $ref: '#/components/schemas/ExportFormat'
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records to return for the query. Use `0` or negative value to return all records.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: parameters
+        in: query
+        description: 'Collection of field names, conditions, and values used to filter the query
+
+
+          See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
+
+
+          List of field names accepted:
+
+
+          - `invoiceDate` (gt, ge, lt, le, eq, ne)
+
+          - `dueDate` (gt, ge, lt, le, eq, ne)
+
+          - `sentDate` (gt, ge, lt, le, eq, ne)
+
+          - `frequency` (in, nin,ne, eq)
+
+          - `invoiceType` (eq, ne)
+
+          - `payTerms` (in, nin, eq, ne)
+
+          - `paypointId` (ne, eq)
+
+          - `totalAmount` (gt, ge, lt, le, eq, ne)
+
+          - `paidAmount` (gt, ge, lt, le, eq, ne)
+
+          - `status` (in, nin, eq, ne)
+
+          - `invoiceNumber` (ct, nct, eq, ne)
+
+          - `purchaseOrder` (ct, nct, eq, ne)
+
+          - `itemProductCode` (ct, nct)
+
+          - `itemDescription` (ct, nct)
+
+          - `customerFirstname` (ct, nct, eq, ne)
+
+          - `customerLastname` (ct, nct, eq, ne)
+
+          - `customerName` (ct, nct)
+
+          - `customerId` (eq, ne)
+
+          - `customerNumber` (ct, nct, eq, ne)
+
+          - `customerCompanyname` (ct, nct, eq, ne)
+
+          - `customerAddress` (ct, nct, eq, ne)
+
+          - `customerCity` (ct, nct, eq, ne)
+
+          - `customerZip` (ct, nct, eq, ne)
+
+          - `customerState` (ct, nct, eq, ne)
+
+          - `customerCountry` (ct, nct, eq, ne)
+
+          - `customerPhone` (ct, nct, eq, ne)
+
+          - `customerEmail` (ct, nct, eq, ne)
+
+          - `customerShippingAddress` (ct, nct, eq, ne)
+
+          - `customerShippingCity` (ct, nct, eq, ne)
+
+          - `customerShippingZip` (ct, nct, eq, ne)
+
+          - `customerShippingState` (ct, nct, eq, ne)
+
+          - `customerShippingCountry` (ct, nct, eq, ne)
+
+          - `orgId` (eq)
+
+          - `paylinkId` (ne, eq)
+
+          - `paypointLegal` (ne, eq, ct, nct)
+
+          - `paypointDba` (ne, eq, ct, nct)
+
+          - `orgName` (ne, eq, ct, nct)
+
+          - `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name
+
+
+          List of comparison accepted - enclosed between parentheses:
+
+
+          - eq or empty => equal
+
+          - gt => greater than
+
+          - ge => greater or equal
+
+          - lt => less than
+
+          - le => less or equal
+
+          - ne => not equal
+
+          - ct => contains
+
+          - nct => not contains
+
+          - in => inside array
+
+          - nin => not inside array
+
+
+          List of parameters accepted:
+
+          - limitRecord : max number of records for query (default="20", "0" or negative value for all)
+
+          - fromRecord : initial record in query
+
+
+          Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.00'
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Fields marked optional may return `null` if not set.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryInvoiceResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Query/invoices/org/{orgId}:
+    get:
+      operationId: ListInvoicesOrg
+      summary: Get list of invoices for an organization
+      description: Returns a list of invoices for an org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
+      tags:
+      - Invoice
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: exportFormat
+        in: query
+        description: Export format for file downloads. When specified, returns data as a file instead of JSON.
+        required: false
+        schema:
+          $ref: '#/components/schemas/ExportFormat'
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records to return for the query. Use `0` or negative value to return all records.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: parameters
+        in: query
+        description: 'Collection of field names, conditions, and values used to filter the query
+
+
+          See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
+
+
+          List of field names accepted:
+
+
+          - `invoiceDate` (gt, ge, lt, le, eq, ne)
+
+          - `dueDate` (gt, ge, lt, le, eq, ne)
+
+          - `sentDate` (gt, ge, lt, le, eq, ne)
+
+          - `frequency` (in, nin,ne, eq)
+
+          - `invoiceType` (eq, ne)
+
+          - `payTerms` (in, nin, eq, ne)
+
+          - `paypointId` (ne, eq)
+
+          - `totalAmount` (gt, ge, lt, le, eq, ne)
+
+          - `paidAmount` (gt, ge, lt, le, eq, ne)
+
+          - `status` (in, nin, eq, ne)
+
+          - `invoiceNumber` (ct, nct, eq, ne)
+
+          - `purchaseOrder` (ct, nct, eq, ne)
+
+          - `itemProductCode` (ct, nct)
+
+          - `itemDescription` (ct, nct)
+
+          - `customerFirstname` (ct, nct, eq, ne)
+
+          - `customerLastname` (ct, nct, eq, ne)
+
+          - `customerName` (ct, nct)
+
+          - `customerId` (eq, ne)
+
+          - `customerNumber` (ct, nct, eq, ne)
+
+          - `customerCompanyname` (ct, nct, eq, ne)
+
+          - `customerAddress` (ct, nct, eq, ne)
+
+          - `customerCity` (ct, nct, eq, ne)
+
+          - `customerZip` (ct, nct, eq, ne)
+
+          - `customerState` (ct, nct, eq, ne)
+
+          - `customerCountry` (ct, nct, eq, ne)
+
+          - `customerPhone` (ct, nct, eq, ne)
+
+          - `customerEmail` (ct, nct, eq, ne)
+
+          - `customerShippingAddress` (ct, nct, eq, ne)
+
+          - `customerShippingCity` (ct, nct, eq, ne)
+
+          - `customerShippingZip` (ct, nct, eq, ne)
+
+          - `customerShippingState` (ct, nct, eq, ne)
+
+          - `customerShippingCountry` (ct, nct, eq, ne)
+
+          - `orgId` (eq)
+
+          - `paylinkId` (ne, eq)
+
+          - `paypointLegal` (ne, eq, ct, nct)
+
+          - `paypointDba` (ne, eq, ct, nct)
+
+          - `orgName` (ne, eq, ct, nct)
+
+          - `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name
+
+
+          List of comparison accepted - enclosed between parentheses:
+
+
+          - eq or empty => equal
+
+          - gt => greater than
+
+          - ge => greater or equal
+
+          - lt => less than
+
+          - le => less or equal
+
+          - ne => not equal
+
+          - ct => contains
+
+          - nct => not contains
+
+          - in => inside array
+
+          - nin => not inside array
+
+
+          List of parameters accepted:
+
+          - limitRecord : max number of records for query (default="20", "0" or negative value for all)
+
+          - fromRecord : initial record in query
+
+
+          Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.00'
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Fields marked optional may return `null` if not set.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryInvoiceResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/invoicePdf/{idInvoice}:
+    get:
+      operationId: GetInvoicePDF
+      summary: Export Invoice PDF
+      description: Export a single invoice in PDF format.
+      tags:
+      - Invoice
+      parameters:
+      - name: idInvoice
+        in: path
+        description: Invoice ID
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    File:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: A file containing the response data, in the format specified in the request.
+      title: File
+    QuerySummary:
+      type: object
+      properties:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount for the records.
+        totalNetAmount:
+          type: number
+          format: double
+          description: Total net amount for the records.
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummary
+    Shippingaddress:
+      type: string
+      description: The shipping address.
+      title: Shippingaddress
+    InvoiceId:
+      type: integer
+      format: int64
+      description: Identifier of invoice.
+      title: InvoiceId
+    FreightAmount:
+      type: number
+      format: double
+      description: Freight/shipping amount.
+      title: FreightAmount
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    BillDataPaymentTerms:
+      type: string
+      enum:
+      - PIA
+      - CIA
+      - UR
+      - NET10
+      - NET20
+      - NET30
+      - NET45
+      - NET60
+      - NET90
+      - EOM
+      - MFI
+      - 5MFI
+      - 10MFI
+      - 15MFI
+      - 20MFI
+      - 2/10NET30
+      - UF
+      - 10UF
+      - 20UF
+      - 25UF
+      - 50UF
+      description: 'Payment terms for invoice. If no terms are defined, then response data for
+
+        this field defaults to `NET30`. Mirrors the values in
+
+        [`Terms`](#schema-terms).
+
+        '
+      title: BillDataPaymentTerms
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    BillingStateNullable:
+      type: string
+      description: Billing state. Must be a 2-letter state code for addresses in the US.
+      title: BillingStateNullable
+    BillingCountryNullable:
+      type: string
+      description: Billing address country.
+      title: BillingCountryNullable
+    CustomerStatus:
+      type: integer
+      description: 'Customer Status. Possible values:
+
+
+        - `-99` Deleted
+
+        - `0` Inactive
+
+        - `1` Active
+
+        - `85` Locked (typically due to multiple failed login attempts)
+
+        '
+      title: CustomerStatus
+    RoomIdNotInUse:
+      type: integer
+      format: int64
+      description: Field not in use on this endpoint. It always returns `0`.
+      title: RoomIdNotInUse
+    SummaryCommodityCode:
+      type: string
+      description: Commodity code.
+      title: SummaryCommodityCode
+    ItemUnitofMeasure:
+      type: string
+      description: Unit of measurement. Max length of 100 characters.
+      title: ItemUnitofMeasure
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    DutyAmount:
+      type: number
+      format: double
+      description: Duty amount.
+      title: DutyAmount
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    Tax:
+      type: number
+      format: double
+      description: Tax rate in percent applied to the invoice.
+      title: Tax
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
+    InvoiceDataRequest:
+      type: object
+      properties:
+        customerData:
+          $ref: '#/components/schemas/PayorDataRequest'
+          description: Object describing the customer/payor. Required for POST requests. Which fields are required depends on the paypoint's custom identifier settings.
+        invoiceData:
+          $ref: '#/components/schemas/BillData'
+          description: Object describing the invoice. Required for POST requests.
+        scheduledOptions:
+          $ref: '#/components/schemas/BillOptions'
+          description: Object with options for scheduled invoices.
+      title: InvoiceDataRequest
+    ItemDescription:
+      type: string
+      description: Item or product description. Max length of 250 characters.
+      title: ItemDescription
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    InvoicePaidAmount:
+      type: number
+      format: double
+      description: Amount partially paid to the invoice.
+      title: InvoicePaidAmount
+    Shippingstate:
+      type: string
+      description: Shipping state or province.
+      title: Shippingstate
+    CustomerId:
+      type: integer
+      format: int64
+      description: The Payabli-generated unique ID for the customer.
+      title: CustomerId
+    BillOptions:
+      type: object
+      properties:
+        includePaylink:
+          type: boolean
+          description: Flag to indicate if the scheduled invoice includes a payment link.
+        includePdf:
+          type: boolean
+          description: Flag to indicate if the scheduled invoice includes a PDF version of invoice
+      title: BillOptions
+    BillingCityNullable:
+      type: string
+      description: Billing city.
+      title: BillingCityNullable
+    CustomerNumberNullable:
+      type: string
+      description: 'User-provided unique identifier for the customer. This is typically the
+
+        customer ID from your own system.
+
+        '
+      title: CustomerNumberNullable
+    BillItem:
+      type: object
+      properties:
+        itemCategories:
+          type: array
+          items:
+            type: string
+          description: Array of tags classifying item or product.
+        itemCommodityCode:
+          $ref: '#/components/schemas/ItemCommodityCode'
+        itemCost:
+          type: number
+          format: double
+          description: Item or product price per unit.
+        itemDescription:
+          $ref: '#/components/schemas/ItemDescription'
+        itemMode:
+          type: integer
+          description: 'Internal class of item or product: value `0` is only for invoices,
+
+            `1` for bills, and `2` is common for both. Required on invoice line
+
+            items — invoice creation fails with `Invalid item data` if it''s omitted.
+
+            '
+        itemProductCode:
+          $ref: '#/components/schemas/ItemProductCode'
+        itemProductName:
+          $ref: '#/components/schemas/ItemProductName'
+        itemQty:
+          type: integer
+          description: Quantity of item or product.
+        itemTaxAmount:
+          type: number
+          format: double
+          description: Tax amount applied to item or product.
+        itemTaxRate:
+          type: number
+          format: double
+          description: Tax rate applied to item or product.
+        itemTotalAmount:
+          type: number
+          format: double
+          description: 'Per-line total for this item (unit cost times quantity). Distinct from
+
+            the invoice''s overall total, `invoiceAmount`. Required on invoice line items.
+
+            '
+        itemUnitOfMeasure:
+          $ref: '#/components/schemas/ItemUnitofMeasure'
+      title: BillItem
+    BillingAddressAddtlNullable:
+      type: string
+      description: Additional line for the billing address.
+      title: BillingAddressAddtlNullable
+    ItemProductCode:
+      type: string
+      description: Item or product code. Max length of 250 characters.
+      title: ItemProductCode
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    BillEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/GeneralEvents'
+      description: Array of event objects with information related to events associated to the invoice.
+      title: BillEvents
+    BillData:
+      type: object
+      properties:
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+        company:
+          type: string
+          description: Company name of the recipient of the invoice.
+        discount:
+          $ref: '#/components/schemas/Discount'
+        dutyAmount:
+          $ref: '#/components/schemas/DutyAmount'
+        firstName:
+          type: string
+          description: First name of the recipient of the invoice.
+        freightAmount:
+          $ref: '#/components/schemas/FreightAmount'
+        frequency:
+          $ref: '#/components/schemas/Frequency'
+          description: Frequency of scheduled invoice.
+        invoiceAmount:
+          $ref: '#/components/schemas/InvoiceAmount'
+        invoiceDate:
+          type: string
+          format: date
+          description: 'Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceDueDate:
+          type: string
+          format: date
+          description: 'Invoice due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceEndDate:
+          type: string
+          format: date
+          description: 'Indicate the date to finish a scheduled invoice cycle (`invoiceType`` = 1) in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceNumber:
+          $ref: '#/components/schemas/InvoiceNumber'
+          description: Invoice number. Identifies the invoice under a paypoint.
+        invoiceStatus:
+          $ref: '#/components/schemas/Invoicestatus'
+        invoiceType:
+          $ref: '#/components/schemas/InvoiceType'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillItem'
+          description: Array of line items included in the invoice.
+        lastName:
+          type: string
+          description: Last name of the recipient of the invoice.
+        notes:
+          type: string
+          description: Notes included in the invoice.
+        paymentTerms:
+          $ref: '#/components/schemas/BillDataPaymentTerms'
+        purchaseOrder:
+          $ref: '#/components/schemas/PurchaseOrder'
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingEmail:
+          $ref: '#/components/schemas/Email'
+          description: Shipping recipient's contact email address.
+        shippingFromZip:
+          $ref: '#/components/schemas/ShippingFromZip'
+        shippingPhone:
+          type: string
+          description: Recipient phone number.
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+        summaryCommodityCode:
+          $ref: '#/components/schemas/SummaryCommodityCode'
+        tax:
+          $ref: '#/components/schemas/Tax'
+        termsConditions:
+          $ref: '#/components/schemas/TermsConditions'
+      title: BillData
+    PaypointId:
+      type: integer
+      format: int64
+      description: The paypoint's ID. Note that this is different than the entryname.
+      title: PaypointId
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    TermsConditions:
+      type: string
+      description: Custom terms and conditions included in the invoice.
+      title: TermsConditions
+    GeneralEvents:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Event description.
+        eventTime:
+          type: string
+          format: date-time
+          description: Event timestamp, in UTC.
+        extraData:
+          type:
+          - string
+          - 'null'
+          description: Extra data.
+        refData:
+          type: string
+          description: Reference data.
+        source:
+          $ref: '#/components/schemas/Source'
+          description: The event source.
+      title: GeneralEvents
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    BillingAddressNullable:
+      type: string
+      description: Billing address.
+      title: BillingAddressNullable
+    Dbaname:
+      type: string
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
+    PayorDataResponse:
+      type: object
+      properties:
+        AdditionalData:
+          oneOf:
+          - $ref: '#/components/schemas/AdditionalDataMap'
+          - type: 'null'
+        BillingAddress1:
+          oneOf:
+          - $ref: '#/components/schemas/BillingAddressNullable'
+          - type: 'null'
+        BillingAddress2:
+          oneOf:
+          - $ref: '#/components/schemas/BillingAddressAddtlNullable'
+          - type: 'null'
+        BillingCity:
+          oneOf:
+          - $ref: '#/components/schemas/BillingCityNullable'
+          - type: 'null'
+        BillingCountry:
+          oneOf:
+          - $ref: '#/components/schemas/BillingCountryNullable'
+          - type: 'null'
+        BillingEmail:
+          oneOf:
+          - $ref: '#/components/schemas/Email'
+          - type: 'null'
+        BillingPhone:
+          oneOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          - type: 'null'
+        BillingState:
+          oneOf:
+          - $ref: '#/components/schemas/BillingStateNullable'
+          - type: 'null'
+        BillingZip:
+          oneOf:
+          - $ref: '#/components/schemas/BillingZip'
+          - type: 'null'
+          description: 'Customer''s billing ZIP code. For Pay In functions, this field supports 5-digit and 9-digit ZIP codes and alphanumeric Canadian postal codes. For example: "37615-1234" or "37615".'
+        CompanyName:
+          type:
+          - string
+          - 'null'
+          description: Customer's company name.
+        customerId:
+          oneOf:
+          - $ref: '#/components/schemas/CustomerId'
+          - type: 'null'
+        CustomerNumber:
+          oneOf:
+          - $ref: '#/components/schemas/CustomerNumberNullable'
+          - type: 'null'
+        customerStatus:
+          oneOf:
+          - $ref: '#/components/schemas/CustomerStatus'
+          - type: 'null'
+          description: Customer status. This is used to determine if the customer is active or inactive.
+        FirstName:
+          type:
+          - string
+          - 'null'
+          description: Customer/Payor first name.
+        Identifiers:
+          oneOf:
+          - $ref: '#/components/schemas/Identifierfields'
+          - type: 'null'
+        LastName:
+          type:
+          - string
+          - 'null'
+          description: Customer/Payor last name.
+        ShippingAddress1:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingaddress'
+          - type: 'null'
+        ShippingAddress2:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingaddressadditional'
+          - type: 'null'
+        ShippingCity:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingcity'
+          - type: 'null'
+        ShippingCountry:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingcountry'
+          - type: 'null'
+        ShippingState:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingstate'
+          - type: 'null'
+        ShippingZip:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingzip'
+          - type: 'null'
+      required:
+      - AdditionalData
+      - BillingAddress1
+      - BillingAddress2
+      - BillingCity
+      - BillingCountry
+      - BillingEmail
+      - BillingPhone
+      - BillingState
+      - BillingZip
+      - CompanyName
+      - customerId
+      - CustomerNumber
+      - customerStatus
+      - FirstName
+      - Identifiers
+      - LastName
+      - ShippingAddress1
+      - ShippingAddress2
+      - ShippingCity
+      - ShippingCountry
+      - ShippingState
+      - ShippingZip
+      description: Customer information.
+      title: PayorDataResponse
+    Shippingcountry:
+      type: string
+      description: Shipping address country.
+      title: Shippingcountry
+    PaylinkId:
+      type: string
+      description: Identifier of payment link associated to the invoice or bill.
+      title: PaylinkId
+    GetInvoiceRecord:
+      type: object
+      properties:
+        invoiceId:
+          $ref: '#/components/schemas/InvoiceId'
+        customerId:
+          $ref: '#/components/schemas/CustomerId'
+        paypointId:
+          $ref: '#/components/schemas/PaypointId'
+        invoiceNumber:
+          $ref: '#/components/schemas/InvoiceNumber'
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        invoiceDueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        invoiceSentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        invoiceEndDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        lastPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        invoiceStatus:
+          $ref: '#/components/schemas/Invoicestatus'
+        invoiceType:
+          $ref: '#/components/schemas/InvoiceType'
+        frequency:
+          $ref: '#/components/schemas/Frequency'
+        paymentTerms:
+          $ref: '#/components/schemas/Terms'
+        termsConditions:
+          oneOf:
+          - $ref: '#/components/schemas/TermsConditions'
+          - type: 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        tax:
+          $ref: '#/components/schemas/Tax'
+        discount:
+          $ref: '#/components/schemas/Discount'
+        invoiceAmount:
+          $ref: '#/components/schemas/InvoiceAmount'
+        invoicePaidAmount:
+          $ref: '#/components/schemas/InvoicePaidAmount'
+        freightAmount:
+          $ref: '#/components/schemas/FreightAmount'
+        dutyAmount:
+          $ref: '#/components/schemas/DutyAmount'
+        purchaseOrder:
+          $ref: '#/components/schemas/PurchaseOrder'
+        firstName:
+          type: string
+          description: First name of the recipient of the invoice.
+        lastName:
+          type: string
+          description: Last name of the recipient of the invoice.
+        company:
+          type: string
+          description: Company name of the recipient of the invoice.
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+        shippingFromZip:
+          $ref: '#/components/schemas/ShippingFromZip'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingEmail:
+          $ref: '#/components/schemas/Email'
+        shippingPhone:
+          type: string
+        summaryCommodityCode:
+          $ref: '#/components/schemas/SummaryCommodityCode'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillItem'
+        Customer:
+          $ref: '#/components/schemas/PayorDataResponse'
+        paylinkId:
+          $ref: '#/components/schemas/PaylinkId'
+        billEvents:
+          $ref: '#/components/schemas/BillEvents'
+        scheduledOptions:
+          $ref: '#/components/schemas/BillOptions'
+        PaypointLegalname:
+          type: string
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        DocumentsRef:
+          $ref: '#/components/schemas/DocumentsRef'
+        externalPaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
+      required:
+      - invoiceId
+      - customerId
+      - paypointId
+      - invoiceNumber
+      - invoiceDate
+      - invoiceDueDate
+      - invoiceSentDate
+      - invoiceEndDate
+      - lastPaymentDate
+      - createdAt
+      - invoiceStatus
+      - invoiceType
+      - frequency
+      - paymentTerms
+      - termsConditions
+      - notes
+      - invoiceAmount
+      - invoicePaidAmount
+      - purchaseOrder
+      - shippingAddress1
+      - shippingAddress2
+      - shippingCity
+      - shippingState
+      - shippingZip
+      - shippingFromZip
+      - shippingCountry
+      - shippingEmail
+      - shippingPhone
+      - summaryCommodityCode
+      - items
+      - Customer
+      - paylinkId
+      - scheduledOptions
+      - PaypointLegalname
+      - PaypointDbaname
+      - PaypointEntryname
+      - ParentOrgName
+      - DocumentsRef
+      title: GetInvoiceRecord
+    InvoiceNumberResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          type: string
+          description: If `isSuccess` = true, this contains the next available invoice number in the format defined by paypoint settings. If `isSuccess` = false, this contains the reason for the error.
+      required:
+      - isSuccess
+      - responseText
+      - responseData
+      description: Response schema for operations for sending invoices or getting next invoice number.
+      title: InvoiceNumberResponse
+    ForceCustomerCreation:
+      type: boolean
+      description: 'When `true`, the request creates a new customer record, regardless of
+
+        whether customer identifiers match an existing customer. Defaults to
+
+        `false`.
+
+        '
+      title: ForceCustomerCreation
+    AdditionalDataMap:
+      type: object
+      additionalProperties:
+        type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataMap
+    AdditionalData:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          description: Any type
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalData
+    InvoiceResponseWithoutData:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: If `isSuccess` = true, this contains the identifier of the invoice. If `isSuccess` = false, this contains the reason for the failure.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageidentifier:
+          oneOf:
+          - $ref: '#/components/schemas/PageIdentifier'
+          - type: 'null'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+      required:
+      - isSuccess
+      - responseCode
+      - responseData
+      - responseText
+      - pageidentifier
+      - roomId
+      description: Response schema for invoice operations.
+      title: InvoiceResponseWithoutData
+    Shippingcity:
+      type: string
+      description: Shipping city.
+      title: Shippingcity
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    QueryInvoiceResponseRecordsItem:
+      type: object
+      properties:
+        invoiceId:
+          $ref: '#/components/schemas/InvoiceId'
+        customerId:
+          $ref: '#/components/schemas/CustomerId'
+        paypointId:
+          $ref: '#/components/schemas/PaypointId'
+        invoiceNumber:
+          $ref: '#/components/schemas/InvoiceNumber'
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceDueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Invoice due date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceSentDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Invoice sent date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceEndDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The end date for a scheduled invoice cycle (`invoiceType` = 1).
+        lastPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp of last payment.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        invoiceStatus:
+          $ref: '#/components/schemas/Invoicestatus'
+        invoiceType:
+          $ref: '#/components/schemas/InvoiceType'
+        frequency:
+          $ref: '#/components/schemas/Frequency'
+          description: Frequency of scheduled invoice.
+        paymentTerms:
+          $ref: '#/components/schemas/Terms'
+        termsConditions:
+          oneOf:
+          - $ref: '#/components/schemas/TermsConditions'
+          - type: 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Invoice notes.
+        tax:
+          $ref: '#/components/schemas/Tax'
+        discount:
+          $ref: '#/components/schemas/Discount'
+        invoiceAmount:
+          $ref: '#/components/schemas/InvoiceAmount'
+        invoicePaidAmount:
+          $ref: '#/components/schemas/InvoicePaidAmount'
+        freightAmount:
+          $ref: '#/components/schemas/FreightAmount'
+        dutyAmount:
+          $ref: '#/components/schemas/DutyAmount'
+        purchaseOrder:
+          oneOf:
+          - $ref: '#/components/schemas/PurchaseOrder'
+          - type: 'null'
+        firstName:
+          type: string
+          description: First name of the recipient of the invoice.
+        lastName:
+          type: string
+          description: Last name of the recipient of the invoice.
+        company:
+          type:
+          - string
+          - 'null'
+          description: Company name of the recipient of the invoice.
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+        shippingFromZip:
+          $ref: '#/components/schemas/ShippingFromZip'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingEmail:
+          $ref: '#/components/schemas/Email'
+          description: Shipping recipient's contact email address.
+        shippingPhone:
+          type: string
+          description: Recipient phone number.
+        summaryCommodityCode:
+          oneOf:
+          - $ref: '#/components/schemas/SummaryCommodityCode'
+          - type: 'null'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillItem'
+          description: Array of line items included in the invoice.
+        Customer:
+          $ref: '#/components/schemas/PayorDataResponse'
+        paylinkId:
+          type: string
+        billEvents:
+          $ref: '#/components/schemas/BillEvents'
+        scheduledOptions:
+          oneOf:
+          - $ref: '#/components/schemas/BillOptions'
+          - type: 'null'
+          description: Object with options for scheduled invoices.
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+          description: Paypoint's legal name.
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+          description: Paypoint's DBA name.
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+          description: Paypoint's entryname.
+        ParentOrgId:
+          $ref: '#/components/schemas/Orgid'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        AdditionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            description: Any type
+          description: Custom list of key:value pairs. This field is used to store any data related to the invoice or for your system.
+        DocumentsRef:
+          oneOf:
+          - $ref: '#/components/schemas/DocumentsRef'
+          - type: 'null'
+          description: Object containing attachments associated to the invoice.
+        externalPaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        pageIdentifier:
+          oneOf:
+          - $ref: '#/components/schemas/PageIdentifier'
+          - type: 'null'
+      required:
+      - invoiceId
+      - customerId
+      - paypointId
+      - invoiceNumber
+      - invoiceDate
+      - invoiceDueDate
+      - invoiceSentDate
+      - invoiceEndDate
+      - lastPaymentDate
+      - createdAt
+      - invoiceStatus
+      - invoiceType
+      - frequency
+      - paymentTerms
+      - termsConditions
+      - notes
+      - invoiceAmount
+      - invoicePaidAmount
+      - purchaseOrder
+      - firstName
+      - lastName
+      - company
+      - shippingAddress1
+      - shippingAddress2
+      - shippingCity
+      - shippingState
+      - shippingZip
+      - shippingFromZip
+      - shippingCountry
+      - shippingEmail
+      - shippingPhone
+      - summaryCommodityCode
+      - items
+      - Customer
+      - paylinkId
+      - scheduledOptions
+      - PaypointLegalname
+      - PaypointDbaname
+      - PaypointEntryname
+      - ParentOrgId
+      - ParentOrgName
+      - AdditionalData
+      - DocumentsRef
+      - externalPaypointID
+      - pageIdentifier
+      title: QueryInvoiceResponseRecordsItem
+    QueryInvoiceResponse:
+      type: object
+      properties:
+        Records:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryInvoiceResponseRecordsItem'
+        Summary:
+          $ref: '#/components/schemas/QuerySummary'
+      required:
+      - Records
+      - Summary
+      title: QueryInvoiceResponse
+    Frequency:
+      type: string
+      enum:
+      - onetime
+      - weekly
+      - every2weeks
+      - every6months
+      - monthly
+      - every3months
+      - annually
+      - firstofmonth
+      - fifteenthofmonth
+      - endofmonth
+      description: 'Frequency for operation. The `firstofmonth`, `fifteenthofmonth`, and `endofmonth` values are only valid on subscriptions — they aren''t accepted by other endpoints (such as invoice scheduling) that use this enum.
+
+        '
+      title: Frequency
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    InvoiceNumber:
+      type: string
+      description: Invoice number. Identifies the invoice under a paypoint.
+      title: InvoiceNumber
+    Shippingaddressadditional:
+      type: string
+      description: Additional line for shipping address.
+      title: Shippingaddressadditional
+    ShippingFromZip:
+      type: string
+      description: Sender shipping ZIP code.
+      title: ShippingFromZip
+    Invoicestatus:
+      type: integer
+      description: Invoice status code.
+      title: Invoicestatus
+    ExternalPaypointId:
+      type: string
+      description: 'A custom identifier for the paypoint, if applicable.
+
+        '
+      title: ExternalPaypointId
+    DocumentsRef:
+      type: object
+      properties:
+        filelist:
+          type: array
+          items:
+            $ref: '#/components/schemas/PairFiles'
+          description: Array of objects describing files contained in the ZIP file.
+        zipfile:
+          type: string
+          description: Zip file containing attachments.
+      title: DocumentsRef
+    ItemCommodityCode:
+      type: string
+      description: Item or product commodity code. Max length of 250 characters.
+      title: ItemCommodityCode
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    SendInvoiceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - isSuccess
+      - responseText
+      title: SendInvoiceResponse
+    ItemProductName:
+      type: string
+      description: Item or product name. Max length of 250 characters.
+      title: ItemProductName
+    Attachments:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileContent'
+      description: 'Array of `fileContent` objects with attached documents. Max upload size is
+
+        30 MB.
+
+        '
+      title: Attachments
+    PayorDataRequest:
+      type: object
+      properties:
+        additionalData:
+          $ref: '#/components/schemas/AdditionalData'
+        billingAddress1:
+          $ref: '#/components/schemas/BillingAddressNullable'
+        billingAddress2:
+          $ref: '#/components/schemas/BillingAddressAddtlNullable'
+        billingCity:
+          $ref: '#/components/schemas/BillingCityNullable'
+        billingCountry:
+          $ref: '#/components/schemas/BillingCountryNullable'
+        billingEmail:
+          $ref: '#/components/schemas/Email'
+        billingPhone:
+          $ref: '#/components/schemas/PhoneNumber'
+        billingState:
+          $ref: '#/components/schemas/BillingStateNullable'
+        billingZip:
+          $ref: '#/components/schemas/BillingZip'
+          description: 'Customer''s billing ZIP code. For Pay In functions, this field supports 5-digit and 9-digit ZIP codes and alphanumeric Canadian postal codes. For example: "37615-1234" or "37615".'
+        company:
+          type: string
+          description: Customer's company name.
+        customerId:
+          $ref: '#/components/schemas/CustomerId'
+        customerNumber:
+          $ref: '#/components/schemas/CustomerNumberNullable'
+        firstName:
+          type: string
+          description: Customer/Payor first name.
+        identifierFields:
+          $ref: '#/components/schemas/Identifierfields'
+        lastName:
+          type: string
+          description: Customer/Payor last name.
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+      description: Customer information. May be required, depending on the paypoint's settings. Required for subscriptions.
+      title: PayorDataRequest
+    Terms:
+      type: string
+      enum:
+      - PIA
+      - CIA
+      - UR
+      - NET10
+      - NET20
+      - NET30
+      - NET45
+      - NET60
+      - NET90
+      - EOM
+      - MFI
+      - 5MFI
+      - 10MFI
+      - 15MFI
+      - 20MFI
+      - 2/10NET30
+      - UF
+      - 10UF
+      - 20UF
+      - 25UF
+      - 50UF
+      description: 'Payment terms for invoice. If no terms are defined, then response data for
+
+        this field defaults to `NET30`.
+
+        '
+      title: Terms
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    ExportFormat:
+      type: string
+      enum:
+      - csv
+      - xlsx
+      description: 'Export format for file downloads. When specified, returns data as a file
+
+        instead of JSON.
+
+        '
+      title: ExportFormat
+    BillingZip:
+      type: string
+      description: Billing address ZIP code.
+      title: BillingZip
+    Shippingzip:
+      type: string
+      description: 'Shipping ZIP code. For Pay In functions, this field supports 5-digit
+
+        and 9-digit ZIP codes and alphanumeric Canadian postal codes. For
+
+        example: `37615-1234` or `37615`.
+
+        '
+      title: Shippingzip
+    PhoneNumber:
+      type: string
+      description: Phone number.
+      title: PhoneNumber
+    InvoiceAmount:
+      type: number
+      format: double
+      description: The invoice amount.
+      title: InvoiceAmount
+    Source:
+      type: string
+      description: Custom identifier to indicate the transaction or request source.
+      title: Source
+    InvoiceType:
+      type: integer
+      description: 'Invoice type. Value `0` is for single/one-time invoices, `1` for
+
+        scheduled invoices.
+
+        '
+      title: InvoiceType
+    PairFiles:
+      type: object
+      properties:
+        originalName:
+          type: string
+          description: Original filename
+        zipName:
+          type: string
+          description: Filename assigned to zipped file. This is the name to use for reference in the API functions to get files in attachments.
+        descriptor:
+          type: string
+          description: Descriptor of the file.
+      title: PairFiles
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    PurchaseOrder:
+      type: string
+      description: Purchase order number.
+      title: PurchaseOrder
+    Identifierfields:
+      type: array
+      items:
+        type: string
+      description: List of fields acting as customer identifiers, to be used instead of CustomerNumber.
+      title: Identifierfields
+    Legalname:
+      type: string
+      description: Business legal name.
+      title: Legalname
+    Discount:
+      type: number
+      format: double
+      description: Discount applied to the invoice.
+      title: Discount
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

@@ -1,0 +1,330 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Import API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Import
+paths:
+  /Import/customersForm/{entry}:
+    post:
+      operationId: ImportCustomer
+      summary: Import list of customers
+      description: Import a list of customers from a CSV file. See the [Import Guide](/developers/developer-guides/entities-customers#import-customers) for more help and example files.
+      tags:
+      - Import
+      parameters:
+      - name: entry
+        in: path
+        description: The entrypoint identifier.
+        required: true
+        schema:
+          $ref: '#/components/schemas/Entrypointfield'
+      - name: replaceExisting
+        in: query
+        description: 'Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0'
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseImport'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+              - file
+  /Import/vendorsForm/{entry}:
+    post:
+      operationId: ImportVendor
+      summary: Import list of vendors
+      description: Import a list of vendors from a CSV file. See the [Import Guide](/developers/developer-guides/entities-vendors#import-vendors) for more help and example files.
+      tags:
+      - Import
+      parameters:
+      - name: entry
+        in: path
+        description: The entrypoint identifier.
+        required: true
+        schema:
+          $ref: '#/components/schemas/Entrypointfield'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseImport'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+              - file
+  /Import/billsForm/{entry}:
+    post:
+      operationId: ImportBills
+      summary: Import list of bills
+      description: Import a list of bills from a CSV file. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and an example file.
+      tags:
+      - Import
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseImport'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to be imported. The file must be a CSV file with the correct format. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and example files.
+              required:
+              - file
+components:
+  schemas:
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    PayabliApiResponseImportResponseData:
+      type: object
+      properties:
+        added:
+          type: integer
+          description: The number of records successfully added.
+        errors:
+          type: array
+          items:
+            type: string
+          description: List of errors, if any.
+        rejected:
+          type: integer
+          description: The number of records that were rejected.
+      description: The response data containing the result of the import operation.
+      title: PayabliApiResponseImportResponseData
+    PayabliApiResponseImport:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/PayabliApiResponseImportResponseData'
+          description: The response data containing the result of the import operation.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseImport
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

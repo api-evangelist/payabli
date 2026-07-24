@@ -1,0 +1,3606 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Boarding API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Boarding
+paths:
+  /Boarding/app:
+    post:
+      operationId: AddApplication
+      summary: Create boarding application
+      description: Creates a boarding application in an organization. This endpoint requires an application API token.
+      tags:
+      - Boarding
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse00Responsedatanonobject'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddApplicationRequest'
+  /Boarding/applications:
+    post:
+      operationId: AddServiceToPaypointFromApp
+      summary: Create multi-product boarding application
+      description: Creates a new boarding application linked to an existing paypoint as part of the multi-product boarding flow. Use this endpoint to add new services to a paypoint without creating a duplicate record. The system copies eligible business, contact, banking, and address data from the paypoint to the new application based on 1:1 field matching. The merchant only needs to provide fields that are specific to the new service. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
+      tags:
+      - Boarding
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationFromPaypointResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationFromPaypointRequest'
+  /Boarding/read/{appId}:
+    get:
+      operationId: GetApplication
+      summary: Get boarding application by ID
+      description: Retrieves the details for a boarding application by ID.
+      tags:
+      - Boarding
+      parameters:
+      - name: appId
+        in: path
+        description: Boarding application ID.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationDetailsRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Boarding/applications/{paypointId}:
+    get:
+      operationId: GetApplicationsByPaypointId
+      summary: Get multi-product boarding applications for a paypoint
+      description: Returns all boarding applications associated with a specific paypoint, including those created through the multi-product boarding flow. Use this endpoint to track underwriting progress across multiple service additions or to build reporting views. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
+      tags:
+      - Boarding
+      parameters:
+      - name: paypointId
+        in: path
+        description: ID of the paypoint to retrieve applications for.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryBoardingAppsListResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Query/boarding/{orgId}:
+    get:
+      operationId: ListApplications
+      summary: Get list of applications for an organization
+      description: Returns a list of boarding applications for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
+      tags:
+      - Boarding
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: exportFormat
+        in: query
+        description: Export format for file downloads. When specified, returns data as a file instead of JSON.
+        required: false
+        schema:
+          $ref: '#/components/schemas/ExportFormat'
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records to return for the query. Use `0` or negative value to return all records.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: parameters
+        in: query
+        description: 'Collection of field names, conditions, and values used to filter the query
+
+
+          See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
+
+
+          List of field names accepted:
+
+          - `createdAt` (gt, ge, lt, le, eq, ne)
+
+          - `startDate` (gt, ge, lt, le, eq, ne)
+
+          - `dbaname` (ct, nct)
+
+          - `legalname` (ct, nct)
+
+          - `ein` (ct, nct)
+
+          - `address` (ct, nct)
+
+          - `city` (ct, nct)
+
+          - `state` (ct, nct)
+
+          - `phone` (ct, nct)
+
+          - `mcc` (ct, nct)
+
+          - `owntype` (ct, nct)
+
+          - `ownerName` (ct, nct)
+
+          - `contactName` (ct, nct)
+
+          - `status` (in, nin, eq,ne)
+
+          - `orgParentname` (ct, nct)
+
+          - `externalpaypointID` (ct, nct, eq, ne)
+
+          - `repCode` (ct, nct, eq, ne)
+
+          - `repName` (ct, nct, eq, ne)
+
+          - `repOffice` (ct, nct, eq, ne)
+
+          List of comparison accepted - enclosed between parentheses:
+
+          - eq or empty => equal
+
+          - gt => greater than
+
+          - ge => greater or equal
+
+          - lt => less than
+
+          - le => less or equal
+
+          - ne => not equal
+
+          - ct => contains
+
+          - nct => not contains
+
+          - in => inside array
+
+          - nin => not inside array'
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryBoardingAppsListResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Boarding/app/{appId}:
+    put:
+      operationId: UpdateApplication
+      summary: Update boarding application
+      description: Updates a boarding application by ID. This endpoint requires an application API token.
+      tags:
+      - Boarding
+      parameters:
+      - name: appId
+        in: path
+        description: Boarding application ID.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse00Responsedatanonobject'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationData'
+    delete:
+      operationId: DeleteApplication
+      summary: Delete boarding application
+      description: Deletes a boarding application by ID.
+      tags:
+      - Boarding
+      parameters:
+      - name: appId
+        in: path
+        description: Boarding application ID.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse00Responsedatanonobject'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Boarding/read/{xId}:
+    post:
+      operationId: GetApplicationByAuth
+      summary: Get boarding application by auth
+      description: Gets a boarding application by authentication information. This endpoint requires an `application` API token.
+      tags:
+      - Boarding
+      parameters:
+      - name: xId
+        in: path
+        description: 'The application ID in Hex format. Find this at the end of the boarding link URL returned in a call to api/Boarding/applink/{appId}/{mail2}. For example in:  `https://boarding-sandbox.payabli.com/boarding/externalapp/load/17E`, the xId is `17E`.'
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestAppByAuth'
+  /Boarding/linkbyId/{boardingLinkId}:
+    get:
+      operationId: GetByIdLinkApplication
+      summary: Get boarding link by ID
+      description: Retrieves details for a boarding link, by ID.
+      tags:
+      - Boarding
+      parameters:
+      - name: boardingLinkId
+        in: path
+        description: The boarding link ID. You can find this at the end of the boarding link reference name. For example `https://boarding.payabli.com/boarding/app/myorgaccountname-00091`. The ID is `91`.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardingLinkQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Boarding/linkbyTemplate/{templateId}:
+    get:
+      operationId: GetByTemplateIdLinkApplication
+      summary: Get boarding link by template ID
+      description: Get details for a boarding link using the boarding template ID. This endpoint requires an application API token.
+      tags:
+      - Boarding
+      parameters:
+      - name: templateId
+        in: path
+        description: 'The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.'
+        required: true
+        schema:
+          type: number
+          format: double
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardingLinkQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Boarding/applink/{appId}/{mail2}:
+    put:
+      operationId: getExternalApplication
+      summary: Get link or email a link for a boarding application
+      description: Retrieves a link and the verification code used to log into an existing boarding application. You can also use this endpoint to send a link and referenceId for an existing boarding application to an email address. The recipient can use the referenceId and email address to access and edit the application.
+      tags:
+      - Boarding
+      parameters:
+      - name: appId
+        in: path
+        description: Boarding application ID.
+        required: true
+        schema:
+          type: integer
+      - name: mail2
+        in: path
+        description: Email address used to access the application. If `sendEmail` parameter is true, a link to the application is sent to this email address.
+        required: true
+        schema:
+          type: string
+      - name: sendEmail
+        in: query
+        description: If `true`, sends an email that includes the link to the application to the `mail2` address. Defaults to `false`.
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse00'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Boarding/link/{boardingLinkReference}:
+    get:
+      operationId: GetLinkApplication
+      summary: Get boarding Link by reference
+      description: Retrieves the details for a boarding link, by reference name. This endpoint requires an application API token.
+      tags:
+      - Boarding
+      parameters:
+      - name: boardingLinkReference
+        in: path
+        description: The boarding link reference name. You can find this at the end of the boarding link URL. For example `https://boarding.payabli.com/boarding/app/myorgaccountname-00091`
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardingLinkQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Query/boardinglinks/{orgId}:
+    get:
+      operationId: ListBoardingLinks
+      summary: Get list of boarding links for organization
+      description: Return a list of boarding links for an organization. Use filters to limit results.
+      tags:
+      - Boarding
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records to return for the query. Use `0` or negative value to return all records.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: parameters
+        in: query
+        description: 'Collection of field names, conditions, and values used to filter the query
+
+
+          See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
+
+
+          List of field names accepted:
+
+          - `lastUpdated` (gt, ge, lt, le, eq, ne)
+
+          - `templateName` (ct, nct)
+
+          - `referenceName` (ct, nct)
+
+          - `acceptRegister` (eq, ne)
+
+          - `acceptAuth` (eq, ne)
+
+          - `templateCode` (ct, nct)
+
+          - `templateId` (eq, ne)
+
+          - `orgParentname` (ct, nct)
+
+
+          List of comparison accepted - enclosed between parentheses:
+
+          - eq or empty => equal
+
+          - gt => greater than
+
+          - ge => greater or equal
+
+          - lt => less than
+
+          - le => less or equal
+
+          - ne => not equal
+
+          - ct => contains
+
+          - nct => not contains
+
+          - in => inside array
+
+          - nin => not inside array
+
+
+          List of parameters accepted:
+
+          - limitRecord : max number of records for query (default="20", "0" or negative value for all)
+
+          - fromRecord : initial record in query
+
+
+          Example: templateName(ct)=hoa return all records with template title containing "hoa"'
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryBoardingLinksResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    Ticketamt:
+      type: number
+      format: double
+      description: 'The average transaction size that the business expects to process. For
+
+        example, if you process $10,000 a month across 10 transactions, that''s
+
+        an average ticket of $1000.
+
+        '
+      title: Ticketamt
+    BoardingLinkId:
+      type: integer
+      description: 'The boarding link ID. This is found at the end of the boarding link
+
+        reference name. For example:
+
+        `https://boarding.payabli.com/boarding/app/myorgaccountname-00091`. The
+
+        ID is `91`.
+
+        '
+      title: BoardingLinkId
+    ApplicationDataPayIn:
+      type: object
+      properties:
+        services:
+          $ref: '#/components/schemas/ApplicationDataPayInServices'
+        annualRevenue:
+          $ref: '#/components/schemas/Annualrevenue'
+        averageBillSize:
+          $ref: '#/components/schemas/BoardingAverageBillSize'
+        averageMonthlyBill:
+          $ref: '#/components/schemas/BoardingAvgMonthlyBill'
+        avgmonthly:
+          $ref: '#/components/schemas/Avgmonthly'
+        baddress:
+          $ref: '#/components/schemas/Baddress1'
+        baddress1:
+          $ref: '#/components/schemas/Baddress2'
+        bankData:
+          $ref: '#/components/schemas/BankData'
+        bcity:
+          $ref: '#/components/schemas/Bcity'
+        bcountry:
+          $ref: '#/components/schemas/Bcountry'
+        binperson:
+          $ref: '#/components/schemas/Binperson'
+        binphone:
+          $ref: '#/components/schemas/Binphone'
+        binweb:
+          $ref: '#/components/schemas/Binweb'
+        boardingLinkId:
+          type: string
+          description: Boarding link ID for the application. Either `templateId` or `boardingLinkId` are required.
+        bstate:
+          $ref: '#/components/schemas/Bstate'
+        bsummary:
+          $ref: '#/components/schemas/Bsummary'
+        btype:
+          $ref: '#/components/schemas/OwnType'
+        bzip:
+          $ref: '#/components/schemas/Bzip'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDataPayInContactsItem'
+          description: List of contacts for the business.
+        creditLimit:
+          type: string
+          description: The maximum amount of credit that our lending partner has authorized to your business for Pay In processing. It's the upper boundary on how much you can spend or owe on a credit account at any given time. For on-demand payout (Pay Out) credit limits, see `payoutCreditLimit`.
+        dbaName:
+          $ref: '#/components/schemas/Dbaname'
+          description: The alternate or common name that this business is doing business under usually referred to as a DBA name. Payabli strongly recommends including this information.
+        ein:
+          $ref: '#/components/schemas/Ein'
+        externalpaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        faxnumber:
+          $ref: '#/components/schemas/FaxNumber'
+          description: The business's fax number.
+        highticketamt:
+          $ref: '#/components/schemas/Highticketamt'
+        legalName:
+          $ref: '#/components/schemas/Legalname'
+        license:
+          $ref: '#/components/schemas/License'
+        licstate:
+          $ref: '#/components/schemas/Licensestate'
+        maddress:
+          $ref: '#/components/schemas/Maddress'
+        maddress1:
+          $ref: '#/components/schemas/Maddress1'
+        mcc:
+          $ref: '#/components/schemas/Mcc'
+        mcity:
+          $ref: '#/components/schemas/Mcity'
+        mcountry:
+          $ref: '#/components/schemas/Mcountry'
+        mstate:
+          $ref: '#/components/schemas/Mstate'
+        mzip:
+          $ref: '#/components/schemas/Mzip'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        ownership:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDataPayInOwnershipItem'
+          description: List of Owners with at least a 25% ownership.
+        phonenumber:
+          $ref: '#/components/schemas/PhoneNumber'
+          description: The business's phone number.
+        processingRegion:
+          type: string
+          description: The business's processing region, either `US` or `CA`.
+        recipientEmail:
+          $ref: '#/components/schemas/Email'
+          description: Email address for the applicant. This is used to send the applicant a boarding link.
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        signer:
+          $ref: '#/components/schemas/SignerDataRequest'
+        startdate:
+          $ref: '#/components/schemas/Busstartdate'
+        taxFillName:
+          $ref: '#/components/schemas/Taxfillname'
+        templateId:
+          $ref: '#/components/schemas/TemplateId'
+          description: The associated boarding template's ID in Payabli. Either `templateId` or `boardingLinkId` are required.
+        ticketamt:
+          $ref: '#/components/schemas/Ticketamt'
+        website:
+          $ref: '#/components/schemas/Website'
+        whenCharged:
+          $ref: '#/components/schemas/Whencharged'
+        whenDelivered:
+          $ref: '#/components/schemas/Whendelivered'
+        whenProvided:
+          $ref: '#/components/schemas/Whenprovided'
+        whenRefunded:
+          $ref: '#/components/schemas/Whenrefunded'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        RepCode:
+          $ref: '#/components/schemas/RepCode'
+        RepName:
+          $ref: '#/components/schemas/RepName'
+        RepOffice:
+          $ref: '#/components/schemas/RepOffice'
+        onCreate:
+          $ref: '#/components/schemas/OnCreate'
+      required:
+      - services
+      - bankData
+      - phonenumber
+      - processingRegion
+      - signer
+      - whenCharged
+      - whenDelivered
+      - whenProvided
+      - whenRefunded
+      description: Fields for Pay In boarding applications.
+      title: ApplicationDataPayIn
+    ContactsField:
+      type: array
+      items:
+        $ref: '#/components/schemas/Contacts'
+      description: List of contacts.
+      title: ContactsField
+    QuerySummary:
+      type: object
+      properties:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount for the records.
+        totalNetAmount:
+          type: number
+          format: double
+          description: Total net amount for the records.
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummary
+    CardLinkTypes:
+      type: object
+      properties:
+        amex:
+          $ref: '#/components/schemas/LinkData'
+        discover:
+          $ref: '#/components/schemas/LinkData'
+        mastercard:
+          $ref: '#/components/schemas/LinkData'
+        visa:
+          $ref: '#/components/schemas/LinkData'
+      title: CardLinkTypes
+    AccountId:
+      type: string
+      description: Custom identifier for payment connector.
+      title: AccountId
+    FaxNumber:
+      type: string
+      description: Fax number.
+      title: FaxNumber
+    OdpSetupProcessingRegion:
+      type: string
+      enum:
+      - US
+      - CA
+      description: Region where payment processing occurs.
+      title: OdpSetupProcessingRegion
+    Bstate:
+      type: string
+      description: Business state.
+      title: Bstate
+    BankName:
+      type: string
+      description: Name of bank for account.
+      title: BankName
+    Bnk:
+      type: object
+      properties:
+        accountNumber:
+          $ref: '#/components/schemas/LinkData'
+        bankName:
+          $ref: '#/components/schemas/LinkData'
+        routingAccount:
+          $ref: '#/components/schemas/LinkData'
+        typeAccount:
+          $ref: '#/components/schemas/LinkData'
+      title: Bnk
+    Licensestate:
+      type: string
+      description: Business license issuing state or province.
+      title: Licensestate
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    SignerSsn:
+      type: string
+      description: The signer's SSN.
+      title: SignerSsn
+    ReferenceTemplateId:
+      type: integer
+      format: int64
+      title: ReferenceTemplateId
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    AcceptOauth:
+      type: boolean
+      title: AcceptOauth
+    AddApplicationRequest:
+      oneOf:
+      - $ref: '#/components/schemas/ApplicationDataPayIn'
+      - $ref: '#/components/schemas/ApplicationDataManaged'
+      - $ref: '#/components/schemas/ApplicationDataOdp'
+      - $ref: '#/components/schemas/ApplicationData'
+      title: AddApplicationRequest
+    BoardingAvgMonthlyBill:
+      type: string
+      description: 'This is the total number of bills the business pays each month. For
+
+        example, if your business pays an electric bill of $500, an internet bill
+
+        of $150, and various suppliers $5,000 every month, then your monthly bill
+
+        volume would be $5,650.
+
+        '
+      title: BoardingAvgMonthlyBill
+    Bphone:
+      type: string
+      description: Business phone number.
+      title: Bphone
+    BoardingBusinessFax:
+      type: string
+      description: The business's fax number.
+      title: BoardingBusinessFax
+    SignerPhone:
+      type: string
+      description: The signer's phone number.
+      title: SignerPhone
+    RoomIdNotInUse:
+      type: integer
+      format: int64
+      description: Field not in use on this endpoint. It always returns `0`.
+      title: RoomIdNotInUse
+    PayoutHighTicketAmount:
+      type: number
+      format: double
+      description: 'The largest amount for a bill you will pay through our service. For
+
+        example, if your business paid for 3 bills each month for $500, $1000,
+
+        and $5000 respectively, then your highest ticket is $5000.
+
+        '
+      title: PayoutHighTicketAmount
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    AppId:
+      type: integer
+      description: Boarding application ID.
+      title: AppId
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    Bcountry:
+      type: string
+      description: 'Business country in ISO-3166-1 alpha 2 format.
+
+        See [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) for more
+
+        information.
+
+        '
+      title: Bcountry
+    AcceptRegister:
+      type: boolean
+      title: AcceptRegister
+    Busstartdate:
+      type: string
+      description: 'Business start date. Accepted formats:
+
+
+        - YYYY-MM-DD
+
+        - MM/DD/YYYY
+
+        '
+      title: Busstartdate
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
+    CardSection:
+      type: object
+      properties:
+        acceptance:
+          $ref: '#/components/schemas/CardLinkTypes'
+        fees:
+          $ref: '#/components/schemas/BasicTable'
+        price:
+          $ref: '#/components/schemas/BasicTable'
+      title: CardSection
+    PayoutAverageTicketLimit:
+      type: number
+      format: double
+      description: 'The average amount of each bill you pay through our service. For example,
+
+        if your business paid 3 bills for a total of $1,500 then your average
+
+        bill size is $500.
+
+        '
+      title: PayoutAverageTicketLimit
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    SignerState:
+      type: string
+      description: The signer's state.
+      title: SignerState
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    PayabliApiResponse00Responsedatanonobject:
+      type: object
+      properties:
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        roomId:
+          type: integer
+          format: int64
+          description: Describes the room ID. Only in use on Boarding endpoints, returns `0` when not applicable.
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+      required:
+      - responseText
+      title: PayabliApiResponse00Responsedatanonobject
+    BankAccountFunction:
+      type: integer
+      description: 'Indicates the function of the bank account:
+
+
+        - `0` — Deposits
+
+        - `1` — Withdrawals
+
+        - `2` — Deposits & Withdrawals
+
+        - `3` — Remittances
+
+        - `4` — Remittances & Deposits
+
+        - `5` — Remittances & Withdrawals
+
+        - `6` — Remittances & Withdrawals & Deposits
+
+
+        A paypoint is required to have a single deposit and withdrawal account. A
+
+        paypoint can have as many remittance accounts as needed for pay outs
+
+        (remittances).
+
+        '
+      title: BankAccountFunction
+    ApplicationData:
+      type: object
+      properties:
+        services:
+          $ref: '#/components/schemas/Services'
+        annualRevenue:
+          $ref: '#/components/schemas/Annualrevenue'
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+        avgmonthly:
+          $ref: '#/components/schemas/Avgmonthly'
+        baddress:
+          $ref: '#/components/schemas/Baddress1'
+        baddress1:
+          $ref: '#/components/schemas/Baddress2'
+        bankData:
+          $ref: '#/components/schemas/BankData'
+        bcity:
+          $ref: '#/components/schemas/Bcity'
+        bcountry:
+          $ref: '#/components/schemas/Bcountry'
+        binperson:
+          $ref: '#/components/schemas/Binperson'
+        binphone:
+          $ref: '#/components/schemas/Binphone'
+        binweb:
+          $ref: '#/components/schemas/Binweb'
+        bstate:
+          $ref: '#/components/schemas/Bstate'
+        bsummary:
+          $ref: '#/components/schemas/Bsummary'
+        btype:
+          $ref: '#/components/schemas/OwnType'
+        bzip:
+          $ref: '#/components/schemas/Bzip'
+        contacts:
+          $ref: '#/components/schemas/ContactsField'
+        dbaname:
+          $ref: '#/components/schemas/Dbaname'
+        ein:
+          $ref: '#/components/schemas/Ein'
+        externalPaypointId:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        faxnumber:
+          $ref: '#/components/schemas/BoardingBusinessFax'
+        highticketamt:
+          $ref: '#/components/schemas/Highticketamt'
+        legalname:
+          $ref: '#/components/schemas/Legalname'
+        license:
+          $ref: '#/components/schemas/License'
+        licstate:
+          $ref: '#/components/schemas/Licensestate'
+        maddress:
+          $ref: '#/components/schemas/Maddress'
+        maddress1:
+          $ref: '#/components/schemas/Maddress1'
+        mcc:
+          $ref: '#/components/schemas/Mcc'
+        mcity:
+          $ref: '#/components/schemas/Mcity'
+        mcountry:
+          $ref: '#/components/schemas/Mcountry'
+        mstate:
+          $ref: '#/components/schemas/Mstate'
+        mzip:
+          $ref: '#/components/schemas/Mzip'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        ownership:
+          $ref: '#/components/schemas/Ownership'
+        payoutAverageMonthlyVolume:
+          $ref: '#/components/schemas/PayoutAverageMonthlyVolume'
+        payoutAverageTicketLimit:
+          $ref: '#/components/schemas/PayoutAverageTicketLimit'
+        payoutCreditLimit:
+          $ref: '#/components/schemas/PayoutCreditLimit'
+        payoutHighTicketAmount:
+          $ref: '#/components/schemas/PayoutHighTicketAmount'
+        phonenumber:
+          $ref: '#/components/schemas/BoardingBusinessPhone'
+        recipientEmail:
+          $ref: '#/components/schemas/Email'
+          description: Email address for the applicant. This is used to send the applicant a boarding link.
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        signer:
+          $ref: '#/components/schemas/SignerDataRequest'
+        startdate:
+          $ref: '#/components/schemas/Busstartdate'
+        taxfillname:
+          $ref: '#/components/schemas/Taxfillname'
+        templateId:
+          $ref: '#/components/schemas/TemplateId'
+        ticketamt:
+          $ref: '#/components/schemas/Ticketamt'
+        website:
+          $ref: '#/components/schemas/Website'
+        whenCharged:
+          $ref: '#/components/schemas/Whencharged'
+        whenDelivered:
+          $ref: '#/components/schemas/Whendelivered'
+        whenProvided:
+          $ref: '#/components/schemas/Whenprovided'
+        whenRefunded:
+          $ref: '#/components/schemas/Whenrefunded'
+        RepCode:
+          $ref: '#/components/schemas/RepCode'
+        RepName:
+          $ref: '#/components/schemas/RepName'
+        RepOffice:
+          $ref: '#/components/schemas/RepOffice'
+        onCreate:
+          $ref: '#/components/schemas/OnCreate'
+      title: ApplicationData
+    Baddress2:
+      type: string
+      description: 'Business address additional line. If used, this must be the physical
+
+        address of the business, not a P.O. box.
+
+        '
+      title: Baddress2
+    ApplicationDataOdpContactsItem:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: ApplicationDataOdpContactsItem
+    Mcountry:
+      type: string
+      description: Business mailing country.
+      title: Mcountry
+    ApplicationDataPayInServicesAch:
+      type: object
+      properties:
+        acceptCCD:
+          type: boolean
+          description: 'CCD is an ACH SEC Code that can be used in ACH transactions by the
+
+            user that indicates the transaction is a Corporate Credit or Debit
+
+            Entry.
+
+            '
+        acceptPPD:
+          type: boolean
+          description: 'PPD is an ACH SEC Code that can be used in ACH transactions by the
+
+            user that indicates the transaction is a Prearranged Payment and
+
+            Deposit.
+
+            '
+        acceptWeb:
+          type: boolean
+          description: 'Web is an ACH SEC Code that can be used in ACH transactions by the
+
+            user that indicates the transaction is an Internet-Initiated/Mobile
+
+            Entry.
+
+            '
+      description: 'Configuration for which ACH SEC codes the user is allowed to use.
+
+        '
+      title: ApplicationDataPayInServicesAch
+    DSection:
+      type: object
+      properties:
+        depositAccount:
+          $ref: '#/components/schemas/Bnk'
+        withdrawalAccount:
+          $ref: '#/components/schemas/Bnk'
+      title: DSection
+    Whencharged:
+      type: string
+      enum:
+      - When Service Provided
+      - In Advance
+      description: 'Describes when customers are charged for goods or services.
+
+        '
+      title: Whencharged
+    SignerDataRequest:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/SignerName'
+        ssn:
+          $ref: '#/components/schemas/SignerSsn'
+        dob:
+          $ref: '#/components/schemas/SignerDob'
+        phone:
+          $ref: '#/components/schemas/SignerPhone'
+        email:
+          $ref: '#/components/schemas/Email'
+          description: The signer's email address.
+        address:
+          $ref: '#/components/schemas/Signeraddress'
+        address1:
+          $ref: '#/components/schemas/SignerAddress1'
+        city:
+          $ref: '#/components/schemas/SignerCity'
+        country:
+          $ref: '#/components/schemas/SignerCountry'
+        state:
+          $ref: '#/components/schemas/SignerState'
+        zip:
+          $ref: '#/components/schemas/SignerZip'
+        acceptance:
+          $ref: '#/components/schemas/SignerAcceptance'
+        signedDocumentReference:
+          $ref: '#/components/schemas/SignedDocumentReference'
+        pciAttestation:
+          $ref: '#/components/schemas/PciAttestation'
+        attestationDate:
+          $ref: '#/components/schemas/AttestationDate'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        signDate:
+          $ref: '#/components/schemas/SignDate'
+      description: Information about the application's signer.
+      title: SignerDataRequest
+    SignerAddress1:
+      type: string
+      description: 'Additional line for the signer''s address. If used, this must be the
+
+        physical address of the signer, not a P.O. box.
+
+        '
+      title: SignerAddress1
+    SignerAcceptance:
+      type: boolean
+      description: 'The signer''s acceptance status. A true or false indicating an
+
+        acceptance to the terms of service with the root org or provider.
+
+        '
+      title: SignerAcceptance
+    OdpSetup:
+      type: object
+      properties:
+        allowAch:
+          type: boolean
+          description: Enables or disables ACH payout functionality
+        allowChecks:
+          type: boolean
+          description: Enables or disables check printing payout functionality
+        allowVCard:
+          type: boolean
+          description: Enables or disables vCard payout functionality
+        processing_region:
+          $ref: '#/components/schemas/OdpSetupProcessingRegion'
+          description: Region where payment processing occurs
+        processor:
+          type: string
+          description: Payment processor identifier
+        issuerNetworkSettingsId:
+          type: string
+          description: Reference ID for the program enabled for ODP issuance
+      title: OdpSetup
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    QueryBoardingLinksResponse:
+      type: object
+      properties:
+        Records:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryBoardingLinksResponseRecordsItem'
+        Summary:
+          $ref: '#/components/schemas/QuerySummary'
+      title: QueryBoardingLinksResponse
+    CreateApplicationFromPaypointRequest:
+      type: object
+      properties:
+        paypointId:
+          type: integer
+          format: int64
+          description: ID of the existing paypoint to link to this application.
+        templateId:
+          type: integer
+          format: int64
+          description: ID of the boarding template to use for the new application.
+        recipientEmail:
+          type: string
+          description: Email address where the boarding link is sent. Required. If you don't want to email the merchant, send to an internal address and use `returnBoardingAccessInfoInLine` to retrieve the link from the response instead.
+        returnBoardingAccessInfoInLine:
+          type: boolean
+          description: When `true`, returns the boarding access information directly in the response.
+        onCreate:
+          type: array
+          items:
+            type: string
+          description: Additional actions to trigger when the application is created. Currently only `submitApplication` is supported, which automatically submits the application on creation and skips the draft state.
+      required:
+      - paypointId
+      - templateId
+      - recipientEmail
+      description: Request to create a boarding application linked to an existing paypoint. Used for adding new services to a paypoint without creating a duplicate record.
+      title: CreateApplicationFromPaypointRequest
+    OnCreate:
+      type: string
+      description: 'Action to take when the application is created. The only currently
+
+        supported option is `submitApplication`. Use this when you have collected
+
+        eSignature elsewhere or are adding additional locations for an applicant,
+
+        or when you want to submit an application via API with one call without
+
+        using the hosted boarding UI or embedded boarding components.
+
+        '
+      title: OnCreate
+    SSection:
+      type: object
+      properties:
+        ach:
+          $ref: '#/components/schemas/AchSection'
+        card:
+          $ref: '#/components/schemas/CardSection'
+      title: SSection
+    SignerZip:
+      type: string
+      description: The signer's ZIP code.
+      title: SignerZip
+    Annualrevenue:
+      type: number
+      format: double
+      description: Annual revenue amount.
+      title: Annualrevenue
+    PayoutCreditLimit:
+      type: number
+      format: double
+      description: 'The maximum amount of credit that our lending partner has authorized to
+
+        the business for on-demand payouts. It''s the upper boundary on how much
+
+        you can spend or owe on a credit account at any given time.
+
+        '
+      title: PayoutCreditLimit
+    BankAccountHolderType:
+      type: string
+      enum:
+      - Personal
+      - Business
+      description: Describes whether the bank is a personal or business account.
+      title: BankAccountHolderType
+    Mzip:
+      type: string
+      description: Business mailing ZIP.
+      title: Mzip
+    CList:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/LinkData'
+        contactName:
+          $ref: '#/components/schemas/LinkData'
+        contactPhone:
+          $ref: '#/components/schemas/LinkData'
+        contactTitle:
+          $ref: '#/components/schemas/LinkData'
+      title: CList
+    PSection:
+      type: object
+      properties:
+        avgmonthly:
+          $ref: '#/components/schemas/LinkData'
+        binperson:
+          $ref: '#/components/schemas/LinkData'
+        binphone:
+          $ref: '#/components/schemas/LinkData'
+        binweb:
+          $ref: '#/components/schemas/LinkData'
+        bsummary:
+          $ref: '#/components/schemas/LinkData'
+        highticketamt:
+          $ref: '#/components/schemas/LinkData'
+        mcc:
+          $ref: '#/components/schemas/LinkData'
+        ticketamt:
+          $ref: '#/components/schemas/LinkData'
+        whenCharged:
+          $ref: '#/components/schemas/LinkData'
+        whenDelivered:
+          $ref: '#/components/schemas/LinkData'
+        whenProvided:
+          $ref: '#/components/schemas/LinkData'
+        whenRefunded:
+          $ref: '#/components/schemas/LinkData'
+      title: PSection
+    ApplicationDataManaged:
+      type: object
+      properties:
+        annualRevenue:
+          $ref: '#/components/schemas/Annualrevenue'
+          description: Annual revenue amount. We recommend including this value.
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+        baddress:
+          $ref: '#/components/schemas/Baddress1'
+        baddress1:
+          $ref: '#/components/schemas/Baddress2'
+        bankData:
+          $ref: '#/components/schemas/BankData'
+        bcity:
+          $ref: '#/components/schemas/Bcity'
+        bcountry:
+          $ref: '#/components/schemas/Bcountry'
+        boardingLinkId:
+          type: string
+          description: Boarding link ID for the application. Either `templateId` or `boardingLinkId` are required.
+        bstate:
+          $ref: '#/components/schemas/Bstate'
+        bsummary:
+          $ref: '#/components/schemas/Bsummary'
+        btype:
+          $ref: '#/components/schemas/OwnType'
+        bzip:
+          $ref: '#/components/schemas/Bzip'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDataManagedContactsItem'
+          description: List of contacts for the business.
+        dbaname:
+          $ref: '#/components/schemas/Dbaname'
+        ein:
+          $ref: '#/components/schemas/Ein'
+        faxnumber:
+          $ref: '#/components/schemas/BoardingBusinessFax'
+        legalname:
+          $ref: '#/components/schemas/Legalname'
+        license:
+          $ref: '#/components/schemas/License'
+        licstate:
+          $ref: '#/components/schemas/Licensestate'
+        maddress:
+          $ref: '#/components/schemas/Maddress'
+        maddress1:
+          $ref: '#/components/schemas/Maddress1'
+        mcc:
+          $ref: '#/components/schemas/Mcc'
+        mcity:
+          $ref: '#/components/schemas/Mcity'
+        mcountry:
+          $ref: '#/components/schemas/Mcountry'
+        mstate:
+          $ref: '#/components/schemas/Mstate'
+        mzip:
+          $ref: '#/components/schemas/Mzip'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        ownership:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDataManagedOwnershipItem'
+          description: List of Owners with at least a 25% ownership.
+        phonenumber:
+          $ref: '#/components/schemas/BoardingBusinessPhone'
+        recipientEmail:
+          $ref: '#/components/schemas/Email'
+          description: Email address for the applicant. This is used to send the applicant a boarding link.
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        signer:
+          $ref: '#/components/schemas/SignerDataRequest'
+        startdate:
+          $ref: '#/components/schemas/Busstartdate'
+        taxfillname:
+          $ref: '#/components/schemas/Taxfillname'
+        templateId:
+          $ref: '#/components/schemas/TemplateId'
+          description: The associated boarding template's ID in Payabli. Either `templateId` or `boardingLinkId` are required.
+        website:
+          $ref: '#/components/schemas/Website'
+        RepCode:
+          $ref: '#/components/schemas/RepCode'
+        RepName:
+          $ref: '#/components/schemas/RepName'
+        RepOffice:
+          $ref: '#/components/schemas/RepOffice'
+        onCreate:
+          $ref: '#/components/schemas/OnCreate'
+      required:
+      - signer
+      title: ApplicationDataManaged
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
+    RoutingAccount:
+      type: string
+      description: Routing number of bank account.
+      title: RoutingAccount
+    QueryBoardingLinksResponseRecordsItem:
+      type: object
+      properties:
+        AcceptOauth:
+          $ref: '#/components/schemas/AcceptOauth'
+        AcceptRegister:
+          $ref: '#/components/schemas/AcceptRegister'
+        EntryAttributes:
+          $ref: '#/components/schemas/EntryAttributes'
+        Id:
+          type: integer
+          description: The record ID.
+        LastUpdated:
+          $ref: '#/components/schemas/LastModified'
+        OrgParentName:
+          $ref: '#/components/schemas/OrgParentName'
+        ReferenceName:
+          $ref: '#/components/schemas/ReferenceName'
+        ReferenceTemplateId:
+          $ref: '#/components/schemas/ReferenceTemplateId'
+        TemplateCode:
+          $ref: '#/components/schemas/TemplateCode'
+        TemplateName:
+          $ref: '#/components/schemas/TemplateName'
+      title: QueryBoardingLinksResponseRecordsItem
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    Bank:
+      type: object
+      properties:
+        default:
+          type: boolean
+        country:
+          type: string
+        id:
+          type: integer
+          description: The Payabli-assigned internal identifier for the bank account.
+        accountId:
+          $ref: '#/components/schemas/AccountId'
+          description: An identifier for the bank account, used to specify which account handles payments when multiple accounts are configured. If not provided during creation or update, the system generates one in the format `acct-{first_digit}xxxxx{last_4_digits}` based on the account number. The mask always uses five `x` characters regardless of account number length. For example, account number `123456789` produces `acct-1xxxxx6789`. If a duplicate exists within the same service at the paypoint, a numeric suffix is appended, such as `acct-1xxxxx6789-2`. This value is also used as the identifier for the bank account's associated payment connector.
+        nickname:
+          $ref: '#/components/schemas/BankNickname'
+        bankName:
+          $ref: '#/components/schemas/BankName'
+        routingAccount:
+          $ref: '#/components/schemas/RoutingAccount'
+        accountNumber:
+          $ref: '#/components/schemas/AccountNumber'
+        typeAccount:
+          $ref: '#/components/schemas/TypeAccount'
+        bankAccountHolderName:
+          $ref: '#/components/schemas/BankAccountHolderName'
+        bankAccountHolderType:
+          $ref: '#/components/schemas/BankAccountHolderType'
+        bankAccountFunction:
+          $ref: '#/components/schemas/BankAccountFunction'
+        verified:
+          type: boolean
+          description: Bank account verification status. When `true`, the account has been verified to exist and be in good standing based on vendor checks or previous processing histories.
+        status:
+          type: integer
+          description: Bank account status
+        services:
+          type: array
+          items:
+            type: string
+          description: Array of services associated with this bank account
+      description: Object that contains bank account details.
+      title: Bank
+    GeneralEvents:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Event description.
+        eventTime:
+          type: string
+          format: date-time
+          description: Event timestamp, in UTC.
+        extraData:
+          type:
+          - string
+          - 'null'
+          description: Extra data.
+        refData:
+          type: string
+          description: Reference data.
+        source:
+          $ref: '#/components/schemas/Source'
+          description: The event source.
+      title: GeneralEvents
+    Ein:
+      type: string
+      description: Business EIN or tax ID. This value is masked in API responses.
+      title: Ein
+    RequestAppByAuth:
+      type: object
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+          description: The email address the applicant used to save the application.
+        referenceId:
+          type: string
+          description: The referenceId is sent to the applicant via email when they save the application.
+      title: RequestAppByAuth
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    Dbaname:
+      type: string
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
+    RepCode:
+      type: string
+      description: 'Sales representative code. This is an optional field that can be used
+
+        to track the sales representative associated with the application.
+
+        '
+      title: RepCode
+    BankNickname:
+      type: string
+      description: User-defined name for the bank account.
+      title: BankNickname
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    EntryAttributes:
+      type: string
+      title: EntryAttributes
+    ApplicationDataPayInServices:
+      type: object
+      properties:
+        ach:
+          $ref: '#/components/schemas/ApplicationDataPayInServicesAch'
+        card:
+          $ref: '#/components/schemas/ApplicationDataPayInServicesCard'
+        odp:
+          $ref: '#/components/schemas/OdpSetup'
+      required:
+      - ach
+      - card
+      title: ApplicationDataPayInServices
+    ApplicationDataPayInOwnershipItem:
+      type: object
+      properties:
+        ownername:
+          type: string
+          description: Person who is registered as the beneficial owner of the business. This is a combination of first and last name.
+        ownertitle:
+          type: string
+          description: The job title of the person such as CEO or director.
+        ownerpercent:
+          type: integer
+          description: Percentage of ownership the person holds, in integer format.
+        ownerssn:
+          type: string
+          description: The relevant identifier for the person such as a Social Security Number.
+        ownerdob:
+          type: string
+          description: Owner's date of birth.
+        ownerphone1:
+          type: string
+          description: Owner phone 1.
+        ownerphone2:
+          type: string
+          description: Owner phone 2.
+        owneremail:
+          $ref: '#/components/schemas/Email'
+          description: Owner email.
+        ownerdriver:
+          type: string
+          description: Owner driver's license ID number. Payabli strongly recommends including this.
+        oaddress:
+          type: string
+          description: Owner street address. This must be the physical address of the owner, not a P.O. box.
+        ocity:
+          type: string
+          description: Owner address city.
+        ocountry:
+          type: string
+          description: Owner address country in ISO-3166-1 alpha 2 format. Check out https://en.wikipedia.org/wiki/ISO_3166-1 for reference.
+        odriverstate:
+          type: string
+          description: Owner driver's license State. Payabli strongly recommends including this.
+        ostate:
+          type: string
+          description: Owner address state.
+        ozip:
+          type: string
+          description: Owner address ZIP.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: ApplicationDataPayInOwnershipItem
+    TemplateName:
+      type: string
+      description: The template name.
+      title: TemplateName
+    Website:
+      type: string
+      description: 'The business website address. Include only the domain and TLD, do not
+
+        enter the protocol (`http`/`https`). For example: `www.example.com` is
+
+        acceptable.
+
+        '
+      title: Website
+    ApplicationDetailsRecordMessagesItem:
+      type: object
+      properties:
+        content:
+          type: string
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        currentApplicationStatus:
+          type: integer
+        currentApplicationSubStatus:
+          type: integer
+        id:
+          type: integer
+        messageType:
+          type: integer
+        originalApplicationStatus:
+          type: integer
+        originalApplicationSubStatus:
+          type: integer
+        roomId:
+          type: integer
+        userId:
+          type: integer
+        userName:
+          type: string
+      title: ApplicationDetailsRecordMessagesItem
+    OwnType:
+      type: string
+      enum:
+      - Limited Liability Company
+      - Non-Profit Org
+      - Partnership
+      - Private Corp
+      - Public Corp
+      - Tax Exempt
+      - Government
+      - Sole Proprietor
+      description: The business ownership type.
+      title: OwnType
+    SignerCountry:
+      type: string
+      description: 'The signer''s country in ISO-3166-1 alpha 2 format. See
+
+        [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) for more.
+
+        '
+      title: SignerCountry
+    CardSetup:
+      type: object
+      properties:
+        acceptAmex:
+          type: boolean
+          description: Determines whether American Express is accepted.
+        acceptDiscover:
+          type: boolean
+          description: Determines whether Discover is accepted.
+        acceptMastercard:
+          type: boolean
+          description: Determines whether Mastercard is accepted.
+        acceptVisa:
+          type: boolean
+          description: Determines whether Visa is accepted.
+      title: CardSetup
+    ApplicationDataOdpOwnershipItem:
+      type: object
+      properties:
+        ownername:
+          type: string
+          description: Person who is registered as the beneficial owner of the business. This is a combination of first and last name.
+        ownertitle:
+          type: string
+          description: The job title of the person such as CEO or director.
+        ownerpercent:
+          type: integer
+          description: Percentage of ownership the person holds, in integer format.
+        ownerssn:
+          type: string
+          description: The relevant identifier for the person such as a Social Security Number.
+        ownerdob:
+          type: string
+          description: Owner's date of birth.
+        ownerphone1:
+          type: string
+          description: Owner phone 1.
+        ownerphone2:
+          type: string
+          description: Owner phone 2.
+        owneremail:
+          $ref: '#/components/schemas/Email'
+          description: Owner email.
+        ownerdriver:
+          type: string
+          description: Owner driver's license ID number. Payabli strongly recommends including this.
+        oaddress:
+          type: string
+          description: Owner street address. This must be the physical address of the owner, not a P.O. box.
+        ocity:
+          type: string
+          description: Owner address city.
+        ocountry:
+          type: string
+          description: Owner address country in ISO-3166-1 alpha 2 format. Check out https://en.wikipedia.org/wiki/ISO_3166-1 for reference.
+        odriverstate:
+          type: string
+          description: Owner driver's license State. Payabli strongly recommends including this.
+        ostate:
+          type: string
+          description: Owner address state.
+        ozip:
+          type: string
+          description: Owner address ZIP.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: ApplicationDataOdpOwnershipItem
+    Avgmonthly:
+      type: number
+      format: double
+      description: 'Average total amount of transactions in your local currency that are
+
+        processed each month.
+
+        '
+      title: Avgmonthly
+    BAddress:
+      type: object
+      properties:
+        baddress:
+          $ref: '#/components/schemas/LinkData'
+        baddress1:
+          $ref: '#/components/schemas/LinkData'
+        bcity:
+          $ref: '#/components/schemas/LinkData'
+        bcountry:
+          $ref: '#/components/schemas/LinkData'
+        bstate:
+          $ref: '#/components/schemas/LinkData'
+        bzip:
+          $ref: '#/components/schemas/LinkData'
+        maddress:
+          $ref: '#/components/schemas/LinkData'
+        maddress1:
+          $ref: '#/components/schemas/LinkData'
+        mcity:
+          $ref: '#/components/schemas/LinkData'
+        mcountry:
+          $ref: '#/components/schemas/LinkData'
+        mstate:
+          $ref: '#/components/schemas/LinkData'
+        mzip:
+          $ref: '#/components/schemas/LinkData'
+      title: BAddress
+    SignerName:
+      type: string
+      description: The signer's name.
+      title: SignerName
+    BankAccountHolderName:
+      type: string
+      description: The accountholder's name.
+      title: BankAccountHolderName
+    LinkRow:
+      type: object
+      properties:
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkData'
+      title: LinkRow
+    OSection:
+      type: object
+      properties:
+        contact_list:
+          $ref: '#/components/schemas/CList'
+        own_list:
+          $ref: '#/components/schemas/OList'
+      title: OSection
+    TemplateCode:
+      type: string
+      description: The internal code for the template.
+      title: TemplateCode
+    AchLinkTypes:
+      type: object
+      properties:
+        ccd:
+          $ref: '#/components/schemas/LinkData'
+        ppd:
+          $ref: '#/components/schemas/LinkData'
+        web:
+          $ref: '#/components/schemas/LinkData'
+      title: AchLinkTypes
+    Services:
+      type: object
+      properties:
+        ach:
+          $ref: '#/components/schemas/AchSetup'
+        card:
+          $ref: '#/components/schemas/CardSetup'
+        odp:
+          $ref: '#/components/schemas/OdpSetup'
+      description: Controls which services will be enabled for the merchant.
+      title: Services
+    BoardingLinkQueryRecord:
+      type: object
+      properties:
+        acceptOauth:
+          $ref: '#/components/schemas/AcceptOauth'
+        acceptRegister:
+          $ref: '#/components/schemas/AcceptRegister'
+        builderData:
+          $ref: '#/components/schemas/BuilderData'
+        entryAttributes:
+          $ref: '#/components/schemas/EntryAttributes'
+        id:
+          type: integer
+          format: int64
+        logo:
+          $ref: '#/components/schemas/FileContent'
+          description: Object containing logo file.
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        'pageIdentifier:':
+          $ref: '#/components/schemas/PageIdentifier'
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        referenceName:
+          $ref: '#/components/schemas/ReferenceName'
+        referenceTemplateId:
+          $ref: '#/components/schemas/ReferenceTemplateId'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+      title: BoardingLinkQueryRecord
+    AdditionalDataMap:
+      type: object
+      additionalProperties:
+        type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataMap
+    ApplicationDataManagedOwnershipItem:
+      type: object
+      properties:
+        ownername:
+          type: string
+          description: Person who is registered as the beneficial owner of the business. This is a combination of first and last name.
+        ownertitle:
+          type: string
+          description: The job title of the person such as CEO or director.
+        ownerpercent:
+          type: integer
+          description: Percentage of ownership the person holds, in integer format.
+        ownerssn:
+          type: string
+          description: The relevant identifier for the person such as a Social Security Number.
+        ownerdob:
+          type: string
+          description: Owner's date of birth.
+        ownerphone1:
+          type: string
+          description: Owner phone 1.
+        ownerphone2:
+          type: string
+          description: Owner phone 2.
+        owneremail:
+          $ref: '#/components/schemas/Email'
+          description: Owner email.
+        ownerdriver:
+          type: string
+          description: Owner driver's license ID number. Payabli strongly recommends including this.
+        oaddress:
+          type: string
+          description: Owner street address. This must be the physical address of the owner, not a P.O. box.
+        ocity:
+          type: string
+          description: Owner address city.
+        ocountry:
+          type: string
+          description: Owner address country in ISO-3166-1 alpha 2 format. Check out https://en.wikipedia.org/wiki/ISO_3166-1 for reference.
+        odriverstate:
+          type: string
+          description: Owner driver's license State. Payabli strongly recommends including this.
+        ostate:
+          type: string
+          description: Owner address state.
+        ozip:
+          type: string
+          description: Owner address ZIP.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: ApplicationDataManagedOwnershipItem
+    ASection:
+      type: object
+      properties:
+        minimumDocuments:
+          type: integer
+        multipleContacts:
+          type: boolean
+        multipleOwners:
+          type: boolean
+      title: ASection
+    PayabliApiResponse00:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/Responsedata'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponse00
+    RepOffice:
+      type: string
+      description: 'Sales representative office location. This is an optional field that
+
+        can be used to track the sales representative office associated with
+
+        the application.
+
+        '
+      title: RepOffice
+    SignerData:
+      type: object
+      properties:
+        signerUuid:
+          type: string
+          description: The signer's ID. This is automatically generated by Payabli.
+        name:
+          $ref: '#/components/schemas/SignerName'
+        ssn:
+          $ref: '#/components/schemas/SignerSsn'
+        dob:
+          $ref: '#/components/schemas/SignerDob'
+        phone:
+          $ref: '#/components/schemas/SignerPhone'
+        email:
+          $ref: '#/components/schemas/Email'
+          description: The signer's email address.
+        address:
+          $ref: '#/components/schemas/Signeraddress'
+        address1:
+          $ref: '#/components/schemas/SignerAddress1'
+        city:
+          $ref: '#/components/schemas/SignerCity'
+        state:
+          $ref: '#/components/schemas/SignerState'
+        zip:
+          $ref: '#/components/schemas/SignerZip'
+        country:
+          $ref: '#/components/schemas/SignerCountry'
+        acceptance:
+          $ref: '#/components/schemas/SignerAcceptance'
+        signedDocumentReference:
+          type: string
+          description: Reference to the signed document.
+        pciAttestation:
+          $ref: '#/components/schemas/PciAttestation'
+        attestationDate:
+          $ref: '#/components/schemas/AttestationDate'
+        signDate:
+          $ref: '#/components/schemas/SignDate'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+      description: Information about the application's signer.
+      title: SignerData
+    Bcity:
+      type: string
+      description: Business city.
+      title: Bcity
+    CreateApplicationFromPaypointResponse:
+      type: object
+      properties:
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/CreateApplicationFromPaypointResponseData'
+      required:
+      - responseText
+      description: Response returned when creating a boarding application linked to an existing paypoint.
+      title: CreateApplicationFromPaypointResponse
+    AttestationDate:
+      type: string
+      description: 'Date the attestation was provided for PCI Compliance (`pciAttestation`),
+
+        in MM/DD/YYYY format.
+
+        '
+      title: AttestationDate
+    Ownership:
+      type: array
+      items:
+        $ref: '#/components/schemas/Owners'
+      description: List of Owners with at least a 25% ownership.
+      title: Ownership
+    LinkData:
+      type: object
+      properties:
+        ro:
+          $ref: '#/components/schemas/ReadOnly'
+        rq:
+          $ref: '#/components/schemas/RequiredElement'
+        validator:
+          type: string
+          description: 'The type of validation applied to the field. Available values:
+
+
+            - `text`
+
+            - `alpha`
+
+            - `ein`
+
+            - `url`
+
+            - `phone`
+
+            - `alphanumeric`
+
+            - `zipcode`
+
+            - `numbers`
+
+            - `float`
+
+            - `ssn`
+
+            - `email`
+
+            - `routing`
+
+            '
+        value:
+          $ref: '#/components/schemas/ValueTemplates'
+      title: LinkData
+    Highticketamt:
+      type: number
+      format: double
+      description: Highest ticket amount.
+      title: Highticketamt
+    SignDate:
+      type: string
+      description: 'Date when the signer signed the document. Accepted formats:
+
+        YYYY-MM-DD, MM/DD/YYYY.
+
+        '
+      title: SignDate
+    Whenprovided:
+      type: string
+      enum:
+      - 30 Days or Less
+      - 31 to 60 Days
+      description: 'Describes when goods or services are provided, from time of transaction.
+
+        '
+      title: Whenprovided
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    RequiredElement:
+      type: boolean
+      description: When `true`, the element is required.
+      title: RequiredElement
+    RecipientEmailNotification:
+      type: boolean
+      description: 'When `true`, Payabli will send the applicant a boarding link. Set this
+
+        value to `false` if you are sending pre-filled applications via the API
+
+        and don''t want Payabli to send the applicant an email to complete the
+
+        boarding application.
+
+        '
+      title: RecipientEmailNotification
+    License:
+      type: string
+      description: Business license ID or state ID number.
+      title: License
+    Mcc:
+      type: string
+      description: 'Business Merchant Category Code (MCC).
+
+        [This resource](https://github.com/greggles/mcc-codes/blob/main/mcc_codes.csv)
+
+        lists MCC codes.
+
+        '
+      title: Mcc
+    Mstate:
+      type: string
+      description: The business's mailing address state.
+      title: Mstate
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    TemplateId:
+      type: integer
+      format: int64
+      description: The associated boarding template's ID in Payabli.
+      title: TemplateId
+    SalesCode:
+      type: string
+      title: SalesCode
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    Signeraddress:
+      type: string
+      description: 'The signer''s address. This must be the physical address of the signer,
+
+        not a P.O. box.
+
+        '
+      title: Signeraddress
+    QueryBoardingAppsListResponse:
+      type: object
+      properties:
+        Records:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationQueryRecord'
+        Summary:
+          $ref: '#/components/schemas/QuerySummary'
+      title: QueryBoardingAppsListResponse
+    BoardingAverageBillSize:
+      type: string
+      description: 'This is the average amount of each bill you pay through our service. For
+
+        example, if your business paid 3 bills for a total of $1,500 then your
+
+        average bill size is $500.
+
+        '
+      title: BoardingAverageBillSize
+    ExternalPaypointId:
+      type: string
+      description: 'A custom identifier for the paypoint, if applicable.
+
+        '
+      title: ExternalPaypointId
+    Resumable:
+      type: boolean
+      description: 'When `true`, the applicant can save an incomplete application and
+
+        resume it later. When `false`, the applicant won''t have an option to
+
+        save their progress, and must complete the application in one session.
+
+        '
+      title: Resumable
+    Binweb:
+      type: integer
+      description: 'Numeric percent of volume processed on web. To pass validation,
+
+        `binperson`, `binweb`, and `binphone` must total 100 together.
+
+        '
+      title: Binweb
+    BSection:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/BAddress'
+        details:
+          $ref: '#/components/schemas/BDetails'
+      title: BSection
+    Binperson:
+      type: integer
+      description: 'Numeric percent of volume processed in person. To pass validation,
+
+        `binperson`, `binweb`, and `binphone` must total 100 together.
+
+        '
+      title: Binperson
+    CreateApplicationFromPaypointResponseData:
+      type: object
+      properties:
+        appId:
+          type: integer
+          format: int64
+          description: Unique identifier for the created application.
+        boardingLink:
+          type: string
+          description: URL where the merchant can complete the boarding process.
+      title: CreateApplicationFromPaypointResponseData
+    PayoutAverageMonthlyVolume:
+      type: number
+      format: double
+      description: 'The total number of bills the business pays each month. For example, if
+
+        your business pays an electric bill of $500, an internet bill of $150, and
+
+        various suppliers $5,000 every month then your monthly bill volume would
+
+        be $5,650.
+
+        '
+      title: PayoutAverageMonthlyVolume
+    BankData:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bank'
+      description: Information about associated bank accounts.
+      title: BankData
+    Maddress1:
+      type: string
+      description: Additional line for the business's mailing address.
+      title: Maddress1
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    Attachments:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileContent'
+      description: 'Array of `fileContent` objects with attached documents. Max upload size is
+
+        30 MB.
+
+        '
+      title: Attachments
+    SignerDob:
+      type: string
+      description: The signer's date of birth.
+      title: SignerDob
+    RepName:
+      type: string
+      description: 'Sales representative name. This is an optional field that can be used
+
+        to track the sales representative associated with the application.
+
+        '
+      title: RepName
+    Contacts:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    Maddress:
+      type: string
+      description: The business's mailing address.
+      title: Maddress
+    BoardingApplicationAttachments:
+      type: object
+      properties:
+        filelist:
+          type: array
+          items:
+            $ref: '#/components/schemas/PairFiles'
+          description: Array of objects describing files contained in the ZIP file.
+        zipfile:
+          type: string
+          description: Zip file containing attachments.
+      title: BoardingApplicationAttachments
+    Binphone:
+      type: integer
+      description: 'Numeric percent of volume processed by phone. To pass validation,
+
+        `binperson`, `binweb`, and `binphone` must total 100 together.
+
+        '
+      title: Binphone
+    ExportFormat:
+      type: string
+      enum:
+      - csv
+      - xlsx
+      description: 'Export format for file downloads. When specified, returns data as a file
+
+        instead of JSON.
+
+        '
+      title: ExportFormat
+    ReferenceName:
+      type: string
+      title: ReferenceName
+    Whendelivered:
+      type: string
+      enum:
+      - 0-7 Days
+      - 8-14 Days
+      - 15-30 Days
+      - Over 30 Days
+      description: When goods and services are delivered.
+      title: Whendelivered
+    ApplicationQueryRecord:
+      type: object
+      properties:
+        annualRevenue:
+          $ref: '#/components/schemas/Annualrevenue'
+        averageMonthlyVolume:
+          $ref: '#/components/schemas/Avgmonthly'
+        averageTicketAmount:
+          $ref: '#/components/schemas/Ticketamt'
+        bAddress1:
+          $ref: '#/components/schemas/Baddress1'
+        bAddress2:
+          $ref: '#/components/schemas/Baddress2'
+        bankData:
+          $ref: '#/components/schemas/BankData'
+        bCity:
+          $ref: '#/components/schemas/Bcity'
+        bCountry:
+          $ref: '#/components/schemas/Bcountry'
+        bFax:
+          $ref: '#/components/schemas/Bphone'
+          description: The business's fax number.
+        binPerson:
+          $ref: '#/components/schemas/Binperson'
+        binPhone:
+          $ref: '#/components/schemas/Binphone'
+        binWeb:
+          $ref: '#/components/schemas/Binweb'
+        boardingLinkId:
+          $ref: '#/components/schemas/BoardingLinkId'
+        boardingStatus:
+          $ref: '#/components/schemas/BoardingStatus'
+        boardingSubStatus:
+          $ref: '#/components/schemas/BoardingStatus'
+        bPhone:
+          $ref: '#/components/schemas/Bphone'
+        bStartdate:
+          $ref: '#/components/schemas/Busstartdate'
+        bState:
+          $ref: '#/components/schemas/Bstate'
+        bSummary:
+          $ref: '#/components/schemas/Bsummary'
+        builderData:
+          $ref: '#/components/schemas/BuilderData'
+        bZip:
+          $ref: '#/components/schemas/Bzip'
+        contactData:
+          $ref: '#/components/schemas/ContactsField'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        dbaName:
+          $ref: '#/components/schemas/Dbaname'
+        documentsRef:
+          $ref: '#/components/schemas/BoardingApplicationAttachments'
+        ein:
+          $ref: '#/components/schemas/Ein'
+        externalPaypointId:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        generalEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneralEvents'
+          description: Events associated with the application.
+        highTicketAmount:
+          $ref: '#/components/schemas/Highticketamt'
+        idApplication:
+          $ref: '#/components/schemas/AppId'
+        lastModified:
+          $ref: '#/components/schemas/LastModified'
+        legalName:
+          $ref: '#/components/schemas/Legalname'
+        license:
+          $ref: '#/components/schemas/License'
+        licenseState:
+          $ref: '#/components/schemas/Licensestate'
+        logo:
+          $ref: '#/components/schemas/FileContent'
+          description: Object containing logo file.
+        mAddress1:
+          $ref: '#/components/schemas/Maddress'
+        mAddress2:
+          $ref: '#/components/schemas/Maddress1'
+        mccid:
+          type: string
+        mCity:
+          $ref: '#/components/schemas/Mstate'
+        mCountry:
+          $ref: '#/components/schemas/Mcountry'
+        mState:
+          $ref: '#/components/schemas/Mstate'
+        mZip:
+          $ref: '#/components/schemas/Mzip'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        orgParentName:
+          $ref: '#/components/schemas/OrgParentName'
+        ownerData:
+          $ref: '#/components/schemas/Ownership'
+        ownType:
+          $ref: '#/components/schemas/OwnType'
+        pageidentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        salesCode:
+          $ref: '#/components/schemas/SalesCode'
+        serviceData:
+          $ref: '#/components/schemas/Services'
+        signer:
+          $ref: '#/components/schemas/SignerData'
+        taxfillname:
+          $ref: '#/components/schemas/Taxfillname'
+        templateId:
+          $ref: '#/components/schemas/TemplateId'
+        websiteAddress:
+          $ref: '#/components/schemas/Website'
+        whencharged:
+          $ref: '#/components/schemas/Whencharged'
+        whendelivered:
+          $ref: '#/components/schemas/Whendelivered'
+        whenProvided:
+          $ref: '#/components/schemas/Whenprovided'
+        whenrefund:
+          $ref: '#/components/schemas/Whenrefunded'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        RepCode:
+          $ref: '#/components/schemas/RepCode'
+        RepName:
+          $ref: '#/components/schemas/RepName'
+        RepOffice:
+          $ref: '#/components/schemas/RepOffice'
+      title: ApplicationQueryRecord
+    ApplicationDataPayInServicesCard:
+      type: object
+      properties:
+        acceptAmex:
+          type: boolean
+          description: Determines whether American Express is accepted.
+        acceptDiscover:
+          type: boolean
+          description: Determines whether Discover is accepted.
+        acceptMastercard:
+          type: boolean
+          description: Determines whether Mastercard is accepted.
+        acceptVisa:
+          type: boolean
+          description: Determines whether Visa is accepted.
+      title: ApplicationDataPayInServicesCard
+    BDetails:
+      type: object
+      properties:
+        btype:
+          $ref: '#/components/schemas/LinkData'
+        dbaname:
+          $ref: '#/components/schemas/LinkData'
+        ein:
+          $ref: '#/components/schemas/LinkData'
+        faxnumber:
+          $ref: '#/components/schemas/LinkData'
+        legalname:
+          $ref: '#/components/schemas/LinkData'
+        license:
+          $ref: '#/components/schemas/LinkData'
+        licstate:
+          $ref: '#/components/schemas/LinkData'
+        phonenumber:
+          $ref: '#/components/schemas/LinkData'
+        startdate:
+          $ref: '#/components/schemas/LinkData'
+        taxfillname:
+          $ref: '#/components/schemas/LinkData'
+        website:
+          $ref: '#/components/schemas/LinkData'
+      title: BDetails
+    ApplicationDataManagedContactsItem:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: ApplicationDataManagedContactsItem
+    SignedDocumentReference:
+      type: string
+      description: Reference to the signed document.
+      title: SignedDocumentReference
+    ApplicationDataOdp:
+      type: object
+      properties:
+        services:
+          $ref: '#/components/schemas/Services'
+        annualRevenue:
+          $ref: '#/components/schemas/Annualrevenue'
+          description: Annual revenue amount. We recommend including this value.
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+        baddress:
+          $ref: '#/components/schemas/Baddress1'
+        baddress1:
+          $ref: '#/components/schemas/Baddress2'
+        bankData:
+          $ref: '#/components/schemas/BankData'
+        bcity:
+          $ref: '#/components/schemas/Bcity'
+        bcountry:
+          $ref: '#/components/schemas/Bcountry'
+        boardingLinkId:
+          type: string
+          description: Boarding link ID for the application. Either `templateId` or `boardingLinkId` are required.
+        bstate:
+          $ref: '#/components/schemas/Bstate'
+        bsummary:
+          $ref: '#/components/schemas/Bsummary'
+        btype:
+          $ref: '#/components/schemas/OwnType'
+        bzip:
+          $ref: '#/components/schemas/Bzip'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDataOdpContactsItem'
+          description: List of contacts for the business.
+        dbaname:
+          $ref: '#/components/schemas/Dbaname'
+        ein:
+          $ref: '#/components/schemas/Ein'
+        faxnumber:
+          $ref: '#/components/schemas/BoardingBusinessFax'
+        highticketamt:
+          $ref: '#/components/schemas/Highticketamt'
+        legalname:
+          $ref: '#/components/schemas/Legalname'
+        license:
+          $ref: '#/components/schemas/License'
+        licstate:
+          $ref: '#/components/schemas/Licensestate'
+        maddress:
+          $ref: '#/components/schemas/Maddress'
+        maddress1:
+          $ref: '#/components/schemas/Maddress1'
+        mcc:
+          $ref: '#/components/schemas/Mcc'
+        mcity:
+          $ref: '#/components/schemas/Mcity'
+        mcountry:
+          $ref: '#/components/schemas/Mcountry'
+        mstate:
+          $ref: '#/components/schemas/Mstate'
+        mzip:
+          $ref: '#/components/schemas/Mzip'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        ownership:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDataOdpOwnershipItem'
+          description: List of Owners with at least a 25% ownership.
+        payoutAverageMonthlyVolume:
+          $ref: '#/components/schemas/PayoutAverageMonthlyVolume'
+        payoutAverageTicketAmount:
+          $ref: '#/components/schemas/PayoutAverageTicketLimit'
+        payoutCreditLimit:
+          $ref: '#/components/schemas/PayoutCreditLimit'
+        payoutHighTicketAmount:
+          $ref: '#/components/schemas/PayoutHighTicketAmount'
+        phonenumber:
+          $ref: '#/components/schemas/BoardingBusinessPhone'
+        recipientEmail:
+          $ref: '#/components/schemas/Email'
+          description: Email address for the applicant. This is used to send the applicant a boarding link.
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        signer:
+          $ref: '#/components/schemas/SignerDataRequest'
+        startdate:
+          $ref: '#/components/schemas/Busstartdate'
+        taxfillname:
+          $ref: '#/components/schemas/Taxfillname'
+        templateId:
+          $ref: '#/components/schemas/TemplateId'
+          description: The associated boarding template's ID in Payabli. Either `templateId` or `boardingLinkId` are required.
+        website:
+          $ref: '#/components/schemas/Website'
+        RepCode:
+          $ref: '#/components/schemas/RepCode'
+        RepName:
+          $ref: '#/components/schemas/RepName'
+        RepOffice:
+          $ref: '#/components/schemas/RepOffice'
+        onCreate:
+          $ref: '#/components/schemas/OnCreate'
+      required:
+      - payoutAverageMonthlyVolume
+      - payoutAverageTicketAmount
+      - payoutCreditLimit
+      - payoutHighTicketAmount
+      - signer
+      title: ApplicationDataOdp
+    Whenrefunded:
+      type: string
+      enum:
+      - Exchange Only
+      - No Refund or Exchange
+      - More than 30 days
+      - 30 Days or Less
+      description: Describes the business refund policy.
+      title: Whenrefunded
+    Baddress1:
+      type: string
+      description: 'Business address. This must be a physical address, not a P.O. box.
+
+        '
+      title: Baddress1
+    BuilderData:
+      type: object
+      properties:
+        services:
+          $ref: '#/components/schemas/SSection'
+        attributes:
+          $ref: '#/components/schemas/ASection'
+        banking:
+          $ref: '#/components/schemas/DSection'
+        business:
+          $ref: '#/components/schemas/BSection'
+        owners:
+          $ref: '#/components/schemas/OSection'
+        processing:
+          $ref: '#/components/schemas/PSection'
+      title: BuilderData
+    PhoneNumber:
+      type: string
+      description: Phone number.
+      title: PhoneNumber
+    Bsummary:
+      type: string
+      description: A summary of what the business sells in terms of goods or services.
+      title: Bsummary
+    Source:
+      type: string
+      description: Custom identifier to indicate the transaction or request source.
+      title: Source
+    Mcity:
+      type: string
+      description: The business's mail city.
+      title: Mcity
+    Taxfillname:
+      type: string
+      description: 'Business name in tax document. This is only relevant if a government
+
+        entity has given you an alternative name to file tax documents with.
+
+        '
+      title: Taxfillname
+    Bzip:
+      type: string
+      description: Business ZIP.
+      title: Bzip
+    BoardingStatus:
+      type: integer
+      description: 'The application''s status in the merchant boarding process. See
+
+        [Boarding Status Reference](/developers/references/boarding-statuses) for
+
+        more.
+
+        '
+      title: BoardingStatus
+    ValueTemplates:
+      type: string
+      title: ValueTemplates
+    PciAttestation:
+      type: boolean
+      description: 'When `true`, indicates that the merchant acknowledges PCI responsibilities
+
+        and can be enrolled in the PCI program for breach insurance.
+
+        '
+      title: PciAttestation
+    PairFiles:
+      type: object
+      properties:
+        originalName:
+          type: string
+          description: Original filename
+        zipName:
+          type: string
+          description: Filename assigned to zipped file. This is the name to use for reference in the API functions to get files in attachments.
+        descriptor:
+          type: string
+          description: Descriptor of the file.
+      title: PairFiles
+    BoardingBusinessPhone:
+      type: string
+      description: The business's phone number.
+      title: BoardingBusinessPhone
+    TypeAccount:
+      type: string
+      enum:
+      - Checking
+      - Savings
+      description: 'Type of bank account: Checking or Savings.'
+      title: TypeAccount
+    OList:
+      type: object
+      properties:
+        oaddress:
+          $ref: '#/components/schemas/LinkData'
+        ocity:
+          $ref: '#/components/schemas/LinkData'
+        ocountry:
+          $ref: '#/components/schemas/LinkData'
+        odriverstate:
+          $ref: '#/components/schemas/LinkData'
+        ostate:
+          $ref: '#/components/schemas/LinkData'
+        ownerdob:
+          $ref: '#/components/schemas/LinkData'
+        ownerdriver:
+          $ref: '#/components/schemas/LinkData'
+        owneremail:
+          $ref: '#/components/schemas/LinkData'
+        ownername:
+          $ref: '#/components/schemas/LinkData'
+        ownerpercent:
+          $ref: '#/components/schemas/LinkData'
+        ownerphone1:
+          $ref: '#/components/schemas/LinkData'
+        ownerphone2:
+          $ref: '#/components/schemas/LinkData'
+        ownerssn:
+          $ref: '#/components/schemas/LinkData'
+        ownertitle:
+          $ref: '#/components/schemas/LinkData'
+        ozip:
+          $ref: '#/components/schemas/LinkData'
+      title: OList
+    Owners:
+      type: object
+      properties:
+        ownername:
+          type: string
+          description: Person who is registered as the beneficial owner of the business. This is a combination of first and last name.
+        ownertitle:
+          type: string
+          description: The job title of the person such as CEO or director.
+        ownerpercent:
+          type: integer
+          description: Percentage of ownership the person holds, in integer format.
+        ownerssn:
+          type: string
+          description: The relevant identifier for the person such as a Social Security Number.
+        ownerdob:
+          type: string
+          description: Owner's date of birth.
+        ownerphone1:
+          type: string
+          description: Owner phone 1.
+        ownerphone2:
+          type: string
+          description: Owner phone 2.
+        owneremail:
+          $ref: '#/components/schemas/Email'
+          description: Owner email.
+        ownerdriver:
+          type: string
+          description: Owner driver's license ID number. Payabli strongly recommends including this.
+        oaddress:
+          type: string
+          description: Owner street address. This must be the physical address of the owner, not a P.O. box.
+        ocity:
+          type: string
+          description: Owner address city.
+        ocountry:
+          type: string
+          description: Owner address country in ISO-3166-1 alpha 2 format. Check out https://en.wikipedia.org/wiki/ISO_3166-1 for reference.
+        odriverstate:
+          type: string
+          description: Owner driver's license State. Payabli strongly recommends including this.
+        ostate:
+          type: string
+          description: Owner address state.
+        ozip:
+          type: string
+          description: Owner address ZIP.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Owners
+    SignerCity:
+      type: string
+      description: The signer's city.
+      title: SignerCity
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    BasicTable:
+      type: object
+      properties:
+        body:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkRow'
+        header:
+          $ref: '#/components/schemas/LinkRow'
+      title: BasicTable
+    ApplicationDetailsRecord:
+      type: object
+      properties:
+        annualRevenue:
+          $ref: '#/components/schemas/Annualrevenue'
+        averageMonthlyVolume:
+          $ref: '#/components/schemas/Avgmonthly'
+        averageTicketAmount:
+          $ref: '#/components/schemas/Ticketamt'
+        bAddress1:
+          $ref: '#/components/schemas/Baddress1'
+        bAddress2:
+          $ref: '#/components/schemas/Baddress2'
+        bankData:
+          $ref: '#/components/schemas/BankData'
+        bCity:
+          $ref: '#/components/schemas/Bcity'
+        bCountry:
+          $ref: '#/components/schemas/Bcountry'
+        bFax:
+          $ref: '#/components/schemas/Bphone'
+          description: The business's fax number.
+        binPerson:
+          $ref: '#/components/schemas/Binperson'
+        binPhone:
+          $ref: '#/components/schemas/Binphone'
+        binWeb:
+          $ref: '#/components/schemas/Binweb'
+        boardingLinkId:
+          $ref: '#/components/schemas/BoardingLinkId'
+        boardingStatus:
+          $ref: '#/components/schemas/BoardingStatus'
+        boardingSubStatus:
+          $ref: '#/components/schemas/BoardingStatus'
+        bPhone:
+          $ref: '#/components/schemas/Bphone'
+        bStartdate:
+          $ref: '#/components/schemas/Busstartdate'
+        bState:
+          $ref: '#/components/schemas/Bstate'
+        bSummary:
+          $ref: '#/components/schemas/Bsummary'
+        builderData:
+          $ref: '#/components/schemas/BuilderData'
+        bZip:
+          $ref: '#/components/schemas/Bzip'
+        contactData:
+          $ref: '#/components/schemas/ContactsField'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        dbaName:
+          $ref: '#/components/schemas/Dbaname'
+        documentsRef:
+          $ref: '#/components/schemas/BoardingApplicationAttachments'
+        ein:
+          $ref: '#/components/schemas/Ein'
+        externalPaypointId:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        generalEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneralEvents'
+          description: Events associated with the application.
+        highTicketAmount:
+          $ref: '#/components/schemas/Highticketamt'
+        idApplication:
+          $ref: '#/components/schemas/AppId'
+        lastModified:
+          $ref: '#/components/schemas/LastModified'
+        legalName:
+          $ref: '#/components/schemas/Legalname'
+        license:
+          $ref: '#/components/schemas/License'
+        licenseState:
+          $ref: '#/components/schemas/Licensestate'
+        logo:
+          type: string
+          description: A URL pointing to a logo file.
+        mAddress1:
+          $ref: '#/components/schemas/Maddress'
+        mAddress2:
+          $ref: '#/components/schemas/Maddress1'
+        mccid:
+          type: string
+        mCity:
+          $ref: '#/components/schemas/Mstate'
+        mCountry:
+          $ref: '#/components/schemas/Mcountry'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDetailsRecordMessagesItem'
+        mState:
+          $ref: '#/components/schemas/Mstate'
+        mZip:
+          $ref: '#/components/schemas/Mzip'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        orgParentName:
+          $ref: '#/components/schemas/OrgParentName'
+        ownerData:
+          $ref: '#/components/schemas/Ownership'
+        ownType:
+          $ref: '#/components/schemas/OwnType'
+        pageidentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        salesCode:
+          $ref: '#/components/schemas/SalesCode'
+        serviceData:
+          $ref: '#/components/schemas/Services'
+        signer:
+          $ref: '#/components/schemas/SignerData'
+        taxfillname:
+          $ref: '#/components/schemas/Taxfillname'
+        templateId:
+          $ref: '#/components/schemas/TemplateId'
+        websiteAddress:
+          $ref: '#/components/schemas/Website'
+        whencharged:
+          $ref: '#/components/schemas/Whencharged'
+        whendelivered:
+          $ref: '#/components/schemas/Whendelivered'
+        whenProvided:
+          $ref: '#/components/schemas/Whenprovided'
+        whenrefund:
+          $ref: '#/components/schemas/Whenrefunded'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+      title: ApplicationDetailsRecord
+    ApplicationDataPayInContactsItem:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: ApplicationDataPayInContactsItem
+    AccountNumber:
+      type: string
+      description: Account number for bank account. This value is returned masked in responses.
+      title: AccountNumber
+    Legalname:
+      type: string
+      description: Business legal name.
+      title: Legalname
+    AchSection:
+      type: object
+      properties:
+        acceptance:
+          $ref: '#/components/schemas/AchLinkTypes'
+        fees:
+          $ref: '#/components/schemas/BasicTable'
+        price:
+          $ref: '#/components/schemas/BasicTable'
+      title: AchSection
+    ReadOnly:
+      type: boolean
+      description: When `true`, the element is read-only.
+      title: ReadOnly
+    AchSetup:
+      type: object
+      properties:
+        acceptCCD:
+          type: boolean
+          description: 'CCD is an ACH SEC Code that can be used in ACH transactions by the
+
+            user that indicates the transaction is a Corporate Credit or Debit
+
+            Entry.
+
+            '
+        acceptPPD:
+          type: boolean
+          description: 'PPD is an ACH SEC Code that can be used in ACH transactions by the
+
+            user that indicates the transaction is a Prearranged Payment and
+
+            Deposit.
+
+            '
+        acceptWeb:
+          type: boolean
+          description: 'Web is an ACH SEC Code that can be used in ACH transactions by the
+
+            user that indicates the transaction is an Internet-Initiated/Mobile
+
+            Entry.
+
+            '
+      description: 'Configuration for which ACH SEC codes the user is allowed to use.
+
+        '
+      title: AchSetup
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

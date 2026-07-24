@@ -1,0 +1,866 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill paymentMethodDomain API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: paymentMethodDomain
+paths:
+  /PaymentMethodDomain:
+    post:
+      operationId: AddPaymentMethodDomain
+      summary: Add a payment method domain
+      description: Add a payment method domain to an organization or paypoint.
+      tags:
+      - paymentMethodDomain
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddPaymentMethodDomainApiResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddPaymentMethodDomainRequest'
+  /PaymentMethodDomain/{domainId}/cascade:
+    post:
+      operationId: CascadePaymentMethodDomain
+      summary: Cascade a payment method domain to the child entities
+      description: Cascades a payment method domain to all child entities. All paypoints and suborganization under this parent will inherit this domain and its settings.
+      tags:
+      - paymentMethodDomain
+      parameters:
+      - name: domainId
+        in: path
+        description: The payment method domain's ID in Payabli.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodDomainGeneralResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /PaymentMethodDomain/{domainId}/verify:
+    post:
+      operationId: VerifyPaymentMethodDomain
+      summary: Verify a payment method domain
+      description: Verify a new payment method domain. If verification is successful, Apple Pay is automatically activated for the domain.
+      tags:
+      - paymentMethodDomain
+      parameters:
+      - name: domainId
+        in: path
+        description: The payment method domain's ID in Payabli.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodDomainGeneralResponse'
+  /PaymentMethodDomain/{domainId}:
+    get:
+      operationId: GetPaymentMethodDomain
+      summary: Get payment method domain details
+      description: Get the details for a payment method domain.
+      tags:
+      - paymentMethodDomain
+      parameters:
+      - name: domainId
+        in: path
+        description: The payment method domain's ID in Payabli.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response that includes a payment method domain's details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    patch:
+      operationId: UpdatePaymentMethodDomain
+      summary: Update payment method domain configuration
+      description: Update a payment method domain's configuration values.
+      tags:
+      - paymentMethodDomain
+      parameters:
+      - name: domainId
+        in: path
+        description: The payment method domain's ID in Payabli.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response for configuration update.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodDomainGeneralResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePaymentMethodDomainRequest'
+    delete:
+      operationId: DeletePaymentMethodDomain
+      summary: Delete a payment method domain
+      description: Delete a payment method domain. You can't delete an inherited domain, you must delete a domain at the organization level.
+      tags:
+      - paymentMethodDomain
+      parameters:
+      - name: domainId
+        in: path
+        description: The payment method domain's ID in Payabli.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response for a deleted payment method domain.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePaymentMethodDomainResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /PaymentMethodDomain/list:
+    get:
+      operationId: ListPaymentMethodDomains
+      summary: List payment method domains for an entity
+      description: Get a list of payment method domains that belong to a PSP, organization, or paypoint.
+      tags:
+      - paymentMethodDomain
+      parameters:
+      - name: entityId
+        in: query
+        description: 'Identifier for the organization or paypoint.
+
+          - For organization, provide the organization ID - For paypoint, provide the paypoint ID'
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: entityType
+        in: query
+        description: "The type of entity. Valid values:\n  - organization\n  - paypoint\n  - psp"
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: Number of records to skip. Defaults to `0`.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records for query response. Defaults to `20`.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPaymentMethodDomainsResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    DeletePaymentMethodDomainResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: The deleted domain's domain ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - isSuccess
+      - pageIdentifier
+      - responseData
+      - responseText
+      title: DeletePaymentMethodDomainResponse
+    AddPaymentMethodDomainRequestGooglePay:
+      type: object
+      properties:
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      description: Google Pay configuration information.
+      title: AddPaymentMethodDomainRequestGooglePay
+    EntityId:
+      type: integer
+      format: int64
+      description: 'The entity''s ID in Payabli. If the entity is a paypoint, this is the
+
+        paypoint ID. If the entity is an organization, this is the organization
+
+        ID.
+
+        '
+      title: EntityId
+    UpdatePaymentMethodDomainRequest:
+      type: object
+      properties:
+        applePay:
+          $ref: '#/components/schemas/UpdatePaymentMethodDomainRequestWallet'
+        googlePay:
+          $ref: '#/components/schemas/UpdatePaymentMethodDomainRequestWallet'
+      title: UpdatePaymentMethodDomainRequest
+    GooglePayMetadata:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: The status code returned by the domain verification URL.
+        redirectUrl:
+          type: string
+          description: 'If the domain verification URL is redirected, this is the URL it''s
+
+            redirected to. For example, `www.partner.com` could redirect to
+
+            `www.partners-new-home-page.com`. In this case, you should add
+
+            `www.partners-new-home-page.com` as a domain instead of
+
+            `www.partner.com`.
+
+            '
+        redirectDomainName:
+          type: string
+          description: The domain name if the domain verification URL returns a redirect.
+      description: 'This metadata appears only when the domain verification check fails. It
+
+        gives more information about why the check failed.
+
+        '
+      title: GooglePayMetadata
+    AddPaymentMethodDomainApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageidentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
+        responseText:
+          type: string
+      required:
+      - isSuccess
+      - pageidentifier
+      - responseData
+      - responseText
+      description: Response for the add payment method domain operation.
+      title: AddPaymentMethodDomainApiResponse
+    ListPaymentMethodDomainsResponse:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
+        summary:
+          $ref: '#/components/schemas/QuerySummaryNoAmt'
+      required:
+      - records
+      - summary
+      title: ListPaymentMethodDomainsResponse
+    JobStatus:
+      type: string
+      enum:
+      - in_progress
+      - completed
+      - failed
+      description: The cascade process status.
+      title: JobStatus
+    AddPaymentMethodDomainRequest:
+      type: object
+      properties:
+        applePay:
+          $ref: '#/components/schemas/AddPaymentMethodDomainRequestApplePay'
+          description: Apple Pay configuration information.
+        googlePay:
+          $ref: '#/components/schemas/AddPaymentMethodDomainRequestGooglePay'
+          description: Google Pay configuration information.
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        entityId:
+          $ref: '#/components/schemas/EntityId'
+        entityType:
+          $ref: '#/components/schemas/EntityType'
+      title: AddPaymentMethodDomainRequest
+    ApplePayMetadata:
+      type: object
+      properties:
+        isFileAvailable:
+          type: boolean
+          description: 'When `true`, indicates whether the domain verification file is
+
+            available at the expected path. When `false`, Payabli was unable to
+
+            find the file at the expected path. If the file is missing, make
+
+            sure it''s hosted at the correct path:
+
+            `/.well-known/apple-developer-merchantid-domain-association`.
+
+            '
+        isFileContentValid:
+          type: boolean
+          description: 'Indicates whether the domain verification file content is valid. If
+
+            the file is invalid, try downloading it and hosting it again.
+
+            '
+        redirectDomainName:
+          type: string
+          description: The domain name if the domain verification URL returns a redirect.
+        redirectUrl:
+          type: string
+          description: 'If the domain verification URL is redirected, this is the URL it''s
+
+            redirected to. For example, `www.partner.com` could redirect to
+
+            `www.partners-new-home-page.com`. In this case, you should add
+
+            `www.partners-new-home-page.com` as a domain instead of
+
+            `www.partner.com`.
+
+            '
+        statusCode:
+          type: integer
+          description: The status code returned by the domain verification URL.
+      description: 'This metadata appears only when the domain verification check fails. It
+
+        gives more information about why the check failed.
+
+        '
+      title: ApplePayMetadata
+    EntityType:
+      type: string
+      description: 'The entity type. Available values:
+
+
+        - `paypoint`
+
+        - `organization`
+
+        - `psp` (payment service provider)
+
+        '
+      title: EntityType
+    IsEnabled:
+      type: boolean
+      description: When `true`, the service is enabled.
+      title: IsEnabled
+    JobId:
+      type: string
+      description: The cascade process ID.
+      title: JobId
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    PaymentMethodDomainApiResponse:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+          description: The record type. For payment method domains, this is always `PaymentMethodDomain`.
+        applePay:
+          $ref: '#/components/schemas/ApplePayData'
+        googlePay:
+          $ref: '#/components/schemas/GooglePayData'
+        cascades:
+          type: array
+          items:
+            $ref: '#/components/schemas/CascadeJobDetails'
+          description: Data about the domain's cascade status.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        entityId:
+          $ref: '#/components/schemas/EntityId'
+        entityType:
+          $ref: '#/components/schemas/EntityType'
+        id:
+          $ref: '#/components/schemas/PaymentMethodDomainId'
+        ownerEntityId:
+          $ref: '#/components/schemas/OwnerEntityId'
+        ownerEntityType:
+          $ref: '#/components/schemas/OwnerEntityType'
+        updatedAt:
+          $ref: '#/components/schemas/LastModified'
+      required:
+      - type
+      - applePay
+      - googlePay
+      - createdAt
+      - domainName
+      - entityId
+      - entityType
+      - id
+      - ownerEntityId
+      - ownerEntityType
+      description: Data related to the payment method domain.
+      title: PaymentMethodDomainApiResponse
+    ApplePayData:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplePayStatusData'
+          description: 'This object is only returned when the domain verification check
+
+            fails. If a domain has failed validation, this object contains
+
+            information about the failure.
+
+            '
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      description: Details about the status of the Apple Pay service.
+      title: ApplePayData
+    AddPaymentMethodDomainRequestApplePay:
+      type: object
+      properties:
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      description: Apple Pay configuration information.
+      title: AddPaymentMethodDomainRequestApplePay
+    QuerySummaryNoAmt:
+      type: object
+      properties:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummaryNoAmt
+    UpdatePaymentMethodDomainRequestWallet:
+      type: object
+      properties:
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      title: UpdatePaymentMethodDomainRequestWallet
+    OwnerEntityType:
+      type: string
+      description: 'The domain''s owner''s entity type. Available values:
+
+
+        - `paypoint`
+
+        - `organization`
+
+        - `psp` (payment service provider)
+
+        '
+      title: OwnerEntityType
+    GooglePayStatusData:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: Any error message related to Google Pay's activation status.
+        metadata:
+          $ref: '#/components/schemas/GooglePayMetadata'
+      description: Details about the Google Pay service status.
+      title: GooglePayStatusData
+    ApplePayStatusData:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: Any error message related to Apple Pay's activation status.
+        metadata:
+          $ref: '#/components/schemas/ApplePayMetadata'
+      description: Details about the Apple Pay service status.
+      title: ApplePayStatusData
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    OwnerEntityId:
+      type: integer
+      format: int64
+      description: 'The domain''s owning entity''s ID in Payabli. This value might be different
+
+        than the `entityId`, depending on whether the domain is cascaded and
+
+        whether it''s inherited.
+
+        '
+      title: OwnerEntityId
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    DomainName:
+      type: string
+      description: 'The domain. For example: `subdomain.domain.com` or `domain.com`. Must be
+
+        public. Can''t be `localhost`, hidden by a VPN, or protected by a password.
+
+        '
+      title: DomainName
+    GooglePayData:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GooglePayStatusData'
+          description: 'This object is only returned when the domain verification check
+
+            fails. If a domain has failed validation, this object contains
+
+            information about the failure.
+
+            '
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      description: Details about the status of the Google Pay service.
+      title: GooglePayData
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    CascadeJobDetails:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        jobErrorMessage:
+          type: string
+          description: Error message for a failed cascade process.
+        jobId:
+          $ref: '#/components/schemas/JobId'
+        jobStatus:
+          $ref: '#/components/schemas/JobStatus'
+        updatedAt:
+          $ref: '#/components/schemas/LastModified'
+      description: Details about the cascade process.
+      title: CascadeJobDetails
+    PaymentMethodDomainGeneralResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageidentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
+        responseText:
+          type: string
+      required:
+      - responseText
+      title: PaymentMethodDomainGeneralResponse
+    PaymentMethodDomainId:
+      type: string
+      description: The payment method domain's ID in Payabli.
+      title: PaymentMethodDomainId
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

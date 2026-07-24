@@ -1,0 +1,472 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Cloud API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Cloud
+paths:
+  /Cloud/register/{entry}:
+    post:
+      operationId: addDevice
+      summary: Register cloud device
+      description: Register a cloud device to an entrypoint. See [Devices Quickstart](/developers/developer-guides/devices-quickstart#devices-quickstart) for a complete guide.
+      tags:
+      - Cloud
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      - name: idempotencyKey
+        in: header
+        description: _Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.
+        required: false
+        schema:
+          $ref: '#/components/schemas/IdempotencyKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddDeviceResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceEntry'
+  /Cloud/list/{entry}:
+    get:
+      operationId: ListDevice
+      summary: List registered devices in cloud
+      description: 'Use [List devices by paypoint](/developers/api-reference/cloud/get-list-of-devices-for-a-paypoint) instead, which supports filters, sorting, and pagination.
+
+
+        Get a list of cloud devices registered to an entrypoint.'
+      tags:
+      - Cloud
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: forceRefresh
+        in: query
+        description: When `true`, the request retrieves an updated list of devices from the processor instead of returning a cached list of devices.
+        required: false
+        schema:
+          type: boolean
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudQueryApiResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Cloud/history/{entry}/{deviceId}:
+    get:
+      operationId: HistoryDevice
+      summary: Get registration history for device
+      description: Retrieve the registration history for a device.
+      tags:
+      - Cloud
+      parameters:
+      - name: deviceId
+        in: path
+        description: ID of the cloud device.
+        required: true
+        schema:
+          type: string
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudQueryApiResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Cloud/register/{entry}/{deviceId}:
+    delete:
+      operationId: RemoveDevice
+      summary: Unregister cloud device
+      description: Remove a cloud device from an entrypoint.
+      tags:
+      - Cloud
+      parameters:
+      - name: deviceId
+        in: path
+        description: ID of the cloud device.
+        required: true
+        schema:
+          type: string
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveDeviceResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    DeviceEntry:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description or name for the device. This can be anything, but Payabli recommends entering the name of the paypoint, or some other easy to identify descriptor. If you have several devices for one paypoint, you can give them descriptions like "Cashier 1" and "Cashier 2", or "Front Desk" and "Back Office"
+        registrationCode:
+          type: string
+          description: 'The device registration code or serial number, depending on the model.
+
+
+            - Ingenico devices: This is the activation code that''s displayed on the device screen during setup.
+
+
+            - PAX A920 device: This code is the serial number on the back of the device.'
+      title: DeviceEntry
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    RemoveDeviceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          type: string
+          description: 'If `isSuccess` = true, this contains the device identifier.
+
+            If `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: RemoveDeviceResponse
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    AddDeviceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          type: string
+          description: 'If `isSuccess` = true, this contains the device identifier.
+
+            If `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: AddDeviceResponse
+    PoiDevice:
+      type: object
+      properties:
+        connected:
+          type: boolean
+          description: The device connection status.
+        dateDeRegistered:
+          type: string
+          format: date-time
+          description: The date the device was unregistered.
+        dateRegistered:
+          type: string
+          format: date-time
+          description: The date the device was registered.
+        deviceId:
+          type: string
+          description: The device identifier.
+        deviceLicense:
+          type: string
+          description: Device license. This is typically the same as `deviceId`.
+        deviceNickName:
+          type: string
+          description: Device description provided during registration.
+        lastConnectedDate:
+          type: string
+          format: date-time
+          description: Last connected date.
+        lastDisconnectedDate:
+          type: string
+          format: date-time
+          description: Last disconnected date.
+        lastTransactionDate:
+          type: string
+          format: date-time
+          description: Last transaction date.
+        make:
+          type: string
+          description: The device manufacturer.
+        model:
+          type: string
+          description: The device model.
+        registered:
+          type: boolean
+          description: The device registration status.
+        serialNumber:
+          type: string
+          description: The device serial number.
+      description: Information about the point of interaction device (also known as a terminal or cloud device) used to process the transaction.
+      title: PoiDevice
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    CloudQueryApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoiDevice'
+          description: List of devices and history of registration.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      description: Object containing details about cloud devices and their registration history.
+      title: CloudQueryApiResponse
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

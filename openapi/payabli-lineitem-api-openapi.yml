@@ -1,0 +1,621 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill lineItem API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: lineItem
+paths:
+  /LineItem/{entry}:
+    post:
+      operationId: AddItem
+      summary: Add item to entrypoint catalog
+      description: Adds products and services to an entrypoint's catalog. These are used as line items for invoicing and transactions. In the response, "responseData" displays the item's code.
+      tags:
+      - lineItem
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      - name: idempotencyKey
+        in: header
+        description: A unique ID you can include to prevent duplicating objects or transactions if a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse6'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineItem'
+  /LineItem/{lineItemId}:
+    get:
+      operationId: GetItem
+      summary: Get item in entrypoint
+      description: Gets an item by ID.
+      tags:
+      - lineItem
+      parameters:
+      - name: lineItemId
+        in: path
+        description: ID for the line item (also known as a product, service, or item).
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineItemQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    put:
+      operationId: UpdateItem
+      summary: Update item in entrypoint
+      description: Updates an item.
+      tags:
+      - lineItem
+      parameters:
+      - name: lineItemId
+        in: path
+        description: ID for the line item (also known as a product, service, or item).
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse6'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineItem'
+    delete:
+      operationId: DeleteItem
+      summary: Delete item in entrypoint
+      description: Deletes an item.
+      tags:
+      - lineItem
+      parameters:
+      - name: lineItemId
+        in: path
+        description: ID for the line item (also known as a product, service, or item).
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteItemResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Query/lineitems/{entry}:
+    get:
+      operationId: ListLineItems
+      summary: Get list of items for entrypoint
+      description: Retrieves a list of line items and their details from an entrypoint. Line items are also known as items, products, and services. Use filters to limit results.
+      tags:
+      - lineItem
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records to return for the query. Use `0` or negative value to return all records.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponseItems'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    QueryResponseItems:
+      type: object
+      properties:
+        Records:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryResponseItemsRecordsItem'
+        Summary:
+          $ref: '#/components/schemas/QuerySummary'
+      description: Response for line item queries
+      title: QueryResponseItems
+    ItemCommodityCode:
+      type: string
+      description: Item or product commodity code. Max length of 250 characters.
+      title: ItemCommodityCode
+    DeleteItemResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - isSuccess
+      - responseText
+      title: DeleteItemResponse
+    ItemProductName:
+      type: string
+      description: Item or product name. Max length of 250 characters.
+      title: ItemProductName
+    QuerySummary:
+      type: object
+      properties:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount for the records.
+        totalNetAmount:
+          type: number
+          format: double
+          description: Total net amount for the records.
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummary
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    LineItemQueryRecord:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: Timestamp of when line item was created, in UTC.
+        id:
+          type: integer
+          format: int64
+          description: Identifier of line item.
+        itemCategories:
+          type: array
+          items:
+            type: string
+          description: Array of tags classifying item or product.
+        itemCommodityCode:
+          $ref: '#/components/schemas/ItemCommodityCode'
+        itemCost:
+          type: number
+          format: double
+          description: Item or product price per unit.
+        itemDescription:
+          $ref: '#/components/schemas/ItemDescription'
+        itemMode:
+          type: integer
+          description: 'Internal class of item or product: value ''0'' is only for invoices , ''1'' for bills, and ''2'' common for both.'
+        itemProductCode:
+          $ref: '#/components/schemas/ItemProductCode'
+        itemProductName:
+          $ref: '#/components/schemas/ItemProductName'
+        itemQty:
+          type: integer
+          description: Quantity of item or product.
+        itemUnitOfMeasure:
+          $ref: '#/components/schemas/ItemUnitofMeasure'
+        lastUpdated:
+          $ref: '#/components/schemas/LastModified'
+          description: Timestamp of when the line item was updated, in UTC.
+        pageidentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+          description: The name of the paypoint's parent organization.
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+          description: The paypoint's DBA name.
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+          description: The paypoint's entryname (entrypoint) value.
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+          description: The paypoint's legal name.
+      required:
+      - itemCost
+      - itemQty
+      title: LineItemQueryRecord
+    ItemProductCode:
+      type: string
+      description: Item or product code. Max length of 250 characters.
+      title: ItemProductCode
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    QueryResponseItemsRecordsItem:
+      type: object
+      properties:
+        LineItem:
+          $ref: '#/components/schemas/LineItem'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+          description: The paypoint's DBA name.
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+          description: The paypoint's entry name (entrypoint).
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+          description: The paypoint's legal name.
+      title: QueryResponseItemsRecordsItem
+    ItemUnitofMeasure:
+      type: string
+      description: Unit of measurement. Max length of 100 characters.
+      title: ItemUnitofMeasure
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    PayabliApiResponse6:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: If `isSuccess` = true, this contains the line item identifier. If `isSuccess` = false, this contains the reason for the error.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      description: Response schema for line item operations.
+      title: PayabliApiResponse6
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    Dbaname:
+      type: string
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    LineItem:
+      type: object
+      properties:
+        itemCategories:
+          type: array
+          items:
+            type: string
+          description: Array of tags classifying item or product.
+        itemCommodityCode:
+          $ref: '#/components/schemas/ItemCommodityCode'
+        itemCost:
+          type: number
+          format: double
+          description: Item or product price per unit.
+        itemDescription:
+          $ref: '#/components/schemas/ItemDescription'
+        itemMode:
+          type: integer
+          description: 'Internal class of item or product: value ''0'' is only for invoices, ''1'' for bills, and ''2'' is common for both.'
+        itemProductCode:
+          $ref: '#/components/schemas/ItemProductCode'
+        itemProductName:
+          $ref: '#/components/schemas/ItemProductName'
+        itemQty:
+          type: integer
+          description: Quantity of item or product.
+        itemUnitOfMeasure:
+          $ref: '#/components/schemas/ItemUnitofMeasure'
+      required:
+      - itemCost
+      - itemQty
+      title: LineItem
+    ItemDescription:
+      type: string
+      description: Item or product description. Max length of 250 characters.
+      title: ItemDescription
+    Legalname:
+      type: string
+      description: Business legal name.
+      title: Legalname
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

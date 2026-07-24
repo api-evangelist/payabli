@@ -1,0 +1,1003 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Notification API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Notification
+paths:
+  /Notification:
+    post:
+      operationId: AddNotification
+      summary: Add notification
+      description: Create a new notification or auto-generated report.
+      tags:
+      - Notification
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseNotifications'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddNotificationRequest'
+  /Notification/{nId}:
+    get:
+      operationId: GetNotification
+      summary: Get notification
+      description: Retrieves a single notification or auto-generated report's details.
+      tags:
+      - Notification
+      parameters:
+      - name: nId
+        in: path
+        description: Notification ID.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    put:
+      operationId: UpdateNotification
+      summary: Update notification
+      description: Update a notification or auto-generated report.
+      tags:
+      - Notification
+      parameters:
+      - name: nId
+        in: path
+        description: Notification ID.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseNotifications'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationRequest'
+    delete:
+      operationId: DeleteNotification
+      summary: Delete notification
+      description: Deletes a single notification or auto-generated report.
+      tags:
+      - Notification
+      parameters:
+      - name: nId
+        in: path
+        description: Notification ID.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseNotifications'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/notificationReport/{Id}:
+    get:
+      operationId: GetReportFile
+      summary: Export generated report by ID
+      description: Gets a copy of a generated report by ID.
+      tags:
+      - Notification
+      parameters:
+      - name: Id
+        in: path
+        description: Report ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+components:
+  schemas:
+    NotificationReportRequestFrequency:
+      type: string
+      enum:
+      - one-time
+      - daily
+      - weekly
+      - biweekly
+      - monthly
+      - quarterly
+      - semiannually
+      - annually
+      title: NotificationReportRequestFrequency
+    PayabliApiResponseNotifications:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+          description: 'If `isSuccess` = true, `responseData` contains the notification identifier.
+
+            If `isSuccess` = false, `responseData` contains the reason for the error.'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/PayabliApiResponseNotificationsResponseData'
+          description: When the request was successful, this contains the notification ID, or `nID` used to manage the notification.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseNotifications
+    File:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: A file containing the response data, in the format specified in the request.
+      title: File
+    PayabliApiResponseNotificationsResponseData:
+      oneOf:
+      - type: integer
+      - type: string
+      description: 'When the request was successful, this contains the notification ID, or
+
+        `nID` used to manage the notification.
+
+        '
+      title: PayabliApiResponseNotificationsResponseData
+    Frequencynotification:
+      type: string
+      enum:
+      - one-time
+      - daily
+      - weekly
+      - biweekly
+      - monthly
+      - quarterly
+      - semiannually
+      - annually
+      - untilcancelled
+      description: Frequency for notifications.
+      title: Frequencynotification
+    NotificationContentReportName:
+      type: string
+      enum:
+      - Transaction
+      - Settlement
+      - Boarding
+      - Returned
+      description: 'The kind of report to generate. For
+
+        [automated reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports)
+
+        only.
+
+        '
+      title: NotificationContentReportName
+    NotificationStandardRequestContentEventType:
+      type: string
+      enum:
+      - payin_transaction_rejected
+      - payin_transaction_onhold
+      - payin_transaction_released
+      - payin_transaction_recovered
+      - payout_transaction_initiated
+      - payout_transaction_authorized
+      - payout_transaction_approvedcaptured
+      - payout_transaction_declined
+      - payout_transaction_technicaldecline
+      - payout_transaction_failed
+      - payout_transaction_error
+      - payout_transaction_paid
+      - payout_transaction_returned
+      - payout_transaction_rejected
+      - payout_transaction_voidedcancelled
+      - payout_transaction_processing
+      - payout_transaction_processed
+      - payout_transaction_onhold
+      - payout_transaction_released
+      - payout_transaction_recovered
+      - payin_batch_onhold
+      - payin_batch_released
+      - payout_batch_open
+      - payout_batch_onhold
+      - payout_batch_released
+      - payout_batch_processed
+      - payout_batch_paid
+      - payout_batch_funded
+      - payout_batch_closed
+      - payout_batch_notclosed
+      - payout_batch_fundpending
+      - payout_batch_cancelled
+      - payout_batch_transferred
+      - payout_batch_resolved
+      - payout_batch_settlement_pending
+      - payout_batch_settlement_intransit
+      - payout_batch_settlement_transferred
+      - payout_batch_settlement_funded
+      - payout_batch_settlement_resolved
+      - payout_batch_settlement_exception
+      - payout_batch_settlement_achreturn
+      - payout_batch_settlement_held
+      - payout_batch_settlement_released
+      - ApprovedPayment
+      - AuthorizedPayment
+      - DeclinedPayment
+      - OriginatedPayment
+      - SettledPayment
+      - SubscriptionCreated
+      - SubscriptionUpdated
+      - SubscriptionCanceled
+      - SubscriptionCompleted
+      - FundedPayment
+      - VoidedPayment
+      - RefundedPayment
+      - HoldTransaction
+      - ReleasedTransaction
+      - HoldBatch
+      - ReleasedBatch
+      - TransferAdjusted
+      - TransferDisabledCreditFund
+      - TransferDisabledDebitFund
+      - TransferNotAvailableBalance
+      - TransferReadyforRetry
+      - TransferResolved
+      - TransferReturn
+      - TransferSuccess
+      - TransferSuspended
+      - TransferError
+      - SendReceipt
+      - RecoveredTransaction
+      - CardUpdaterComplete
+      - CreatedApplication
+      - ApprovedApplication
+      - FailedBoardingApplication
+      - SubmittedApplication
+      - ActivatedMerchant
+      - ReceivedChargeBack
+      - ChargebackUpdated
+      - ReceivedRetrieval
+      - RetrievalUpdated
+      - ReceivedAchReturn
+      - HoldingApplication
+      - DeclinedApplication
+      - BoardingApplication
+      - PaypointMoved
+      - FraudAlert
+      - InvoiceSent
+      - InvoicePaid
+      - InvoiceCreated
+      - BillPaid
+      - BillApproved
+      - BillDisApproved
+      - BillCanceled
+      - BillProcessing
+      - CardCreated
+      - CardActivated
+      - CardDeactivated
+      - CardExpired
+      - CardExpiring
+      - CardLimitUpdated
+      - BatchClosed
+      - BatchNotClosed
+      - PayOutFunded
+      - PayOutProcessed
+      - PayOutCanceled
+      - PayOutPaid
+      - PayOutReturned
+      - PayoutSubscriptionCreated
+      - PayoutSubscriptionUpdated
+      - PayoutSubscriptionCanceled
+      - PayoutSubscriptionCompleted
+      - PayoutSubscriptionReminder
+      - importFileReceived
+      - importFileProcessed
+      - importFileError
+      - exportFileSent
+      - exportFileError
+      - UpdatedMerchant
+      - Report
+      - FailedEmailNotification
+      - FailedWebNotification
+      - FailedSMSNotification
+      - UserPasswordExpiring
+      - UserPasswordExpired
+      - TransactionNotFound
+      - SystemAlert
+      description: The notification's event name.
+      title: NotificationStandardRequestContentEventType
+    NotificationContentEventType:
+      type: string
+      enum:
+      - ApprovedPayment
+      - AuthorizedPayment
+      - DeclinedPayment
+      - OriginatedPayment
+      - SettledPayment
+      - SubscriptionCreated
+      - SubscriptionUpdated
+      - SubscriptionCanceled
+      - SubscriptionCompleted
+      - FundedPayment
+      - VoidedPayment
+      - RefundedPayment
+      - HoldTransaction
+      - ReleasedTransaction
+      - HoldBatch
+      - ReleasedBatch
+      - TransferDisabledCreditFund
+      - TransferDisabledDebitFund
+      - TransferNotAvailableBalance
+      - TransferReturn
+      - TransferSuccess
+      - TransferSuspended
+      - TransferError
+      - SendReceipt
+      - RecoveredTransaction
+      - CardUpdaterComplete
+      - CreatedApplication
+      - ApprovedApplication
+      - FailedBoardingApplication
+      - SubmittedApplication
+      - ActivatedMerchant
+      - ReceivedChargeBack
+      - ChargebackUpdated
+      - ReceivedRetrieval
+      - RetrievalUpdated
+      - ReceivedAchReturn
+      - HoldingApplication
+      - DeclinedApplication
+      - BoardingApplication
+      - FraudAlert
+      - InvoiceSent
+      - InvoicePaid
+      - InvoiceCreated
+      - BillPaid
+      - BillApproved
+      - BillDisApproved
+      - BillCanceled
+      - BillProcessing
+      - CardCreated
+      - CardActivated
+      - CardDeactivated
+      - CardExpired
+      - CardExpiring
+      - CardLimitUpdated
+      - BatchClosed
+      - BatchNotClosed
+      - PayOutFunded
+      - PayOutProcessed
+      - PayOutCanceled
+      - PayOutPaid
+      - PayOutReturned
+      - PayoutSubscriptionCreated
+      - PayoutSubscriptionUpdated
+      - PayoutSubscriptionCanceled
+      - PayoutSubscriptionCompleted
+      - PayoutSubscriptionReminder
+      - importFileReceived
+      - importFileProcessed
+      - importFileError
+      - exportFileSent
+      - exportFileError
+      - FailedEmailNotification
+      - FailedWebNotification
+      - FailedSMSNotification
+      - UserPasswordExpiring
+      - UserPasswordExpired
+      - TransactionNotFound
+      - SystemAlert
+      - Report
+      description: The notification's event name.
+      title: NotificationContentEventType
+    NotificationReportRequestContentReportName:
+      type: string
+      enum:
+      - Transaction
+      - Settlement
+      - Boarding
+      - Returned
+      description: The kind of report to generate.
+      title: NotificationReportRequestContentReportName
+    NotificationReportRequestContentFileFormat:
+      type: string
+      enum:
+      - json
+      - csv
+      - xlsx
+      description: 'Indicate the format of report file to be generated by the engine.
+
+        '
+      title: NotificationReportRequestContentFileFormat
+    UpdateNotificationRequest:
+      oneOf:
+      - $ref: '#/components/schemas/NotificationStandardRequest'
+      - $ref: '#/components/schemas/NotificationReportRequest'
+      title: UpdateNotificationRequest
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    NotificationReportRequestContent:
+      type: object
+      properties:
+        eventType:
+          type: string
+          enum:
+          - Report
+          description: The notification's event name.
+        fileFormat:
+          $ref: '#/components/schemas/NotificationReportRequestContentFileFormat'
+          description: Indicate the format of report file to be generated by the engine.
+        internalData:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueDuo'
+          description: Array of pairs key:value to insert in request body to target in **method** = *report-web*.
+        reportName:
+          $ref: '#/components/schemas/NotificationReportRequestContentReportName'
+          description: The kind of report to generate.
+        timeZone:
+          $ref: '#/components/schemas/Timezone'
+        transactionId:
+          type: string
+          default: '0'
+          description: Used internally to reference the entity or object generating the event.
+        webHeaderParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueDuo'
+          description: Array of pairs key:value to insert in header of request to target in **method** = *report-web*.
+      title: NotificationReportRequestContent
+    Ownertype:
+      type: integer
+      description: 'Entity owner type. Accepted values:
+
+
+        - `0`: Organization/partner
+
+        - `2`: Paypoint
+
+        '
+      title: Ownertype
+    NotificationStandardRequest:
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/NotificationStandardRequestContent'
+        frequency:
+          $ref: '#/components/schemas/NotificationStandardRequestFrequency'
+        method:
+          $ref: '#/components/schemas/NotificationStandardRequestMethod'
+          description: Get near-instant notifications via email, SMS, or webhooks for important events like new payment disputes, merchant activations, fraud alerts, approved transactions, settlement history, vendor payouts, and more. Use webhooks with notifications to get real-time updates and automate operations based on those key events. See [Notifications](/developers/developer-guides/notifications-and-webhooks-overview#notifications) for more.
+        ownerId:
+          $ref: '#/components/schemas/Ownerid'
+        ownerType:
+          $ref: '#/components/schemas/Ownertype'
+        status:
+          $ref: '#/components/schemas/Statusnotification'
+        target:
+          type: string
+          description: 'Specify the notification target.
+
+            - For method=email the expected value is a list of email addresses separated by semicolon.
+
+            - For method=sms the expected value is a list of phone numbers separated by semicolon.
+
+            - For method=web the expected value is a valid and complete URL. Webhooks support only standard HTTP ports: 80, 443, 8080, or 4443.'
+      required:
+      - frequency
+      - method
+      - ownerType
+      - target
+      description: Information about the standard notification configuration (email, SMS, web).
+      title: NotificationStandardRequest
+    NotificationReportRequestMethod:
+      type: string
+      enum:
+      - report-email
+      - report-web
+      description: 'Automated reporting lets you gather critical reports without manually
+
+        filtering and exporting the data. Get automated daily, weekly, and
+
+        monthly reports for daily sales, ACH returns, settlements, and more. You
+
+        can send these reports via email or via webhook. See
+
+        [Automated Reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports)
+
+        for more.
+
+        '
+      title: NotificationReportRequestMethod
+    Target:
+      type: string
+      description: 'Specify the notification target.
+
+
+        For `method`=`email` the expected value is a list of email addresses
+
+        separated by semicolon.
+
+
+        For `method`=`sms` the expected value is a list of phone numbers
+
+        separated by semicolon.
+
+
+        For `method`=`web` the expected value is a valid and complete URL.
+
+        Webhooks support only standard HTTP ports: 80, 443, 8080, or 4443.
+
+        '
+      title: Target
+    NotificationContent:
+      type: object
+      properties:
+        eventType:
+          $ref: '#/components/schemas/NotificationContentEventType'
+          description: The notification's event name.
+        fileFormat:
+          $ref: '#/components/schemas/NotificationContentFileFormat'
+          description: 'Indicate the format of report file to be generated by the engine.
+
+            Used for `method` = *report-email* and *report-web*.'
+        internalData:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueDuo'
+          description: Array of pairs key:value to insert in request body to target in **method** = *web* or *report-web*.
+        reportName:
+          $ref: '#/components/schemas/NotificationContentReportName'
+          description: The kind report to generate. For [automated reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports) only.
+        timeZone:
+          $ref: '#/components/schemas/Timezone'
+        transactionId:
+          type: string
+          default: '0'
+          description: Used internally to reference the entity or object generating the event.
+        webHeaderParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueDuo'
+          description: Array of pairs key:value to insert in header of request to target in **method** = *web* or *report-web*.
+      title: NotificationContent
+    Source:
+      type: string
+      description: Custom identifier to indicate the transaction or request source.
+      title: Source
+    NotificationQueryRecord:
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/NotificationContent'
+          description: Notification content.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: Timestamp of when notification was created.
+        frequency:
+          $ref: '#/components/schemas/Frequencynotification'
+        lastUpdated:
+          $ref: '#/components/schemas/LastModified'
+          description: Timestamp of when notification was last updated.
+        method:
+          $ref: '#/components/schemas/Methodnotification'
+        notificationId:
+          $ref: '#/components/schemas/NotificationId'
+        ownerId:
+          $ref: '#/components/schemas/Ownerid'
+        ownerName:
+          type: string
+          description: Name of entity owner of notification.
+        ownerType:
+          $ref: '#/components/schemas/Ownertype'
+        source:
+          $ref: '#/components/schemas/Source'
+          description: Custom descriptor of source of notification.
+        status:
+          $ref: '#/components/schemas/Statusnotification'
+        target:
+          $ref: '#/components/schemas/Target'
+      title: NotificationQueryRecord
+    Timezone:
+      type: integer
+      description: Timezone, in UTC offset. For example, -5 is Eastern time.
+      title: Timezone
+    Methodnotification:
+      type: string
+      enum:
+      - email
+      - sms
+      - web
+      - report-email
+      - report-web
+      description: Method to use to send the notification to the target.
+      title: Methodnotification
+    NotificationId:
+      type: integer
+      format: int64
+      description: 'The notification''s Payabli identifier. This is the ID used to manage the
+
+        notification.
+
+        '
+      title: NotificationId
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    NotificationContentFileFormat:
+      type: string
+      enum:
+      - json
+      - csv
+      - xlsx
+      description: 'Indicate the format of report file to be generated by the engine.
+
+        Used for `method` = `report-email` and `report-web`.
+
+        '
+      title: NotificationContentFileFormat
+    NotificationStandardRequestMethod:
+      type: string
+      enum:
+      - email
+      - sms
+      - web
+      description: 'Get near-instant notifications via email, SMS, or webhooks for important
+
+        events like new payment disputes, merchant activations, fraud alerts,
+
+        approved transactions, settlement history, vendor payouts, and more. Use
+
+        webhooks with notifications to get real-time updates and automate
+
+        operations based on those key events. See
+
+        [Notifications](/developers/developer-guides/notifications-and-webhooks-overview#notifications)
+
+        for more.
+
+        '
+      title: NotificationStandardRequestMethod
+    KeyValueDuo:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key name.
+        value:
+          type: string
+          description: Key value.
+      title: KeyValueDuo
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    NotificationStandardRequestContent:
+      type: object
+      properties:
+        eventType:
+          $ref: '#/components/schemas/NotificationStandardRequestContentEventType'
+          description: The notification's event name.
+        internalData:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueDuo'
+          description: Array of pairs key:value to insert in request body to target in **method** = *web*.
+        transactionId:
+          type: string
+          default: '0'
+          description: Used internally to reference the entity or object generating the event.
+        webHeaderParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueDuo'
+          description: Array of pairs key:value to insert in header of request to target in **method** = *web*.
+      title: NotificationStandardRequestContent
+    AddNotificationRequest:
+      oneOf:
+      - $ref: '#/components/schemas/NotificationStandardRequest'
+      - $ref: '#/components/schemas/NotificationReportRequest'
+      title: AddNotificationRequest
+    NotificationReportRequest:
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/NotificationReportRequestContent'
+        frequency:
+          $ref: '#/components/schemas/NotificationReportRequestFrequency'
+        method:
+          $ref: '#/components/schemas/NotificationReportRequestMethod'
+          description: Automated reporting lets you gather critical reports without manually filtering and exporting the data. Get automated daily, weekly, and monthly reports for daily sales, ACH returns, settlements, and more. You can send these reports via email or via webhook. See [Automated Reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports) for more.
+        ownerId:
+          $ref: '#/components/schemas/Ownerid'
+        ownerType:
+          $ref: '#/components/schemas/Ownertype'
+        status:
+          $ref: '#/components/schemas/Statusnotification'
+        target:
+          type: string
+          description: 'Specify the notification target.
+
+            For method=report-email the expected value is a list of email addresses separated by semicolon.
+
+            For method=report-web the expected value is a valid and complete URL. Webhooks support only standard HTTP ports: 80, 443, 8080, or 4443.'
+      required:
+      - content
+      - frequency
+      - method
+      - ownerType
+      - target
+      description: Information about the report notification configuration (report-email, report-web).
+      title: NotificationReportRequest
+    NotificationStandardRequestFrequency:
+      type: string
+      enum:
+      - one-time
+      - untilcancelled
+      title: NotificationStandardRequestFrequency
+    Ownerid:
+      type: integer
+      description: 'ID for the paypoint or organization that owns the notification.
+
+
+        If the `ownerType` field is `0`, this field is the same as the `orgId`
+
+        for the organization that owns this notification.
+
+
+        If the `ownerType` field is `2`, this field is the same as the
+
+        `paypointId` for the paypoint that owns this notification.
+
+        '
+      title: Ownerid
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    Statusnotification:
+      type: integer
+      description: 'Status of notification:
+
+
+        - `0`: Inactive
+
+        - `1`: Active
+
+        '
+      title: Statusnotification
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Token API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Token
+paths:
+  /v2/Token/serverside:
+    post:
+      operationId: createServerSideToken
+      summary: Get an access token (server-side)
+      description: 'Exchanges a client ID and client secret for a short-lived Bearer access token using the OAuth2 client-credentials flow. Designed for server-to-server use: the credentials and the returned token stay on your backend. Send the returned `access_token` in the `Authorization` header as `Bearer <access_token>` on subsequent API calls. See the [OAuth authentication guide](/developers/oauth-authentication) for the full flow.'
+      tags:
+      - Token
+      responses:
+        '200':
+          description: Access token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliAccessTokenResponse'
+        '400':
+          description: Invalid or missing client credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenExchangeByClientIdModel'
+components:
+  schemas:
+    TokenErrorResponse:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: The error category, for example `InvalidCredentials`.
+        errorMessage:
+          type: string
+          description: A human-readable error description.
+      required:
+      - errorType
+      - errorMessage
+      description: Error response from the token endpoint when the request is invalid, for example when the client credentials are wrong.
+      title: TokenErrorResponse
+    TokenExchangeByClientIdModel:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: The client ID issued for your integration when credentials are provisioned in the Payabli Portal.
+        clientSecret:
+          type: string
+          description: The client secret issued alongside the client ID. Keep it on your backend and never expose it in client-side code.
+        state:
+          type:
+          - string
+          - 'null'
+          description: An optional opaque value echoed back in the response. Use it to correlate the request with its response.
+        permissions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: An optional array of permission IDs that scopes the token to a subset of the credential's granted permissions. When omitted, the token carries all permissions granted to the credential.
+      required:
+      - clientId
+      - clientSecret
+      description: Request body for exchanging client credentials for an access token.
+      title: TokenExchangeByClientIdModel
+    PayabliAccessTokenResponse:
+      type: object
+      properties:
+        token_type:
+          type: string
+          description: The token type. Send the access token in the `Authorization` header as `Bearer <access_token>`.
+        access_token:
+          type: string
+          description: The access token to send on subsequent API calls.
+        expires_in:
+          type: integer
+          description: The token's lifetime in seconds. Request a new token when it expires.
+        state:
+          type:
+          - string
+          - 'null'
+          description: The opaque value sent in the request, echoed back. Present only when you send `state` in the request.
+      required:
+      - token_type
+      - access_token
+      - expires_in
+      description: Successful response from the token endpoint. Returns the access token, its lifetime, and any state echoed from the request.
+      title: PayabliAccessTokenResponse
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

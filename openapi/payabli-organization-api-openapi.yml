@@ -1,0 +1,1141 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Organization API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Organization
+paths:
+  /Organization:
+    post:
+      operationId: AddOrganization
+      summary: Add organization
+      description: Creates an organization under a parent organization. This is also referred to as a suborganization.
+      tags:
+      - Organization
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      - name: idempotencyKey
+        in: header
+        description: _Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.
+        required: false
+        schema:
+          $ref: '#/components/schemas/IdempotencyKey'
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddOrganizationResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddOrganizationRequest'
+  /Organization/read/{orgId}:
+    get:
+      operationId: GetOrganization
+      summary: Get organization
+      description: Retrieves details for an organization by ID.
+      tags:
+      - Organization
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Organization/basic/{entry}:
+    get:
+      operationId: GetBasicOrganization
+      summary: Get basic organization details by entry name
+      description: Gets an organization's basic information by entry name (entrypoint identifier).
+      tags:
+      - Organization
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Organization/basicById/{orgId}:
+    get:
+      operationId: GetBasicOrganizationById
+      summary: Get basic organization details by ID
+      description: Gets an organization's basic details by org ID.
+      tags:
+      - Organization
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Organization/settings/{orgId}:
+    get:
+      operationId: GetSettingsOrganization
+      summary: Get organization settings
+      description: Retrieves an organization's settings.
+      tags:
+      - Organization
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingsQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Organization/{orgId}:
+    put:
+      operationId: EditOrganization
+      summary: Update organization
+      description: Updates an organization's details by ID.
+      tags:
+      - Organization
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditOrganizationResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationData'
+    delete:
+      operationId: DeleteOrganization
+      summary: Delete organization
+      description: Delete an organization by ID.
+      tags:
+      - Organization
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganizationResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    NameUser:
+      type: string
+      title: NameUser
+    ContactsField:
+      type: array
+      items:
+        $ref: '#/components/schemas/Contacts'
+      description: List of contacts.
+      title: ContactsField
+    Contacts:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
+    IsRoot:
+      type: boolean
+      description: When `true`, indicates that this is the organization's root template.
+      title: IsRoot
+    AddOrganizationRequest:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceCost'
+        billingInfo:
+          $ref: '#/components/schemas/Instrument'
+        contacts:
+          $ref: '#/components/schemas/ContactsField'
+        hasBilling:
+          type: boolean
+        hasResidual:
+          type: boolean
+        orgAddress:
+          $ref: '#/components/schemas/Orgaddress'
+        orgCity:
+          $ref: '#/components/schemas/Orgcity'
+        orgCountry:
+          $ref: '#/components/schemas/Orgcountry'
+        orgEntryName:
+          $ref: '#/components/schemas/Orgentryname'
+        orgId:
+          $ref: '#/components/schemas/Orgidstring'
+        orgLogo:
+          $ref: '#/components/schemas/FileContent'
+        orgName:
+          $ref: '#/components/schemas/Orgname'
+        orgParentId:
+          $ref: '#/components/schemas/OrgParentId'
+        orgState:
+          $ref: '#/components/schemas/Orgstate'
+        orgTimezone:
+          $ref: '#/components/schemas/Orgtimezone'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+        orgWebsite:
+          $ref: '#/components/schemas/Orgwebsite'
+        orgZip:
+          $ref: '#/components/schemas/Orgzip'
+        replyToEmail:
+          $ref: '#/components/schemas/ReplyToEmail'
+      required:
+      - orgName
+      - orgType
+      - replyToEmail
+      title: AddOrganizationRequest
+    ServiceCost:
+      type: object
+      properties:
+        description:
+          type: string
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        monthlyCost:
+          type: number
+          format: double
+        name:
+          type: string
+        reseller:
+          type: boolean
+        setupCost:
+          type: number
+          format: double
+        txCost:
+          type: number
+          format: double
+        txPercentCost:
+          type: number
+          format: double
+      title: ServiceCost
+    SummaryOrg:
+      type: object
+      properties:
+        amountSubs:
+          type: number
+          format: double
+        amountTx:
+          type: number
+          format: double
+        childOrgs:
+          type: integer
+        childPaypoints:
+          type: integer
+        countSubs:
+          type: integer
+        countTx:
+          type: integer
+      title: SummaryOrg
+    BillingCityNullable:
+      type: string
+      description: Billing city.
+      title: BillingCityNullable
+    Orgname:
+      type: string
+      description: The name of the organization.
+      title: Orgname
+    Orgcountry:
+      type: string
+      description: The organization's country.
+      title: Orgcountry
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    Language:
+      type: string
+      description: The language code.
+      title: Language
+    BillingZip:
+      type: string
+      description: Billing address ZIP code.
+      title: BillingZip
+    Achrouting:
+      type: string
+      description: ABA/routing number of Bank account.
+      title: Achrouting
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    MfaMode:
+      type: integer
+      title: MfaMode
+    Orgwebsite:
+      type: string
+      description: The organization's website.
+      title: Orgwebsite
+    Enabled:
+      type: boolean
+      description: Toggles whether the section or element is enabled.
+      title: Enabled
+    DeleteOrganizationResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: Returns the organization ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: DeleteOrganizationResponse
+    ReplyToEmail:
+      type: string
+      format: email
+      description: 'Email address for organization-level communications, such as messages
+
+        about why an application was declined. This is required by commerce
+
+        laws in the US.
+
+        '
+      title: ReplyToEmail
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    BillingStateNullable:
+      type: string
+      description: Billing state. Must be a 2-letter state code for addresses in the US.
+      title: BillingStateNullable
+    OrganizationQueryRecord:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationQueryRecordServicesItem'
+        billingInfo:
+          $ref: '#/components/schemas/Instrument'
+        contacts:
+          $ref: '#/components/schemas/ContactsField'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        hasBilling:
+          type: boolean
+        hasResidual:
+          type: boolean
+        idOrg:
+          $ref: '#/components/schemas/Orgid'
+        isRoot:
+          $ref: '#/components/schemas/IsRoot'
+        orgAddress:
+          $ref: '#/components/schemas/Orgaddress'
+        orgCity:
+          $ref: '#/components/schemas/Orgcity'
+        orgCountry:
+          $ref: '#/components/schemas/Orgcountry'
+        orgEntryName:
+          $ref: '#/components/schemas/Orgentryname'
+        orgId:
+          $ref: '#/components/schemas/Orgidstring'
+        orgLogo:
+          $ref: '#/components/schemas/FileContent'
+        orgName:
+          $ref: '#/components/schemas/Orgname'
+        orgParentId:
+          $ref: '#/components/schemas/OrgParentId'
+        orgParentName:
+          $ref: '#/components/schemas/OrgParentName'
+        orgState:
+          $ref: '#/components/schemas/Orgstate'
+        orgTimezone:
+          $ref: '#/components/schemas/Orgtimezone'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+        orgWebsite:
+          $ref: '#/components/schemas/Orgwebsite'
+        orgZip:
+          $ref: '#/components/schemas/Orgzip'
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        replyToEmail:
+          $ref: '#/components/schemas/ReplyToEmail'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        summary:
+          $ref: '#/components/schemas/SummaryOrg'
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserQueryRecord'
+      title: OrganizationQueryRecord
+    Orgtimezone:
+      type: integer
+      description: 'The org''s timezone, in UTC offset. For example, -5 is Eastern time.
+
+        '
+      title: Orgtimezone
+    KeyValue:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key name.
+        readOnly:
+          $ref: '#/components/schemas/ReadOnly'
+        value:
+          type: string
+          description: Key value.
+      title: KeyValue
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    PhoneNumber:
+      type: string
+      description: Phone number.
+      title: PhoneNumber
+    UserQueryRecord:
+      type: object
+      properties:
+        Access:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsrAccess'
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: The timestamp for the user's creation, in UTC.
+        Email:
+          $ref: '#/components/schemas/Email'
+          description: The user's email address.
+        language:
+          $ref: '#/components/schemas/Language'
+        lastAccess:
+          type: string
+          format: date-time
+          description: The timestamp for the user's last activity, in UTC.
+        Name:
+          $ref: '#/components/schemas/NameUser'
+        Phone:
+          $ref: '#/components/schemas/PhoneNumber'
+          description: The user's phone number.
+        Scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrgXScope'
+        snData:
+          type: string
+          description: Additional data provided by the social network related to the customer.
+        snIdentifier:
+          type: string
+          description: Identifier or token for customer in linked social network.
+        snProvider:
+          type: string
+          description: 'Social network linked to customer. Possible values: facebook, google, twitter, microsoft.'
+        timeZone:
+          $ref: '#/components/schemas/Timezone'
+        userId:
+          type: integer
+          format: int64
+          description: The user's ID in Payabli.
+        UsrMFA:
+          $ref: '#/components/schemas/Mfa'
+        UsrMFAMode:
+          $ref: '#/components/schemas/MfaMode'
+        UsrStatus:
+          $ref: '#/components/schemas/UsrStatus'
+      title: UserQueryRecord
+    RecipientEmailNotification:
+      type: boolean
+      description: 'When `true`, Payabli will send the applicant a boarding link. Set this
+
+        value to `false` if you are sending pre-filled applications via the API
+
+        and don''t want Payabli to send the applicant an email to complete the
+
+        boarding application.
+
+        '
+      title: RecipientEmailNotification
+    BillingCountryNullable:
+      type: string
+      description: Billing address country.
+      title: BillingCountryNullable
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
+    Orgzip:
+      type: string
+      description: The organization's ZIP code.
+      title: Orgzip
+    OrganizationQueryRecordServicesItem:
+      type: object
+      properties:
+        description:
+          type: string
+        enabled:
+          type: boolean
+        monthlyCost:
+          type: number
+          format: double
+        name:
+          type: string
+        reseller:
+          type: boolean
+        setupCost:
+          type: number
+          format: double
+        txCost:
+          type: number
+          format: double
+        txPercentCost:
+          type: number
+          format: double
+      title: OrganizationQueryRecordServicesItem
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    OrgParentId:
+      type: integer
+      format: int64
+      description: The ID of the org's parent organization.
+      title: OrgParentId
+    Orgentryname:
+      type: string
+      description: 'The entryname for the org, in string format. If you leave this blank,
+
+        Payabli uses the DBA name.
+
+        '
+      title: Orgentryname
+    UsrAccess:
+      type: object
+      properties:
+        roleLabel:
+          type: string
+        roleValue:
+          type: boolean
+      title: UsrAccess
+    Timezone:
+      type: integer
+      description: Timezone, in UTC offset. For example, -5 is Eastern time.
+      title: Timezone
+    EditOrganizationResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: Returns the organization ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseCode
+      - responseText
+      title: EditOrganizationResponse
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    Mfa:
+      type: boolean
+      description: When `true`, multi-factor authentication (MFA) is enabled.
+      title: Mfa
+    Orgaddress:
+      type: string
+      description: The organization's address.
+      title: Orgaddress
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    Orgcity:
+      type: string
+      description: The organization's city.
+      title: Orgcity
+    Orgstate:
+      type: string
+      description: The organization's state.
+      title: Orgstate
+    Instrument:
+      type: object
+      properties:
+        achAccount:
+          $ref: '#/components/schemas/Achaccount'
+        achRouting:
+          $ref: '#/components/schemas/Achrouting'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressNullable'
+        billingCity:
+          $ref: '#/components/schemas/BillingCityNullable'
+        billingCountry:
+          $ref: '#/components/schemas/BillingCountryNullable'
+        billingState:
+          $ref: '#/components/schemas/BillingStateNullable'
+        billingZip:
+          $ref: '#/components/schemas/BillingZip'
+      required:
+      - achAccount
+      - achRouting
+      title: Instrument
+    Orgtype:
+      type: integer
+      description: The organization type. Currently, this must be `0`.
+      title: Orgtype
+    BillingAddressNullable:
+      type: string
+      description: Billing address.
+      title: BillingAddressNullable
+    SettingsQueryRecord:
+      type: object
+      properties:
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValue'
+          description: Any custom fields defined for the org.
+        forInvoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValue'
+        forPayOuts:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValue'
+        forWallets:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValue'
+          description: Information about digital wallet settings for the entity. Available values are `isApplePayEnabled` and `isGooglePayEnabled`.
+        general:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValue'
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValue'
+      title: SettingsQueryRecord
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    Resumable:
+      type: boolean
+      description: 'When `true`, the applicant can save an incomplete application and
+
+        resume it later. When `false`, the applicant won''t have an option to
+
+        save their progress, and must complete the application in one session.
+
+        '
+      title: Resumable
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
+    AddOrganizationResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: Returns the organization ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: AddOrganizationResponse
+    OrgXScope:
+      type: object
+      properties:
+        orgEntry:
+          $ref: '#/components/schemas/Orgentryname'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+      title: OrgXScope
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    UsrStatus:
+      type: integer
+      description: 'The user''s status:
+
+
+        - Inactive: `0`
+
+        - Active: `1`
+
+        - Deleted: `-99`
+
+        - Locked: `85`
+
+        '
+      title: UsrStatus
+    ReadOnly:
+      type: boolean
+      description: When `true`, the element is read-only.
+      title: ReadOnly
+    Achaccount:
+      type: string
+      description: Bank account number.
+      title: Achaccount
+    Orgidstring:
+      type: string
+      description: 'An alternate ID for the organization, in string format. This can be your
+
+        internal identifier for an org, and is typically a name, like "My
+
+        Suborganization".
+
+        '
+      title: Orgidstring
+    OrganizationData:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceCost'
+        billingInfo:
+          $ref: '#/components/schemas/Instrument'
+        contacts:
+          $ref: '#/components/schemas/ContactsField'
+        hasBilling:
+          type: boolean
+        hasResidual:
+          type: boolean
+        orgAddress:
+          $ref: '#/components/schemas/Orgaddress'
+        orgCity:
+          $ref: '#/components/schemas/Orgcity'
+        orgCountry:
+          $ref: '#/components/schemas/Orgcountry'
+        orgEntryName:
+          $ref: '#/components/schemas/Orgentryname'
+        orgId:
+          $ref: '#/components/schemas/Orgidstring'
+        orgLogo:
+          $ref: '#/components/schemas/FileContent'
+        orgName:
+          $ref: '#/components/schemas/Orgname'
+        orgParentId:
+          $ref: '#/components/schemas/OrgParentId'
+        orgState:
+          $ref: '#/components/schemas/Orgstate'
+        orgTimezone:
+          $ref: '#/components/schemas/Orgtimezone'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+        orgWebsite:
+          $ref: '#/components/schemas/Orgwebsite'
+        orgZip:
+          $ref: '#/components/schemas/Orgzip'
+        replyToEmail:
+          $ref: '#/components/schemas/ReplyToEmail'
+      title: OrganizationData
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

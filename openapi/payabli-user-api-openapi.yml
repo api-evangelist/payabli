@@ -1,0 +1,1088 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill User API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: User
+paths:
+  /User:
+    post:
+      operationId: AddUser
+      summary: Add User to an Organization
+      description: Use this endpoint to add a new user to an organization.
+      tags:
+      - User
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddUserResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserData'
+  /User/{userId}:
+    get:
+      operationId: GetUser
+      summary: Get User in an Organization
+      description: Use this endpoint to retrieve information about a specific user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: userId
+        in: path
+        description: The Payabli-generated `userId` value.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: entry
+        in: query
+        description: The entrypoint identifier.
+        required: false
+        schema:
+          type: string
+      - name: level
+        in: query
+        description: 'Entry level: 0 - partner, 2 - paypoint'
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    put:
+      operationId: EditUser
+      summary: Modify User in an Organization
+      description: Use this endpoint to modify the details of a specific user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: userId
+        in: path
+        description: User Identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserData'
+    delete:
+      operationId: DeleteUser
+      summary: Delete User in an Organization
+      description: Use this endpoint to delete a specific user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: userId
+        in: path
+        description: The Payabli-generated `userId` value.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /User/mfa/{userId}:
+    put:
+      operationId: EditMfaUser
+      summary: Enable/disable MFA for user in an organization
+      description: Use this endpoint to enable or disable multi-factor authentication (MFA) for a user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: userId
+        in: path
+        description: User Identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditMfaUserResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MfaData'
+  /User/auth/{provider}:
+    post:
+      operationId: AuthUser
+      summary: Authenticate User
+      description: This endpoint requires an application API token.
+      tags:
+      - User
+      parameters:
+      - name: provider
+        in: path
+        description: Auth provider. Pass `null` to use the built-in provider.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseMfaBasic'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthRequest'
+  /User/authrefresh:
+    post:
+      operationId: AuthRefreshUser
+      summary: Refresh token for User
+      description: Use this endpoint to refresh the authentication token for a user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseUserMfa'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /User/authlogout:
+    get:
+      operationId: LogoutUser
+      summary: Logout User
+      description: Use this endpoint to log a user out from the system.
+      tags:
+      - User
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogoutUserResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /User/authpsw:
+    put:
+      operationId: ChangePswUser
+      summary: Update password for User
+      description: Use this endpoint to change the password for a user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePswUserResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthPswResetRequest'
+  /User/authreset:
+    post:
+      operationId: AuthResetUser
+      summary: Reset password for User
+      description: Use this endpoint to initiate a password reset for a user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResetUserResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthResetRequest'
+  /User/mfa:
+    post:
+      operationId: ValidateMfaUser
+      summary: Validate MFA for User in an Organization
+      description: Use this endpoint to validate the multi-factor authentication (MFA) code for a user within an organization.
+      tags:
+      - User
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseUserMfa'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MfaValidationData'
+  /User/resendmfa/{usrname}/{Entry}/{EntryType}:
+    post:
+      operationId: ResendMFACode
+      summary: Resend MFA code
+      description: Resends the MFA code to the user via the selected MFA mode (email or SMS).
+      tags:
+      - User
+      parameters:
+      - name: Entry
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: EntryType
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+      - name: usrname
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponseMfaBasic'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    UserAuthRequest:
+      type: object
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        entry:
+          type: string
+          description: Identifier for entry point originating the request (used by front-end apps)
+        entryType:
+          type: integer
+          description: 'Type of entry identifier: 0 - partner, 2 - paypoint. This is used by front-end apps, required if an Entry is indicated.'
+        psw:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        userTokenId:
+          type: string
+      title: UserAuthRequest
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    NameUser:
+      type: string
+      title: NameUser
+    LogoutUserResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: LogoutUserResponse
+    ChangePswUserResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: ChangePswUserResponse
+    UserAuthPswResetRequest:
+      type: object
+      properties:
+        psw:
+          type: string
+          description: New User password
+      title: UserAuthPswResetRequest
+    PayabliApiResponseMfaBasic:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        mfa:
+          $ref: '#/components/schemas/Mfa'
+        mfaMode:
+          type: string
+          description: The mode of multi-factor authentication used.
+        mfaValidationCode:
+          $ref: '#/components/schemas/MfaValidationCode'
+        responseData:
+          type: string
+          description: Data returned by the response, masked for security.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseMfaBasic
+    OrgScope:
+      type: object
+      properties:
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+      title: OrgScope
+    Language:
+      type: string
+      description: The language code.
+      title: Language
+    AdditionalData:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          description: Any type
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalData
+    AddUserResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          type: string
+          description: The response data.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: AddUserResponse
+    AuthResetUserResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: AuthResetUserResponse
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedata'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponse
+    MfaMode:
+      type: integer
+      title: MfaMode
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    MfaValidationData:
+      type: object
+      properties:
+        mfaCode:
+          type: string
+        mfaValidationCode:
+          $ref: '#/components/schemas/MfaValidationCode'
+      title: MfaValidationData
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    PhoneNumber:
+      type: string
+      description: Phone number.
+      title: PhoneNumber
+    DeleteUserResponse:
+      type: object
+      properties:
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: DeleteUserResponse
+    UserQueryRecord:
+      type: object
+      properties:
+        Access:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsrAccess'
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: The timestamp for the user's creation, in UTC.
+        Email:
+          $ref: '#/components/schemas/Email'
+          description: The user's email address.
+        language:
+          $ref: '#/components/schemas/Language'
+        lastAccess:
+          type: string
+          format: date-time
+          description: The timestamp for the user's last activity, in UTC.
+        Name:
+          $ref: '#/components/schemas/NameUser'
+        Phone:
+          $ref: '#/components/schemas/PhoneNumber'
+          description: The user's phone number.
+        Scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrgXScope'
+        snData:
+          type: string
+          description: Additional data provided by the social network related to the customer.
+        snIdentifier:
+          type: string
+          description: Identifier or token for customer in linked social network.
+        snProvider:
+          type: string
+          description: 'Social network linked to customer. Possible values: facebook, google, twitter, microsoft.'
+        timeZone:
+          $ref: '#/components/schemas/Timezone'
+        userId:
+          type: integer
+          format: int64
+          description: The user's ID in Payabli.
+        UsrMFA:
+          $ref: '#/components/schemas/Mfa'
+        UsrMFAMode:
+          $ref: '#/components/schemas/MfaMode'
+        UsrStatus:
+          $ref: '#/components/schemas/UsrStatus'
+      title: UserQueryRecord
+    PayabliApiResponseUserMfa:
+      type: object
+      properties:
+        inactiveTokenTime:
+          type: integer
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        remaining:
+          type: integer
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseUserMfa
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
+    EditMfaUserResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: EditMfaUserResponse
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    UserData:
+      type: object
+      properties:
+        access:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsrAccess'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalData'
+        email:
+          $ref: '#/components/schemas/Email'
+          description: The user's email address.
+        language:
+          $ref: '#/components/schemas/Language'
+        mfaData:
+          $ref: '#/components/schemas/MfaData'
+        name:
+          $ref: '#/components/schemas/NameUser'
+        phone:
+          $ref: '#/components/schemas/PhoneNumber'
+          description: The user's phone number.
+        pwd:
+          type: string
+        scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrgScope'
+        timeZone:
+          $ref: '#/components/schemas/Timezone'
+        usrStatus:
+          $ref: '#/components/schemas/UsrStatus'
+      title: UserData
+    Timezone:
+      type: integer
+      description: Timezone, in UTC offset. For example, -5 is Eastern time.
+      title: Timezone
+    UsrAccess:
+      type: object
+      properties:
+        roleLabel:
+          type: string
+        roleValue:
+          type: boolean
+      title: UsrAccess
+    Orgentryname:
+      type: string
+      description: 'The entryname for the org, in string format. If you leave this blank,
+
+        Payabli uses the DBA name.
+
+        '
+      title: Orgentryname
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    Mfa:
+      type: boolean
+      description: When `true`, multi-factor authentication (MFA) is enabled.
+      title: Mfa
+    MfaValidationCode:
+      type: string
+      description: 'The validation code for multi-factor authentication, typically a hash or
+
+        similar encrypted format.
+
+        '
+      title: MfaValidationCode
+    UserAuthResetRequest:
+      type: object
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+          description: The user's email address.
+        entry:
+          type: string
+          description: Identifier for entrypoint originating the request (used by front-end apps)
+        entryType:
+          type: integer
+          description: 'Type of entry identifier: 0 - partner, 2 - paypoint. This is used by front-end apps, required if an Entry is indicated.'
+      title: UserAuthResetRequest
+    Orgtype:
+      type: integer
+      description: The organization type. Currently, this must be `0`.
+      title: Orgtype
+    MfaData:
+      type: object
+      properties:
+        mfa:
+          type: boolean
+        mfaMode:
+          $ref: '#/components/schemas/MfaMode'
+      title: MfaData
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    OrgXScope:
+      type: object
+      properties:
+        orgEntry:
+          $ref: '#/components/schemas/Orgentryname'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+      title: OrgXScope
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    UsrStatus:
+      type: integer
+      description: 'The user''s status:
+
+
+        - Inactive: `0`
+
+        - Active: `1`
+
+        - Deleted: `-99`
+
+        - Locked: `85`
+
+        '
+      title: UsrStatus
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

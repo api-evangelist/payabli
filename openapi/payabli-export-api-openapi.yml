@@ -1,0 +1,2620 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Export API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Export
+paths:
+  /Export/batches/{format}/{entry}:
+    get:
+      operationId: ExportBatches
+      summary: Export list of batches for entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List batches for paypoint](/developers/api-reference/query/get-list-of-batches-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of batches for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `batchDate` (gt, ge, lt, le, eq, ne)\n- `batchNumber` (ne, eq)\n- `connectorName` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `batchAmount` (gt, ge, lt, le, eq, ne)\n- `feeBatchAmount` (gt, ge, lt, le, eq, ne)\n- `netBatchAmount` (gt, ge, lt, le, eq, ne)\n- `releaseAmount` (gt, ge, lt, le, eq, ne)\n- `heldAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `paypointId` (ne, eq)\n- `externalPaypointID` (ct, nct, eq, ne)\n- `expectedDepositDate` (gt, ge, lt, le, eq, ne)\n- `batchRecords` (gt, ge, lt, le, eq, ne)\n- `transferId` (ne, eq)\n- `transferDate` (gt, ge, lt, le, eq, ne)\n- `grossAmount` (gt, ge, lt, le, eq, ne)\n- `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n- `returnedAmount` (gt, ge, lt, le, eq, ne)\n- `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n- `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n- `netFundedAmount` (gt, ge, lt, le, eq, ne)\n- `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n- `processor` (ne, eq, ct, nct)\n- `transferStatus` (ne, eq, in, nin)\n\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/batches/{format}/org/{orgId}:
+    get:
+      operationId: ExportBatchesOrg
+      summary: Export list of batches for organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List batches for org](/developers/api-reference/query/get-list-of-batches-for-an-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of batches for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `batchDate` (gt, ge, lt, le, eq, ne)\n- `batchNumber` (ne, eq)\n- `connectorName` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `batchAmount` (gt, ge, lt, le, eq, ne)\n- `feeBatchAmount` (gt, ge, lt, le, eq, ne)\n- `netBatchAmount` (gt, ge, lt, le, eq, ne)\n- `releaseAmount` (gt, ge, lt, le, eq, ne)\n- `heldAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `paypointId` (ne, eq)\n- `externalPaypointID` (ct, nct, eq, ne)\n- `expectedDepositDate` (gt, ge, lt, le, eq, ne)\n- `batchRecords` (gt, ge, lt, le, eq, ne)\n- `transferId` (ne, eq)\n- `transferDate` (gt, ge, lt, le, eq, ne)\n- `grossAmount` (gt, ge, lt, le, eq, ne)\n- `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n- `returnedAmount` (gt, ge, lt, le, eq, ne)\n- `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n- `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n- `netFundedAmount` (gt, ge, lt, le, eq, ne)\n- `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n- `processor` (ne, eq, ct, nct)\n- `transferStatus` (ne, eq, in, nin)\n\nList of parameters accepted:\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\nExample: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/batchDetails/{format}/{entry}:
+    get:
+      operationId: ExportBatchDetails
+      summary: Export batch details for a paypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List batch details](/developers/api-reference/query/get-list-of-batchdetails-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport batch details for a paypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n\n  - `settlementDate` (gt, ge, lt, le, eq, ne)\n  - `depositDate` (gt, ge, lt, le, eq, ne)\n  - `transId`  (ne, eq, ct, nct)\n  - `gatewayTransId`  (ne, eq, ct, nct)\n  - `method`   (in, nin, eq, ne)\n  - `settledAmount`  (gt, ge, lt, le, eq, ne)\n  - `operation`    (in, nin, eq, ne)\n  - `source`   (in, nin, eq, ne)\n  - `batchNumber`  (ct, nct, eq, ne)\n  - `payaccountLastfour`   (nct, ct)\n  - `payaccountType`   (ne, eq, in, nin)\n  - `customerFirstname`   (ct, nct, eq, ne)\n  - `customerLastname`    (ct, nct, eq, ne)\n  - `customerName`   (ct, nct)\n  - `customerId`  (eq, ne)\n  - `customerNumber`  (ct, nct, eq, ne)\n  - `customerCompanyname`    (ct, nct, eq, ne)\n  - `customerAddress` (ct, nct, eq, ne)\n  - `customerCity`    (ct, nct, eq, ne)\n  - `customerZip` (ct, nct, eq, ne)\n  - `customerState` (ct, nct, eq, ne)\n  - `customerCountry` (ct, nct, eq, ne)\n  - `customerPhone` (ct, nct, eq, ne)\n  - `customerEmail` (ct, nct, eq, ne)\n  - `customerShippingAddress` (ct, nct, eq, ne)\n  - `customerShippingCity`    (ct, nct, eq, ne)\n  - `customerShippingZip` (ct, nct, eq, ne)\n  - `customerShippingState` (ct, nct, eq, ne)\n  - `customerShippingCountry` (ct, nct, eq, ne)\n  - `orgId`  (eq) *mandatory when entry=org*\n  - `isHold` (eq, ne)\n  - `paypointId`  (ne, eq)\n  - `paypointLegal`  (ne, eq, ct, nct)\n  - `paypointDba`  (ne, eq, ct, nct)\n  - `orgName`  (ne, eq, ct, nct)\n  - `batchId` (ct, nct, eq, neq)\n  - `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: `amount(gt)=20` return all records with amount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/batchDetails/{format}/org/{orgId}:
+    get:
+      operationId: ExportBatchDetailsOrg
+      summary: Export batch details for an org
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List batch details for org](/developers/api-reference/query/get-list-of-batchdetails-for-an-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport batch details for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n\n  - `settlementDate` (gt, ge, lt, le, eq, ne)\n  - `depositDate` (gt, ge, lt, le, eq, ne)\n  - `transId`  (ne, eq, ct, nct)\n  - `gatewayTransId`  (ne, eq, ct, nct)\n  - `method`   (in, nin, eq, ne)\n  - `settledAmount`  (gt, ge, lt, le, eq, ne)\n  - `operation`    (in, nin, eq, ne)\n  - `source`   (in, nin, eq, ne)\n  - `batchNumber`  (ct, nct, eq, ne)\n  - `payaccountLastfour`   (nct, ct)\n  - `payaccountType`   (ne, eq, in, nin)\n  - `customerFirstname`   (ct, nct, eq, ne)\n  - `customerLastname`    (ct, nct, eq, ne)\n  - `customerName`   (ct, nct)\n  - `customerId`  (eq, ne)\n  - `customerNumber`  (ct, nct, eq, ne)\n  - `customerCompanyname`    (ct, nct, eq, ne)\n  - `customerAddress` (ct, nct, eq, ne)\n  - `customerCity`    (ct, nct, eq, ne)\n  - `customerZip` (ct, nct, eq, ne)\n  - `customerState` (ct, nct, eq, ne)\n  - `customerCountry` (ct, nct, eq, ne)\n  - `customerPhone` (ct, nct, eq, ne)\n  - `customerEmail` (ct, nct, eq, ne)\n  - `customerShippingAddress` (ct, nct, eq, ne)\n  - `customerShippingCity`    (ct, nct, eq, ne)\n  - `customerShippingZip` (ct, nct, eq, ne)\n  - `customerShippingState` (ct, nct, eq, ne)\n  - `customerShippingCountry` (ct, nct, eq, ne)\n  - `orgId`  (eq) *mandatory when entry=org*\n  - `isHold` (eq, ne)\n  - `paypointId`  (ne, eq)\n  - `paypointLegal`  (ne, eq, ct, nct)\n  - `paypointDba`  (ne, eq, ct, nct)\n  - `orgName`  (ne, eq, ct, nct)\n  - `batchId` (ct, nct, eq, neq)\n  - `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: `amount(gt)=20` return all records with amount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/settlements/{format}/{entry}:
+    get:
+      operationId: ExportSettlements
+      summary: Export list of settled transactions for entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List settled transactions for paypoint](/developers/api-reference/query/get-list-of-settled-transactions-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of settled transactions for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `settlementDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct)\n- `gatewayTransId` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `settledAmount` (gt, ge, lt, le, eq, ne)\n- `operation` (in, nin, eq, ne)\n- `source` (in, nin, eq, ne)\n- `batchNumber` (ct, nct, eq, ne)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: `settledAmount(gt)=20` returns all records with a `settledAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/settlements/{format}/org/{orgId}:
+    get:
+      operationId: ExportSettlementsOrg
+      summary: Export list of settled transactions for organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List settled transactions for org](/developers/api-reference/query/get-list-of-settled-transactions-for-an-org) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of settled transactions for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `settlementDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct)\n- `gatewayTransId` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `settledAmount` (gt, ge, lt, le, eq, ne)\n- `operation` (in, nin, eq, ne)\n- `source` (in, nin, eq, ne)\n- `batchNumber` (ct, nct, eq, ne)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: `settledAmount(gt)=20` returns all records with a `settledAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/transactions/{format}/{entry}:
+    get:
+      operationId: ExportTransactions
+      summary: Export list of transactions for entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List transactions for paypoint](/developers/api-reference/query/get-list-of-transactions-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of transactions for an entrypoint in a file in XLSX or CSV format. Use filters to limit results. If you don't specify a date range in the request, the last two months of data are returned."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `transactionDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct)\n- `gatewayTransId` (ne, eq, ct, nct)\n- `orderId` (ne, eq)\n- `idTrans` (ne, eq)\n- `orgId` (ne, eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `operation` (in, nin, eq, ne)\n- `source` (in, nin, eq, ne)\n- `status` (in, nin, eq, ne)\n- `settlementStatus` (in, nin, eq, ne)\n- `batchNumber` (nct, ct)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/transactions/{format}/org/{orgId}:
+    get:
+      operationId: ExportTransactionsOrg
+      summary: Export list of transactions for an org
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List transactions for org](/developers/api-reference/query/get-list-of-transactions-for-an-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of transactions for an org in a file in XLSX or CSV format. Use filters to limit results. If you don't specify a date range in the request, the last two months of data are returned."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `transactionDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct)\n- `gatewayTransId` (ne, eq, ct, nct)\n- `orderId` (ne, eq)\n- `idTrans` (ne, eq)\n- `orgId` (ne, eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `operation` (in, nin, eq, ne)\n- `source` (in, nin, eq, ne)\n- `status` (in, nin, eq, ne)\n- `settlementStatus` (in, nin, eq, ne)\n- `batchNumber` (nct, ct)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/transfers/{entry}:
+    get:
+      operationId: ExportTransfers
+      summary: Export list of transfers for entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List transfers](/developers/api-reference/query/get-list-of-transfers) with the `exportFormat` query parameter instead.\n</Warning>\n\nGet a list of transfers for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n  - `transferDate` (gt, ge, lt, le, eq, ne)\n\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n\n  - `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n\n  - `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n\n  - `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n\n  - `processor` (ne, eq, ct, nct)\n\n  - `transferStatus` (ne, eq, in, nin)\n\n  - `batchNumber` (ne, eq, ct, nct)\n\n  - `batchId` (ne, eq, in, nin)"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/transferDetails/{format}/{entry}/{transferId}:
+    get:
+      operationId: ExportTransferDetails
+      summary: Export list of transfer details
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [Get transfer details](/developers/api-reference/query/get-list-of-transfer-details) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of transfer details for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: transferId
+        in: path
+        description: Transfer identifier.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n\n  - `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n\n  - `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n\n  - `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n\n  - `transactionId` (eq, ne, in, nin)\n\n  - `category` (eq, ne, ct, nct)\n\n  - `type` (eq, ne, in, nin)\n\n  - `method` (eq, ne, in, nin)"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/subscriptions/{format}/{entry}:
+    get:
+      operationId: ExportSubscriptions
+      summary: Export list of subscriptions for an entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List subscriptions by paypoint](/developers/api-reference/subscription/get-list-of-subscriptions-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of subscriptions for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `endDate` (gt, ge, lt, le, eq, ne)\n- `nextDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `untilcancelled` (eq, ne)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/subscriptions/{format}/org/{orgId}:
+    get:
+      operationId: ExportSubscriptionsOrg
+      summary: Export list of subscriptions for an organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List subscriptions by organization](/developers/api-reference/subscription/get-list-of-subscriptions-for-an-org) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of subscriptions for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `endDate` (gt, ge, lt, le, eq, ne)\n- `nextDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `untilcancelled` (eq, ne)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/customers/{format}/{entry}:
+    get:
+      operationId: ExportCustomers
+      summary: Export list of customers for entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List customers by paypoint](/developers/api-reference/customer/get-list-of-customers-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of customers for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n- `createdDate` (gt, ge, lt, le, eq, ne)\n- `customernumber` (ne, eq, ct, nct)\n- `firstname` (ne, eq, ct, nct)\n- `lastname` (ne, eq, ct, nct)\n- `name` (ct, nct)\n- `address` (ne, eq, ct, nct)\n- `city` (ne, eq, ct, nct)\n- `country` (ne, eq, ct, nct)\n- `zip` (ne, eq, ct, nct)\n- `state` (ne, eq, ct, nct)\n- `shippingaddress` (ne, eq, ct, nct)\n- `shippingcity` (ne, eq, ct, nct)\n- `shippingcountry` (ne, eq, ct, nct)\n- `shippingzip` (ne, eq, ct, nct)\n- `shippingstate` (ne, eq, ct, nct)\n- `phone` (ne, eq, ct, nct)\n- `email` (ne, eq, ct, nct)\n- `company` (ne, eq, ct, nct)\n- `username` (ne, eq, ct, nct)\n- `balance` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\n**List of comparison accepted - enclosed between parentheses:**\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\n**Example:**\nbalance(gt)=20 return all records with balance greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/customers/{format}/org/{orgId}:
+    get:
+      operationId: ExportCustomersOrg
+      summary: Export list of customers for organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List customers by organization](/developers/api-reference/customer/get-list-of-customers-for-an-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExports a list of customers for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n- `createdDate` (gt, ge, lt, le, eq, ne)\n- `customernumber` (ne, eq, ct, nct)\n- `firstname` (ne, eq, ct, nct)\n- `lastname` (ne, eq, ct, nct)\n- `name` (ct, nct)\n- `address` (ne, eq, ct, nct)\n- `city` (ne, eq, ct, nct)\n- `country` (ne, eq, ct, nct)\n- `zip` (ne, eq, ct, nct)\n- `state` (ne, eq, ct, nct)\n- `shippingaddress` (ne, eq, ct, nct)\n- `shippingcity` (ne, eq, ct, nct)\n- `shippingcountry` (ne, eq, ct, nct)\n- `shippingzip` (ne, eq, ct, nct)\n- `shippingstate` (ne, eq, ct, nct)\n- `phone` (ne, eq, ct, nct)\n- `email` (ne, eq, ct, nct)\n- `company` (ne, eq, ct, nct)\n- `username` (ne, eq, ct, nct)\n- `balance` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\n**List of comparison accepted - enclosed between parentheses:**\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\n**Example:**\nbalance(gt)=20 return all records with balance greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/invoices/{format}/{entry}:
+    get:
+      operationId: ExportInvoices
+      summary: Export list of invoices for an entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List invoices by paypoint](/developers/api-reference/invoice/get-list-of-invoices-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport list of invoices for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n - `invoiceDate` (gt, ge, lt, le, eq, ne)\n - `dueDate` (gt, ge, lt, le, eq, ne)\n - `sentDate` (gt, ge, lt, le, eq, ne)\n - `frequency`  (in, nin,ne, eq)\n - `invoiceType`   (eq, ne)\n - `payTerms`   (in, nin, eq, ne)\n - `paypointId`  (ne, eq)\n - `totalAmount`  (gt, ge, lt, le, eq, ne)\n - `paidAmount`  (gt, ge, lt, le, eq, ne)\n - `status`   (in, nin, eq, ne)\n - `invoiceNumber`   (ct, nct, eq, ne)\n - `purchaseOrder`   (ct, nct, eq, ne)\n - `itemProductCode` (ct, nct)\n - `itemDescription` (ct, nct)\n - `customerFirstname`   (ct, nct, eq, ne)\n - `customerLastname`    (ct, nct, eq, ne)\n - `customerName`   (ct, nct)\n - `customerId`  (eq, ne)\n - `customerNumber`  (ct, nct, eq, ne)\n - `customerCompanyname`    (ct, nct, eq, ne)\n - `customerAddress` (ct, nct, eq, ne)\n - `customerCity`    (ct, nct, eq, ne)\n - `customerZip` (ct, nct, eq, ne)\n - `customerState` (ct, nct, eq, ne)\n - `customerCountry` (ct, nct, eq, ne)\n - `customerPhone` (ct, nct, eq, ne)\n - `customerEmail` (ct, nct, eq, ne)\n - `customerShippingAddress` (ct, nct, eq, ne)\n - `customerShippingCity` (ct, nct, eq, ne)\n - `customerShippingZip` (ct, nct, eq, ne)\n - `customerShippingState` (ct, nct, eq, ne)\n - `customerShippingCountry` (ct, nct, eq, ne)\n - `orgId`  (eq)\n - `paylinkId`  (ne, eq)\n - `paypointLegal`  (ne, eq, ct, nct)\n - `paypointDba`  (ne, eq, ct, nct)\n - `orgName`  (ne, eq, ct, nct)\n - `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n - eq or empty => equal\n - gt => greater than\n - ge => greater or equal\n - lt => less than\n - le => less or equal\n - ne => not equal\n - ct => contains\n - nct => not contains\n - in => inside array\n - nin => not inside array\n\nList of parameters accepted:\n - `limitRecord` : max number of records for query (default=\"20\", \"0\" or negative value for all)\n - `fromRecord` : initial record in query\n\nExample: `totalAmount(gt)=20` returns all records with `totalAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/invoices/{format}/org/{orgId}:
+    get:
+      operationId: ExportInvoicesOrg
+      summary: Export list of invoices for an organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List invoices by organization](/developers/api-reference/invoice/get-list-of-invoices-for-an-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of invoices for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n - `invoiceDate` (gt, ge, lt, le, eq, ne)\n - `dueDate` (gt, ge, lt, le, eq, ne)\n - `sentDate` (gt, ge, lt, le, eq, ne)\n - `frequency` (in, nin,ne, eq)\n - `invoiceType` (eq, ne)\n - `payTerms` (in, nin, eq, ne)\n - `paypointId` (ne, eq)\n - `totalAmount` (gt, ge, lt, le, eq, ne)\n - `paidAmount` (gt, ge, lt, le, eq, ne)\n - `status` (in, nin, eq, ne)\n - `invoiceNumber` (ct, nct, eq, ne)\n - `purchaseOrder` (ct, nct, eq, ne)\n - `itemProductCode` (ct, nct)\n - `itemDescription` (ct, nct)\n - `customerFirstname` (ct, nct, eq, ne)\n - `customerLastname` (ct, nct, eq, ne)\n - `customerName` (ct, nct)\n - `customerId` (eq, ne)\n - `customerNumber` (ct, nct, eq, ne)\n - `customerCompanyname` (ct, nct, eq, ne)\n - `customerAddress` (ct, nct, eq, ne)\n - `customerCity` (ct, nct, eq, ne)\n - `customerZip` (ct, nct, eq, ne)\n - `customerState` (ct, nct, eq, ne)\n - `customerCountry` (ct, nct, eq, ne)\n - `customerPhone` (ct, nct, eq, ne)\n - `customerEmail` (ct, nct, eq, ne)\n - `customerShippingAddress` (ct, nct, eq, ne)\n - `customerShippingCity` (ct, nct, eq, ne)\n - `customerShippingZip` (ct, nct, eq, ne)\n - `customerShippingState` (ct, nct, eq, ne)\n - `customerShippingCountry` (ct, nct, eq, ne)\n - `orgId` (eq)\n - `paylinkId` (ne, eq)\n - `paypointLegal` (ne, eq, ct, nct)\n - `paypointDba` (ne, eq, ct, nct)\n - `orgName` (ne, eq, ct, nct)\n - `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n - eq or empty => equal\n - gt => greater than\n - ge => greater or equal\n - lt => less than\n - le => less or equal\n - ne => not equal\n - ct => contains\n - nct => not contains\n - in => inside array\n - nin => not inside array\n\nList of parameters accepted:\n - limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n - fromRecord : initial record in query\n\nExample: totalAmount(gt)=20  return all records with totalAmount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/chargebacks/{format}/{entry}:
+    get:
+      operationId: ExportChargebacks
+      summary: Export list of chargebacks and returned transactions for entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List disputes by paypoint](/developers/api-reference/chargebacks/get-list-of-chargebacks-and-returned-transactions-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of chargebacks and ACH returns for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `chargebackDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `reasonCode` (in, nin, eq, ne)\n- `reason` (ct, nct, eq, ne)\n- `caseNumber` (ct, nct, eq, ne)\n- `status` (in, nin, eq, ne)\n- `accountType` (in, nin, eq, ne)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/chargebacks/{format}/org/{orgId}:
+    get:
+      operationId: ExportChargebacksOrg
+      summary: Export list of chargebacks and returned transactions for an organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List disputes by organization](/developers/api-reference/chargebacks/get-list-of-chargebacks-and-returned-transactions-for-an-org) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of chargebacks and ACH returns for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `chargebackDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct)\n- `method` (in, nin, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `reasonCode` (in, nin, eq, ne)\n- `reason` (ct, nct, eq, ne)\n- `caseNumber` (ct, nct, eq, ne)\n- `status` (in, nin, eq, ne)\n- `accountType` (in, nin, eq, ne)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/payouts/{format}/{entry}:
+    get:
+      operationId: ExportPayout
+      summary: Export list of payouts for an entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List payouts by paypoint](/developers/api-reference/query/get-list-of-payouts-for-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of payouts and their statuses for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `status` (in, nin, eq, ne)\n- `transactionDate` (gt, ge, lt, le, eq, ne)\n- `billNumber` (ct, nct)\n- `vendorNumber` (ct, nct, eq, ne)\n- `vendorName` (ct, nct, eq, ne)\n- `paymentMethod` (ct, nct, eq, ne)\n- `paymentId` (ct, nct, eq, ne)\n- `paymentgroup` (ct, nct, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: totalAmount(gt)=20 return all records with totalAmount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/payouts/{format}/org/{orgId}:
+    get:
+      operationId: ExportPayoutOrg
+      summary: Export list of payouts for organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List payouts by org](/developers/api-reference/query/get-list-of-payouts-for-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of payouts and their details for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `status` (in, nin, eq, ne)\n- `transactionDate` (gt, ge, lt, le, eq, ne)\n- `billNumber` (ct, nct)\n- `vendorNumber` (ct, nct, eq, ne)\n- `vendorName` (ct, nct, eq, ne)\n- `paymentMethod` (ct, nct, eq, ne)\n- `paymentId` (ct, nct, eq, ne)\n- `paymentgroup` (ct, nct, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: totalAmount(gt)=20 return all records with totalAmount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/batchesOut/{format}/{entry}:
+    get:
+      operationId: ExportBatchesOut
+      summary: Export list of pay out batches for entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List payout batches for paypoint](/developers/api-reference/query/get-list-of-moneyout-batches-for-an-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of money out batches for a paypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n  - `batchDate` (gt, ge, lt, le, eq, ne)\n  - `batchNumber` (ne, eq)\n  - `batchAmount` (gt, ge, lt, le, eq, ne)\n  - `status` (in, nin, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct, nin, in)\n  - `paypointId` (ne, eq)\n  - `externalPaypointID` (ct, nct, eq, ne)\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00\""
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/batchesOut/{format}/org/{orgId}:
+    get:
+      operationId: ExportBatchesOutOrg
+      summary: Export list of pay out batches for organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List payout batches for org](/developers/api-reference/query/get-list-of-moneyout-batches-for-an-org) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of money out batches for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n  - `batchDate` (gt, ge, lt, le, eq, ne)\n  - `batchNumber` (ne, eq)\n  - `batchAmount` (gt, ge, lt, le, eq, ne)\n  - `status` (in, nin, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct, nin, in)\n  - `paypointId` (ne, eq)\n  - `externalPaypointID` (ct, nct, eq, ne)\nList of parameters accepted:\n- limitRecord: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord: initial record in query\n\nExample: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00\""
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/vendors/{format}/{entry}:
+    get:
+      operationId: ExportVendors
+      summary: Export vendors for an entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List vendors by paypoint](/developers/api-reference/vendor/get-list-of-vendors-for-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of vendors for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `method` (in, nin, eq, ne)\n- `enrollmentStatus` (in, nin, eq, ne)\n- `status` (in, nin, eq, ne)\n- `vendorNumber` (ct, nct, eq, ne)\n- `name` (ct, nct, eq, ne)\n- `ein` (ct, nct, eq, ne)\n- `phone` (ct, nct, eq, ne)\n- `email` (ct, nct, eq, ne)\n- `address` (ct, nct, eq, ne)\n- `city` (ct, nct, eq, ne)\n- `state` (ct, nct, eq, ne)\n- `country` (ct, nct, eq, ne)\n- `zip` (ct, nct, eq, ne)\n- `mcc` (ct, nct, eq, ne)\n- `locationCode` (ct, nct, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/vendors/{format}/org/{orgId}:
+    get:
+      operationId: ExportVendorsOrg
+      summary: Export vendors for an organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List vendors by organization](/developers/api-reference/vendor/get-list-of-vendors-for-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of vendors for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `method` (in, nin, eq, ne)\n- `enrollmentStatus` (in, nin, eq, ne)\n- `status` (in, nin, eq, ne)\n- `vendorNumber` (ct, nct, eq, ne)\n- `name` (ct, nct, eq, ne)\n- `ein` (ct, nct, eq, ne)\n- `phone` (ct, nct, eq, ne)\n- `email` (ct, nct, eq, ne)\n- `address` (ct, nct, eq, ne)\n- `city` (ct, nct, eq, ne)\n- `state` (ct, nct, eq, ne)\n- `country` (ct, nct, eq, ne)\n- `zip` (ct, nct, eq, ne)\n- `mcc` (ct, nct, eq, ne)\n- `locationCode` (ct, nct, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+  /Export/bills/{format}/{entry}:
+    get:
+      operationId: ExportBills
+      summary: Export list of bills for an entrypoint
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List bills by paypoint](/developers/api-reference/bill/get-list-of-bills-for-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of bills for an entrypoint. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `status` (in, nin, eq, ne)\n- `billNumber` (ct, nct, eq, ne)\n- `billDate` (gt, ge, lt, le, eq, ne)\n- `billDueDate` (gt, ge, lt, le, eq, ne)\n- `vendorNumber` (ct, nct, eq, ne)\n- `vendorName` (ct, nct, eq, ne)\n- `ein` (ct, nct, eq, ne)\n- `paymentMethod` (ct, nct, eq, ne)\n- `paymentId` (ct, nct, eq, ne)\n- `paymentgroup` (ct, nct, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20  return all records with totalAmount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/bills/{format}/org/{orgId}:
+    get:
+      operationId: ExportBillsOrg
+      summary: Export list of bills for organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List bills by organization](/developers/api-reference/bill/get-list-of-bills-for-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of bills for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `status` (in, nin, eq, ne)\n- `billNumber` (ct, nct, eq, ne)\n- `billDate` (gt, ge, lt, le, eq, ne)\n- `billDueDate` (gt, ge, lt, le, eq, ne)\n- `vendorNumber` (ct, nct, eq, ne)\n- `vendorName` (ct, nct, eq, ne)\n- `ein` (ct, nct, eq, ne)\n- `paymentMethod` (ct, nct, eq, ne)\n- `paymentId` (ct, nct, eq, ne)\n- `paymentgroup` (ct, nct, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20  return all records with totalAmount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/boarding/{format}/{orgId}:
+    get:
+      operationId: ExportApplications
+      summary: Export list of boarding applications for organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List all apps for org](/developers/api-reference/boarding/get-list-of-applications-for-an-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of boarding applications for an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `dbaname`  (ct, nct)\n- `legalname`  (ct, nct)\n- `ein`  (ct, nct)\n- `address`  (ct, nct)\n- `city`  (ct, nct)\n- `state`  (ct, nct)\n- `phone`  (ct, nct)\n- `mcc`  (ct, nct)\n- `owntype`  (ct, nct)\n- `ownerName`  (ct, nct)\n- `contactName`  (ct, nct)\n- `status`  (eq, ne)\n- `orgParentname`  (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- `limitRecord` : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord` : initial record in query\n\nExample: `dbaname(ct)=hoa` returns all records with a `dbaname` containing \"hoa\""
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/organizations/{format}/org/{orgId}:
+    get:
+      operationId: ExportOrganizations
+      summary: Export list of child organization for a parent organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List suborganizations by organization](/developers/api-reference/organization/get-list-of-organizations-for-entrypoint) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of child organizations (suborganizations) for a parent organization."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `name` (ct, nct, eq, ne)\n- `type` (ne, eq)\n- `contactName` (ct, nct, eq, ne)\n- `contactTitle` (ct, nct, eq, ne)\n- `contactEmail` (ct, nct, eq, ne)\n- `contactPhone` (ct, nct, eq, ne)\n- `city` (ct, nct, eq, ne)\n- `state` (in, nin, eq, ne)\n- `address` (ct, nct, eq, ne)\n- `country` (ct, nct, eq, ne)\n- `zip` (ct, nct, eq, ne)\n- `hasBilling` any value greater than zero is taken as TRUE otherwise is FALSE\n- `hasResidual` any value greater than zero is taken as TRUE otherwise is FALSE\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=hoa  return all records where name contains \"hoa\""
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Export/paypoints/{format}/{orgId}:
+    get:
+      operationId: ExportPaypoints
+      summary: Export list of paypoints in an organization
+      description: "<Warning>\n  This endpoint is deprecated. To export this data, use [List paypoints by organization](/developers/api-reference/paypoint/get-list-of-paypoints-for-an-organization) with the `exportFormat` query parameter instead.\n</Warning>\n\nExport a list of paypoints in an organization. Use filters to limit results."
+      tags:
+      - Export
+      parameters:
+      - name: format
+        in: path
+        description: Format for the export, either XLSX or CSV.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ExportFormat1'
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: columnsExport
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
+        required: false
+        schema:
+          type: integer
+          default: 25000
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `dbaname` (ct, nct)\n- `legalname` (ct, nct)\n- `ein` (ct, nct)\n- `address` (ct, nct)\n- `city` (ct, nct)\n- `state` (ct, nct)\n- `phone` (ct, nct)\n- `mcc` (ct, nct)\n- `owntype` (ct, nct)\n- `ownerName` (ct, nct)\n- `contactName` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `dbaname(ct)=hoa` returns all records with `dbaname` containing \"hoa\""
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    File:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: A file containing the response data, in the format specified in the request.
+      title: File
+    ExportFormat1:
+      type: string
+      enum:
+      - csv
+      - xlsx
+      title: ExportFormat1
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

@@ -1,0 +1,244 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill checkCapture API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: checkCapture
+paths:
+  /CheckCapture/CheckProcessing:
+    post:
+      operationId: CheckProcessing
+      summary: Process Check Capture
+      description: Captures a check for Remote Deposit Capture (RDC) using the provided check images and details. This endpoint handles the OCR extraction of check data including MICR, routing number, account number, and amount. See the [RDC guide](/developers/developer-guides/pay-in-rdc) for more details.
+      tags:
+      - checkCapture
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with check processing results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckCaptureResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckCaptureRequestBody'
+components:
+  schemas:
+    Entry:
+      type: string
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+
+        '
+      title: Entry
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    CheckCaptureResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID for the check capture, to be used with the /api/MoneyIn/getpaid endpoint.
+        success:
+          type: boolean
+          description: Indicates whether the check processing was successful.
+        processDate:
+          type: string
+          description: The date and time when the check was processed (ISO 8601 format).
+        ocrMicr:
+          type: string
+          description: The OCR-extracted MICR (Magnetic Ink Character Recognition) line from the check.
+        ocrMicrStatus:
+          type: string
+          description: Status of the MICR extraction process.
+        ocrMicrConfidence:
+          type: string
+          description: Confidence score for the MICR extraction (0 to 100).
+        ocrAccountNumber:
+          type: string
+          description: The bank account number extracted from the check.
+        ocrRoutingNumber:
+          type: string
+          description: The bank routing number extracted from the check.
+        ocrCheckNumber:
+          type: string
+          description: The check number extracted from the check.
+        ocrCheckTranCode:
+          type: string
+          description: The transaction code extracted from the check.
+        ocrAmount:
+          type: string
+          description: The amount extracted via OCR from the check.
+        ocrAmountStatus:
+          type: string
+          description: Status of the amount extraction process.
+        ocrAmountConfidence:
+          type: string
+          description: Confidence score for the amount extraction (0 to 100).
+        amountDiscrepancyDetected:
+          type: boolean
+          description: Flag indicating whether there's a discrepancy between the provided amount and the OCR-detected amount.
+        endorsementDetected:
+          type: boolean
+          description: Flag indicating whether an endorsement was detected on the check.
+        errors:
+          type: array
+          items:
+            type: string
+          description: List of error messages that occurred during processing.
+        messages:
+          type: array
+          items:
+            type: string
+          description: List of informational messages about the processing.
+        carLarMatchConfidence:
+          type: string
+          description: Confidence score for the match between Courtesy Amount Recognition (CAR) and Legal Amount Recognition (LAR).
+        carLarMatchStatus:
+          type: string
+          description: Status of the CAR/LAR match.
+        frontImage:
+          type: string
+          description: Processed front image of the check (Base64-encoded).
+        rearImage:
+          type: string
+          description: Processed rear image of the check (Base64-encoded).
+        checkType:
+          type: number
+          format: double
+          description: 'Identifier for the type of check.
+
+            Personal = 1
+
+            Business = 2
+
+            Only personal checks are supported for check capture.'
+        referenceNumber:
+          type: string
+          description: Reference number for the transaction.
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+      required:
+      - success
+      - processDate
+      - amountDiscrepancyDetected
+      - endorsementDetected
+      - checkType
+      description: Response model for check capture processing.
+      title: CheckCaptureResponse
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    CheckCaptureRequestBody:
+      type: object
+      properties:
+        entryPoint:
+          $ref: '#/components/schemas/Entry'
+        frontImage:
+          type: string
+          description: Base64-encoded front check image. Must be JPEG or PNG format and less than 1MB. Image must show the entire check clearly with no partial, blurry, or illegible portions.
+        rearImage:
+          type: string
+          description: Base64-encoded rear check image. Must be JPEG or PNG format and less than 1MB. Image must show the entire check clearly with no partial, blurry, or illegible portions.
+        checkAmount:
+          type: integer
+          description: Check amount in cents (maximum 32-bit integer value).
+      required:
+      - entryPoint
+      - frontImage
+      - rearImage
+      - checkAmount
+      title: CheckCaptureRequestBody
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

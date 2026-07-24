@@ -1,0 +1,3379 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Bill
+paths:
+  /Bill/single/{entry}:
+    post:
+      operationId: AddBill
+      summary: Add bill
+      description: Creates a bill in an entrypoint.
+      tags:
+      - Bill
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      - name: idempotencyKey
+        in: header
+        description: _Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.
+        required: false
+        schema:
+          $ref: '#/components/schemas/IdempotencyKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillOutData'
+  /Bill/{idBill}:
+    get:
+      operationId: GetBill
+      summary: Get bill
+      description: Retrieves a bill by ID from an entrypoint.
+      tags:
+      - Bill
+      parameters:
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    put:
+      operationId: EditBill
+      summary: Update bill
+      description: Updates a bill by ID.
+      tags:
+      - Bill
+      parameters:
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditBillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillOutData'
+    delete:
+      operationId: DeleteBill
+      summary: Delete bill
+      description: Deletes a bill by ID.
+      tags:
+      - Bill
+      parameters:
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Query/bills/{entry}:
+    get:
+      operationId: ListBills
+      summary: Get list of bills for entrypoint
+      description: Retrieve a list of bills for an entrypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
+      tags:
+      - Bill
+      parameters:
+      - name: entry
+        in: path
+        description: The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          type: string
+      - name: exportFormat
+        in: query
+        description: Export format for file downloads. When specified, returns data as a file instead of JSON.
+        required: false
+        schema:
+          $ref: '#/components/schemas/ExportFormat'
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records to return for the query. Use `0` or negative value to return all records.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response isn't filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `frequency` (`in`, `nin`, `ne`, `eq`)\n- `method` (`in`, `nin`, `eq`, `ne`)\n- `event` (`in`, `nin`, `eq`, `ne`)\n- `target` (`ct`, `nct`, `eq`, `ne`)\n- `status` (`eq`, `ne`)\n- `approvalUserId` (`eq`, `ne`)\n- `parentOrgId` (`ne`, `eq`, `nin`, `in`)\n- `approvalUserEmail` (`eq`, `ne`)\n- `scheduleId` (`ne`, `eq`)\n\nList of comparison accepted - enclosed between parentheses:\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array\n\nList of parameters accepted:\n- `limitRecord` : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord` : initial record in query\nExample: `totalAmount(gt)=20` returns all records with a `totalAmount` that's greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillQueryResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Query/bills/org/{orgId}:
+    get:
+      operationId: ListBillsOrg
+      summary: Get list of bills for organization
+      description: Retrieve a list of bills for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
+      tags:
+      - Bill
+      parameters:
+      - name: orgId
+        in: path
+        description: The numeric identifier for organization, assigned by Payabli.
+        required: true
+        schema:
+          type: integer
+      - name: exportFormat
+        in: query
+        description: Export format for file downloads. When specified, returns data as a file instead of JSON.
+        required: false
+        schema:
+          $ref: '#/components/schemas/ExportFormat'
+      - name: fromRecord
+        in: query
+        description: The number of records to skip before starting to collect the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+      - name: limitRecord
+        in: query
+        description: Max number of records to return for the query. Use `0` or negative value to return all records.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: parameters
+        in: query
+        description: "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response isn't filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `event` (in, nin, eq, ne)\n- `target` (ct, nct, eq, ne)\n- `status` (eq, ne)\n- `parentOrgId` (ne, eq, nin, in)\n- `approvalUserId` (eq, ne)\n- `approvalUserEmail` (eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20 return all records with totalAmount greater than 20.00"
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: sortBy
+        in: query
+        description: The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillQueryResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Bill/attachedFileFromBill/{idBill}/{filename}:
+    delete:
+      operationId: deleteAttachedFromBill
+      summary: Delete attached file from bill
+      description: Delete a file attached to a bill.
+      tags:
+      - Bill
+      parameters:
+      - name: filename
+        in: path
+        description: 'The filename in Payabli. Get this from the `zipName` field
+
+          in the `DocumentsRef.filelist` array returned by
+
+          `/api/Bill/{idBill}`. Example: `0_Bill.pdf`.'
+        required: true
+        schema:
+          type: string
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: returnObject
+        in: query
+        description: When `true`, the response includes the full bill object.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+    get:
+      operationId: getAttachedFromBill
+      summary: Get attached file from bill
+      description: Retrieves a file attached to a bill, either as a binary file or as a Base64-encoded string.
+      tags:
+      - Bill
+      parameters:
+      - name: filename
+        in: path
+        description: 'The filename in Payabli. Get this from the `zipName` field
+
+          in the `DocumentsRef.filelist` array returned by
+
+          `/api/Bill/{idBill}`. Example: `0_Bill.pdf`.'
+        required: true
+        schema:
+          type: string
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: returnObject
+        in: query
+        description: When `true`, the request returns the file content as a Base64-encoded string.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A successful response returns a binary file when `returnObject` is `false`. When `returnObject` is `true`, the response contains the file content as a Base64-encoded string in an object. Due to technical limitations, only the object response is documented here.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileContent'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Bill/approval/{idBill}:
+    post:
+      operationId: SendToApprovalBill
+      summary: Send a bill to approval
+      description: Send a bill to a user or list of users to approve.
+      tags:
+      - Bill
+      parameters:
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: autocreateUser
+        in: query
+        description: Automatically create the target user for approval if they don't exist.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      - name: idempotencyKey
+        in: header
+        description: _Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.
+        required: false
+        schema:
+          $ref: '#/components/schemas/IdempotencyKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+    put:
+      operationId: ModifyApprovalBill
+      summary: Change bill approvers
+      description: Modify the list of users the bill is sent to for approval.
+      tags:
+      - Bill
+      parameters:
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyApprovalBillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+  /Bill/approval/{idBill}/{approved}:
+    get:
+      operationId: SetApprovedBill
+      summary: Approve or disapprove a bill
+      description: Approve or disapprove a bill by ID.
+      tags:
+      - Bill
+      parameters:
+      - name: approved
+        in: path
+        description: 'String representing the approved status. Accepted values: ''true'' or ''false''.'
+        required: true
+        schema:
+          type: string
+      - name: idBill
+        in: path
+        description: Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+        required: true
+        schema:
+          type: integer
+      - name: email
+        in: query
+        description: Email or username of user modifying approval status.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetApprovedBillResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    RiskReason:
+      type: string
+      description: Reason for risk flagging.
+      title: RiskReason
+    IsSameDayACH:
+      type: boolean
+      description: 'When `true`, this is a same-day ACH transaction.
+
+        '
+      title: IsSameDayACH
+    ContactsField:
+      type: array
+      items:
+        $ref: '#/components/schemas/Contacts'
+      description: List of contacts.
+      title: ContactsField
+    AccountId:
+      type: string
+      description: Custom identifier for payment connector.
+      title: AccountId
+    BillQueryRecord2BillApprovalsItem:
+      type: object
+      properties:
+        approved:
+          type: integer
+          description: Indicates whether the bill has been approved. `0` is false, and `1` is true.
+        approvedTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp of when the approval was made, in UTC.
+        comments:
+          type: string
+          description: Additional comments on the approval.
+        email:
+          $ref: '#/components/schemas/Email'
+          description: The approving user's email address.
+        Id:
+          type: integer
+          format: int64
+          description: The approving user's ID.
+      required:
+      - approvedTime
+      title: BillQueryRecord2BillApprovalsItem
+    SettlementStatusPayout:
+      type: string
+      description: 'The settlement status of the payout transaction. See
+
+        [Payout Transaction Statuses](/guides/pay-out-status-reference#payout-transaction-statuses)
+
+        for a full reference.
+
+        '
+      title: SettlementStatusPayout
+    Maskedaccount:
+      type: string
+      description: 'Masked card or bank account used in transaction. In the case of Apple
+
+        Pay, this is a masked DPAN (device primary account number).
+
+        '
+      title: Maskedaccount
+    BankName:
+      type: string
+      description: Name of bank for account.
+      title: BankName
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    RiskFlaggedOn:
+      type: string
+      format: date-time
+      description: Timestamp when the transaction was flagged for risk.
+      title: RiskFlaggedOn
+    VendorOutData:
+      type: object
+      properties:
+        additionalData:
+          $ref: '#/components/schemas/AdditionalData'
+        Address1:
+          $ref: '#/components/schemas/AddressNullable'
+          description: Vendor's street address. Allowed characters are letters, numbers, spaces, and `. ,
+        Address2:
+          $ref: '#/components/schemas/AddressAddtlNullable'
+          description: Additional line for vendor's address, such as a suite or unit number.
+        BillingData:
+          $ref: '#/components/schemas/BillingData'
+          description: Object containing vendor's bank information.
+        City:
+          type: string
+          description: Vendor's city.
+        Contacts:
+          $ref: '#/components/schemas/ContactsField'
+          description: Array of objects describing the vendor's contacts.
+        Country:
+          type: string
+          description: Vendor's country. `US` or `CA`.
+        customerVendorAccount:
+          type: string
+          description: Account number of paypoint in the vendor side.
+        EIN:
+          type: string
+          description: 'EIN/Tax ID for vendor. Must be nine digits formatted as `XX-XXXXXXX`. In responses, this field is masked and looks like: `XXXXX6789`.'
+        Email:
+          $ref: '#/components/schemas/Email'
+          description: Vendor's email address. Required for vCard.
+        InternalReferenceId:
+          type: integer
+          format: int64
+          description: Internal identifier for global vendor account.
+        LocationCode:
+          $ref: '#/components/schemas/LocationCode'
+        Mcc:
+          $ref: '#/components/schemas/Mcc'
+        Name1:
+          type: string
+          description: Primary name for vendor. Required for new vendor. Allowed characters are letters, numbers, spaces, and `. , ' & ( )
+        Name2:
+          type: string
+          description: Secondary name for vendor. If provided, allowed characters are the same as `Name1`.
+        payeeName1:
+          $ref: '#/components/schemas/PayeeName'
+        payeeName2:
+          $ref: '#/components/schemas/PayeeName'
+        PaymentMethod:
+          $ref: '#/components/schemas/VendorPaymentMethod'
+        Phone:
+          type: string
+          description: Vendor's phone number. Digits only when creating or updating a vendor.
+        remitAddress1:
+          $ref: '#/components/schemas/Remitaddress1'
+        remitAddress2:
+          $ref: '#/components/schemas/Remitaddress2'
+        remitCity:
+          $ref: '#/components/schemas/Remitcity'
+        remitCountry:
+          $ref: '#/components/schemas/Remitcountry'
+        remitState:
+          $ref: '#/components/schemas/Remitstate'
+        remitZip:
+          $ref: '#/components/schemas/Remitzip'
+        State:
+          type: string
+          description: Vendor's state or province. Must be a valid US state or Canadian province abbreviation, depending on the `Country` value.
+        VendorId:
+          $ref: '#/components/schemas/Vendorid'
+          description: Payabli identifier for vendor record. Required when `VendorNumber` isn't included.
+        VendorNumber:
+          $ref: '#/components/schemas/VendorNumber'
+        VendorStatus:
+          $ref: '#/components/schemas/Vendorstatus'
+        Zip:
+          type: string
+          description: Vendor's ZIP or postal code. For US addresses, five digits (`12345`) or ZIP+4 format (`12345-6789`).
+      required:
+      - City
+      - Country
+      - EIN
+      - Name1
+      - Phone
+      - State
+      - Zip
+      title: VendorOutData
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    Accountexp:
+      type: string
+      description: Expiration date of card used in transaction.
+      title: Accountexp
+    BillOutDataVendor:
+      type: object
+      properties:
+        vendorNumber:
+          $ref: '#/components/schemas/VendorNumber'
+      description: 'The vendor associated with the bill. Although you can create a vendor
+
+        in a create bill request, Payabli recommends creating a vendor
+
+        separately and passing a valid `vendorNumber` here. At minimum, the
+
+        `vendorNumber` is required.
+
+        '
+      title: BillOutDataVendor
+    CityNullable:
+      type: string
+      description: The city.
+      title: CityNullable
+    VendorDataResponsePaymentMethod:
+      type: string
+      enum:
+      - vcard
+      - ach
+      - check
+      - card
+      description: Preferred payment method for vendor.
+      title: VendorDataResponsePaymentMethod
+    SetApprovedBillResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          type: integer
+          description: 'If `isSuccess` = true, this contains the bill identifier. If
+
+            `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: Response from the Approve or disapprove a bill endpoint.
+      title: SetApprovedBillResponse
+    RoomIdNotInUse:
+      type: integer
+      format: int64
+      description: Field not in use on this endpoint. It always returns `0`.
+      title: RoomIdNotInUse
+    ItemUnitofMeasure:
+      type: string
+      description: Unit of measurement. Max length of 100 characters.
+      title: ItemUnitofMeasure
+    RemitEmail:
+      type: string
+      format: email
+      description: 'Remittance email address. Used for sending virtual cards and other
+
+        information about payouts.
+
+        '
+      title: RemitEmail
+    PayeeName:
+      type: string
+      description: Alternative name used to receive paper check.
+      title: PayeeName
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    Vendorid:
+      type: integer
+      description: Payabli identifier for vendor record.
+      title: Vendorid
+    RiskStatus:
+      type: string
+      description: Current risk status of the transaction.
+      title: RiskStatus
+    BillQueryResponseSummary:
+      type: object
+      properties:
+        pageidentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        total2approval:
+          type: integer
+        totalactive:
+          type: integer
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount of bills in response.
+        totalamount2approval:
+          type: number
+          format: double
+        totalamountactive:
+          type: number
+          format: double
+        totalamountapproved:
+          type: number
+          format: double
+          description: The total amount of approved bills.
+        totalamountcancel:
+          type: number
+          format: double
+        totalamountdisapproved:
+          type: number
+          format: double
+          description: The total amount of disapproved bills.
+        totalamountintransit:
+          type: number
+          format: double
+        totalamountoverdue:
+          type: number
+          format: double
+          description: The total amount of bills that are overdue.
+        totalamountpaid:
+          type: number
+          format: double
+          description: The total amount of paid bills.
+        totalamountsent2approval:
+          type: number
+          format: double
+        totalapproved:
+          type: integer
+          description: The total number of bills that were approved.
+        totalcancel:
+          type: integer
+        totaldisapproved:
+          type: integer
+          description: The number of bills that were disapproved.
+        totalintransit:
+          type: integer
+        totaloverdue:
+          type: integer
+          description: The number of bills that are overdue.
+        totalPages:
+          $ref: '#/components/schemas/Totalpages'
+        totalpaid:
+          type: integer
+          description: The total number of paid bills.
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+        totalsent2approval:
+          type: integer
+      title: BillQueryResponseSummary
+    Billitems:
+      type: array
+      items:
+        $ref: '#/components/schemas/BillItem'
+      description: Array of `LineItems` contained in bill.
+      title: Billitems
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
+    ItemDescription:
+      type: string
+      description: Item or product description. Max length of 250 characters.
+      title: ItemDescription
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    BinData:
+      type: object
+      properties:
+        binMatchedLength:
+          type: string
+          description: 'The number of characters from the beginning of the card number that
+
+            were matched against a Bank Identification Number (BIN) or the Card
+
+            Range table.'
+        binCardBrand:
+          type: string
+          description: 'The card brand. For example, Visa, Mastercard, American Express,
+
+            Discover.'
+        binCardType:
+          type: string
+          description: 'The type of card: `Credit` or `Debit`. Case can vary between
+
+            processors, so compare this value case-insensitively.'
+        binCardCategory:
+          type: string
+          description: 'The category of the card, which indicates the card product. For example: Standard, Gold, Platinum, etc. The binCardCategory for prepaid cards is marked `PREPAID`.'
+        binCardIssuer:
+          type: string
+          description: The name of the financial institution that issued the card.
+        binCardIssuerCountry:
+          type: string
+          description: The issuing financial institution's country name.
+        binCardIssuerCountryCodeA2:
+          type: string
+          description: The issuing financial institution's two-character ISO country code. See [this resource](https://www.iso.org/obp/ui/#search) for a list of codes.
+        binCardIssuerCountryNumber:
+          type: string
+          description: The issuing financial institution's ISO standard numeric country code. See [this resource](https://www.iso.org/obp/ui/#search) for a list of codes.
+        binCardIsRegulated:
+          type: string
+          description: Indicates whether the card is regulated.
+        binCardUseCategory:
+          type: string
+          description: The use category classification for the card.
+        binCardIssuerCountryCodeA3:
+          type: string
+          description: 'The issuing financial institution''s three-character ISO country code.
+
+            See [this resource](https://www.iso.org/obp/ui/#search) for a list of
+
+            codes.'
+      description: 'Object containing information related to the card. This object is `null`
+
+        unless the payment method is card. If the payment method is Apple Pay, the
+
+        binData will be related to the DPAN (device primary account number), not
+
+        the card connected to Apple Pay.'
+      title: BinData
+    Holdername:
+      type: string
+      description: The cardholder name.
+      title: Holdername
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    BillPayOutData:
+      type: object
+      properties:
+        billId:
+          type: integer
+          format: int64
+          description: Bill ID in Payabli.
+        LotNumber:
+          type:
+          - string
+          - 'null'
+          description: Lot number associated with the bill.
+        AccountingField1:
+          $ref: '#/components/schemas/AccountingField'
+        AccountingField2:
+          $ref: '#/components/schemas/AccountingField'
+        Terms:
+          $ref: '#/components/schemas/Terms'
+          description: Description of payment terms.
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+          description: Bill image attachment. Send the bill image as Base64-encoded string, or as a publicly accessible link. For full details on using this field with a payout authorization, see [the documentation](/developers/developer-guides/pay-out-manage-payouts).
+        invoiceNumber:
+          $ref: '#/components/schemas/InvoiceNumber'
+          description: Custom number identifying the bill. Must be unique in paypoint. **Required** for new bill and when `billId` isn't provided.
+        netAmount:
+          $ref: '#/components/schemas/NetAmountstring'
+          description: Net Amount owed in bill. Required when adding a bill.
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Bill date in format YYYY-MM-DD or MM/DD/YYYY.
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Bill due date in format YYYY-MM-DD or MM/DD/YYYY.
+        comments:
+          $ref: '#/components/schemas/Comments'
+          description: Any comments about bill. **For managed payouts, this field has a limit of 100 characters**.
+        identifier:
+          type:
+          - string
+          - 'null'
+          description: Custom identifier for the bill.
+        discount:
+          type: string
+          description: Bill discount amount.
+        totalAmount:
+          type:
+          - string
+          - 'null'
+          description: Total amount of the bill.
+      required:
+      - invoiceDate
+      - dueDate
+      title: BillPayOutData
+    BillQueryRecord2:
+      type: object
+      properties:
+        AccountingField1:
+          oneOf:
+          - $ref: '#/components/schemas/AccountingField'
+          - type: 'null'
+        AccountingField2:
+          oneOf:
+          - $ref: '#/components/schemas/AccountingField'
+          - type: 'null'
+        AdditionalData:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Additional data associated with the bill.
+        BatchNumber:
+          type:
+          - string
+          - 'null'
+          description: Batch number associated with the bill.
+        billApprovals:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BillQueryRecord2BillApprovalsItem'
+        BillDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Bill creation date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        billEvents:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/GeneralEvents'
+          description: Events associated with the bill.
+        BillItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BillItem'
+          description: Array of items included in the bill.
+        BillNumber:
+          type:
+          - string
+          - 'null'
+          description: Bill number.
+        Comments:
+          type:
+          - string
+          - 'null'
+          description: Additional comments on the bill.
+        CreatedAt:
+          oneOf:
+          - $ref: '#/components/schemas/CreatedAt'
+          - type: 'null'
+          description: Timestamp of when bill was created, in UTC.
+        Discount:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Discount amount applied to the bill.
+        DocumentsRef:
+          type:
+          - string
+          - 'null'
+          description: Reference to documents associated with the bill.
+        DueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Bill due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        EndDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: End date for the bill.
+        EntityID:
+          type:
+          - string
+          - 'null'
+          description: Entity identifier associated with the bill.
+        externalPaypointID:
+          oneOf:
+          - $ref: '#/components/schemas/ExternalPaypointId'
+          - type: 'null'
+        Frequency:
+          oneOf:
+          - $ref: '#/components/schemas/Frequency'
+          - type: 'null'
+          description: Frequency for scheduled bills. Applied only in `Mode` = 1.
+        IdBill:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Identifier of the bill.
+        LastUpdated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp of when bill was last updated, in UTC.
+        LotNumber:
+          type:
+          - string
+          - 'null'
+          description: Lot number associated with the bill.
+        Mode:
+          type:
+          - integer
+          - 'null'
+          description: 'Bill mode: value `0` for single/one-time bills, `1` for scheduled bills.'
+        NetAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Net amount of the bill.
+        ParentOrgId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Parent organization identifier.
+        ParentOrgName:
+          oneOf:
+          - $ref: '#/components/schemas/OrgParentName'
+          - type: 'null'
+        PaymentId:
+          oneOf:
+          - $ref: '#/components/schemas/PaymentIdString'
+          - type: 'null'
+        PaymentMethod:
+          oneOf:
+          - $ref: '#/components/schemas/BillQueryRecord2PaymentMethod'
+          - type: 'null'
+          description: Preferred payment method used.
+        paylinkId:
+          type:
+          - string
+          - 'null'
+          description: Paylink identifier associated with the bill.
+        PaypointDbaname:
+          oneOf:
+          - $ref: '#/components/schemas/Dbaname'
+          - type: 'null'
+          description: The paypoint's DBA name.
+        PaypointEntryname:
+          type:
+          - string
+          - 'null'
+          description: Entry name of the paypoint.
+        PaypointLegalname:
+          oneOf:
+          - $ref: '#/components/schemas/Legalname'
+          - type: 'null'
+          description: The paypoint's legal name.
+        Source:
+          type:
+          - string
+          - 'null'
+          description: Source of the bill.
+        Status:
+          oneOf:
+          - $ref: '#/components/schemas/Billstatus'
+          - type: 'null'
+        Terms:
+          oneOf:
+          - $ref: '#/components/schemas/Terms'
+          - type: 'null'
+          description: The payment terms for invoice. If no terms were defined initially, then response data for this field will default to `N30`.
+        TotalAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Total amount of the bill including taxes and fees.
+        Transaction:
+          oneOf:
+          - $ref: '#/components/schemas/TransactionOutQueryRecord'
+          - type: 'null'
+          description: MoneyOut transaction associated to the bill.
+        Vendor:
+          oneOf:
+          - $ref: '#/components/schemas/VendorOutData'
+          - type: 'null'
+      required:
+      - AccountingField1
+      - AccountingField2
+      - AdditionalData
+      - BatchNumber
+      - billApprovals
+      - BillDate
+      - billEvents
+      - BillItems
+      - BillNumber
+      - Comments
+      - CreatedAt
+      - Discount
+      - DocumentsRef
+      - DueDate
+      - EndDate
+      - EntityID
+      - externalPaypointID
+      - Frequency
+      - IdBill
+      - LastUpdated
+      - LotNumber
+      - Mode
+      - NetAmount
+      - ParentOrgId
+      - ParentOrgName
+      - PaymentId
+      - PaymentMethod
+      - paylinkId
+      - PaypointDbaname
+      - PaypointEntryname
+      - PaypointLegalname
+      - Source
+      - Status
+      - Terms
+      - TotalAmount
+      - Transaction
+      - Vendor
+      title: BillQueryRecord2
+    Initiator:
+      type: string
+      description: 'The transaction''s initiator. Indicates who initiated the transaction.
+
+        '
+      title: Initiator
+    BillOutData:
+      type: object
+      properties:
+        accountingField1:
+          $ref: '#/components/schemas/AccountingField'
+        accountingField2:
+          $ref: '#/components/schemas/AccountingField'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+          description: 'An array of bill images. Attachments aren''t required, but we strongly
+
+            recommend including them. Including a bill image can make payouts
+
+            smoother and prevent delays. You can include either the Base64-encoded
+
+            file content, or you can include a `furl` to a public file. The maximum
+
+            file size for image uploads is 30 MB.
+
+
+            When vendor enrichment is enabled and the first attachment is a PDF,
+
+            the invoice is scanned and extracted vendor contact information and
+
+            bill details (invoice number, amount due, due date) are merged into
+
+            the request. Fields in the request body take precedence over extracted
+
+            data. If the scan fails, bill creation proceeds with the original
+
+            request data. See the
+
+            [vendor enrichment guide](/guides/pay-out-vendor-enrichment-overview)
+
+            for details. Contact Payabli to enable this feature.
+
+            '
+        billDate:
+          type: string
+          format: date
+          description: 'Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        billItems:
+          $ref: '#/components/schemas/Billitems'
+        billNumber:
+          type: string
+          description: Unique identifier for the bill. Required when adding a bill.
+        comments:
+          $ref: '#/components/schemas/Comments'
+        discount:
+          type: number
+          format: double
+          description: Discount amount applied to the bill.
+        dueDate:
+          type: string
+          format: date
+          description: 'Due date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        endDate:
+          type: string
+          format: date
+          description: 'End date for scheduled bills. Applied only in `Mode` = 1. Accepted
+
+            formats: YYYY-MM-DD, MM/DD/YYYY.
+
+            '
+        frequency:
+          $ref: '#/components/schemas/Frequency'
+        lotNumber:
+          type: string
+          description: Lot number associated with the bill.
+        mode:
+          type: integer
+          description: 'Bill mode: value `0` for one-time bills, `1` for scheduled bills.'
+        netAmount:
+          type: number
+          format: double
+          description: Net amount owed in bill. Required when adding a bill.
+        scheduledOptions:
+          $ref: '#/components/schemas/BillOutDataScheduledOptions'
+        status:
+          $ref: '#/components/schemas/Billstatus'
+        terms:
+          $ref: '#/components/schemas/Terms'
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount of the bill.
+        vendor:
+          $ref: '#/components/schemas/BillOutDataVendor'
+          description: 'The vendor associated with the bill. Although you can create a vendor
+
+            in a create bill request, Payabli recommends creating a vendor
+
+            separately and passing a valid `vendorNumber` here. At minimum, the
+
+            `vendorNumber` is required.
+
+            '
+      description: Bill payload sent when creating or updating a bill.
+      title: BillOutData
+    Remitcountry:
+      type: string
+      description: 'Remittance address country. Used for mailing paper checks. Must be `US`
+
+        or `CA`. Defaults to `US` if not provided.
+
+        '
+      title: Remitcountry
+    FeeAmount:
+      type: number
+      format: double
+      description: Service fee or sub-charge applied.
+      title: FeeAmount
+    EnrollmentStatus:
+      type: string
+      description: Enrollment status of vendor in payables program.
+      title: EnrollmentStatus
+    InternalReferenceId:
+      type: integer
+      format: int64
+      description: An internal reference ID.
+      title: InternalReferenceId
+    VendorDataResponse:
+      type: object
+      properties:
+        VendorNumber:
+          $ref: '#/components/schemas/VendorNumber'
+        Name1:
+          type: string
+          description: Primary name for vendor.
+        Name2:
+          type: string
+          description: Secondary name for vendor.
+        EIN:
+          type: string
+          description: 'EIN/Tax ID for vendor. In responses, this field is masked, and looks like: `"ein": "XXXXX6789"`.'
+        Phone:
+          type: string
+          description: Vendor's phone number.
+        Email:
+          $ref: '#/components/schemas/Email'
+        RemitEmail:
+          type: string
+          description: Email address for remittance
+        Address1:
+          type: string
+          description: Vendor's address.
+        Address2:
+          type: string
+          description: Additional line for vendor's address.
+        City:
+          type: string
+          description: Vendor's city.
+        State:
+          type: string
+          description: Vendor's state. Must be a two-character state code.
+        Zip:
+          type: string
+          description: Vendor's zip code.
+        Country:
+          type: string
+          description: Vendor's country. Payabli supports only US and Canadian vendors.
+        Mcc:
+          $ref: '#/components/schemas/Mcc'
+        LocationCode:
+          $ref: '#/components/schemas/LocationCode'
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactsResponse'
+          description: Array of objects describing the vendor's contacts.
+        BillingData:
+          $ref: '#/components/schemas/VendorResponseBillingData'
+          description: Object containing vendor's bank information.
+        PaymentMethod:
+          $ref: '#/components/schemas/VendorDataResponsePaymentMethod'
+          description: Preferred payment method for vendor.
+        VendorStatus:
+          $ref: '#/components/schemas/Vendorstatus'
+        VendorId:
+          $ref: '#/components/schemas/Vendorid'
+        EnrollmentStatus:
+          type: string
+          description: Vendor enrollment status
+        Summary:
+          $ref: '#/components/schemas/VendorResponseSummary'
+          description: Vendor bill summary statistics
+        PaypointLegalname:
+          type: string
+          description: Legal name of the paypoint
+        PaypointDbaname:
+          type: string
+          description: DBA name of the paypoint
+        PaypointEntryname:
+          type: string
+          description: Entry name of the paypoint
+        ParentOrgName:
+          type: string
+          description: Name of the parent organization
+        ParentOrgId:
+          type: integer
+          description: ID of the parent organization
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date when vendor was created
+        LastUpdated:
+          type: string
+          format: date-time
+          description: Date when vendor was last updated
+        remitAddress1:
+          $ref: '#/components/schemas/Remitaddress1'
+        remitAddress2:
+          $ref: '#/components/schemas/Remitaddress2'
+        remitCity:
+          $ref: '#/components/schemas/Remitcity'
+        remitState:
+          $ref: '#/components/schemas/Remitstate'
+        remitZip:
+          $ref: '#/components/schemas/Remitzip'
+        remitCountry:
+          $ref: '#/components/schemas/Remitcountry'
+        payeeName1:
+          $ref: '#/components/schemas/PayeeName'
+        payeeName2:
+          $ref: '#/components/schemas/PayeeName'
+        customField1:
+          type: string
+          description: Custom field 1 for vendor
+        customField2:
+          type: string
+          description: Custom field 2 for vendor
+        customerVendorAccount:
+          type: string
+          description: Account number of paypoint in the Vendor side.
+        InternalReferenceId:
+          $ref: '#/components/schemas/InternalReferenceId'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        externalPaypointID:
+          type: string
+          description: External paypoint identifier
+        StoredMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorResponseStoredMethod'
+          description: Array of stored payment methods for vendor
+      required:
+      - VendorNumber
+      - Name1
+      - Name2
+      - EIN
+      - Phone
+      - Email
+      - Address1
+      - Address2
+      - City
+      - State
+      - Zip
+      - Country
+      - Mcc
+      - LocationCode
+      - Contacts
+      - BillingData
+      - PaymentMethod
+      - VendorStatus
+      - VendorId
+      - Summary
+      - PaypointLegalname
+      - PaypointDbaname
+      - PaypointEntryname
+      - ParentOrgName
+      - ParentOrgId
+      - CreatedDate
+      - LastUpdated
+      - remitAddress1
+      - remitAddress2
+      - remitCity
+      - remitState
+      - remitZip
+      - remitCountry
+      - payeeName1
+      - payeeName2
+      - customField1
+      - customField2
+      - InternalReferenceId
+      - additionalData
+      - externalPaypointID
+      - StoredMethods
+      title: VendorDataResponse
+    BillItem:
+      type: object
+      properties:
+        itemCategories:
+          type: array
+          items:
+            type: string
+          description: Array of tags classifying item or product.
+        itemCommodityCode:
+          $ref: '#/components/schemas/ItemCommodityCode'
+        itemCost:
+          type: number
+          format: double
+          description: Item or product price per unit.
+        itemDescription:
+          $ref: '#/components/schemas/ItemDescription'
+        itemMode:
+          type: integer
+          description: 'Internal class of item or product: value `0` is only for invoices,
+
+            `1` for bills, and `2` is common for both. Required on invoice line
+
+            items — invoice creation fails with `Invalid item data` if it''s omitted.
+
+            '
+        itemProductCode:
+          $ref: '#/components/schemas/ItemProductCode'
+        itemProductName:
+          $ref: '#/components/schemas/ItemProductName'
+        itemQty:
+          type: integer
+          description: Quantity of item or product.
+        itemTaxAmount:
+          type: number
+          format: double
+          description: Tax amount applied to item or product.
+        itemTaxRate:
+          type: number
+          format: double
+          description: Tax rate applied to item or product.
+        itemTotalAmount:
+          type: number
+          format: double
+          description: 'Per-line total for this item (unit cost times quantity). Distinct from
+
+            the invoice''s overall total, `invoiceAmount`. Required on invoice line items.
+
+            '
+        itemUnitOfMeasure:
+          $ref: '#/components/schemas/ItemUnitofMeasure'
+      title: BillItem
+    ItemProductCode:
+      type: string
+      description: Item or product code. Max length of 250 characters.
+      title: ItemProductCode
+    PaymentIdString:
+      type: string
+      description: 'The unique transaction ID. This value is a string representation of a
+
+        long integer.
+
+        '
+      title: PaymentIdString
+    Comments:
+      type: string
+      description: Any comment or description.
+      title: Comments
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    BillEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/GeneralEvents'
+      description: Array of event objects with information related to events associated to the invoice.
+      title: BillEvents
+    ScheduleId:
+      type: integer
+      format: int64
+      description: ID of the recurring payment schedule associated with the transaction.
+      title: ScheduleId
+    Vendorstatus:
+      type: integer
+      description: 'Vendor''s status. Allowed values:
+
+
+        - `0` Inactive
+
+        - `1` Active
+
+        - `-99` Deleted
+
+        '
+      title: Vendorstatus
+    BankAccountHolderType:
+      type: string
+      enum:
+      - Personal
+      - Business
+      description: Describes whether the bank is a personal or business account.
+      title: BankAccountHolderType
+    VendorPaymentMethod:
+      type: object
+      properties:
+        method:
+          type: string
+          description: Payment method type - "managed", "vcard", "check", or "ach"
+        storedMethodId:
+          type: string
+          description: ID of the stored ACH payment method. Only applicable when method is "ach". Required when using a previously saved ACH method when the vendor has more than one saved method. See the [Payouts with saved ACH payment methods](/developers/developer-guides/pay-out-manage-payouts) section for more details.
+      required:
+      - method
+      description: 'Payment method object to use for the payout.
+
+        - `{ method: "managed" }` - Managed payment method
+
+        - `{ method: "vcard" }` - Virtual card payment method
+
+        - `{ method: "check" }` - Check payment method
+
+        - `{ method: "ach", storedMethodId?: "..." }` - ACH payment method with optional stored method ID'
+      title: VendorPaymentMethod
+    LocationCode:
+      type: string
+      description: A location code used to identify the vendor's location.
+      title: LocationCode
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
+    RoutingAccount:
+      type: string
+      description: Routing number of bank account.
+      title: RoutingAccount
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    RiskActionCode:
+      type: integer
+      description: Numeric code representing the risk action.
+      title: RiskActionCode
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    GeneralEvents:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Event description.
+        eventTime:
+          type: string
+          format: date-time
+          description: Event timestamp, in UTC.
+        extraData:
+          type:
+          - string
+          - 'null'
+          description: Extra data.
+        refData:
+          type: string
+          description: Reference data.
+        source:
+          $ref: '#/components/schemas/Source'
+          description: The event source.
+      title: GeneralEvents
+    Ein:
+      type: string
+      description: Business EIN or tax ID. This value is masked in API responses.
+      title: Ein
+    Dbaname:
+      type: string
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
+    BillingDataResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The bank's ID in Payabli.
+        accountId:
+          $ref: '#/components/schemas/AccountId'
+          description: An identifier for the bank account. If not provided during creation or update, the system generates one in the format `acct-{first_digit}xxxxx{last_4_digits}` based on the account number. If a duplicate exists within the same service at the paypoint, a numeric suffix is appended, such as `-2`. This value is also used as the identifier for the bank account's associated payment connector.
+        nickname:
+          type: string
+        bankName:
+          $ref: '#/components/schemas/BankName'
+        routingAccount:
+          $ref: '#/components/schemas/RoutingAccount'
+        accountNumber:
+          $ref: '#/components/schemas/AccountNumber'
+        typeAccount:
+          $ref: '#/components/schemas/TypeAccount'
+        bankAccountHolderName:
+          $ref: '#/components/schemas/BankAccountHolderName'
+        bankAccountHolderType:
+          $ref: '#/components/schemas/BankAccountHolderType'
+        bankAccountFunction:
+          type: integer
+          description: "Describes whether the bank account is used for deposits or withdrawals in Payabli:\n  - `0`: Deposit\n  - `1`: Withdrawal\n  - `2`: Deposit and withdrawal"
+        verified:
+          type: boolean
+        status:
+          type: integer
+        services:
+          type: array
+          items:
+            description: Any type
+        default:
+          type: boolean
+      required:
+      - id
+      - nickname
+      - bankName
+      - routingAccount
+      - accountNumber
+      - typeAccount
+      - bankAccountHolderName
+      - bankAccountHolderType
+      - bankAccountFunction
+      - verified
+      - status
+      - services
+      - default
+      title: BillingDataResponse
+    PaylinkId:
+      type: string
+      description: Identifier of payment link associated to the invoice or bill.
+      title: PaylinkId
+    VendorQueryRecord:
+      type: object
+      properties:
+        VendorNumber:
+          $ref: '#/components/schemas/VendorNumber'
+        Name1:
+          type: string
+        Name2:
+          type:
+          - string
+          - 'null'
+        EIN:
+          oneOf:
+          - $ref: '#/components/schemas/Ein'
+          - type: 'null'
+        Phone:
+          type: string
+        Email:
+          $ref: '#/components/schemas/Email'
+        RemitEmail:
+          oneOf:
+          - $ref: '#/components/schemas/RemitEmail'
+          - type: 'null'
+        Address1:
+          $ref: '#/components/schemas/AddressNullable'
+        Address2:
+          $ref: '#/components/schemas/AddressAddtlNullable'
+        City:
+          $ref: '#/components/schemas/CityNullable'
+        State:
+          $ref: '#/components/schemas/StateNullable'
+        Zip:
+          $ref: '#/components/schemas/Zip'
+        Country:
+          type: string
+        Mcc:
+          $ref: '#/components/schemas/Mcc'
+        LocationCode:
+          type: string
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactsResponse'
+          description: Array of objects describing the vendor's contacts.
+        BillingData:
+          $ref: '#/components/schemas/BillingDataResponse'
+        PaymentMethod:
+          $ref: '#/components/schemas/VendorPaymentMethodString'
+        VendorStatus:
+          $ref: '#/components/schemas/Vendorstatus'
+        VendorId:
+          $ref: '#/components/schemas/Vendorid'
+        EnrollmentStatus:
+          $ref: '#/components/schemas/EnrollmentStatus'
+        Summary:
+          $ref: '#/components/schemas/VendorSummary'
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+        PaypointId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: The paypoint's ID. This is different from the entryname.
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        ParentOrgId:
+          $ref: '#/components/schemas/OrgParentId'
+        CreatedDate:
+          $ref: '#/components/schemas/CreatedAt'
+        LastUpdated:
+          $ref: '#/components/schemas/LastModified'
+        remitAddress1:
+          $ref: '#/components/schemas/Remitaddress1'
+        remitAddress2:
+          $ref: '#/components/schemas/Remitaddress2'
+        remitCity:
+          $ref: '#/components/schemas/Remitcity'
+        remitState:
+          $ref: '#/components/schemas/Remitstate'
+        remitZip:
+          $ref: '#/components/schemas/Remitzip'
+        remitCountry:
+          $ref: '#/components/schemas/Remitcountry'
+        payeeName1:
+          $ref: '#/components/schemas/PayeeName'
+        payeeName2:
+          $ref: '#/components/schemas/PayeeName'
+        customField1:
+          type: string
+        customField2:
+          type: string
+        customerVendorAccount:
+          type: string
+        InternalReferenceId:
+          $ref: '#/components/schemas/InternalReferenceId'
+        PaymentPortalUrl:
+          type: string
+          description: URL for the vendor's online payment portal, if known. Populated by the vendor enrichment pipeline.
+        CardAccepted:
+          type: string
+          description: Whether the vendor accepts card payments. Values are `yes`, `no`, or `unable to determine`. Populated by the vendor enrichment pipeline.
+        AchAccepted:
+          type: string
+          description: Whether the vendor accepts ACH payments. Values are `yes`, `no`, or `unable to determine`. Populated by the vendor enrichment pipeline.
+        CheckAccepted:
+          type: string
+          description: Whether the vendor accepts check payments. Values are `yes`, `no`, or `unable to determine`. Populated by the vendor enrichment pipeline.
+        EnrichmentStatus:
+          type: string
+          description: Current enrichment state of the vendor. Values are `not_enriched`, `partially_enriched`, `fully_enriched`, or `fallback_applied`.
+        EnrichedBy:
+          type: string
+          description: Which enrichment method resolved the vendor's payment acceptance info. Values are `invoice_scan`, `web_search`, `vendor_network`, or `manual`.
+        EnrichedAt:
+          type: string
+          format: date-time
+          description: When the vendor was last enriched (UTC).
+        EnrichmentId:
+          type: string
+          description: Identifier for the enrichment request that last updated this vendor.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        externalPaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        StoredMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorResponseStoredMethod'
+      title: VendorQueryRecord
+    VendorNumber:
+      type: string
+      description: 'Custom number identifying the vendor. Must be unique in paypoint. Can''t be
+
+        blank.
+
+        '
+      title: VendorNumber
+    Remitzip:
+      type: string
+      description: 'Remittance address ZIP or postal code. Used for mailing paper checks.
+
+        Required if any remittance address field is provided. For US addresses,
+
+        use five digits or ZIP+4 format.
+
+        '
+      title: Remitzip
+    Signaturedata:
+      type: string
+      title: Signaturedata
+    Sequence:
+      type: string
+      description: "The order of the transaction for cardholder-initiated transaction (CIT)\nand merchant-initiated transaction (MIT) purposes. This field is\nautomatically detected and populated by Payabli.\n\nAvailable values:\n\n- `first`: The first use of the payment method. This is almost always\n  a cardholder-initiated transaction.\n- `subsequent`: For merchant-initiated transactions after the first use\n  of the payment method.\n\nSee\n[Understanding CIT and MIT Indicators](/guides/pay-in-transactions-cit-mit-overview)\nfor more information.\n"
+      title: Sequence
+    BankAccountHolderName:
+      type: string
+      description: The accountholder's name.
+      title: BankAccountHolderName
+    StoredMethodUsageType:
+      type: string
+      description: "**Strongly recommended.** The usage type for the stored method, used\nfor merchant-initiated transactions (MIT). If you don't specify a\nvalue, Payabli defaults to `unscheduled`.\n\nAvailable values:\n\n- `unscheduled`: One-time or otherwise not pre-scheduled.\n- `subscription`: Subscription payments. For example, monthly rental\n  fees or ongoing service subscriptions.\n- `recurring`: Recurring payments per a set plan. For example,\n  splitting an HOA special assessment over 6 monthly payments.\n\nSee\n[Understanding CIT and MIT Indicators](/guides/pay-in-transactions-cit-mit-overview)\nfor more information.\n"
+      title: StoredMethodUsageType
+    ContactsResponse:
+      type: object
+      properties:
+        ContactName:
+          type: string
+          description: Contact name.
+        ContactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        ContactTitle:
+          type: string
+          description: Contact title.
+        ContactPhone:
+          type: string
+          description: Contact phone number.
+      title: ContactsResponse
+    SplitFundingContent:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: The accountId for the account the split should be sent to.
+        amount:
+          type: number
+          format: double
+          description: Amount from the transaction to send to this recipient.
+        description:
+          type: string
+          description: A description for the split.
+        recipientEntryPoint:
+          type: string
+          description: The entrypoint the split should be sent to.
+      title: SplitFundingContent
+    AdditionalDataMap:
+      type: object
+      additionalProperties:
+        type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataMap
+    BillId:
+      type: integer
+      format: int64
+      description: 'The bill''s ID in Payabli. This value is automatically generated by Payabli
+
+        when the bill is created.
+
+        '
+      title: BillId
+    AdditionalData:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          description: Any type
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalData
+    BillingData:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Account number for bank account.
+        bankAccountFunction:
+          type: integer
+          description: "Describes whether the bank account is used for deposits or withdrawals in Payabli:\n  - `0`: Deposit\n  - `1`: Withdrawal\n  - `2`: Deposit and withdrawal"
+        bankAccountHolderName:
+          $ref: '#/components/schemas/BankAccountHolderName'
+        bankAccountHolderType:
+          $ref: '#/components/schemas/BankAccountHolderType'
+        bankName:
+          $ref: '#/components/schemas/BankName'
+        id:
+          type: integer
+          description: The bank's ID in Payabli.
+        routingAccount:
+          $ref: '#/components/schemas/RoutingAccount'
+        typeAccount:
+          $ref: '#/components/schemas/TypeAccount'
+      title: BillingData
+    Remitaddress2:
+      type: string
+      description: 'Remittance address additional line, such as a suite or unit number. Used
+
+        for mailing paper checks. Always optional.
+
+        '
+      title: Remitaddress2
+    Storedmethodid:
+      type: string
+      description: 'Payabli identifier of a tokenized payment method. If this field is
+
+        used in a request, the `method` field is overridden and the payment
+
+        is made using the payment token.
+
+        '
+      title: Storedmethodid
+    Accounttype:
+      type: string
+      description: Bank account type or card brand.
+      title: Accounttype
+    ModifyApprovalBillResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          type: integer
+          description: 'If `isSuccess` = true, this contains the bill identifier. If
+
+            `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: Response from approval-modification endpoints.
+      title: ModifyApprovalBillResponse
+    AccountingField:
+      type: string
+      description: Optional custom field.
+      title: AccountingField
+    GetBillResponse:
+      type: object
+      properties:
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/BillResponseData'
+      required:
+      - responseText
+      description: A successful response returns a bill object with all its details. If the bill isn't found, the response will contain an error message.
+      title: GetBillResponse
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    PayoutProgram:
+      type: string
+      description: 'The payout program associated with the transaction. Values are `Managed`
+
+        (managed payables) or `ODP` (on-demand payables).
+
+        '
+      title: PayoutProgram
+    EditBillResponse:
+      type: object
+      properties:
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        pageIdentifier:
+          oneOf:
+          - $ref: '#/components/schemas/PageIdentifier'
+          - type: 'null'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          type: integer
+          description: 'If `isSuccess` = true, this contains the bill identifier. If
+
+            `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: Response wrapper for the Update bill endpoint.
+      title: EditBillResponse
+    Frequency:
+      type: string
+      enum:
+      - onetime
+      - weekly
+      - every2weeks
+      - every6months
+      - monthly
+      - every3months
+      - annually
+      - firstofmonth
+      - fifteenthofmonth
+      - endofmonth
+      description: 'Frequency for operation. The `firstofmonth`, `fifteenthofmonth`, and `endofmonth` values are only valid on subscriptions — they aren''t accepted by other endpoints (such as invoice scheduling) that use this enum.
+
+        '
+      title: Frequency
+    Mcc:
+      type: string
+      description: 'Business Merchant Category Code (MCC).
+
+        [This resource](https://github.com/greggles/mcc-codes/blob/main/mcc_codes.csv)
+
+        lists MCC codes.
+
+        '
+      title: Mcc
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    OrgParentId:
+      type: integer
+      format: int64
+      description: The ID of the org's parent organization.
+      title: OrgParentId
+    QueryPaymentData:
+      type: object
+      properties:
+        AccountExp:
+          $ref: '#/components/schemas/Accountexp'
+        accountId:
+          $ref: '#/components/schemas/AccountId'
+        AccountType:
+          $ref: '#/components/schemas/Accounttype'
+        AccountZip:
+          $ref: '#/components/schemas/Accountzip'
+        binData:
+          $ref: '#/components/schemas/BinData'
+        HolderName:
+          $ref: '#/components/schemas/Holdername'
+        Initiator:
+          $ref: '#/components/schemas/Initiator'
+        MaskedAccount:
+          $ref: '#/components/schemas/Maskedaccount'
+        orderDescription:
+          $ref: '#/components/schemas/Orderdescription'
+        paymentDetails:
+          $ref: '#/components/schemas/PaymentDetail'
+        Sequence:
+          $ref: '#/components/schemas/Sequence'
+        SignatureData:
+          $ref: '#/components/schemas/Signaturedata'
+        StoredId:
+          $ref: '#/components/schemas/Storedmethodid'
+          description: Identifier of stored payment method used in transaction.
+        StoredMethodUsageType:
+          $ref: '#/components/schemas/StoredMethodUsageType'
+      title: QueryPaymentData
+    VendorPaymentMethodString:
+      type: string
+      description: 'The vendor''s preferred payment method. Can be one of:
+
+
+        - `managed` — Managed payment method
+
+        - `vcard` — Virtual card payment method
+
+        - `check` — Check payment method
+
+        - `ach` — ACH payment method
+
+        '
+      title: VendorPaymentMethodString
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    InvoiceNumber:
+      type: string
+      description: Invoice number. Identifies the invoice under a paypoint.
+      title: InvoiceNumber
+    ExternalPaypointId:
+      type: string
+      description: 'A custom identifier for the paypoint, if applicable.
+
+        '
+      title: ExternalPaypointId
+    Remitcity:
+      type: string
+      description: 'Remittance address city. Used for mailing paper checks. Required if any
+
+        remittance address field is provided.
+
+        '
+      title: Remitcity
+    NetAmountstring:
+      type: string
+      description: Net amount owed in bill. Required when adding a bill.
+      title: NetAmountstring
+    Remitaddress1:
+      type: string
+      description: 'Remittance street address. Used for mailing paper checks. Required if any
+
+        remittance address field is provided.
+
+        '
+      title: Remitaddress1
+    HasVcardTransactions:
+      type: boolean
+      description: 'When `true`, indicates that the paypoint has vCard transactions.
+
+        '
+      title: HasVcardTransactions
+    Gatewayfield:
+      type: string
+      description: 'The payment gateway used to process the transaction.
+
+        '
+      title: Gatewayfield
+    DocumentsRef:
+      type: object
+      properties:
+        filelist:
+          type: array
+          items:
+            $ref: '#/components/schemas/PairFiles'
+          description: Array of objects describing files contained in the ZIP file.
+        zipfile:
+          type: string
+          description: Zip file containing attachments.
+      title: DocumentsRef
+    ItemCommodityCode:
+      type: string
+      description: Item or product commodity code. Max length of 250 characters.
+      title: ItemCommodityCode
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    ItemProductName:
+      type: string
+      description: Item or product name. Max length of 250 characters.
+      title: ItemProductName
+    Attachments:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileContent'
+      description: 'Array of `fileContent` objects with attached documents. Max upload size is
+
+        30 MB.
+
+        '
+      title: Attachments
+    Accountzip:
+      type: string
+      description: ZIP code for card used in transaction.
+      title: Accountzip
+    EntityId:
+      type: integer
+      format: int64
+      description: 'The entity''s ID in Payabli. If the entity is a paypoint, this is the
+
+        paypoint ID. If the entity is an organization, this is the organization
+
+        ID.
+
+        '
+      title: EntityId
+    Contacts:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
+    Terms:
+      type: string
+      enum:
+      - PIA
+      - CIA
+      - UR
+      - NET10
+      - NET20
+      - NET30
+      - NET45
+      - NET60
+      - NET90
+      - EOM
+      - MFI
+      - 5MFI
+      - 10MFI
+      - 15MFI
+      - 20MFI
+      - 2/10NET30
+      - UF
+      - 10UF
+      - 20UF
+      - 25UF
+      - 50UF
+      description: 'Payment terms for invoice. If no terms are defined, then response data for
+
+        this field defaults to `NET30`.
+
+        '
+      title: Terms
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    ExportFormat:
+      type: string
+      enum:
+      - csv
+      - xlsx
+      description: 'Export format for file downloads. When specified, returns data as a file
+
+        instead of JSON.
+
+        '
+      title: ExportFormat
+    TransactionOutQueryRecord:
+      type: object
+      properties:
+        IdOut:
+          type: integer
+          format: int64
+          description: Identifier of payout transaction.
+        CreatedAt:
+          $ref: '#/components/schemas/CreatedAt'
+        Comments:
+          $ref: '#/components/schemas/Comments'
+          description: Any comment or description for payout transaction.
+        Vendor:
+          $ref: '#/components/schemas/VendorQueryRecord'
+          description: Vendor related to the payout transaction.
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+        Status:
+          type: integer
+          description: Internal status of transaction.
+        LastUpdated:
+          $ref: '#/components/schemas/LastModified'
+          description: Timestamp when payment record was updated, in UTC.
+        TotalAmount:
+          type: number
+          format: double
+          description: Transaction total amount (including service fee or sub-charge).
+        NetAmount:
+          $ref: '#/components/schemas/Netamountnullable'
+        FeeAmount:
+          $ref: '#/components/schemas/FeeAmount'
+        Source:
+          $ref: '#/components/schemas/Source'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        ParentOrgId:
+          $ref: '#/components/schemas/Orgid'
+        BatchNumber:
+          type: string
+          description: The batch number for the payout transaction.
+        PaymentStatus:
+          type: string
+          description: Status of payout transaction.
+        PaymentMethod:
+          type: string
+          description: Method of payment applied to the transaction.
+        CardToken:
+          type: string
+        CheckNumber:
+          type: string
+          description: Paper check number related to payout transaction.
+        CheckData:
+          $ref: '#/components/schemas/FileContent'
+          description: Object referencing to paper check image.
+        PaymentId:
+          $ref: '#/components/schemas/PaymentIdString'
+        PaymentData:
+          $ref: '#/components/schemas/QueryPaymentData'
+        Bills:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPayOutData'
+          description: Bills associated with this transaction.
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryTransactionEvents'
+          description: Events associated with this transaction.
+        externalPaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        EntryName:
+          $ref: '#/components/schemas/Entrypointfield'
+        Gateway:
+          $ref: '#/components/schemas/Gatewayfield'
+        BatchId:
+          type: string
+          description: ID of the batch the transaction belongs to.
+        HasVcardTransactions:
+          $ref: '#/components/schemas/HasVcardTransactions'
+        IsSameDayACH:
+          $ref: '#/components/schemas/IsSameDayACH'
+        ScheduleId:
+          $ref: '#/components/schemas/ScheduleId'
+        SettlementStatus:
+          $ref: '#/components/schemas/SettlementStatusPayout'
+        RiskFlagged:
+          $ref: '#/components/schemas/RiskFlagged'
+        RiskFlaggedOn:
+          $ref: '#/components/schemas/RiskFlaggedOn'
+        RiskStatus:
+          $ref: '#/components/schemas/RiskStatus'
+        RiskReason:
+          $ref: '#/components/schemas/RiskReason'
+        RiskAction:
+          $ref: '#/components/schemas/RiskAction'
+        RiskActionCode:
+          $ref: '#/components/schemas/RiskActionCode'
+        PayoutProgram:
+          $ref: '#/components/schemas/PayoutProgram'
+      title: TransactionOutQueryRecord
+    Netamountnullable:
+      type: number
+      format: double
+      description: Net amount.
+      title: Netamountnullable
+    VendorResponseSummary:
+      type: object
+      properties:
+        ActiveBills:
+          type: integer
+        PendingBills:
+          type: integer
+        InTransitBills:
+          type: integer
+        PaidBills:
+          type: integer
+        OverdueBills:
+          type: integer
+        ApprovedBills:
+          type: integer
+        DisapprovedBills:
+          type: integer
+        TotalBills:
+          type: integer
+        ActiveBillsAmount:
+          type: number
+          format: double
+        PendingBillsAmount:
+          type: number
+          format: double
+        InTransitBillsAmount:
+          type: number
+          format: double
+        PaidBillsAmount:
+          type: number
+          format: double
+        OverdueBillsAmount:
+          type: number
+          format: double
+        ApprovedBillsAmount:
+          type: number
+          format: double
+        DisapprovedBillsAmount:
+          type: number
+          format: double
+        TotalBillsAmount:
+          type: number
+          format: double
+      description: Vendor bill summary statistics
+      title: VendorResponseSummary
+    StateNullable:
+      type: string
+      description: The state or province.
+      title: StateNullable
+    VendorResponseBillingData:
+      type: object
+      properties:
+        id:
+          type: integer
+        accountId:
+          type: string
+        nickname:
+          type: string
+        bankName:
+          type: string
+        routingAccount:
+          type: string
+        accountNumber:
+          type: string
+        typeAccount:
+          type: string
+        bankAccountHolderName:
+          type: string
+        bankAccountHolderType:
+          type: string
+        bankAccountFunction:
+          type: integer
+        verified:
+          type: boolean
+        status:
+          type: integer
+        services:
+          type: array
+          items:
+            description: Any type
+        default:
+          type: boolean
+      description: Object containing vendor's bank information
+      title: VendorResponseBillingData
+    AddressNullable:
+      type: string
+      description: The address.
+      title: AddressNullable
+    PaymentCategories:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Price/cost per unit of item or category.
+        description:
+          type: string
+          description: Description of item or category
+        label:
+          type: string
+          description: Name of item or category.
+        qty:
+          type: integer
+          default: 1
+          description: Quantity of item or category
+      required:
+      - amount
+      - label
+      title: PaymentCategories
+    BillOutDataScheduledOptions:
+      type: object
+      properties:
+        storedMethodId:
+          type: string
+          description: The ID of the stored payment method to use for the bill.
+      description: Options for scheduled bills.
+      title: BillOutDataScheduledOptions
+    BillQueryResponse:
+      type: object
+      properties:
+        Summary:
+          $ref: '#/components/schemas/BillQueryResponseSummary'
+          description: Summary statistics for the bill query response.
+        Records:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillQueryRecord2'
+          description: Array of bill records returned by the query.
+      title: BillQueryResponse
+    SplitFunding:
+      type: array
+      items:
+        $ref: '#/components/schemas/SplitFundingContent'
+      description: Split funding instructions for the transaction. The total amount of the splits must match the total amount of the transaction.
+      title: SplitFunding
+    Billstatus:
+      type: integer
+      description: 'The bill''s status. Values are:
+
+
+        - `-99`: deleted or canceled
+
+        - `1`: Active
+
+        - `2`: Sent to approval
+
+        - `5`: Partially approved
+
+        - `11`: Rejected
+
+        - `20`: Approved
+
+        - `50`: Payment in transit
+
+        - `100`: Paid
+
+        '
+      title: Billstatus
+    Remitstate:
+      type: string
+      description: 'Remittance address state or province. Used for mailing paper checks.
+
+        Required if any remittance address field is provided. Must be a valid
+
+        US state or Canadian province abbreviation.
+
+        '
+      title: Remitstate
+    VendorResponseStoredMethod:
+      type: object
+      properties:
+        IdPmethod:
+          type:
+          - string
+          - 'null'
+        Method:
+          type:
+          - string
+          - 'null'
+        Descriptor:
+          type:
+          - string
+          - 'null'
+        MaskedAccount:
+          type:
+          - string
+          - 'null'
+        ExpDate:
+          type:
+          - string
+          - 'null'
+        HolderName:
+          type:
+          - string
+          - 'null'
+        AchSecCode:
+          type:
+          - string
+          - 'null'
+        AchHolderType:
+          type:
+          - string
+          - 'null'
+        IsValidatedACH:
+          type:
+          - boolean
+          - 'null'
+        BIN:
+          type:
+          - string
+          - 'null'
+        binData:
+          oneOf:
+          - $ref: '#/components/schemas/BinData'
+          - type: 'null'
+        ABA:
+          type:
+          - string
+          - 'null'
+        PostalCode:
+          type:
+          - string
+          - 'null'
+        MethodType:
+          type:
+          - string
+          - 'null'
+        WalletType:
+          type:
+          - string
+          - 'null'
+          description: Digital wallet type if applicable.
+        LastUpdated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        CardUpdatedOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date and time the card was last updated.
+      required:
+      - IdPmethod
+      - Method
+      - Descriptor
+      - MaskedAccount
+      - ExpDate
+      - HolderName
+      - AchSecCode
+      - AchHolderType
+      - IsValidatedACH
+      - BIN
+      - binData
+      - ABA
+      - PostalCode
+      - MethodType
+      - WalletType
+      - LastUpdated
+      - CardUpdatedOn
+      description: Stored payment method information
+      title: VendorResponseStoredMethod
+    QueryTransactionEventsEventData:
+      oneOf:
+      - type: object
+        additionalProperties:
+          description: Any type
+      - type: string
+      description: 'Any data associated to the event received from processor. Contents vary
+
+        by event type.
+
+        '
+      title: QueryTransactionEventsEventData
+    VendorSummary:
+      type: object
+      properties:
+        ActiveBills:
+          type: integer
+        PendingBills:
+          type: integer
+        InTransitBills:
+          type: integer
+        PaidBills:
+          type: integer
+        OverdueBills:
+          type: integer
+        ApprovedBills:
+          type: integer
+        DisapprovedBills:
+          type: integer
+        TotalBills:
+          type: integer
+        ActiveBillsAmount:
+          type: number
+          format: double
+        PendingBillsAmount:
+          type: number
+          format: double
+        InTransitBillsAmount:
+          type: number
+          format: double
+        PaidBillsAmount:
+          type: number
+          format: double
+        OverdueBillsAmount:
+          type: number
+          format: double
+        ApprovedBillsAmount:
+          type: number
+          format: double
+        DisapprovedBillsAmount:
+          type: number
+          format: double
+        TotalBillsAmount:
+          type: number
+          format: double
+      title: VendorSummary
+    Source:
+      type: string
+      description: Custom identifier to indicate the transaction or request source.
+      title: Source
+    BillApprovals:
+      type: array
+      items:
+        $ref: '#/components/schemas/BillQueryRecord2BillApprovalsItem'
+      description: Approvals associated with the bill.
+      title: BillApprovals
+    Zip:
+      type: string
+      description: ZIP code for address.
+      title: Zip
+    PairFiles:
+      type: object
+      properties:
+        originalName:
+          type: string
+          description: Original filename
+        zipName:
+          type: string
+          description: Filename assigned to zipped file. This is the name to use for reference in the API functions to get files in attachments.
+        descriptor:
+          type: string
+          description: Descriptor of the file.
+      title: PairFiles
+    RiskAction:
+      type: string
+      description: Action taken due to risk assessment.
+      title: RiskAction
+    TypeAccount:
+      type: string
+      enum:
+      - Checking
+      - Savings
+      description: 'Type of bank account: Checking or Savings.'
+      title: TypeAccount
+    BillResponse:
+      type: object
+      properties:
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        pageIdentifier:
+          oneOf:
+          - $ref: '#/components/schemas/PageIdentifier'
+          - type: 'null'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: 'If `isSuccess` = true, this contains the bill identifier. If
+
+            `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: Response wrapper for bill operations.
+      title: BillResponse
+    Totalpages:
+      type: integer
+      description: Total number of pages in response.
+      title: Totalpages
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    Orderdescription:
+      type: string
+      description: Text description of the transaction.
+      title: Orderdescription
+    RiskFlagged:
+      type: boolean
+      description: Indicates if the transaction was flagged for risk.
+      title: RiskFlagged
+    BillResponseData:
+      type: object
+      properties:
+        IdBill:
+          $ref: '#/components/schemas/BillId'
+        BillNumber:
+          type: string
+          description: Unique identifier for the bill.
+        NetAmount:
+          type: number
+          format: double
+          description: Net amount owed in bill.
+        Discount:
+          type: number
+          format: double
+          description: Bill discount amount.
+        TotalAmount:
+          type: number
+          format: double
+          description: Total amount for the bill.
+        BillDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY'
+        DueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: 'Due Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY'
+        Comments:
+          type: string
+          description: Comments associated with the bill. For managed payables, the character limit is 200. For on demand payouts, the characters limit is 250.
+        BatchNumber:
+          type: string
+          description: The batch number that the bill belongs to.
+        BillItems:
+          $ref: '#/components/schemas/Billitems'
+          description: Array of `LineItems` contained in bill.
+        Mode:
+          type: integer
+          description: 'Bill mode: value `0` for single/one-time bills, `1` for scheduled bills.'
+        PaymentMethod:
+          type: string
+          description: Payment method used for the bill.
+        PaymentId:
+          type: string
+          description: Payment ID associated with the bill.
+        AccountingField1:
+          $ref: '#/components/schemas/AccountingField'
+        AccountingField2:
+          $ref: '#/components/schemas/AccountingField'
+        Terms:
+          $ref: '#/components/schemas/Terms'
+        Source:
+          type: string
+          description: The source of the bill, such as "API" or "UI".
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+        Vendor:
+          $ref: '#/components/schemas/VendorDataResponse'
+        Status:
+          $ref: '#/components/schemas/Billstatus'
+        CreatedAt:
+          $ref: '#/components/schemas/CreatedAt'
+        EndDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: End date for scheduled bills. Applied only in `Mode` = 1.
+        LastUpdated:
+          $ref: '#/components/schemas/LastModified'
+        Frequency:
+          $ref: '#/components/schemas/Frequency'
+          description: Frequency for scheduled bills. Applied only in `Mode` = 1.
+        Transaction:
+          $ref: '#/components/schemas/TransactionOutQueryRecord'
+          description: MoneyOut transaction associated to the bill
+        billEvents:
+          $ref: '#/components/schemas/BillEvents'
+        billApprovals:
+          $ref: '#/components/schemas/BillApprovals'
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+        ParentOrgId:
+          $ref: '#/components/schemas/OrgParentId'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+        paylinkId:
+          $ref: '#/components/schemas/PaylinkId'
+        DocumentsRef:
+          $ref: '#/components/schemas/DocumentsRef'
+          description: Object with the attached documents.
+        externalPaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        LotNumber:
+          type: string
+          description: Lot number of the bill.
+        EntityID:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - BillDate
+      - DueDate
+      - EndDate
+      title: BillResponseData
+    PaymentDetail:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCategories'
+          description: 'Array of payment categories/line items describing the amount to be paid.
+
+            **Note**: These categories are for information only and aren''t validated against the total amount provided.'
+        checkImage:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Object containing image of paper check.
+        checkNumber:
+          type: string
+          description: A check number to be used in the ach transaction. **Required** for payment method = 'check'.
+        currency:
+          type: string
+          description: The currency for the transaction, `USD` or `CAD`. If your paypoint is configured for CAD, you must send the `CAD` value in this field, otherwise it defaults to USD, which will cause the transaction to fail.
+        serviceFee:
+          type: number
+          format: double
+          description: Service fee to be deducted from the total amount. This amount must be a number, percentages aren't accepted. If you are using a percentage-based fee schedule, you must calculate the value manually.
+        splitFunding:
+          $ref: '#/components/schemas/SplitFunding'
+          description: Split funding instructions for the transaction. See [Split a Transaction](/developers/developer-guides/money-in-split-funding) for more.
+        checkUniqueId:
+          type: string
+          description: Unique identifier for a processed check image. Required for RDC (Remote Deposit Capture) transactions where `achCode` is `BOC`. Use the `id` value from the [check processing](/developers/api-reference/moneyin/check-capture) response.
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount to be charged. If a service fee is sent, then this amount should include the service fee."
+      required:
+      - totalAmount
+      description: Details about the payment.
+      title: PaymentDetail
+    QueryTransactionEvents:
+      type: object
+      properties:
+        TransEvent:
+          type: string
+          description: Event descriptor. See [TransEvent Reference](/guides/pay-in-transevents-reference) for more details.
+        EventData:
+          $ref: '#/components/schemas/QueryTransactionEventsEventData'
+          description: Any data associated to the event received from processor. Contents vary by event type.
+        EventTime:
+          type: string
+          format: date-time
+          description: Date and time of event.
+      title: QueryTransactionEvents
+    BillQueryRecord2PaymentMethod:
+      type: string
+      enum:
+      - vcard
+      - ach
+      - check
+      - card
+      - managed
+      description: Preferred payment method used.
+      title: BillQueryRecord2PaymentMethod
+    AccountNumber:
+      type: string
+      description: Account number for bank account. This value is returned masked in responses.
+      title: AccountNumber
+    Legalname:
+      type: string
+      description: Business legal name.
+      title: Legalname
+    AddressAddtlNullable:
+      type: string
+      description: Additional line for the address.
+      title: AddressAddtlNullable
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

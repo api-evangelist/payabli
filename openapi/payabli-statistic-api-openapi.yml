@@ -1,0 +1,826 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill Statistic API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: Statistic
+paths:
+  /Statistic/subscriptions/{interval}/{level}/{entryId}:
+    get:
+      operationId: SubStats
+      summary: Get subscription statistics for a paypoint or organization
+      description: Retrieves the subscription statistics for a given interval for a paypoint or organization.
+      tags:
+      - Statistic
+      parameters:
+      - name: entryId
+        in: path
+        description: Identifier in Payabli for the entity.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: interval
+        in: path
+        description: 'Interval to get the data. Allowed values:
+
+
+          - `all` - all intervals
+
+          - `30` - 1-30 days
+
+          - `60` - 31-60 days
+
+          - `90` - 61-90 days
+
+          - `plus` - +90 days'
+        required: true
+        schema:
+          type: string
+      - name: level
+        in: path
+        description: "The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+        required: true
+        schema:
+          type: integer
+      - name: parameters
+        in: query
+        description: List of parameters
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatBasicQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Statistic/customerbasic/{mode}/{freq}/{customerId}:
+    get:
+      operationId: CustomerBasicStats
+      summary: Get basic statistics for a customer
+      description: Retrieves the basic statistics for a customer for a specific time period, grouped by a selected frequency.
+      tags:
+      - Statistic
+      parameters:
+      - name: customerId
+        in: path
+        description: Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
+        required: true
+        schema:
+          type: integer
+      - name: freq
+        in: path
+        description: 'Frequency to group series. Allowed values:
+
+
+          - `m` - monthly
+
+          - `w` - weekly
+
+          - `d` - daily
+
+          - `h` - hourly
+
+
+          For example, `w` groups the results by week.'
+        required: true
+        schema:
+          type: string
+      - name: mode
+        in: path
+        description: 'Mode for request. Allowed values:
+
+
+          - `ytd` - Year To Date
+
+          - `mtd` - Month To Date
+
+          - `wtd` - Week To Date
+
+          - `today` - All current day
+
+          - `m12` - Last 12 months
+
+          - `d30` - Last 30 days
+
+          - `h24` - Last 24 hours
+
+          - `lasty` - Last Year
+
+          - `lastm` - Last Month
+
+          - `lastw` - Last Week
+
+          - `yesterday` - Last Day'
+        required: true
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        description: List of parameters.
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubscriptionStatsQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Statistic/vendorbasic/{mode}/{freq}/{idVendor}:
+    get:
+      operationId: VendorBasicStats
+      summary: Get basic statistics for a vendor
+      description: Retrieve the basic statistics about a vendor for a given time period, grouped by frequency.
+      tags:
+      - Statistic
+      parameters:
+      - name: freq
+        in: path
+        description: 'Frequency to group series. Allowed values:
+
+
+          - `m` - monthly
+
+          - `w` - weekly
+
+          - `d` - daily
+
+          - `h` - hourly
+
+
+          For example, `w` groups the results by week.'
+        required: true
+        schema:
+          type: string
+      - name: idVendor
+        in: path
+        description: Vendor ID.
+        required: true
+        schema:
+          type: integer
+      - name: mode
+        in: path
+        description: 'Mode for request. Allowed values:
+
+
+          - `ytd` - Year To Date
+
+          - `mtd` - Month To Date
+
+          - `wtd` - Week To Date
+
+          - `today` - All current day
+
+          - `m12` - Last 12 months
+
+          - `d30` - Last 30 days
+
+          - `h24` - Last 24 hours
+
+          - `lasty` - Last Year
+
+          - `lastm` - Last Month
+
+          - `lastw` - Last Week
+
+          - `yesterday` - Last Day'
+        required: true
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        description: List of parameters
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatisticsVendorQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+  /Statistic/basic/{mode}/{freq}/{level}/{entryId}:
+    get:
+      operationId: BasicStats
+      summary: Get Basic statistics for a paypoint or organization
+      description: Retrieves the basic statistics for an organization or a paypoint, for a given time period, grouped by a particular frequency.
+      tags:
+      - Statistic
+      parameters:
+      - name: entryId
+        in: path
+        description: Identifier in Payabli for the entity.
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: freq
+        in: path
+        description: 'Frequency to group series. Allowed values:
+
+
+          - `m` - monthly
+
+          - `w` - weekly
+
+          - `d` - daily
+
+          - `h` - hourly
+
+
+          For example, `w` groups the results by week.'
+        required: true
+        schema:
+          type: string
+      - name: level
+        in: path
+        description: "The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+        required: true
+        schema:
+          type: integer
+      - name: mode
+        in: path
+        description: 'Mode for the request. Allowed values:
+
+
+          - `custom` - Allows you to set a custom date range
+
+          - `ytd` - Year To Date
+
+          - `mtd` - Month To Date
+
+          - `wtd` - Week To Date
+
+          - `today` - All current day
+
+          - `m12` - Last 12 months
+
+          - `d30` - Last 30 days
+
+          - `h24` - Last 24 hours
+
+          - `lasty` - Last Year
+
+          - `lastm` - Last Month
+
+          - `lastw` - Last Week
+
+          - `yesterday` - Last Day'
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: "Used with `custom` mode. The end date for the range.\nValid formats:\n  - YYYY-mm-dd\n  - YYYY/mm/dd\n  - mm-dd-YYYY\n  - mm/dd/YYYY"
+        required: false
+        schema:
+          type: string
+      - name: parameters
+        in: query
+        description: List of parameters.
+        required: false
+        schema:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      - name: startDate
+        in: query
+        description: "Used with `custom` mode. The start date for the range.\nValid formats:\n   - YYYY-mm-dd\n   - YYYY/mm/dd\n   -  mm-dd-YYYY\n   - mm/dd/YYYY"
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatBasicExtendedQueryRecord'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+components:
+  schemas:
+    StatBasicQueryRecord:
+      type: object
+      properties:
+        statX:
+          type: string
+          description: Statistical grouping identifier
+        inTransactions:
+          type: integer
+          description: Number of incoming transactions
+        inTransactionsVolume:
+          type: number
+          format: double
+          description: Volume of incoming transactions
+        inWalletTransactions:
+          type: integer
+          description: Number of incoming wallet transactions
+        inWalletVolume:
+          type: number
+          format: double
+          description: Volume of incoming wallet transactions
+      required:
+      - statX
+      - inTransactions
+      - inTransactionsVolume
+      - inWalletTransactions
+      - inWalletVolume
+      title: StatBasicQueryRecord
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    StatBasicExtendedQueryRecord:
+      type: object
+      properties:
+        statX:
+          type: string
+          description: The time window based on the mode and frequency used for the query.
+        outCustomers:
+          type: integer
+          description: Number of active vendors.
+        outNewCustomers:
+          type: integer
+          description: Number of new vendors.
+        outTransactions:
+          type: integer
+          description: Outbound (payout) transactions count.
+        outSubscriptionsPaid:
+          type: integer
+          description: Recurring outbound (payout) transactions count.
+        outCardTransactions:
+          type: integer
+          description: Outbound (payout) pCard transactions count.
+        outVCardTransactions:
+          type: integer
+          description: Outbound (payout) vCard transactions count.
+        outACHTransactions:
+          type: integer
+          description: Outbound (payout) ACH transactions count.
+        outCheckTransactions:
+          type: integer
+          description: Outbound (payout) check transactions count.
+        outPendingMethodTransactions:
+          type: integer
+          description: Outbound (payout) Managed Payables transactions count.
+        outRTPTransactions:
+          type: integer
+          description: Outbound (payout) RTP transactions count.
+        outRTPVolume:
+          type: number
+          format: double
+          description: Outbound (payout) RTP transactions volume.
+        outWireTransactions:
+          type: integer
+          description: Outbound (payout) wire transactions count.
+        outWireVolume:
+          type: number
+          format: double
+          description: Outbound (payout) wire transactions volume.
+        outTransactionsVolume:
+          type: number
+          format: double
+          description: Outbound (payout) volume.
+        outSubscriptionsPaidVolume:
+          type: number
+          format: double
+          description: Recurring outbound (payout) volume.
+        outCardVolume:
+          type: number
+          format: double
+          description: Outbound (payout) pCard transactions volume.
+        outVCardVolume:
+          type: number
+          format: double
+          description: Outbound (payout) vCard transactions volume.
+        outACHVolume:
+          type: number
+          format: double
+          description: Outbound (payout) ACH transactions volume.
+        outCheckVolume:
+          type: number
+          format: double
+          description: Outbound (payout) check transactions volume.
+        outPendingMethodVolume:
+          type: number
+          format: double
+          description: Outbound (payout) Managed Payables volume.
+        inTransactions:
+          type: integer
+          description: Inbound transactions count.
+        inSubscriptionsPaid:
+          type: integer
+          description: Inbound recurring transactions count.
+        inCustomers:
+          type: integer
+          description: Number of active customers.
+        inNewCustomers:
+          type: integer
+          description: Number of new customers.
+        inCardTransactions:
+          type: integer
+          description: Inbound card transactions count.
+        inACHTransactions:
+          type: integer
+          description: Inbound ACH transactions count.
+        inCheckTransactions:
+          type: integer
+          description: Inbound check transactions count.
+        inCashTransactions:
+          type: integer
+          description: Inbound cash transactions count.
+        inWalletTransactions:
+          type: integer
+          description: Inbound wallet transactions count.
+        inCardChargeBacks:
+          type: integer
+          description: Inbound card chargebacks and returns count.
+        inACHReturns:
+          type: integer
+          description: Inbound ACH returns count.
+        inTransactionsVolume:
+          type: number
+          format: double
+          description: Inbound volume.
+        inSubscriptionsPaidVolume:
+          type: number
+          format: double
+          description: Inbound recurring payments volume.
+        inCardVolume:
+          type: number
+          format: double
+          description: Inbound card volume.
+        inACHVolume:
+          type: number
+          format: double
+          description: Inbound ACH volume.
+        inCheckVolume:
+          type: number
+          format: double
+          description: Inbound check volume.
+        inCashVolume:
+          type: number
+          format: double
+          description: Inbound cash volume recognized.
+        inWalletVolume:
+          type: number
+          format: double
+          description: Inbound wallet transactions volume.
+        inCardChargeBackVolume:
+          type: number
+          format: double
+          description: Inbound Card chargebacks and returns volume.
+        inACHReturnsVolume:
+          type: number
+          format: double
+          description: Inbound ACH returns volume.
+      required:
+      - statX
+      - outCustomers
+      - outNewCustomers
+      - outTransactions
+      - outSubscriptionsPaid
+      - outCardTransactions
+      - outVCardTransactions
+      - outACHTransactions
+      - outCheckTransactions
+      - outPendingMethodTransactions
+      - outRTPTransactions
+      - outRTPVolume
+      - outWireTransactions
+      - outWireVolume
+      - outTransactionsVolume
+      - outSubscriptionsPaidVolume
+      - outCardVolume
+      - outVCardVolume
+      - outACHVolume
+      - outCheckVolume
+      - outPendingMethodVolume
+      - inTransactions
+      - inSubscriptionsPaid
+      - inCustomers
+      - inNewCustomers
+      - inCardTransactions
+      - inACHTransactions
+      - inCheckTransactions
+      - inCashTransactions
+      - inWalletTransactions
+      - inCardChargeBacks
+      - inACHReturns
+      - inTransactionsVolume
+      - inSubscriptionsPaidVolume
+      - inCardVolume
+      - inACHVolume
+      - inCheckVolume
+      - inCashVolume
+      - inWalletVolume
+      - inCardChargeBackVolume
+      - inACHReturnsVolume
+      title: StatBasicExtendedQueryRecord
+    SubscriptionStatsQueryRecord:
+      type: object
+      properties:
+        interval:
+          type: string
+          description: Time interval identifier
+        count:
+          type: integer
+          description: Number of subscriptions
+        volume:
+          type: number
+          format: double
+          description: Subscription volume
+      required:
+      - interval
+      - count
+      - volume
+      title: SubscriptionStatsQueryRecord
+    StatisticsVendorQueryRecord:
+      type: object
+      properties:
+        statX:
+          type: string
+          description: Statistical grouping identifier
+        active:
+          type: integer
+          description: Number of active transactions
+        activeVolume:
+          type: number
+          format: double
+          description: Volume of active transactions
+        sentToApproval:
+          type: integer
+          description: Number of transactions sent to approval
+        sentToApprovalVolume:
+          type: number
+          format: double
+          description: Volume of transactions sent to approval
+        toApproval:
+          type: integer
+          description: Number of transactions to approval
+        toApprovalVolume:
+          type: number
+          format: double
+          description: Volume of transactions to approval
+        approved:
+          type: integer
+          description: Number of approved transactions
+        approvedVolume:
+          type: number
+          format: double
+          description: Volume of approved transactions
+        disapproved:
+          type: integer
+          description: Number of disapproved transactions
+        disapprovedVolume:
+          type: number
+          format: double
+          description: Volume of disapproved transactions
+        cancelled:
+          type: integer
+          description: Number of cancelled transactions
+        cancelledVolume:
+          type: number
+          format: double
+          description: Volume of cancelled transactions
+        inTransit:
+          type: integer
+          description: Number of transactions in transit
+        inTransitVolume:
+          type: number
+          format: double
+          description: Volume of transactions in transit
+        paid:
+          type: integer
+          description: Number of paid transactions
+        paidVolume:
+          type: number
+          format: double
+          description: Volume of paid transactions
+      required:
+      - statX
+      - active
+      - activeVolume
+      - sentToApproval
+      - sentToApprovalVolume
+      - toApproval
+      - toApprovalVolume
+      - approved
+      - approvedVolume
+      - disapproved
+      - disapprovedVolume
+      - cancelled
+      - cancelledVolume
+      - inTransit
+      - inTransitVolume
+      - paid
+      - paidVolume
+      title: StatisticsVendorQueryRecord
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '

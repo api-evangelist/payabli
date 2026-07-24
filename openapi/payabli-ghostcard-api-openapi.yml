@@ -1,0 +1,362 @@
+openapi: 3.1.0
+info:
+  title: API reference Bill ghostCard API
+  version: 1.0.0
+servers:
+- url: https://api-sandbox.payabli.com/api
+  description: Sandbox
+- url: https://api.payabli.com/api
+  description: Production
+tags:
+- name: ghostCard
+paths:
+  /MoneyOutCard/GhostCard/{entry}:
+    post:
+      operationId: CreateGhostCard
+      summary: Create ghost card
+      description: 'Creates a ghost card, a multi-use virtual debit card issued to a vendor for recurring or discretionary spend.
+
+
+        Unlike single-use virtual cards issued as part of a payout transaction, ghost cards aren''t tied to a specific payout. They''re issued directly to a vendor and can be reused up to a configurable number of times within the card''s spending limits.
+
+
+        Only one ghost card can exist per vendor per paypoint. To issue a new card to the same vendor, cancel the existing card first.'
+      tags:
+      - ghostCard
+      parameters:
+      - name: entry
+        in: path
+        description: The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          $ref: '#/components/schemas/Entry'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with ghost card details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGhostCardResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGhostCardRequestBody'
+  /MoneyOutCard/card/{entry}:
+    patch:
+      operationId: UpdateCard
+      summary: Update card status
+      description: Updates the status of a virtual card (including ghost cards) under a paypoint.
+      tags:
+      - ghostCard
+      parameters:
+      - name: entry
+        in: path
+        description: The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+        required: true
+        schema:
+          $ref: '#/components/schemas/Entry'
+      - name: Authorization
+        in: header
+        description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+          '
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliApiResponse'
+        '400':
+          description: Bad request / invalid data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+        '503':
+          description: Database connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayabliErrorBody'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCardRequestBody'
+components:
+  schemas:
+    UpdateCardRequestBody:
+      type: object
+      properties:
+        cardToken:
+          type: string
+          description: Token that uniquely identifies the card. This is the `ReferenceId` returned when the card was created.
+        status:
+          $ref: '#/components/schemas/CardStatus'
+          description: The new status to set on the card.
+      required:
+      - cardToken
+      title: UpdateCardRequestBody
+    ResultCode:
+      type: integer
+      description: 'Result code for the operation. Value `1` indicates a successful
+
+        operation, values `2` and `3` indicate errors. A value of `10` indicates
+
+        that an operation has been initiated and is pending.
+
+        '
+      title: ResultCode
+    Entry:
+      type: string
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+
+        '
+      title: Entry
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedata'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponse
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    CardStatus:
+      type: string
+      enum:
+      - Active
+      - Inactive
+      - Cancelled
+      - Expired
+      description: 'The status to set on the card. Not all transitions are valid: `Active` can change to `Inactive`, `Cancelled`, or `Expired`. `Inactive` can change to `Active`. `Expired` can change to `Active` (renews the card). `Cancelled` is terminal and can''t be changed.'
+      title: CardStatus
+    CreateGhostCardResponseData:
+      type: object
+      properties:
+        ReferenceId:
+          type: string
+          description: Card token for the ghost card. Use this value to reference the card in subsequent operations (update, cancel, etc.).
+        ResultCode:
+          $ref: '#/components/schemas/ResultCode'
+        ResultText:
+          $ref: '#/components/schemas/Resulttext'
+      title: CreateGhostCardResponseData
+    CreateGhostCardRequestBody:
+      type: object
+      properties:
+        vendorId:
+          type: integer
+          format: int64
+          description: ID of the vendor who receives the card. The vendor must belong to the paypoint and have an active status.
+        expenseLimit:
+          type: number
+          format: double
+          description: Spending limit for the card. Must be greater than `0` and can't exceed the paypoint's configured payout credit limit.
+        expirationDate:
+          type: string
+          description: Requested expiration date for the card. If not provided, defaults to 30 days from creation.
+        amount:
+          type: number
+          format: double
+          description: Initial load amount for the card.
+        maxNumberOfUses:
+          type: integer
+          description: Maximum number of times the card can be used. Ignored and set to `1` when `exactAmount` is `true`.
+        exactAmount:
+          type: boolean
+          description: When `true`, restricts the card to a single use. `maxNumberOfUses` is automatically set to `1` regardless of any other value provided.
+        expenseLimitPeriod:
+          type: string
+          description: Time period over which `expenseLimit` applies (for example, `monthly` or `weekly`).
+        billingCycle:
+          type: string
+          description: Billing cycle identifier.
+        billingCycleDay:
+          type: string
+          description: Day within the billing cycle.
+        dailyTransactionCount:
+          type: integer
+          description: Maximum number of transactions allowed per day.
+        dailyAmountLimit:
+          type: number
+          format: double
+          description: Maximum total spend allowed per day.
+        transactionAmountLimit:
+          type: integer
+          description: Maximum spend allowed per single transaction.
+        mcc:
+          type: string
+          description: Merchant Category Code to restrict where the card can be used. Must be a valid MCC if provided.
+        tcc:
+          type: string
+          description: Transaction Category Code to restrict where the card can be used. Must be a valid TCC if provided.
+        misc1:
+          type: string
+          description: Custom metadata field. Stored on the card record.
+        misc2:
+          type: string
+          description: Custom metadata field. Stored on the card record.
+      required:
+      - vendorId
+      - expenseLimit
+      - amount
+      - maxNumberOfUses
+      - exactAmount
+      - expenseLimitPeriod
+      - billingCycle
+      - billingCycleDay
+      - dailyTransactionCount
+      - dailyAmountLimit
+      - transactionAmountLimit
+      title: CreateGhostCardRequestBody
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    CreateGhostCardResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/CreateGhostCardResponseData'
+      required:
+      - responseText
+      description: Response for creating a ghost card.
+      title: CreateGhostCardResponse
+    Resulttext:
+      type: string
+      description: 'Text describing the result. If `ResultCode` = 1, will return `Approved`
+
+        or a general success message. If `ResultCode` = 2 or 3, will contain
+
+        the cause of the error or decline.
+
+        '
+      title: Resulttext
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).
+
+        '
+    APIKeyAuth:
+      type: apiKey
+      in: header
+      name: requestToken
+      description: 'Long-lived API token sent in the `requestToken` header. See [API token authentication](/developers/api-tokens).
+
+        '
