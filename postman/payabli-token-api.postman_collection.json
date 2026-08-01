@@ -1,0 +1,199 @@
+{
+  "info": {
+    "_postman_id": "5ed9adc6-ca75-40ba-86e8-1a8fb5d363ec",
+    "name": "API reference Bill Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:15.000Z",
+    "updatedAt": "2026-07-28T02:33:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5ed9adc6-ca75-40ba-86e8-1a8fb5d363ec"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "Token",
+          "item": [
+            {
+              "name": "serverside",
+              "item": [
+                {
+                  "name": "Get an access token (server-side)",
+                  "id": "74c0c4f9-5edb-4131-a351-98f8488795d1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"state\": \"<string,null>\",\n  \"permissions\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/Token/serverside",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "Token",
+                        "serverside"
+                      ]
+                    },
+                    "description": "Exchanges a client ID and client secret for a short-lived Bearer access token using the OAuth2 client-credentials flow. Designed for server-to-server use: the credentials and the returned token stay on your backend. Send the returned `access_token` in the `Authorization` header as `Bearer <access_token>` on subsequent API calls. See the [OAuth authentication guide](/developers/oauth-authentication) for the full flow."
+                  },
+                  "response": [
+                    {
+                      "id": "6e37bec1-4690-4e81-a392-5c413441129f",
+                      "name": "Access token issued.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"state\": \"<string,null>\",\n  \"permissions\": null\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/Token/serverside",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "Token",
+                            "serverside"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"token_type\": \"<string>\",\n  \"access_token\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"state\": \"<string,null>\"\n}",
+                      "createdAt": "2026-07-28T02:33:16.000Z",
+                      "updatedAt": "2026-07-28T02:33:16.000Z",
+                      "uid": "35240-6e37bec1-4690-4e81-a392-5c413441129f"
+                    },
+                    {
+                      "id": "e007d8a1-f094-48bd-9fcd-d5b9f2492b4b",
+                      "name": "Invalid or missing client credentials.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"clientId\": \"<string>\",\n  \"clientSecret\": \"<string>\",\n  \"state\": \"<string,null>\",\n  \"permissions\": null\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/Token/serverside",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "Token",
+                            "serverside"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorType\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:33:16.000Z",
+                      "updatedAt": "2026-07-28T02:33:16.000Z",
+                      "uid": "35240-e007d8a1-f094-48bd-9fcd-d5b9f2492b4b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:33:16.000Z",
+                  "updatedAt": "2026-07-28T02:33:16.000Z",
+                  "uid": "35240-74c0c4f9-5edb-4131-a351-98f8488795d1"
+                }
+              ],
+              "id": "13b95b56-9fa5-493b-b80a-74cce6ddbc65",
+              "createdAt": "2026-07-28T02:33:16.000Z",
+              "updatedAt": "2026-07-28T02:33:16.000Z",
+              "uid": "35240-13b95b56-9fa5-493b-b80a-74cce6ddbc65"
+            }
+          ],
+          "id": "20965636-606f-427e-8a81-274275e054c5",
+          "createdAt": "2026-07-28T02:33:16.000Z",
+          "updatedAt": "2026-07-28T02:33:16.000Z",
+          "uid": "35240-20965636-606f-427e-8a81-274275e054c5"
+        }
+      ],
+      "id": "494346b6-3469-43c2-ad5b-48963855fcae",
+      "createdAt": "2026-07-28T02:33:16.000Z",
+      "updatedAt": "2026-07-28T02:33:16.000Z",
+      "uid": "35240-494346b6-3469-43c2-ad5b-48963855fcae"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

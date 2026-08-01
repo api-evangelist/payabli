@@ -1,0 +1,391 @@
+{
+  "info": {
+    "_postman_id": "d6218f93-eb9c-4643-b3ee-1f52a56543e8",
+    "name": "API reference Bill Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:44.000Z",
+    "updatedAt": "2026-07-28T02:32:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d6218f93-eb9c-4643-b3ee-1f52a56543e8"
+  },
+  "item": [
+    {
+      "name": "Management",
+      "item": [
+        {
+          "name": "verifyAccountDetails",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Verify bank account details",
+                  "id": "ecc55f90-797f-4eef-a9cd-3c795eee4daa",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"accountHolderType\": \"<string>\",\n  \"holderName\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/verifyAccountDetails/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "verifyAccountDetails",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cabdc828-5fdd-4e69-9f26-34bb9e34275d",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The paypoint's entry name identifier."
+                        }
+                      ]
+                    },
+                    "description": "Verifies a bank account and returns detailed verification results from the verification network, including bank name, account status, and response codes. Unlike a pass/fail verification, this endpoint returns granular data to support decision-making and troubleshooting.\n\nWhen bank authentication is enabled for the paypoint's organization, the endpoint performs an identity verification check on the account holder. Otherwise, it performs an account existence check. When bank authentication is enabled, the `accountHolderType` and `holderName` fields are required.\n\nRequires `inboundpayments_create` or `outboundpayments_create` permission."
+                  },
+                  "response": [
+                    {
+                      "id": "1befed75-932b-46f6-9329-ad65487e1745",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"accountHolderType\": \"<string>\",\n  \"holderName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Management/verifyAccountDetails/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Management",
+                            "verifyAccountDetails",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"isValid\": \"<boolean>\",\n    \"errorMessage\": \"<string,null>\",\n    \"bankName\": \"<string,null>\",\n    \"reportedAccountType\": \"<string,null>\",\n    \"accountAddedDate\": \"<string,null>\",\n    \"accountLastUpdatedDate\": \"<string,null>\",\n    \"accountClosedDate\": \"<string,null>\",\n    \"aba\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"verificationResponse\": \"<string>\",\n    \"responseCode\": \"<string>\",\n    \"responseValue\": \"<string>\",\n    \"responseDescription\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:45.000Z",
+                      "updatedAt": "2026-07-28T02:32:45.000Z",
+                      "uid": "35240-1befed75-932b-46f6-9329-ad65487e1745"
+                    },
+                    {
+                      "id": "04a605c6-93b5-458c-a6c9-554b91730ce3",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"accountHolderType\": \"<string>\",\n  \"holderName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Management/verifyAccountDetails/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Management",
+                            "verifyAccountDetails",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:45.000Z",
+                      "updatedAt": "2026-07-28T02:32:45.000Z",
+                      "uid": "35240-04a605c6-93b5-458c-a6c9-554b91730ce3"
+                    },
+                    {
+                      "id": "5e07f064-1d63-4721-8ef5-0ae89ad566c2",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"accountHolderType\": \"<string>\",\n  \"holderName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Management/verifyAccountDetails/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Management",
+                            "verifyAccountDetails",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:45.000Z",
+                      "updatedAt": "2026-07-28T02:32:45.000Z",
+                      "uid": "35240-5e07f064-1d63-4721-8ef5-0ae89ad566c2"
+                    },
+                    {
+                      "id": "f40d254a-ca64-4332-8ef4-cd4733193dd3",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"accountHolderType\": \"<string>\",\n  \"holderName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Management/verifyAccountDetails/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Management",
+                            "verifyAccountDetails",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:45.000Z",
+                      "updatedAt": "2026-07-28T02:32:45.000Z",
+                      "uid": "35240-f40d254a-ca64-4332-8ef4-cd4733193dd3"
+                    },
+                    {
+                      "id": "7c966682-7545-4698-a933-9f6bc5ff7e85",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"accountHolderType\": \"<string>\",\n  \"holderName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Management/verifyAccountDetails/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Management",
+                            "verifyAccountDetails",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:45.000Z",
+                      "updatedAt": "2026-07-28T02:32:45.000Z",
+                      "uid": "35240-7c966682-7545-4698-a933-9f6bc5ff7e85"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:45.000Z",
+                  "updatedAt": "2026-07-28T02:32:45.000Z",
+                  "uid": "35240-ecc55f90-797f-4eef-a9cd-3c795eee4daa"
+                }
+              ],
+              "id": "5718edcb-cede-4330-a637-73b777683cc4",
+              "createdAt": "2026-07-28T02:32:45.000Z",
+              "updatedAt": "2026-07-28T02:32:45.000Z",
+              "uid": "35240-5718edcb-cede-4330-a637-73b777683cc4"
+            }
+          ],
+          "id": "a84c2d1e-c8bd-4c13-9d6c-b0fa7b5a17a2",
+          "createdAt": "2026-07-28T02:32:45.000Z",
+          "updatedAt": "2026-07-28T02:32:45.000Z",
+          "uid": "35240-a84c2d1e-c8bd-4c13-9d6c-b0fa7b5a17a2"
+        }
+      ],
+      "id": "bbc52bb4-ceb0-4e4a-a055-59a902177b86",
+      "createdAt": "2026-07-28T02:32:45.000Z",
+      "updatedAt": "2026-07-28T02:32:45.000Z",
+      "uid": "35240-bbc52bb4-ceb0-4e4a-a055-59a902177b86"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

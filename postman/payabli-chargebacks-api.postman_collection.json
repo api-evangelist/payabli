@@ -1,0 +1,1015 @@
+{
+  "info": {
+    "_postman_id": "7b06dd1d-84d4-48a6-a180-6e073a2caaff",
+    "name": "API reference Bill chargeBacks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:08.000Z",
+    "updatedAt": "2026-07-28T02:32:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7b06dd1d-84d4-48a6-a180-6e073a2caaff"
+  },
+  "item": [
+    {
+      "name": "ChargeBacks",
+      "item": [
+        {
+          "name": "read",
+          "item": [
+            {
+              "name": "{Id}",
+              "item": [
+                {
+                  "name": "Get chargeback or ACH return record",
+                  "id": "082f01ad-5392-4bac-883a-7a68cac686d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ChargeBacks/read/:Id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ChargeBacks",
+                        "read",
+                        ":Id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "23a1a9fe-f6c8-4a44-beac-3167b3554204",
+                          "key": "Id",
+                          "value": "<long>",
+                          "description": "(Required) ID of the chargeback or return record. This is returned as `chargebackID` in the [ReceivedChargeBack](/guides/pay-ops-webhooks-payloads#receivedchargeback) and [ReceivedAchReturn](/guides/pay-ops-webhooks-payloads#receivedachreturn) webhook notifications."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a chargeback record and its details."
+                  },
+                  "response": [
+                    {
+                      "id": "4016aec1-5a8f-4bed-a9ad-0466012c18df",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/read/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "read",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"Id\": \"<long>\",\n  \"ChargebackDate\": \"<dateTime>\",\n  \"CaseNumber\": \"<string>\",\n  \"ReasonCode\": \"<string>\",\n  \"Reason\": \"<string>\",\n  \"ReferenceNumber\": \"<string>\",\n  \"LastFour\": \"<string>\",\n  \"AccountType\": \"<string>\",\n  \"Status\": \"<integer>\",\n  \"Method\": \"<string>\",\n  \"CreatedAt\": \"<dateTime>\",\n  \"ReplyBy\": \"<dateTime>\",\n  \"PaymentTransId\": \"<string>\",\n  \"OrderId\": \"<string>\",\n  \"TransactionTime\": \"<dateTime>\",\n  \"Customer\": {\n    \"Identifiers\": [\n      {\n        \"description\": \"Any type\"\n      },\n      {\n        \"description\": \"Any type\"\n      }\n    ],\n    \"FirstName\": \"<string>\",\n    \"LastName\": \"<string>\",\n    \"CompanyName\": \"<string>\",\n    \"BillingAddress1\": \"<string>\",\n    \"BillingAddress2\": \"<string>\",\n    \"BillingCity\": \"<string>\",\n    \"BillingState\": \"<string>\",\n    \"BillingZip\": \"<string>\",\n    \"BillingCountry\": \"<string>\",\n    \"BillingPhone\": \"<string>\",\n    \"BillingEmail\": \"<email>\",\n    \"CustomerNumber\": \"<string>\",\n    \"ShippingAddress1\": \"<string>\",\n    \"ShippingAddress2\": \"<string>\",\n    \"ShippingCity\": \"<string>\",\n    \"ShippingState\": \"<string>\",\n    \"ShippingZip\": \"<string>\",\n    \"ShippingCountry\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerStatus\": \"<integer>\",\n    \"AdditionalData\": {\n      \"inca1\": \"<string>\",\n      \"amet0\": \"<string>\",\n      \"eu42\": \"<string>\",\n      \"magna_4\": \"<string>\"\n    }\n  },\n  \"PaymentData\": {\n    \"AccountExp\": \"<string>\",\n    \"accountId\": \"<string>\",\n    \"AccountType\": \"<string>\",\n    \"AccountZip\": \"<string>\",\n    \"binData\": {\n      \"binMatchedLength\": \"<string>\",\n      \"binCardBrand\": \"<string>\",\n      \"binCardType\": \"<string>\",\n      \"binCardCategory\": \"<string>\",\n      \"binCardIssuer\": \"<string>\",\n      \"binCardIssuerCountry\": \"<string>\",\n      \"binCardIssuerCountryCodeA2\": \"<string>\",\n      \"binCardIssuerCountryNumber\": \"<string>\",\n      \"binCardIsRegulated\": \"<string>\",\n      \"binCardUseCategory\": \"<string>\",\n      \"binCardIssuerCountryCodeA3\": \"<string>\"\n    },\n    \"HolderName\": \"<string>\",\n    \"Initiator\": \"<string>\",\n    \"MaskedAccount\": \"<string>\",\n    \"orderDescription\": \"<string>\",\n    \"paymentDetails\": {\n      \"totalAmount\": \"<double>\",\n      \"categories\": [\n        {\n          \"amount\": \"<double>\",\n          \"label\": \"<string>\",\n          \"description\": \"<string>\",\n          \"qty\": 1\n        },\n        {\n          \"amount\": \"<double>\",\n          \"label\": \"<string>\",\n          \"description\": \"<string>\",\n          \"qty\": 1\n        }\n      ],\n      \"checkImage\": {\n        \"est11\": {\n          \"description\": \"Any type\"\n        },\n        \"voluptate400\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"checkNumber\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"serviceFee\": \"<double>\",\n      \"splitFunding\": [\n        {\n          \"accountId\": \"<string>\",\n          \"amount\": \"<double>\",\n          \"description\": \"<string>\",\n          \"recipientEntryPoint\": \"<string>\"\n        },\n        {\n          \"accountId\": \"<string>\",\n          \"amount\": \"<double>\",\n          \"description\": \"<string>\",\n          \"recipientEntryPoint\": \"<string>\"\n        }\n      ],\n      \"checkUniqueId\": \"<string>\"\n    },\n    \"Sequence\": \"<string>\",\n    \"SignatureData\": \"<string>\",\n    \"StoredId\": \"<string>\",\n    \"StoredMethodUsageType\": \"<string>\"\n  },\n  \"PaypointLegalname\": \"<string>\",\n  \"PaypointDbaname\": \"<string>\",\n  \"ParentOrgName\": \"<string>\",\n  \"ParentOrgId\": \"<long>\",\n  \"PaypointEntryname\": \"<string>\",\n  \"Responses\": [\n    {\n      \"attachments\": {\n        \"filelist\": [\n          {\n            \"originalName\": \"<string>\",\n            \"zipName\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          },\n          {\n            \"originalName\": \"<string>\",\n            \"zipName\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          }\n        ],\n        \"zipfile\": \"<string>\"\n      },\n      \"contactEmail\": \"<email>\",\n      \"contactName\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"id\": \"<long>\",\n      \"notes\": \"<string>\"\n    },\n    {\n      \"attachments\": {\n        \"filelist\": [\n          {\n            \"originalName\": \"<string>\",\n            \"zipName\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          },\n          {\n            \"originalName\": \"<string>\",\n            \"zipName\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          }\n        ],\n        \"zipfile\": \"<string>\"\n      },\n      \"contactEmail\": \"<email>\",\n      \"contactName\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"id\": \"<long>\",\n      \"notes\": \"<string>\"\n    }\n  ],\n  \"Transaction\": {\n    \"splitCount\": \"<integer>\",\n    \"TransactionTime\": \"<string,null-date-time>\",\n    \"AchHolderType\": \"personal\",\n    \"AchSecCode\": \"<string>\",\n    \"BatchAmount\": \"<double>\",\n    \"BatchNumber\": \"<string>\",\n    \"CfeeTransactions\": [\n      {\n        \"cFeeTransid\": \"<string>\",\n        \"feeAmount\": \"<double>\",\n        \"operation\": \"<string>\",\n        \"refundId\": \"<long>\",\n        \"responseData\": {\n          \"quif\": {\n            \"description\": \"Any type\"\n          },\n          \"ad__23\": {\n            \"description\": \"Any type\"\n          },\n          \"laboris8__\": {\n            \"description\": \"Any type\"\n          },\n          \"velitf3f\": {\n            \"description\": \"Any type\"\n          }\n        },\n        \"settlementStatus\": \"<integer>\",\n        \"transactionTime\": \"<dateTime>\",\n        \"transStatus\": \"<integer>\"\n      },\n      {\n        \"cFeeTransid\": \"<string>\",\n        \"feeAmount\": \"<double>\",\n        \"operation\": \"<string>\",\n        \"refundId\": \"<long>\",\n        \"responseData\": {\n          \"nulla9\": {\n            \"description\": \"Any type\"\n          }\n        },\n        \"settlementStatus\": \"<integer>\",\n        \"transactionTime\": \"<dateTime>\",\n        \"transStatus\": \"<integer>\"\n      }\n    ],\n    \"ConnectorName\": \"<string>\",\n    \"Customer\": {\n      \"Identifiers\": [\n        {\n          \"description\": \"Any type\"\n        },\n        {\n          \"description\": \"Any type\"\n        }\n      ],\n      \"FirstName\": \"<string>\",\n      \"LastName\": \"<string>\",\n      \"CompanyName\": \"<string>\",\n      \"BillingAddress1\": \"<string>\",\n      \"BillingAddress2\": \"<string>\",\n      \"BillingCity\": \"<string>\",\n      \"BillingState\": \"<string>\",\n      \"BillingZip\": \"<string>\",\n      \"BillingCountry\": \"<string>\",\n      \"BillingPhone\": \"<string>\",\n      \"BillingEmail\": \"<email>\",\n      \"CustomerNumber\": \"<string>\",\n      \"ShippingAddress1\": \"<string>\",\n      \"ShippingAddress2\": \"<string>\",\n      \"ShippingCity\": \"<string>\",\n      \"ShippingState\": \"<string>\",\n      \"ShippingZip\": \"<string>\",\n      \"ShippingCountry\": \"<string>\",\n      \"customerId\": \"<long>\",\n      \"customerStatus\": \"<integer>\",\n      \"AdditionalData\": {\n        \"laboris7\": \"<string>\"\n      }\n    },\n    \"DeviceId\": \"<string>\",\n    \"EntrypageId\": \"<long>\",\n    \"ExternalProcessorInformation\": \"<string>\",\n    \"FeeAmount\": \"<double>\",\n    \"GatewayTransId\": \"<string>\",\n    \"invoiceData\": {\n      \"AdditionalData\": {\n        \"commodo_f24\": \"<string>\",\n        \"deserunt__29\": \"<string>\"\n      },\n      \"attachments\": [\n        {\n          \"fContent\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"ftype\": \"docx\",\n          \"furl\": \"<string>\"\n        },\n        {\n          \"fContent\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"ftype\": \"png\",\n          \"furl\": \"<string>\"\n        }\n      ],\n      \"company\": \"<string>\",\n      \"discount\": \"<double>\",\n      \"dutyAmount\": \"<double>\",\n      \"firstName\": \"<string>\",\n      \"freightAmount\": \"<double>\",\n      \"frequency\": \"annually\",\n      \"invoiceAmount\": \"<double>\",\n      \"invoiceDate\": \"<date>\",\n      \"invoiceDueDate\": \"<date>\",\n      \"invoiceEndDate\": \"<date>\",\n      \"invoiceNumber\": \"<string>\",\n      \"invoiceStatus\": \"<integer>\",\n      \"invoiceType\": \"<integer>\",\n      \"items\": [\n        {\n          \"itemCategories\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"itemCommodityCode\": \"<string>\",\n          \"itemCost\": \"<double>\",\n          \"itemDescription\": \"<string>\",\n          \"itemMode\": \"<integer>\",\n          \"itemProductCode\": \"<string>\",\n          \"itemProductName\": \"<string>\",\n          \"itemQty\": \"<integer>\",\n          \"itemTaxAmount\": \"<double>\",\n          \"itemTaxRate\": \"<double>\",\n          \"itemTotalAmount\": \"<double>\",\n          \"itemUnitOfMeasure\": \"<string>\"\n        },\n        {\n          \"itemCategories\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"itemCommodityCode\": \"<string>\",\n          \"itemCost\": \"<double>\",\n          \"itemDescription\": \"<string>\",\n          \"itemMode\": \"<integer>\",\n          \"itemProductCode\": \"<string>\",\n          \"itemProductName\": \"<string>\",\n          \"itemQty\": \"<integer>\",\n          \"itemTaxAmount\": \"<double>\",\n          \"itemTaxRate\": \"<double>\",\n          \"itemTotalAmount\": \"<double>\",\n          \"itemUnitOfMeasure\": \"<string>\"\n        }\n      ],\n      \"lastName\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"paymentTerms\": \"NET30\",\n      \"purchaseOrder\": \"<string>\",\n      \"shippingAddress1\": \"<string>\",\n      \"shippingAddress2\": \"<string>\",\n      \"shippingCity\": \"<string>\",\n      \"shippingCountry\": \"<string>\",\n      \"shippingEmail\": \"<email>\",\n      \"shippingFromZip\": \"<string>\",\n      \"shippingPhone\": \"<string>\",\n      \"shippingState\": \"<string>\",\n      \"shippingZip\": \"<string>\",\n      \"summaryCommodityCode\": \"<string>\",\n      \"tax\": \"<double>\",\n      \"termsConditions\": \"<string>\"\n    },\n    \"Method\": \"<string>\",\n    \"NetAmount\": \"<double>\",\n    \"Operation\": \"<string>\",\n    \"OrderId\": \"<string>\",\n    \"OrgId\": \"<long>\",\n    \"ParentOrgName\": \"<string>\",\n    \"PaymentData\": {\n      \"AccountExp\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"AccountType\": \"<string>\",\n      \"AccountZip\": \"<string>\",\n      \"binData\": {\n        \"binMatchedLength\": \"<string>\",\n        \"binCardBrand\": \"<string>\",\n        \"binCardType\": \"<string>\",\n        \"binCardCategory\": \"<string>\",\n        \"binCardIssuer\": \"<string>\",\n        \"binCardIssuerCountry\": \"<string>\",\n        \"binCardIssuerCountryCodeA2\": \"<string>\",\n        \"binCardIssuerCountryNumber\": \"<string>\",\n        \"binCardIsRegulated\": \"<string>\",\n        \"binCardUseCategory\": \"<string>\",\n        \"binCardIssuerCountryCodeA3\": \"<string>\"\n      },\n      \"HolderName\": \"<string>\",\n      \"Initiator\": \"<string>\",\n      \"MaskedAccount\": \"<string>\",\n      \"orderDescription\": \"<string>\",\n      \"paymentDetails\": {\n        \"totalAmount\": \"<double>\",\n        \"categories\": [\n          {\n            \"amount\": \"<double>\",\n            \"label\": \"<string>\",\n            \"description\": \"<string>\",\n            \"qty\": 1\n          },\n          {\n            \"amount\": \"<double>\",\n            \"label\": \"<string>\",\n            \"description\": \"<string>\",\n            \"qty\": 1\n          }\n        ],\n        \"checkImage\": {\n          \"laboris26_\": {\n            \"description\": \"Any type\"\n          },\n          \"dolore81\": {\n            \"description\": \"Any type\"\n          }\n        },\n        \"checkNumber\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"serviceFee\": \"<double>\",\n        \"splitFunding\": [\n          {\n            \"accountId\": \"<string>\",\n            \"amount\": \"<double>\",\n            \"description\": \"<string>\",\n            \"recipientEntryPoint\": \"<string>\"\n          },\n          {\n            \"accountId\": \"<string>\",\n            \"amount\": \"<double>\",\n            \"description\": \"<string>\",\n            \"recipientEntryPoint\": \"<string>\"\n          }\n        ],\n        \"checkUniqueId\": \"<string>\"\n      },\n      \"Sequence\": \"<string>\",\n      \"SignatureData\": \"<string>\",\n      \"StoredId\": \"<string>\",\n      \"StoredMethodUsageType\": \"<string>\"\n    },\n    \"PaymentTransId\": \"<string>\",\n    \"PayorId\": \"<long>\",\n    \"PaypointDbaname\": \"<string>\",\n    \"PaypointEntryname\": \"<string>\",\n    \"PaypointId\": \"<long>\",\n    \"PaypointLegalname\": \"<string>\",\n    \"PendingFeeAmount\": \"<double>\",\n    \"RefundId\": \"<long>\",\n    \"ResponseData\": {\n      \"authcode\": \"<string>\",\n      \"avsresponse\": \"<string>\",\n      \"avsresponse_text\": \"<string>\",\n      \"cvvresponse\": \"<string>\",\n      \"cvvresponse_text\": \"<string>\",\n      \"emv_auth_response_data\": \"<string>\",\n      \"orderid\": \"<string>\",\n      \"response\": \"<string>\",\n      \"response_code\": \"<string>\",\n      \"response_code_text\": \"<string>\",\n      \"responsetext\": \"<string>\",\n      \"resultCode\": \"<string>\",\n      \"resultCodeText\": \"<string>\",\n      \"transactionid\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"ReturnedId\": \"<long>\",\n    \"ScheduleReference\": \"<long>\",\n    \"SettlementStatus\": \"<integer>\",\n    \"Source\": \"<string>\",\n    \"splitFundingInstructions\": [\n      {\n        \"accountId\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"description\": \"<string>\",\n        \"recipientEntryPoint\": \"<string>\"\n      },\n      {\n        \"accountId\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"description\": \"<string>\",\n        \"recipientEntryPoint\": \"<string>\"\n      }\n    ],\n    \"TotalAmount\": \"<double>\",\n    \"TransactionEvents\": [\n      {\n        \"TransEvent\": \"<string>\",\n        \"EventData\": {\n          \"laborisec8\": {\n            \"description\": \"Any type\"\n          },\n          \"id_0a\": {\n            \"description\": \"Any type\"\n          }\n        },\n        \"EventTime\": \"<dateTime>\"\n      },\n      {\n        \"TransEvent\": \"<string>\",\n        \"EventData\": {\n          \"esse02a\": {\n            \"description\": \"Any type\"\n          },\n          \"elit_7d\": {\n            \"description\": \"Any type\"\n          },\n          \"ipsum_f\": {\n            \"description\": \"Any type\"\n          },\n          \"ex_75\": {\n            \"description\": \"Any type\"\n          }\n        },\n        \"EventTime\": \"<dateTime>\"\n      }\n    ],\n    \"TransAdditionalData\": {\n      \"description\": \"Any type\"\n    },\n    \"TransStatus\": \"<integer>\"\n  },\n  \"messages\": [\n    {\n      \"Id\": \"<integer>\",\n      \"RoomId\": \"<integer>\",\n      \"UserId\": \"<integer>\",\n      \"UserName\": \"<string>\",\n      \"Content\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"MessageType\": \"<integer>\",\n      \"MessageProperties\": {\n        \"consequat_f5\": \"<string>\"\n      }\n    },\n    {\n      \"Id\": \"<integer>\",\n      \"RoomId\": \"<integer>\",\n      \"UserId\": \"<integer>\",\n      \"UserName\": \"<string>\",\n      \"Content\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"MessageType\": \"<integer>\",\n      \"MessageProperties\": {\n        \"consectetura1d\": \"<string>\"\n      }\n    }\n  ],\n  \"ServiceGroup\": \"<string>\",\n  \"DisputeType\": \"<string>\",\n  \"ProcessorName\": \"<string>\",\n  \"ScheduleReference\": \"<long>\",\n  \"NetAmount\": \"<double>\",\n  \"externalPaypointID\": \"<string>\",\n  \"pageidentifier\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-4016aec1-5a8f-4bed-a9ad-0466012c18df"
+                    },
+                    {
+                      "id": "a8f865d2-ff63-4a93-b5f7-54b3b6d28d46",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/read/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "read",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-a8f865d2-ff63-4a93-b5f7-54b3b6d28d46"
+                    },
+                    {
+                      "id": "4e2b5b2e-890c-47e5-a87b-338b77c195e3",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/read/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "read",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-4e2b5b2e-890c-47e5-a87b-338b77c195e3"
+                    },
+                    {
+                      "id": "27d7f57c-67d3-43ca-b968-19df3e640c29",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/read/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "read",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-27d7f57c-67d3-43ca-b968-19df3e640c29"
+                    },
+                    {
+                      "id": "64198008-fb6a-4fe3-811d-c827b81a83b8",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/read/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "read",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-64198008-fb6a-4fe3-811d-c827b81a83b8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:08.000Z",
+                  "updatedAt": "2026-07-28T02:32:08.000Z",
+                  "uid": "35240-082f01ad-5392-4bac-883a-7a68cac686d0"
+                }
+              ],
+              "id": "88fbfb45-0d63-499a-8fb8-5f0076a2a1e0",
+              "createdAt": "2026-07-28T02:32:08.000Z",
+              "updatedAt": "2026-07-28T02:32:08.000Z",
+              "uid": "35240-88fbfb45-0d63-499a-8fb8-5f0076a2a1e0"
+            }
+          ],
+          "id": "c161f144-cb96-42b1-b21f-f33d80ee765d",
+          "createdAt": "2026-07-28T02:32:08.000Z",
+          "updatedAt": "2026-07-28T02:32:08.000Z",
+          "uid": "35240-c161f144-cb96-42b1-b21f-f33d80ee765d"
+        },
+        {
+          "name": "response",
+          "item": [
+            {
+              "name": "{Id}",
+              "item": [
+                {
+                  "name": "Add response to chargeback or return",
+                  "id": "fad6dbec-3ce5-4023-aaef-c78e12373547",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attachments\": [\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"doc\",\n      \"furl\": \"<string>\"\n    },\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"txt\",\n      \"furl\": \"<string>\"\n    }\n  ],\n  \"contactEmail\": \"<email>\",\n  \"contactName\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ChargeBacks/response/:Id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ChargeBacks",
+                        "response",
+                        ":Id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a12f0110-7617-488b-aaac-3b789cf2184f",
+                          "key": "Id",
+                          "value": "<long>",
+                          "description": "(Required) ID of the chargeback or return record."
+                        }
+                      ]
+                    },
+                    "description": "Add a response to a chargeback or ACH return."
+                  },
+                  "response": [
+                    {
+                      "id": "6ae4943d-b5e1-4c00-af72-0fb676314d5d",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attachments\": [\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"doc\",\n      \"furl\": \"<string>\"\n    },\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"txt\",\n      \"furl\": \"<string>\"\n    }\n  ],\n  \"contactEmail\": \"<email>\",\n  \"contactName\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/response/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "response",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-6ae4943d-b5e1-4c00-af72-0fb676314d5d"
+                    },
+                    {
+                      "id": "a2f9e2a5-35fd-4158-b1e4-458fcec2b0b5",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attachments\": [\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"doc\",\n      \"furl\": \"<string>\"\n    },\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"txt\",\n      \"furl\": \"<string>\"\n    }\n  ],\n  \"contactEmail\": \"<email>\",\n  \"contactName\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/response/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "response",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-a2f9e2a5-35fd-4158-b1e4-458fcec2b0b5"
+                    },
+                    {
+                      "id": "7cc403e1-0de5-4e52-aa45-2f2f758792e2",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attachments\": [\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"doc\",\n      \"furl\": \"<string>\"\n    },\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"txt\",\n      \"furl\": \"<string>\"\n    }\n  ],\n  \"contactEmail\": \"<email>\",\n  \"contactName\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/response/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "response",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-7cc403e1-0de5-4e52-aa45-2f2f758792e2"
+                    },
+                    {
+                      "id": "3ec9b38a-3675-4278-9f51-3f304e5aff8d",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attachments\": [\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"doc\",\n      \"furl\": \"<string>\"\n    },\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"txt\",\n      \"furl\": \"<string>\"\n    }\n  ],\n  \"contactEmail\": \"<email>\",\n  \"contactName\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/response/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "response",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-3ec9b38a-3675-4278-9f51-3f304e5aff8d"
+                    },
+                    {
+                      "id": "f953fabe-6a81-4597-aad2-68da7c22e91e",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attachments\": [\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"doc\",\n      \"furl\": \"<string>\"\n    },\n    {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"txt\",\n      \"furl\": \"<string>\"\n    }\n  ],\n  \"contactEmail\": \"<email>\",\n  \"contactName\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/response/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "response",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-f953fabe-6a81-4597-aad2-68da7c22e91e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:08.000Z",
+                  "updatedAt": "2026-07-28T02:32:08.000Z",
+                  "uid": "35240-fad6dbec-3ce5-4023-aaef-c78e12373547"
+                }
+              ],
+              "id": "a48748fa-57a1-4ef7-ae53-39cc16d29ae5",
+              "createdAt": "2026-07-28T02:32:08.000Z",
+              "updatedAt": "2026-07-28T02:32:08.000Z",
+              "uid": "35240-a48748fa-57a1-4ef7-ae53-39cc16d29ae5"
+            }
+          ],
+          "id": "060d09c6-ad59-49a8-9eac-7fc0812afe57",
+          "createdAt": "2026-07-28T02:32:08.000Z",
+          "updatedAt": "2026-07-28T02:32:08.000Z",
+          "uid": "35240-060d09c6-ad59-49a8-9eac-7fc0812afe57"
+        },
+        {
+          "name": "getChargebackAttachments",
+          "item": [
+            {
+              "name": "{Id}",
+              "item": [
+                {
+                  "name": "{fileName}",
+                  "item": [
+                    {
+                      "name": "Get ChargeBack attachment by fileName",
+                      "id": "e57a08f6-3cfa-4cb0-9731-83e6cb50079d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ChargeBacks/getChargebackAttachments/:Id/:fileName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ChargeBacks",
+                            "getChargebackAttachments",
+                            ":Id",
+                            ":fileName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "65cc669a-dd1b-4a53-b2f5-b0ee7709223d",
+                              "key": "Id",
+                              "value": "<long>",
+                              "description": "(Required) The ID of chargeback or return record."
+                            },
+                            {
+                              "id": "3ea23308-2f5f-4435-b991-da58b57f3385",
+                              "key": "fileName",
+                              "value": "<string>",
+                              "description": "(Required) The chargeback attachment's file name."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a chargeback attachment file by its file name."
+                      },
+                      "response": [
+                        {
+                          "id": "90fd2757-b524-4675-b9ef-2ed81b69e0c4",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ChargeBacks/getChargebackAttachments/:Id/:fileName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ChargeBacks",
+                                "getChargebackAttachments",
+                                ":Id",
+                                ":fileName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "Id"
+                                },
+                                {
+                                  "key": "fileName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T02:32:08.000Z",
+                          "updatedAt": "2026-07-28T02:32:08.000Z",
+                          "uid": "35240-90fd2757-b524-4675-b9ef-2ed81b69e0c4"
+                        },
+                        {
+                          "id": "d64a6468-ed12-4c7e-a25b-5288aaa37b98",
+                          "name": "Bad request / invalid data.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ChargeBacks/getChargebackAttachments/:Id/:fileName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ChargeBacks",
+                                "getChargebackAttachments",
+                                ":Id",
+                                ":fileName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "Id"
+                                },
+                                {
+                                  "key": "fileName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:08.000Z",
+                          "updatedAt": "2026-07-28T02:32:08.000Z",
+                          "uid": "35240-d64a6468-ed12-4c7e-a25b-5288aaa37b98"
+                        },
+                        {
+                          "id": "48b749ff-a7af-488a-bff3-36f090e31dfa",
+                          "name": "Unauthorized request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ChargeBacks/getChargebackAttachments/:Id/:fileName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ChargeBacks",
+                                "getChargebackAttachments",
+                                ":Id",
+                                ":fileName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "Id"
+                                },
+                                {
+                                  "key": "fileName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:08.000Z",
+                          "updatedAt": "2026-07-28T02:32:08.000Z",
+                          "uid": "35240-48b749ff-a7af-488a-bff3-36f090e31dfa"
+                        },
+                        {
+                          "id": "48050465-12cc-4274-ab3c-efaf13ac8d28",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ChargeBacks/getChargebackAttachments/:Id/:fileName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ChargeBacks",
+                                "getChargebackAttachments",
+                                ":Id",
+                                ":fileName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "Id"
+                                },
+                                {
+                                  "key": "fileName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:08.000Z",
+                          "updatedAt": "2026-07-28T02:32:08.000Z",
+                          "uid": "35240-48050465-12cc-4274-ab3c-efaf13ac8d28"
+                        },
+                        {
+                          "id": "8507ef3e-d941-4418-b773-1256af978350",
+                          "name": "Database connection error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ChargeBacks/getChargebackAttachments/:Id/:fileName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ChargeBacks",
+                                "getChargebackAttachments",
+                                ":Id",
+                                ":fileName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "Id"
+                                },
+                                {
+                                  "key": "fileName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:08.000Z",
+                          "updatedAt": "2026-07-28T02:32:08.000Z",
+                          "uid": "35240-8507ef3e-d941-4418-b773-1256af978350"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:32:08.000Z",
+                      "updatedAt": "2026-07-28T02:32:08.000Z",
+                      "uid": "35240-e57a08f6-3cfa-4cb0-9731-83e6cb50079d"
+                    }
+                  ],
+                  "id": "6676a299-ee10-4f12-9ba9-c4d716a3d782",
+                  "createdAt": "2026-07-28T02:32:08.000Z",
+                  "updatedAt": "2026-07-28T02:32:08.000Z",
+                  "uid": "35240-6676a299-ee10-4f12-9ba9-c4d716a3d782"
+                }
+              ],
+              "id": "d5b3997b-507c-483c-9b9f-5899e9419022",
+              "createdAt": "2026-07-28T02:32:08.000Z",
+              "updatedAt": "2026-07-28T02:32:08.000Z",
+              "uid": "35240-d5b3997b-507c-483c-9b9f-5899e9419022"
+            }
+          ],
+          "id": "8afe4953-9ae3-4cbe-925f-21238b08accf",
+          "createdAt": "2026-07-28T02:32:08.000Z",
+          "updatedAt": "2026-07-28T02:32:08.000Z",
+          "uid": "35240-8afe4953-9ae3-4cbe-925f-21238b08accf"
+        }
+      ],
+      "id": "554baee0-bdf0-49bd-b77b-fd5a0fd8f6c4",
+      "createdAt": "2026-07-28T02:32:08.000Z",
+      "updatedAt": "2026-07-28T02:32:08.000Z",
+      "uid": "35240-554baee0-bdf0-49bd-b77b-fd5a0fd8f6c4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.payabli.com/developers/api-reference/api-overview
+summary: >-
+  Cross-cutting request/response semantics for the Payabli API, captured from the API overview and
+  derived from the OpenAPI 3.1 spec. Cross-links: authentication/payabli-authentication.yml,
+  errors/payabli-problem-types.yml, errors/payabli-decline-codes.yml, lifecycle/payabli-lifecycle.yml.
+authentication:
+  styles:
+  - name: API token
+    scheme: apiKey
+    location: header
+    header: requestToken
+    notes: Long-lived token issued in the Payabli portal.
+  - name: OAuth2 client credentials
+    scheme: bearer
+    header: Authorization
+    docs: https://docs.payabli.com/developers/oauth-authentication
+idempotency:
+  supported: true
+  header: idempotencyKey
+  scope: request
+  retention: 2 minutes
+  recommendation: Use a UUID per request; retries within the window return the original result.
+  docs: https://docs.payabli.com/developers/api-reference/api-overview
+rate_limiting:
+  velocity:
+  - 200 requests/minute
+  - 3000 requests/15 minutes
+  - 10000 requests/hour
+  fraud_controls:
+  - max 3 declines per card per hour
+  - max 3 declines per IP per hour
+  - max 10 declines per paypoint per hour
+  - max 250 transactions per paypoint per 15 minutes
+  - max 10 transactions per card per hour
+  status_code_on_limit: 429
+timeouts:
+  write_seconds: 30
+  read_seconds: 90
+  status_code_on_timeout: 504
+error_envelope:
+  format: rfc7807
+  notes: >-
+    v2 Money In endpoints return RFC 7807 Problem Details on 500. Transaction declines return HTTP
+    402 with a unified response code (A/D/E prefix). See errors/ artifacts.
+  fields:
+  - responseCode
+  - responseText
+  - isSuccess
+versioning:
+  scheme: uri-path
+  current: v2
+  notes: v2 Money In endpoints (/v2/MoneyIn/*) coexist with v1 endpoints (/MoneyIn/*).
+pagination:
+  style: query-parameter
+  notes: Query endpoints accept filtering/paging parameters; see the Query tag operations.

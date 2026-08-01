@@ -1,0 +1,522 @@
+{
+  "info": {
+    "_postman_id": "171e1be7-f156-408f-9f2f-3209f07f7e18",
+    "name": "API reference Bill Ocr API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:54.000Z",
+    "updatedAt": "2026-07-28T02:32:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-171e1be7-f156-408f-9f2f-3209f07f7e18"
+  },
+  "item": [
+    {
+      "name": "Import",
+      "item": [
+        {
+          "name": "ocrDocumentForm",
+          "item": [
+            {
+              "name": "{typeResult}",
+              "item": [
+                {
+                  "name": "Ocr Document Form",
+                  "id": "062d67db-c8cc-4355-a2c0-3a4f715dd961",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Import/ocrDocumentForm/:typeResult",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Import",
+                        "ocrDocumentForm",
+                        ":typeResult"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ac9f0657-6628-4bd6-b271-924954404cbd",
+                          "key": "typeResult",
+                          "value": "<string>",
+                          "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                        }
+                      ]
+                    },
+                    "description": "Use this endpoint to upload an image file for OCR processing. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more."
+                  },
+                  "response": [
+                    {
+                      "id": "6a4ca3ac-b05b-48b2-b9ae-23360f926560",
+                      "name": "OCR document processing result",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/ocrDocumentForm/:typeResult",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "ocrDocumentForm",
+                            ":typeResult"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeResult"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"resultData\": {\n      \"billNumber\": \"<string>\",\n      \"netAmount\": \"<double>\",\n      \"billDate\": \"<dateTime>\",\n      \"dueDate\": \"<dateTime>\",\n      \"comments\": \"<string>\",\n      \"billItems\": [\n        {\n          \"itemTotalAmount\": \"<double>\",\n          \"itemTaxAmount\": \"<double>\",\n          \"itemTaxRate\": \"<double>\",\n          \"itemProductCode\": \"<string>\",\n          \"itemProductName\": \"<string>\",\n          \"itemDescription\": \"<string>\",\n          \"itemCommodityCode\": \"<string>\",\n          \"itemUnitOfMeasure\": \"<string>\",\n          \"itemCost\": \"<double>\",\n          \"itemQty\": \"<integer>\",\n          \"itemMode\": \"<integer>\",\n          \"itemCategories\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"itemTotalAmount\": \"<double>\",\n          \"itemTaxAmount\": \"<double>\",\n          \"itemTaxRate\": \"<double>\",\n          \"itemProductCode\": \"<string>\",\n          \"itemProductName\": \"<string>\",\n          \"itemDescription\": \"<string>\",\n          \"itemCommodityCode\": \"<string>\",\n          \"itemUnitOfMeasure\": \"<string>\",\n          \"itemCost\": \"<double>\",\n          \"itemQty\": \"<integer>\",\n          \"itemMode\": \"<integer>\",\n          \"itemCategories\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"mode\": \"<integer>\",\n      \"accountingField1\": \"<string>\",\n      \"accountingField2\": \"<string>\",\n      \"additionalData\": {\n        \"category\": \"<string>\",\n        \"currency_code\": \"<string>\",\n        \"type\": \"<string>\",\n        \"reference_number\": \"<string>\"\n      },\n      \"vendor\": {\n        \"vendorNumber\": \"<string>\",\n        \"name1\": \"<string>\",\n        \"name2\": \"<string>\",\n        \"ein\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"email\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"mcc\": \"<string>\",\n        \"locationCode\": \"<string>\",\n        \"contacts\": [\n          {\n            \"contactEmail\": \"<email>\",\n            \"contactName\": \"<string>\",\n            \"contactPhone\": \"<string>\",\n            \"contactTitle\": \"<string>\",\n            \"additionalData\": \"<string>\"\n          },\n          {\n            \"contactEmail\": \"<email>\",\n            \"contactName\": \"<string>\",\n            \"contactPhone\": \"<string>\",\n            \"contactTitle\": \"<string>\",\n            \"additionalData\": \"<string>\"\n          }\n        ],\n        \"billingData\": {\n          \"id\": \"<integer>\",\n          \"bankName\": \"<string>\",\n          \"routingAccount\": \"<string>\",\n          \"accountNumber\": \"<string>\",\n          \"typeAccount\": \"<string>\",\n          \"bankAccountHolderName\": \"<string>\",\n          \"bankAccountHolderType\": \"<string>\",\n          \"bankAccountFunction\": \"<integer>\"\n        },\n        \"paymentMethod\": \"<string>\",\n        \"vendorStatus\": \"<integer>\",\n        \"remitAddress1\": \"<string>\",\n        \"remitAddress2\": \"<string>\",\n        \"remitCity\": \"<string>\",\n        \"remitState\": \"<string>\",\n        \"remitZip\": \"<string>\",\n        \"remitCountry\": \"<string>\",\n        \"payeeName1\": \"<string>\",\n        \"payeeName2\": \"<string>\",\n        \"customerVendorAccount\": \"<string>\",\n        \"internalReferenceId\": \"<long>\",\n        \"customField1\": \"<string>\",\n        \"customField2\": \"<string>\",\n        \"additionalData\": {\n          \"web\": \"<string>\"\n        }\n      },\n      \"endDate\": \"<dateTime>\",\n      \"frequency\": \"<string>\",\n      \"terms\": \"<string>\",\n      \"status\": \"<integer>\",\n      \"lotNumber\": \"<string>\",\n      \"attachments\": [\n        {\n          \"ftype\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"fileDescriptor\": \"<string>\",\n          \"furl\": \"<string>\",\n          \"fContent\": \"<string>\"\n        },\n        {\n          \"ftype\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"fileDescriptor\": \"<string>\",\n          \"furl\": \"<string>\",\n          \"fContent\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:54.000Z",
+                      "updatedAt": "2026-07-28T02:32:54.000Z",
+                      "uid": "35240-6a4ca3ac-b05b-48b2-b9ae-23360f926560"
+                    },
+                    {
+                      "id": "ff105225-670a-4b0c-ab64-eda6ca18a7e9",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/ocrDocumentForm/:typeResult",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "ocrDocumentForm",
+                            ":typeResult"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeResult"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:54.000Z",
+                      "updatedAt": "2026-07-28T02:32:54.000Z",
+                      "uid": "35240-ff105225-670a-4b0c-ab64-eda6ca18a7e9"
+                    },
+                    {
+                      "id": "b374dd50-b50a-411e-a2a2-988990db27fc",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/ocrDocumentForm/:typeResult",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "ocrDocumentForm",
+                            ":typeResult"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeResult"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:54.000Z",
+                      "updatedAt": "2026-07-28T02:32:54.000Z",
+                      "uid": "35240-b374dd50-b50a-411e-a2a2-988990db27fc"
+                    },
+                    {
+                      "id": "acf6bfd3-292d-4c25-a629-2eaf415c4d3f",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/ocrDocumentForm/:typeResult",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "ocrDocumentForm",
+                            ":typeResult"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeResult"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:54.000Z",
+                      "updatedAt": "2026-07-28T02:32:54.000Z",
+                      "uid": "35240-acf6bfd3-292d-4c25-a629-2eaf415c4d3f"
+                    },
+                    {
+                      "id": "e5110077-7d2f-4996-83de-0ce683ea0879",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/ocrDocumentForm/:typeResult",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "ocrDocumentForm",
+                            ":typeResult"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeResult"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:54.000Z",
+                      "updatedAt": "2026-07-28T02:32:54.000Z",
+                      "uid": "35240-e5110077-7d2f-4996-83de-0ce683ea0879"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:54.000Z",
+                  "updatedAt": "2026-07-28T02:32:54.000Z",
+                  "uid": "35240-062d67db-c8cc-4355-a2c0-3a4f715dd961"
+                }
+              ],
+              "id": "015c56a0-a520-47a4-a52a-74dfe1a24c3a",
+              "createdAt": "2026-07-28T02:32:54.000Z",
+              "updatedAt": "2026-07-28T02:32:54.000Z",
+              "uid": "35240-015c56a0-a520-47a4-a52a-74dfe1a24c3a"
+            }
+          ],
+          "id": "f9f8b7d6-9623-4be3-a8c3-a4a6b0d3b5bf",
+          "createdAt": "2026-07-28T02:32:54.000Z",
+          "updatedAt": "2026-07-28T02:32:54.000Z",
+          "uid": "35240-f9f8b7d6-9623-4be3-a8c3-a4a6b0d3b5bf"
+        },
+        {
+          "name": "ocrDocumentJson",
+          "item": [
+            {
+              "name": "{typeResult}",
+              "item": [
+                {
+                  "name": "Ocr Document Json",
+                  "id": "c946c312-1ff7-4222-9fc4-c43669c3c97d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Import/ocrDocumentJson/:typeResult",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Import",
+                        "ocrDocumentJson",
+                        ":typeResult"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8a0de8f9-40d9-46f4-be21-8141b39db426",
+                          "key": "typeResult",
+                          "value": "<string>",
+                          "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                        }
+                      ]
+                    },
+                    "description": "Use this endpoint to submit a Base64-encoded image file for OCR processing. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more."
+                  },
+                  "response": [
+                    {
+                      "id": "22cf1495-03d7-4cc9-9447-8c287b36c3d0",
+                      "name": "OCR document processing result",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ftype\": \"txt\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/ocrDocumentJson/:typeResult",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "ocrDocumentJson",
+                            ":typeResult"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeResult"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"resultData\": {\n      \"billNumber\": \"<string>\",\n      \"netAmount\": \"<double>\",\n      \"billDate\": \"<dateTime>\",\n      \"dueDate\": \"<dateTime>\",\n      \"comments\": \"<string>\",\n      \"billItems\": [\n        {\n          \"itemTotalAmount\": \"<double>\",\n          \"itemTaxAmount\": \"<double>\",\n          \"itemTaxRate\": \"<double>\",\n          \"itemProductCode\": \"<string>\",\n          \"itemProductName\": \"<string>\",\n          \"itemDescription\": \"<string>\",\n          \"itemCommodityCode\": \"<string>\",\n          \"itemUnitOfMeasure\": \"<string>\",\n          \"itemCost\": \"<double>\",\n          \"itemQty\": \"<integer>\",\n          \"itemMode\": \"<integer>\",\n          \"itemCategories\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"itemTotalAmount\": \"<double>\",\n          \"itemTaxAmount\": \"<double>\",\n          \"itemTaxRate\": \"<double>\",\n          \"itemProductCode\": \"<string>\",\n          \"itemProductName\": \"<string>\",\n          \"itemDescription\": \"<string>\",\n          \"itemCommodityCode\": \"<string>\",\n          \"itemUnitOfMeasure\": \"<string>\",\n          \"itemCost\": \"<double>\",\n          \"itemQty\": \"<integer>\",\n          \"itemMode\": \"<integer>\",\n          \"itemCategories\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"mode\": \"<integer>\",\n      \"accountingField1\": \"<string>\",\n      \"accountingField2\": \"<string>\",\n      \"additionalData\": {\n        \"category\": \"<string>\",\n        \"currency_code\": \"<string>\",\n        \"type\": \"<string>\",\n        \"reference_number\": \"<string>\"\n      },\n      \"vendor\": {\n        \"vendorNumber\": \"<string>\",\n        \"name1\": \"<string>\",\n        \"name2\": \"<string>\",\n        \"ein\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"email\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"mcc\": \"<string>\",\n        \"locationCode\": \"<string>\",\n        \"contacts\": [\n          {\n            \"contactEmail\": \"<email>\",\n            \"contactName\": \"<string>\",\n            \"contactPhone\": \"<string>\",\n            \"contactTitle\": \"<string>\",\n            \"additionalData\": \"<string>\"\n          },\n          {\n            \"contactEmail\": \"<email>\",\n            \"contactName\": \"<string>\",\n            \"contactPhone\": \"<string>\",\n            \"contactTitle\": \"<string>\",\n            \"additionalData\": \"<string>\"\n          }\n        ],\n        \"billingData\": {\n          \"id\": \"<integer>\",\n          \"bankName\": \"<string>\",\n          \"routingAccount\": \"<string>\",\n          \"accountNumber\": \"<string>\",\n          \"typeAccount\": \"<string>\",\n          \"bankAccountHolderName\": \"<string>\",\n          \"bankAccountHolderType\": \"<string>\",\n          \"bankAccountFunction\": \"<integer>\"\n        },\n        \"paymentMethod\": \"<string>\",\n        \"vendorStatus\": \"<integer>\",\n        \"remitAddress1\": \"<string>\",\n        \"remitAddress2\": \"<string>\",\n        \"remitCity\": \"<string>\",\n        \"remitState\": \"<string>\",\n        \"remitZip\": \"<string>\",\n        \"remitCountry\": \"<string>\",\n        \"payeeName1\": \"<string>\",\n        \"payeeName2\": \"<string>\",\n        \"customerVendorAccount\": \"<string>\",\n        \"internalReferenceId\": \"<long>\",\n        \"customField1\": \"<string>\",\n        \"customField2\": \"<string>\",\n        \"additionalData\": {\n          \"web\": \"<string>\"\n        }\n      },\n      \"endDate\": \"<dateTime>\",\n      \"frequency\": \"<string>\",\n      \"terms\": \"<string>\",\n      \"status\": \"<integer>\",\n      \"lotNumber\": \"<string>\",\n      \"attachments\": [\n        {\n          \"ftype\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"fileDescriptor\": \"<string>\",\n          \"furl\": \"<string>\",\n          \"fContent\": \"<string>\"\n        },\n        {\n          \"ftype\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"fileDescriptor\": \"<string>\",\n          \"furl\": \"<string>\",\n          \"fContent\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:54.000Z",
+                      "updatedAt": "2026-07-28T02:32:54.000Z",
+                      "uid": "35240-22cf1495-03d7-4cc9-9447-8c287b36c3d0"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:54.000Z",
+                  "updatedAt": "2026-07-28T02:32:54.000Z",
+                  "uid": "35240-c946c312-1ff7-4222-9fc4-c43669c3c97d"
+                }
+              ],
+              "id": "9277b6d8-44b6-41fb-85f0-82e5a912b65e",
+              "createdAt": "2026-07-28T02:32:54.000Z",
+              "updatedAt": "2026-07-28T02:32:54.000Z",
+              "uid": "35240-9277b6d8-44b6-41fb-85f0-82e5a912b65e"
+            }
+          ],
+          "id": "df517acd-bf65-4b74-bcc3-5a68acabdf86",
+          "createdAt": "2026-07-28T02:32:54.000Z",
+          "updatedAt": "2026-07-28T02:32:54.000Z",
+          "uid": "35240-df517acd-bf65-4b74-bcc3-5a68acabdf86"
+        }
+      ],
+      "id": "13596217-c3aa-4c6a-8966-78461af67c68",
+      "createdAt": "2026-07-28T02:32:54.000Z",
+      "updatedAt": "2026-07-28T02:32:54.000Z",
+      "uid": "35240-13596217-c3aa-4c6a-8966-78461af67c68"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

@@ -1,0 +1,754 @@
+{
+  "info": {
+    "_postman_id": "92674f9a-4e67-4070-9115-4f972340cc4f",
+    "name": "API reference Bill ghostCard API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:37.000Z",
+    "updatedAt": "2026-07-28T02:32:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-92674f9a-4e67-4070-9115-4f972340cc4f"
+  },
+  "item": [
+    {
+      "name": "MoneyOutCard",
+      "item": [
+        {
+          "name": "GhostCard",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Create ghost card",
+                  "id": "ea88c59b-0a11-40c5-9000-41d52796e916",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"vendorId\": \"<long>\",\n  \"expenseLimit\": \"<double>\",\n  \"amount\": \"<double>\",\n  \"maxNumberOfUses\": \"<integer>\",\n  \"exactAmount\": \"<boolean>\",\n  \"expenseLimitPeriod\": \"<string>\",\n  \"billingCycle\": \"<string>\",\n  \"billingCycleDay\": \"<string>\",\n  \"dailyTransactionCount\": \"<integer>\",\n  \"dailyAmountLimit\": \"<double>\",\n  \"transactionAmountLimit\": \"<integer>\",\n  \"expirationDate\": \"<string>\",\n  \"mcc\": \"<string>\",\n  \"tcc\": \"<string>\",\n  \"misc1\": \"<string>\",\n  \"misc2\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/MoneyOutCard/GhostCard/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "MoneyOutCard",
+                        "GhostCard",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cc6fc3bc-8a6d-4225-839d-74ff8be7e401",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                        }
+                      ]
+                    },
+                    "description": "Creates a ghost card, a multi-use virtual debit card issued to a vendor for recurring or discretionary spend.\n\nUnlike single-use virtual cards issued as part of a payout transaction, ghost cards aren't tied to a specific payout. They're issued directly to a vendor and can be reused up to a configurable number of times within the card's spending limits.\n\nOnly one ghost card can exist per vendor per paypoint. To issue a new card to the same vendor, cancel the existing card first."
+                  },
+                  "response": [
+                    {
+                      "id": "543196cb-ef3e-4716-b541-a676448a8a04",
+                      "name": "Success response with ghost card details.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"vendorId\": \"<long>\",\n  \"expenseLimit\": \"<double>\",\n  \"amount\": \"<double>\",\n  \"maxNumberOfUses\": \"<integer>\",\n  \"exactAmount\": \"<boolean>\",\n  \"expenseLimitPeriod\": \"<string>\",\n  \"billingCycle\": \"<string>\",\n  \"billingCycleDay\": \"<string>\",\n  \"dailyTransactionCount\": \"<integer>\",\n  \"dailyAmountLimit\": \"<double>\",\n  \"transactionAmountLimit\": \"<integer>\",\n  \"expirationDate\": \"<string>\",\n  \"mcc\": \"<string>\",\n  \"tcc\": \"<string>\",\n  \"misc1\": \"<string>\",\n  \"misc2\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/GhostCard/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "GhostCard",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"ReferenceId\": \"<string>\",\n    \"ResultCode\": \"<integer>\",\n    \"ResultText\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-543196cb-ef3e-4716-b541-a676448a8a04"
+                    },
+                    {
+                      "id": "11383588-2d09-4737-b726-4dd58ba0ff0e",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"vendorId\": \"<long>\",\n  \"expenseLimit\": \"<double>\",\n  \"amount\": \"<double>\",\n  \"maxNumberOfUses\": \"<integer>\",\n  \"exactAmount\": \"<boolean>\",\n  \"expenseLimitPeriod\": \"<string>\",\n  \"billingCycle\": \"<string>\",\n  \"billingCycleDay\": \"<string>\",\n  \"dailyTransactionCount\": \"<integer>\",\n  \"dailyAmountLimit\": \"<double>\",\n  \"transactionAmountLimit\": \"<integer>\",\n  \"expirationDate\": \"<string>\",\n  \"mcc\": \"<string>\",\n  \"tcc\": \"<string>\",\n  \"misc1\": \"<string>\",\n  \"misc2\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/GhostCard/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "GhostCard",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-11383588-2d09-4737-b726-4dd58ba0ff0e"
+                    },
+                    {
+                      "id": "64329f9b-b495-46b7-a7eb-45d9c5ed3c03",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"vendorId\": \"<long>\",\n  \"expenseLimit\": \"<double>\",\n  \"amount\": \"<double>\",\n  \"maxNumberOfUses\": \"<integer>\",\n  \"exactAmount\": \"<boolean>\",\n  \"expenseLimitPeriod\": \"<string>\",\n  \"billingCycle\": \"<string>\",\n  \"billingCycleDay\": \"<string>\",\n  \"dailyTransactionCount\": \"<integer>\",\n  \"dailyAmountLimit\": \"<double>\",\n  \"transactionAmountLimit\": \"<integer>\",\n  \"expirationDate\": \"<string>\",\n  \"mcc\": \"<string>\",\n  \"tcc\": \"<string>\",\n  \"misc1\": \"<string>\",\n  \"misc2\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/GhostCard/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "GhostCard",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-64329f9b-b495-46b7-a7eb-45d9c5ed3c03"
+                    },
+                    {
+                      "id": "0e23dca4-f9e7-4d46-89b4-d946b30d8dd8",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"vendorId\": \"<long>\",\n  \"expenseLimit\": \"<double>\",\n  \"amount\": \"<double>\",\n  \"maxNumberOfUses\": \"<integer>\",\n  \"exactAmount\": \"<boolean>\",\n  \"expenseLimitPeriod\": \"<string>\",\n  \"billingCycle\": \"<string>\",\n  \"billingCycleDay\": \"<string>\",\n  \"dailyTransactionCount\": \"<integer>\",\n  \"dailyAmountLimit\": \"<double>\",\n  \"transactionAmountLimit\": \"<integer>\",\n  \"expirationDate\": \"<string>\",\n  \"mcc\": \"<string>\",\n  \"tcc\": \"<string>\",\n  \"misc1\": \"<string>\",\n  \"misc2\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/GhostCard/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "GhostCard",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-0e23dca4-f9e7-4d46-89b4-d946b30d8dd8"
+                    },
+                    {
+                      "id": "d3fdb5ff-4808-4f28-98db-0727df47c18c",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"vendorId\": \"<long>\",\n  \"expenseLimit\": \"<double>\",\n  \"amount\": \"<double>\",\n  \"maxNumberOfUses\": \"<integer>\",\n  \"exactAmount\": \"<boolean>\",\n  \"expenseLimitPeriod\": \"<string>\",\n  \"billingCycle\": \"<string>\",\n  \"billingCycleDay\": \"<string>\",\n  \"dailyTransactionCount\": \"<integer>\",\n  \"dailyAmountLimit\": \"<double>\",\n  \"transactionAmountLimit\": \"<integer>\",\n  \"expirationDate\": \"<string>\",\n  \"mcc\": \"<string>\",\n  \"tcc\": \"<string>\",\n  \"misc1\": \"<string>\",\n  \"misc2\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/GhostCard/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "GhostCard",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-d3fdb5ff-4808-4f28-98db-0727df47c18c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:38.000Z",
+                  "updatedAt": "2026-07-28T02:32:38.000Z",
+                  "uid": "35240-ea88c59b-0a11-40c5-9000-41d52796e916"
+                }
+              ],
+              "id": "464af670-a592-4c5a-8069-c162ff310e9e",
+              "createdAt": "2026-07-28T02:32:38.000Z",
+              "updatedAt": "2026-07-28T02:32:38.000Z",
+              "uid": "35240-464af670-a592-4c5a-8069-c162ff310e9e"
+            }
+          ],
+          "id": "4c901e2e-ccfc-48c8-aea4-ca7784f83cf7",
+          "createdAt": "2026-07-28T02:32:38.000Z",
+          "updatedAt": "2026-07-28T02:32:38.000Z",
+          "uid": "35240-4c901e2e-ccfc-48c8-aea4-ca7784f83cf7"
+        },
+        {
+          "name": "card",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Update card status",
+                  "id": "d9cb6870-e609-4cd4-96a9-831ff7599122",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cardToken\": \"<string>\",\n  \"status\": \"Expired\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/MoneyOutCard/card/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "MoneyOutCard",
+                        "card",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0ef282ea-026f-4302-a3ba-88017f4a8687",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                        }
+                      ]
+                    },
+                    "description": "Updates the status of a virtual card (including ghost cards) under a paypoint."
+                  },
+                  "response": [
+                    {
+                      "id": "12991fbd-f24a-4899-af96-a34a95cc9b2e",
+                      "name": "Success response.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"cardToken\": \"<string>\",\n  \"status\": \"Expired\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/card/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "card",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"do_2\": {\n      \"description\": \"Any type\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-12991fbd-f24a-4899-af96-a34a95cc9b2e"
+                    },
+                    {
+                      "id": "dbd4c338-6f00-42c6-b47c-f0ba068229d0",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"cardToken\": \"<string>\",\n  \"status\": \"Expired\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/card/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "card",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-dbd4c338-6f00-42c6-b47c-f0ba068229d0"
+                    },
+                    {
+                      "id": "309eb962-8fc5-490a-8418-40f4bf9263ab",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"cardToken\": \"<string>\",\n  \"status\": \"Expired\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/card/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "card",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-309eb962-8fc5-490a-8418-40f4bf9263ab"
+                    },
+                    {
+                      "id": "30b59426-0a69-4784-889e-bbaaac231c76",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"cardToken\": \"<string>\",\n  \"status\": \"Expired\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/card/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "card",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-30b59426-0a69-4784-889e-bbaaac231c76"
+                    },
+                    {
+                      "id": "56c0667a-8c5b-4728-ac3c-35e133048259",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"cardToken\": \"<string>\",\n  \"status\": \"Expired\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/MoneyOutCard/card/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "MoneyOutCard",
+                            "card",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:38.000Z",
+                      "updatedAt": "2026-07-28T02:32:38.000Z",
+                      "uid": "35240-56c0667a-8c5b-4728-ac3c-35e133048259"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:38.000Z",
+                  "updatedAt": "2026-07-28T02:32:38.000Z",
+                  "uid": "35240-d9cb6870-e609-4cd4-96a9-831ff7599122"
+                }
+              ],
+              "id": "3eedf4e0-cb84-4e64-935b-a99702f63971",
+              "createdAt": "2026-07-28T02:32:38.000Z",
+              "updatedAt": "2026-07-28T02:32:38.000Z",
+              "uid": "35240-3eedf4e0-cb84-4e64-935b-a99702f63971"
+            }
+          ],
+          "id": "d6d94145-da88-45ab-8fff-ceb0365f378e",
+          "createdAt": "2026-07-28T02:32:38.000Z",
+          "updatedAt": "2026-07-28T02:32:38.000Z",
+          "uid": "35240-d6d94145-da88-45ab-8fff-ceb0365f378e"
+        }
+      ],
+      "id": "4e73f41f-9bb3-4e0d-bc79-6a41010668ef",
+      "createdAt": "2026-07-28T02:32:38.000Z",
+      "updatedAt": "2026-07-28T02:32:38.000Z",
+      "uid": "35240-4e73f41f-9bb3-4e0d-bc79-6a41010668ef"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

@@ -1,0 +1,1936 @@
+{
+  "info": {
+    "_postman_id": "8c0d8f16-8388-4516-91b3-82e91ed09ced",
+    "name": "API reference Bill Customer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:32.000Z",
+    "updatedAt": "2026-07-28T02:32:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8c0d8f16-8388-4516-91b3-82e91ed09ced"
+  },
+  "item": [
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "single",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Add customer",
+                  "id": "81603acb-8086-4167-a72d-4c2f8aa3ba50",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/single/:entry?forceCustomerCreation=false&replaceExisting=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        "single",
+                        ":entry"
+                      ],
+                      "query": [
+                        {
+                          "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.",
+                          "key": "forceCustomerCreation",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`.",
+                          "key": "replaceExisting",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "d7902d84-4819-4288-99de-db7ff688ac6b",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The entrypoint identifier."
+                        }
+                      ]
+                    },
+                    "description": "Creates a customer in an entrypoint. An identifier is required to create customer records. Change your identifier settings in Settings > Custom Fields in the Payabli Portal.\nIf you don't include an identifier, the record is rejected."
+                  },
+                  "response": [
+                    {
+                      "id": "19155720-ab9d-43c4-8764-b99d0d34d26a",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/single/:entry?forceCustomerCreation=false&replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            "single",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.",
+                              "key": "forceCustomerCreation",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`.",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"customerUsername\": \"<string>\",\n    \"customerStatus\": \"<integer>\",\n    \"Company\": \"<string>\",\n    \"Firstname\": \"<string>\",\n    \"Lastname\": \"<string>\",\n    \"Phone\": \"<string>\",\n    \"Email\": \"<email>\",\n    \"Address\": \"<string>\",\n    \"Address1\": \"<string>\",\n    \"City\": \"<string>\",\n    \"State\": \"<string>\",\n    \"Zip\": \"<string>\",\n    \"Country\": \"<string>\",\n    \"ShippingAddress\": \"<string>\",\n    \"ShippingAddress1\": \"<string>\",\n    \"ShippingCity\": \"<string>\",\n    \"ShippingState\": \"<string>\",\n    \"ShippingZip\": \"<string>\",\n    \"ShippingCountry\": \"<string>\",\n    \"Balance\": \"<double>\",\n    \"TimeZone\": \"<integer>\",\n    \"MFA\": \"<boolean>\",\n    \"MFAMode\": \"<integer>\",\n    \"snProvider\": \"<string>\",\n    \"snIdentifier\": \"<string>\",\n    \"snData\": \"<string>\",\n    \"LastUpdated\": \"<dateTime>\",\n    \"Created\": \"<dateTime>\",\n    \"AdditionalFields\": {\n      \"irure81\": \"<string>\",\n      \"commodo_2\": \"<string>\"\n    },\n    \"IdentifierFields\": [\n      \"<string>\"\n    ],\n    \"Subscriptions\": [\n      {\n        \"EndDate\": \"<string,null-date-time>\",\n        \"LastRun\": \"<string,null-date-time>\",\n        \"NextDate\": \"<string,null-date-time>\",\n        \"StartDate\": \"<string,null-date-time>\",\n        \"StoredMethod\": {\n          \"IdPmethod\": \"<string,null>\",\n          \"Method\": \"<string,null>\",\n          \"Descriptor\": \"<string,null>\",\n          \"MaskedAccount\": \"<string,null>\",\n          \"ExpDate\": \"<string,null>\",\n          \"HolderName\": \"<string,null>\",\n          \"AchSecCode\": \"<string,null>\",\n          \"AchHolderType\": \"<string,null>\",\n          \"IsValidatedACH\": \"<boolean,null>\",\n          \"BIN\": \"<string,null>\",\n          \"binData\": {\n            \"binMatchedLength\": \"<string>\",\n            \"binCardBrand\": \"<string>\",\n            \"binCardType\": \"<string>\",\n            \"binCardCategory\": \"<string>\",\n            \"binCardIssuer\": \"<string>\",\n            \"binCardIssuerCountry\": \"<string>\",\n            \"binCardIssuerCountryCodeA2\": \"<string>\",\n            \"binCardIssuerCountryNumber\": \"<string>\",\n            \"binCardIsRegulated\": \"<string>\",\n            \"binCardUseCategory\": \"<string>\",\n            \"binCardIssuerCountryCodeA3\": \"<string>\"\n          },\n          \"ABA\": \"<string,null>\",\n          \"PostalCode\": \"<string,null>\",\n          \"MethodType\": \"<string,null>\",\n          \"WalletType\": \"<string,null>\",\n          \"LastUpdated\": \"<string,null-date-time>\",\n          \"CardUpdatedOn\": \"<string,null-date-time>\"\n        },\n        \"CreatedAt\": \"<dateTime>\",\n        \"Customer\": {\n          \"Identifiers\": [\n            {\n              \"description\": \"Any type\"\n            }\n          ],\n          \"FirstName\": \"<string>\",\n          \"LastName\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"BillingAddress1\": \"<string>\",\n          \"BillingAddress2\": \"<string>\",\n          \"BillingCity\": \"<string>\",\n          \"BillingState\": \"<string>\",\n          \"BillingZip\": \"<string>\",\n          \"BillingCountry\": \"<string>\",\n          \"BillingPhone\": \"<string>\",\n          \"BillingEmail\": \"<email>\",\n          \"CustomerNumber\": \"<string>\",\n          \"ShippingAddress1\": \"<string>\",\n          \"ShippingAddress2\": \"<string>\",\n          \"ShippingCity\": \"<string>\",\n          \"ShippingState\": \"<string>\",\n          \"ShippingZip\": \"<string>\",\n          \"ShippingCountry\": \"<string>\",\n          \"customerId\": \"<long>\",\n          \"customerStatus\": \"<integer>\",\n          \"AdditionalData\": {\n            \"pariatur3\": \"<string>\",\n            \"dolore4\": \"<string>\"\n          }\n        },\n        \"EntrypageId\": \"<long>\",\n        \"ExternalPaypointID\": \"<string>\",\n        \"FeeAmount\": \"<double>\",\n        \"Frequency\": \"<string>\",\n        \"IdSub\": \"<long>\",\n        \"invoiceData\": {\n          \"AdditionalData\": {\n            \"culpa_3c\": \"<string>\"\n          },\n          \"attachments\": [\n            {\n              \"fContent\": \"<string>\",\n              \"filename\": \"<string>\",\n              \"ftype\": \"pdf\",\n              \"furl\": \"<string>\"\n            }\n          ],\n          \"company\": \"<string>\",\n          \"discount\": \"<double>\",\n          \"dutyAmount\": \"<double>\",\n          \"firstName\": \"<string>\",\n          \"freightAmount\": \"<double>\",\n          \"frequency\": \"firstofmonth\",\n          \"invoiceAmount\": \"<double>\",\n          \"invoiceDate\": \"<date>\",\n          \"invoiceDueDate\": \"<date>\",\n          \"invoiceEndDate\": \"<date>\",\n          \"invoiceNumber\": \"<string>\",\n          \"invoiceStatus\": \"<integer>\",\n          \"invoiceType\": \"<integer>\",\n          \"items\": [\n            {\n              \"itemCategories\": [\n                \"<string>\"\n              ],\n              \"itemCommodityCode\": \"<string>\",\n              \"itemCost\": \"<double>\",\n              \"itemDescription\": \"<string>\",\n              \"itemMode\": \"<integer>\",\n              \"itemProductCode\": \"<string>\",\n              \"itemProductName\": \"<string>\",\n              \"itemQty\": \"<integer>\",\n              \"itemTaxAmount\": \"<double>\",\n              \"itemTaxRate\": \"<double>\",\n              \"itemTotalAmount\": \"<double>\",\n              \"itemUnitOfMeasure\": \"<string>\"\n            }\n          ],\n          \"lastName\": \"<string>\",\n          \"notes\": \"<string>\",\n          \"paymentTerms\": \"25UF\",\n          \"purchaseOrder\": \"<string>\",\n          \"shippingAddress1\": \"<string>\",\n          \"shippingAddress2\": \"<string>\",\n          \"shippingCity\": \"<string>\",\n          \"shippingCountry\": \"<string>\",\n          \"shippingEmail\": \"<email>\",\n          \"shippingFromZip\": \"<string>\",\n          \"shippingPhone\": \"<string>\",\n          \"shippingState\": \"<string>\",\n          \"shippingZip\": \"<string>\",\n          \"summaryCommodityCode\": \"<string>\",\n          \"tax\": \"<double>\",\n          \"termsConditions\": \"<string>\"\n        },\n        \"LastUpdated\": \"<dateTime>\",\n        \"LeftCycles\": \"<integer>\",\n        \"Method\": \"<string>\",\n        \"NetAmount\": \"<double>\",\n        \"ParentOrgName\": \"<string>\",\n        \"PaymentData\": {\n          \"AccountExp\": \"<string>\",\n          \"accountId\": \"<string>\",\n          \"AccountType\": \"<string>\",\n          \"AccountZip\": \"<string>\",\n          \"binData\": {\n            \"binMatchedLength\": \"<string>\",\n            \"binCardBrand\": \"<string>\",\n            \"binCardType\": \"<string>\",\n            \"binCardCategory\": \"<string>\",\n            \"binCardIssuer\": \"<string>\",\n            \"binCardIssuerCountry\": \"<string>\",\n            \"binCardIssuerCountryCodeA2\": \"<string>\",\n            \"binCardIssuerCountryNumber\": \"<string>\",\n            \"binCardIsRegulated\": \"<string>\",\n            \"binCardUseCategory\": \"<string>\",\n            \"binCardIssuerCountryCodeA3\": \"<string>\"\n          },\n          \"HolderName\": \"<string>\",\n          \"Initiator\": \"<string>\",\n          \"MaskedAccount\": \"<string>\",\n          \"orderDescription\": \"<string>\",\n          \"paymentDetails\": {\n            \"totalAmount\": \"<double>\",\n            \"categories\": [\n              {\n                \"amount\": \"<double>\",\n                \"label\": \"<string>\",\n                \"description\": \"<string>\",\n                \"qty\": 1\n              }\n            ],\n            \"checkImage\": {\n              \"exercitation_64d\": {\n                \"description\": \"Any type\"\n              }\n            },\n            \"checkNumber\": \"<string>\",\n            \"currency\": \"<string>\",\n            \"serviceFee\": \"<double>\",\n            \"splitFunding\": [\n              {\n                \"accountId\": \"<string>\",\n                \"amount\": \"<double>\",\n                \"description\": \"<string>\",\n                \"recipientEntryPoint\": \"<string>\"\n              }\n            ],\n            \"checkUniqueId\": \"<string>\"\n          },\n          \"Sequence\": \"<string>\",\n          \"SignatureData\": \"<string>\",\n          \"StoredId\": \"<string>\",\n          \"StoredMethodUsageType\": \"<string>\"\n        },\n        \"PaypointDbaname\": \"<string>\",\n        \"PaypointEntryname\": \"<string>\",\n        \"PaypointId\": \"<long>\",\n        \"PaypointLegalname\": \"<string>\",\n        \"PlanId\": \"<integer>\",\n        \"Source\": \"<string>\",\n        \"SubEvents\": [\n          {\n            \"description\": \"<string>\",\n            \"eventTime\": \"<dateTime>\",\n            \"extraData\": \"<string,null>\",\n            \"refData\": \"<string>\",\n            \"source\": \"<string>\"\n          }\n        ],\n        \"SubStatus\": \"<integer>\",\n        \"SubscriptionType\": \"BalanceDriven\",\n        \"TotalAmount\": \"<double>\",\n        \"TotalCycles\": \"<integer>\",\n        \"UntilCancelled\": \"<boolean>\"\n      }\n    ],\n    \"StoredMethods\": [\n      {\n        \"IdPmethod\": \"<string>\",\n        \"Method\": \"<string>\",\n        \"Descriptor\": \"<string>\",\n        \"MaskedAccount\": \"<string>\",\n        \"ExpDate\": \"<string>\",\n        \"HolderName\": \"<string>\",\n        \"AchSecCode\": \"<string,null>\",\n        \"AchHolderType\": \"<string,null>\",\n        \"IsValidatedACH\": \"<boolean,null>\",\n        \"BIN\": \"<string>\",\n        \"binData\": {\n          \"binMatchedLength\": \"<string>\",\n          \"binCardBrand\": \"<string>\",\n          \"binCardType\": \"<string>\",\n          \"binCardCategory\": \"<string>\",\n          \"binCardIssuer\": \"<string>\",\n          \"binCardIssuerCountry\": \"<string>\",\n          \"binCardIssuerCountryCodeA2\": \"<string>\",\n          \"binCardIssuerCountryNumber\": \"<string>\",\n          \"binCardIsRegulated\": \"<string>\",\n          \"binCardUseCategory\": \"<string>\",\n          \"binCardIssuerCountryCodeA3\": \"<string>\"\n        },\n        \"ABA\": \"<string,null>\",\n        \"PostalCode\": \"<string,null>\",\n        \"MethodType\": \"<string,null>\",\n        \"WalletType\": \"<string,null>\",\n        \"LastUpdated\": \"<dateTime>\",\n        \"CardUpdatedOn\": \"<string,null-date-time>\"\n      }\n    ],\n    \"customerSummary\": {\n      \"NumberofTransactions\": \"<integer>\",\n      \"RecentTransactions\": [\n        {\n          \"splitCount\": \"<integer>\",\n          \"TransactionTime\": \"<string,null-date-time>\",\n          \"AchHolderType\": \"personal\",\n          \"AchSecCode\": \"<string>\",\n          \"BatchAmount\": \"<double>\",\n          \"BatchNumber\": \"<string>\",\n          \"CfeeTransactions\": [\n            {\n              \"cFeeTransid\": \"<string>\",\n              \"feeAmount\": \"<double>\",\n              \"operation\": \"<string>\",\n              \"refundId\": \"<long>\",\n              \"responseData\": {\n                \"Ut_5\": {\n                  \"description\": \"Any type\"\n                },\n                \"non_04\": {\n                  \"description\": \"Any type\"\n                },\n                \"ut_e45\": {\n                  \"description\": \"Any type\"\n                },\n                \"dolore_f8\": {\n                  \"description\": \"Any type\"\n                }\n              },\n              \"settlementStatus\": \"<integer>\",\n              \"transactionTime\": \"<dateTime>\",\n              \"transStatus\": \"<integer>\"\n            }\n          ],\n          \"ConnectorName\": \"<string>\",\n          \"Customer\": {\n            \"Identifiers\": [\n              {\n                \"description\": \"Any type\"\n              }\n            ],\n            \"FirstName\": \"<string>\",\n            \"LastName\": \"<string>\",\n            \"CompanyName\": \"<string>\",\n            \"BillingAddress1\": \"<string>\",\n            \"BillingAddress2\": \"<string>\",\n            \"BillingCity\": \"<string>\",\n            \"BillingState\": \"<string>\",\n            \"BillingZip\": \"<string>\",\n            \"BillingCountry\": \"<string>\",\n            \"BillingPhone\": \"<string>\",\n            \"BillingEmail\": \"<email>\",\n            \"CustomerNumber\": \"<string>\",\n            \"ShippingAddress1\": \"<string>\",\n            \"ShippingAddress2\": \"<string>\",\n            \"ShippingCity\": \"<string>\",\n            \"ShippingState\": \"<string>\",\n            \"ShippingZip\": \"<string>\",\n            \"ShippingCountry\": \"<string>\",\n            \"customerId\": \"<long>\",\n            \"customerStatus\": \"<integer>\",\n            \"AdditionalData\": {\n              \"nostrud_f0\": \"<string>\"\n            }\n          },\n          \"DeviceId\": \"<string>\",\n          \"EntrypageId\": \"<long>\",\n          \"ExternalProcessorInformation\": \"<string>\",\n          \"FeeAmount\": \"<double>\",\n          \"GatewayTransId\": \"<string>\",\n          \"invoiceData\": {\n            \"AdditionalData\": {\n              \"aute_1a\": \"<string>\"\n            },\n            \"attachments\": [\n              {\n                \"fContent\": \"<string>\",\n                \"filename\": \"<string>\",\n                \"ftype\": \"doc\",\n                \"furl\": \"<string>\"\n              }\n            ],\n            \"company\": \"<string>\",\n            \"discount\": \"<double>\",\n            \"dutyAmount\": \"<double>\",\n            \"firstName\": \"<string>\",\n            \"freightAmount\": \"<double>\",\n            \"frequency\": \"every2weeks\",\n            \"invoiceAmount\": \"<double>\",\n            \"invoiceDate\": \"<date>\",\n            \"invoiceDueDate\": \"<date>\",\n            \"invoiceEndDate\": \"<date>\",\n            \"invoiceNumber\": \"<string>\",\n            \"invoiceStatus\": \"<integer>\",\n            \"invoiceType\": \"<integer>\",\n            \"items\": [\n              {\n                \"itemCategories\": [\n                  \"<string>\"\n                ],\n                \"itemCommodityCode\": \"<string>\",\n                \"itemCost\": \"<double>\",\n                \"itemDescription\": \"<string>\",\n                \"itemMode\": \"<integer>\",\n                \"itemProductCode\": \"<string>\",\n                \"itemProductName\": \"<string>\",\n                \"itemQty\": \"<integer>\",\n                \"itemTaxAmount\": \"<double>\",\n                \"itemTaxRate\": \"<double>\",\n                \"itemTotalAmount\": \"<double>\",\n                \"itemUnitOfMeasure\": \"<string>\"\n              }\n            ],\n            \"lastName\": \"<string>\",\n            \"notes\": \"<string>\",\n            \"paymentTerms\": \"10UF\",\n            \"purchaseOrder\": \"<string>\",\n            \"shippingAddress1\": \"<string>\",\n            \"shippingAddress2\": \"<string>\",\n            \"shippingCity\": \"<string>\",\n            \"shippingCountry\": \"<string>\",\n            \"shippingEmail\": \"<email>\",\n            \"shippingFromZip\": \"<string>\",\n            \"shippingPhone\": \"<string>\",\n            \"shippingState\": \"<string>\",\n            \"shippingZip\": \"<string>\",\n            \"summaryCommodityCode\": \"<string>\",\n            \"tax\": \"<double>\",\n            \"termsConditions\": \"<string>\"\n          },\n          \"Method\": \"<string>\",\n          \"NetAmount\": \"<double>\",\n          \"Operation\": \"<string>\",\n          \"OrderId\": \"<string>\",\n          \"OrgId\": \"<long>\",\n          \"ParentOrgName\": \"<string>\",\n          \"PaymentData\": {\n            \"AccountExp\": \"<string>\",\n            \"accountId\": \"<string>\",\n            \"AccountType\": \"<string>\",\n            \"AccountZip\": \"<string>\",\n            \"binData\": {\n              \"binMatchedLength\": \"<string>\",\n              \"binCardBrand\": \"<string>\",\n              \"binCardType\": \"<string>\",\n              \"binCardCategory\": \"<string>\",\n              \"binCardIssuer\": \"<string>\",\n              \"binCardIssuerCountry\": \"<string>\",\n              \"binCardIssuerCountryCodeA2\": \"<string>\",\n              \"binCardIssuerCountryNumber\": \"<string>\",\n              \"binCardIsRegulated\": \"<string>\",\n              \"binCardUseCategory\": \"<string>\",\n              \"binCardIssuerCountryCodeA3\": \"<string>\"\n            },\n            \"HolderName\": \"<string>\",\n            \"Initiator\": \"<string>\",\n            \"MaskedAccount\": \"<string>\",\n            \"orderDescription\": \"<string>\",\n            \"paymentDetails\": {\n              \"totalAmount\": \"<double>\",\n              \"categories\": [\n                {\n                  \"amount\": \"<double>\",\n                  \"label\": \"<string>\",\n                  \"description\": \"<string>\",\n                  \"qty\": 1\n                }\n              ],\n              \"checkImage\": {\n                \"consecteturbb\": {\n                  \"description\": \"Any type\"\n                },\n                \"labore_8\": {\n                  \"description\": \"Any type\"\n                }\n              },\n              \"checkNumber\": \"<string>\",\n              \"currency\": \"<string>\",\n              \"serviceFee\": \"<double>\",\n              \"splitFunding\": [\n                {\n                  \"accountId\": \"<string>\",\n                  \"amount\": \"<double>\",\n                  \"description\": \"<string>\",\n                  \"recipientEntryPoint\": \"<string>\"\n                }\n              ],\n              \"checkUniqueId\": \"<string>\"\n            },\n            \"Sequence\": \"<string>\",\n            \"SignatureData\": \"<string>\",\n            \"StoredId\": \"<string>\",\n            \"StoredMethodUsageType\": \"<string>\"\n          },\n          \"PaymentTransId\": \"<string>\",\n          \"PayorId\": \"<long>\",\n          \"PaypointDbaname\": \"<string>\",\n          \"PaypointEntryname\": \"<string>\",\n          \"PaypointId\": \"<long>\",\n          \"PaypointLegalname\": \"<string>\",\n          \"PendingFeeAmount\": \"<double>\",\n          \"RefundId\": \"<long>\",\n          \"ResponseData\": {\n            \"authcode\": \"<string>\",\n            \"avsresponse\": \"<string>\",\n            \"avsresponse_text\": \"<string>\",\n            \"cvvresponse\": \"<string>\",\n            \"cvvresponse_text\": \"<string>\",\n            \"emv_auth_response_data\": \"<string>\",\n            \"orderid\": \"<string>\",\n            \"response\": \"<string>\",\n            \"response_code\": \"<string>\",\n            \"response_code_text\": \"<string>\",\n            \"responsetext\": \"<string>\",\n            \"resultCode\": \"<string>\",\n            \"resultCodeText\": \"<string>\",\n            \"transactionid\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          \"ReturnedId\": \"<long>\",\n          \"ScheduleReference\": \"<long>\",\n          \"SettlementStatus\": \"<integer>\",\n          \"Source\": \"<string>\",\n          \"splitFundingInstructions\": [\n            {\n              \"accountId\": \"<string>\",\n              \"amount\": \"<double>\",\n              \"description\": \"<string>\",\n              \"recipientEntryPoint\": \"<string>\"\n            }\n          ],\n          \"TotalAmount\": \"<double>\",\n          \"TransactionEvents\": [\n            {\n              \"TransEvent\": \"<string>\",\n              \"EventData\": {\n                \"irurea\": {\n                  \"description\": \"Any type\"\n                },\n                \"cillum_58\": {\n                  \"description\": \"Any type\"\n                }\n              },\n              \"EventTime\": \"<dateTime>\"\n            }\n          ],\n          \"TransAdditionalData\": {\n            \"description\": \"Any type\"\n          },\n          \"TransStatus\": \"<integer>\"\n        }\n      ],\n      \"TotalAmountTransactions\": \"<double>\",\n      \"TotalNetAmountTransactions\": \"<double>\"\n    },\n    \"PaypointLegalname\": \"<string>\",\n    \"PaypointDbaname\": \"<string>\",\n    \"ParentOrgName\": \"<string>\",\n    \"ParentOrgId\": \"<long>\",\n    \"PaypointEntryname\": \"<string>\",\n    \"pageidentifier\": \"<string>\",\n    \"externalPaypointID\": \"<string>\",\n    \"customerConsent\": {\n      \"eCommunication\": {\n        \"status\": \"<integer>\",\n        \"updatedAt\": \"<dateTime>\"\n      },\n      \"sms\": {\n        \"status\": \"<integer>\",\n        \"updatedAt\": \"<dateTime>\"\n      }\n    },\n    \"customerPortal\": \"<string,null>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-19155720-ab9d-43c4-8764-b99d0d34d26a"
+                    },
+                    {
+                      "id": "c0e87a5c-4e0c-4299-803f-758739a8446f",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/single/:entry?forceCustomerCreation=false&replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            "single",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.",
+                              "key": "forceCustomerCreation",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`.",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-c0e87a5c-4e0c-4299-803f-758739a8446f"
+                    },
+                    {
+                      "id": "67036d3f-e93e-4c0f-9cd6-a725dfe171c5",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/single/:entry?forceCustomerCreation=false&replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            "single",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.",
+                              "key": "forceCustomerCreation",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`.",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-67036d3f-e93e-4c0f-9cd6-a725dfe171c5"
+                    },
+                    {
+                      "id": "d96250ff-839e-4ed7-8446-eb2f90e84bca",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/single/:entry?forceCustomerCreation=false&replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            "single",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.",
+                              "key": "forceCustomerCreation",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`.",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-d96250ff-839e-4ed7-8446-eb2f90e84bca"
+                    },
+                    {
+                      "id": "1a284d43-52a7-4b67-b6de-0ca4051416e5",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                            "key": "idempotencyKey",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/single/:entry?forceCustomerCreation=false&replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            "single",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.",
+                              "key": "forceCustomerCreation",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`.",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-1a284d43-52a7-4b67-b6de-0ca4051416e5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-81603acb-8086-4167-a72d-4c2f8aa3ba50"
+                }
+              ],
+              "id": "273dd4ff-e2ef-4f7f-8c4b-d9b66e955cb5",
+              "createdAt": "2026-07-28T02:32:33.000Z",
+              "updatedAt": "2026-07-28T02:32:33.000Z",
+              "uid": "35240-273dd4ff-e2ef-4f7f-8c4b-d9b66e955cb5"
+            }
+          ],
+          "id": "1f9bbabf-27e7-424f-8393-3c6489340d26",
+          "createdAt": "2026-07-28T02:32:33.000Z",
+          "updatedAt": "2026-07-28T02:32:33.000Z",
+          "uid": "35240-1f9bbabf-27e7-424f-8393-3c6489340d26"
+        },
+        {
+          "name": "{customerId}",
+          "item": [
+            {
+              "name": "consent",
+              "item": [
+                {
+                  "name": "Request consent opt-in",
+                  "id": "71c3d50f-7a2a-4f30-a398-4f73c533fb5c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId/consent",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId",
+                        "consent"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5a766e17-3994-413e-a709-d7bc020d212d",
+                          "key": "customerId",
+                          "value": "<integer>",
+                          "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                        }
+                      ]
+                    },
+                    "description": "Sends the consent opt-in email to the customer email address in the customer record."
+                  },
+                  "response": [
+                    {
+                      "id": "cabd18ad-ee03-4f26-8624-aa31f8934c43",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/:customerId/consent",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            ":customerId",
+                            "consent"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"pageIdentifier\": \"<string>\",\n  \"roomId\": \"<long>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-cabd18ad-ee03-4f26-8624-aa31f8934c43"
+                    },
+                    {
+                      "id": "a911cfc2-c844-44ac-9d27-690b2b250ffc",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/:customerId/consent",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            ":customerId",
+                            "consent"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-a911cfc2-c844-44ac-9d27-690b2b250ffc"
+                    },
+                    {
+                      "id": "3c9b0680-ea34-456f-9693-f40e119585a3",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/:customerId/consent",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            ":customerId",
+                            "consent"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-3c9b0680-ea34-456f-9693-f40e119585a3"
+                    },
+                    {
+                      "id": "f8a8dbee-a098-45d7-a096-3407fa9c2673",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/:customerId/consent",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            ":customerId",
+                            "consent"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-f8a8dbee-a098-45d7-a096-3407fa9c2673"
+                    },
+                    {
+                      "id": "52bc2aaf-cf06-4557-a4c1-e21d1fd58643",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/:customerId/consent",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            ":customerId",
+                            "consent"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-52bc2aaf-cf06-4557-a4c1-e21d1fd58643"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-71c3d50f-7a2a-4f30-a398-4f73c533fb5c"
+                }
+              ],
+              "id": "e9b7eddd-1c4d-4928-9428-5df5bd91a489",
+              "createdAt": "2026-07-28T02:32:33.000Z",
+              "updatedAt": "2026-07-28T02:32:33.000Z",
+              "uid": "35240-e9b7eddd-1c4d-4928-9428-5df5bd91a489"
+            },
+            {
+              "name": "Get customer record",
+              "id": "cd77a1c3-f05b-4597-b8bc-18e2ca0cf949",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Customer/:customerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cd795698-4e2c-44b6-a537-0d07c75d2cbc",
+                      "key": "customerId",
+                      "value": "<integer>",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "description": "Retrieves a customer's record and details."
+              },
+              "response": [
+                {
+                  "id": "ca2c4cd1-00ee-4e4a-bfdc-e994f9b2d290",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"customerId\": \"<long>\",\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"Company\": \"<string>\",\n  \"Firstname\": \"<string>\",\n  \"Lastname\": \"<string>\",\n  \"Phone\": \"<string>\",\n  \"Email\": \"<email>\",\n  \"Address\": \"<string>\",\n  \"Address1\": \"<string>\",\n  \"City\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Zip\": \"<string>\",\n  \"Country\": \"<string>\",\n  \"ShippingAddress\": \"<string>\",\n  \"ShippingAddress1\": \"<string>\",\n  \"ShippingCity\": \"<string>\",\n  \"ShippingState\": \"<string>\",\n  \"ShippingZip\": \"<string>\",\n  \"ShippingCountry\": \"<string>\",\n  \"Balance\": \"<double>\",\n  \"TimeZone\": \"<integer>\",\n  \"MFA\": \"<boolean>\",\n  \"MFAMode\": \"<integer>\",\n  \"snProvider\": \"<string>\",\n  \"snIdentifier\": \"<string>\",\n  \"snData\": \"<string>\",\n  \"LastUpdated\": \"<dateTime>\",\n  \"Created\": \"<dateTime>\",\n  \"AdditionalFields\": {\n    \"dolore64\": \"<string>\",\n    \"aliquip__\": \"<string>\"\n  },\n  \"IdentifierFields\": [\n    \"<string>\"\n  ],\n  \"Subscriptions\": [\n    {\n      \"EndDate\": \"<string,null-date-time>\",\n      \"LastRun\": \"<string,null-date-time>\",\n      \"NextDate\": \"<string,null-date-time>\",\n      \"StartDate\": \"<string,null-date-time>\",\n      \"StoredMethod\": {\n        \"IdPmethod\": \"<string,null>\",\n        \"Method\": \"<string,null>\",\n        \"Descriptor\": \"<string,null>\",\n        \"MaskedAccount\": \"<string,null>\",\n        \"ExpDate\": \"<string,null>\",\n        \"HolderName\": \"<string,null>\",\n        \"AchSecCode\": \"<string,null>\",\n        \"AchHolderType\": \"<string,null>\",\n        \"IsValidatedACH\": \"<boolean,null>\",\n        \"BIN\": \"<string,null>\",\n        \"binData\": {\n          \"binMatchedLength\": \"<string>\",\n          \"binCardBrand\": \"<string>\",\n          \"binCardType\": \"<string>\",\n          \"binCardCategory\": \"<string>\",\n          \"binCardIssuer\": \"<string>\",\n          \"binCardIssuerCountry\": \"<string>\",\n          \"binCardIssuerCountryCodeA2\": \"<string>\",\n          \"binCardIssuerCountryNumber\": \"<string>\",\n          \"binCardIsRegulated\": \"<string>\",\n          \"binCardUseCategory\": \"<string>\",\n          \"binCardIssuerCountryCodeA3\": \"<string>\"\n        },\n        \"ABA\": \"<string,null>\",\n        \"PostalCode\": \"<string,null>\",\n        \"MethodType\": \"<string,null>\",\n        \"WalletType\": \"<string,null>\",\n        \"LastUpdated\": \"<string,null-date-time>\",\n        \"CardUpdatedOn\": \"<string,null-date-time>\"\n      },\n      \"CreatedAt\": \"<dateTime>\",\n      \"Customer\": {\n        \"Identifiers\": [\n          {\n            \"description\": \"Any type\"\n          }\n        ],\n        \"FirstName\": \"<string>\",\n        \"LastName\": \"<string>\",\n        \"CompanyName\": \"<string>\",\n        \"BillingAddress1\": \"<string>\",\n        \"BillingAddress2\": \"<string>\",\n        \"BillingCity\": \"<string>\",\n        \"BillingState\": \"<string>\",\n        \"BillingZip\": \"<string>\",\n        \"BillingCountry\": \"<string>\",\n        \"BillingPhone\": \"<string>\",\n        \"BillingEmail\": \"<email>\",\n        \"CustomerNumber\": \"<string>\",\n        \"ShippingAddress1\": \"<string>\",\n        \"ShippingAddress2\": \"<string>\",\n        \"ShippingCity\": \"<string>\",\n        \"ShippingState\": \"<string>\",\n        \"ShippingZip\": \"<string>\",\n        \"ShippingCountry\": \"<string>\",\n        \"customerId\": \"<long>\",\n        \"customerStatus\": \"<integer>\",\n        \"AdditionalData\": {\n          \"sunteb\": \"<string>\",\n          \"est_d\": \"<string>\",\n          \"reprehenderite\": \"<string>\",\n          \"cupidatat_be\": \"<string>\"\n        }\n      },\n      \"EntrypageId\": \"<long>\",\n      \"ExternalPaypointID\": \"<string>\",\n      \"FeeAmount\": \"<double>\",\n      \"Frequency\": \"<string>\",\n      \"IdSub\": \"<long>\",\n      \"invoiceData\": {\n        \"AdditionalData\": {\n          \"pariatur1\": \"<string>\",\n          \"pariatur3\": \"<string>\",\n          \"ut_895\": \"<string>\"\n        },\n        \"attachments\": [\n          {\n            \"fContent\": \"<string>\",\n            \"filename\": \"<string>\",\n            \"ftype\": \"jpg\",\n            \"furl\": \"<string>\"\n          }\n        ],\n        \"company\": \"<string>\",\n        \"discount\": \"<double>\",\n        \"dutyAmount\": \"<double>\",\n        \"firstName\": \"<string>\",\n        \"freightAmount\": \"<double>\",\n        \"frequency\": \"every3months\",\n        \"invoiceAmount\": \"<double>\",\n        \"invoiceDate\": \"<date>\",\n        \"invoiceDueDate\": \"<date>\",\n        \"invoiceEndDate\": \"<date>\",\n        \"invoiceNumber\": \"<string>\",\n        \"invoiceStatus\": \"<integer>\",\n        \"invoiceType\": \"<integer>\",\n        \"items\": [\n          {\n            \"itemCategories\": [\n              \"<string>\"\n            ],\n            \"itemCommodityCode\": \"<string>\",\n            \"itemCost\": \"<double>\",\n            \"itemDescription\": \"<string>\",\n            \"itemMode\": \"<integer>\",\n            \"itemProductCode\": \"<string>\",\n            \"itemProductName\": \"<string>\",\n            \"itemQty\": \"<integer>\",\n            \"itemTaxAmount\": \"<double>\",\n            \"itemTaxRate\": \"<double>\",\n            \"itemTotalAmount\": \"<double>\",\n            \"itemUnitOfMeasure\": \"<string>\"\n          }\n        ],\n        \"lastName\": \"<string>\",\n        \"notes\": \"<string>\",\n        \"paymentTerms\": \"UF\",\n        \"purchaseOrder\": \"<string>\",\n        \"shippingAddress1\": \"<string>\",\n        \"shippingAddress2\": \"<string>\",\n        \"shippingCity\": \"<string>\",\n        \"shippingCountry\": \"<string>\",\n        \"shippingEmail\": \"<email>\",\n        \"shippingFromZip\": \"<string>\",\n        \"shippingPhone\": \"<string>\",\n        \"shippingState\": \"<string>\",\n        \"shippingZip\": \"<string>\",\n        \"summaryCommodityCode\": \"<string>\",\n        \"tax\": \"<double>\",\n        \"termsConditions\": \"<string>\"\n      },\n      \"LastUpdated\": \"<dateTime>\",\n      \"LeftCycles\": \"<integer>\",\n      \"Method\": \"<string>\",\n      \"NetAmount\": \"<double>\",\n      \"ParentOrgName\": \"<string>\",\n      \"PaymentData\": {\n        \"AccountExp\": \"<string>\",\n        \"accountId\": \"<string>\",\n        \"AccountType\": \"<string>\",\n        \"AccountZip\": \"<string>\",\n        \"binData\": {\n          \"binMatchedLength\": \"<string>\",\n          \"binCardBrand\": \"<string>\",\n          \"binCardType\": \"<string>\",\n          \"binCardCategory\": \"<string>\",\n          \"binCardIssuer\": \"<string>\",\n          \"binCardIssuerCountry\": \"<string>\",\n          \"binCardIssuerCountryCodeA2\": \"<string>\",\n          \"binCardIssuerCountryNumber\": \"<string>\",\n          \"binCardIsRegulated\": \"<string>\",\n          \"binCardUseCategory\": \"<string>\",\n          \"binCardIssuerCountryCodeA3\": \"<string>\"\n        },\n        \"HolderName\": \"<string>\",\n        \"Initiator\": \"<string>\",\n        \"MaskedAccount\": \"<string>\",\n        \"orderDescription\": \"<string>\",\n        \"paymentDetails\": {\n          \"totalAmount\": \"<double>\",\n          \"categories\": [\n            {\n              \"amount\": \"<double>\",\n              \"label\": \"<string>\",\n              \"description\": \"<string>\",\n              \"qty\": 1\n            }\n          ],\n          \"checkImage\": {\n            \"velitfea\": {\n              \"description\": \"Any type\"\n            }\n          },\n          \"checkNumber\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"serviceFee\": \"<double>\",\n          \"splitFunding\": [\n            {\n              \"accountId\": \"<string>\",\n              \"amount\": \"<double>\",\n              \"description\": \"<string>\",\n              \"recipientEntryPoint\": \"<string>\"\n            }\n          ],\n          \"checkUniqueId\": \"<string>\"\n        },\n        \"Sequence\": \"<string>\",\n        \"SignatureData\": \"<string>\",\n        \"StoredId\": \"<string>\",\n        \"StoredMethodUsageType\": \"<string>\"\n      },\n      \"PaypointDbaname\": \"<string>\",\n      \"PaypointEntryname\": \"<string>\",\n      \"PaypointId\": \"<long>\",\n      \"PaypointLegalname\": \"<string>\",\n      \"PlanId\": \"<integer>\",\n      \"Source\": \"<string>\",\n      \"SubEvents\": [\n        {\n          \"description\": \"<string>\",\n          \"eventTime\": \"<dateTime>\",\n          \"extraData\": \"<string,null>\",\n          \"refData\": \"<string>\",\n          \"source\": \"<string>\"\n        }\n      ],\n      \"SubStatus\": \"<integer>\",\n      \"SubscriptionType\": \"BalanceDriven\",\n      \"TotalAmount\": \"<double>\",\n      \"TotalCycles\": \"<integer>\",\n      \"UntilCancelled\": \"<boolean>\"\n    }\n  ],\n  \"StoredMethods\": [\n    {\n      \"IdPmethod\": \"<string>\",\n      \"Method\": \"<string>\",\n      \"Descriptor\": \"<string>\",\n      \"MaskedAccount\": \"<string>\",\n      \"ExpDate\": \"<string>\",\n      \"HolderName\": \"<string>\",\n      \"AchSecCode\": \"<string,null>\",\n      \"AchHolderType\": \"<string,null>\",\n      \"IsValidatedACH\": \"<boolean,null>\",\n      \"BIN\": \"<string>\",\n      \"binData\": {\n        \"binMatchedLength\": \"<string>\",\n        \"binCardBrand\": \"<string>\",\n        \"binCardType\": \"<string>\",\n        \"binCardCategory\": \"<string>\",\n        \"binCardIssuer\": \"<string>\",\n        \"binCardIssuerCountry\": \"<string>\",\n        \"binCardIssuerCountryCodeA2\": \"<string>\",\n        \"binCardIssuerCountryNumber\": \"<string>\",\n        \"binCardIsRegulated\": \"<string>\",\n        \"binCardUseCategory\": \"<string>\",\n        \"binCardIssuerCountryCodeA3\": \"<string>\"\n      },\n      \"ABA\": \"<string,null>\",\n      \"PostalCode\": \"<string,null>\",\n      \"MethodType\": \"<string,null>\",\n      \"WalletType\": \"<string,null>\",\n      \"LastUpdated\": \"<dateTime>\",\n      \"CardUpdatedOn\": \"<string,null-date-time>\"\n    }\n  ],\n  \"customerSummary\": {\n    \"NumberofTransactions\": \"<integer>\",\n    \"RecentTransactions\": [\n      {\n        \"splitCount\": \"<integer>\",\n        \"TransactionTime\": \"<string,null-date-time>\",\n        \"AchHolderType\": \"personal\",\n        \"AchSecCode\": \"<string>\",\n        \"BatchAmount\": \"<double>\",\n        \"BatchNumber\": \"<string>\",\n        \"CfeeTransactions\": [\n          {\n            \"cFeeTransid\": \"<string>\",\n            \"feeAmount\": \"<double>\",\n            \"operation\": \"<string>\",\n            \"refundId\": \"<long>\",\n            \"responseData\": {\n              \"eaade\": {\n                \"description\": \"Any type\"\n              }\n            },\n            \"settlementStatus\": \"<integer>\",\n            \"transactionTime\": \"<dateTime>\",\n            \"transStatus\": \"<integer>\"\n          }\n        ],\n        \"ConnectorName\": \"<string>\",\n        \"Customer\": {\n          \"Identifiers\": [\n            {\n              \"description\": \"Any type\"\n            }\n          ],\n          \"FirstName\": \"<string>\",\n          \"LastName\": \"<string>\",\n          \"CompanyName\": \"<string>\",\n          \"BillingAddress1\": \"<string>\",\n          \"BillingAddress2\": \"<string>\",\n          \"BillingCity\": \"<string>\",\n          \"BillingState\": \"<string>\",\n          \"BillingZip\": \"<string>\",\n          \"BillingCountry\": \"<string>\",\n          \"BillingPhone\": \"<string>\",\n          \"BillingEmail\": \"<email>\",\n          \"CustomerNumber\": \"<string>\",\n          \"ShippingAddress1\": \"<string>\",\n          \"ShippingAddress2\": \"<string>\",\n          \"ShippingCity\": \"<string>\",\n          \"ShippingState\": \"<string>\",\n          \"ShippingZip\": \"<string>\",\n          \"ShippingCountry\": \"<string>\",\n          \"customerId\": \"<long>\",\n          \"customerStatus\": \"<integer>\",\n          \"AdditionalData\": {\n            \"amet_bc\": \"<string>\",\n            \"nulla9_d\": \"<string>\",\n            \"eu3f\": \"<string>\",\n            \"eu_5\": \"<string>\"\n          }\n        },\n        \"DeviceId\": \"<string>\",\n        \"EntrypageId\": \"<long>\",\n        \"ExternalProcessorInformation\": \"<string>\",\n        \"FeeAmount\": \"<double>\",\n        \"GatewayTransId\": \"<string>\",\n        \"invoiceData\": {\n          \"AdditionalData\": {\n            \"sunt_1b\": \"<string>\"\n          },\n          \"attachments\": [\n            {\n              \"fContent\": \"<string>\",\n              \"filename\": \"<string>\",\n              \"ftype\": \"png\",\n              \"furl\": \"<string>\"\n            }\n          ],\n          \"company\": \"<string>\",\n          \"discount\": \"<double>\",\n          \"dutyAmount\": \"<double>\",\n          \"firstName\": \"<string>\",\n          \"freightAmount\": \"<double>\",\n          \"frequency\": \"annually\",\n          \"invoiceAmount\": \"<double>\",\n          \"invoiceDate\": \"<date>\",\n          \"invoiceDueDate\": \"<date>\",\n          \"invoiceEndDate\": \"<date>\",\n          \"invoiceNumber\": \"<string>\",\n          \"invoiceStatus\": \"<integer>\",\n          \"invoiceType\": \"<integer>\",\n          \"items\": [\n            {\n              \"itemCategories\": [\n                \"<string>\"\n              ],\n              \"itemCommodityCode\": \"<string>\",\n              \"itemCost\": \"<double>\",\n              \"itemDescription\": \"<string>\",\n              \"itemMode\": \"<integer>\",\n              \"itemProductCode\": \"<string>\",\n              \"itemProductName\": \"<string>\",\n              \"itemQty\": \"<integer>\",\n              \"itemTaxAmount\": \"<double>\",\n              \"itemTaxRate\": \"<double>\",\n              \"itemTotalAmount\": \"<double>\",\n              \"itemUnitOfMeasure\": \"<string>\"\n            }\n          ],\n          \"lastName\": \"<string>\",\n          \"notes\": \"<string>\",\n          \"paymentTerms\": \"15MFI\",\n          \"purchaseOrder\": \"<string>\",\n          \"shippingAddress1\": \"<string>\",\n          \"shippingAddress2\": \"<string>\",\n          \"shippingCity\": \"<string>\",\n          \"shippingCountry\": \"<string>\",\n          \"shippingEmail\": \"<email>\",\n          \"shippingFromZip\": \"<string>\",\n          \"shippingPhone\": \"<string>\",\n          \"shippingState\": \"<string>\",\n          \"shippingZip\": \"<string>\",\n          \"summaryCommodityCode\": \"<string>\",\n          \"tax\": \"<double>\",\n          \"termsConditions\": \"<string>\"\n        },\n        \"Method\": \"<string>\",\n        \"NetAmount\": \"<double>\",\n        \"Operation\": \"<string>\",\n        \"OrderId\": \"<string>\",\n        \"OrgId\": \"<long>\",\n        \"ParentOrgName\": \"<string>\",\n        \"PaymentData\": {\n          \"AccountExp\": \"<string>\",\n          \"accountId\": \"<string>\",\n          \"AccountType\": \"<string>\",\n          \"AccountZip\": \"<string>\",\n          \"binData\": {\n            \"binMatchedLength\": \"<string>\",\n            \"binCardBrand\": \"<string>\",\n            \"binCardType\": \"<string>\",\n            \"binCardCategory\": \"<string>\",\n            \"binCardIssuer\": \"<string>\",\n            \"binCardIssuerCountry\": \"<string>\",\n            \"binCardIssuerCountryCodeA2\": \"<string>\",\n            \"binCardIssuerCountryNumber\": \"<string>\",\n            \"binCardIsRegulated\": \"<string>\",\n            \"binCardUseCategory\": \"<string>\",\n            \"binCardIssuerCountryCodeA3\": \"<string>\"\n          },\n          \"HolderName\": \"<string>\",\n          \"Initiator\": \"<string>\",\n          \"MaskedAccount\": \"<string>\",\n          \"orderDescription\": \"<string>\",\n          \"paymentDetails\": {\n            \"totalAmount\": \"<double>\",\n            \"categories\": [\n              {\n                \"amount\": \"<double>\",\n                \"label\": \"<string>\",\n                \"description\": \"<string>\",\n                \"qty\": 1\n              }\n            ],\n            \"checkImage\": {\n              \"incididunt88\": {\n                \"description\": \"Any type\"\n              },\n              \"reprehenderit_4e\": {\n                \"description\": \"Any type\"\n              }\n            },\n            \"checkNumber\": \"<string>\",\n            \"currency\": \"<string>\",\n            \"serviceFee\": \"<double>\",\n            \"splitFunding\": [\n              {\n                \"accountId\": \"<string>\",\n                \"amount\": \"<double>\",\n                \"description\": \"<string>\",\n                \"recipientEntryPoint\": \"<string>\"\n              }\n            ],\n            \"checkUniqueId\": \"<string>\"\n          },\n          \"Sequence\": \"<string>\",\n          \"SignatureData\": \"<string>\",\n          \"StoredId\": \"<string>\",\n          \"StoredMethodUsageType\": \"<string>\"\n        },\n        \"PaymentTransId\": \"<string>\",\n        \"PayorId\": \"<long>\",\n        \"PaypointDbaname\": \"<string>\",\n        \"PaypointEntryname\": \"<string>\",\n        \"PaypointId\": \"<long>\",\n        \"PaypointLegalname\": \"<string>\",\n        \"PendingFeeAmount\": \"<double>\",\n        \"RefundId\": \"<long>\",\n        \"ResponseData\": {\n          \"authcode\": \"<string>\",\n          \"avsresponse\": \"<string>\",\n          \"avsresponse_text\": \"<string>\",\n          \"cvvresponse\": \"<string>\",\n          \"cvvresponse_text\": \"<string>\",\n          \"emv_auth_response_data\": \"<string>\",\n          \"orderid\": \"<string>\",\n          \"response\": \"<string>\",\n          \"response_code\": \"<string>\",\n          \"response_code_text\": \"<string>\",\n          \"responsetext\": \"<string>\",\n          \"resultCode\": \"<string>\",\n          \"resultCodeText\": \"<string>\",\n          \"transactionid\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"ReturnedId\": \"<long>\",\n        \"ScheduleReference\": \"<long>\",\n        \"SettlementStatus\": \"<integer>\",\n        \"Source\": \"<string>\",\n        \"splitFundingInstructions\": [\n          {\n            \"accountId\": \"<string>\",\n            \"amount\": \"<double>\",\n            \"description\": \"<string>\",\n            \"recipientEntryPoint\": \"<string>\"\n          }\n        ],\n        \"TotalAmount\": \"<double>\",\n        \"TransactionEvents\": [\n          {\n            \"TransEvent\": \"<string>\",\n            \"EventData\": {\n              \"deserunt519\": {\n                \"description\": \"Any type\"\n              },\n              \"adipisicing_396\": {\n                \"description\": \"Any type\"\n              }\n            },\n            \"EventTime\": \"<dateTime>\"\n          }\n        ],\n        \"TransAdditionalData\": {\n          \"description\": \"Any type\"\n        },\n        \"TransStatus\": \"<integer>\"\n      }\n    ],\n    \"TotalAmountTransactions\": \"<double>\",\n    \"TotalNetAmountTransactions\": \"<double>\"\n  },\n  \"PaypointLegalname\": \"<string>\",\n  \"PaypointDbaname\": \"<string>\",\n  \"ParentOrgName\": \"<string>\",\n  \"ParentOrgId\": \"<long>\",\n  \"PaypointEntryname\": \"<string>\",\n  \"pageidentifier\": \"<string>\",\n  \"externalPaypointID\": \"<string>\",\n  \"customerConsent\": {\n    \"eCommunication\": {\n      \"status\": \"<integer>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    \"sms\": {\n      \"status\": \"<integer>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  },\n  \"customerPortal\": \"<string,null>\"\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-ca2c4cd1-00ee-4e4a-bfdc-e994f9b2d290"
+                },
+                {
+                  "id": "fc539e17-8e62-4125-b1a1-1dfdee44bc9c",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-fc539e17-8e62-4125-b1a1-1dfdee44bc9c"
+                },
+                {
+                  "id": "3edf88b3-5ba9-4462-9873-2562cb325467",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-3edf88b3-5ba9-4462-9873-2562cb325467"
+                },
+                {
+                  "id": "e8d93ea4-d4c2-4f65-a3ef-661d7989986d",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-e8d93ea4-d4c2-4f65-a3ef-661d7989986d"
+                },
+                {
+                  "id": "8efef347-7e99-48f9-b60f-eb0b31071324",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-8efef347-7e99-48f9-b60f-eb0b31071324"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:33.000Z",
+              "updatedAt": "2026-07-28T02:32:33.000Z",
+              "uid": "35240-cd77a1c3-f05b-4597-b8bc-18e2ca0cf949"
+            },
+            {
+              "name": "Update customer record",
+              "id": "ed2fec37-8390-40ed-a9c9-213e1de054db",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Customer/:customerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3b7b6eae-d2e4-41c0-a665-88eff82409c0",
+                      "key": "customerId",
+                      "value": "<integer>",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "description": "Update a customer record. Include only the fields you want to change."
+              },
+              "response": [
+                {
+                  "id": "b25ef90c-a303-47a6-8870-9d17f8606232",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"pageIdentifier\": \"<string>\",\n  \"roomId\": \"<long>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-b25ef90c-a303-47a6-8870-9d17f8606232"
+                },
+                {
+                  "id": "222eb8ba-acb4-43a3-a36a-287c866ecf43",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-222eb8ba-acb4-43a3-a36a-287c866ecf43"
+                },
+                {
+                  "id": "4abf9c20-338f-406e-bfde-86c674f41ec9",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-4abf9c20-338f-406e-bfde-86c674f41ec9"
+                },
+                {
+                  "id": "27c71ba1-1378-4d9b-844c-0a19e2bcef63",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-27c71ba1-1378-4d9b-844c-0a19e2bcef63"
+                },
+                {
+                  "id": "f75bcd35-9fc8-4873-b607-f179db1e139e",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"velit_5bf\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-f75bcd35-9fc8-4873-b607-f179db1e139e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:33.000Z",
+              "updatedAt": "2026-07-28T02:32:33.000Z",
+              "uid": "35240-ed2fec37-8390-40ed-a9c9-213e1de054db"
+            },
+            {
+              "name": "Delete customer record",
+              "id": "fbec7cba-3435-414b-8f65-4104c9534af2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Customer/:customerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b1fb3f37-d95d-443f-bef2-229fc4c85032",
+                      "key": "customerId",
+                      "value": "<integer>",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "description": "Delete a customer record."
+              },
+              "response": [
+                {
+                  "id": "220ff173-3793-4c4d-bda1-a5560d0763a2",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"pageIdentifier\": \"<string>\",\n  \"roomId\": \"<long>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-220ff173-3793-4c4d-bda1-a5560d0763a2"
+                },
+                {
+                  "id": "285c60dd-5e28-4e4e-9370-f76ff5bcf5c8",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-285c60dd-5e28-4e4e-9370-f76ff5bcf5c8"
+                },
+                {
+                  "id": "bee4d847-f470-40f8-b698-712107923243",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-bee4d847-f470-40f8-b698-712107923243"
+                },
+                {
+                  "id": "e87ea527-6b71-410c-8158-e73bdd1244c7",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-e87ea527-6b71-410c-8158-e73bdd1244c7"
+                },
+                {
+                  "id": "61ed7053-12ca-4132-a152-a18747fea385",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Customer/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Customer",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-61ed7053-12ca-4132-a152-a18747fea385"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:33.000Z",
+              "updatedAt": "2026-07-28T02:32:33.000Z",
+              "uid": "35240-fbec7cba-3435-414b-8f65-4104c9534af2"
+            }
+          ],
+          "id": "ee67d842-6b3f-454a-ab76-22b302bbe008",
+          "createdAt": "2026-07-28T02:32:33.000Z",
+          "updatedAt": "2026-07-28T02:32:33.000Z",
+          "uid": "35240-ee67d842-6b3f-454a-ab76-22b302bbe008"
+        },
+        {
+          "name": "link",
+          "item": [
+            {
+              "name": "{customerId}",
+              "item": [
+                {
+                  "name": "{transId}",
+                  "item": [
+                    {
+                      "name": "Link Customer to Transaction",
+                      "id": "5862c366-0bdf-4677-a91a-c12ab40020e3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Customer/link/:customerId/:transId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Customer",
+                            "link",
+                            ":customerId",
+                            ":transId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2d13f9b6-d1a7-4a65-bccd-9ad3eebbb87a",
+                              "key": "customerId",
+                              "value": "<integer>",
+                              "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                            },
+                            {
+                              "id": "ba9de5fc-9f77-46d6-8a9f-249dd6e9392e",
+                              "key": "transId",
+                              "value": "<string>",
+                              "description": "(Required) ReferenceId for the transaction (PaymentId)."
+                            }
+                          ]
+                        },
+                        "description": "Links a customer to a transaction by ID."
+                      },
+                      "response": [
+                        {
+                          "id": "e86520a1-3f91-4400-80d8-4f898b2284b7",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Customer/link/:customerId/:transId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Customer",
+                                "link",
+                                ":customerId",
+                                ":transId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerId"
+                                },
+                                {
+                                  "key": "transId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"pageIdentifier\": \"<string>\",\n  \"roomId\": \"<long>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:32:33.000Z",
+                          "updatedAt": "2026-07-28T02:32:33.000Z",
+                          "uid": "35240-e86520a1-3f91-4400-80d8-4f898b2284b7"
+                        },
+                        {
+                          "id": "7b307a8e-8a37-4a8d-a88f-4da1f0c0cb28",
+                          "name": "Bad request / invalid data.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Customer/link/:customerId/:transId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Customer",
+                                "link",
+                                ":customerId",
+                                ":transId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerId"
+                                },
+                                {
+                                  "key": "transId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:33.000Z",
+                          "updatedAt": "2026-07-28T02:32:33.000Z",
+                          "uid": "35240-7b307a8e-8a37-4a8d-a88f-4da1f0c0cb28"
+                        },
+                        {
+                          "id": "5a915ab5-a9ce-48da-986d-0afe5a01938b",
+                          "name": "Unauthorized request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Customer/link/:customerId/:transId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Customer",
+                                "link",
+                                ":customerId",
+                                ":transId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerId"
+                                },
+                                {
+                                  "key": "transId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:33.000Z",
+                          "updatedAt": "2026-07-28T02:32:33.000Z",
+                          "uid": "35240-5a915ab5-a9ce-48da-986d-0afe5a01938b"
+                        },
+                        {
+                          "id": "6fefa032-a987-45fd-bff3-44b369b69e48",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Customer/link/:customerId/:transId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Customer",
+                                "link",
+                                ":customerId",
+                                ":transId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerId"
+                                },
+                                {
+                                  "key": "transId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:33.000Z",
+                          "updatedAt": "2026-07-28T02:32:33.000Z",
+                          "uid": "35240-6fefa032-a987-45fd-bff3-44b369b69e48"
+                        },
+                        {
+                          "id": "0ac0193d-9031-4d0d-8fec-20140462ff1b",
+                          "name": "Database connection error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Customer/link/:customerId/:transId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Customer",
+                                "link",
+                                ":customerId",
+                                ":transId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customerId"
+                                },
+                                {
+                                  "key": "transId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:32:33.000Z",
+                          "updatedAt": "2026-07-28T02:32:33.000Z",
+                          "uid": "35240-0ac0193d-9031-4d0d-8fec-20140462ff1b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:32:33.000Z",
+                      "updatedAt": "2026-07-28T02:32:33.000Z",
+                      "uid": "35240-5862c366-0bdf-4677-a91a-c12ab40020e3"
+                    }
+                  ],
+                  "id": "095c4283-e82a-4ad6-a325-c19bdec9a184",
+                  "createdAt": "2026-07-28T02:32:33.000Z",
+                  "updatedAt": "2026-07-28T02:32:33.000Z",
+                  "uid": "35240-095c4283-e82a-4ad6-a325-c19bdec9a184"
+                }
+              ],
+              "id": "15dc152b-8866-48ae-b6d2-62dd34d3573d",
+              "createdAt": "2026-07-28T02:32:33.000Z",
+              "updatedAt": "2026-07-28T02:32:33.000Z",
+              "uid": "35240-15dc152b-8866-48ae-b6d2-62dd34d3573d"
+            }
+          ],
+          "id": "3df4b77b-6a4d-4b3f-8827-de7b077b4fe2",
+          "createdAt": "2026-07-28T02:32:33.000Z",
+          "updatedAt": "2026-07-28T02:32:33.000Z",
+          "uid": "35240-3df4b77b-6a4d-4b3f-8827-de7b077b4fe2"
+        }
+      ],
+      "id": "a6be8059-2a9d-4737-9681-0cf4d4c8199c",
+      "createdAt": "2026-07-28T02:32:33.000Z",
+      "updatedAt": "2026-07-28T02:32:33.000Z",
+      "uid": "35240-a6be8059-2a9d-4737-9681-0cf4d4c8199c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

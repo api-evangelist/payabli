@@ -1,0 +1,1298 @@
+{
+  "info": {
+    "_postman_id": "e23687af-a4dd-47c4-8f57-3412f42f3dbf",
+    "name": "API reference Bill Notification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:50.000Z",
+    "updatedAt": "2026-07-28T02:32:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e23687af-a4dd-47c4-8f57-3412f42f3dbf"
+  },
+  "item": [
+    {
+      "name": "Notification",
+      "item": [
+        {
+          "name": "{nId}",
+          "item": [
+            {
+              "name": "Get notification",
+              "id": "b6c12cc7-ca9e-490d-ac5b-1c79de33042b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Notification/:nId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification",
+                    ":nId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ef82085b-4100-4c39-ae25-3b6e0357d696",
+                      "key": "nId",
+                      "value": "<string>",
+                      "description": "(Required) Notification ID."
+                    }
+                  ]
+                },
+                "description": "Retrieves a single notification or auto-generated report's details."
+              },
+              "response": [
+                {
+                  "id": "f6426c28-95fa-4a0f-978b-4a970a331352",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"content\": {\n    \"eventType\": \"BillApproved\",\n    \"fileFormat\": \"csv\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"reportName\": \"Settlement\",\n    \"timeZone\": \"<integer>\",\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"frequency\": \"quarterly\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"method\": \"report-web\",\n  \"notificationId\": \"<long>\",\n  \"ownerId\": \"<integer>\",\n  \"ownerName\": \"<string>\",\n  \"ownerType\": \"<integer>\",\n  \"source\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"target\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-f6426c28-95fa-4a0f-978b-4a970a331352"
+                },
+                {
+                  "id": "701005ca-78cf-4c32-84ee-ae783d89abbb",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-701005ca-78cf-4c32-84ee-ae783d89abbb"
+                },
+                {
+                  "id": "dccd6a96-85f6-49d8-846e-e0590d366c04",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-dccd6a96-85f6-49d8-846e-e0590d366c04"
+                },
+                {
+                  "id": "05960ba7-68d7-4a85-bf71-b53bc080e10f",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-05960ba7-68d7-4a85-bf71-b53bc080e10f"
+                },
+                {
+                  "id": "02c2f59c-6c87-4a4a-b27e-bbe41fe258c5",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-02c2f59c-6c87-4a4a-b27e-bbe41fe258c5"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-b6c12cc7-ca9e-490d-ac5b-1c79de33042b"
+            },
+            {
+              "name": "Update notification",
+              "id": "2f533d02-3220-450a-b43b-c93bbb7f739e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Notification/:nId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification",
+                    ":nId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6351a8b1-0ed8-4bf6-8f81-21f4df88676d",
+                      "key": "nId",
+                      "value": "<string>",
+                      "description": "(Required) Notification ID."
+                    }
+                  ]
+                },
+                "description": "Update a notification or auto-generated report."
+              },
+              "response": [
+                {
+                  "id": "15f983fc-578e-411b-964b-3a27334708fe",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-15f983fc-578e-411b-964b-3a27334708fe"
+                },
+                {
+                  "id": "8b1a70b7-2c03-4da9-8e21-c3c214b3fa62",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-8b1a70b7-2c03-4da9-8e21-c3c214b3fa62"
+                },
+                {
+                  "id": "e29b9152-be70-4d91-ab9d-8c45fbf66ed6",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-e29b9152-be70-4d91-ab9d-8c45fbf66ed6"
+                },
+                {
+                  "id": "24081a39-6a16-4b77-bf31-c63a7b364676",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-24081a39-6a16-4b77-bf31-c63a7b364676"
+                },
+                {
+                  "id": "a96206f3-c2d3-4ac4-9d10-b9fd5c814465",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-a96206f3-c2d3-4ac4-9d10-b9fd5c814465"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-2f533d02-3220-450a-b43b-c93bbb7f739e"
+            },
+            {
+              "name": "Delete notification",
+              "id": "45561116-a8d3-4c9b-9440-ba9ee4109f1c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Notification/:nId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification",
+                    ":nId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "85993b0b-30ba-4170-afe7-ec3d82691e82",
+                      "key": "nId",
+                      "value": "<string>",
+                      "description": "(Required) Notification ID."
+                    }
+                  ]
+                },
+                "description": "Deletes a single notification or auto-generated report."
+              },
+              "response": [
+                {
+                  "id": "cfd8d7a2-cc15-49fa-a45d-224d83371ed1",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-cfd8d7a2-cc15-49fa-a45d-224d83371ed1"
+                },
+                {
+                  "id": "ac184071-562e-4bba-8540-f213c823691b",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-ac184071-562e-4bba-8540-f213c823691b"
+                },
+                {
+                  "id": "61258fb1-34e9-4a64-bca4-c60ec82b0571",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-61258fb1-34e9-4a64-bca4-c60ec82b0571"
+                },
+                {
+                  "id": "0ec0d55f-b94d-4807-be6b-c098581d783d",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-0ec0d55f-b94d-4807-be6b-c098581d783d"
+                },
+                {
+                  "id": "7778fd8d-c2c1-4d25-900e-7e2a8c7d68cf",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Notification/:nId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Notification",
+                        ":nId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-7778fd8d-c2c1-4d25-900e-7e2a8c7d68cf"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-45561116-a8d3-4c9b-9440-ba9ee4109f1c"
+            }
+          ],
+          "id": "9b7168da-4a96-4700-810f-e73502f194bf",
+          "createdAt": "2026-07-28T02:32:50.000Z",
+          "updatedAt": "2026-07-28T02:32:50.000Z",
+          "uid": "35240-9b7168da-4a96-4700-810f-e73502f194bf"
+        },
+        {
+          "name": "Add notification",
+          "id": "46d7f88b-91c2-443b-9663-ae95513ec9f9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/Notification",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Notification"
+              ]
+            },
+            "description": "Create a new notification or auto-generated report."
+          },
+          "response": [
+            {
+              "id": "fea41e76-3dde-4eb1-bd03-c5d0f8c09df4",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Notification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-fea41e76-3dde-4eb1-bd03-c5d0f8c09df4"
+            },
+            {
+              "id": "8847f8d0-5ead-4514-ae4f-fa61a7b73515",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Notification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-8847f8d0-5ead-4514-ae4f-fa61a7b73515"
+            },
+            {
+              "id": "9c0d7cc5-edbb-4ada-80c9-bc2f7fc3c52e",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Notification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-9c0d7cc5-edbb-4ada-80c9-bc2f7fc3c52e"
+            },
+            {
+              "id": "e86dcfb3-ed90-49b9-8866-916275bdec93",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Notification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-e86dcfb3-ed90-49b9-8866-916275bdec93"
+            },
+            {
+              "id": "d8664478-c3b9-4a2f-9c90-25fafb0dd686",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frequency\": \"untilcancelled\",\n  \"method\": \"web\",\n  \"ownerType\": \"<integer>\",\n  \"target\": \"<string>\",\n  \"content\": {\n    \"eventType\": \"TransferSuccess\",\n    \"internalData\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"transactionId\": \"0\",\n    \"webHeaderParameters\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"ownerId\": \"<integer>\",\n  \"status\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Notification",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Notification"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-d8664478-c3b9-4a2f-9c90-25fafb0dd686"
+            }
+          ],
+          "createdAt": "2026-07-28T02:32:50.000Z",
+          "updatedAt": "2026-07-28T02:32:50.000Z",
+          "uid": "35240-46d7f88b-91c2-443b-9663-ae95513ec9f9"
+        }
+      ],
+      "id": "ef00ff49-29a4-4745-bcc1-659b75195319",
+      "createdAt": "2026-07-28T02:32:50.000Z",
+      "updatedAt": "2026-07-28T02:32:50.000Z",
+      "uid": "35240-ef00ff49-29a4-4745-bcc1-659b75195319"
+    },
+    {
+      "name": "Export",
+      "item": [
+        {
+          "name": "notificationReport",
+          "item": [
+            {
+              "name": "{Id}",
+              "item": [
+                {
+                  "name": "Export generated report by ID",
+                  "id": "c056e804-c9a1-40ab-b96e-6b6300ada68b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Export/notificationReport/:Id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Export",
+                        "notificationReport",
+                        ":Id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ca8576f3-5309-4d08-be35-c4a53b92e3f5",
+                          "key": "Id",
+                          "value": "<long>",
+                          "description": "(Required) Report ID"
+                        }
+                      ]
+                    },
+                    "description": "Gets a copy of a generated report by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "5028912f-c7a2-4b82-8b20-e75b4c1de257",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Export/notificationReport/:Id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Export",
+                            "notificationReport",
+                            ":Id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "Id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"dolore416\": {\n    \"description\": \"Any type\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:50.000Z",
+                      "updatedAt": "2026-07-28T02:32:50.000Z",
+                      "uid": "35240-5028912f-c7a2-4b82-8b20-e75b4c1de257"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:50.000Z",
+                  "updatedAt": "2026-07-28T02:32:50.000Z",
+                  "uid": "35240-c056e804-c9a1-40ab-b96e-6b6300ada68b"
+                }
+              ],
+              "id": "3323f3a0-bd7e-4440-8aa6-1e306e1cfe43",
+              "createdAt": "2026-07-28T02:32:50.000Z",
+              "updatedAt": "2026-07-28T02:32:50.000Z",
+              "uid": "35240-3323f3a0-bd7e-4440-8aa6-1e306e1cfe43"
+            }
+          ],
+          "id": "93c7b443-0948-4f7e-8e9c-dd9897624314",
+          "createdAt": "2026-07-28T02:32:50.000Z",
+          "updatedAt": "2026-07-28T02:32:50.000Z",
+          "uid": "35240-93c7b443-0948-4f7e-8e9c-dd9897624314"
+        }
+      ],
+      "id": "c103f700-6337-46f5-9f70-fc4d374350bc",
+      "createdAt": "2026-07-28T02:32:50.000Z",
+      "updatedAt": "2026-07-28T02:32:50.000Z",
+      "uid": "35240-c103f700-6337-46f5-9f70-fc4d374350bc"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

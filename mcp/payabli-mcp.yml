@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: https://docs.payabli.com/developers/platform-developer-mcp
+server:
+  name: payabli
+  provider: Inkeep (hosted docs MCP)
+  transport: http
+  url: https://mcp.inkeep.com/payabli/mcp
+  alt_url: https://docs.payabli.com/_mcp/server
+  hosting: remote
+  notes: >-
+    Official hosted MCP server for Payabli documentation and SDK knowledge. Beta for Claude
+    Desktop remote connectors; also configurable in Cursor, Windsurf, and Claude Web (Enterprise).
+    For local use, connect via `npx -y mcp-remote https://mcp.inkeep.com/payabli/mcp`.
+tools:
+- name: search-payabli-docs
+  description: Searches Payabli's official documentation.
+- name: ask-question-about-payabli
+  description: >-
+    Searches Payabli's SDK GitHub repositories and other resources outside of the documentation.
+install:
+  cursor:
+    file: .cursor/mcp.json
+    config: '{"mcpServers": {"inkeepMcp": {"url": "https://mcp.inkeep.com/payabli/mcp"}}}'
+  claude_desktop:
+    file: claude_desktop_config.json
+    config: '{"mcpServers": {"payabli": {"command": "npx", "args": ["-y", "mcp-remote", "https://mcp.inkeep.com/payabli/mcp"]}}}'

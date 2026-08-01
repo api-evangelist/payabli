@@ -1,0 +1,1221 @@
+{
+  "info": {
+    "_postman_id": "f225c7e6-6b18-401f-944c-3f424139054a",
+    "name": "API reference Bill tokenStorage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:17.000Z",
+    "updatedAt": "2026-07-28T02:33:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f225c7e6-6b18-401f-944c-3f424139054a"
+  },
+  "item": [
+    {
+      "name": "TokenStorage",
+      "item": [
+        {
+          "name": "add",
+          "item": [
+            {
+              "name": "Save a payment method (tokenize)",
+              "id": "f3c595df-7284-43d1-b627-9d397079d708",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/TokenStorage/add?achValidation=<boolean>&createAnonymous=<boolean>&forceCustomerCreation=<boolean>&temporary=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "TokenStorage",
+                    "add"
+                  ],
+                  "query": [
+                    {
+                      "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                      "key": "achValidation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.",
+                      "key": "createAnonymous",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.",
+                      "key": "forceCustomerCreation",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.",
+                      "key": "temporary",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Saves a payment method for reuse. This call exchanges sensitive payment information for a token that can be used to process future transactions. The `ReferenceId` value in the response is the `storedMethodId` to use with transactions."
+              },
+              "response": [
+                {
+                  "id": "b22b5b15-26d3-4d23-ba1d-2dd94880b806",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/add?achValidation=<boolean>&createAnonymous=<boolean>&forceCustomerCreation=<boolean>&temporary=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        "add"
+                      ],
+                      "query": [
+                        {
+                          "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                          "key": "achValidation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.",
+                          "key": "createAnonymous",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.",
+                          "key": "forceCustomerCreation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.",
+                          "key": "temporary",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"referenceId\": \"<string>\",\n    \"resultCode\": \"<integer>\",\n    \"resultText\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"methodReferenceId\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-b22b5b15-26d3-4d23-ba1d-2dd94880b806"
+                },
+                {
+                  "id": "b6a20e9d-0367-41c2-85c6-ea82d4c35e00",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/add?achValidation=<boolean>&createAnonymous=<boolean>&forceCustomerCreation=<boolean>&temporary=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        "add"
+                      ],
+                      "query": [
+                        {
+                          "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                          "key": "achValidation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.",
+                          "key": "createAnonymous",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.",
+                          "key": "forceCustomerCreation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.",
+                          "key": "temporary",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-b6a20e9d-0367-41c2-85c6-ea82d4c35e00"
+                },
+                {
+                  "id": "6340938a-2e89-4820-b760-9528a66300dc",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/add?achValidation=<boolean>&createAnonymous=<boolean>&forceCustomerCreation=<boolean>&temporary=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        "add"
+                      ],
+                      "query": [
+                        {
+                          "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                          "key": "achValidation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.",
+                          "key": "createAnonymous",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.",
+                          "key": "forceCustomerCreation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.",
+                          "key": "temporary",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-6340938a-2e89-4820-b760-9528a66300dc"
+                },
+                {
+                  "id": "d354958d-647d-46fa-ba9c-e556e71a4c2b",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/add?achValidation=<boolean>&createAnonymous=<boolean>&forceCustomerCreation=<boolean>&temporary=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        "add"
+                      ],
+                      "query": [
+                        {
+                          "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                          "key": "achValidation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.",
+                          "key": "createAnonymous",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.",
+                          "key": "forceCustomerCreation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.",
+                          "key": "temporary",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-d354958d-647d-46fa-ba9c-e556e71a4c2b"
+                },
+                {
+                  "id": "075052e6-19b4-48d7-a1c1-7cb9fe4a346f",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/add?achValidation=<boolean>&createAnonymous=<boolean>&forceCustomerCreation=<boolean>&temporary=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        "add"
+                      ],
+                      "query": [
+                        {
+                          "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                          "key": "achValidation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.",
+                          "key": "createAnonymous",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.",
+                          "key": "forceCustomerCreation",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.",
+                          "key": "temporary",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-075052e6-19b4-48d7-a1c1-7cb9fe4a346f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:17.000Z",
+              "updatedAt": "2026-07-28T02:33:17.000Z",
+              "uid": "35240-f3c595df-7284-43d1-b627-9d397079d708"
+            }
+          ],
+          "id": "5bff9b85-69ec-413d-bddd-e7b9e995975c",
+          "createdAt": "2026-07-28T02:33:17.000Z",
+          "updatedAt": "2026-07-28T02:33:17.000Z",
+          "uid": "35240-5bff9b85-69ec-413d-bddd-e7b9e995975c"
+        },
+        {
+          "name": "{methodId}",
+          "item": [
+            {
+              "name": "Get payment method",
+              "id": "6ab7a0ea-16b6-48f3-a7c9-62f37185a0fb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/TokenStorage/:methodId?cardExpirationFormat=0&includeTemporary=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY",
+                      "key": "cardExpirationFormat",
+                      "value": "0"
+                    },
+                    {
+                      "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens.",
+                      "key": "includeTemporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "01efd3ec-13dc-4dc4-84d0-0a0be1e1f56b",
+                      "key": "methodId",
+                      "value": "<string>",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "description": "Retrieves details for a saved payment method."
+              },
+              "response": [
+                {
+                  "id": "9f83a869-9b1d-497d-89e5-cb9685affa59",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId?cardExpirationFormat=0&includeTemporary=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY",
+                          "key": "cardExpirationFormat",
+                          "value": "0"
+                        },
+                        {
+                          "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens.",
+                          "key": "includeTemporary",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"aba\": \"<string>\",\n    \"achHolderType\": \"personal\",\n    \"achSecCode\": \"<string>\",\n    \"bin\": \"<string>\",\n    \"binData\": {\n      \"binMatchedLength\": \"<string>\",\n      \"binCardBrand\": \"<string>\",\n      \"binCardType\": \"<string>\",\n      \"binCardCategory\": \"<string>\",\n      \"binCardIssuer\": \"<string>\",\n      \"binCardIssuerCountry\": \"<string>\",\n      \"binCardIssuerCountryCodeA2\": \"<string>\",\n      \"binCardIssuerCountryNumber\": \"<string>\",\n      \"binCardIsRegulated\": \"<string>\",\n      \"binCardUseCategory\": \"<string>\",\n      \"binCardIssuerCountryCodeA3\": \"<string>\"\n    },\n    \"cardUpdatedOn\": \"<dateTime>\",\n    \"customers\": [\n      {\n        \"additionalData\": {\n          \"magna3\": {\n            \"autea\": {\n              \"description\": \"Any type\"\n            },\n            \"fugiat_c3b\": {\n              \"description\": \"Any type\"\n            }\n          }\n        },\n        \"billingAddress1\": \"<string>\",\n        \"billingAddress2\": \"<string>\",\n        \"billingCity\": \"<string>\",\n        \"billingCountry\": \"<string>\",\n        \"billingEmail\": \"<email>\",\n        \"billingPhone\": \"<string>\",\n        \"billingState\": \"<string>\",\n        \"billingZip\": \"<string>\",\n        \"company\": \"<string>\",\n        \"customerId\": \"<long>\",\n        \"customerNumber\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"identifierFields\": [\n          \"<string>\"\n        ],\n        \"lastName\": \"<string>\",\n        \"shippingAddress1\": \"<string>\",\n        \"shippingAddress2\": \"<string>\",\n        \"shippingCity\": \"<string>\",\n        \"shippingCountry\": \"<string>\",\n        \"shippingState\": \"<string>\",\n        \"shippingZip\": \"<string>\",\n        \"balance\": \"<double>\",\n        \"created\": \"<dateTime>\",\n        \"customerConsent\": {\n          \"quif\": {\n            \"description\": \"Any type\"\n          }\n        },\n        \"customerStatus\": \"<integer>\",\n        \"customerSummary\": {\n          \"NumberofTransactions\": \"<integer>\",\n          \"RecentTransactions\": [\n            {\n              \"splitCount\": \"<integer>\",\n              \"TransactionTime\": \"<string,null-date-time>\",\n              \"AchHolderType\": \"personal\",\n              \"AchSecCode\": \"<string>\",\n              \"BatchAmount\": \"<double>\",\n              \"BatchNumber\": \"<string>\",\n              \"CfeeTransactions\": [\n                {\n                  \"cFeeTransid\": \"<string>\",\n                  \"feeAmount\": \"<double>\",\n                  \"operation\": \"<string>\",\n                  \"refundId\": \"<long>\",\n                  \"responseData\": {\n                    \"Lorem_3\": {\n                      \"description\": \"Any type\"\n                    },\n                    \"incididunt_6\": {\n                      \"description\": \"Any type\"\n                    },\n                    \"Excepteura3\": {\n                      \"description\": \"Any type\"\n                    },\n                    \"pariatur39\": {\n                      \"description\": \"Any type\"\n                    }\n                  },\n                  \"settlementStatus\": \"<integer>\",\n                  \"transactionTime\": \"<dateTime>\",\n                  \"transStatus\": \"<integer>\"\n                }\n              ],\n              \"ConnectorName\": \"<string>\",\n              \"Customer\": {\n                \"Identifiers\": [\n                  {\n                    \"description\": \"Any type\"\n                  }\n                ],\n                \"FirstName\": \"<string>\",\n                \"LastName\": \"<string>\",\n                \"CompanyName\": \"<string>\",\n                \"BillingAddress1\": \"<string>\",\n                \"BillingAddress2\": \"<string>\",\n                \"BillingCity\": \"<string>\",\n                \"BillingState\": \"<string>\",\n                \"BillingZip\": \"<string>\",\n                \"BillingCountry\": \"<string>\",\n                \"BillingPhone\": \"<string>\",\n                \"BillingEmail\": \"<email>\",\n                \"CustomerNumber\": \"<string>\",\n                \"ShippingAddress1\": \"<string>\",\n                \"ShippingAddress2\": \"<string>\",\n                \"ShippingCity\": \"<string>\",\n                \"ShippingState\": \"<string>\",\n                \"ShippingZip\": \"<string>\",\n                \"ShippingCountry\": \"<string>\",\n                \"customerId\": \"<long>\",\n                \"customerStatus\": \"<integer>\",\n                \"AdditionalData\": {\n                  \"elitc3\": \"<string>\"\n                }\n              },\n              \"DeviceId\": \"<string>\",\n              \"EntrypageId\": \"<long>\",\n              \"ExternalProcessorInformation\": \"<string>\",\n              \"FeeAmount\": \"<double>\",\n              \"GatewayTransId\": \"<string>\",\n              \"invoiceData\": {\n                \"AdditionalData\": {\n                  \"tempora1\": \"<string>\"\n                },\n                \"attachments\": [\n                  {\n                    \"fContent\": \"<string>\",\n                    \"filename\": \"<string>\",\n                    \"ftype\": \"doc\",\n                    \"furl\": \"<string>\"\n                  }\n                ],\n                \"company\": \"<string>\",\n                \"discount\": \"<double>\",\n                \"dutyAmount\": \"<double>\",\n                \"firstName\": \"<string>\",\n                \"freightAmount\": \"<double>\",\n                \"frequency\": \"every2weeks\",\n                \"invoiceAmount\": \"<double>\",\n                \"invoiceDate\": \"<date>\",\n                \"invoiceDueDate\": \"<date>\",\n                \"invoiceEndDate\": \"<date>\",\n                \"invoiceNumber\": \"<string>\",\n                \"invoiceStatus\": \"<integer>\",\n                \"invoiceType\": \"<integer>\",\n                \"items\": [\n                  {\n                    \"itemCategories\": [\n                      \"<string>\"\n                    ],\n                    \"itemCommodityCode\": \"<string>\",\n                    \"itemCost\": \"<double>\",\n                    \"itemDescription\": \"<string>\",\n                    \"itemMode\": \"<integer>\",\n                    \"itemProductCode\": \"<string>\",\n                    \"itemProductName\": \"<string>\",\n                    \"itemQty\": \"<integer>\",\n                    \"itemTaxAmount\": \"<double>\",\n                    \"itemTaxRate\": \"<double>\",\n                    \"itemTotalAmount\": \"<double>\",\n                    \"itemUnitOfMeasure\": \"<string>\"\n                  }\n                ],\n                \"lastName\": \"<string>\",\n                \"notes\": \"<string>\",\n                \"paymentTerms\": \"NET10\",\n                \"purchaseOrder\": \"<string>\",\n                \"shippingAddress1\": \"<string>\",\n                \"shippingAddress2\": \"<string>\",\n                \"shippingCity\": \"<string>\",\n                \"shippingCountry\": \"<string>\",\n                \"shippingEmail\": \"<email>\",\n                \"shippingFromZip\": \"<string>\",\n                \"shippingPhone\": \"<string>\",\n                \"shippingState\": \"<string>\",\n                \"shippingZip\": \"<string>\",\n                \"summaryCommodityCode\": \"<string>\",\n                \"tax\": \"<double>\",\n                \"termsConditions\": \"<string>\"\n              },\n              \"Method\": \"<string>\",\n              \"NetAmount\": \"<double>\",\n              \"Operation\": \"<string>\",\n              \"OrderId\": \"<string>\",\n              \"OrgId\": \"<long>\",\n              \"ParentOrgName\": \"<string>\",\n              \"PaymentData\": {\n                \"AccountExp\": \"<string>\",\n                \"accountId\": \"<string>\",\n                \"AccountType\": \"<string>\",\n                \"AccountZip\": \"<string>\",\n                \"binData\": {\n                  \"binMatchedLength\": \"<string>\",\n                  \"binCardBrand\": \"<string>\",\n                  \"binCardType\": \"<string>\",\n                  \"binCardCategory\": \"<string>\",\n                  \"binCardIssuer\": \"<string>\",\n                  \"binCardIssuerCountry\": \"<string>\",\n                  \"binCardIssuerCountryCodeA2\": \"<string>\",\n                  \"binCardIssuerCountryNumber\": \"<string>\",\n                  \"binCardIsRegulated\": \"<string>\",\n                  \"binCardUseCategory\": \"<string>\",\n                  \"binCardIssuerCountryCodeA3\": \"<string>\"\n                },\n                \"HolderName\": \"<string>\",\n                \"Initiator\": \"<string>\",\n                \"MaskedAccount\": \"<string>\",\n                \"orderDescription\": \"<string>\",\n                \"paymentDetails\": {\n                  \"totalAmount\": \"<double>\",\n                  \"categories\": [\n                    {\n                      \"amount\": \"<double>\",\n                      \"label\": \"<string>\",\n                      \"description\": \"<string>\",\n                      \"qty\": 1\n                    }\n                  ],\n                  \"checkImage\": {\n                    \"ullamco_0cc\": {\n                      \"description\": \"Any type\"\n                    },\n                    \"utb\": {\n                      \"description\": \"Any type\"\n                    }\n                  },\n                  \"checkNumber\": \"<string>\",\n                  \"currency\": \"<string>\",\n                  \"serviceFee\": \"<double>\",\n                  \"splitFunding\": [\n                    {\n                      \"accountId\": \"<string>\",\n                      \"amount\": \"<double>\",\n                      \"description\": \"<string>\",\n                      \"recipientEntryPoint\": \"<string>\"\n                    }\n                  ],\n                  \"checkUniqueId\": \"<string>\"\n                },\n                \"Sequence\": \"<string>\",\n                \"SignatureData\": \"<string>\",\n                \"StoredId\": \"<string>\",\n                \"StoredMethodUsageType\": \"<string>\"\n              },\n              \"PaymentTransId\": \"<string>\",\n              \"PayorId\": \"<long>\",\n              \"PaypointDbaname\": \"<string>\",\n              \"PaypointEntryname\": \"<string>\",\n              \"PaypointId\": \"<long>\",\n              \"PaypointLegalname\": \"<string>\",\n              \"PendingFeeAmount\": \"<double>\",\n              \"RefundId\": \"<long>\",\n              \"ResponseData\": {\n                \"authcode\": \"<string>\",\n                \"avsresponse\": \"<string>\",\n                \"avsresponse_text\": \"<string>\",\n                \"cvvresponse\": \"<string>\",\n                \"cvvresponse_text\": \"<string>\",\n                \"emv_auth_response_data\": \"<string>\",\n                \"orderid\": \"<string>\",\n                \"response\": \"<string>\",\n                \"response_code\": \"<string>\",\n                \"response_code_text\": \"<string>\",\n                \"responsetext\": \"<string>\",\n                \"resultCode\": \"<string>\",\n                \"resultCodeText\": \"<string>\",\n                \"transactionid\": \"<string>\",\n                \"type\": \"<string>\"\n              },\n              \"ReturnedId\": \"<long>\",\n              \"ScheduleReference\": \"<long>\",\n              \"SettlementStatus\": \"<integer>\",\n              \"Source\": \"<string>\",\n              \"splitFundingInstructions\": [\n                {\n                  \"accountId\": \"<string>\",\n                  \"amount\": \"<double>\",\n                  \"description\": \"<string>\",\n                  \"recipientEntryPoint\": \"<string>\"\n                }\n              ],\n              \"TotalAmount\": \"<double>\",\n              \"TransactionEvents\": [\n                {\n                  \"TransEvent\": \"<string>\",\n                  \"EventData\": {\n                    \"velit6\": {\n                      \"description\": \"Any type\"\n                    },\n                    \"velit_5\": {\n                      \"description\": \"Any type\"\n                    },\n                    \"amet_95\": {\n                      \"description\": \"Any type\"\n                    }\n                  },\n                  \"EventTime\": \"<dateTime>\"\n                }\n              ],\n              \"TransAdditionalData\": {\n                \"description\": \"Any type\"\n              },\n              \"TransStatus\": \"<integer>\"\n            }\n          ],\n          \"TotalAmountTransactions\": \"<double>\",\n          \"TotalNetAmountTransactions\": \"<double>\"\n        },\n        \"customerUsername\": \"<string>\",\n        \"externalPaypointID\": \"<string>\",\n        \"lastUpdated\": \"<dateTime>\",\n        \"mfa\": \"<boolean>\",\n        \"mfaMode\": \"<integer>\",\n        \"pageindentifier\": \"<string>\",\n        \"parentOrgId\": \"<integer>\",\n        \"parentOrgName\": \"<string>\",\n        \"paypointDbaname\": \"<string>\",\n        \"paypointEntryname\": \"<string>\",\n        \"paypointLegalname\": \"<string>\",\n        \"snData\": {\n          \"nonf\": {\n            \"description\": \"Any type\"\n          }\n        },\n        \"snIdentifier\": \"<string>\",\n        \"snProvider\": \"<string>\",\n        \"storedMethods\": [\n          {\n            \"IdPmethod\": \"<string>\",\n            \"Method\": \"<string>\",\n            \"Descriptor\": \"<string>\",\n            \"MaskedAccount\": \"<string>\",\n            \"ExpDate\": \"<string>\",\n            \"HolderName\": \"<string>\",\n            \"AchSecCode\": \"<string,null>\",\n            \"AchHolderType\": \"<string,null>\",\n            \"IsValidatedACH\": \"<boolean,null>\",\n            \"BIN\": \"<string>\",\n            \"binData\": {\n              \"binMatchedLength\": \"<string>\",\n              \"binCardBrand\": \"<string>\",\n              \"binCardType\": \"<string>\",\n              \"binCardCategory\": \"<string>\",\n              \"binCardIssuer\": \"<string>\",\n              \"binCardIssuerCountry\": \"<string>\",\n              \"binCardIssuerCountryCodeA2\": \"<string>\",\n              \"binCardIssuerCountryNumber\": \"<string>\",\n              \"binCardIsRegulated\": \"<string>\",\n              \"binCardUseCategory\": \"<string>\",\n              \"binCardIssuerCountryCodeA3\": \"<string>\"\n            },\n            \"ABA\": \"<string,null>\",\n            \"PostalCode\": \"<string,null>\",\n            \"MethodType\": \"<string,null>\",\n            \"WalletType\": \"<string,null>\",\n            \"LastUpdated\": \"<dateTime>\",\n            \"CardUpdatedOn\": \"<string,null-date-time>\"\n          }\n        ],\n        \"subscriptions\": [\n          {\n            \"EndDate\": \"<string,null-date-time>\",\n            \"LastRun\": \"<string,null-date-time>\",\n            \"NextDate\": \"<string,null-date-time>\",\n            \"StartDate\": \"<string,null-date-time>\",\n            \"StoredMethod\": {\n              \"IdPmethod\": \"<string,null>\",\n              \"Method\": \"<string,null>\",\n              \"Descriptor\": \"<string,null>\",\n              \"MaskedAccount\": \"<string,null>\",\n              \"ExpDate\": \"<string,null>\",\n              \"HolderName\": \"<string,null>\",\n              \"AchSecCode\": \"<string,null>\",\n              \"AchHolderType\": \"<string,null>\",\n              \"IsValidatedACH\": \"<boolean,null>\",\n              \"BIN\": \"<string,null>\",\n              \"binData\": {\n                \"binMatchedLength\": \"<string>\",\n                \"binCardBrand\": \"<string>\",\n                \"binCardType\": \"<string>\",\n                \"binCardCategory\": \"<string>\",\n                \"binCardIssuer\": \"<string>\",\n                \"binCardIssuerCountry\": \"<string>\",\n                \"binCardIssuerCountryCodeA2\": \"<string>\",\n                \"binCardIssuerCountryNumber\": \"<string>\",\n                \"binCardIsRegulated\": \"<string>\",\n                \"binCardUseCategory\": \"<string>\",\n                \"binCardIssuerCountryCodeA3\": \"<string>\"\n              },\n              \"ABA\": \"<string,null>\",\n              \"PostalCode\": \"<string,null>\",\n              \"MethodType\": \"<string,null>\",\n              \"WalletType\": \"<string,null>\",\n              \"LastUpdated\": \"<string,null-date-time>\",\n              \"CardUpdatedOn\": \"<string,null-date-time>\"\n            },\n            \"CreatedAt\": \"<dateTime>\",\n            \"Customer\": {\n              \"Identifiers\": [\n                {\n                  \"description\": \"Any type\"\n                }\n              ],\n              \"FirstName\": \"<string>\",\n              \"LastName\": \"<string>\",\n              \"CompanyName\": \"<string>\",\n              \"BillingAddress1\": \"<string>\",\n              \"BillingAddress2\": \"<string>\",\n              \"BillingCity\": \"<string>\",\n              \"BillingState\": \"<string>\",\n              \"BillingZip\": \"<string>\",\n              \"BillingCountry\": \"<string>\",\n              \"BillingPhone\": \"<string>\",\n              \"BillingEmail\": \"<email>\",\n              \"CustomerNumber\": \"<string>\",\n              \"ShippingAddress1\": \"<string>\",\n              \"ShippingAddress2\": \"<string>\",\n              \"ShippingCity\": \"<string>\",\n              \"ShippingState\": \"<string>\",\n              \"ShippingZip\": \"<string>\",\n              \"ShippingCountry\": \"<string>\",\n              \"customerId\": \"<long>\",\n              \"customerStatus\": \"<integer>\",\n              \"AdditionalData\": {\n                \"sunt_14\": \"<string>\",\n                \"veniam__\": \"<string>\"\n              }\n            },\n            \"EntrypageId\": \"<long>\",\n            \"ExternalPaypointID\": \"<string>\",\n            \"FeeAmount\": \"<double>\",\n            \"Frequency\": \"<string>\",\n            \"IdSub\": \"<long>\",\n            \"invoiceData\": {\n              \"AdditionalData\": {\n                \"idc6\": \"<string>\"\n              },\n              \"attachments\": [\n                {\n                  \"fContent\": \"<string>\",\n                  \"filename\": \"<string>\",\n                  \"ftype\": \"gif\",\n                  \"furl\": \"<string>\"\n                }\n              ],\n              \"company\": \"<string>\",\n              \"discount\": \"<double>\",\n              \"dutyAmount\": \"<double>\",\n              \"firstName\": \"<string>\",\n              \"freightAmount\": \"<double>\",\n              \"frequency\": \"endofmonth\",\n              \"invoiceAmount\": \"<double>\",\n              \"invoiceDate\": \"<date>\",\n              \"invoiceDueDate\": \"<date>\",\n              \"invoiceEndDate\": \"<date>\",\n              \"invoiceNumber\": \"<string>\",\n              \"invoiceStatus\": \"<integer>\",\n              \"invoiceType\": \"<integer>\",\n              \"items\": [\n                {\n                  \"itemCategories\": [\n                    \"<string>\"\n                  ],\n                  \"itemCommodityCode\": \"<string>\",\n                  \"itemCost\": \"<double>\",\n                  \"itemDescription\": \"<string>\",\n                  \"itemMode\": \"<integer>\",\n                  \"itemProductCode\": \"<string>\",\n                  \"itemProductName\": \"<string>\",\n                  \"itemQty\": \"<integer>\",\n                  \"itemTaxAmount\": \"<double>\",\n                  \"itemTaxRate\": \"<double>\",\n                  \"itemTotalAmount\": \"<double>\",\n                  \"itemUnitOfMeasure\": \"<string>\"\n                }\n              ],\n              \"lastName\": \"<string>\",\n              \"notes\": \"<string>\",\n              \"paymentTerms\": \"25UF\",\n              \"purchaseOrder\": \"<string>\",\n              \"shippingAddress1\": \"<string>\",\n              \"shippingAddress2\": \"<string>\",\n              \"shippingCity\": \"<string>\",\n              \"shippingCountry\": \"<string>\",\n              \"shippingEmail\": \"<email>\",\n              \"shippingFromZip\": \"<string>\",\n              \"shippingPhone\": \"<string>\",\n              \"shippingState\": \"<string>\",\n              \"shippingZip\": \"<string>\",\n              \"summaryCommodityCode\": \"<string>\",\n              \"tax\": \"<double>\",\n              \"termsConditions\": \"<string>\"\n            },\n            \"LastUpdated\": \"<dateTime>\",\n            \"LeftCycles\": \"<integer>\",\n            \"Method\": \"<string>\",\n            \"NetAmount\": \"<double>\",\n            \"ParentOrgName\": \"<string>\",\n            \"PaymentData\": {\n              \"AccountExp\": \"<string>\",\n              \"accountId\": \"<string>\",\n              \"AccountType\": \"<string>\",\n              \"AccountZip\": \"<string>\",\n              \"binData\": {\n                \"binMatchedLength\": \"<string>\",\n                \"binCardBrand\": \"<string>\",\n                \"binCardType\": \"<string>\",\n                \"binCardCategory\": \"<string>\",\n                \"binCardIssuer\": \"<string>\",\n                \"binCardIssuerCountry\": \"<string>\",\n                \"binCardIssuerCountryCodeA2\": \"<string>\",\n                \"binCardIssuerCountryNumber\": \"<string>\",\n                \"binCardIsRegulated\": \"<string>\",\n                \"binCardUseCategory\": \"<string>\",\n                \"binCardIssuerCountryCodeA3\": \"<string>\"\n              },\n              \"HolderName\": \"<string>\",\n              \"Initiator\": \"<string>\",\n              \"MaskedAccount\": \"<string>\",\n              \"orderDescription\": \"<string>\",\n              \"paymentDetails\": {\n                \"totalAmount\": \"<double>\",\n                \"categories\": [\n                  {\n                    \"amount\": \"<double>\",\n                    \"label\": \"<string>\",\n                    \"description\": \"<string>\",\n                    \"qty\": 1\n                  }\n                ],\n                \"checkImage\": {\n                  \"reprehenderitc\": {\n                    \"description\": \"Any type\"\n                  },\n                  \"exa\": {\n                    \"description\": \"Any type\"\n                  }\n                },\n                \"checkNumber\": \"<string>\",\n                \"currency\": \"<string>\",\n                \"serviceFee\": \"<double>\",\n                \"splitFunding\": [\n                  {\n                    \"accountId\": \"<string>\",\n                    \"amount\": \"<double>\",\n                    \"description\": \"<string>\",\n                    \"recipientEntryPoint\": \"<string>\"\n                  }\n                ],\n                \"checkUniqueId\": \"<string>\"\n              },\n              \"Sequence\": \"<string>\",\n              \"SignatureData\": \"<string>\",\n              \"StoredId\": \"<string>\",\n              \"StoredMethodUsageType\": \"<string>\"\n            },\n            \"PaypointDbaname\": \"<string>\",\n            \"PaypointEntryname\": \"<string>\",\n            \"PaypointId\": \"<long>\",\n            \"PaypointLegalname\": \"<string>\",\n            \"PlanId\": \"<integer>\",\n            \"Source\": \"<string>\",\n            \"SubEvents\": [\n              {\n                \"description\": \"<string>\",\n                \"eventTime\": \"<dateTime>\",\n                \"extraData\": \"<string,null>\",\n                \"refData\": \"<string>\",\n                \"source\": \"<string>\"\n              }\n            ],\n            \"SubStatus\": \"<integer>\",\n            \"SubscriptionType\": \"BalanceDriven\",\n            \"TotalAmount\": \"<double>\",\n            \"TotalCycles\": \"<integer>\",\n            \"UntilCancelled\": \"<boolean>\"\n          }\n        ],\n        \"timeZone\": \"<integer>\"\n      }\n    ],\n    \"descriptor\": \"<string>\",\n    \"expDate\": \"<string>\",\n    \"holderName\": \"<string>\",\n    \"idPmethod\": \"<string>\",\n    \"isValidatedACH\": \"<boolean>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"maskedAccount\": \"<string>\",\n    \"method\": \"<string>\",\n    \"methodType\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"vendors\": [\n      {\n        \"additionalData\": {\n          \"cupidatat698\": \"<string>\"\n        },\n        \"address1\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"billingData\": {\n          \"id\": \"<integer>\",\n          \"accountId\": \"<string>\",\n          \"nickname\": \"<string>\",\n          \"bankName\": \"<string>\",\n          \"routingAccount\": \"<string>\",\n          \"accountNumber\": \"<string>\",\n          \"typeAccount\": \"<string>\",\n          \"bankAccountHolderName\": \"<string>\",\n          \"bankAccountHolderType\": \"<string>\",\n          \"bankAccountFunction\": \"<integer>\",\n          \"verified\": \"<boolean>\",\n          \"status\": \"<integer>\",\n          \"services\": [\n            {\n              \"description\": \"Any type\"\n            }\n          ],\n          \"default\": \"<boolean>\"\n        },\n        \"city\": \"<string>\",\n        \"contacts\": [\n          {\n            \"contactEmail\": \"<email>\",\n            \"contactName\": \"<string>\",\n            \"contactPhone\": \"<string>\",\n            \"contactTitle\": \"<string>\",\n            \"additionalData\": \"<string>\"\n          }\n        ],\n        \"country\": \"<string>\",\n        \"createdDate\": \"<dateTime>\",\n        \"customField1\": \"<string>\",\n        \"customField2\": \"<string>\",\n        \"customerVendorAccount\": \"<string>\",\n        \"ein\": \"<string>\",\n        \"email\": \"<email>\",\n        \"enrollmentStatus\": \"<string>\",\n        \"externalPaypointID\": \"<string>\",\n        \"internalReferenceId\": \"<long>\",\n        \"lastUpdated\": \"<dateTime>\",\n        \"locationCode\": \"<string>\",\n        \"mcc\": \"<string>\",\n        \"name1\": \"<string>\",\n        \"name2\": \"<string>\",\n        \"parentOrgId\": \"<integer>\",\n        \"parentOrgName\": \"<string>\",\n        \"payeeName1\": \"<string>\",\n        \"payeeName2\": \"<string>\",\n        \"paymentMethod\": \"<string>\",\n        \"paypointDbaname\": \"<string>\",\n        \"paypointEntryname\": \"<string>\",\n        \"paypointId\": \"<string>\",\n        \"paypointLegalname\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"remitAddress1\": \"<string>\",\n        \"remitAddress2\": \"<string>\",\n        \"remitCity\": \"<string>\",\n        \"remitCountry\": \"<string>\",\n        \"remitEmail\": \"<string>\",\n        \"remitState\": \"<string>\",\n        \"remitZip\": \"<string>\",\n        \"state\": \"<string>\",\n        \"storedMethods\": [\n          {\n            \"IdPmethod\": \"<string,null>\",\n            \"Method\": \"<string,null>\",\n            \"Descriptor\": \"<string,null>\",\n            \"MaskedAccount\": \"<string,null>\",\n            \"ExpDate\": \"<string,null>\",\n            \"HolderName\": \"<string,null>\",\n            \"AchSecCode\": \"<string,null>\",\n            \"AchHolderType\": \"<string,null>\",\n            \"IsValidatedACH\": \"<boolean,null>\",\n            \"BIN\": \"<string,null>\",\n            \"binData\": {\n              \"binMatchedLength\": \"<string>\",\n              \"binCardBrand\": \"<string>\",\n              \"binCardType\": \"<string>\",\n              \"binCardCategory\": \"<string>\",\n              \"binCardIssuer\": \"<string>\",\n              \"binCardIssuerCountry\": \"<string>\",\n              \"binCardIssuerCountryCodeA2\": \"<string>\",\n              \"binCardIssuerCountryNumber\": \"<string>\",\n              \"binCardIsRegulated\": \"<string>\",\n              \"binCardUseCategory\": \"<string>\",\n              \"binCardIssuerCountryCodeA3\": \"<string>\"\n            },\n            \"ABA\": \"<string,null>\",\n            \"PostalCode\": \"<string,null>\",\n            \"MethodType\": \"<string,null>\",\n            \"WalletType\": \"<string,null>\",\n            \"LastUpdated\": \"<string,null-date-time>\",\n            \"CardUpdatedOn\": \"<string,null-date-time>\"\n          }\n        ],\n        \"summary\": {\n          \"ActiveBills\": \"<integer>\",\n          \"PendingBills\": \"<integer>\",\n          \"InTransitBills\": \"<integer>\",\n          \"PaidBills\": \"<integer>\",\n          \"OverdueBills\": \"<integer>\",\n          \"ApprovedBills\": \"<integer>\",\n          \"DisapprovedBills\": \"<integer>\",\n          \"TotalBills\": \"<integer>\",\n          \"ActiveBillsAmount\": \"<double>\",\n          \"PendingBillsAmount\": \"<double>\",\n          \"InTransitBillsAmount\": \"<double>\",\n          \"PaidBillsAmount\": \"<double>\",\n          \"OverdueBillsAmount\": \"<double>\",\n          \"ApprovedBillsAmount\": \"<double>\",\n          \"DisapprovedBillsAmount\": \"<double>\",\n          \"TotalBillsAmount\": \"<double>\"\n        },\n        \"vendorId\": \"<integer>\",\n        \"vendorNumber\": \"<string>\",\n        \"vendorStatus\": \"<integer>\",\n        \"zip\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-9f83a869-9b1d-497d-89e5-cb9685affa59"
+                },
+                {
+                  "id": "9b0f60d0-e5a5-412b-a701-0d0736bdc781",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId?cardExpirationFormat=0&includeTemporary=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY",
+                          "key": "cardExpirationFormat",
+                          "value": "0"
+                        },
+                        {
+                          "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens.",
+                          "key": "includeTemporary",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-9b0f60d0-e5a5-412b-a701-0d0736bdc781"
+                },
+                {
+                  "id": "07bc7f36-43f5-475c-825e-bec1c51c783e",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId?cardExpirationFormat=0&includeTemporary=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY",
+                          "key": "cardExpirationFormat",
+                          "value": "0"
+                        },
+                        {
+                          "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens.",
+                          "key": "includeTemporary",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-07bc7f36-43f5-475c-825e-bec1c51c783e"
+                },
+                {
+                  "id": "71b1754d-5af2-410b-a351-c29c301bf47d",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId?cardExpirationFormat=0&includeTemporary=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY",
+                          "key": "cardExpirationFormat",
+                          "value": "0"
+                        },
+                        {
+                          "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens.",
+                          "key": "includeTemporary",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-71b1754d-5af2-410b-a351-c29c301bf47d"
+                },
+                {
+                  "id": "a1de6a0a-7339-477f-ac08-e06dc38246e1",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId?cardExpirationFormat=0&includeTemporary=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY",
+                          "key": "cardExpirationFormat",
+                          "value": "0"
+                        },
+                        {
+                          "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens.",
+                          "key": "includeTemporary",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-a1de6a0a-7339-477f-ac08-e06dc38246e1"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:17.000Z",
+              "updatedAt": "2026-07-28T02:33:17.000Z",
+              "uid": "35240-6ab7a0ea-16b6-48f3-a7c9-62f37185a0fb"
+            },
+            {
+              "name": "Update a payment method",
+              "id": "cf146ebf-84e3-4c4c-a7d9-c178b0fb3917",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/TokenStorage/:methodId?achValidation=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "query": [
+                    {
+                      "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                      "key": "achValidation",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "baa1776e-825e-4fbc-8d88-c53d946fbbb4",
+                      "key": "methodId",
+                      "value": "<string>",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "description": "Updates a saved payment method."
+              },
+              "response": [
+                {
+                  "id": "45553a08-69b8-41b7-be0c-c65e992080fd",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"veniam7\": {\n        \"est_f\": {\n          \"description\": \"Any type\"\n        },\n        \"exercitationc4\": {\n          \"description\": \"Any type\"\n        },\n        \"cillum_a86\": {\n          \"description\": \"Any type\"\n        }\n      },\n      \"dolor633\": {\n        \"veniam_b73\": {\n          \"description\": \"Any type\"\n        },\n        \"ut5\": {\n          \"description\": \"Any type\"\n        }\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId?achValidation=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "query": [
+                        {
+                          "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.",
+                          "key": "achValidation",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"referenceId\": \"<string>\",\n    \"resultCode\": \"<integer>\",\n    \"resultText\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-45553a08-69b8-41b7-be0c-c65e992080fd"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:17.000Z",
+              "updatedAt": "2026-07-28T02:33:17.000Z",
+              "uid": "35240-cf146ebf-84e3-4c4c-a7d9-c178b0fb3917"
+            },
+            {
+              "name": "Remove a payment method",
+              "id": "6be16848-0c43-4d8e-a2fa-839d86e029d3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/TokenStorage/:methodId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dafaeca0-9786-4544-b54e-d6a7df5befa8",
+                      "key": "methodId",
+                      "value": "<string>",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "description": "Deletes a saved payment method."
+              },
+              "response": [
+                {
+                  "id": "3e106d8d-b508-48bc-b548-edba2d2188c1",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"responseData\": {\n    \"referenceId\": \"<string>\",\n    \"resultCode\": \"<integer>\",\n    \"resultText\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-3e106d8d-b508-48bc-b548-edba2d2188c1"
+                },
+                {
+                  "id": "763dec0b-cd30-416b-b505-253d164ba988",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-763dec0b-cd30-416b-b505-253d164ba988"
+                },
+                {
+                  "id": "3e0c4197-9f5b-431b-9e70-fb559984ff49",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-3e0c4197-9f5b-431b-9e70-fb559984ff49"
+                },
+                {
+                  "id": "9423e2da-56e6-4689-90be-0cfe6d11f82e",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-9423e2da-56e6-4689-90be-0cfe6d11f82e"
+                },
+                {
+                  "id": "cbacbb24-341d-4257-9b9d-9d5be596aa7d",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/TokenStorage/:methodId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "TokenStorage",
+                        ":methodId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "methodId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:17.000Z",
+                  "updatedAt": "2026-07-28T02:33:17.000Z",
+                  "uid": "35240-cbacbb24-341d-4257-9b9d-9d5be596aa7d"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:17.000Z",
+              "updatedAt": "2026-07-28T02:33:17.000Z",
+              "uid": "35240-6be16848-0c43-4d8e-a2fa-839d86e029d3"
+            }
+          ],
+          "id": "c42b2458-68a9-4dd9-ab41-6ab1c12e45bd",
+          "createdAt": "2026-07-28T02:33:17.000Z",
+          "updatedAt": "2026-07-28T02:33:17.000Z",
+          "uid": "35240-c42b2458-68a9-4dd9-ab41-6ab1c12e45bd"
+        }
+      ],
+      "id": "88d26017-4a82-41f2-9ad0-53ac8f029116",
+      "createdAt": "2026-07-28T02:33:17.000Z",
+      "updatedAt": "2026-07-28T02:33:17.000Z",
+      "uid": "35240-88d26017-4a82-41f2-9ad0-53ac8f029116"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

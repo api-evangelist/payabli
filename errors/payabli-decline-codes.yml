@@ -1,0 +1,66 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.payabli.com/guides/pay-in-unified-response-codes-reference
+scheme:
+  description: >-
+    Payabli uses a unified response-code system across Pay In transactions. Each code is a letter
+    prefix plus a four-digit number.
+  categories:
+  - prefix: A
+    range: A0000-A0099
+    meaning: Approved (HTTP 200/201)
+  - prefix: D
+    range: D0100-D2999
+    meaning: Declined (HTTP 402)
+  - prefix: E
+    range: E3000-E9999
+    meaning: Error condition (HTTP 400/500)
+envelope_fields:
+- responseCode
+- responseText
+- response_code
+- response_code_text
+- avsresponse
+- cvvresponse
+notes: >-
+  Codes appear on the transaction response object (response_code / response_code_text and the
+  unified responseCode). Only representative codes are captured below — see the reference for the
+  complete list. Fraud-policy blocks surface as responseCode 9005 (HTTP 422).
+approved_codes:
+- code: A0000
+  meaning: Transaction approved
+- code: A0001
+  meaning: Transaction initiated
+- code: A0002
+  meaning: Transaction authorized
+- code: A0003
+  meaning: Transaction canceled
+- code: A0004
+  meaning: Transaction refunded
+- code: A0010
+  meaning: Card issuer approved an amount less than requested
+- code: A0030
+  meaning: Zero-dollar verification approved
+- code: A0050
+  meaning: Pending approval at processor
+decline_codes:
+- code: D0100
+  meaning: Generic decline from card network or issuer
+- code: D0110
+  meaning: Card verification failed
+- code: D0120
+  meaning: Declined due to policy restrictions
+- code: D0225
+  meaning: Insufficient funds or over credit limit
+- code: D0270
+  meaning: Suspected fraud
+- code: D0284
+  meaning: Closed or inactive account
+- code: D0460
+  meaning: Expired card
+- code: D0580
+  meaning: Terminal is offline
+error_codes:
+- code: '9005'
+  http: 422
+  meaning: Blocked by fraud control (terminal — transaction rejected)

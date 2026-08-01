@@ -1,0 +1,1336 @@
+{
+  "info": {
+    "_postman_id": "440471b3-d7c7-4892-8fbe-84cf90231a25",
+    "name": "API reference Bill Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:14.000Z",
+    "updatedAt": "2026-07-28T02:33:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-440471b3-d7c7-4892-8fbe-84cf90231a25"
+  },
+  "item": [
+    {
+      "name": "Templates",
+      "item": [
+        {
+          "name": "getlink",
+          "item": [
+            {
+              "name": "{templateId}",
+              "item": [
+                {
+                  "name": "{ignoreEmpty}",
+                  "item": [
+                    {
+                      "name": "Generate boarding link from template",
+                      "id": "5723d96c-0751-4e34-ae29-3f10ee7aa2fc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Templates/getlink/:templateId/:ignoreEmpty",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Templates",
+                            "getlink",
+                            ":templateId",
+                            ":ignoreEmpty"
+                          ],
+                          "variable": [
+                            {
+                              "id": "917868a5-659e-4dd7-9349-e4caba2db5fb",
+                              "key": "templateId",
+                              "value": "<double>",
+                              "description": "(Required) The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`."
+                            },
+                            {
+                              "id": "3de0ca4f-406f-4688-9167-5c111c26c156",
+                              "key": "ignoreEmpty",
+                              "value": "<boolean>",
+                              "description": "(Required) Ignore read-only and empty fields. Default is `false`. If `ignoreEmpty` = `false` and any field is empty, then the request returns a failure response. If `ignoreEmpty` = `true`, the request returns the boarding link name regardless of whether fields are empty."
+                            }
+                          ]
+                        },
+                        "description": "Generates a boarding link from a boarding template."
+                      },
+                      "response": [
+                        {
+                          "id": "82d94a95-a6fc-4c4c-b65b-8924e8146465",
+                          "name": "Success.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Templates/getlink/:templateId/:ignoreEmpty",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Templates",
+                                "getlink",
+                                ":templateId",
+                                ":ignoreEmpty"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "templateId"
+                                },
+                                {
+                                  "key": "ignoreEmpty"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"responseText\": \"<string>\",\n  \"responseData\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:33:15.000Z",
+                          "updatedAt": "2026-07-28T02:33:15.000Z",
+                          "uid": "35240-82d94a95-a6fc-4c4c-b65b-8924e8146465"
+                        },
+                        {
+                          "id": "eb0c6b27-e8a1-4a83-b8db-55ab4b1b1806",
+                          "name": "Bad request / invalid data.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Templates/getlink/:templateId/:ignoreEmpty",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Templates",
+                                "getlink",
+                                ":templateId",
+                                ":ignoreEmpty"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "templateId"
+                                },
+                                {
+                                  "key": "ignoreEmpty"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:33:15.000Z",
+                          "updatedAt": "2026-07-28T02:33:15.000Z",
+                          "uid": "35240-eb0c6b27-e8a1-4a83-b8db-55ab4b1b1806"
+                        },
+                        {
+                          "id": "cf57d307-ed66-4a54-9c1e-a920ac8dd41d",
+                          "name": "Unauthorized request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Templates/getlink/:templateId/:ignoreEmpty",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Templates",
+                                "getlink",
+                                ":templateId",
+                                ":ignoreEmpty"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "templateId"
+                                },
+                                {
+                                  "key": "ignoreEmpty"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:33:15.000Z",
+                          "updatedAt": "2026-07-28T02:33:15.000Z",
+                          "uid": "35240-cf57d307-ed66-4a54-9c1e-a920ac8dd41d"
+                        },
+                        {
+                          "id": "83db6361-1a48-4004-9697-4276d377a9ea",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Templates/getlink/:templateId/:ignoreEmpty",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Templates",
+                                "getlink",
+                                ":templateId",
+                                ":ignoreEmpty"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "templateId"
+                                },
+                                {
+                                  "key": "ignoreEmpty"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:33:15.000Z",
+                          "updatedAt": "2026-07-28T02:33:15.000Z",
+                          "uid": "35240-83db6361-1a48-4004-9697-4276d377a9ea"
+                        },
+                        {
+                          "id": "220865bb-4406-484f-95c7-8307df30b48b",
+                          "name": "Database connection error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/Templates/getlink/:templateId/:ignoreEmpty",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "Templates",
+                                "getlink",
+                                ":templateId",
+                                ":ignoreEmpty"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "templateId"
+                                },
+                                {
+                                  "key": "ignoreEmpty"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:33:15.000Z",
+                          "updatedAt": "2026-07-28T02:33:15.000Z",
+                          "uid": "35240-220865bb-4406-484f-95c7-8307df30b48b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-5723d96c-0751-4e34-ae29-3f10ee7aa2fc"
+                    }
+                  ],
+                  "id": "5684467a-ef98-4d85-b773-30bec0df65e2",
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-5684467a-ef98-4d85-b773-30bec0df65e2"
+                }
+              ],
+              "id": "5920f196-e5f5-43d5-a9e0-19ad004488f9",
+              "createdAt": "2026-07-28T02:33:15.000Z",
+              "updatedAt": "2026-07-28T02:33:15.000Z",
+              "uid": "35240-5920f196-e5f5-43d5-a9e0-19ad004488f9"
+            }
+          ],
+          "id": "e3a76dcf-e539-4e48-bf4f-5ca53f075975",
+          "createdAt": "2026-07-28T02:33:15.000Z",
+          "updatedAt": "2026-07-28T02:33:15.000Z",
+          "uid": "35240-e3a76dcf-e539-4e48-bf4f-5ca53f075975"
+        },
+        {
+          "name": "get",
+          "item": [
+            {
+              "name": "{templateId}",
+              "item": [
+                {
+                  "name": "Get boarding template by ID",
+                  "id": "44958451-34a6-4b10-80cc-8bdd84377a78",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Templates/get/:templateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Templates",
+                        "get",
+                        ":templateId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0697256d-51cc-469e-b675-8384b7e2105c",
+                          "key": "templateId",
+                          "value": "<double>",
+                          "description": "(Required) The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a boarding template's details by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "c41b5caf-f49f-44f2-b870-c5ca8ec34d56",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Templates/get/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Templates",
+                            "get",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"addPrice\": \"<boolean>\",\n  \"boardingLinks\": [\n    {\n      \"acceptOauth\": \"<boolean>\",\n      \"acceptRegister\": \"<boolean>\",\n      \"entryAttributes\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"orgParentName\": \"<string>\",\n      \"referenceName\": \"<string>\",\n      \"referenceTemplateId\": \"<long>\",\n      \"templateCode\": \"<string>\",\n      \"templateName\": \"<string>\"\n    }\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"idTemplate\": \"<long>\",\n  \"isRoot\": \"<boolean>\",\n  \"orgParentName\": \"<string>\",\n  \"recipientEmailNotification\": \"<boolean>\",\n  \"resumable\": \"<boolean>\",\n  \"templateCode\": \"<string>\",\n  \"templateContent\": {\n    \"businessData\": {\n      \"baddress\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"baddress1\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"bcity\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"bcountry\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"bstate\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"btype\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"bzip\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"dbaname\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ein\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"faxnumber\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"legalname\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"license\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"licstate\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"maddress\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"maddress1\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"mcity\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"mcountry\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"mstate\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"mzip\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"phonenumber\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"startdate\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"taxfillname\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"visible\": \"<boolean>\",\n      \"website\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"additionalData\": {\n        \"fields\": {\n          \"dolore9_\": {\n            \"visible\": \"<boolean>\",\n            \"readOnly\": \"<boolean>\",\n            \"required\": \"<boolean>\",\n            \"posRow\": \"<integer>\",\n            \"posCol\": \"<integer>\",\n            \"value\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"visible\": \"<boolean>\"\n      }\n    },\n    \"documentsData\": {\n      \"visble\": \"<boolean>\",\n      \"subFooter\": \"<string>\",\n      \"subHeader\": \"<string>\",\n      \"depositBank\": {\n        \"visible\": \"<boolean>\",\n        \"accountNumber\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"accountType\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"bankName\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"routingNumber\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        }\n      },\n      \"minimumDocuments\": \"<integer>\",\n      \"uploadDocuments\": \"<boolean>\",\n      \"bankData\": {\n        \"visible\": \"<boolean>\",\n        \"accountNumber\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"accountType\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"bankName\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"routingNumber\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        }\n      },\n      \"termsAndConditions\": {\n        \"tcLinks\": [\n          {\n            \"label\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"visible\": \"<boolean>\"\n      },\n      \"signer\": {\n        \"visible\": \"<boolean>\",\n        \"name\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"ssn\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"dob\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"phone\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"email\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"address\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"address1\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"city\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"country\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"state\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"zip\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"acceptance\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"signedDocumentReference\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"additionalData\": {\n          \"fields\": {\n            \"consequat_37\": {\n              \"visible\": \"<boolean>\",\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"posRow\": \"<integer>\",\n              \"posCol\": \"<integer>\",\n              \"value\": \"<string>\",\n              \"label\": \"<string>\",\n              \"type\": \"<string>\"\n            }\n          },\n          \"visible\": \"<boolean>\"\n        }\n      },\n      \"visible\": \"<boolean>\",\n      \"withdrawalBank\": {\n        \"visible\": \"<boolean>\",\n        \"accountNumber\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"accountType\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"bankName\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"routingNumber\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        }\n      }\n    },\n    \"ownershipData\": {\n      \"contactEmail\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"contactName\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"contactPhone\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"contactTitle\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"multipleContacts\": \"<boolean>\",\n      \"multipleOwners\": \"<boolean>\",\n      \"oaddress\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ocity\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ocountry\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"odriverstate\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ostate\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownerdob\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownerdriver\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"owneremail\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownername\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownerpercent\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownerphone1\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownerphone2\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownerssn\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ownertitle\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"ozip\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"subFooter\": \"<string>\",\n      \"subHeader\": \"<string>\",\n      \"visible\": \"<boolean>\",\n      \"additionalData\": {\n        \"fields\": {\n          \"cillum_f80\": {\n            \"visible\": \"<boolean>\",\n            \"readOnly\": \"<boolean>\",\n            \"required\": \"<boolean>\",\n            \"posRow\": \"<integer>\",\n            \"posCol\": \"<integer>\",\n            \"value\": \"<string>\",\n            \"label\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"visible\": \"<boolean>\"\n      }\n    },\n    \"processingData\": {\n      \"avgmonthly\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"binperson\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"binphone\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"binweb\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"bsummary\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"highticketamt\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"mcc\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"subFooter\": \"<string>\",\n      \"subHeader\": \"<string>\",\n      \"ticketamt\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"visible\": \"<boolean>\",\n      \"whenCharged\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"whenDelivered\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"whenProvided\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"whenRefunded\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"CombinedBatches\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"payoutAverageMonthlyVolume\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"payoutHighTicketAmount\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"payoutAverageTicketAmount\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      },\n      \"payoutCreditLimit\": {\n        \"posCol\": \"<integer>\",\n        \"posRow\": \"<integer>\",\n        \"readOnly\": \"<boolean>\",\n        \"value\": \"<string>\",\n        \"visible\": \"<boolean>\",\n        \"required\": \"<boolean>\"\n      }\n    },\n    \"salesData\": {\n      \"salesCode\": \"<string>\",\n      \"salesCRM\": \"<string>\"\n    },\n    \"servicesData\": {\n      \"ach\": {\n        \"achAbsorb\": {\n          \"multiTier\": \"<boolean>\",\n          \"tiers\": [\n            {\n              \"ccd\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"ppd\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"web\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              }\n            }\n          ],\n          \"visible\": \"<boolean>\"\n        },\n        \"achAbsorb_highPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"achAbsorb_lowPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"achAcceptance\": {\n          \"types\": {\n            \"ccd\": {\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"visible\": \"<boolean>\"\n            },\n            \"ppd\": {\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"visible\": \"<boolean>\"\n            },\n            \"web\": {\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"visible\": \"<boolean>\"\n            }\n          },\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\"\n        },\n        \"achFees\": {\n          \"advancedSettlementAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"annualAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"chargebackAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"earlyTerminationAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"monthlyAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"quarterlyPCIAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"returnedAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"sameDayAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"sundayOriginationAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"verifyBankAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"verifyFundAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"verifyNegativeAchFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"visible\": \"<boolean>\"\n        },\n        \"achPass_highPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"achPass_lowPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"achPassThrough\": {\n          \"multiTier\": \"<boolean>\",\n          \"tiers\": [\n            {\n              \"ccd\": {\n                \"amountFeeone-time\": \"<double>\",\n                \"amountFeeRecurring\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentFeeone-time\": \"<double>\",\n                \"percentFeeRecurring\": \"<double>\"\n              },\n              \"ppd\": {\n                \"amountFeeone-time\": \"<double>\",\n                \"amountFeeRecurring\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentFeeone-time\": \"<double>\",\n                \"percentFeeRecurring\": \"<double>\"\n              },\n              \"web\": {\n                \"amountFeeone-time\": \"<double>\",\n                \"amountFeeRecurring\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentFeeone-time\": \"<double>\",\n                \"percentFeeRecurring\": \"<double>\"\n              }\n            }\n          ],\n          \"visible\": \"<boolean>\"\n        },\n        \"batchCutoffTime\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"discountFrequency\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"fundingRollup\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"gateway\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"pdfTemplateId\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"pricingPlan\": \"<long>\",\n        \"pricingType\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"processor\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"provider\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"tierName\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"visible\": \"<boolean>\"\n      },\n      \"card\": {\n        \"batchCutoffTime\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardAcceptance\": {\n          \"types\": {\n            \"amex\": {\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"visible\": \"<boolean>\"\n            },\n            \"discover\": {\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"visible\": \"<boolean>\"\n            },\n            \"masterCard\": {\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"visible\": \"<boolean>\"\n            },\n            \"visa\": {\n              \"readOnly\": \"<boolean>\",\n              \"required\": \"<boolean>\",\n              \"visible\": \"<boolean>\"\n            }\n          },\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\"\n        },\n        \"cardFees\": {\n          \"achBatchCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"annualCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"avsCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"chargebackCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ddaRejectsCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"earlyTerminationCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"minimumProcessingCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"monthlyPCICardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"montlyPlatformCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"retrievalCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"transactionCardFee\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"visible\": \"<boolean>\"\n        },\n        \"cardFlat\": {\n          \"tiers\": [\n            {\n              \"amex\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"discover\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"masterCard\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"visa\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              }\n            }\n          ],\n          \"visible\": \"<boolean>\"\n        },\n        \"cardFlat_amountxAuth\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardFlat_highPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardFlat_lowPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardFlat_percentxAuth\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardICP\": {\n          \"tiers\": [\n            {\n              \"amex\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"discover\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"masterCard\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              },\n              \"visa\": {\n                \"amountxAuth\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentxAuth\": \"<double>\"\n              }\n            }\n          ],\n          \"visible\": \"<boolean>\"\n        },\n        \"cardICP_amountxAuth\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardICP_highPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardICP_lowPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardICP_percentxAuth\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardPassThrough\": {\n          \"multiTier\": \"<boolean>\",\n          \"tiers\": [\n            {\n              \"amex\": {\n                \"amountFeeone-time\": \"<double>\",\n                \"amountFeeRecurring\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentFeeone-time\": \"<double>\",\n                \"percentFeeRecurring\": \"<double>\"\n              },\n              \"discover\": {\n                \"amountFeeone-time\": \"<double>\",\n                \"amountFeeRecurring\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentFeeone-time\": \"<double>\",\n                \"percentFeeRecurring\": \"<double>\"\n              },\n              \"masterCard\": {\n                \"amountFeeone-time\": \"<double>\",\n                \"amountFeeRecurring\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentFeeone-time\": \"<double>\",\n                \"percentFeeRecurring\": \"<double>\"\n              },\n              \"visa\": {\n                \"amountFeeone-time\": \"<double>\",\n                \"amountFeeRecurring\": \"<double>\",\n                \"highPayRange\": \"<double>\",\n                \"lowPayRange\": \"<double>\",\n                \"percentFeeone-time\": \"<double>\",\n                \"percentFeeRecurring\": \"<double>\"\n              }\n            }\n          ],\n          \"visible\": \"<boolean>\"\n        },\n        \"cardPassThrough_amountRecurring\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardPassThrough_amountxAuth\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardPassThrough_highPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardPassThrough_lowPayRange\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardPassThrough_percentRecurring\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"cardPassThrough_percentxAuth\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"discountFrequency\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"fundingRollup\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"gateway\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"passThroughCost\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"pdfTemplateId\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"pricingPlan\": \"<long>\",\n        \"pricingType\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"processor\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"provider\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"tierName\": {\n          \"posCol\": \"<integer>\",\n          \"posRow\": \"<integer>\",\n          \"readOnly\": \"<boolean>\",\n          \"value\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"required\": \"<boolean>\"\n        },\n        \"visible\": \"<boolean>\"\n      },\n      \"subFooter\": \"<string>\",\n      \"subHeader\": \"<string>\",\n      \"visible\": \"<boolean>\"\n    },\n    \"underwritingData\": {\n      \"method\": \"manual\",\n      \"policyId\": \"<string>\"\n    }\n  },\n  \"templateDescription\": \"<string>\",\n  \"templateTitle\": \"<string>\",\n  \"usedBy\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-c41b5caf-f49f-44f2-b870-c5ca8ec34d56"
+                    },
+                    {
+                      "id": "5e19551d-5aa3-4722-b256-5c685b133d8e",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Templates/get/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Templates",
+                            "get",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-5e19551d-5aa3-4722-b256-5c685b133d8e"
+                    },
+                    {
+                      "id": "74f44d50-22a6-45ff-ad6a-5b68ae585342",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Templates/get/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Templates",
+                            "get",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-74f44d50-22a6-45ff-ad6a-5b68ae585342"
+                    },
+                    {
+                      "id": "0ee0f716-533c-4750-8b25-624622df74b0",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Templates/get/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Templates",
+                            "get",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-0ee0f716-533c-4750-8b25-624622df74b0"
+                    },
+                    {
+                      "id": "135c8417-7473-4107-9c71-9c3ae8054967",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Templates/get/:templateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Templates",
+                            "get",
+                            ":templateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-135c8417-7473-4107-9c71-9c3ae8054967"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-44958451-34a6-4b10-80cc-8bdd84377a78"
+                }
+              ],
+              "id": "f856adc9-614d-4f89-96df-f53461de697b",
+              "createdAt": "2026-07-28T02:33:15.000Z",
+              "updatedAt": "2026-07-28T02:33:15.000Z",
+              "uid": "35240-f856adc9-614d-4f89-96df-f53461de697b"
+            }
+          ],
+          "id": "342fbc0b-6fb8-4dd4-85b7-c6f4f621e593",
+          "createdAt": "2026-07-28T02:33:15.000Z",
+          "updatedAt": "2026-07-28T02:33:15.000Z",
+          "uid": "35240-342fbc0b-6fb8-4dd4-85b7-c6f4f621e593"
+        },
+        {
+          "name": "{templateId}",
+          "item": [
+            {
+              "name": "Delete boarding template",
+              "id": "ce23de84-b464-4a0d-b5ac-08733793f10b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Templates/:templateId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Templates",
+                    ":templateId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4a21bbcc-f370-4971-8b9c-cf628ed9fa77",
+                      "key": "templateId",
+                      "value": "<double>",
+                      "description": "(Required) The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`."
+                    }
+                  ]
+                },
+                "description": "Deletes a template by ID."
+              },
+              "response": [
+                {
+                  "id": "fed24764-73a4-4f6e-a7ad-7d630be0452f",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Templates/:templateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Templates",
+                        ":templateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-fed24764-73a4-4f6e-a7ad-7d630be0452f"
+                },
+                {
+                  "id": "a21d865b-53f9-4658-9eb4-97d00793128c",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Templates/:templateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Templates",
+                        ":templateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-a21d865b-53f9-4658-9eb4-97d00793128c"
+                },
+                {
+                  "id": "61adf947-09b2-4839-b6c3-5859f52c85a9",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Templates/:templateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Templates",
+                        ":templateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-61adf947-09b2-4839-b6c3-5859f52c85a9"
+                },
+                {
+                  "id": "18ba3deb-2574-4123-8ea3-455dbb2217d3",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Templates/:templateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Templates",
+                        ":templateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-18ba3deb-2574-4123-8ea3-455dbb2217d3"
+                },
+                {
+                  "id": "b6909d77-53dd-4cd2-9f4b-a9006c373195",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Templates/:templateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Templates",
+                        ":templateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "templateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-b6909d77-53dd-4cd2-9f4b-a9006c373195"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:15.000Z",
+              "updatedAt": "2026-07-28T02:33:15.000Z",
+              "uid": "35240-ce23de84-b464-4a0d-b5ac-08733793f10b"
+            }
+          ],
+          "id": "5191dd5e-02f0-414c-a9d4-a55f6a493020",
+          "createdAt": "2026-07-28T02:33:15.000Z",
+          "updatedAt": "2026-07-28T02:33:15.000Z",
+          "uid": "35240-5191dd5e-02f0-414c-a9d4-a55f6a493020"
+        }
+      ],
+      "id": "da72275b-e637-4c50-8c0c-0380443e88f2",
+      "createdAt": "2026-07-28T02:33:15.000Z",
+      "updatedAt": "2026-07-28T02:33:15.000Z",
+      "uid": "35240-da72275b-e637-4c50-8c0c-0380443e88f2"
+    },
+    {
+      "name": "Query",
+      "item": [
+        {
+          "name": "templates",
+          "item": [
+            {
+              "name": "{orgId}",
+              "item": [
+                {
+                  "name": "Get list of boarding templates for organization",
+                  "id": "87d1a254-9eb2-4d38-8f46-7897a8154d99",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Query/templates/:orgId?fromRecord=0&limitRecord=20&incididunt_77=<string,null>&sed6=<string,null>&sortBy=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Query",
+                        "templates",
+                        ":orgId"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of records to skip before starting to collect the result set.",
+                          "key": "fromRecord",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                          "key": "limitRecord",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                          "key": "incididunt_77",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                          "key": "sed6",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                          "key": "sortBy",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "69f51f8e-096c-4ae3-83ff-a5a6a14c8f9a",
+                          "key": "orgId",
+                          "value": "<integer>",
+                          "description": "(Required) The numeric identifier for organization, assigned by Payabli."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of boarding templates for an organization. Use filters to limit results. You can't make a request that includes filters from the API console in the documentation. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client."
+                  },
+                  "response": [
+                    {
+                      "id": "b50015ec-e104-4400-acc1-4053155f1f75",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/templates/:orgId?fromRecord=0&limitRecord=20&incididunt_77=<string,null>&sed6=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "templates",
+                            ":orgId"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "incididunt_77",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "sed6",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "orgId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"records\": [\n    {\n      \"addPrice\": \"<boolean>\",\n      \"boardingLinks\": [\n        {\n          \"acceptOauth\": \"<boolean>\",\n          \"acceptRegister\": \"<boolean>\",\n          \"entryAttributes\": \"<string>\",\n          \"id\": \"<integer>\",\n          \"lastUpdated\": \"<dateTime>\",\n          \"orgParentName\": \"<string>\",\n          \"referenceName\": \"<string>\",\n          \"referenceTemplateId\": \"<long>\",\n          \"templateCode\": \"<string>\",\n          \"templateName\": \"<string>\"\n        }\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"idTemplate\": \"<long>\",\n      \"isRoot\": \"<boolean>\",\n      \"orgParentName\": \"<string>\",\n      \"recipientEmailNotification\": \"<boolean>\",\n      \"resumable\": \"<boolean>\",\n      \"templateCode\": \"<string>\",\n      \"templateContent\": {\n        \"businessData\": {\n          \"baddress\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"baddress1\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"bcity\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"bcountry\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"bstate\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"btype\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"bzip\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"dbaname\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ein\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"faxnumber\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"legalname\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"license\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"licstate\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"maddress\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"maddress1\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"mcity\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"mcountry\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"mstate\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"mzip\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"phonenumber\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"startdate\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"taxfillname\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"visible\": \"<boolean>\",\n          \"website\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"additionalData\": {\n            \"fields\": {\n              \"proidentcf\": {\n                \"visible\": \"<boolean>\",\n                \"readOnly\": \"<boolean>\",\n                \"required\": \"<boolean>\",\n                \"posRow\": \"<integer>\",\n                \"posCol\": \"<integer>\",\n                \"value\": \"<string>\",\n                \"label\": \"<string>\",\n                \"type\": \"<string>\"\n              }\n            },\n            \"visible\": \"<boolean>\"\n          }\n        },\n        \"documentsData\": {\n          \"visble\": \"<boolean>\",\n          \"subFooter\": \"<string>\",\n          \"subHeader\": \"<string>\",\n          \"depositBank\": {\n            \"visible\": \"<boolean>\",\n            \"accountNumber\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"accountType\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"bankName\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"routingNumber\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            }\n          },\n          \"minimumDocuments\": \"<integer>\",\n          \"uploadDocuments\": \"<boolean>\",\n          \"bankData\": {\n            \"visible\": \"<boolean>\",\n            \"accountNumber\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"accountType\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"bankName\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"routingNumber\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            }\n          },\n          \"termsAndConditions\": {\n            \"tcLinks\": [\n              {\n                \"label\": \"<string>\",\n                \"value\": \"<string>\"\n              }\n            ],\n            \"visible\": \"<boolean>\"\n          },\n          \"signer\": {\n            \"visible\": \"<boolean>\",\n            \"name\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"ssn\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"dob\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"phone\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"email\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"address\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"address1\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"city\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"country\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"state\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"zip\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"acceptance\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"signedDocumentReference\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"additionalData\": {\n              \"fields\": {\n                \"ipsumf\": {\n                  \"visible\": \"<boolean>\",\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"posRow\": \"<integer>\",\n                  \"posCol\": \"<integer>\",\n                  \"value\": \"<string>\",\n                  \"label\": \"<string>\",\n                  \"type\": \"<string>\"\n                },\n                \"esse_5\": {\n                  \"visible\": \"<boolean>\",\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"posRow\": \"<integer>\",\n                  \"posCol\": \"<integer>\",\n                  \"value\": \"<string>\",\n                  \"label\": \"<string>\",\n                  \"type\": \"<string>\"\n                }\n              },\n              \"visible\": \"<boolean>\"\n            }\n          },\n          \"visible\": \"<boolean>\",\n          \"withdrawalBank\": {\n            \"visible\": \"<boolean>\",\n            \"accountNumber\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"accountType\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"bankName\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"routingNumber\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            }\n          }\n        },\n        \"ownershipData\": {\n          \"contactEmail\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"contactName\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"contactPhone\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"contactTitle\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"multipleContacts\": \"<boolean>\",\n          \"multipleOwners\": \"<boolean>\",\n          \"oaddress\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ocity\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ocountry\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"odriverstate\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ostate\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownerdob\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownerdriver\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"owneremail\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownername\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownerpercent\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownerphone1\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownerphone2\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownerssn\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ownertitle\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"ozip\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"subFooter\": \"<string>\",\n          \"subHeader\": \"<string>\",\n          \"visible\": \"<boolean>\",\n          \"additionalData\": {\n            \"fields\": {\n              \"Duis21\": {\n                \"visible\": \"<boolean>\",\n                \"readOnly\": \"<boolean>\",\n                \"required\": \"<boolean>\",\n                \"posRow\": \"<integer>\",\n                \"posCol\": \"<integer>\",\n                \"value\": \"<string>\",\n                \"label\": \"<string>\",\n                \"type\": \"<string>\"\n              },\n              \"id__e\": {\n                \"visible\": \"<boolean>\",\n                \"readOnly\": \"<boolean>\",\n                \"required\": \"<boolean>\",\n                \"posRow\": \"<integer>\",\n                \"posCol\": \"<integer>\",\n                \"value\": \"<string>\",\n                \"label\": \"<string>\",\n                \"type\": \"<string>\"\n              },\n              \"consecteturd\": {\n                \"visible\": \"<boolean>\",\n                \"readOnly\": \"<boolean>\",\n                \"required\": \"<boolean>\",\n                \"posRow\": \"<integer>\",\n                \"posCol\": \"<integer>\",\n                \"value\": \"<string>\",\n                \"label\": \"<string>\",\n                \"type\": \"<string>\"\n              },\n              \"adipisicing8\": {\n                \"visible\": \"<boolean>\",\n                \"readOnly\": \"<boolean>\",\n                \"required\": \"<boolean>\",\n                \"posRow\": \"<integer>\",\n                \"posCol\": \"<integer>\",\n                \"value\": \"<string>\",\n                \"label\": \"<string>\",\n                \"type\": \"<string>\"\n              }\n            },\n            \"visible\": \"<boolean>\"\n          }\n        },\n        \"processingData\": {\n          \"avgmonthly\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"binperson\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"binphone\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"binweb\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"bsummary\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"highticketamt\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"mcc\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"subFooter\": \"<string>\",\n          \"subHeader\": \"<string>\",\n          \"ticketamt\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"visible\": \"<boolean>\",\n          \"whenCharged\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"whenDelivered\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"whenProvided\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"whenRefunded\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"CombinedBatches\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"payoutAverageMonthlyVolume\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"payoutHighTicketAmount\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"payoutAverageTicketAmount\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          },\n          \"payoutCreditLimit\": {\n            \"posCol\": \"<integer>\",\n            \"posRow\": \"<integer>\",\n            \"readOnly\": \"<boolean>\",\n            \"value\": \"<string>\",\n            \"visible\": \"<boolean>\",\n            \"required\": \"<boolean>\"\n          }\n        },\n        \"salesData\": {\n          \"salesCode\": \"<string>\",\n          \"salesCRM\": \"<string>\"\n        },\n        \"servicesData\": {\n          \"ach\": {\n            \"achAbsorb\": {\n              \"multiTier\": \"<boolean>\",\n              \"tiers\": [\n                {\n                  \"ccd\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"ppd\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"web\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  }\n                }\n              ],\n              \"visible\": \"<boolean>\"\n            },\n            \"achAbsorb_highPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"achAbsorb_lowPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"achAcceptance\": {\n              \"types\": {\n                \"ccd\": {\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"visible\": \"<boolean>\"\n                },\n                \"ppd\": {\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"visible\": \"<boolean>\"\n                },\n                \"web\": {\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"visible\": \"<boolean>\"\n                }\n              },\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\"\n            },\n            \"achFees\": {\n              \"advancedSettlementAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"annualAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"chargebackAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"earlyTerminationAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"monthlyAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"quarterlyPCIAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"returnedAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"sameDayAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"sundayOriginationAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"verifyBankAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"verifyFundAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"verifyNegativeAchFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"visible\": \"<boolean>\"\n            },\n            \"achPass_highPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"achPass_lowPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"achPassThrough\": {\n              \"multiTier\": \"<boolean>\",\n              \"tiers\": [\n                {\n                  \"ccd\": {\n                    \"amountFeeone-time\": \"<double>\",\n                    \"amountFeeRecurring\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentFeeone-time\": \"<double>\",\n                    \"percentFeeRecurring\": \"<double>\"\n                  },\n                  \"ppd\": {\n                    \"amountFeeone-time\": \"<double>\",\n                    \"amountFeeRecurring\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentFeeone-time\": \"<double>\",\n                    \"percentFeeRecurring\": \"<double>\"\n                  },\n                  \"web\": {\n                    \"amountFeeone-time\": \"<double>\",\n                    \"amountFeeRecurring\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentFeeone-time\": \"<double>\",\n                    \"percentFeeRecurring\": \"<double>\"\n                  }\n                }\n              ],\n              \"visible\": \"<boolean>\"\n            },\n            \"batchCutoffTime\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"discountFrequency\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"fundingRollup\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"gateway\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"pdfTemplateId\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"pricingPlan\": \"<long>\",\n            \"pricingType\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"processor\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"provider\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"tierName\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"visible\": \"<boolean>\"\n          },\n          \"card\": {\n            \"batchCutoffTime\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardAcceptance\": {\n              \"types\": {\n                \"amex\": {\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"visible\": \"<boolean>\"\n                },\n                \"discover\": {\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"visible\": \"<boolean>\"\n                },\n                \"masterCard\": {\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"visible\": \"<boolean>\"\n                },\n                \"visa\": {\n                  \"readOnly\": \"<boolean>\",\n                  \"required\": \"<boolean>\",\n                  \"visible\": \"<boolean>\"\n                }\n              },\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\"\n            },\n            \"cardFees\": {\n              \"achBatchCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"annualCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"avsCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"chargebackCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"ddaRejectsCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"earlyTerminationCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"minimumProcessingCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"monthlyPCICardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"montlyPlatformCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"retrievalCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"transactionCardFee\": {\n                \"posCol\": \"<integer>\",\n                \"posRow\": \"<integer>\",\n                \"readOnly\": \"<boolean>\",\n                \"value\": \"<string>\",\n                \"visible\": \"<boolean>\",\n                \"required\": \"<boolean>\"\n              },\n              \"visible\": \"<boolean>\"\n            },\n            \"cardFlat\": {\n              \"tiers\": [\n                {\n                  \"amex\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"discover\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"masterCard\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"visa\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  }\n                }\n              ],\n              \"visible\": \"<boolean>\"\n            },\n            \"cardFlat_amountxAuth\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardFlat_highPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardFlat_lowPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardFlat_percentxAuth\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardICP\": {\n              \"tiers\": [\n                {\n                  \"amex\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"discover\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"masterCard\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  },\n                  \"visa\": {\n                    \"amountxAuth\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentxAuth\": \"<double>\"\n                  }\n                }\n              ],\n              \"visible\": \"<boolean>\"\n            },\n            \"cardICP_amountxAuth\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardICP_highPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardICP_lowPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardICP_percentxAuth\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardPassThrough\": {\n              \"multiTier\": \"<boolean>\",\n              \"tiers\": [\n                {\n                  \"amex\": {\n                    \"amountFeeone-time\": \"<double>\",\n                    \"amountFeeRecurring\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentFeeone-time\": \"<double>\",\n                    \"percentFeeRecurring\": \"<double>\"\n                  },\n                  \"discover\": {\n                    \"amountFeeone-time\": \"<double>\",\n                    \"amountFeeRecurring\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentFeeone-time\": \"<double>\",\n                    \"percentFeeRecurring\": \"<double>\"\n                  },\n                  \"masterCard\": {\n                    \"amountFeeone-time\": \"<double>\",\n                    \"amountFeeRecurring\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentFeeone-time\": \"<double>\",\n                    \"percentFeeRecurring\": \"<double>\"\n                  },\n                  \"visa\": {\n                    \"amountFeeone-time\": \"<double>\",\n                    \"amountFeeRecurring\": \"<double>\",\n                    \"highPayRange\": \"<double>\",\n                    \"lowPayRange\": \"<double>\",\n                    \"percentFeeone-time\": \"<double>\",\n                    \"percentFeeRecurring\": \"<double>\"\n                  }\n                }\n              ],\n              \"visible\": \"<boolean>\"\n            },\n            \"cardPassThrough_amountRecurring\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardPassThrough_amountxAuth\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardPassThrough_highPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardPassThrough_lowPayRange\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardPassThrough_percentRecurring\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"cardPassThrough_percentxAuth\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"discountFrequency\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"fundingRollup\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"gateway\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"passThroughCost\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"pdfTemplateId\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"pricingPlan\": \"<long>\",\n            \"pricingType\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"processor\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"provider\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"tierName\": {\n              \"posCol\": \"<integer>\",\n              \"posRow\": \"<integer>\",\n              \"readOnly\": \"<boolean>\",\n              \"value\": \"<string>\",\n              \"visible\": \"<boolean>\",\n              \"required\": \"<boolean>\"\n            },\n            \"visible\": \"<boolean>\"\n          },\n          \"subFooter\": \"<string>\",\n          \"subHeader\": \"<string>\",\n          \"visible\": \"<boolean>\"\n        },\n        \"underwritingData\": {\n          \"method\": \"bypass\",\n          \"policyId\": \"<string>\"\n        }\n      },\n      \"templateDescription\": \"<string>\",\n      \"templateTitle\": \"<string>\",\n      \"usedBy\": \"<integer>\"\n    }\n  ],\n  \"summary\": {\n    \"pageIdentifier\": \"<string>\",\n    \"pageSize\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"totalNetAmount\": \"<double>\",\n    \"totalPages\": \"<integer>\",\n    \"totalRecords\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-b50015ec-e104-4400-acc1-4053155f1f75"
+                    },
+                    {
+                      "id": "c312da87-e7f3-4b00-8981-055ff2856d36",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/templates/:orgId?fromRecord=0&limitRecord=20&incididunt_77=<string,null>&sed6=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "templates",
+                            ":orgId"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "incididunt_77",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "sed6",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "orgId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-c312da87-e7f3-4b00-8981-055ff2856d36"
+                    },
+                    {
+                      "id": "a8ff0b47-9f97-44dc-b8bd-2835470ed7f0",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/templates/:orgId?fromRecord=0&limitRecord=20&incididunt_77=<string,null>&sed6=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "templates",
+                            ":orgId"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "incididunt_77",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "sed6",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "orgId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-a8ff0b47-9f97-44dc-b8bd-2835470ed7f0"
+                    },
+                    {
+                      "id": "961b6c20-805e-490e-a1cd-4f7772313ec2",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/templates/:orgId?fromRecord=0&limitRecord=20&incididunt_77=<string,null>&sed6=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "templates",
+                            ":orgId"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "incididunt_77",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "sed6",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "orgId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-961b6c20-805e-490e-a1cd-4f7772313ec2"
+                    },
+                    {
+                      "id": "62afd30c-6b6f-4026-92cd-ad3bc9a22047",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/templates/:orgId?fromRecord=0&limitRecord=20&incididunt_77=<string,null>&sed6=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "templates",
+                            ":orgId"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "incididunt_77",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `title` (ct, nct)\n- `description` (ct, nct)\n- `code` (ct, nct)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: title(ct)=hoa return all records with title containing \"hoa\"",
+                              "key": "sed6",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "orgId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:15.000Z",
+                      "updatedAt": "2026-07-28T02:33:15.000Z",
+                      "uid": "35240-62afd30c-6b6f-4026-92cd-ad3bc9a22047"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:33:15.000Z",
+                  "updatedAt": "2026-07-28T02:33:15.000Z",
+                  "uid": "35240-87d1a254-9eb2-4d38-8f46-7897a8154d99"
+                }
+              ],
+              "id": "6cbb397f-46e7-4077-9dcf-edf4e80ecdb2",
+              "createdAt": "2026-07-28T02:33:15.000Z",
+              "updatedAt": "2026-07-28T02:33:15.000Z",
+              "uid": "35240-6cbb397f-46e7-4077-9dcf-edf4e80ecdb2"
+            }
+          ],
+          "id": "51ff8917-1e40-4710-adc3-7a1a070d756f",
+          "createdAt": "2026-07-28T02:33:15.000Z",
+          "updatedAt": "2026-07-28T02:33:15.000Z",
+          "uid": "35240-51ff8917-1e40-4710-adc3-7a1a070d756f"
+        }
+      ],
+      "id": "4b2b869c-2e1e-461c-aec8-630555c6eaf0",
+      "createdAt": "2026-07-28T02:33:15.000Z",
+      "updatedAt": "2026-07-28T02:33:15.000Z",
+      "uid": "35240-4b2b869c-2e1e-461c-aec8-630555c6eaf0"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

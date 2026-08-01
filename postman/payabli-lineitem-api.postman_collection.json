@@ -1,0 +1,1774 @@
+{
+  "info": {
+    "_postman_id": "45344a1b-b8e5-44c1-becb-a1d0cb8f492f",
+    "name": "API reference Bill lineItem API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:43.000Z",
+    "updatedAt": "2026-07-28T02:32:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-45344a1b-b8e5-44c1-becb-a1d0cb8f492f"
+  },
+  "item": [
+    {
+      "name": "LineItem",
+      "item": [
+        {
+          "name": "{entry}",
+          "item": [
+            {
+              "name": "Add item to entrypoint catalog",
+              "id": "b13b973c-36d0-4552-986f-9510fcfd0823",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "A unique ID you can include to prevent duplicating objects or transactions if a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself.",
+                    "key": "idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/LineItem/:entry",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "LineItem",
+                    ":entry"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d8e39696-8ea7-44e3-84d6-cbeb82e44fe7",
+                      "key": "entry",
+                      "value": "<string>",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    }
+                  ]
+                },
+                "description": "Adds products and services to an entrypoint's catalog. These are used as line items for invoicing and transactions. In the response, \"responseData\" displays the item's code."
+              },
+              "response": [
+                {
+                  "id": "fc5afd37-5923-4892-9197-c70cd8c14294",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "A unique ID you can include to prevent duplicating objects or transactions if a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entry"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseData\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-fc5afd37-5923-4892-9197-c70cd8c14294"
+                },
+                {
+                  "id": "894ef88a-d63c-4da5-89fe-1d8597a38d3a",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "A unique ID you can include to prevent duplicating objects or transactions if a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entry"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-894ef88a-d63c-4da5-89fe-1d8597a38d3a"
+                },
+                {
+                  "id": "7ed50976-18c8-466e-92c4-aae2c7473768",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "A unique ID you can include to prevent duplicating objects or transactions if a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entry"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-7ed50976-18c8-466e-92c4-aae2c7473768"
+                },
+                {
+                  "id": "bd2bf116-5de2-427b-b184-6711e075596f",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "A unique ID you can include to prevent duplicating objects or transactions if a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entry"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-bd2bf116-5de2-427b-b184-6711e075596f"
+                },
+                {
+                  "id": "5966612a-f8aa-4dd8-b781-8521e33f8dd6",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "A unique ID you can include to prevent duplicating objects or transactions if a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself.",
+                        "key": "idempotencyKey",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "key": "entry"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-5966612a-f8aa-4dd8-b781-8521e33f8dd6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:44.000Z",
+              "updatedAt": "2026-07-28T02:32:44.000Z",
+              "uid": "35240-b13b973c-36d0-4552-986f-9510fcfd0823"
+            }
+          ],
+          "id": "60eef606-6c6f-42da-90dd-29a63e4238de",
+          "createdAt": "2026-07-28T02:32:44.000Z",
+          "updatedAt": "2026-07-28T02:32:44.000Z",
+          "uid": "35240-60eef606-6c6f-42da-90dd-29a63e4238de"
+        },
+        {
+          "name": "{lineItemId}",
+          "item": [
+            {
+              "name": "Get item in entrypoint",
+              "id": "e351d9f6-c510-4686-8027-298191fd77c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "LineItem",
+                    ":lineItemId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "40fefad0-9b5b-4b21-b3a2-1eb0e4603adc",
+                      "key": "lineItemId",
+                      "value": "<integer>",
+                      "description": "(Required) ID for the line item (also known as a product, service, or item)."
+                    }
+                  ]
+                },
+                "description": "Gets an item by ID."
+              },
+              "response": [
+                {
+                  "id": "2189e508-513f-4d68-9b56-42300d18df54",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<long>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"pageidentifier\": \"<string>\",\n  \"ParentOrgName\": \"<string>\",\n  \"PaypointDbaname\": \"<string>\",\n  \"PaypointEntryname\": \"<string>\",\n  \"PaypointLegalname\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-2189e508-513f-4d68-9b56-42300d18df54"
+                },
+                {
+                  "id": "393e5bd7-cfdd-4e7b-853c-8269b1d2a5cd",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-393e5bd7-cfdd-4e7b-853c-8269b1d2a5cd"
+                },
+                {
+                  "id": "babc0afe-f888-4f1f-8f62-2363d6a08502",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-babc0afe-f888-4f1f-8f62-2363d6a08502"
+                },
+                {
+                  "id": "99d9fbff-bfda-483c-aa33-1df0b4daddf4",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-99d9fbff-bfda-483c-aa33-1df0b4daddf4"
+                },
+                {
+                  "id": "da5c81a7-f8b2-4f57-9227-559474044360",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-da5c81a7-f8b2-4f57-9227-559474044360"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:44.000Z",
+              "updatedAt": "2026-07-28T02:32:44.000Z",
+              "uid": "35240-e351d9f6-c510-4686-8027-298191fd77c3"
+            },
+            {
+              "name": "Update item in entrypoint",
+              "id": "51ff359f-672b-45ed-be9a-fc9856d6e4a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "LineItem",
+                    ":lineItemId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1e95b14a-0554-42e1-aee0-ff5c812fd657",
+                      "key": "lineItemId",
+                      "value": "<integer>",
+                      "description": "(Required) ID for the line item (also known as a product, service, or item)."
+                    }
+                  ]
+                },
+                "description": "Updates an item."
+              },
+              "response": [
+                {
+                  "id": "4b7bfdae-b40d-4702-9de6-eb1559b54ce4",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseData\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-4b7bfdae-b40d-4702-9de6-eb1559b54ce4"
+                },
+                {
+                  "id": "54fb9332-60c6-4644-8b58-945a4a059e30",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-54fb9332-60c6-4644-8b58-945a4a059e30"
+                },
+                {
+                  "id": "2fa6715a-977d-4772-b0cb-bf8878c163bd",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-2fa6715a-977d-4772-b0cb-bf8878c163bd"
+                },
+                {
+                  "id": "3e01bb2d-c9ad-44c5-b628-0fd7d236dfbd",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-3e01bb2d-c9ad-44c5-b628-0fd7d236dfbd"
+                },
+                {
+                  "id": "925a9b16-c792-446b-8859-a3da123bba2e",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"itemCost\": \"<double>\",\n  \"itemQty\": \"<integer>\",\n  \"itemCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"itemCommodityCode\": \"<string>\",\n  \"itemDescription\": \"<string>\",\n  \"itemMode\": \"<integer>\",\n  \"itemProductCode\": \"<string>\",\n  \"itemProductName\": \"<string>\",\n  \"itemUnitOfMeasure\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-925a9b16-c792-446b-8859-a3da123bba2e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:44.000Z",
+              "updatedAt": "2026-07-28T02:32:44.000Z",
+              "uid": "35240-51ff359f-672b-45ed-be9a-fc9856d6e4a3"
+            },
+            {
+              "name": "Delete item in entrypoint",
+              "id": "6b17a733-0634-4e51-800c-1f2cb8e8616d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "LineItem",
+                    ":lineItemId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "59a239a6-1f5c-49e6-8f6b-e9d47dbc7d33",
+                      "key": "lineItemId",
+                      "value": "<integer>",
+                      "description": "(Required) ID for the line item (also known as a product, service, or item)."
+                    }
+                  ]
+                },
+                "description": "Deletes an item."
+              },
+              "response": [
+                {
+                  "id": "d3f86872-0fdd-43fa-90e2-21db91c2373e",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-d3f86872-0fdd-43fa-90e2-21db91c2373e"
+                },
+                {
+                  "id": "ea282781-7eec-401c-bdd8-7691cb593bfe",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-ea282781-7eec-401c-bdd8-7691cb593bfe"
+                },
+                {
+                  "id": "9e559059-ac1a-4978-867b-947777dd2f55",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-9e559059-ac1a-4978-867b-947777dd2f55"
+                },
+                {
+                  "id": "7d4b2feb-7544-4c39-a05e-beceb321df1c",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-7d4b2feb-7544-4c39-a05e-beceb321df1c"
+                },
+                {
+                  "id": "a34343b0-aede-4c14-a1ee-4f5eadf7878c",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/LineItem/:lineItemId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "LineItem",
+                        ":lineItemId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "lineItemId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-a34343b0-aede-4c14-a1ee-4f5eadf7878c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:44.000Z",
+              "updatedAt": "2026-07-28T02:32:44.000Z",
+              "uid": "35240-6b17a733-0634-4e51-800c-1f2cb8e8616d"
+            }
+          ],
+          "id": "a90f8ac6-9e2c-4b68-b2c2-62a774610218",
+          "createdAt": "2026-07-28T02:32:44.000Z",
+          "updatedAt": "2026-07-28T02:32:44.000Z",
+          "uid": "35240-a90f8ac6-9e2c-4b68-b2c2-62a774610218"
+        }
+      ],
+      "id": "19aded0a-b9cf-4378-a325-69a7d2a9ae74",
+      "createdAt": "2026-07-28T02:32:44.000Z",
+      "updatedAt": "2026-07-28T02:32:44.000Z",
+      "uid": "35240-19aded0a-b9cf-4378-a325-69a7d2a9ae74"
+    },
+    {
+      "name": "Query",
+      "item": [
+        {
+          "name": "lineitems",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Get list of items for entrypoint",
+                  "id": "61e19f62-95f7-40bc-a92e-a0bdfed6b20b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Query/lineitems/:entry?fromRecord=0&limitRecord=20&et52=<string,null>&consequatec8=<string,null>&deserunt_1=<string,null>&dolora8d=<string,null>&sortBy=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Query",
+                        "lineitems",
+                        ":entry"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of records to skip before starting to collect the result set.",
+                          "key": "fromRecord",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                          "key": "limitRecord",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                          "key": "et52",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                          "key": "consequatec8",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                          "key": "deserunt_1",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                          "key": "dolora8d",
+                          "value": "<string,null>"
+                        },
+                        {
+                          "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                          "key": "sortBy",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "cd99af31-cc2b-41cc-80b9-12bb74a89ebf",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of line items and their details from an entrypoint. Line items are also known as items, products, and services. Use filters to limit results."
+                  },
+                  "response": [
+                    {
+                      "id": "7f42cf3d-a1cf-4e03-a9f3-cc88abd58f02",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/lineitems/:entry?fromRecord=0&limitRecord=20&et52=<string,null>&consequatec8=<string,null>&deserunt_1=<string,null>&dolora8d=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "lineitems",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "et52",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "consequatec8",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "deserunt_1",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "dolora8d",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"Records\": [\n    {\n      \"LineItem\": {\n        \"itemCost\": \"<double>\",\n        \"itemQty\": \"<integer>\",\n        \"itemCategories\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"itemCommodityCode\": \"<string>\",\n        \"itemDescription\": \"<string>\",\n        \"itemMode\": \"<integer>\",\n        \"itemProductCode\": \"<string>\",\n        \"itemProductName\": \"<string>\",\n        \"itemUnitOfMeasure\": \"<string>\"\n      },\n      \"ParentOrgName\": \"<string>\",\n      \"PaypointDbaname\": \"<string>\",\n      \"PaypointEntryname\": \"<string>\",\n      \"PaypointLegalname\": \"<string>\"\n    },\n    {\n      \"LineItem\": {\n        \"itemCost\": \"<double>\",\n        \"itemQty\": \"<integer>\",\n        \"itemCategories\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"itemCommodityCode\": \"<string>\",\n        \"itemDescription\": \"<string>\",\n        \"itemMode\": \"<integer>\",\n        \"itemProductCode\": \"<string>\",\n        \"itemProductName\": \"<string>\",\n        \"itemUnitOfMeasure\": \"<string>\"\n      },\n      \"ParentOrgName\": \"<string>\",\n      \"PaypointDbaname\": \"<string>\",\n      \"PaypointEntryname\": \"<string>\",\n      \"PaypointLegalname\": \"<string>\"\n    }\n  ],\n  \"Summary\": {\n    \"pageIdentifier\": \"<string>\",\n    \"pageSize\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"totalNetAmount\": \"<double>\",\n    \"totalPages\": \"<integer>\",\n    \"totalRecords\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:44.000Z",
+                      "updatedAt": "2026-07-28T02:32:44.000Z",
+                      "uid": "35240-7f42cf3d-a1cf-4e03-a9f3-cc88abd58f02"
+                    },
+                    {
+                      "id": "115d7864-e0b8-468d-987d-173c439c8052",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/lineitems/:entry?fromRecord=0&limitRecord=20&et52=<string,null>&consequatec8=<string,null>&deserunt_1=<string,null>&dolora8d=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "lineitems",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "et52",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "consequatec8",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "deserunt_1",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "dolora8d",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:44.000Z",
+                      "updatedAt": "2026-07-28T02:32:44.000Z",
+                      "uid": "35240-115d7864-e0b8-468d-987d-173c439c8052"
+                    },
+                    {
+                      "id": "60aae1d1-aad8-4402-b869-396038165258",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/lineitems/:entry?fromRecord=0&limitRecord=20&et52=<string,null>&consequatec8=<string,null>&deserunt_1=<string,null>&dolora8d=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "lineitems",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "et52",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "consequatec8",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "deserunt_1",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "dolora8d",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:44.000Z",
+                      "updatedAt": "2026-07-28T02:32:44.000Z",
+                      "uid": "35240-60aae1d1-aad8-4402-b869-396038165258"
+                    },
+                    {
+                      "id": "84b6f200-f76a-4fc4-90bd-c3d38317d208",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/lineitems/:entry?fromRecord=0&limitRecord=20&et52=<string,null>&consequatec8=<string,null>&deserunt_1=<string,null>&dolora8d=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "lineitems",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "et52",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "consequatec8",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "deserunt_1",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "dolora8d",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:44.000Z",
+                      "updatedAt": "2026-07-28T02:32:44.000Z",
+                      "uid": "35240-84b6f200-f76a-4fc4-90bd-c3d38317d208"
+                    },
+                    {
+                      "id": "30c8c896-bc0a-49f7-b5ba-e7f3f050f03c",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/Query/lineitems/:entry?fromRecord=0&limitRecord=20&et52=<string,null>&consequatec8=<string,null>&deserunt_1=<string,null>&dolora8d=<string,null>&sortBy=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Query",
+                            "lineitems",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "The number of records to skip before starting to collect the result set.",
+                              "key": "fromRecord",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Max number of records to return for the query. Use `0` or negative value to return all records.",
+                              "key": "limitRecord",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "et52",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "consequatec8",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "deserunt_1",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john",
+                              "key": "dolora8d",
+                              "value": "<string,null>"
+                            },
+                            {
+                              "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.",
+                              "key": "sortBy",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:44.000Z",
+                      "updatedAt": "2026-07-28T02:32:44.000Z",
+                      "uid": "35240-30c8c896-bc0a-49f7-b5ba-e7f3f050f03c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:44.000Z",
+                  "updatedAt": "2026-07-28T02:32:44.000Z",
+                  "uid": "35240-61e19f62-95f7-40bc-a92e-a0bdfed6b20b"
+                }
+              ],
+              "id": "49c5640e-cbce-491c-b8c6-25b995945dea",
+              "createdAt": "2026-07-28T02:32:44.000Z",
+              "updatedAt": "2026-07-28T02:32:44.000Z",
+              "uid": "35240-49c5640e-cbce-491c-b8c6-25b995945dea"
+            }
+          ],
+          "id": "ccaa48bd-ca91-467a-ae1c-938474420ea2",
+          "createdAt": "2026-07-28T02:32:44.000Z",
+          "updatedAt": "2026-07-28T02:32:44.000Z",
+          "uid": "35240-ccaa48bd-ca91-467a-ae1c-938474420ea2"
+        }
+      ],
+      "id": "5c3cce6d-df86-4aba-960a-415b22a73c47",
+      "createdAt": "2026-07-28T02:32:44.000Z",
+      "updatedAt": "2026-07-28T02:32:44.000Z",
+      "uid": "35240-5c3cce6d-df86-4aba-960a-415b22a73c47"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

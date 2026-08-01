@@ -1,0 +1,65 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.payabli.com/guides/test-accounts-reference
+environments:
+  sandbox:
+    base_url: https://api-sandbox.payabli.com/api
+    portal: https://sandbox.payabli.com
+  production:
+    base_url: https://api.payabli.com/api
+notes: >-
+  Payabli separates test and live via the sandbox environment (api-sandbox.payabli.com). Test
+  credentials/tokens are issued in the sandbox portal. All values below are published verbatim by
+  Payabli's test-accounts reference — never use them in production.
+test_cards:
+- brand: Visa
+  number: '4012000098765439'
+  cvv: '999'
+  exp: any future date
+  result: approved
+- brand: Mastercard
+  number: '5146315000000055'
+  cvv: '998'
+  exp: any future date
+  result: approved
+- brand: Mastercard (BIN 2)
+  number: '2223000048400011'
+  cvv: '998'
+  exp: any future date
+  result: approved
+- brand: Discover
+  number: '6011000993026909'
+  cvv: '996'
+  exp: any future date
+  result: approved
+- brand: American Express
+  number: '374101000000608'
+  cvv: '9997'
+  exp: any future date
+  result: approved
+- brand: American Express
+  number: '371449635392376'
+  cvv: '9997'
+  exp: any future date
+  result: approved
+- brand: Diners Club
+  number: '36256000000725'
+  cvv: '123'
+  exp: any future date
+  result: approved
+- brand: JCB
+  number: '3566000000000000'
+  cvv: '123'
+  exp: any future date
+  result: approved
+test_ach:
+- account_number: '123123123'
+  routing_number: any valid ABA routing number (e.g. 102103407)
+  notes: Works with any account type.
+decline_simulation:
+- scenario: Transaction decline
+  method: Visa 4532802195368947 (CVV 999)
+- scenario: Stored-method decline
+  method: Charge stored Visa 4012000098765439 or AmEx 374101000000608 / 371449635392376 for $0.20
+- scenario: Invalid CVV decline
+  method: Use any approved card number above with an incorrect CVV

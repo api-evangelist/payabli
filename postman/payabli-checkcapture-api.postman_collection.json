@@ -1,0 +1,343 @@
+{
+  "info": {
+    "_postman_id": "80e3163e-ff2b-4fcd-a8f6-2a963d3745c2",
+    "name": "API reference Bill checkCapture API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:10.000Z",
+    "updatedAt": "2026-07-28T02:32:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-80e3163e-ff2b-4fcd-a8f6-2a963d3745c2"
+  },
+  "item": [
+    {
+      "name": "CheckCapture",
+      "item": [
+        {
+          "name": "CheckProcessing",
+          "item": [
+            {
+              "name": "Process Check Capture",
+              "id": "2ff63bbf-b861-45be-8c4f-03fefe0f2287",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entryPoint\": \"<string>\",\n  \"frontImage\": \"<string>\",\n  \"rearImage\": \"<string>\",\n  \"checkAmount\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/CheckCapture/CheckProcessing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "CheckCapture",
+                    "CheckProcessing"
+                  ]
+                },
+                "description": "Captures a check for Remote Deposit Capture (RDC) using the provided check images and details. This endpoint handles the OCR extraction of check data including MICR, routing number, account number, and amount. See the [RDC guide](/developers/developer-guides/pay-in-rdc) for more details."
+              },
+              "response": [
+                {
+                  "id": "ce0425c9-16d6-46fb-bdda-89417b11c97f",
+                  "name": "Success response with check processing results.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"entryPoint\": \"<string>\",\n  \"frontImage\": \"<string>\",\n  \"rearImage\": \"<string>\",\n  \"checkAmount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/CheckCapture/CheckProcessing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "CheckCapture",
+                        "CheckProcessing"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"processDate\": \"<string>\",\n  \"amountDiscrepancyDetected\": \"<boolean>\",\n  \"endorsementDetected\": \"<boolean>\",\n  \"checkType\": \"<double>\",\n  \"id\": \"<string>\",\n  \"ocrMicr\": \"<string>\",\n  \"ocrMicrStatus\": \"<string>\",\n  \"ocrMicrConfidence\": \"<string>\",\n  \"ocrAccountNumber\": \"<string>\",\n  \"ocrRoutingNumber\": \"<string>\",\n  \"ocrCheckNumber\": \"<string>\",\n  \"ocrCheckTranCode\": \"<string>\",\n  \"ocrAmount\": \"<string>\",\n  \"ocrAmountStatus\": \"<string>\",\n  \"ocrAmountConfidence\": \"<string>\",\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"messages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"carLarMatchConfidence\": \"<string>\",\n  \"carLarMatchStatus\": \"<string>\",\n  \"frontImage\": \"<string>\",\n  \"rearImage\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"pageIdentifier\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:32:11.000Z",
+                  "updatedAt": "2026-07-28T02:32:11.000Z",
+                  "uid": "35240-ce0425c9-16d6-46fb-bdda-89417b11c97f"
+                },
+                {
+                  "id": "97f41e3b-e652-4a7b-91d4-fbd494538f9b",
+                  "name": "Bad request / invalid data.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"entryPoint\": \"<string>\",\n  \"frontImage\": \"<string>\",\n  \"rearImage\": \"<string>\",\n  \"checkAmount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/CheckCapture/CheckProcessing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "CheckCapture",
+                        "CheckProcessing"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:11.000Z",
+                  "updatedAt": "2026-07-28T02:32:11.000Z",
+                  "uid": "35240-97f41e3b-e652-4a7b-91d4-fbd494538f9b"
+                },
+                {
+                  "id": "d583e403-bef8-425c-bdb3-0a605dec352b",
+                  "name": "Unauthorized request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"entryPoint\": \"<string>\",\n  \"frontImage\": \"<string>\",\n  \"rearImage\": \"<string>\",\n  \"checkAmount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/CheckCapture/CheckProcessing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "CheckCapture",
+                        "CheckProcessing"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:11.000Z",
+                  "updatedAt": "2026-07-28T02:32:11.000Z",
+                  "uid": "35240-d583e403-bef8-425c-bdb3-0a605dec352b"
+                },
+                {
+                  "id": "44744f3e-8f11-4893-8e4f-c5fa2205b738",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"entryPoint\": \"<string>\",\n  \"frontImage\": \"<string>\",\n  \"rearImage\": \"<string>\",\n  \"checkAmount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/CheckCapture/CheckProcessing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "CheckCapture",
+                        "CheckProcessing"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:11.000Z",
+                  "updatedAt": "2026-07-28T02:32:11.000Z",
+                  "uid": "35240-44744f3e-8f11-4893-8e4f-c5fa2205b738"
+                },
+                {
+                  "id": "a254b33d-db48-4f4a-8f19-78bd2ae92be4",
+                  "name": "Database connection error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"entryPoint\": \"<string>\",\n  \"frontImage\": \"<string>\",\n  \"rearImage\": \"<string>\",\n  \"checkAmount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/CheckCapture/CheckProcessing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "CheckCapture",
+                        "CheckProcessing"
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:11.000Z",
+                  "updatedAt": "2026-07-28T02:32:11.000Z",
+                  "uid": "35240-a254b33d-db48-4f4a-8f19-78bd2ae92be4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:11.000Z",
+              "updatedAt": "2026-07-28T02:32:11.000Z",
+              "uid": "35240-2ff63bbf-b861-45be-8c4f-03fefe0f2287"
+            }
+          ],
+          "id": "0d161b4d-d7ad-4f6d-87cc-83ce2c507678",
+          "createdAt": "2026-07-28T02:32:11.000Z",
+          "updatedAt": "2026-07-28T02:32:11.000Z",
+          "uid": "35240-0d161b4d-d7ad-4f6d-87cc-83ce2c507678"
+        }
+      ],
+      "id": "d24d1895-4ef3-4b6a-a4e5-91fb251bc052",
+      "createdAt": "2026-07-28T02:32:11.000Z",
+      "updatedAt": "2026-07-28T02:32:11.000Z",
+      "uid": "35240-d24d1895-4ef3-4b6a-a4e5-91fb251bc052"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}

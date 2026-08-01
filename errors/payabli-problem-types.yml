@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/payabli-api-reference-openapi.json
+docs: https://docs.payabli.com/developers/api-reference/api-responses
+format: rfc7807
+notes: Payabli v2 Money In endpoints return RFC 7807 Problem Details on 500; 4xx use a JSON error body
+  (V2BadRequestError / PayabliErrorBody). Transaction declines surface as HTTP 402 with unified response
+  codes (see errors/payabli-decline-codes.yml).
+error_schemas:
+- TokenErrorResponse
+- V2BadRequestErrorDetail
+- V2BadRequestError
+- PayabliErrorBodyResponseData
+- PayabliErrorBody
+- V2InternalServerError
+problems:
+- status: 400
+  description: Invalid or missing client credentials.
+  source_operation: openapi/payabli-api-reference-openapi.json#createServerSideToken
+- status: 401
+  description: Unauthorized request.
+  source_operation: openapi/payabli-api-reference-openapi.json#getpaidv2
+- status: 402
+  description: Auth or sale decline error for v2 Money In endpoints (HTTP 402). Returned when an authorization
+    or sale operation is declined for a transaction. Uses unified response codes starting with 'D'. See
+    the [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for
+    the complete list of codes.
+  source_operation: openapi/payabli-api-reference-openapi.json#getpaidv2
+- status: 403
+  description: Consent error.
+  source_operation: openapi/payabli-api-reference-openapi.json#ReissueOut
+- status: 422
+  description: Blocked by fraud control. Returned when a risk policy blocks the transaction
+  source_operation: openapi/payabli-api-reference-openapi.json#AuthorizeOut
+- status: 429
+  description: Too many requests. The calling system is rate limited.
+  source_operation: openapi/payabli-api-reference-openapi.json#ScheduleEnrichmentCall
+- status: 500
+  description: Internal server error for v2 Money In endpoints (HTTP 500). Returned when an unexpected
+    error occurs. Follows RFC 7807 Problem Details format.
+  source_operation: openapi/payabli-api-reference-openapi.json#getpaidv2
+- status: 503
+  description: Database connection error.
+  source_operation: openapi/payabli-api-reference-openapi.json#getpaid

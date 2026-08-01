@@ -1,0 +1,1162 @@
+{
+  "info": {
+    "_postman_id": "616d006a-f385-4dfa-a26c-a8acfe84de5e",
+    "name": "API reference Bill Import API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:40.000Z",
+    "updatedAt": "2026-07-28T02:32:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-616d006a-f385-4dfa-a26c-a8acfe84de5e"
+  },
+  "item": [
+    {
+      "name": "Import",
+      "item": [
+        {
+          "name": "customersForm",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Import list of customers",
+                  "id": "129d1db2-1cc2-4d8a-aa3c-a7d13e0ce176",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Import/customersForm/:entry?replaceExisting=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Import",
+                        "customersForm",
+                        ":entry"
+                      ],
+                      "query": [
+                        {
+                          "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0",
+                          "key": "replaceExisting",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "abe64a1b-72e6-416e-b2c9-6f7112774bd9",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The entrypoint identifier."
+                        }
+                      ]
+                    },
+                    "description": "Import a list of customers from a CSV file. See the [Import Guide](/developers/developer-guides/entities-customers#import-customers) for more help and example files."
+                  },
+                  "response": [
+                    {
+                      "id": "5f18ff0c-ca1f-467b-a7cf-b0a51f497abc",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/customersForm/:entry?replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "customersForm",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"added\": \"<integer>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rejected\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-5f18ff0c-ca1f-467b-a7cf-b0a51f497abc"
+                    },
+                    {
+                      "id": "4f18922a-5ce0-441f-9383-60d9828a4d04",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/customersForm/:entry?replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "customersForm",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-4f18922a-5ce0-441f-9383-60d9828a4d04"
+                    },
+                    {
+                      "id": "8b562254-12c7-4209-b3ac-7f2d8adb676f",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/customersForm/:entry?replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "customersForm",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-8b562254-12c7-4209-b3ac-7f2d8adb676f"
+                    },
+                    {
+                      "id": "f6d0b8cb-c009-4074-8d73-8ef6d61f971a",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/customersForm/:entry?replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "customersForm",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-f6d0b8cb-c009-4074-8d73-8ef6d61f971a"
+                    },
+                    {
+                      "id": "0f3b6b95-e754-416a-94e2-62254cf50100",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/customersForm/:entry?replaceExisting=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "customersForm",
+                            ":entry"
+                          ],
+                          "query": [
+                            {
+                              "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0",
+                              "key": "replaceExisting",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-0f3b6b95-e754-416a-94e2-62254cf50100"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:40.000Z",
+                  "updatedAt": "2026-07-28T02:32:40.000Z",
+                  "uid": "35240-129d1db2-1cc2-4d8a-aa3c-a7d13e0ce176"
+                }
+              ],
+              "id": "4a5bd40e-c059-4dc3-95d6-9d2dc7dc3c6a",
+              "createdAt": "2026-07-28T02:32:40.000Z",
+              "updatedAt": "2026-07-28T02:32:40.000Z",
+              "uid": "35240-4a5bd40e-c059-4dc3-95d6-9d2dc7dc3c6a"
+            }
+          ],
+          "id": "3aefb180-effb-4588-96ea-4e8371460dc9",
+          "createdAt": "2026-07-28T02:32:40.000Z",
+          "updatedAt": "2026-07-28T02:32:40.000Z",
+          "uid": "35240-3aefb180-effb-4588-96ea-4e8371460dc9"
+        },
+        {
+          "name": "vendorsForm",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Import list of vendors",
+                  "id": "b05541bc-6a31-4a23-9697-ddfdfa641cde",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Import/vendorsForm/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Import",
+                        "vendorsForm",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3ffa3d8c-452a-44ef-950e-f76b5958855f",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The entrypoint identifier."
+                        }
+                      ]
+                    },
+                    "description": "Import a list of vendors from a CSV file. See the [Import Guide](/developers/developer-guides/entities-vendors#import-vendors) for more help and example files."
+                  },
+                  "response": [
+                    {
+                      "id": "06915ee7-0246-4857-b7eb-8c38848e3913",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/vendorsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "vendorsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"added\": \"<integer>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rejected\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-06915ee7-0246-4857-b7eb-8c38848e3913"
+                    },
+                    {
+                      "id": "e9b5afcb-ede8-4e7d-acec-03ec96804663",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/vendorsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "vendorsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-e9b5afcb-ede8-4e7d-acec-03ec96804663"
+                    },
+                    {
+                      "id": "c8f9c286-4c83-4ec4-884b-0421bb49ab9f",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/vendorsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "vendorsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-c8f9c286-4c83-4ec4-884b-0421bb49ab9f"
+                    },
+                    {
+                      "id": "8cdc6d19-212c-472d-8139-10d31c54ab77",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/vendorsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "vendorsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-8cdc6d19-212c-472d-8139-10d31c54ab77"
+                    },
+                    {
+                      "id": "2c94cb0b-ac82-41cd-bbe6-ba353684f994",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/vendorsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "vendorsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-2c94cb0b-ac82-41cd-bbe6-ba353684f994"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:40.000Z",
+                  "updatedAt": "2026-07-28T02:32:40.000Z",
+                  "uid": "35240-b05541bc-6a31-4a23-9697-ddfdfa641cde"
+                }
+              ],
+              "id": "8faefddd-be4f-4f7e-afd9-ff083cbcd32f",
+              "createdAt": "2026-07-28T02:32:40.000Z",
+              "updatedAt": "2026-07-28T02:32:40.000Z",
+              "uid": "35240-8faefddd-be4f-4f7e-afd9-ff083cbcd32f"
+            }
+          ],
+          "id": "fa196257-3111-4500-8944-cd1a5f327868",
+          "createdAt": "2026-07-28T02:32:40.000Z",
+          "updatedAt": "2026-07-28T02:32:40.000Z",
+          "uid": "35240-fa196257-3111-4500-8944-cd1a5f327868"
+        },
+        {
+          "name": "billsForm",
+          "item": [
+            {
+              "name": "{entry}",
+              "item": [
+                {
+                  "name": "Import list of bills",
+                  "id": "1ab6c47f-4225-489e-b140-f7b355090577",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file to be imported. The file must be a CSV file with the correct format. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and example files.",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Import/billsForm/:entry",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Import",
+                        "billsForm",
+                        ":entry"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c59de60f-f0fe-43f2-bafa-4e427444f609",
+                          "key": "entry",
+                          "value": "<string>",
+                          "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                        }
+                      ]
+                    },
+                    "description": "Import a list of bills from a CSV file. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and an example file."
+                  },
+                  "response": [
+                    {
+                      "id": "b1af1ebf-8625-4b84-9f41-ed9a8b28da55",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file to be imported. The file must be a CSV file with the correct format. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and example files.",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/billsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "billsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"responseText\": \"<string>\",\n  \"isSuccess\": \"<boolean>\",\n  \"pageIdentifier\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"added\": \"<integer>\",\n    \"errors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rejected\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-b1af1ebf-8625-4b84-9f41-ed9a8b28da55"
+                    },
+                    {
+                      "id": "0b36d1ec-974d-41b2-bd39-7690f476acd3",
+                      "name": "Bad request / invalid data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file to be imported. The file must be a CSV file with the correct format. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and example files.",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/billsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "billsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-0b36d1ec-974d-41b2-bd39-7690f476acd3"
+                    },
+                    {
+                      "id": "ad557fc8-a1d8-40c8-8f6d-58660211bdb4",
+                      "name": "Unauthorized request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file to be imported. The file must be a CSV file with the correct format. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and example files.",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/billsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "billsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-ad557fc8-a1d8-40c8-8f6d-58660211bdb4"
+                    },
+                    {
+                      "id": "df5cfbf2-c095-4ecb-bb1e-8b53eccc22fc",
+                      "name": "Internal server error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file to be imported. The file must be a CSV file with the correct format. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and example files.",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/billsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "billsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-df5cfbf2-c095-4ecb-bb1e-8b53eccc22fc"
+                    },
+                    {
+                      "id": "9c9c6d2f-9cc9-4bd2-872e-2ef4b4f559a6",
+                      "name": "Database connection error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file to be imported. The file must be a CSV file with the correct format. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and example files.",
+                              "key": "file",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/Import/billsForm/:entry",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "Import",
+                            "billsForm",
+                            ":entry"
+                          ],
+                          "variable": [
+                            {
+                              "key": "entry"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isSuccess\": \"<boolean>\",\n  \"responseText\": \"<string>\",\n  \"responseCode\": \"<integer>\",\n  \"responseData\": {\n    \"explanation\": \"<string>\",\n    \"todoAction\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:40.000Z",
+                      "updatedAt": "2026-07-28T02:32:40.000Z",
+                      "uid": "35240-9c9c6d2f-9cc9-4bd2-872e-2ef4b4f559a6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:40.000Z",
+                  "updatedAt": "2026-07-28T02:32:40.000Z",
+                  "uid": "35240-1ab6c47f-4225-489e-b140-f7b355090577"
+                }
+              ],
+              "id": "50792a30-2d91-4de9-88e7-458cc3d34ee4",
+              "createdAt": "2026-07-28T02:32:40.000Z",
+              "updatedAt": "2026-07-28T02:32:40.000Z",
+              "uid": "35240-50792a30-2d91-4de9-88e7-458cc3d34ee4"
+            }
+          ],
+          "id": "45cce767-c00c-4722-93b2-54dd30f7f3f4",
+          "createdAt": "2026-07-28T02:32:40.000Z",
+          "updatedAt": "2026-07-28T02:32:40.000Z",
+          "uid": "35240-45cce767-c00c-4722-93b2-54dd30f7f3f4"
+        }
+      ],
+      "id": "42ff73f3-a368-4241-a7aa-08a65838e721",
+      "createdAt": "2026-07-28T02:32:40.000Z",
+      "updatedAt": "2026-07-28T02:32:40.000Z",
+      "uid": "35240-42ff73f3-a368-4241-a7aa-08a65838e721"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-sandbox.payabli.com/api"
+    }
+  ]
+}
