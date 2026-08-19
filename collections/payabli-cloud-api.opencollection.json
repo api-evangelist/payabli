@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Cloud API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cloud",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register cloud device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Cloud/register/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a cloud device to an entrypoint. See [Devices Quickstart](/developers/developer-guides/devices-quickstart#devices-quickstart) for a complete guide."
+        },
+        {
+          "info": {
+            "name": "List registered devices in cloud",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Cloud/list/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request retrieves an updated list of devices from the processor instead of returning a cached list of devices."
+              }
+            ]
+          },
+          "docs": "Use [List devices by paypoint](/developers/api-reference/cloud/get-list-of-devices-for-a-paypoint) instead, which supports filters, sorting, and pagination.\n\nGet a list of cloud devices registered to an entrypoint."
+        },
+        {
+          "info": {
+            "name": "Get registration history for device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Cloud/history/:entry/:deviceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the cloud device."
+              },
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ]
+          },
+          "docs": "Retrieve the registration history for a device."
+        },
+        {
+          "info": {
+            "name": "Unregister cloud device",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Cloud/register/:entry/:deviceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the cloud device."
+              },
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ]
+          },
+          "docs": "Remove a cloud device from an entrypoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

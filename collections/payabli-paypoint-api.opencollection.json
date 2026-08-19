@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Paypoint API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Paypoint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get paypoint details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "entrypages",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Gets the details for a single paypoint."
+        },
+        {
+          "info": {
+            "name": "Get payment page details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/:entry/:subdomain",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "subdomain",
+                "value": "",
+                "type": "path",
+                "description": "Payment page identifier. The subdomain value is the last portion of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+              }
+            ]
+          },
+          "docs": "Gets the details for a single payment page for a paypoint."
+        },
+        {
+          "info": {
+            "name": "Delete a payment page",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/:entry/:subdomain",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "subdomain",
+                "value": "",
+                "type": "path",
+                "description": "Payment page identifier. The subdomain value is the last portion of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+              }
+            ]
+          },
+          "docs": "Deletes a payment page in a paypoint."
+        },
+        {
+          "info": {
+            "name": "Get basic paypoint details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/basic/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ]
+          },
+          "docs": "Gets the basic details for a paypoint."
+        },
+        {
+          "info": {
+            "name": "Get paypoint details by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/basicById/:IdPaypoint",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "IdPaypoint",
+                "value": "",
+                "type": "path",
+                "description": "Paypoint ID. You can find this value by querying `/api/Query/paypoints/{orgId}`"
+              }
+            ]
+          },
+          "docs": "Retrieves the basic details for a paypoint by ID."
+        },
+        {
+          "info": {
+            "name": "Get paypoint settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/settings/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ]
+          },
+          "docs": "Retrieves a paypoint's basic settings like custom fields, identifiers, and invoicing settings."
+        },
+        {
+          "info": {
+            "name": "Update paypoint logo",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/logo/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a paypoint logo."
+        },
+        {
+          "info": {
+            "name": "Migrate paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/migrate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrates a paypoint to a new parent organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

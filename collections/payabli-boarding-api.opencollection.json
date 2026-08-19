@@ -1,0 +1,409 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Boarding API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Boarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create boarding application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/app",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a boarding application in an organization. This endpoint requires an application API token."
+        },
+        {
+          "info": {
+            "name": "Create multi-product boarding application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/applications",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new boarding application linked to an existing paypoint as part of the multi-product boarding flow. Use this endpoint to add new services to a paypoint without creating a duplicate record. The system copies eligible business, contact, banking, and address data from the paypoint to the new application based on 1:1 field matching. The merchant only needs to provide fields that are specific to the new service. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-produ"
+        },
+        {
+          "info": {
+            "name": "Get boarding application by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/read/:appId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "Boarding application ID."
+              }
+            ]
+          },
+          "docs": "Retrieves the details for a boarding application by ID."
+        },
+        {
+          "info": {
+            "name": "Get multi-product boarding applications for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/applications/:paypointId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "paypointId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the paypoint to retrieve applications for."
+              }
+            ]
+          },
+          "docs": "Returns all boarding applications associated with a specific paypoint, including those created through the multi-product boarding flow. Use this endpoint to track underwriting progress across multiple service additions or to build reporting views. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow."
+        },
+        {
+          "info": {
+            "name": "Get list of applications for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/boarding/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `dbaname` (ct, nct)\n- `legalname` (ct, nct)\n- `ein` (ct, nct)\n- `address` (ct, nct)\n- `city` (ct, nct)\n- `state` (ct, nct)\n- `phone` (ct, nct)\n- `mcc` (ct, nct)\n- `owntype` (ct, nct)\n- `ownerName` (ct, nct)\n- `contactName` (ct, nct)\n- `status` (in, nin, eq,ne)\n- `orgParentname` (ct, nct)\n- `externalpaypointID` (ct, nct, eq, ne)\n- `repCode` (ct, nct, eq, ne)\n- `repName` (ct, nct, eq, ne)\n- `repOffice` (ct, nct, eq, ne)\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of boarding applications for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Update boarding application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/app/:appId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "Boarding application ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a boarding application by ID. This endpoint requires an application API token."
+        },
+        {
+          "info": {
+            "name": "Delete boarding application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/app/:appId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "Boarding application ID."
+              }
+            ]
+          },
+          "docs": "Deletes a boarding application by ID."
+        },
+        {
+          "info": {
+            "name": "Get boarding application by auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/read/:xId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "xId",
+                "value": "",
+                "type": "path",
+                "description": "The application ID in Hex format. Find this at the end of the boarding link URL returned in a call to api/Boarding/applink/{appId}/{mail2}. For example in:  `https://boarding-sandbox.payabli.com/boarding/externalapp/load/17E`, the xId is `17E`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets a boarding application by authentication information. This endpoint requires an `application` API token."
+        },
+        {
+          "info": {
+            "name": "Get boarding link by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/linkbyId/:boardingLinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "boardingLinkId",
+                "value": "",
+                "type": "path",
+                "description": "The boarding link ID. You can find this at the end of the boarding link reference name. For example `https://boarding.payabli.com/boarding/app/myorgaccountname-00091`. The ID is `91`."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a boarding link, by ID."
+        },
+        {
+          "info": {
+            "name": "Get boarding link by template ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/linkbyTemplate/:templateId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`."
+              }
+            ]
+          },
+          "docs": "Get details for a boarding link using the boarding template ID. This endpoint requires an application API token."
+        },
+        {
+          "info": {
+            "name": "Get link or email a link for a boarding application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/applink/:appId/:mail2",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "Boarding application ID."
+              },
+              {
+                "name": "mail2",
+                "value": "",
+                "type": "path",
+                "description": "Email address used to access the application. If `sendEmail` parameter is true, a link to the application is sent to this email address."
+              },
+              {
+                "name": "sendEmail",
+                "value": "",
+                "type": "query",
+                "description": "If `true`, sends an email that includes the link to the application to the `mail2` address. Defaults to `false`."
+              }
+            ]
+          },
+          "docs": "Retrieves a link and the verification code used to log into an existing boarding application. You can also use this endpoint to send a link and referenceId for an existing boarding application to an email address. The recipient can use the referenceId and email address to access and edit the application."
+        },
+        {
+          "info": {
+            "name": "Get boarding Link by reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Boarding/link/:boardingLinkReference",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "boardingLinkReference",
+                "value": "",
+                "type": "path",
+                "description": "The boarding link reference name. You can find this at the end of the boarding link URL. For example `https://boarding.payabli.com/boarding/app/myorgaccountname-00091`"
+              }
+            ]
+          },
+          "docs": "Retrieves the details for a boarding link, by reference name. This endpoint requires an application API token."
+        },
+        {
+          "info": {
+            "name": "Get list of boarding links for organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/boardinglinks/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `lastUpdated` (gt, ge, lt, le, eq, ne)\n- `templateName` (ct, nct)\n- `referenceName` (ct, nct)\n- `acceptRegister` (eq, ne)\n- `acceptAuth` (eq, ne)\n- `templateCode` (ct, nct)\n- `templateId` (eq, ne)\n- `orgParentname` (ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: templateName(ct)=hoa return all records with template title containing \"hoa\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Return a list of boarding links for an organization. Use filters to limit results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

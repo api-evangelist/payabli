@@ -1,0 +1,377 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill moneyOut API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "moneyOut",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authorize a payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/authorize",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "allowDuplicatedBills",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the authorization bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout authorization for a bill, like a split payment."
+              },
+              {
+                "name": "doNotCreateBills",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, Payabli won't automatically create a bill for this payout transaction."
+              },
+              {
+                "name": "forceVendorCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new vendor record, regardless of whether the vendor already exists."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authorizes a transaction for payout.\n\nIf you don't pass `autoCapture` with a value of `true`, authorized transactions aren't flagged for settlement until captured. Use the `referenceId` returned in the response to capture the transaction.\n\nWhen `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transactio"
+        },
+        {
+          "info": {
+            "name": "Capture an authorized payout transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/capture/:referenceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID for the payout transaction."
+              }
+            ]
+          },
+          "docs": "Captures a single authorized payout transaction by ID. If the transaction was authorized with `autoCapture` set to `true`, you don't need to call this endpoint to capture the transaction for processing.\n\nIf a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the capture is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection."
+        },
+        {
+          "info": {
+            "name": "Capture a list of authorized payout transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/captureAll",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Captures an array of authorized payout transactions for settlement. The maximum number of transactions that can be captured in a single request is 500."
+        },
+        {
+          "info": {
+            "name": "Cancel a payout transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/cancel/:referenceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID for the payout transaction."
+              }
+            ]
+          },
+          "docs": "Cancel a payout transaction by ID."
+        },
+        {
+          "info": {
+            "name": "Cancel a payout transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/cancel/:referenceId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID for the payout transaction."
+              }
+            ]
+          },
+          "docs": "Cancel a payout transaction by ID."
+        },
+        {
+          "info": {
+            "name": "Cancel list of payout transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/cancelAll",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an array of payout transactions."
+        },
+        {
+          "info": {
+            "name": "Get details for a processed payout transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/details/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "Returns details for a processed money out transaction."
+        },
+        {
+          "info": {
+            "name": "Get check image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/checkimage/:assetName",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "assetName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the check asset to retrieve. This is returned as `filename` in the `CheckData` object\nin the response when you make a GET request to `/MoneyOut/details/{transId}`.\n```\n    \"CheckData\": {\n      \"ftype\": \"PDF\",\n      \"filename\": \"check133832686289732320_01JKBNZ5P32JPTZY8XXXX000000.pdf\",\n      \"furl\": \"\",\n      \"fContent\": \"\"\n  }\n```\n"
+              }
+            ]
+          },
+          "docs": "Retrieve the image of a check associated with a processed transaction.\nThe check image is returned in the response body as a base64-encoded string.\nThe check image is only available for payouts that have been processed."
+        },
+        {
+          "info": {
+            "name": "Update check payment status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/status/:transId/:checkPaymentStatus",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "The Payabli transaction ID for the check payment."
+              },
+              {
+                "name": "checkPaymentStatus",
+                "value": "",
+                "type": "path",
+                "description": "The new status to apply to the check transaction. To mark a check as `Paid`, send 5. To mark a check as `Cancelled`, send 0."
+              }
+            ]
+          },
+          "docs": "Updates the status of a processed check payment transaction. This endpoint handles the status transition, updates related bills, creates audit events, and triggers notifications.\n\nThe transaction must meet all of the following criteria:\n- **Status**: Must be in Processing or Processed status.\n- **Payment method**: Must be a check payment method.\n\n### Allowed status values\n\n| Value | Status | Description |\n|-------|--------|-------------|\n| `0` | Cancelled/Voided | Cancels the check transaction. "
+        },
+        {
+          "info": {
+            "name": "Reissue a payout transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/reissue",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "query",
+                "description": "The transaction ID of the payout to reissue."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reissues a payout transaction with a new payment method. This creates a new transaction linked to the original and marks the original transaction as reissued.\n\nThe original transaction must be in **Processing** or **Processed** status. The payment method in the request body is used directly. The endpoint doesn't fall back to vendor-managed payment methods.\n\nThe new transaction goes through the standard authorize-and-capture flow automatically. Both the original and new transactions are linked th"
+        },
+        {
+          "info": {
+            "name": "Get a virtual card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOut/vcard/:cardToken",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "ID for a virtual card."
+              }
+            ]
+          },
+          "docs": "Retrieves vCard details for a single card in an entrypoint."
+        },
+        {
+          "info": {
+            "name": "Renew a virtual card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/MoneyOutCard/vcard/:cardToken/renew",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "ID for the virtual card to renew."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renews an expired or expiring virtual card by extending its expiration date to a future month.\n\nThe card must be a virtual card that hasn't been fully used. The new expiration date must be in `MM-YYYY` or `MM/YYYY` format and no more than 2 years and 363 days in the future. The card expires on the last day of the month you specify.\n\nOn success, `referenceId` holds the renewed card's token (the card processor may issue a new token). The response reuses the standard payout result object, so the pa"
+        },
+        {
+          "info": {
+            "name": "Send virtual card link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/vcard/send-card-link",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a virtual card link via email to the vendor associated with the `transId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

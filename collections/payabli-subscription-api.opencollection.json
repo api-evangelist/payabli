@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Subscription API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Subscription/add",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a subscription or scheduled payment to run at a specified time and frequency. You can use stored payment method tokens for card, ACH, and digital wallets by passing them into the `paymentMethod.storedMethodId` field."
+        },
+        {
+          "info": {
+            "name": "Get a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Subscription/:subId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subId",
+                "value": "",
+                "type": "path",
+                "description": "The subscription ID."
+              }
+            ]
+          },
+          "docs": "Retrieves a single subscription's details."
+        },
+        {
+          "info": {
+            "name": "Update a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Subscription/:subId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subId",
+                "value": "",
+                "type": "path",
+                "description": "The subscription ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a subscription's details."
+        },
+        {
+          "info": {
+            "name": "Delete a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Subscription/:subId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subId",
+                "value": "",
+                "type": "path",
+                "description": "The subscription ID."
+              }
+            ]
+          },
+          "docs": "Deletes a subscription, autopay, or recurring payment and prevents future charges."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

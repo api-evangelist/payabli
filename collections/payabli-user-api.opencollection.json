@@ -1,0 +1,319 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill User API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add User to an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/User",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to add a new user to an organization."
+        },
+        {
+          "info": {
+            "name": "Get User in an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/User/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The Payabli-generated `userId` value."
+              },
+              {
+                "name": "entry",
+                "value": "",
+                "type": "query",
+                "description": "The entrypoint identifier."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Entry level: 0 - partner, 2 - paypoint"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve information about a specific user within an organization."
+        },
+        {
+          "info": {
+            "name": "Modify User in an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/User/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User Identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to modify the details of a specific user within an organization."
+        },
+        {
+          "info": {
+            "name": "Delete User in an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/User/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The Payabli-generated `userId` value."
+              }
+            ]
+          },
+          "docs": "Use this endpoint to delete a specific user within an organization."
+        },
+        {
+          "info": {
+            "name": "Enable/disable MFA for user in an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/User/mfa/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User Identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to enable or disable multi-factor authentication (MFA) for a user within an organization."
+        },
+        {
+          "info": {
+            "name": "Authenticate User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/User/auth/:provider",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "Auth provider. Pass `null` to use the built-in provider."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint requires an application API token."
+        },
+        {
+          "info": {
+            "name": "Refresh token for User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/User/authrefresh",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this endpoint to refresh the authentication token for a user within an organization."
+        },
+        {
+          "info": {
+            "name": "Logout User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/User/authlogout",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Use this endpoint to log a user out from the system."
+        },
+        {
+          "info": {
+            "name": "Update password for User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/User/authpsw",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to change the password for a user within an organization."
+        },
+        {
+          "info": {
+            "name": "Reset password for User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/User/authreset",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to initiate a password reset for a user within an organization."
+        },
+        {
+          "info": {
+            "name": "Validate MFA for User in an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/User/mfa",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to validate the multi-factor authentication (MFA) code for a user within an organization."
+        },
+        {
+          "info": {
+            "name": "Resend MFA code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/User/resendmfa/:usrname/:Entry/:EntryType",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "Entry",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "EntryType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "usrname",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resends the MFA code to the user via the selected MFA mode (email or SMS)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

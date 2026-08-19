@@ -1,0 +1,1296 @@
+{
+  "item": [
+    {
+      "id": "c084f06b-bfb6-4c17-a6ae-3bd2f4fc9ba3",
+      "name": "payoutSubscription",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3890ad5-d24e-4e32-ab9b-2edf77a310f2",
+          "name": "Create payout subscription",
+          "request": {
+            "name": "Create payout subscription",
+            "description": {
+              "content": "Creates a payout subscription to automatically send payouts to a vendor on a recurring schedule. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for a step-by-step guide.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "PayoutSubscription"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                "key": "idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entryPoint\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"achHolder\": \"<string>\",\n    \"achRouting\": \"<string>\",\n    \"achAccount\": \"<string>\",\n    \"achAccountType\": \"<string>\",\n    \"achCode\": \"<string>\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"<string>\",\n    \"initiator\": \"<string>\",\n    \"storedMethodUsageType\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorNumber\": \"<string>\",\n    \"name1\": \"<string>\",\n    \"name2\": \"<string>\",\n    \"ein\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"address1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"mcc\": \"<string>\",\n    \"contacts\": [\n      {\n        \"contactEmail\": \"<email>\",\n        \"contactName\": \"<string>\",\n        \"contactPhone\": \"<string>\",\n        \"contactTitle\": \"<string>\",\n        \"additionalData\": \"<string>\"\n      },\n      {\n        \"contactEmail\": \"<email>\",\n        \"contactName\": \"<string>\",\n        \"contactPhone\": \"<string>\",\n        \"contactTitle\": \"<string>\",\n        \"additionalData\": \"<string>\"\n      }\n    ],\n    \"billingData\": {\n      \"bankName\": \"<string>\",\n      \"routingAccount\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"typeAccount\": \"<string>\",\n      \"bankAccountHolderName\": \"<string>\"\n    },\n    \"vendorStatus\": \"<integer>\",\n    \"remitAddress1\": \"<string>\",\n    \"remitAddress2\": \"<string>\",\n    \"remitCity\": \"<string>\",\n    \"remitState\": \"<string>\",\n    \"remitZip\": \"<string>\",\n    \"remitCountry\": \"<string>\",\n    \"customerVendorAccount\": \"<string>\",\n    \"customField1\": \"<string>\",\n    \"customField2\": \"<string>\",\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"key_2\": {\n        \"key_0\": {}\n      }\n    },\n    \"address2\": \"<string>\",\n    \"internalReferenceId\": \"<long>\",\n    \"locationCode\": \"<string>\",\n    \"payeeName1\": \"<string>\",\n    \"payeeName2\": \"<string>\",\n    \"paymentMethod\": {\n      \"method\": \"<string>\",\n      \"storedMethodId\": \"<string>\"\n    },\n    \"vendorId\": \"<integer>\"\n  },\n  \"subdomain\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"source\": \"<string>\",\n  \"setPause\": \"<boolean>\",\n  \"paymentDetails\": {\n    \"totalAmount\": \"<double>\",\n    \"serviceFee\": \"<double>\",\n    \"currency\": \"<string>\",\n    \"checkNumber\": \"<string>\",\n    \"orderDescription\": \"<string>\",\n    \"orderId\": \"<string>\",\n    \"orderIdAlternative\": \"<string>\",\n    \"paymentDescription\": \"<string>\",\n    \"settlementDescriptor\": \"<string>\",\n    \"groupNumber\": \"<string>\",\n    \"source\": \"<string>\",\n    \"payabliTransId\": \"<string>\",\n    \"unbundled\": \"<boolean>\"\n  },\n  \"billData\": [\n    {\n      \"billId\": \"<long>\",\n      \"comments\": \"<string>\",\n      \"dueDate\": \"<date>\",\n      \"invoiceDate\": \"<date>\",\n      \"invoiceNumber\": \"<string>\",\n      \"netAmount\": \"<string>\",\n      \"discount\": \"<string>\",\n      \"terms\": \"<string>\",\n      \"accountingField1\": \"<string>\",\n      \"accountingField2\": \"<string>\",\n      \"additionalData\": \"<string>\",\n      \"attachments\": [\n        {\n          \"fContent\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"ftype\": \"<string>\",\n          \"furl\": \"<string>\"\n        },\n        {\n          \"fContent\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"ftype\": \"<string>\",\n          \"furl\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"billId\": \"<long>\",\n      \"comments\": \"<string>\",\n      \"dueDate\": \"<date>\",\n      \"invoiceDate\": \"<date>\",\n      \"invoiceNumber\": \"<string>\",\n      \"netAmount\": \"<string>\",\n      \"discount\": \"<string>\",\n      \"terms\": \"<string>\",\n      \"accountingField1\": \"<string>\",\n      \"accountingField2\": \"<string>\",\n      \"additionalData\": \"<string>\",\n      \"attachments\": [\n        {\n          \"fContent\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"ftype\": \"<string>\",\n          \"furl\": \"<string>\"\n        },\n        {\n          \"fContent\": \"<string>\",\n          \"filename\": \"<string>\",\n          \"ftype\": \"<string>\",\n          \"furl\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"scheduleDetails\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\",\n    \"frequency\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "13ac6d9c-02ea-455f-8a8b-847bb3184acc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entryPoint\": \"string\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorNumber\": \"string\",\n    \"name1\": \"string\",\n    \"name2\": \"string\",\n    \"ein\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"9dV79k9@AqQqrllnDIwoaMejzAulcKkWjWRz.dbl\",\n    \"address1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"country\": \"string\",\n    \"mcc\": \"string\",\n    \"contacts\": [\n      {\n        \"contactEmail\": \"WhjEeEXJXKK@vsezTGQVxEwherJbHYHqPq.pgfh\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      },\n      {\n        \"contactEmail\": \"X8yLTilBKQ-ut@oXmCgMrshnOuEr.cf\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      }\n    ],\n    \"billingData\": {\n      \"bankName\": \"string\",\n      \"routingAccount\": \"string\",\n      \"accountNumber\": \"string\",\n      \"typeAccount\": \"Checking\",\n      \"bankAccountHolderName\": \"string\"\n    },\n    \"vendorStatus\": 4992,\n    \"remitAddress1\": \"string\",\n    \"remitAddress2\": \"string\",\n    \"remitCity\": \"string\",\n    \"remitState\": \"string\",\n    \"remitZip\": \"string\",\n    \"remitCountry\": \"string\",\n    \"customerVendorAccount\": \"string\",\n    \"customField1\": \"string\",\n    \"customField2\": \"string\",\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"address2\": \"string\",\n    \"internalReferenceId\": 62,\n    \"locationCode\": \"string\",\n    \"payeeName1\": \"string\",\n    \"payeeName2\": \"string\",\n    \"paymentMethod\": {\n      \"method\": \"string\",\n      \"storedMethodId\": \"string\"\n    },\n    \"vendorId\": 6457\n  },\n  \"subdomain\": \"string\",\n  \"accountId\": \"string\",\n  \"source\": \"string\",\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 2757.0502974691035,\n    \"serviceFee\": 8892.432330251037,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"billData\": [\n    {\n      \"billId\": 2851,\n      \"comments\": \"string\",\n      \"dueDate\": \"2007-03-21\",\n      \"invoiceDate\": \"2014-05-01\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"MFI\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpeg\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpg\",\n          \"furl\": \"string\"\n        }\n      ]\n    },\n    {\n      \"billId\": 1942,\n      \"comments\": \"string\",\n      \"dueDate\": \"1971-01-01\",\n      \"invoiceDate\": \"1967-09-18\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"NET60\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"pdf\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"gif\",\n          \"furl\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"endofmonth\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseData\": 610,\n  \"isSuccess\": true,\n  \"customerId\": 8820\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aee5d7b6-b29a-49f7-a82f-9d48d55ad5e2",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entryPoint\": \"string\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorNumber\": \"string\",\n    \"name1\": \"string\",\n    \"name2\": \"string\",\n    \"ein\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"9dV79k9@AqQqrllnDIwoaMejzAulcKkWjWRz.dbl\",\n    \"address1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"country\": \"string\",\n    \"mcc\": \"string\",\n    \"contacts\": [\n      {\n        \"contactEmail\": \"WhjEeEXJXKK@vsezTGQVxEwherJbHYHqPq.pgfh\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      },\n      {\n        \"contactEmail\": \"X8yLTilBKQ-ut@oXmCgMrshnOuEr.cf\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      }\n    ],\n    \"billingData\": {\n      \"bankName\": \"string\",\n      \"routingAccount\": \"string\",\n      \"accountNumber\": \"string\",\n      \"typeAccount\": \"Checking\",\n      \"bankAccountHolderName\": \"string\"\n    },\n    \"vendorStatus\": 4992,\n    \"remitAddress1\": \"string\",\n    \"remitAddress2\": \"string\",\n    \"remitCity\": \"string\",\n    \"remitState\": \"string\",\n    \"remitZip\": \"string\",\n    \"remitCountry\": \"string\",\n    \"customerVendorAccount\": \"string\",\n    \"customField1\": \"string\",\n    \"customField2\": \"string\",\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"address2\": \"string\",\n    \"internalReferenceId\": 62,\n    \"locationCode\": \"string\",\n    \"payeeName1\": \"string\",\n    \"payeeName2\": \"string\",\n    \"paymentMethod\": {\n      \"method\": \"string\",\n      \"storedMethodId\": \"string\"\n    },\n    \"vendorId\": 6457\n  },\n  \"subdomain\": \"string\",\n  \"accountId\": \"string\",\n  \"source\": \"string\",\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 2757.0502974691035,\n    \"serviceFee\": 8892.432330251037,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"billData\": [\n    {\n      \"billId\": 2851,\n      \"comments\": \"string\",\n      \"dueDate\": \"2007-03-21\",\n      \"invoiceDate\": \"2014-05-01\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"MFI\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpeg\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpg\",\n          \"furl\": \"string\"\n        }\n      ]\n    },\n    {\n      \"billId\": 1942,\n      \"comments\": \"string\",\n      \"dueDate\": \"1971-01-01\",\n      \"invoiceDate\": \"1967-09-18\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"NET60\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"pdf\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"gif\",\n          \"furl\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"endofmonth\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b14b2cf-8730-429d-ba1c-25216e082847",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entryPoint\": \"string\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorNumber\": \"string\",\n    \"name1\": \"string\",\n    \"name2\": \"string\",\n    \"ein\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"9dV79k9@AqQqrllnDIwoaMejzAulcKkWjWRz.dbl\",\n    \"address1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"country\": \"string\",\n    \"mcc\": \"string\",\n    \"contacts\": [\n      {\n        \"contactEmail\": \"WhjEeEXJXKK@vsezTGQVxEwherJbHYHqPq.pgfh\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      },\n      {\n        \"contactEmail\": \"X8yLTilBKQ-ut@oXmCgMrshnOuEr.cf\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      }\n    ],\n    \"billingData\": {\n      \"bankName\": \"string\",\n      \"routingAccount\": \"string\",\n      \"accountNumber\": \"string\",\n      \"typeAccount\": \"Checking\",\n      \"bankAccountHolderName\": \"string\"\n    },\n    \"vendorStatus\": 4992,\n    \"remitAddress1\": \"string\",\n    \"remitAddress2\": \"string\",\n    \"remitCity\": \"string\",\n    \"remitState\": \"string\",\n    \"remitZip\": \"string\",\n    \"remitCountry\": \"string\",\n    \"customerVendorAccount\": \"string\",\n    \"customField1\": \"string\",\n    \"customField2\": \"string\",\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"address2\": \"string\",\n    \"internalReferenceId\": 62,\n    \"locationCode\": \"string\",\n    \"payeeName1\": \"string\",\n    \"payeeName2\": \"string\",\n    \"paymentMethod\": {\n      \"method\": \"string\",\n      \"storedMethodId\": \"string\"\n    },\n    \"vendorId\": 6457\n  },\n  \"subdomain\": \"string\",\n  \"accountId\": \"string\",\n  \"source\": \"string\",\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 2757.0502974691035,\n    \"serviceFee\": 8892.432330251037,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"billData\": [\n    {\n      \"billId\": 2851,\n      \"comments\": \"string\",\n      \"dueDate\": \"2007-03-21\",\n      \"invoiceDate\": \"2014-05-01\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"MFI\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpeg\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpg\",\n          \"furl\": \"string\"\n        }\n      ]\n    },\n    {\n      \"billId\": 1942,\n      \"comments\": \"string\",\n      \"dueDate\": \"1971-01-01\",\n      \"invoiceDate\": \"1967-09-18\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"NET60\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"pdf\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"gif\",\n          \"furl\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"endofmonth\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fd5327b-73b2-4fc2-b782-68e0e70d33bd",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entryPoint\": \"string\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorNumber\": \"string\",\n    \"name1\": \"string\",\n    \"name2\": \"string\",\n    \"ein\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"9dV79k9@AqQqrllnDIwoaMejzAulcKkWjWRz.dbl\",\n    \"address1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"country\": \"string\",\n    \"mcc\": \"string\",\n    \"contacts\": [\n      {\n        \"contactEmail\": \"WhjEeEXJXKK@vsezTGQVxEwherJbHYHqPq.pgfh\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      },\n      {\n        \"contactEmail\": \"X8yLTilBKQ-ut@oXmCgMrshnOuEr.cf\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      }\n    ],\n    \"billingData\": {\n      \"bankName\": \"string\",\n      \"routingAccount\": \"string\",\n      \"accountNumber\": \"string\",\n      \"typeAccount\": \"Checking\",\n      \"bankAccountHolderName\": \"string\"\n    },\n    \"vendorStatus\": 4992,\n    \"remitAddress1\": \"string\",\n    \"remitAddress2\": \"string\",\n    \"remitCity\": \"string\",\n    \"remitState\": \"string\",\n    \"remitZip\": \"string\",\n    \"remitCountry\": \"string\",\n    \"customerVendorAccount\": \"string\",\n    \"customField1\": \"string\",\n    \"customField2\": \"string\",\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"address2\": \"string\",\n    \"internalReferenceId\": 62,\n    \"locationCode\": \"string\",\n    \"payeeName1\": \"string\",\n    \"payeeName2\": \"string\",\n    \"paymentMethod\": {\n      \"method\": \"string\",\n      \"storedMethodId\": \"string\"\n    },\n    \"vendorId\": 6457\n  },\n  \"subdomain\": \"string\",\n  \"accountId\": \"string\",\n  \"source\": \"string\",\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 2757.0502974691035,\n    \"serviceFee\": 8892.432330251037,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"billData\": [\n    {\n      \"billId\": 2851,\n      \"comments\": \"string\",\n      \"dueDate\": \"2007-03-21\",\n      \"invoiceDate\": \"2014-05-01\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"MFI\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpeg\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpg\",\n          \"furl\": \"string\"\n        }\n      ]\n    },\n    {\n      \"billId\": 1942,\n      \"comments\": \"string\",\n      \"dueDate\": \"1971-01-01\",\n      \"invoiceDate\": \"1967-09-18\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"NET60\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"pdf\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"gif\",\n          \"furl\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"endofmonth\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "131acb24-1b0b-4eb4-91d8-69fcec8352b1",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entryPoint\": \"string\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorNumber\": \"string\",\n    \"name1\": \"string\",\n    \"name2\": \"string\",\n    \"ein\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"9dV79k9@AqQqrllnDIwoaMejzAulcKkWjWRz.dbl\",\n    \"address1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"country\": \"string\",\n    \"mcc\": \"string\",\n    \"contacts\": [\n      {\n        \"contactEmail\": \"WhjEeEXJXKK@vsezTGQVxEwherJbHYHqPq.pgfh\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      },\n      {\n        \"contactEmail\": \"X8yLTilBKQ-ut@oXmCgMrshnOuEr.cf\",\n        \"contactName\": \"string\",\n        \"contactPhone\": \"string\",\n        \"contactTitle\": \"string\",\n        \"additionalData\": \"string\"\n      }\n    ],\n    \"billingData\": {\n      \"bankName\": \"string\",\n      \"routingAccount\": \"string\",\n      \"accountNumber\": \"string\",\n      \"typeAccount\": \"Checking\",\n      \"bankAccountHolderName\": \"string\"\n    },\n    \"vendorStatus\": 4992,\n    \"remitAddress1\": \"string\",\n    \"remitAddress2\": \"string\",\n    \"remitCity\": \"string\",\n    \"remitState\": \"string\",\n    \"remitZip\": \"string\",\n    \"remitCountry\": \"string\",\n    \"customerVendorAccount\": \"string\",\n    \"customField1\": \"string\",\n    \"customField2\": \"string\",\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"address2\": \"string\",\n    \"internalReferenceId\": 62,\n    \"locationCode\": \"string\",\n    \"payeeName1\": \"string\",\n    \"payeeName2\": \"string\",\n    \"paymentMethod\": {\n      \"method\": \"string\",\n      \"storedMethodId\": \"string\"\n    },\n    \"vendorId\": 6457\n  },\n  \"subdomain\": \"string\",\n  \"accountId\": \"string\",\n  \"source\": \"string\",\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 2757.0502974691035,\n    \"serviceFee\": 8892.432330251037,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"billData\": [\n    {\n      \"billId\": 2851,\n      \"comments\": \"string\",\n      \"dueDate\": \"2007-03-21\",\n      \"invoiceDate\": \"2014-05-01\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"MFI\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpeg\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"jpg\",\n          \"furl\": \"string\"\n        }\n      ]\n    },\n    {\n      \"billId\": 1942,\n      \"comments\": \"string\",\n      \"dueDate\": \"1971-01-01\",\n      \"invoiceDate\": \"1967-09-18\",\n      \"invoiceNumber\": \"string\",\n      \"netAmount\": \"string\",\n      \"discount\": \"string\",\n      \"terms\": \"NET60\",\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": \"string\",\n      \"attachments\": [\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"pdf\",\n          \"furl\": \"string\"\n        },\n        {\n          \"fContent\": \"string\",\n          \"filename\": \"string\",\n          \"ftype\": \"gif\",\n          \"furl\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"endofmonth\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae65adba-0701-4684-b425-c895a17147ea",
+          "name": "Get a payout subscription",
+          "request": {
+            "name": "Get a payout subscription",
+            "description": {
+              "content": "Retrieves a single payout subscription's details. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "PayoutSubscription",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The payout subscription ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c13234f-3e4a-4045-ae6a-2695cd991ff9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": false,\n  \"responseData\": {\n    \"startDate\": \"1970-03-24T21:45:12.809Z\",\n    \"endDate\": \"1999-04-18T12:29:51.118Z\",\n    \"nextDate\": \"1995-09-06T11:47:26.647Z\",\n    \"lastRun\": \"1951-04-10T19:06:30.406Z\",\n    \"idOutSubscription\": 8520,\n    \"status\": 1577,\n    \"events\": [\n      {\n        \"description\": \"string\",\n        \"eventTime\": \"1967-03-26T17:01:44.719Z\",\n        \"extraData\": \"string\",\n        \"refData\": \"string\",\n        \"source\": \"string\"\n      },\n      {\n        \"description\": \"string\",\n        \"eventTime\": \"1954-04-06T00:19:35.739Z\",\n        \"extraData\": \"string\",\n        \"refData\": \"string\",\n        \"source\": \"string\"\n      }\n    ],\n    \"vendor\": {\n      \"VendorNumber\": \"string\",\n      \"Name1\": \"string\",\n      \"Name2\": \"string\",\n      \"EIN\": \"string\",\n      \"Phone\": \"string\",\n      \"Email\": \"ixy7n@BFfkYIYGraesrcxY.gf\",\n      \"RemitEmail\": \"EBzs651Qxvo@nisTqYK.sxm\",\n      \"Address1\": \"string\",\n      \"Address2\": \"string\",\n      \"City\": \"string\",\n      \"State\": \"string\",\n      \"Zip\": \"string\",\n      \"Country\": \"string\",\n      \"Mcc\": \"string\",\n      \"LocationCode\": \"string\",\n      \"Contacts\": [\n        {\n          \"ContactName\": \"string\",\n          \"ContactEmail\": \"MkXX@tDUiZNAEEUrBsWmYRG.gslq\",\n          \"ContactTitle\": \"string\",\n          \"ContactPhone\": \"string\"\n        },\n        {\n          \"ContactName\": \"string\",\n          \"ContactEmail\": \"2r2kQN@qSYWmenAVnmPnZwKwgayhEbEsdfJFJ.zdmo\",\n          \"ContactTitle\": \"string\",\n          \"ContactPhone\": \"string\"\n        }\n      ],\n      \"BillingData\": {\n        \"id\": 9356,\n        \"nickname\": \"string\",\n        \"bankName\": \"string\",\n        \"routingAccount\": \"string\",\n        \"accountNumber\": \"string\",\n        \"typeAccount\": \"Checking\",\n        \"bankAccountHolderName\": \"string\",\n        \"bankAccountHolderType\": \"Personal\",\n        \"bankAccountFunction\": 904,\n        \"verified\": false,\n        \"status\": 3401,\n        \"services\": [],\n        \"default\": true,\n        \"accountId\": \"string\"\n      },\n      \"PaymentMethod\": \"string\",\n      \"VendorStatus\": 6878,\n      \"VendorId\": 9199,\n      \"EnrollmentStatus\": \"string\",\n      \"Summary\": {\n        \"ActiveBills\": 5852,\n        \"PendingBills\": 5883,\n        \"InTransitBills\": 5466,\n        \"PaidBills\": 2555,\n        \"OverdueBills\": 4093,\n        \"ApprovedBills\": 6743,\n        \"DisapprovedBills\": 3059,\n        \"TotalBills\": 978,\n        \"ActiveBillsAmount\": 8417.571702167514,\n        \"PendingBillsAmount\": 6403.770427186039,\n        \"InTransitBillsAmount\": 1754.8586945360523,\n        \"PaidBillsAmount\": 8732.281810639826,\n        \"OverdueBillsAmount\": 3762.7074022628813,\n        \"ApprovedBillsAmount\": 5920.635074826776,\n        \"DisapprovedBillsAmount\": 3381.061158003247,\n        \"TotalBillsAmount\": 7447.609359326639\n      },\n      \"PaypointLegalname\": \"string\",\n      \"PaypointId\": 5161,\n      \"PaypointDbaname\": \"string\",\n      \"PaypointEntryname\": \"string\",\n      \"ParentOrgName\": \"string\",\n      \"ParentOrgId\": 9626,\n      \"CreatedDate\": \"2018-12-06T07:22:04.285Z\",\n      \"LastUpdated\": \"1995-04-01T10:40:34.022Z\",\n      \"remitAddress1\": \"string\",\n      \"remitAddress2\": \"string\",\n      \"remitCity\": \"string\",\n      \"remitState\": \"string\",\n      \"remitZip\": \"string\",\n      \"remitCountry\": \"string\",\n      \"payeeName1\": \"string\",\n      \"payeeName2\": \"string\",\n      \"customField1\": \"string\",\n      \"customField2\": \"string\",\n      \"customerVendorAccount\": \"string\",\n      \"InternalReferenceId\": 2330,\n      \"PaymentPortalUrl\": \"string\",\n      \"CardAccepted\": \"string\",\n      \"AchAccepted\": \"string\",\n      \"CheckAccepted\": \"string\",\n      \"EnrichmentStatus\": \"string\",\n      \"EnrichedBy\": \"string\",\n      \"EnrichedAt\": \"2004-10-27T11:06:52.974Z\",\n      \"EnrichmentId\": \"string\",\n      \"additionalData\": {\n        \"key_0\": \"string\"\n      },\n      \"externalPaypointID\": \"string\",\n      \"StoredMethods\": [\n        {\n          \"IdPmethod\": \"string\",\n          \"Method\": \"string\",\n          \"Descriptor\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"ExpDate\": \"string\",\n          \"HolderName\": \"string\",\n          \"AchSecCode\": \"string\",\n          \"AchHolderType\": \"string\",\n          \"IsValidatedACH\": true,\n          \"BIN\": \"string\",\n          \"binData\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ABA\": \"string\",\n          \"PostalCode\": \"string\",\n          \"MethodType\": \"string\",\n          \"WalletType\": \"string\",\n          \"LastUpdated\": \"1963-08-20T04:56:57.810Z\",\n          \"CardUpdatedOn\": \"1950-10-05T06:38:41.027Z\"\n        },\n        {\n          \"IdPmethod\": \"string\",\n          \"Method\": \"string\",\n          \"Descriptor\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"ExpDate\": \"string\",\n          \"HolderName\": \"string\",\n          \"AchSecCode\": \"string\",\n          \"AchHolderType\": \"string\",\n          \"IsValidatedACH\": true,\n          \"BIN\": \"string\",\n          \"binData\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ABA\": \"string\",\n          \"PostalCode\": \"string\",\n          \"MethodType\": \"string\",\n          \"WalletType\": \"string\",\n          \"LastUpdated\": \"1978-06-25T21:28:24.697Z\",\n          \"CardUpdatedOn\": \"2007-07-23T02:36:53.209Z\"\n        }\n      ]\n    },\n    \"billData\": [\n      {\n        \"invoiceDate\": \"2022-10-29\",\n        \"dueDate\": \"1986-04-25\",\n        \"billId\": 2703,\n        \"LotNumber\": \"string\",\n        \"AccountingField1\": \"string\",\n        \"AccountingField2\": \"string\",\n        \"Terms\": \"PIA\",\n        \"AdditionalData\": \"string\",\n        \"attachments\": [\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"invoiceNumber\": \"string\",\n        \"netAmount\": \"string\",\n        \"comments\": \"string\",\n        \"identifier\": \"string\",\n        \"discount\": \"string\",\n        \"totalAmount\": \"string\"\n      },\n      {\n        \"invoiceDate\": \"2018-06-28\",\n        \"dueDate\": \"1949-08-28\",\n        \"billId\": 7844,\n        \"LotNumber\": \"string\",\n        \"AccountingField1\": \"string\",\n        \"AccountingField2\": \"string\",\n        \"Terms\": \"2/10NET30\",\n        \"AdditionalData\": \"string\",\n        \"attachments\": [\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"invoiceNumber\": \"string\",\n        \"netAmount\": \"string\",\n        \"comments\": \"string\",\n        \"identifier\": \"string\",\n        \"discount\": \"string\",\n        \"totalAmount\": \"string\"\n      }\n    ],\n    \"externalPaypointID\": \"string\",\n    \"method\": \"string\",\n    \"paypointId\": 8471,\n    \"totalAmount\": 893.41884948403,\n    \"netAmount\": 1094.4837582337075,\n    \"feeAmount\": 3306.6825428575853,\n    \"paymentData\": {\n      \"AccountExp\": \"string\",\n      \"accountId\": \"string\",\n      \"AccountType\": \"string\",\n      \"AccountZip\": \"string\",\n      \"binData\": {\n        \"binMatchedLength\": \"string\",\n        \"binCardBrand\": \"string\",\n        \"binCardType\": \"string\",\n        \"binCardCategory\": \"string\",\n        \"binCardIssuer\": \"string\",\n        \"binCardIssuerCountry\": \"string\",\n        \"binCardIssuerCountryCodeA2\": \"string\",\n        \"binCardIssuerCountryNumber\": \"string\",\n        \"binCardIsRegulated\": \"string\",\n        \"binCardUseCategory\": \"string\",\n        \"binCardIssuerCountryCodeA3\": \"string\"\n      },\n      \"HolderName\": \"string\",\n      \"Initiator\": \"string\",\n      \"MaskedAccount\": \"string\",\n      \"orderDescription\": \"string\",\n      \"paymentDetails\": {\n        \"totalAmount\": 3870.564465365436,\n        \"categories\": [\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"qty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"qty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"checkImage\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"checkNumber\": \"string\",\n        \"currency\": \"string\",\n        \"serviceFee\": 47.36419235018996,\n        \"splitFunding\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"checkUniqueId\": \"string\"\n      },\n      \"Sequence\": \"string\",\n      \"SignatureData\": \"string\",\n      \"StoredId\": \"string\",\n      \"StoredMethodUsageType\": \"string\"\n    },\n    \"frequency\": \"string\",\n    \"totalCycles\": 6162,\n    \"leftCycles\": 407,\n    \"entrypageId\": 6680,\n    \"untilCancelled\": false,\n    \"lastUpdated\": \"1996-11-15T13:18:19.981Z\",\n    \"createdAt\": \"2018-11-24T00:34:48.275Z\",\n    \"paypointLegalname\": \"string\",\n    \"paypointDbaname\": \"string\",\n    \"paypointEntryname\": \"string\",\n    \"parentOrgName\": \"string\",\n    \"parentOrgId\": 9587,\n    \"source\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6bb71fc-ca82-4927-a00e-5ec36f04f28c",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1fdc6b2-544a-4bba-97b6-c325ccf3db79",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b1f0803-4759-42be-afda-2cc4d1007752",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7d05238-53d4-437a-9dfc-d33a1fb45ea7",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a7246a4-94b1-4d36-9356-97589b73ffb8",
+          "name": "Update a payout subscription",
+          "request": {
+            "name": "Update a payout subscription",
+            "description": {
+              "content": "Updates a payout subscription's details. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "PayoutSubscription",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The payout subscription ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"setPause\": \"<boolean>\",\n  \"paymentDetails\": {\n    \"totalAmount\": \"<double>\",\n    \"serviceFee\": \"<double>\",\n    \"currency\": \"<string>\",\n    \"checkNumber\": \"<string>\",\n    \"orderDescription\": \"<string>\",\n    \"orderId\": \"<string>\",\n    \"orderIdAlternative\": \"<string>\",\n    \"paymentDescription\": \"<string>\",\n    \"settlementDescriptor\": \"<string>\",\n    \"groupNumber\": \"<string>\",\n    \"source\": \"<string>\",\n    \"payabliTransId\": \"<string>\",\n    \"unbundled\": \"<boolean>\"\n  },\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"achHolder\": \"<string>\",\n    \"achRouting\": \"<string>\",\n    \"achAccount\": \"<string>\",\n    \"achAccountType\": \"<string>\",\n    \"achCode\": \"<string>\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"<string>\",\n    \"initiator\": \"<string>\",\n    \"storedMethodUsageType\": \"<string>\"\n  },\n  \"scheduleDetails\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\",\n    \"frequency\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "475bb431-ea58-4734-a15d-3ddfee332a0f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 277.72215604984996,\n    \"serviceFee\": 3220.2326219401643,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"annually\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": true,\n  \"responseData\": \"string\",\n  \"customerId\": 7486\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa07261b-a566-4030-8930-ed02ffc80f93",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 277.72215604984996,\n    \"serviceFee\": 3220.2326219401643,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"annually\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a7bfb10-d7b8-4c63-92f7-ae9d2913080f",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 277.72215604984996,\n    \"serviceFee\": 3220.2326219401643,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"annually\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a0ad0fb-7361-4971-a2b2-de2edf10ca8d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 277.72215604984996,\n    \"serviceFee\": 3220.2326219401643,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"annually\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9674debe-ccd1-47bb-9051-6b539ee63474",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"setPause\": true,\n  \"paymentDetails\": {\n    \"totalAmount\": 277.72215604984996,\n    \"serviceFee\": 3220.2326219401643,\n    \"currency\": \"string\",\n    \"checkNumber\": \"string\",\n    \"orderDescription\": \"string\",\n    \"orderId\": \"string\",\n    \"orderIdAlternative\": \"string\",\n    \"paymentDescription\": \"string\",\n    \"settlementDescriptor\": \"string\",\n    \"groupNumber\": \"string\",\n    \"source\": \"string\",\n    \"payabliTransId\": \"string\",\n    \"unbundled\": false\n  },\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"achHolder\": \"string\",\n    \"achRouting\": \"string\",\n    \"achAccount\": \"string\",\n    \"achAccountType\": \"string\",\n    \"achCode\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"storedMethodId\": \"string\",\n    \"initiator\": \"string\",\n    \"storedMethodUsageType\": \"string\"\n  },\n  \"scheduleDetails\": {\n    \"startDate\": \"string\",\n    \"endDate\": \"string\",\n    \"frequency\": \"annually\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d46e323c-ce00-41d5-a0b5-fd8de46fba4f",
+          "name": "Delete a payout subscription",
+          "request": {
+            "name": "Delete a payout subscription",
+            "description": {
+              "content": "Deletes a payout subscription and prevents future payouts. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "PayoutSubscription",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) The payout subscription ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "982b9da3-c180-4473-846d-56b60c8f8a04",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03e01d41-20e4-4850-b3de-b92e5fc0e86f",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff2a1e43-4752-46eb-8f61-eff8536b29e1",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14007887-aa72-42ef-a929-a7705fcb29b5",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae4b4d7d-c3cd-4098-a5a5-aedeec7caac2",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PayoutSubscription",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) The payout subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 3294,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.payabli.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f4ea1a1d-ac52-4348-89e7-b274e85ddd3f",
+    "name": "API reference Bill payoutSubscription API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

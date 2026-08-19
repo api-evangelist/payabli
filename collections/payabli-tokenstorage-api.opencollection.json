@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill tokenStorage API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tokenStorage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Save a payment method (tokenize)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/TokenStorage/add",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "achValidation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information."
+              },
+              {
+                "name": "createAnonymous",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`."
+              },
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              },
+              {
+                "name": "temporary",
+                "value": "",
+                "type": "query",
+                "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves a payment method for reuse. This call exchanges sensitive payment information for a token that can be used to process future transactions. The `ReferenceId` value in the response is the `storedMethodId` to use with transactions."
+        },
+        {
+          "info": {
+            "name": "Get payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/TokenStorage/:methodId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "methodId",
+                "value": "",
+                "type": "path",
+                "description": "The saved payment method ID."
+              },
+              {
+                "name": "cardExpirationFormat",
+                "value": "",
+                "type": "query",
+                "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY"
+              },
+              {
+                "name": "includeTemporary",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a saved payment method."
+        },
+        {
+          "info": {
+            "name": "Update a payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/TokenStorage/:methodId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "methodId",
+                "value": "",
+                "type": "path",
+                "description": "The saved payment method ID."
+              },
+              {
+                "name": "achValidation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a saved payment method."
+        },
+        {
+          "info": {
+            "name": "Remove a payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/TokenStorage/:methodId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "methodId",
+                "value": "",
+                "type": "path",
+                "description": "The saved payment method ID."
+              }
+            ]
+          },
+          "docs": "Deletes a saved payment method."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

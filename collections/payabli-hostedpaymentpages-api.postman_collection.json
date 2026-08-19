@@ -1,0 +1,1158 @@
+{
+  "item": [
+    {
+      "id": "b229ad9d-fa00-421a-a99b-021481b1ef94",
+      "name": "hostedPaymentPages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ca18ec0-d0a2-4772-a3fd-b377989ec240",
+          "name": "Create payment page",
+          "request": {
+            "name": "Create payment page",
+            "description": {
+              "content": "Creates a new payment page for a paypoint.\nNote: this operation doesn't create a new paypoint, just a payment page for an existing paypoint. Paypoints are created by the Payabli team when a boarding application is approved.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Paypoint",
+                ":entry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entry",
+                  "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                "key": "idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {},\n      \"key_4\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"<string>\",\n      \"cfeeFix\": \"<double>\",\n      \"cfeeFloat\": \"<double>\",\n      \"cfeeMax\": \"<double>\",\n      \"cfeeMin\": \"<double>\",\n      \"maxticket\": \"<double>\",\n      \"minticket\": \"<double>\",\n      \"mode\": \"<integer>\",\n      \"referenceId\": \"<long>\",\n      \"service\": \"<string>\",\n      \"greaterValueAllowed\": \"<boolean>\",\n      \"absorbDifference\": \"<boolean>\",\n      \"allowOverride\": \"<boolean>\"\n    },\n    {\n      \"accountId\": \"<string>\",\n      \"cfeeFix\": \"<double>\",\n      \"cfeeFloat\": \"<double>\",\n      \"cfeeMax\": \"<double>\",\n      \"cfeeMin\": \"<double>\",\n      \"maxticket\": \"<double>\",\n      \"minticket\": \"<double>\",\n      \"mode\": \"<integer>\",\n      \"referenceId\": \"<long>\",\n      \"service\": \"<string>\",\n      \"greaterValueAllowed\": \"<boolean>\",\n      \"absorbDifference\": \"<boolean>\",\n      \"allowOverride\": \"<boolean>\"\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"<string>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"optionalPay\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"quantity\": \"<integer>\",\n          \"showDescription\": \"<boolean>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"description\": \"<string>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"optionalPay\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"quantity\": \"<integer>\",\n          \"showDescription\": \"<boolean>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"autopay\": {\n      \"enabled\": \"<boolean>\",\n      \"finish\": {\n        \"calendar\": \"<boolean>\",\n        \"untilCancelled\": \"<boolean>\"\n      },\n      \"frequency\": {\n        \"annually\": \"<boolean>\",\n        \"every2Weeks\": \"<boolean>\",\n        \"every3Months\": \"<boolean>\",\n        \"every6Months\": \"<boolean>\",\n        \"monthly\": \"<boolean>\",\n        \"onetime\": \"<boolean>\",\n        \"weekly\": \"<boolean>\"\n      },\n      \"frequencySelected\": \"<string>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"startDate\": \"<string>\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"paymentIcons\": \"<boolean>\",\n      \"phoneLabel\": \"<string>\"\n    },\n    \"entry\": \"<string>\",\n    \"invoices\": {\n      \"enabled\": \"<boolean>\",\n      \"invoiceLink\": {\n        \"enabled\": \"<boolean>\",\n        \"label\": \"<string>\",\n        \"order\": \"<integer>\"\n      },\n      \"order\": \"<integer>\",\n      \"viewInvoiceDetails\": {\n        \"enabled\": \"<boolean>\",\n        \"label\": \"<string>\",\n        \"order\": \"<integer>\"\n      }\n    },\n    \"logo\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"name\": \"<string>\",\n    \"notes\": {\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"page\": {\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentButton\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": \"<boolean>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"methods\": {\n        \"amex\": \"<boolean>\",\n        \"applePay\": \"<boolean>\",\n        \"googlePay\": \"<boolean>\",\n        \"discover\": \"<boolean>\",\n        \"eCheck\": \"<boolean>\",\n        \"mastercard\": \"<boolean>\",\n        \"visa\": \"<boolean>\",\n        \"diners\": \"<boolean>\",\n        \"jcb\": \"<boolean>\",\n        \"rdc\": \"<boolean>\"\n      },\n      \"order\": \"<integer>\",\n      \"paymentDescription\": \"<string>\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": \"<boolean>\",\n      \"fields\": [\n        {\n          \"display\": \"<boolean>\",\n          \"fixed\": \"<boolean>\",\n          \"identifier\": \"<boolean>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"order\": \"<integer>\",\n          \"required\": \"<boolean>\",\n          \"validation\": \"<string>\",\n          \"value\": \"<string>\",\n          \"width\": \"<integer>\"\n        },\n        {\n          \"display\": \"<boolean>\",\n          \"fixed\": \"<boolean>\",\n          \"identifier\": \"<boolean>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"order\": \"<integer>\",\n          \"required\": \"<boolean>\",\n          \"validation\": \"<string>\",\n          \"value\": \"<string>\",\n          \"width\": \"<integer>\"\n        }\n      ],\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"review\": {\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"subdomain\": \"<string>\"\n  },\n  \"pageIdentifier\": \"<string>\",\n  \"PageSettings\": {\n    \"color\": \"<string>\",\n    \"customCssUrl\": \"<string>\",\n    \"language\": \"<string>\",\n    \"pageLogo\": {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"<string>\",\n      \"furl\": \"<string>\"\n    },\n    \"paymentButton\": {\n      \"label\": \"<string>\",\n      \"size\": \"<string>\"\n    },\n    \"redirectAfterApprove\": \"<boolean>\",\n    \"redirectAfterApproveUrl\": \"<string>\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"contactUs\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"details\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"logo\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"page\": {\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentButton\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentInformation\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"settings\": {\n      \"enabled\": \"<boolean>\",\n      \"fields\": [\n        {\n          \"display\": \"<boolean>\",\n          \"Fixed\": \"<boolean>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"display\": \"<boolean>\",\n          \"Fixed\": \"<boolean>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"order\": \"<integer>\",\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"<string>\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6275381-6006-47ee-88da-4a9e3d6eb2c9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseCode\": 6939,\n  \"pageIdentifier\": \"string\",\n  \"roomId\": 7781,\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a6ebd4d-bdc8-492e-88a7-a31e0a600815",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3dcf09e-e04b-4d7d-941f-44f9903f6ac4",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4535e9d6-13ce-4e98-ae09-e86d8d1cd9e1",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41e003f8-348a-46f8-8a74-c4732fefbf26",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cfb7fde-ffa6-4735-bb9c-8d9cb75f463a",
+          "name": "Update a payment page",
+          "request": {
+            "name": "Update a payment page",
+            "description": {
+              "content": "Updates a payment page in a paypoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Paypoint",
+                ":entry",
+                ":subdomain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entry",
+                  "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subdomain",
+                  "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {},\n      \"key_4\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"<string>\",\n      \"cfeeFix\": \"<double>\",\n      \"cfeeFloat\": \"<double>\",\n      \"cfeeMax\": \"<double>\",\n      \"cfeeMin\": \"<double>\",\n      \"maxticket\": \"<double>\",\n      \"minticket\": \"<double>\",\n      \"mode\": \"<integer>\",\n      \"referenceId\": \"<long>\",\n      \"service\": \"<string>\",\n      \"greaterValueAllowed\": \"<boolean>\",\n      \"absorbDifference\": \"<boolean>\",\n      \"allowOverride\": \"<boolean>\"\n    },\n    {\n      \"accountId\": \"<string>\",\n      \"cfeeFix\": \"<double>\",\n      \"cfeeFloat\": \"<double>\",\n      \"cfeeMax\": \"<double>\",\n      \"cfeeMin\": \"<double>\",\n      \"maxticket\": \"<double>\",\n      \"minticket\": \"<double>\",\n      \"mode\": \"<integer>\",\n      \"referenceId\": \"<long>\",\n      \"service\": \"<string>\",\n      \"greaterValueAllowed\": \"<boolean>\",\n      \"absorbDifference\": \"<boolean>\",\n      \"allowOverride\": \"<boolean>\"\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"<string>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"optionalPay\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"quantity\": \"<integer>\",\n          \"showDescription\": \"<boolean>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"description\": \"<string>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"optionalPay\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"quantity\": \"<integer>\",\n          \"showDescription\": \"<boolean>\",\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"autopay\": {\n      \"enabled\": \"<boolean>\",\n      \"finish\": {\n        \"calendar\": \"<boolean>\",\n        \"untilCancelled\": \"<boolean>\"\n      },\n      \"frequency\": {\n        \"annually\": \"<boolean>\",\n        \"every2Weeks\": \"<boolean>\",\n        \"every3Months\": \"<boolean>\",\n        \"every6Months\": \"<boolean>\",\n        \"monthly\": \"<boolean>\",\n        \"onetime\": \"<boolean>\",\n        \"weekly\": \"<boolean>\"\n      },\n      \"frequencySelected\": \"<string>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"startDate\": \"<string>\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"paymentIcons\": \"<boolean>\",\n      \"phoneLabel\": \"<string>\"\n    },\n    \"entry\": \"<string>\",\n    \"invoices\": {\n      \"enabled\": \"<boolean>\",\n      \"invoiceLink\": {\n        \"enabled\": \"<boolean>\",\n        \"label\": \"<string>\",\n        \"order\": \"<integer>\"\n      },\n      \"order\": \"<integer>\",\n      \"viewInvoiceDetails\": {\n        \"enabled\": \"<boolean>\",\n        \"label\": \"<string>\",\n        \"order\": \"<integer>\"\n      }\n    },\n    \"logo\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"name\": \"<string>\",\n    \"notes\": {\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\",\n      \"placeholder\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"page\": {\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentButton\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": \"<boolean>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"methods\": {\n        \"amex\": \"<boolean>\",\n        \"applePay\": \"<boolean>\",\n        \"googlePay\": \"<boolean>\",\n        \"discover\": \"<boolean>\",\n        \"eCheck\": \"<boolean>\",\n        \"mastercard\": \"<boolean>\",\n        \"visa\": \"<boolean>\",\n        \"diners\": \"<boolean>\",\n        \"jcb\": \"<boolean>\",\n        \"rdc\": \"<boolean>\"\n      },\n      \"order\": \"<integer>\",\n      \"paymentDescription\": \"<string>\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": \"<boolean>\",\n      \"fields\": [\n        {\n          \"display\": \"<boolean>\",\n          \"fixed\": \"<boolean>\",\n          \"identifier\": \"<boolean>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"order\": \"<integer>\",\n          \"required\": \"<boolean>\",\n          \"validation\": \"<string>\",\n          \"value\": \"<string>\",\n          \"width\": \"<integer>\"\n        },\n        {\n          \"display\": \"<boolean>\",\n          \"fixed\": \"<boolean>\",\n          \"identifier\": \"<boolean>\",\n          \"label\": \"<string>\",\n          \"name\": \"<string>\",\n          \"order\": \"<integer>\",\n          \"required\": \"<boolean>\",\n          \"validation\": \"<string>\",\n          \"value\": \"<string>\",\n          \"width\": \"<integer>\"\n        }\n      ],\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"review\": {\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"subdomain\": \"<string>\"\n  },\n  \"pageIdentifier\": \"<string>\",\n  \"PageSettings\": {\n    \"color\": \"<string>\",\n    \"customCssUrl\": \"<string>\",\n    \"language\": \"<string>\",\n    \"pageLogo\": {\n      \"fContent\": \"<string>\",\n      \"filename\": \"<string>\",\n      \"ftype\": \"<string>\",\n      \"furl\": \"<string>\"\n    },\n    \"paymentButton\": {\n      \"label\": \"<string>\",\n      \"size\": \"<string>\"\n    },\n    \"redirectAfterApprove\": \"<boolean>\",\n    \"redirectAfterApproveUrl\": \"<string>\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"contactUs\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"details\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"logo\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"page\": {\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"header\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentButton\": {\n      \"enabled\": \"<boolean>\",\n      \"label\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    \"paymentInformation\": {\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\"\n    },\n    \"settings\": {\n      \"enabled\": \"<boolean>\",\n      \"fields\": [\n        {\n          \"display\": \"<boolean>\",\n          \"Fixed\": \"<boolean>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"display\": \"<boolean>\",\n          \"Fixed\": \"<boolean>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"order\": \"<integer>\",\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"<string>\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c701ba77-1bac-43eb-95e1-ff7f8ac14516",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseCode\": 6939,\n  \"pageIdentifier\": \"string\",\n  \"roomId\": 7781,\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e85d56e-26eb-41bb-a4e5-1e09bb51b6cd",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48b10d80-f893-4db3-b0cc-2f491cd55335",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b3ab952-da59-4550-8b84-68c4a2059b26",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed87f9e9-6bc4-49f9-81c2-763d5bb15728",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"key_1\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 8831.111371364224,\n      \"cfeeFloat\": 4943.764000696523,\n      \"cfeeMax\": 7967.572402837888,\n      \"cfeeMin\": 8480.898733375127,\n      \"maxticket\": 2874.014614396658,\n      \"minticket\": 8634.20393802888,\n      \"mode\": 9228,\n      \"referenceId\": 8583,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 7951.595499384077,\n      \"cfeeFloat\": 2155.5265498353306,\n      \"cfeeMax\": 4882.348174218839,\n      \"cfeeMin\": 2013.9235884897555,\n      \"maxticket\": 2013.6726694617635,\n      \"minticket\": 4620.914092215527,\n      \"mode\": 5089,\n      \"referenceId\": 4986,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": false,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"<dateTime>\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2605,\n          \"quantity\": 6504,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 5957,\n          \"quantity\": 8284,\n          \"showDescription\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 676\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": true,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": false,\n        \"every6Months\": false,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 2864,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 7480,\n      \"paymentIcons\": false,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 3002\n      },\n      \"order\": 8888,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 7889\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 1470\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 3479\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 1184,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 4940\n    },\n    \"paymentButton\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 1692\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": false,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": false,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": true,\n        \"eCheck\": true,\n        \"mastercard\": true,\n        \"visa\": true,\n        \"diners\": true,\n        \"jcb\": false,\n        \"rdc\": true\n      },\n      \"order\": 4126,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": true,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 3548,\n          \"required\": false,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 5486\n        },\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 4666,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1177\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 7190\n    },\n    \"review\": {\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 3314\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"jpeg\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": \"<integer>\",\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 5741\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 4787\n    },\n    \"details\": {\n      \"enabled\": true,\n      \"order\": 5593\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 5317\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1238\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 8225\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 2517\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 2258\n    },\n    \"settings\": {\n      \"enabled\": false,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": false,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1050,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": \"<double>\",\n  \"validationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "def09577-2163-447e-8e30-bd4a797474f0",
+          "name": "Get all payment page details",
+          "request": {
+            "name": "Get all payment page details",
+            "description": {
+              "content": "Loads all of a payment page's details including `pageIdentifier` and `validationCode`. This endpoint requires an `application` API token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Paypoint",
+                "load",
+                ":entry",
+                ":subdomain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entry",
+                  "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subdomain",
+                  "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b68ccd03-9e88-4211-a563-bc2b4ef42952",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    "load",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AdditionalData\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"Credentials\": [\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 1755.1910485386136,\n      \"cfeeFloat\": 1365.4148230597473,\n      \"cfeeMax\": 7530.231488175373,\n      \"cfeeMin\": 6635.689665381231,\n      \"maxticket\": 5434.957221110856,\n      \"minticket\": 4170.946013372385,\n      \"mode\": 740,\n      \"referenceId\": 1837,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": false,\n      \"absorbDifference\": false,\n      \"allowOverride\": false\n    },\n    {\n      \"accountId\": \"string\",\n      \"cfeeFix\": 1030.9980859048605,\n      \"cfeeFloat\": 9470.082584574564,\n      \"cfeeMax\": 8477.46588757263,\n      \"cfeeMin\": 222.44131997229633,\n      \"maxticket\": 5433.447611604825,\n      \"minticket\": 2637.3940600503443,\n      \"mode\": 8784,\n      \"referenceId\": 1205,\n      \"service\": \"string\",\n      \"greaterValueAllowed\": true,\n      \"absorbDifference\": true,\n      \"allowOverride\": true\n    }\n  ],\n  \"LastAccess\": \"1974-06-22T22:27:05.191Z\",\n  \"PageContent\": {\n    \"amount\": {\n      \"categories\": [\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": false,\n          \"order\": 140,\n          \"quantity\": 294,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"optionalPay\": true,\n          \"order\": 2589,\n          \"quantity\": 9435,\n          \"showDescription\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"order\": 5475\n    },\n    \"autopay\": {\n      \"enabled\": true,\n      \"finish\": {\n        \"calendar\": false,\n        \"untilCancelled\": true\n      },\n      \"frequency\": {\n        \"annually\": true,\n        \"every2Weeks\": false,\n        \"every3Months\": true,\n        \"every6Months\": true,\n        \"monthly\": true,\n        \"onetime\": false,\n        \"weekly\": true\n      },\n      \"frequencySelected\": \"string\",\n      \"header\": \"string\",\n      \"order\": 850,\n      \"startDate\": \"string\"\n    },\n    \"contactUs\": {\n      \"emailLabel\": \"string\",\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"order\": 2217,\n      \"paymentIcons\": true,\n      \"phoneLabel\": \"string\"\n    },\n    \"entry\": \"string\",\n    \"invoices\": {\n      \"enabled\": true,\n      \"invoiceLink\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 8571\n      },\n      \"order\": 9278,\n      \"viewInvoiceDetails\": {\n        \"enabled\": true,\n        \"label\": \"string\",\n        \"order\": 313\n      }\n    },\n    \"logo\": {\n      \"enabled\": false,\n      \"order\": 4952\n    },\n    \"messageBeforePaying\": {\n      \"enabled\": false,\n      \"label\": \"string\",\n      \"order\": 6524\n    },\n    \"name\": \"string\",\n    \"notes\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 3412,\n      \"placeholder\": \"string\",\n      \"value\": \"string\"\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 2598\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 5421\n    },\n    \"paymentMethods\": {\n      \"allMethodsChecked\": true,\n      \"enabled\": true,\n      \"header\": \"string\",\n      \"methods\": {\n        \"amex\": true,\n        \"applePay\": false,\n        \"googlePay\": false,\n        \"discover\": false,\n        \"eCheck\": false,\n        \"mastercard\": false,\n        \"visa\": false,\n        \"diners\": true,\n        \"jcb\": true,\n        \"rdc\": false\n      },\n      \"order\": 1629,\n      \"paymentDescription\": \"string\",\n      \"settings\": {\n        \"applePay\": {\n          \"buttonStyle\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"buttonType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"language\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"showSaveMethod\": true\n    },\n    \"payor\": {\n      \"enabled\": true,\n      \"fields\": [\n        {\n          \"display\": true,\n          \"fixed\": true,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 1182,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 1406\n        },\n        {\n          \"display\": true,\n          \"fixed\": false,\n          \"identifier\": false,\n          \"label\": \"string\",\n          \"name\": \"string\",\n          \"order\": 5742,\n          \"required\": true,\n          \"validation\": \"string\",\n          \"value\": \"string\",\n          \"width\": 3250\n        }\n      ],\n      \"header\": \"string\",\n      \"order\": 6466\n    },\n    \"review\": {\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 9868\n    },\n    \"subdomain\": \"string\"\n  },\n  \"pageIdentifier\": \"string\",\n  \"PageSettings\": {\n    \"color\": \"string\",\n    \"customCssUrl\": \"string\",\n    \"language\": \"string\",\n    \"pageLogo\": {\n      \"fContent\": \"string\",\n      \"filename\": \"string\",\n      \"ftype\": \"png\",\n      \"furl\": \"string\"\n    },\n    \"paymentButton\": {\n      \"label\": \"string\",\n      \"size\": \"lg\"\n    },\n    \"redirectAfterApprove\": true,\n    \"redirectAfterApproveUrl\": \"string\"\n  },\n  \"published\": 4907,\n  \"ReceiptContent\": {\n    \"amount\": {\n      \"enabled\": true,\n      \"order\": 7006\n    },\n    \"contactUs\": {\n      \"enabled\": false,\n      \"order\": 3873\n    },\n    \"details\": {\n      \"enabled\": false,\n      \"order\": 2703\n    },\n    \"logo\": {\n      \"enabled\": true,\n      \"order\": 2991\n    },\n    \"messageBeforeButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 6625\n    },\n    \"page\": {\n      \"description\": \"string\",\n      \"enabled\": false,\n      \"header\": \"string\",\n      \"order\": 2533\n    },\n    \"paymentButton\": {\n      \"enabled\": true,\n      \"label\": \"string\",\n      \"order\": 1159\n    },\n    \"paymentInformation\": {\n      \"enabled\": true,\n      \"order\": 5477\n    },\n    \"settings\": {\n      \"enabled\": true,\n      \"fields\": [\n        {\n          \"display\": false,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        },\n        {\n          \"display\": true,\n          \"Fixed\": true,\n          \"name\": \"string\"\n        }\n      ],\n      \"order\": 1114,\n      \"sendAuto\": true,\n      \"sendManual\": false\n    }\n  },\n  \"Subdomain\": \"string\",\n  \"totalAmount\": 9311.398099566912,\n  \"validationCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d5d8be8-0f84-4601-8210-1bf0c2b6137c",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    "load",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce0d4c3f-7713-4d07-8938-eb4123a75aae",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    "load",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90c9b26a-b857-4be8-b768-90af7f20325f",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    "load",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9ae6daa-539e-4ad1-909c-6e34216d959a",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Paypoint",
+                    "load",
+                    ":entry",
+                    ":subdomain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subdomain",
+                      "description": "(Required) Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1390,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.payabli.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "72109b25-7a4f-4fcf-ac17-492b3cb6e4f0",
+    "name": "API reference Bill hostedPaymentPages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

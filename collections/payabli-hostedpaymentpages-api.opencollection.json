@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill hostedPaymentPages API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "hostedPaymentPages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create payment page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new payment page for a paypoint.\nNote: this operation doesn't create a new paypoint, just a payment page for an existing paypoint. Paypoints are created by the Payabli team when a boarding application is approved."
+        },
+        {
+          "info": {
+            "name": "Update a payment page",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/:entry/:subdomain",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "subdomain",
+                "value": "",
+                "type": "path",
+                "description": "Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a payment page in a paypoint."
+        },
+        {
+          "info": {
+            "name": "Get all payment page details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Paypoint/load/:entry/:subdomain",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "subdomain",
+                "value": "",
+                "type": "path",
+                "description": "Payment page identifier. The subdomain value is the last part of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`."
+              }
+            ]
+          },
+          "docs": "Loads all of a payment page's details including `pageIdentifier` and `validationCode`. This endpoint requires an `application` API token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

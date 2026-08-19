@@ -1,0 +1,395 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill paymentLink API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "paymentLink",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate payment link from Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/:idInvoice",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              },
+              {
+                "name": "amountFixed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay."
+              },
+              {
+                "name": "mail2",
+                "value": "",
+                "type": "query",
+                "description": "List of recipient email addresses. When there is more than one, separate them by a semicolon (;)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a payment link for an invoice from the invoice ID.\n\nThe payment page configuration blocks (`logo`, `page`, `paymentMethods`, `review`, `messageBeforePaying`, `paymentButton`, `notes`, `contactUs`, and `settings`) are optional. When you omit a block, Payabli applies a default rather than hiding it. The block is enabled at a fixed display order, so the generated page stays complete and branded. To hide a section, send the block explicitly with `enabled` set to `false`. An explicit value "
+        },
+        {
+          "info": {
+            "name": "Generate payment link from Bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/bill/:billId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "billId",
+                "value": "",
+                "type": "path",
+                "description": "The Payabli ID for the bill."
+              },
+              {
+                "name": "amountFixed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay."
+              },
+              {
+                "name": "mail2",
+                "value": "",
+                "type": "query",
+                "description": "List of recipient email addresses. When there is more than one, separate them by a semicolon (;)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a payment link for a bill from the bill ID. The vendor receives a secure page where they can select their preferred payment method (ACH, virtual card, or check) and complete the payment."
+        },
+        {
+          "info": {
+            "name": "Get payment link from ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/load/:paylinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "paylinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for payment link"
+              }
+            ]
+          },
+          "docs": "Retrieves a payment link by ID."
+        },
+        {
+          "info": {
+            "name": "Send payment link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/push/:payLinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payLinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the payment link."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a payment link to the specified email addresses or phone numbers."
+        },
+        {
+          "info": {
+            "name": "Update payment link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/update/:payLinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payLinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the payment link."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a payment link's details."
+        },
+        {
+          "info": {
+            "name": "Refresh payment link content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/refresh/:payLinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payLinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the payment link."
+              },
+              {
+                "name": "amountFixed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay."
+              }
+            ]
+          },
+          "docs": "Refresh a payment link's content after an update."
+        },
+        {
+          "info": {
+            "name": "Delete payment link",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/:payLinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payLinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the payment link."
+              }
+            ]
+          },
+          "docs": "Deletes a payment link by ID."
+        },
+        {
+          "info": {
+            "name": "Send payment link email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/send/:payLinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payLinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the payment link."
+              },
+              {
+                "name": "attachfile",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, attaches a PDF version of invoice to the email."
+              },
+              {
+                "name": "mail2",
+                "value": "",
+                "type": "query",
+                "description": "List of recipient email addresses. When there is more than one, separate them by a semicolon (;)."
+              }
+            ]
+          },
+          "docs": "Sends a payment link to the specified email addresses."
+        },
+        {
+          "info": {
+            "name": "Generate payment link from lot number",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/bill/lotNumber/:lotNumber",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "lotNumber",
+                "value": "",
+                "type": "path",
+                "description": "Lot number of the bills to pay. All bills with this lot number will be included."
+              },
+              {
+                "name": "entryPoint",
+                "value": "",
+                "type": "query",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "vendorNumber",
+                "value": "",
+                "type": "query",
+                "description": "The vendor number for the vendor being paid with this payment link."
+              },
+              {
+                "name": "mail2",
+                "value": "",
+                "type": "query",
+                "description": "List of recipient email addresses. When there is more than one, separate them by a semicolon (;)."
+              },
+              {
+                "name": "amountFixed",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a vendor payment link for a specific bill lot number. This allows you to pay all bills with the same lot number for a vendor with a single payment link."
+        },
+        {
+          "info": {
+            "name": "Update Pay Out payment link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/out/:paylinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "paylinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the payment link."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially updates a Pay Out payment link's content, expiration date, and/or status. Use this to modify the payment page configuration, extend or change the expiration, or cancel a link. Updating the expiration date of an expired link reactivates it to Active status."
+        },
+        {
+          "info": {
+            "name": "Update Pay Out payment link content",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.payabli.com/api/PaymentLink/updateOut/:paylinkId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "paylinkId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the payment link."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the payment page content for a Pay Out payment link. Use this to change the branding, messaging, payment methods offered, or other page configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

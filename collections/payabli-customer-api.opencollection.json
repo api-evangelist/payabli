@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Customer API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Customer/single/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entrypoint identifier."
+              },
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer."
+              },
+              {
+                "name": "replaceExisting",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a customer in an entrypoint. An identifier is required to create customer records. Change your identifier settings in Settings > Custom Fields in the Payabli Portal.\nIf you don't include an identifier, the record is rejected."
+        },
+        {
+          "info": {
+            "name": "Get customer record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Customer/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+              }
+            ]
+          },
+          "docs": "Retrieves a customer's record and details."
+        },
+        {
+          "info": {
+            "name": "Update customer record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Customer/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a customer record. Include only the fields you want to change."
+        },
+        {
+          "info": {
+            "name": "Delete customer record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Customer/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+              }
+            ]
+          },
+          "docs": "Delete a customer record."
+        },
+        {
+          "info": {
+            "name": "Link Customer to Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Customer/link/:customerId/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+              },
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "Links a customer to a transaction by ID."
+        },
+        {
+          "info": {
+            "name": "Request consent opt-in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Customer/:customerId/consent",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+              }
+            ]
+          },
+          "docs": "Sends the consent opt-in email to the customer email address in the customer record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

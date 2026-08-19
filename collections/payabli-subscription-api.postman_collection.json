@@ -1,0 +1,1102 @@
+{
+  "item": [
+    {
+      "id": "527f4798-a1f5-437c-a80f-80ce9dbfdf97",
+      "name": "Subscription",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dbf3f510-ba8c-43f7-894d-bc50645b6f3a",
+          "name": "Create Subscription",
+          "request": {
+            "name": "Create Subscription",
+            "description": {
+              "content": "Creates a subscription or scheduled payment to run at a specified time and frequency. You can use stored payment method tokens for card, ACH, and digital wallets by passing them into the `paymentMethod.storedMethodId` field.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceCustomerCreation",
+                  "value": "<boolean>",
+                  "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                "key": "idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"invoiceData\": {\n    \"AdditionalData\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"attachments\": [\n      {\n        \"fContent\": \"<string>\",\n        \"filename\": \"<string>\",\n        \"ftype\": \"<string>\",\n        \"furl\": \"<string>\"\n      },\n      {\n        \"fContent\": \"<string>\",\n        \"filename\": \"<string>\",\n        \"ftype\": \"<string>\",\n        \"furl\": \"<string>\"\n      }\n    ],\n    \"company\": \"<string>\",\n    \"discount\": \"<double>\",\n    \"dutyAmount\": \"<double>\",\n    \"firstName\": \"<string>\",\n    \"freightAmount\": \"<double>\",\n    \"frequency\": \"<string>\",\n    \"invoiceAmount\": \"<double>\",\n    \"invoiceDate\": \"<date>\",\n    \"invoiceDueDate\": \"<date>\",\n    \"invoiceEndDate\": \"<date>\",\n    \"invoiceNumber\": \"<string>\",\n    \"invoiceStatus\": \"<integer>\",\n    \"invoiceType\": \"<integer>\",\n    \"items\": [\n      {\n        \"itemCategories\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"itemCommodityCode\": \"<string>\",\n        \"itemCost\": \"<double>\",\n        \"itemDescription\": \"<string>\",\n        \"itemMode\": \"<integer>\",\n        \"itemProductCode\": \"<string>\",\n        \"itemProductName\": \"<string>\",\n        \"itemQty\": \"<integer>\",\n        \"itemTaxAmount\": \"<double>\",\n        \"itemTaxRate\": \"<double>\",\n        \"itemTotalAmount\": \"<double>\",\n        \"itemUnitOfMeasure\": \"<string>\"\n      },\n      {\n        \"itemCategories\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"itemCommodityCode\": \"<string>\",\n        \"itemCost\": \"<double>\",\n        \"itemDescription\": \"<string>\",\n        \"itemMode\": \"<integer>\",\n        \"itemProductCode\": \"<string>\",\n        \"itemProductName\": \"<string>\",\n        \"itemQty\": \"<integer>\",\n        \"itemTaxAmount\": \"<double>\",\n        \"itemTaxRate\": \"<double>\",\n        \"itemTotalAmount\": \"<double>\",\n        \"itemUnitOfMeasure\": \"<string>\"\n      }\n    ],\n    \"lastName\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"paymentTerms\": \"<string>\",\n    \"purchaseOrder\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingEmail\": \"<email>\",\n    \"shippingFromZip\": \"<string>\",\n    \"shippingPhone\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\",\n    \"summaryCommodityCode\": \"<string>\",\n    \"tax\": \"<double>\",\n    \"termsConditions\": \"<string>\"\n  },\n  \"paymentDetails\": {\n    \"totalAmount\": \"<double>\",\n    \"categories\": [\n      {\n        \"amount\": \"<double>\",\n        \"label\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": \"<double>\",\n        \"label\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"checkNumber\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"serviceFee\": \"<double>\",\n    \"splitFunding\": [\n      {\n        \"accountId\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"description\": \"<string>\",\n        \"recipientEntryPoint\": \"<string>\"\n      },\n      {\n        \"accountId\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"description\": \"<string>\",\n        \"recipientEntryPoint\": \"<string>\"\n      }\n    ],\n    \"checkUniqueId\": \"<string>\"\n  },\n  \"paymentMethod\": {\n    \"cardexp\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"method\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"initiator\": \"<string>\",\n    \"saveIfSuccess\": \"<boolean>\"\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"planId\": \"<integer>\",\n    \"startDate\": \"<string>\"\n  },\n  \"setPause\": \"<boolean>\",\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\",\n  \"subscriptionType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "741603bd-f573-4ee4-a9f6-3e947124e09f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"hDEv6sOSmIRJhVx@sfHdkDNTNzFrWLjSNKuoz.std\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 1402,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"invoiceData\": {\n    \"AdditionalData\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"attachments\": [\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"txt\",\n        \"furl\": \"string\"\n      },\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"jpeg\",\n        \"furl\": \"string\"\n      }\n    ],\n    \"company\": \"string\",\n    \"discount\": 3115.756082444735,\n    \"dutyAmount\": 8832.865215660424,\n    \"firstName\": \"string\",\n    \"freightAmount\": 6148.380457448289,\n    \"frequency\": \"annually\",\n    \"invoiceAmount\": 5480.642085937861,\n    \"invoiceDate\": \"2008-05-07\",\n    \"invoiceDueDate\": \"2009-11-29\",\n    \"invoiceEndDate\": \"1952-03-08\",\n    \"invoiceNumber\": \"string\",\n    \"invoiceStatus\": 7781,\n    \"invoiceType\": 208,\n    \"items\": [\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 1329.3338529265552,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 6674,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 9822,\n        \"itemTaxAmount\": 4885.06839316642,\n        \"itemTaxRate\": 8014.682109327869,\n        \"itemTotalAmount\": 5629.58241803466,\n        \"itemUnitOfMeasure\": \"string\"\n      },\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 9697.348593718965,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 239,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 5985,\n        \"itemTaxAmount\": 9988.580226813267,\n        \"itemTaxRate\": 6939.96117538535,\n        \"itemTotalAmount\": 724.727400389884,\n        \"itemUnitOfMeasure\": \"string\"\n      }\n    ],\n    \"lastName\": \"string\",\n    \"notes\": \"string\",\n    \"paymentTerms\": \"50UF\",\n    \"purchaseOrder\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingEmail\": \"O4v6R02@EamcFvvlJsHiuiNVLKJeiDUFYvrTIFm.gszf\",\n    \"shippingFromZip\": \"string\",\n    \"shippingPhone\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\",\n    \"summaryCommodityCode\": \"string\",\n    \"tax\": 1106.7929997973092,\n    \"termsConditions\": \"string\"\n  },\n  \"paymentDetails\": {\n    \"totalAmount\": 1314.6663552132309,\n    \"categories\": [\n      {\n        \"amount\": 4745.319996048235,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": 5767.7661874195355,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {}\n    },\n    \"checkNumber\": \"string\",\n    \"currency\": \"string\",\n    \"serviceFee\": 1897.647282521644,\n    \"splitFunding\": [\n      {\n        \"accountId\": \"string\",\n        \"amount\": 8367.64413226654,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      },\n      {\n        \"accountId\": \"string\",\n        \"amount\": 697.4772195168599,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      }\n    ],\n    \"checkUniqueId\": \"string\"\n  },\n  \"paymentMethod\": {\n    \"cardexp\": \"string\",\n    \"cardnumber\": \"string\",\n    \"method\": \"card\",\n    \"cardcvv\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardzip\": \"string\",\n    \"initiator\": \"string\",\n    \"saveIfSuccess\": true\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"string\",\n    \"frequency\": \"firstofmonth\",\n    \"planId\": 2497,\n    \"startDate\": \"string\"\n  },\n  \"setPause\": true,\n  \"source\": \"string\",\n  \"subdomain\": \"string\",\n  \"subscriptionType\": \"Regular\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseData\": 7414,\n  \"customerId\": 8727,\n  \"isSuccess\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c666e26c-8685-42f8-b191-f5ab156ef125",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"hDEv6sOSmIRJhVx@sfHdkDNTNzFrWLjSNKuoz.std\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 1402,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"invoiceData\": {\n    \"AdditionalData\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"attachments\": [\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"txt\",\n        \"furl\": \"string\"\n      },\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"jpeg\",\n        \"furl\": \"string\"\n      }\n    ],\n    \"company\": \"string\",\n    \"discount\": 3115.756082444735,\n    \"dutyAmount\": 8832.865215660424,\n    \"firstName\": \"string\",\n    \"freightAmount\": 6148.380457448289,\n    \"frequency\": \"annually\",\n    \"invoiceAmount\": 5480.642085937861,\n    \"invoiceDate\": \"2008-05-07\",\n    \"invoiceDueDate\": \"2009-11-29\",\n    \"invoiceEndDate\": \"1952-03-08\",\n    \"invoiceNumber\": \"string\",\n    \"invoiceStatus\": 7781,\n    \"invoiceType\": 208,\n    \"items\": [\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 1329.3338529265552,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 6674,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 9822,\n        \"itemTaxAmount\": 4885.06839316642,\n        \"itemTaxRate\": 8014.682109327869,\n        \"itemTotalAmount\": 5629.58241803466,\n        \"itemUnitOfMeasure\": \"string\"\n      },\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 9697.348593718965,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 239,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 5985,\n        \"itemTaxAmount\": 9988.580226813267,\n        \"itemTaxRate\": 6939.96117538535,\n        \"itemTotalAmount\": 724.727400389884,\n        \"itemUnitOfMeasure\": \"string\"\n      }\n    ],\n    \"lastName\": \"string\",\n    \"notes\": \"string\",\n    \"paymentTerms\": \"50UF\",\n    \"purchaseOrder\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingEmail\": \"O4v6R02@EamcFvvlJsHiuiNVLKJeiDUFYvrTIFm.gszf\",\n    \"shippingFromZip\": \"string\",\n    \"shippingPhone\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\",\n    \"summaryCommodityCode\": \"string\",\n    \"tax\": 1106.7929997973092,\n    \"termsConditions\": \"string\"\n  },\n  \"paymentDetails\": {\n    \"totalAmount\": 1314.6663552132309,\n    \"categories\": [\n      {\n        \"amount\": 4745.319996048235,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": 5767.7661874195355,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {}\n    },\n    \"checkNumber\": \"string\",\n    \"currency\": \"string\",\n    \"serviceFee\": 1897.647282521644,\n    \"splitFunding\": [\n      {\n        \"accountId\": \"string\",\n        \"amount\": 8367.64413226654,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      },\n      {\n        \"accountId\": \"string\",\n        \"amount\": 697.4772195168599,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      }\n    ],\n    \"checkUniqueId\": \"string\"\n  },\n  \"paymentMethod\": {\n    \"cardexp\": \"string\",\n    \"cardnumber\": \"string\",\n    \"method\": \"card\",\n    \"cardcvv\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardzip\": \"string\",\n    \"initiator\": \"string\",\n    \"saveIfSuccess\": true\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"string\",\n    \"frequency\": \"firstofmonth\",\n    \"planId\": 2497,\n    \"startDate\": \"string\"\n  },\n  \"setPause\": true,\n  \"source\": \"string\",\n  \"subdomain\": \"string\",\n  \"subscriptionType\": \"Regular\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "785079c3-b5cf-4bdc-b8f1-f4fc297d3955",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"hDEv6sOSmIRJhVx@sfHdkDNTNzFrWLjSNKuoz.std\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 1402,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"invoiceData\": {\n    \"AdditionalData\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"attachments\": [\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"txt\",\n        \"furl\": \"string\"\n      },\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"jpeg\",\n        \"furl\": \"string\"\n      }\n    ],\n    \"company\": \"string\",\n    \"discount\": 3115.756082444735,\n    \"dutyAmount\": 8832.865215660424,\n    \"firstName\": \"string\",\n    \"freightAmount\": 6148.380457448289,\n    \"frequency\": \"annually\",\n    \"invoiceAmount\": 5480.642085937861,\n    \"invoiceDate\": \"2008-05-07\",\n    \"invoiceDueDate\": \"2009-11-29\",\n    \"invoiceEndDate\": \"1952-03-08\",\n    \"invoiceNumber\": \"string\",\n    \"invoiceStatus\": 7781,\n    \"invoiceType\": 208,\n    \"items\": [\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 1329.3338529265552,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 6674,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 9822,\n        \"itemTaxAmount\": 4885.06839316642,\n        \"itemTaxRate\": 8014.682109327869,\n        \"itemTotalAmount\": 5629.58241803466,\n        \"itemUnitOfMeasure\": \"string\"\n      },\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 9697.348593718965,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 239,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 5985,\n        \"itemTaxAmount\": 9988.580226813267,\n        \"itemTaxRate\": 6939.96117538535,\n        \"itemTotalAmount\": 724.727400389884,\n        \"itemUnitOfMeasure\": \"string\"\n      }\n    ],\n    \"lastName\": \"string\",\n    \"notes\": \"string\",\n    \"paymentTerms\": \"50UF\",\n    \"purchaseOrder\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingEmail\": \"O4v6R02@EamcFvvlJsHiuiNVLKJeiDUFYvrTIFm.gszf\",\n    \"shippingFromZip\": \"string\",\n    \"shippingPhone\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\",\n    \"summaryCommodityCode\": \"string\",\n    \"tax\": 1106.7929997973092,\n    \"termsConditions\": \"string\"\n  },\n  \"paymentDetails\": {\n    \"totalAmount\": 1314.6663552132309,\n    \"categories\": [\n      {\n        \"amount\": 4745.319996048235,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": 5767.7661874195355,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {}\n    },\n    \"checkNumber\": \"string\",\n    \"currency\": \"string\",\n    \"serviceFee\": 1897.647282521644,\n    \"splitFunding\": [\n      {\n        \"accountId\": \"string\",\n        \"amount\": 8367.64413226654,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      },\n      {\n        \"accountId\": \"string\",\n        \"amount\": 697.4772195168599,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      }\n    ],\n    \"checkUniqueId\": \"string\"\n  },\n  \"paymentMethod\": {\n    \"cardexp\": \"string\",\n    \"cardnumber\": \"string\",\n    \"method\": \"card\",\n    \"cardcvv\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardzip\": \"string\",\n    \"initiator\": \"string\",\n    \"saveIfSuccess\": true\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"string\",\n    \"frequency\": \"firstofmonth\",\n    \"planId\": 2497,\n    \"startDate\": \"string\"\n  },\n  \"setPause\": true,\n  \"source\": \"string\",\n  \"subdomain\": \"string\",\n  \"subscriptionType\": \"Regular\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cc107c5-5fb3-4329-945d-26adddcb0172",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"hDEv6sOSmIRJhVx@sfHdkDNTNzFrWLjSNKuoz.std\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 1402,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"invoiceData\": {\n    \"AdditionalData\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"attachments\": [\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"txt\",\n        \"furl\": \"string\"\n      },\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"jpeg\",\n        \"furl\": \"string\"\n      }\n    ],\n    \"company\": \"string\",\n    \"discount\": 3115.756082444735,\n    \"dutyAmount\": 8832.865215660424,\n    \"firstName\": \"string\",\n    \"freightAmount\": 6148.380457448289,\n    \"frequency\": \"annually\",\n    \"invoiceAmount\": 5480.642085937861,\n    \"invoiceDate\": \"2008-05-07\",\n    \"invoiceDueDate\": \"2009-11-29\",\n    \"invoiceEndDate\": \"1952-03-08\",\n    \"invoiceNumber\": \"string\",\n    \"invoiceStatus\": 7781,\n    \"invoiceType\": 208,\n    \"items\": [\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 1329.3338529265552,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 6674,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 9822,\n        \"itemTaxAmount\": 4885.06839316642,\n        \"itemTaxRate\": 8014.682109327869,\n        \"itemTotalAmount\": 5629.58241803466,\n        \"itemUnitOfMeasure\": \"string\"\n      },\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 9697.348593718965,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 239,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 5985,\n        \"itemTaxAmount\": 9988.580226813267,\n        \"itemTaxRate\": 6939.96117538535,\n        \"itemTotalAmount\": 724.727400389884,\n        \"itemUnitOfMeasure\": \"string\"\n      }\n    ],\n    \"lastName\": \"string\",\n    \"notes\": \"string\",\n    \"paymentTerms\": \"50UF\",\n    \"purchaseOrder\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingEmail\": \"O4v6R02@EamcFvvlJsHiuiNVLKJeiDUFYvrTIFm.gszf\",\n    \"shippingFromZip\": \"string\",\n    \"shippingPhone\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\",\n    \"summaryCommodityCode\": \"string\",\n    \"tax\": 1106.7929997973092,\n    \"termsConditions\": \"string\"\n  },\n  \"paymentDetails\": {\n    \"totalAmount\": 1314.6663552132309,\n    \"categories\": [\n      {\n        \"amount\": 4745.319996048235,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": 5767.7661874195355,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {}\n    },\n    \"checkNumber\": \"string\",\n    \"currency\": \"string\",\n    \"serviceFee\": 1897.647282521644,\n    \"splitFunding\": [\n      {\n        \"accountId\": \"string\",\n        \"amount\": 8367.64413226654,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      },\n      {\n        \"accountId\": \"string\",\n        \"amount\": 697.4772195168599,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      }\n    ],\n    \"checkUniqueId\": \"string\"\n  },\n  \"paymentMethod\": {\n    \"cardexp\": \"string\",\n    \"cardnumber\": \"string\",\n    \"method\": \"card\",\n    \"cardcvv\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardzip\": \"string\",\n    \"initiator\": \"string\",\n    \"saveIfSuccess\": true\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"string\",\n    \"frequency\": \"firstofmonth\",\n    \"planId\": 2497,\n    \"startDate\": \"string\"\n  },\n  \"setPause\": true,\n  \"source\": \"string\",\n  \"subdomain\": \"string\",\n  \"subscriptionType\": \"Regular\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8954aead-7c1e-4c11-93e4-968125273924",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"hDEv6sOSmIRJhVx@sfHdkDNTNzFrWLjSNKuoz.std\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 1402,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"invoiceData\": {\n    \"AdditionalData\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"attachments\": [\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"txt\",\n        \"furl\": \"string\"\n      },\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"jpeg\",\n        \"furl\": \"string\"\n      }\n    ],\n    \"company\": \"string\",\n    \"discount\": 3115.756082444735,\n    \"dutyAmount\": 8832.865215660424,\n    \"firstName\": \"string\",\n    \"freightAmount\": 6148.380457448289,\n    \"frequency\": \"annually\",\n    \"invoiceAmount\": 5480.642085937861,\n    \"invoiceDate\": \"2008-05-07\",\n    \"invoiceDueDate\": \"2009-11-29\",\n    \"invoiceEndDate\": \"1952-03-08\",\n    \"invoiceNumber\": \"string\",\n    \"invoiceStatus\": 7781,\n    \"invoiceType\": 208,\n    \"items\": [\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 1329.3338529265552,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 6674,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 9822,\n        \"itemTaxAmount\": 4885.06839316642,\n        \"itemTaxRate\": 8014.682109327869,\n        \"itemTotalAmount\": 5629.58241803466,\n        \"itemUnitOfMeasure\": \"string\"\n      },\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 9697.348593718965,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 239,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 5985,\n        \"itemTaxAmount\": 9988.580226813267,\n        \"itemTaxRate\": 6939.96117538535,\n        \"itemTotalAmount\": 724.727400389884,\n        \"itemUnitOfMeasure\": \"string\"\n      }\n    ],\n    \"lastName\": \"string\",\n    \"notes\": \"string\",\n    \"paymentTerms\": \"50UF\",\n    \"purchaseOrder\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingEmail\": \"O4v6R02@EamcFvvlJsHiuiNVLKJeiDUFYvrTIFm.gszf\",\n    \"shippingFromZip\": \"string\",\n    \"shippingPhone\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\",\n    \"summaryCommodityCode\": \"string\",\n    \"tax\": 1106.7929997973092,\n    \"termsConditions\": \"string\"\n  },\n  \"paymentDetails\": {\n    \"totalAmount\": 1314.6663552132309,\n    \"categories\": [\n      {\n        \"amount\": 4745.319996048235,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": 5767.7661874195355,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {}\n    },\n    \"checkNumber\": \"string\",\n    \"currency\": \"string\",\n    \"serviceFee\": 1897.647282521644,\n    \"splitFunding\": [\n      {\n        \"accountId\": \"string\",\n        \"amount\": 8367.64413226654,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      },\n      {\n        \"accountId\": \"string\",\n        \"amount\": 697.4772195168599,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      }\n    ],\n    \"checkUniqueId\": \"string\"\n  },\n  \"paymentMethod\": {\n    \"cardexp\": \"string\",\n    \"cardnumber\": \"string\",\n    \"method\": \"card\",\n    \"cardcvv\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardzip\": \"string\",\n    \"initiator\": \"string\",\n    \"saveIfSuccess\": true\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"string\",\n    \"frequency\": \"firstofmonth\",\n    \"planId\": 2497,\n    \"startDate\": \"string\"\n  },\n  \"setPause\": true,\n  \"source\": \"string\",\n  \"subdomain\": \"string\",\n  \"subscriptionType\": \"Regular\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d34f1c4f-b457-4a64-8df3-d5df0bf2eed4",
+          "name": "Get a subscription",
+          "request": {
+            "name": "Get a subscription",
+            "description": {
+              "content": "Retrieves a single subscription's details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "subId",
+                  "description": "(Required) The subscription ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a629ce06-3e83-4145-9eb7-6b146d20908b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"EndDate\": \"1993-10-10T04:24:45.427Z\",\n  \"LastRun\": \"1993-07-20T06:27:34.911Z\",\n  \"NextDate\": \"2020-04-27T13:00:40.852Z\",\n  \"StartDate\": \"1954-10-06T09:07:11.322Z\",\n  \"StoredMethod\": {\n    \"IdPmethod\": \"string\",\n    \"Method\": \"string\",\n    \"Descriptor\": \"string\",\n    \"MaskedAccount\": \"string\",\n    \"ExpDate\": \"string\",\n    \"HolderName\": \"string\",\n    \"AchSecCode\": \"string\",\n    \"AchHolderType\": \"string\",\n    \"IsValidatedACH\": false,\n    \"BIN\": \"string\",\n    \"binData\": {\n      \"binMatchedLength\": \"string\",\n      \"binCardBrand\": \"string\",\n      \"binCardType\": \"string\",\n      \"binCardCategory\": \"string\",\n      \"binCardIssuer\": \"string\",\n      \"binCardIssuerCountry\": \"string\",\n      \"binCardIssuerCountryCodeA2\": \"string\",\n      \"binCardIssuerCountryNumber\": \"string\",\n      \"binCardIsRegulated\": \"string\",\n      \"binCardUseCategory\": \"string\",\n      \"binCardIssuerCountryCodeA3\": \"string\"\n    },\n    \"ABA\": \"string\",\n    \"PostalCode\": \"string\",\n    \"MethodType\": \"string\",\n    \"WalletType\": \"string\",\n    \"LastUpdated\": \"1950-07-12T10:12:46.848Z\",\n    \"CardUpdatedOn\": \"2018-10-04T18:14:58.301Z\"\n  },\n  \"CreatedAt\": \"1960-10-27T06:49:09.817Z\",\n  \"Customer\": {\n    \"FirstName\": \"string\",\n    \"LastName\": \"string\",\n    \"CompanyName\": \"string\",\n    \"BillingAddress1\": \"string\",\n    \"BillingAddress2\": \"string\",\n    \"BillingCity\": \"string\",\n    \"BillingState\": \"string\",\n    \"BillingZip\": \"string\",\n    \"BillingCountry\": \"string\",\n    \"BillingPhone\": \"string\",\n    \"BillingEmail\": \"GMDI@gFQFL.xa\",\n    \"CustomerNumber\": \"string\",\n    \"ShippingAddress1\": \"string\",\n    \"ShippingAddress2\": \"string\",\n    \"ShippingCity\": \"string\",\n    \"ShippingState\": \"string\",\n    \"ShippingZip\": \"string\",\n    \"ShippingCountry\": \"string\",\n    \"customerId\": 3842,\n    \"customerStatus\": 9058,\n    \"AdditionalData\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"EntrypageId\": 8634,\n  \"ExternalPaypointID\": \"string\",\n  \"FeeAmount\": 1807.8673451595828,\n  \"Frequency\": \"string\",\n  \"IdSub\": 47,\n  \"invoiceData\": {\n    \"AdditionalData\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"attachments\": [\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"docx\",\n        \"furl\": \"string\"\n      },\n      {\n        \"fContent\": \"string\",\n        \"filename\": \"string\",\n        \"ftype\": \"docx\",\n        \"furl\": \"string\"\n      }\n    ],\n    \"company\": \"string\",\n    \"discount\": 4304.837455038545,\n    \"dutyAmount\": 5605.195838920135,\n    \"firstName\": \"string\",\n    \"freightAmount\": 3499.908147965832,\n    \"frequency\": \"monthly\",\n    \"invoiceAmount\": 1288.2771395390812,\n    \"invoiceDate\": \"1987-03-10\",\n    \"invoiceDueDate\": \"1997-09-30\",\n    \"invoiceEndDate\": \"1967-08-22\",\n    \"invoiceNumber\": \"string\",\n    \"invoiceStatus\": 1397,\n    \"invoiceType\": 6827,\n    \"items\": [\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 8665.294988557687,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 419,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 9133,\n        \"itemTaxAmount\": 9810.288098525454,\n        \"itemTaxRate\": 3104.136492403089,\n        \"itemTotalAmount\": 500.49472753451727,\n        \"itemUnitOfMeasure\": \"string\"\n      },\n      {\n        \"itemCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"itemCommodityCode\": \"string\",\n        \"itemCost\": 502.33515189684,\n        \"itemDescription\": \"string\",\n        \"itemMode\": 9256,\n        \"itemProductCode\": \"string\",\n        \"itemProductName\": \"string\",\n        \"itemQty\": 757,\n        \"itemTaxAmount\": 2712.648112957149,\n        \"itemTaxRate\": 6534.628296380358,\n        \"itemTotalAmount\": 4896.269361537566,\n        \"itemUnitOfMeasure\": \"string\"\n      }\n    ],\n    \"lastName\": \"string\",\n    \"notes\": \"string\",\n    \"paymentTerms\": \"PIA\",\n    \"purchaseOrder\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingEmail\": \"t0g-umKJbkbH@UVh.kgp\",\n    \"shippingFromZip\": \"string\",\n    \"shippingPhone\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\",\n    \"summaryCommodityCode\": \"string\",\n    \"tax\": 7878.894850142861,\n    \"termsConditions\": \"string\"\n  },\n  \"LastUpdated\": \"1987-10-22T09:24:37.800Z\",\n  \"LeftCycles\": 2148,\n  \"Method\": \"string\",\n  \"NetAmount\": 1920.0004489101098,\n  \"ParentOrgName\": \"string\",\n  \"PaymentData\": {\n    \"AccountExp\": \"string\",\n    \"accountId\": \"string\",\n    \"AccountType\": \"string\",\n    \"AccountZip\": \"string\",\n    \"binData\": {\n      \"binMatchedLength\": \"string\",\n      \"binCardBrand\": \"string\",\n      \"binCardType\": \"string\",\n      \"binCardCategory\": \"string\",\n      \"binCardIssuer\": \"string\",\n      \"binCardIssuerCountry\": \"string\",\n      \"binCardIssuerCountryCodeA2\": \"string\",\n      \"binCardIssuerCountryNumber\": \"string\",\n      \"binCardIsRegulated\": \"string\",\n      \"binCardUseCategory\": \"string\",\n      \"binCardIssuerCountryCodeA3\": \"string\"\n    },\n    \"HolderName\": \"string\",\n    \"Initiator\": \"string\",\n    \"MaskedAccount\": \"string\",\n    \"orderDescription\": \"string\",\n    \"paymentDetails\": {\n      \"totalAmount\": 1435.6274513250733,\n      \"categories\": [\n        {\n          \"amount\": 3888.610247933203,\n          \"label\": \"string\",\n          \"description\": \"string\",\n          \"qty\": 1\n        },\n        {\n          \"amount\": 4674.876312052474,\n          \"label\": \"string\",\n          \"description\": \"string\",\n          \"qty\": 1\n        }\n      ],\n      \"checkImage\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"checkNumber\": \"string\",\n      \"currency\": \"string\",\n      \"serviceFee\": 2011.3674170542506,\n      \"splitFunding\": [\n        {\n          \"accountId\": \"string\",\n          \"amount\": 218.59317810624668,\n          \"description\": \"string\",\n          \"recipientEntryPoint\": \"string\"\n        },\n        {\n          \"accountId\": \"string\",\n          \"amount\": 3699.935301066354,\n          \"description\": \"string\",\n          \"recipientEntryPoint\": \"string\"\n        }\n      ],\n      \"checkUniqueId\": \"string\"\n    },\n    \"Sequence\": \"string\",\n    \"SignatureData\": \"string\",\n    \"StoredId\": \"string\",\n    \"StoredMethodUsageType\": \"string\"\n  },\n  \"PaypointDbaname\": \"string\",\n  \"PaypointEntryname\": \"string\",\n  \"PaypointId\": 2806,\n  \"PaypointLegalname\": \"string\",\n  \"PlanId\": 7108,\n  \"Source\": \"string\",\n  \"SubEvents\": [\n    {\n      \"description\": \"string\",\n      \"eventTime\": \"2023-05-31T01:22:17.332Z\",\n      \"extraData\": \"string\",\n      \"refData\": \"string\",\n      \"source\": \"string\"\n    },\n    {\n      \"description\": \"string\",\n      \"eventTime\": \"1962-05-27T15:25:38.301Z\",\n      \"extraData\": \"string\",\n      \"refData\": \"string\",\n      \"source\": \"string\"\n    }\n  ],\n  \"SubStatus\": 263,\n  \"SubscriptionType\": \"Regular\",\n  \"TotalAmount\": 9193.79344899585,\n  \"TotalCycles\": 5679,\n  \"UntilCancelled\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cff6f5e3-fccb-4662-9617-e4b0d6e41e3e",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "146600ed-038a-4884-a0ca-a12e4dd069cd",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "288d1a90-d144-4bcb-a8fa-344d7843dfa6",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f145d5f-b1c7-485e-a6d3-e9c18a89d6b7",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a7273d5-c971-4ede-a448-228e68145371",
+          "name": "Update a subscription",
+          "request": {
+            "name": "Update a subscription",
+            "description": {
+              "content": "Updates a subscription's details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "subId",
+                  "description": "(Required) The subscription ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentDetails\": {\n    \"totalAmount\": \"<double>\",\n    \"categories\": [\n      {\n        \"amount\": \"<double>\",\n        \"label\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": \"<double>\",\n        \"label\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"checkNumber\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"serviceFee\": \"<double>\",\n    \"splitFunding\": [\n      {\n        \"accountId\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"description\": \"<string>\",\n        \"recipientEntryPoint\": \"<string>\"\n      },\n      {\n        \"accountId\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"description\": \"<string>\",\n        \"recipientEntryPoint\": \"<string>\"\n      }\n    ],\n    \"checkUniqueId\": \"<string>\"\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"<string>\",\n    \"frequency\": \"<string>\",\n    \"planId\": \"<integer>\",\n    \"startDate\": \"<string>\"\n  },\n  \"setPause\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "484b6de4-6650-454c-afff-88b20639020b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentDetails\": {\n    \"totalAmount\": 8107.70492504233,\n    \"categories\": [\n      {\n        \"amount\": 5022.058537719167,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      },\n      {\n        \"amount\": 4577.11717019947,\n        \"label\": \"string\",\n        \"description\": \"string\",\n        \"qty\": 1\n      }\n    ],\n    \"checkImage\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"checkNumber\": \"string\",\n    \"currency\": \"string\",\n    \"serviceFee\": 4103.176044330169,\n    \"splitFunding\": [\n      {\n        \"accountId\": \"string\",\n        \"amount\": 9118.311863761175,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      },\n      {\n        \"accountId\": \"string\",\n        \"amount\": 4389.701331176174,\n        \"description\": \"string\",\n        \"recipientEntryPoint\": \"string\"\n      }\n    ],\n    \"checkUniqueId\": \"string\"\n  },\n  \"scheduleDetails\": {\n    \"endDate\": \"string\",\n    \"frequency\": \"every6months\",\n    \"planId\": 1207,\n    \"startDate\": \"string\"\n  },\n  \"setPause\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": true,\n  \"responseData\": \"string\",\n  \"customerId\": 9867\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f33e070-4986-4dbe-96b6-73551bfc2652",
+          "name": "Delete a subscription",
+          "request": {
+            "name": "Delete a subscription",
+            "description": {
+              "content": "Deletes a subscription, autopay, or recurring payment and prevents future charges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "subId",
+                  "description": "(Required) The subscription ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b42ddfc-3bb6-40b5-a601-78434bd1469b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b28f292-2851-4e94-a0fb-a2521065fdd4",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3944256-7702-4ebb-aa55-231964b33d3c",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "855bd9a4-35f7-4f20-a1c0-42779a18f8b8",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8134392c-bb19-40e1-86c7-3ffeff6fbc01",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) The subscription ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 3728,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.payabli.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4ecc63b9-b266-4f22-ae04-6406bba00fd4",
+    "name": "API reference Bill Subscription API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

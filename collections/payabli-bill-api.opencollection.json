@@ -1,0 +1,419 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bill",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Bill/single/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a bill in an entrypoint."
+        },
+        {
+          "info": {
+            "name": "Get bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Bill/:idBill",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              }
+            ]
+          },
+          "docs": "Retrieves a bill by ID from an entrypoint."
+        },
+        {
+          "info": {
+            "name": "Update bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Bill/:idBill",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a bill by ID."
+        },
+        {
+          "info": {
+            "name": "Delete bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Bill/:idBill",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              }
+            ]
+          },
+          "docs": "Deletes a bill by ID."
+        },
+        {
+          "info": {
+            "name": "Get list of bills for entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/bills/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response isn't filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `frequency` (`in`, `nin`, `ne`, `eq`)\n- `method` (`in`, `nin`, `eq`, `ne`)\n- `event` (`in`, `nin`, `eq`, `ne`)\n- `target` (`ct`, `nct`, `eq`, `ne`)\n- `status` (`eq`, `ne`)\n- `approvalUserId` (`eq`, `ne`)\n- `parentOrgId` (`ne`, `eq`, `nin`, `in`)\n- `approvalUserEmail` (`eq`, `ne`)\n- `scheduleId` (`ne`, `eq`)\n\nList of comparison accepted - enclosed between parentheses:\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array\n\nList of parameters accepted:\n- `limitRecord` : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord` : initial record in query\nExample: `totalAmount(gt)=20` returns all records with a `totalAmount` that's greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of bills for an entrypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of bills for organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/bills/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response isn't filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `event` (in, nin, eq, ne)\n- `target` (ct, nct, eq, ne)\n- `status` (eq, ne)\n- `parentOrgId` (ne, eq, nin, in)\n- `approvalUserId` (eq, ne)\n- `approvalUserEmail` (eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20 return all records with totalAmount greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of bills for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get attached file from bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Bill/attachedFileFromBill/:idBill/:filename",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The filename in Payabli. Get this from the `zipName` field\nin the `DocumentsRef.filelist` array returned by\n`/api/Bill/{idBill}`. Example: `0_Bill.pdf`."
+              },
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              },
+              {
+                "name": "returnObject",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request returns the file content as a Base64-encoded string."
+              }
+            ]
+          },
+          "docs": "Retrieves a file attached to a bill, either as a binary file or as a Base64-encoded string."
+        },
+        {
+          "info": {
+            "name": "Delete attached file from bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Bill/attachedFileFromBill/:idBill/:filename",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The filename in Payabli. Get this from the `zipName` field\nin the `DocumentsRef.filelist` array returned by\n`/api/Bill/{idBill}`. Example: `0_Bill.pdf`."
+              },
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              },
+              {
+                "name": "returnObject",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the response includes the full bill object."
+              }
+            ]
+          },
+          "docs": "Delete a file attached to a bill."
+        },
+        {
+          "info": {
+            "name": "Send a bill to approval",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Bill/approval/:idBill",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              },
+              {
+                "name": "autocreateUser",
+                "value": "",
+                "type": "query",
+                "description": "Automatically create the target user for approval if they don't exist."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a bill to a user or list of users to approve."
+        },
+        {
+          "info": {
+            "name": "Change bill approvers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Bill/approval/:idBill",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify the list of users the bill is sent to for approval."
+        },
+        {
+          "info": {
+            "name": "Approve or disapprove a bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Bill/approval/:idBill/:approved",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "approved",
+                "value": "",
+                "type": "path",
+                "description": "String representing the approved status. Accepted values: 'true' or 'false'."
+              },
+              {
+                "name": "idBill",
+                "value": "",
+                "type": "path",
+                "description": "Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email or username of user modifying approval status."
+              }
+            ]
+          },
+          "docs": "Approve or disapprove a bill by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

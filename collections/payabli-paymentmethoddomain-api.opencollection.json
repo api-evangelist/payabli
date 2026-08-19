@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill paymentMethodDomain API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "paymentMethodDomain",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a payment method domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/PaymentMethodDomain",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a payment method domain to an organization or paypoint."
+        },
+        {
+          "info": {
+            "name": "Cascade a payment method domain to the child entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/PaymentMethodDomain/:domainId/cascade",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "path",
+                "description": "The payment method domain's ID in Payabli."
+              }
+            ]
+          },
+          "docs": "Cascades a payment method domain to all child entities. All paypoints and suborganization under this parent will inherit this domain and its settings."
+        },
+        {
+          "info": {
+            "name": "Verify a payment method domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/PaymentMethodDomain/:domainId/verify",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "path",
+                "description": "The payment method domain's ID in Payabli."
+              }
+            ]
+          },
+          "docs": "Verify a new payment method domain. If verification is successful, Apple Pay is automatically activated for the domain."
+        },
+        {
+          "info": {
+            "name": "Get payment method domain details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/PaymentMethodDomain/:domainId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "path",
+                "description": "The payment method domain's ID in Payabli."
+              }
+            ]
+          },
+          "docs": "Get the details for a payment method domain."
+        },
+        {
+          "info": {
+            "name": "Update payment method domain configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.payabli.com/api/PaymentMethodDomain/:domainId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "path",
+                "description": "The payment method domain's ID in Payabli."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a payment method domain's configuration values."
+        },
+        {
+          "info": {
+            "name": "Delete a payment method domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/PaymentMethodDomain/:domainId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "path",
+                "description": "The payment method domain's ID in Payabli."
+              }
+            ]
+          },
+          "docs": "Delete a payment method domain. You can't delete an inherited domain, you must delete a domain at the organization level."
+        },
+        {
+          "info": {
+            "name": "List payment method domains for an entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/PaymentMethodDomain/list",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier for the organization or paypoint.\n- For organization, provide the organization ID - For paypoint, provide the paypoint ID"
+              },
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "query",
+                "description": "The type of entity. Valid values:\n  - organization\n  - paypoint\n  - psp"
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip. Defaults to `0`."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records for query response. Defaults to `20`."
+              }
+            ]
+          },
+          "docs": "Get a list of payment method domains that belong to a PSP, organization, or paypoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

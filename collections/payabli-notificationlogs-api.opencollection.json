@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Notificationlogs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notificationlogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Notification Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/notificationlogs",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records on each response page."
+              },
+              {
+                "name": "Page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve. Defaults to 1 if not provided."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search notification logs with filtering and pagination.\n  - Start date and end date cannot be more than 30 days apart\n  - Either `orgId` or `paypointId` must be provided\n\nThis endpoint requires the `notifications_create` OR `notifications_read` permission."
+        },
+        {
+          "info": {
+            "name": "Get Notification Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/v2/notificationlogs/:uuid",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The notification log entry."
+              }
+            ]
+          },
+          "docs": "Get detailed information for a specific notification log entry.\nThis endpoint requires the `notifications_create` OR `notifications_read` permission."
+        },
+        {
+          "info": {
+            "name": "Retry Notification Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/v2/notificationlogs/:uuid/retry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Unique id"
+              }
+            ]
+          },
+          "docs": "Retry sending a specific notification.\n\n**Permissions:** notifications_create"
+        },
+        {
+          "info": {
+            "name": "Bulk Retry Notification Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/notificationlogs/retry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retry sending multiple notifications (maximum 50 IDs).\nThis is an async process, so use the search endpoint again to check the notification status.\n\nThis endpoint requires the `notifications_create` permission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

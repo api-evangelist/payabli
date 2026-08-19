@@ -1,0 +1,1250 @@
+{
+  "item": [
+    {
+      "id": "6b3b2378-c19d-405c-9504-1c893721f1cd",
+      "name": "tokenStorage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e8ae97e0-6df3-4104-bfe1-9918944713a3",
+          "name": "Save a payment method (tokenize)",
+          "request": {
+            "name": "Save a payment method (tokenize)",
+            "description": {
+              "content": "Saves a payment method for reuse. This call exchanges sensitive payment information for a token that can be used to process future transactions. The `ReferenceId` value in the response is the `storedMethodId` to use with transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "TokenStorage",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "achValidation",
+                  "value": "<boolean>",
+                  "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information."
+                },
+                {
+                  "disabled": false,
+                  "key": "createAnonymous",
+                  "value": "<boolean>",
+                  "description": "When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "forceCustomerCreation",
+                  "value": "<boolean>",
+                  "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "temporary",
+                  "value": "<boolean>",
+                  "description": "Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                "key": "idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"key_2\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa0e6428-dfe6-49ed-888e-77769377cbb6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "achValidation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "createAnonymous",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "temporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"XzLg9n3o@FfPyZNBgWxPxCXESvyItxmRivgraIBlK.xf\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 7036,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"cardexp\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardnumber\": \"string\",\n    \"cardcvv\": \"string\",\n    \"cardzip\": \"string\",\n    \"device\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorId\": 1847,\n    \"vendorNumber\": \"string\"\n  },\n  \"source\": \"string\",\n  \"subdomain\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": true,\n  \"responseData\": {\n    \"referenceId\": \"string\",\n    \"resultCode\": 3692,\n    \"resultText\": \"string\",\n    \"customerId\": 6729,\n    \"methodReferenceId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1379181e-04cd-4ff7-a85c-abee08a7d85f",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "achValidation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "createAnonymous",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "temporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"XzLg9n3o@FfPyZNBgWxPxCXESvyItxmRivgraIBlK.xf\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 7036,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"cardexp\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardnumber\": \"string\",\n    \"cardcvv\": \"string\",\n    \"cardzip\": \"string\",\n    \"device\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorId\": 1847,\n    \"vendorNumber\": \"string\"\n  },\n  \"source\": \"string\",\n  \"subdomain\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "246c2dd9-3153-47eb-96bd-76367e9dcd40",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "achValidation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "createAnonymous",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    },
+                    {
+                      "key": "temporary",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"XzLg9n3o@FfPyZNBgWxPxCXESvyItxmRivgraIBlK.xf\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 7036,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"cardexp\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardnumber\": \"string\",\n    \"cardcvv\": \"string\",\n    \"cardzip\": \"string\",\n    \"device\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorId\": 1847,\n    \"vendorNumber\": \"string\"\n  },\n  \"source\": \"string\",\n  \"subdomain\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96e0ace6-908a-484e-abf9-41d478118fc5",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "achValidation",
+                      "value": "true"
+                    },
+                    {
+                      "key": "createAnonymous",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    },
+                    {
+                      "key": "temporary",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"XzLg9n3o@FfPyZNBgWxPxCXESvyItxmRivgraIBlK.xf\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 7036,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"cardexp\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardnumber\": \"string\",\n    \"cardcvv\": \"string\",\n    \"cardzip\": \"string\",\n    \"device\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorId\": 1847,\n    \"vendorNumber\": \"string\"\n  },\n  \"source\": \"string\",\n  \"subdomain\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2ac0fff-173b-4cbc-be4f-82a37254bbaf",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "achValidation",
+                      "value": "true"
+                    },
+                    {
+                      "key": "createAnonymous",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "true"
+                    },
+                    {
+                      "key": "temporary",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"XzLg9n3o@FfPyZNBgWxPxCXESvyItxmRivgraIBlK.xf\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 7036,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"cardexp\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardnumber\": \"string\",\n    \"cardcvv\": \"string\",\n    \"cardzip\": \"string\",\n    \"device\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorId\": 1847,\n    \"vendorNumber\": \"string\"\n  },\n  \"source\": \"string\",\n  \"subdomain\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51780c43-daea-45f5-8579-c325f1bc7c6f",
+          "name": "Get payment method",
+          "request": {
+            "name": "Get payment method",
+            "description": {
+              "content": "Retrieves details for a saved payment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "TokenStorage",
+                ":methodId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cardExpirationFormat",
+                  "value": "0",
+                  "description": "Format for card expiration dates in the response.\n\nAccepted values:\n\n- 0: default, no formatting. Expiration dates are returned in the format they're saved in.\n\n- 1: MMYY\n\n- 2: MM/YY"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeTemporary",
+                  "value": "false",
+                  "description": "When `true`, the request will include temporary tokens in the search and return details for a matching temporary token. The default behavior searches only for permanent tokens."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "methodId",
+                  "description": "(Required) The saved payment method ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f5cf5f2-be1b-4805-8be3-2f1bd238498d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cardExpirationFormat",
+                      "value": "0"
+                    },
+                    {
+                      "key": "includeTemporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": false,\n  \"responseData\": {\n    \"aba\": \"string\",\n    \"achHolderType\": \"personal\",\n    \"achSecCode\": \"string\",\n    \"bin\": \"string\",\n    \"binData\": {\n      \"binMatchedLength\": \"string\",\n      \"binCardBrand\": \"string\",\n      \"binCardType\": \"string\",\n      \"binCardCategory\": \"string\",\n      \"binCardIssuer\": \"string\",\n      \"binCardIssuerCountry\": \"string\",\n      \"binCardIssuerCountryCodeA2\": \"string\",\n      \"binCardIssuerCountryNumber\": \"string\",\n      \"binCardIsRegulated\": \"string\",\n      \"binCardUseCategory\": \"string\",\n      \"binCardIssuerCountryCodeA3\": \"string\"\n    },\n    \"cardUpdatedOn\": \"1974-12-07T06:05:40.974Z\",\n    \"customers\": [\n      {\n        \"additionalData\": {\n          \"key_0\": {\n            \"key_0\": {}\n          },\n          \"key_1\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        },\n        \"billingAddress1\": \"string\",\n        \"billingAddress2\": \"string\",\n        \"billingCity\": \"string\",\n        \"billingCountry\": \"string\",\n        \"billingEmail\": \"MCDLoEuJ@vpaAjAZ.qlks\",\n        \"billingPhone\": \"string\",\n        \"billingState\": \"string\",\n        \"billingZip\": \"string\",\n        \"company\": \"string\",\n        \"customerId\": 277,\n        \"customerNumber\": \"string\",\n        \"firstName\": \"string\",\n        \"identifierFields\": [\n          \"string\",\n          \"string\"\n        ],\n        \"lastName\": \"string\",\n        \"shippingAddress1\": \"string\",\n        \"shippingAddress2\": \"string\",\n        \"shippingCity\": \"string\",\n        \"shippingCountry\": \"string\",\n        \"shippingState\": \"string\",\n        \"shippingZip\": \"string\",\n        \"balance\": 8168.7243669613545,\n        \"created\": \"2023-11-26T22:24:46.636Z\",\n        \"customerConsent\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"customerStatus\": 4674,\n        \"customerSummary\": {\n          \"NumberofTransactions\": 6227,\n          \"RecentTransactions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"TotalAmountTransactions\": 8420.419517788469,\n          \"TotalNetAmountTransactions\": 1715.518854668472\n        },\n        \"customerUsername\": \"string\",\n        \"externalPaypointID\": \"string\",\n        \"lastUpdated\": \"2021-12-04T03:21:50.217Z\",\n        \"mfa\": true,\n        \"mfaMode\": 2084,\n        \"pageindentifier\": \"string\",\n        \"parentOrgId\": 8952,\n        \"parentOrgName\": \"string\",\n        \"paypointDbaname\": \"string\",\n        \"paypointEntryname\": \"string\",\n        \"paypointLegalname\": \"string\",\n        \"snData\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        \"snIdentifier\": \"string\",\n        \"snProvider\": \"string\",\n        \"storedMethods\": [\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"MaskedAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExpDate\": \"string\",\n            \"HolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": false,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CardUpdatedOn\": \"1993-06-07T05:08:51.936Z\"\n          },\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"MaskedAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExpDate\": \"string\",\n            \"HolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": true,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CardUpdatedOn\": \"2003-08-25T18:25:08.825Z\"\n          }\n        ],\n        \"subscriptions\": [\n          {\n            \"EndDate\": \"1987-04-07T07:16:13.290Z\",\n            \"LastRun\": \"1997-12-22T19:04:07.960Z\",\n            \"NextDate\": \"1998-01-08T00:54:12.211Z\",\n            \"StartDate\": \"2005-12-05T16:07:51.050Z\",\n            \"StoredMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EntrypageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExternalPaypointID\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"FeeAmount\": 2195.4773915493597,\n            \"Frequency\": \"string\",\n            \"IdSub\": 6678,\n            \"invoiceData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LeftCycles\": 4188,\n            \"Method\": \"string\",\n            \"NetAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ParentOrgName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaymentData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointDbaname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointEntryname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointLegalname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PlanId\": 1458,\n            \"Source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"SubEvents\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"SubStatus\": 3342,\n            \"SubscriptionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"TotalAmount\": 7630.195125832633,\n            \"TotalCycles\": 7801,\n            \"UntilCancelled\": true\n          },\n          {\n            \"EndDate\": \"1950-01-07T11:42:16.913Z\",\n            \"LastRun\": \"1953-04-03T04:03:21.807Z\",\n            \"NextDate\": \"1974-11-01T11:32:42.954Z\",\n            \"StartDate\": \"1971-02-10T13:32:32.080Z\",\n            \"StoredMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EntrypageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExternalPaypointID\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"FeeAmount\": 3253.3095354622355,\n            \"Frequency\": \"string\",\n            \"IdSub\": 1451,\n            \"invoiceData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LeftCycles\": 9736,\n            \"Method\": \"string\",\n            \"NetAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ParentOrgName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaymentData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointDbaname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointEntryname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointLegalname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PlanId\": 6162,\n            \"Source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"SubEvents\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"SubStatus\": 1467,\n            \"SubscriptionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"TotalAmount\": 9986.10408603038,\n            \"TotalCycles\": 4883,\n            \"UntilCancelled\": true\n          }\n        ],\n        \"timeZone\": 3300\n      },\n      {\n        \"additionalData\": {\n          \"key_0\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"key_1\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          \"key_2\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"key_3\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          \"key_4\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        },\n        \"billingAddress1\": \"string\",\n        \"billingAddress2\": \"string\",\n        \"billingCity\": \"string\",\n        \"billingCountry\": \"string\",\n        \"billingEmail\": \"j0ykizl@ZAenvhnhhmUAswCTOpjTD.be\",\n        \"billingPhone\": \"string\",\n        \"billingState\": \"string\",\n        \"billingZip\": \"string\",\n        \"company\": \"string\",\n        \"customerId\": 3200,\n        \"customerNumber\": \"string\",\n        \"firstName\": \"string\",\n        \"identifierFields\": [\n          \"string\",\n          \"string\"\n        ],\n        \"lastName\": \"string\",\n        \"shippingAddress1\": \"string\",\n        \"shippingAddress2\": \"string\",\n        \"shippingCity\": \"string\",\n        \"shippingCountry\": \"string\",\n        \"shippingState\": \"string\",\n        \"shippingZip\": \"string\",\n        \"balance\": 7306.688016442573,\n        \"created\": \"1964-08-20T07:12:28.741Z\",\n        \"customerConsent\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        },\n        \"customerStatus\": 7880,\n        \"customerSummary\": {\n          \"NumberofTransactions\": 1407,\n          \"RecentTransactions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"TotalAmountTransactions\": 1929.1860984549492,\n          \"TotalNetAmountTransactions\": 1940.2766249204317\n        },\n        \"customerUsername\": \"string\",\n        \"externalPaypointID\": \"string\",\n        \"lastUpdated\": \"1981-08-24T17:47:46.043Z\",\n        \"mfa\": false,\n        \"mfaMode\": 645,\n        \"pageindentifier\": \"string\",\n        \"parentOrgId\": 3445,\n        \"parentOrgName\": \"string\",\n        \"paypointDbaname\": \"string\",\n        \"paypointEntryname\": \"string\",\n        \"paypointLegalname\": \"string\",\n        \"snData\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {},\n          \"key_3\": {}\n        },\n        \"snIdentifier\": \"string\",\n        \"snProvider\": \"string\",\n        \"storedMethods\": [\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"MaskedAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExpDate\": \"string\",\n            \"HolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": false,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CardUpdatedOn\": \"2018-09-24T04:16:12.741Z\"\n          },\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"MaskedAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExpDate\": \"string\",\n            \"HolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": true,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CardUpdatedOn\": \"1950-07-03T00:10:07.577Z\"\n          }\n        ],\n        \"subscriptions\": [\n          {\n            \"EndDate\": \"2016-10-30T07:24:47.867Z\",\n            \"LastRun\": \"2023-06-14T18:55:18.276Z\",\n            \"NextDate\": \"2017-07-06T05:16:07.186Z\",\n            \"StartDate\": \"1985-12-13T03:38:20.636Z\",\n            \"StoredMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EntrypageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExternalPaypointID\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"FeeAmount\": 2707.828497330854,\n            \"Frequency\": \"string\",\n            \"IdSub\": 2047,\n            \"invoiceData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LeftCycles\": 944,\n            \"Method\": \"string\",\n            \"NetAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ParentOrgName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaymentData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointDbaname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointEntryname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointLegalname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PlanId\": 7556,\n            \"Source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"SubEvents\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"SubStatus\": 7176,\n            \"SubscriptionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"TotalAmount\": 3284.098438260857,\n            \"TotalCycles\": 1881,\n            \"UntilCancelled\": false\n          },\n          {\n            \"EndDate\": \"2001-09-18T21:31:32.472Z\",\n            \"LastRun\": \"1975-06-24T23:00:38.245Z\",\n            \"NextDate\": \"2001-03-02T19:27:38.833Z\",\n            \"StartDate\": \"1993-08-14T20:34:23.968Z\",\n            \"StoredMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EntrypageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ExternalPaypointID\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"FeeAmount\": 7786.014544119388,\n            \"Frequency\": \"string\",\n            \"IdSub\": 9625,\n            \"invoiceData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LastUpdated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LeftCycles\": 9790,\n            \"Method\": \"string\",\n            \"NetAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ParentOrgName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaymentData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointDbaname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointEntryname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PaypointLegalname\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PlanId\": 3450,\n            \"Source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"SubEvents\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"SubStatus\": 7950,\n            \"SubscriptionType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"TotalAmount\": 9579.090401167403,\n            \"TotalCycles\": 4817,\n            \"UntilCancelled\": false\n          }\n        ],\n        \"timeZone\": 7343\n      }\n    ],\n    \"descriptor\": \"string\",\n    \"expDate\": \"string\",\n    \"holderName\": \"string\",\n    \"idPmethod\": \"string\",\n    \"isValidatedACH\": false,\n    \"lastUpdated\": \"1960-06-12T05:03:55.878Z\",\n    \"maskedAccount\": \"string\",\n    \"method\": \"string\",\n    \"methodType\": \"string\",\n    \"postalCode\": \"string\",\n    \"vendors\": [\n      {\n        \"additionalData\": {\n          \"key_0\": \"string\"\n        },\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"billingData\": {\n          \"id\": 9669,\n          \"accountId\": \"string\",\n          \"nickname\": \"string\",\n          \"bankName\": \"string\",\n          \"routingAccount\": \"string\",\n          \"accountNumber\": \"string\",\n          \"typeAccount\": \"string\",\n          \"bankAccountHolderName\": \"string\",\n          \"bankAccountHolderType\": \"string\",\n          \"bankAccountFunction\": 4061,\n          \"verified\": false,\n          \"status\": 4191,\n          \"default\": false\n        },\n        \"city\": \"string\",\n        \"contacts\": [\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": \"string\",\n            \"contactPhone\": \"string\",\n            \"contactTitle\": \"string\",\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": \"string\",\n            \"contactPhone\": \"string\",\n            \"contactTitle\": \"string\",\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"country\": \"string\",\n        \"createdDate\": \"1958-08-28T20:00:03.917Z\",\n        \"customField1\": \"string\",\n        \"customField2\": \"string\",\n        \"customerVendorAccount\": \"string\",\n        \"ein\": \"string\",\n        \"email\": \"zzLMptH@hBwUAybkzHDUOFESswTOWkbdrFiOc.iu\",\n        \"enrollmentStatus\": \"string\",\n        \"externalPaypointID\": \"string\",\n        \"internalReferenceId\": 6904,\n        \"lastUpdated\": \"1960-06-06T04:31:28.924Z\",\n        \"locationCode\": \"string\",\n        \"mcc\": \"string\",\n        \"name1\": \"string\",\n        \"name2\": \"string\",\n        \"parentOrgId\": 1789,\n        \"parentOrgName\": \"string\",\n        \"payeeName1\": \"string\",\n        \"payeeName2\": \"string\",\n        \"paymentMethod\": \"string\",\n        \"paypointDbaname\": \"string\",\n        \"paypointEntryname\": \"string\",\n        \"paypointId\": \"string\",\n        \"paypointLegalname\": \"string\",\n        \"phone\": \"string\",\n        \"remitAddress1\": \"string\",\n        \"remitAddress2\": \"string\",\n        \"remitCity\": \"string\",\n        \"remitCountry\": \"string\",\n        \"remitEmail\": \"string\",\n        \"remitState\": \"string\",\n        \"remitZip\": \"string\",\n        \"state\": \"string\",\n        \"storedMethods\": [\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": \"string\",\n            \"MaskedAccount\": \"string\",\n            \"ExpDate\": \"string\",\n            \"HolderName\": \"string\",\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": true,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": \"2008-01-30T23:19:54.745Z\",\n            \"CardUpdatedOn\": \"1959-09-26T08:44:15.854Z\"\n          },\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": \"string\",\n            \"MaskedAccount\": \"string\",\n            \"ExpDate\": \"string\",\n            \"HolderName\": \"string\",\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": false,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": \"1949-11-13T15:09:48.267Z\",\n            \"CardUpdatedOn\": \"1992-12-21T03:51:34.485Z\"\n          }\n        ],\n        \"summary\": {\n          \"ActiveBills\": 6532,\n          \"PendingBills\": 6572,\n          \"InTransitBills\": 4255,\n          \"PaidBills\": 210,\n          \"OverdueBills\": 9451,\n          \"ApprovedBills\": 4617,\n          \"DisapprovedBills\": 1181,\n          \"TotalBills\": 3859,\n          \"ActiveBillsAmount\": 224.23308389862285,\n          \"PendingBillsAmount\": 3974.664559055421,\n          \"InTransitBillsAmount\": 552.2777219712094,\n          \"PaidBillsAmount\": 1192.113017364208,\n          \"OverdueBillsAmount\": 4576.465907506944,\n          \"ApprovedBillsAmount\": 3934.008838456499,\n          \"DisapprovedBillsAmount\": 4670.862260251266,\n          \"TotalBillsAmount\": 6356.755518921952\n        },\n        \"vendorId\": 403,\n        \"vendorNumber\": \"string\",\n        \"vendorStatus\": 3598,\n        \"zip\": \"string\"\n      },\n      {\n        \"additionalData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"billingData\": {\n          \"id\": 3364,\n          \"accountId\": \"string\",\n          \"nickname\": \"string\",\n          \"bankName\": \"string\",\n          \"routingAccount\": \"string\",\n          \"accountNumber\": \"string\",\n          \"typeAccount\": \"string\",\n          \"bankAccountHolderName\": \"string\",\n          \"bankAccountHolderType\": \"string\",\n          \"bankAccountFunction\": 3404,\n          \"verified\": true,\n          \"status\": 3314,\n          \"default\": true\n        },\n        \"city\": \"string\",\n        \"contacts\": [\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": \"string\",\n            \"contactPhone\": \"string\",\n            \"contactTitle\": \"string\",\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": \"string\",\n            \"contactPhone\": \"string\",\n            \"contactTitle\": \"string\",\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"country\": \"string\",\n        \"createdDate\": \"1974-08-20T20:35:51.635Z\",\n        \"customField1\": \"string\",\n        \"customField2\": \"string\",\n        \"customerVendorAccount\": \"string\",\n        \"ein\": \"string\",\n        \"email\": \"9T3IDXaqBAtAJYA@oc.tj\",\n        \"enrollmentStatus\": \"string\",\n        \"externalPaypointID\": \"string\",\n        \"internalReferenceId\": 3980,\n        \"lastUpdated\": \"2007-05-25T01:36:27.095Z\",\n        \"locationCode\": \"string\",\n        \"mcc\": \"string\",\n        \"name1\": \"string\",\n        \"name2\": \"string\",\n        \"parentOrgId\": 3927,\n        \"parentOrgName\": \"string\",\n        \"payeeName1\": \"string\",\n        \"payeeName2\": \"string\",\n        \"paymentMethod\": \"string\",\n        \"paypointDbaname\": \"string\",\n        \"paypointEntryname\": \"string\",\n        \"paypointId\": \"string\",\n        \"paypointLegalname\": \"string\",\n        \"phone\": \"string\",\n        \"remitAddress1\": \"string\",\n        \"remitAddress2\": \"string\",\n        \"remitCity\": \"string\",\n        \"remitCountry\": \"string\",\n        \"remitEmail\": \"string\",\n        \"remitState\": \"string\",\n        \"remitZip\": \"string\",\n        \"state\": \"string\",\n        \"storedMethods\": [\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": \"string\",\n            \"MaskedAccount\": \"string\",\n            \"ExpDate\": \"string\",\n            \"HolderName\": \"string\",\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": false,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": \"1957-12-13T12:40:37.559Z\",\n            \"CardUpdatedOn\": \"1979-10-10T04:13:27.754Z\"\n          },\n          {\n            \"IdPmethod\": \"string\",\n            \"Method\": \"string\",\n            \"Descriptor\": \"string\",\n            \"MaskedAccount\": \"string\",\n            \"ExpDate\": \"string\",\n            \"HolderName\": \"string\",\n            \"AchSecCode\": \"string\",\n            \"AchHolderType\": \"string\",\n            \"IsValidatedACH\": true,\n            \"BIN\": \"string\",\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ABA\": \"string\",\n            \"PostalCode\": \"string\",\n            \"MethodType\": \"string\",\n            \"WalletType\": \"string\",\n            \"LastUpdated\": \"2021-06-19T05:53:21.147Z\",\n            \"CardUpdatedOn\": \"1957-08-21T14:17:11.406Z\"\n          }\n        ],\n        \"summary\": {\n          \"ActiveBills\": 344,\n          \"PendingBills\": 6741,\n          \"InTransitBills\": 3428,\n          \"PaidBills\": 4602,\n          \"OverdueBills\": 7137,\n          \"ApprovedBills\": 422,\n          \"DisapprovedBills\": 1369,\n          \"TotalBills\": 3813,\n          \"ActiveBillsAmount\": 6040.66479841171,\n          \"PendingBillsAmount\": 2999.0694859316604,\n          \"InTransitBillsAmount\": 7667.282195585782,\n          \"PaidBillsAmount\": 9618.035590947342,\n          \"OverdueBillsAmount\": 2966.3982875447837,\n          \"ApprovedBillsAmount\": 5738.781018003234,\n          \"DisapprovedBillsAmount\": 897.0072765576831,\n          \"TotalBillsAmount\": 4186.77412342391\n        },\n        \"vendorId\": 525,\n        \"vendorNumber\": \"string\",\n        \"vendorStatus\": 3935,\n        \"zip\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "651f9119-2ac2-4704-ba95-4f8a16469397",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cardExpirationFormat",
+                      "value": "0"
+                    },
+                    {
+                      "key": "includeTemporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80c5ff97-87f3-42be-88b8-be983f20ab5b",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cardExpirationFormat",
+                      "value": "0"
+                    },
+                    {
+                      "key": "includeTemporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34b4e4af-7f86-4c3b-ac62-c50056797871",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cardExpirationFormat",
+                      "value": "0"
+                    },
+                    {
+                      "key": "includeTemporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f81548bb-a5b2-49bb-b1f1-c05574ae9692",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cardExpirationFormat",
+                      "value": "0"
+                    },
+                    {
+                      "key": "includeTemporary",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "292344d4-24b9-4d5f-9e92-424f1ce74d6b",
+          "name": "Update a payment method",
+          "request": {
+            "name": "Update a payment method",
+            "description": {
+              "content": "Updates a saved payment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "TokenStorage",
+                ":methodId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "achValidation",
+                  "value": "<boolean>",
+                  "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "methodId",
+                  "description": "(Required) The saved payment method ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"key_1\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"key_2\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingEmail\": \"<email>\",\n    \"billingPhone\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingZip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"customerId\": \"<long>\",\n    \"customerNumber\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"identifierFields\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"lastName\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingZip\": \"<string>\"\n  },\n  \"entryPoint\": \"<string>\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"<string>\",\n    \"cardexp\": \"<string>\",\n    \"cardHolder\": \"<string>\",\n    \"cardnumber\": \"<string>\",\n    \"cardcvv\": \"<string>\",\n    \"cardzip\": \"<string>\",\n    \"device\": \"<string>\"\n  },\n  \"vendorData\": {\n    \"vendorId\": \"<long>\",\n    \"vendorNumber\": \"<string>\"\n  },\n  \"source\": \"<string>\",\n  \"subdomain\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "736fba1a-9b3d-423d-a2f1-ae52fbcfee4d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "achValidation",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerData\": {\n    \"additionalData\": {\n      \"key_0\": {\n        \"key_0\": {}\n      }\n    },\n    \"billingAddress1\": \"string\",\n    \"billingAddress2\": \"string\",\n    \"billingCity\": \"string\",\n    \"billingCountry\": \"string\",\n    \"billingEmail\": \"XzLg9n3o@FfPyZNBgWxPxCXESvyItxmRivgraIBlK.xf\",\n    \"billingPhone\": \"string\",\n    \"billingState\": \"string\",\n    \"billingZip\": \"string\",\n    \"company\": \"string\",\n    \"customerId\": 7036,\n    \"customerNumber\": \"string\",\n    \"firstName\": \"string\",\n    \"identifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"shippingAddress1\": \"string\",\n    \"shippingAddress2\": \"string\",\n    \"shippingCity\": \"string\",\n    \"shippingCountry\": \"string\",\n    \"shippingState\": \"string\",\n    \"shippingZip\": \"string\"\n  },\n  \"entryPoint\": \"string\",\n  \"fallbackAuth\": false,\n  \"fallbackAuthAmount\": 100,\n  \"methodDescription\": \"<string>\",\n  \"paymentMethod\": {\n    \"method\": \"string\",\n    \"cardexp\": \"string\",\n    \"cardHolder\": \"string\",\n    \"cardnumber\": \"string\",\n    \"cardcvv\": \"string\",\n    \"cardzip\": \"string\",\n    \"device\": \"string\"\n  },\n  \"vendorData\": {\n    \"vendorId\": 1847,\n    \"vendorNumber\": \"string\"\n  },\n  \"source\": \"string\",\n  \"subdomain\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": false,\n  \"responseData\": {\n    \"referenceId\": \"string\",\n    \"resultCode\": 7523,\n    \"resultText\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4baef8e-8288-48b8-8a20-58e3300305a9",
+          "name": "Remove a payment method",
+          "request": {
+            "name": "Remove a payment method",
+            "description": {
+              "content": "Deletes a saved payment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "TokenStorage",
+                ":methodId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "methodId",
+                  "description": "(Required) The saved payment method ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec17bf00-eea8-427d-91da-779c41731557",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": false,\n  \"responseData\": {\n    \"referenceId\": \"string\",\n    \"resultCode\": 7523,\n    \"resultText\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70467e0a-a631-4f16-9627-309701828a23",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84d13a02-fd47-4a50-a54c-f6560043b649",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6345ca69-eb18-47ae-a7e2-0f7e77ae405a",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6aad27b2-4387-47f8-9487-e34f69ed6ad8",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "TokenStorage",
+                    ":methodId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "methodId",
+                      "description": "(Required) The saved payment method ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 6937,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.payabli.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c389ee63-83b9-4cd1-ad67-c63bd2904afc",
+    "name": "API reference Bill tokenStorage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

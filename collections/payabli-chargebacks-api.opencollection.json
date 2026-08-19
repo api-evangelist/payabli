@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill chargeBacks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "chargeBacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get chargeback or ACH return record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/ChargeBacks/read/:Id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the chargeback or return record. This is returned as `chargebackID` in the [ReceivedChargeBack](/guides/pay-ops-webhooks-payloads#receivedchargeback) and [ReceivedAchReturn](/guides/pay-ops-webhooks-payloads#receivedachreturn) webhook notifications."
+              }
+            ]
+          },
+          "docs": "Retrieves a chargeback record and its details."
+        },
+        {
+          "info": {
+            "name": "Add response to chargeback or return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/ChargeBacks/response/:Id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the chargeback or return record."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a response to a chargeback or ACH return."
+        },
+        {
+          "info": {
+            "name": "Get ChargeBack attachment by fileName",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/ChargeBacks/getChargebackAttachments/:Id/:fileName",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "path",
+                "description": "The chargeback attachment's file name."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of chargeback or return record."
+              }
+            ]
+          },
+          "docs": "Retrieves a chargeback attachment file by its file name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

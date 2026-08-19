@@ -1,0 +1,1844 @@
+{
+  "item": [
+    {
+      "id": "3d0e1116-2468-4cd1-9d66-c68d0531374f",
+      "name": "Statistic",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b00c2b77-7f55-44bc-98a8-6f4aebb80408",
+          "name": "Get subscription statistics for a paypoint or organization",
+          "request": {
+            "name": "Get subscription statistics for a paypoint or organization",
+            "description": {
+              "content": "Retrieves the subscription statistics for a given interval for a paypoint or organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Statistic",
+                "subscriptions",
+                ":interval",
+                ":level",
+                ":entryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "<string,null>",
+                  "description": "List of parameters"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "entryId",
+                  "description": "(Required) Identifier in Payabli for the entity."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "interval",
+                  "description": "(Required) Interval to get the data. Allowed values:\n\n- `all` - all intervals\n- `30` - 1-30 days\n- `60` - 31-60 days\n- `90` - 61-90 days\n- `plus` - +90 days"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "level",
+                  "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "663da7d4-a5c6-43e5-afae-c52b78fdac4e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "subscriptions",
+                    ":interval",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interval",
+                      "description": "(Required) Interval to get the data. Allowed values:\n\n- `all` - all intervals\n- `30` - 1-30 days\n- `60` - 31-60 days\n- `90` - 61-90 days\n- `plus` - +90 days"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"statX\": \"string\",\n    \"inTransactions\": 719,\n    \"inTransactionsVolume\": 2060.22476600646,\n    \"inWalletTransactions\": 1039,\n    \"inWalletVolume\": 3405.0245504089426\n  },\n  {\n    \"statX\": \"string\",\n    \"inTransactions\": 7063,\n    \"inTransactionsVolume\": 9568.007278154462,\n    \"inWalletTransactions\": 1637,\n    \"inWalletVolume\": 7280.632869396037\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e525dd8-321b-425c-a131-64f8928724bc",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "subscriptions",
+                    ":interval",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interval",
+                      "description": "(Required) Interval to get the data. Allowed values:\n\n- `all` - all intervals\n- `30` - 1-30 days\n- `60` - 31-60 days\n- `90` - 61-90 days\n- `plus` - +90 days"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a751020c-e25f-48c9-b137-bcbcc64c0d32",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "subscriptions",
+                    ":interval",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interval",
+                      "description": "(Required) Interval to get the data. Allowed values:\n\n- `all` - all intervals\n- `30` - 1-30 days\n- `60` - 31-60 days\n- `90` - 61-90 days\n- `plus` - +90 days"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2786f36d-dc30-46ef-81c7-a94307746789",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "subscriptions",
+                    ":interval",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interval",
+                      "description": "(Required) Interval to get the data. Allowed values:\n\n- `all` - all intervals\n- `30` - 1-30 days\n- `60` - 31-60 days\n- `90` - 61-90 days\n- `plus` - +90 days"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19738fda-69b8-4a1c-9879-ce75ccbfd867",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "subscriptions",
+                    ":interval",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interval",
+                      "description": "(Required) Interval to get the data. Allowed values:\n\n- `all` - all intervals\n- `30` - 1-30 days\n- `60` - 31-60 days\n- `90` - 61-90 days\n- `plus` - +90 days"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e83e09b-f40a-4998-ab7d-28d42d460a3e",
+          "name": "Get basic statistics for a customer",
+          "request": {
+            "name": "Get basic statistics for a customer",
+            "description": {
+              "content": "Retrieves the basic statistics for a customer for a specific time period, grouped by a selected frequency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Statistic",
+                "customerbasic",
+                ":mode",
+                ":freq",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "<string,null>",
+                  "description": "List of parameters."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customerId",
+                  "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "freq",
+                  "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf47d10a-8e50-4e3f-92b1-afc0195fd76c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "customerbasic",
+                    ":mode",
+                    ":freq",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"interval\": \"string\",\n    \"count\": 1930,\n    \"volume\": 6054.695078177935\n  },\n  {\n    \"interval\": \"string\",\n    \"count\": 9099,\n    \"volume\": 1725.1334795921014\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a7b6944-9772-4d7b-a85c-82482c65c8a5",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "customerbasic",
+                    ":mode",
+                    ":freq",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a47ab53a-9140-4e1d-a9fc-c376168d142f",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "customerbasic",
+                    ":mode",
+                    ":freq",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9611bf4d-9cdf-418c-a660-53cedccd46aa",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "customerbasic",
+                    ":mode",
+                    ":freq",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c84ae6df-75e2-489a-8d29-8f57dd1e3efc",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "customerbasic",
+                    ":mode",
+                    ":freq",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7f14f07-4be4-430b-9a96-a79e1e84fe0a",
+          "name": "Get basic statistics for a vendor",
+          "request": {
+            "name": "Get basic statistics for a vendor",
+            "description": {
+              "content": "Retrieve the basic statistics about a vendor for a given time period, grouped by frequency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Statistic",
+                "vendorbasic",
+                ":mode",
+                ":freq",
+                ":idVendor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "<string,null>",
+                  "description": "List of parameters"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "freq",
+                  "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "idVendor",
+                  "description": "(Required) Vendor ID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d352c45-8e15-42d9-a222-4ad06d46eb43",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "vendorbasic",
+                    ":mode",
+                    ":freq",
+                    ":idVendor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "idVendor",
+                      "description": "(Required) Vendor ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"statX\": \"string\",\n    \"active\": 9054,\n    \"activeVolume\": 9242.054675759542,\n    \"sentToApproval\": 2742,\n    \"sentToApprovalVolume\": 8108.577538096746,\n    \"toApproval\": 6061,\n    \"toApprovalVolume\": 9525.498277796716,\n    \"approved\": 8102,\n    \"approvedVolume\": 6940.025406566129,\n    \"disapproved\": 7199,\n    \"disapprovedVolume\": 1656.1887551567688,\n    \"cancelled\": 1375,\n    \"cancelledVolume\": 2227.5608563722417,\n    \"inTransit\": 3570,\n    \"inTransitVolume\": 6474.556107558345,\n    \"paid\": 4887,\n    \"paidVolume\": 7105.842305015812\n  },\n  {\n    \"statX\": \"string\",\n    \"active\": 9308,\n    \"activeVolume\": 7672.765910577872,\n    \"sentToApproval\": 5441,\n    \"sentToApprovalVolume\": 2156.595460368681,\n    \"toApproval\": 9862,\n    \"toApprovalVolume\": 5511.290758932795,\n    \"approved\": 8837,\n    \"approvedVolume\": 3795.8425470252546,\n    \"disapproved\": 3861,\n    \"disapprovedVolume\": 4251.319753828689,\n    \"cancelled\": 4264,\n    \"cancelledVolume\": 347.252531025557,\n    \"inTransit\": 155,\n    \"inTransitVolume\": 2978.194438289594,\n    \"paid\": 3046,\n    \"paidVolume\": 5984.3287294068505\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1541544-1858-4c1e-bd1e-50f73714475d",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "vendorbasic",
+                    ":mode",
+                    ":freq",
+                    ":idVendor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "idVendor",
+                      "description": "(Required) Vendor ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d49f3eca-1e6a-4c1c-87c5-2d1faed66ee7",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "vendorbasic",
+                    ":mode",
+                    ":freq",
+                    ":idVendor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "idVendor",
+                      "description": "(Required) Vendor ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e926af7-2c92-4f84-8b6c-aa03c84e823e",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "vendorbasic",
+                    ":mode",
+                    ":freq",
+                    ":idVendor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "idVendor",
+                      "description": "(Required) Vendor ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2152559c-fa5e-4677-980b-10328a5d3290",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "vendorbasic",
+                    ":mode",
+                    ":freq",
+                    ":idVendor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "idVendor",
+                      "description": "(Required) Vendor ID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5a1afee-1b39-457e-85fa-909e19d3a66d",
+          "name": "Get Basic statistics for a paypoint or organization",
+          "request": {
+            "name": "Get Basic statistics for a paypoint or organization",
+            "description": {
+              "content": "Retrieves the basic statistics for an organization or a paypoint, for a given time period, grouped by a particular frequency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Statistic",
+                "basic",
+                ":mode",
+                ":freq",
+                ":level",
+                ":entryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "Used with `custom` mode. The end date for the range.\nValid formats:\n  - YYYY-mm-dd\n  - YYYY/mm/dd\n  - mm-dd-YYYY\n  - mm/dd/YYYY"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "<string,null>",
+                  "description": "List of parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Used with `custom` mode. The start date for the range.\nValid formats:\n   - YYYY-mm-dd\n   - YYYY/mm/dd\n   -  mm-dd-YYYY\n   - mm/dd/YYYY"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "entryId",
+                  "description": "(Required) Identifier in Payabli for the entity."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "freq",
+                  "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "level",
+                  "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Mode for the request. Allowed values:\n\n- `custom` - Allows you to set a custom date range\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0c45d18-6379-47e8-86d9-8fd55eb74a0b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "basic",
+                    ":mode",
+                    ":freq",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for the request. Allowed values:\n\n- `custom` - Allows you to set a custom date range\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"statX\": \"string\",\n    \"outCustomers\": 8747,\n    \"outNewCustomers\": 8991,\n    \"outTransactions\": 5873,\n    \"outSubscriptionsPaid\": 7006,\n    \"outCardTransactions\": 2184,\n    \"outVCardTransactions\": 1752,\n    \"outACHTransactions\": 6450,\n    \"outCheckTransactions\": 6319,\n    \"outPendingMethodTransactions\": 4142,\n    \"outRTPTransactions\": 8514,\n    \"outRTPVolume\": 592.744654473546,\n    \"outWireTransactions\": 7548,\n    \"outWireVolume\": 8875.736927594047,\n    \"outTransactionsVolume\": 6318.9280481121,\n    \"outSubscriptionsPaidVolume\": 3607.0012427181055,\n    \"outCardVolume\": 6056.118953106613,\n    \"outVCardVolume\": 1294.9255506871636,\n    \"outACHVolume\": 6989.011632486684,\n    \"outCheckVolume\": 3809.0152455571438,\n    \"outPendingMethodVolume\": 374.2805328432486,\n    \"inTransactions\": 2987,\n    \"inSubscriptionsPaid\": 827,\n    \"inCustomers\": 7687,\n    \"inNewCustomers\": 3297,\n    \"inCardTransactions\": 4101,\n    \"inACHTransactions\": 2811,\n    \"inCheckTransactions\": 5468,\n    \"inCashTransactions\": 6953,\n    \"inWalletTransactions\": 7020,\n    \"inCardChargeBacks\": 411,\n    \"inACHReturns\": 7780,\n    \"inTransactionsVolume\": 2666.3245588254804,\n    \"inSubscriptionsPaidVolume\": 5606.617091495689,\n    \"inCardVolume\": 9180.88444164109,\n    \"inACHVolume\": 2639.02026682565,\n    \"inCheckVolume\": 4776.580505103489,\n    \"inCashVolume\": 9469.77158078081,\n    \"inWalletVolume\": 8703.54240019245,\n    \"inCardChargeBackVolume\": 4744.209948114839,\n    \"inACHReturnsVolume\": 2332.142448514277\n  },\n  {\n    \"statX\": \"string\",\n    \"outCustomers\": 8768,\n    \"outNewCustomers\": 364,\n    \"outTransactions\": 8103,\n    \"outSubscriptionsPaid\": 8260,\n    \"outCardTransactions\": 3259,\n    \"outVCardTransactions\": 7606,\n    \"outACHTransactions\": 7902,\n    \"outCheckTransactions\": 7845,\n    \"outPendingMethodTransactions\": 7640,\n    \"outRTPTransactions\": 3919,\n    \"outRTPVolume\": 7449.574465072433,\n    \"outWireTransactions\": 5049,\n    \"outWireVolume\": 4599.475461907006,\n    \"outTransactionsVolume\": 5865.242214074623,\n    \"outSubscriptionsPaidVolume\": 7918.496300923095,\n    \"outCardVolume\": 7473.6266902611,\n    \"outVCardVolume\": 2285.1752483765717,\n    \"outACHVolume\": 7001.430170729317,\n    \"outCheckVolume\": 5927.594172925985,\n    \"outPendingMethodVolume\": 8361.50687105253,\n    \"inTransactions\": 7537,\n    \"inSubscriptionsPaid\": 1212,\n    \"inCustomers\": 8444,\n    \"inNewCustomers\": 3412,\n    \"inCardTransactions\": 2044,\n    \"inACHTransactions\": 8319,\n    \"inCheckTransactions\": 9137,\n    \"inCashTransactions\": 8808,\n    \"inWalletTransactions\": 2616,\n    \"inCardChargeBacks\": 9475,\n    \"inACHReturns\": 5760,\n    \"inTransactionsVolume\": 3592.543485172759,\n    \"inSubscriptionsPaidVolume\": 44.13152468653925,\n    \"inCardVolume\": 8184.876519376707,\n    \"inACHVolume\": 5351.705405168183,\n    \"inCheckVolume\": 6765.998995501204,\n    \"inCashVolume\": 1255.7874887467947,\n    \"inWalletVolume\": 3061.8150878961524,\n    \"inCardChargeBackVolume\": 1967.3851143553745,\n    \"inACHReturnsVolume\": 7004.099709517244\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07dae9d0-6544-4bd2-ae17-41e114ffbcdc",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "basic",
+                    ":mode",
+                    ":freq",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for the request. Allowed values:\n\n- `custom` - Allows you to set a custom date range\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa13573d-98fa-4bd7-a8e1-623cb455d48b",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "basic",
+                    ":mode",
+                    ":freq",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for the request. Allowed values:\n\n- `custom` - Allows you to set a custom date range\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e97e8fbd-c4df-40cc-88c3-c32de64f3620",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "basic",
+                    ":mode",
+                    ":freq",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for the request. Allowed values:\n\n- `custom` - Allows you to set a custom date range\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d777b6f7-77de-4941-b5c9-4a0cad0086cc",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Statistic",
+                    "basic",
+                    ":mode",
+                    ":freq",
+                    ":level",
+                    ":entryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key_0",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "entryId",
+                      "description": "(Required) Identifier in Payabli for the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "freq",
+                      "description": "(Required) Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "level",
+                      "description": "(Required) The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Mode for the request. Allowed values:\n\n- `custom` - Allows you to set a custom date range\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 2926,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.payabli.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39e8a003-0513-47ae-b9d8-9909f16118c7",
+    "name": "API reference Bill Statistic API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

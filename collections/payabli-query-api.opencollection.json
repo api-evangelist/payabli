@@ -1,0 +1,2274 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Query API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get list of transactions for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transactions/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `transactionDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct, in, nin)\n- `gatewayTransId` (ne, eq, ct, nct)\n- `orderId` (ne, eq)\n- `scheduleId` (ne, eq)\n- `returnId` (ne, eq)\n- `refundId` (ne, eq)\n- `rejectId` (ne, eq)\n- `idTrans` (ne, eq)\n- `orgId` (ne, eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `externalPaypointId` (ct, nct, eq, ne)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `operation` (in, nin, eq, ne)\n- `source` (in, nin, eq, ne, ct, nct)\n- `status` (in, nin, eq, ne)\n- `settlementStatus` (in, nin, eq, ne)\n- `batchNumber` (nct, ct)\n- `invoiceNumber` (ct, nct)\n- `ipAddress` (eq, ne)\n- `authCode` (ct, nct)\n- `orderDescription` (ct, nct)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `payaccountCurrency` (ne, eq, in, nin)\n- `binCardType` (eq, ne, in, nin). Filters by card type for card transactions. Accepts `CREDIT`, `DEBIT`, or `PREPAID`. Case-insensitive.\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `deviceId` (ct, nct, in, nin, eq, ne)\n- `AchSecCode` ( ct, nct, in, nin, eq, ne)\n- `AchHolderType` (ct, nct, in, nin, eq, and ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name related to customer data\n- 'invoiceAdditional-xxx' (ne, eq, ct, nct) where xxx is the additional field name related to invoice data\n\n**List of comparison operators accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.\n\nBy default, this endpoint returns only transactions from the last 60 days. To query transactions outside of this period, include `transactionDate` filters.\n\nThese request parameters filter for transactions between April 1, 2024 and April 9, 2024.\n\n```bash\ncurl -X GET https://api-sandbox.payabli.com/api/Query/transact"
+        },
+        {
+          "info": {
+            "name": "Get list of transactions for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transactions/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `transactionDate` (gt, ge, lt, le, eq, ne)\n- `transId` (ne, eq, ct, nct, in, nin)\n- `gatewayTransId` (ne, eq, ct, nct)\n- `orderId` (ne, eq)\n- `scheduleId` (ne, eq)\n- `returnId` (ne, eq)\n- `refundId` (ne, eq)\n- `rejectId` (ne, eq)\n- `idTrans` (ne, eq)\n- `orgId` (ne, eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `externalPaypointId` (ct, nct, eq, ne)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `operation` (in, nin, eq, ne)\n- `source` (in, nin, eq, ne, ct, nct)\n- `status` (in, nin, eq, ne)\n- `settlementStatus` (in, nin, eq, ne)\n- `batchNumber` (nct, ct)\n- `invoiceNumber` (ct, nct)\n- `authCode` (ct, nct)\n- `orderDescription` (ct, nct)\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `payaccountCurrency` (ne, eq, in, nin)\n- `binCardType` (eq, ne, in, nin). Filters by card type for card transactions. Accepts `CREDIT`, `DEBIT`, or `PREPAID`. Case-insensitive.\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `deviceId` (ct, nct, in, nin, eq, ne)\n- `AchSecCode` ( ct, nct, in, nin, eq, ne)\n- `AchHolderType`` (ct, nct, in, nin, eq, and ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name related to customer data\n- 'invoiceAdditional-xxx' (ne, eq, ct, nct) where xxx is the additional field name related to invoice data\n\n**List of comparison operators accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of transactions for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.\n\nBy default, this endpoint returns only transactions from the last 60 days. To query transactions outside of this period, include `transactionDate` filters.\n\nThese request parameters filter for transactions between April 1, 2024 and April 9, 2024.\n\n```bash\ncurl -X GET \"https://api-sandbox.payabli.com/api/Query/tr"
+        },
+        {
+          "info": {
+            "name": "Get list of settled transactions for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/settlements/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `settlementDate` (gt, ge, lt, le, eq, ne)\n- `depositDate` (gt, ge, lt, le, eq, ne)\n- `transId`  (ne, eq, ct, nct)\n- `gatewayTransId`  (ne, eq, ct, nct)\n- `method`   (in, nin, eq, ne)\n- `settledAmount`  (gt, ge, lt, le, eq, ne)\n- `operation`    (in, nin, eq, ne)\n- `source`   (in, nin, eq, ne)\n- `batchNumber`  (ct, nct, eq, ne)\n- `payaccountLastfour`   (nct, ct)\n- `payaccountType`   (ne, eq, in, nin)\n- `customerFirstname`   (ct, nct, eq, ne)\n- `customerLastname`    (ct, nct, eq, ne)\n- `customerName`   (ct, nct)\n- `customerId`  (eq, ne)\n- `customerNumber`  (ct, nct, eq, ne)\n- `customerCompanyname`    (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity`    (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity`    (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId`  (eq) *mandatory when entry=org*\n- `isHold` (eq, ne)\n- `paypointId`  (ne, eq)\n- `paypointLegal`  (ne, eq, ct, nct)\n- `paypointDba`  (ne, eq, ct, nct)\n- `orgName`  (ne, eq, ct, nct)\n- `batchId` (ct, nct, eq, neq)\n- `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `settledAmount(gt)=20` returns all records with a `settledAmount` greater than 20.00."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of settled transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of settled transactions for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/settlements/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `settlementDate` (gt, ge, lt, le, eq, ne)\n- `depositDate` (gt, ge, lt, le, eq, ne)\n- `transId`  (ne, eq, ct, nct)\n- `gatewayTransId`  (ne, eq, ct, nct)\n- `method`   (in, nin, eq, ne)\n- `settledAmount`  (gt, ge, lt, le, eq, ne)\n- `operation`    (in, nin, eq, ne)\n- `source`   (in, nin, eq, ne)\n- `batchNumber`  (ct, nct, eq, ne)\n- `payaccountLastfour`   (nct, ct)\n- `payaccountType`   (ne, eq, in, nin)\n- `customerFirstname`   (ct, nct, eq, ne)\n- `customerLastname`    (ct, nct, eq, ne)\n- `customerName`   (ct, nct)\n- `customerId`  (eq, ne)\n- `customerNumber`  (ct, nct, eq, ne)\n- `customerCompanyname`    (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity`    (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity`    (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId`  (eq) *mandatory when entry=org*\n- `isHold` (eq, ne)\n- `paypointId`  (ne, eq)\n- `paypointLegal`  (ne, eq, ct, nct)\n- `paypointDba`  (ne, eq, ct, nct)\n- `orgName`  (ne, eq, ct, nct)\n- `batchId` (ct, nct, eq, neq)\n- `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `settledAmount(gt)=20` returns all records with a `settledAmount` greater than 20.00."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of settled transactions for an organization. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of batches for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/batches/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `batchDate` (gt, ge, lt, le, eq, ne)\n- `batchNumber` (ne, eq)\n- `method` (in, nin, eq, ne)\n- `connectorName` (ne, eq, ct, nct)\n- `batchAmount` (gt, ge, lt, le, eq, ne)\n- `feeBatchAmount` (gt, ge, lt, le, eq, ne)\n- `netBatchAmount` (gt, ge, lt, le, eq, ne)\n- `releaseAmount` (gt, ge, lt, le, eq, ne)\n- `heldAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `paypointId` (ne, eq)\n- `externalPaypointID` (ct, nct, eq, ne)\n- `expectedDepositDate` (gt, ge, lt, le, eq, ne)\n- `depositDate` (gt, ge, lt, le, eq, ne)\n- `batchRecords` (gt, ge, lt, le, eq, ne)\n- `transferId` (ne, eq)\n- `transferDate` (gt, ge, lt, le, eq, ne)\n- `grossAmount` (gt, ge, lt, le, eq, ne)\n- `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n- `returnedAmount` (gt, ge, lt, le, eq, ne)\n- `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n- `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n- `netFundedAmount` (gt, ge, lt, le, eq, ne)\n- `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n- `processor` (ne, eq, ct, nct)\n- `transferStatus` (ne, eq, in, nin)\n\n**List of parameters accepted:**\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of batches for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of batches for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/batches/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `batchDate` (gt, ge, lt, le, eq, ne)\n- `batchNumber` (ne, eq)\n- `method` (in, nin, eq, ne)\n- `connectorName` (ne, eq, ct, nct)\n- `batchAmount` (gt, ge, lt, le, eq, ne)\n- `feeBatchAmount` (gt, ge, lt, le, eq, ne)\n- `netBatchAmount` (gt, ge, lt, le, eq, ne)\n- `releaseAmount` (gt, ge, lt, le, eq, ne)\n- `heldAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `paypointId` (ne, eq)\n- `externalPaypointID` (ct, nct, eq, ne)\n- `expectedDepositDate` (gt, ge, lt, le, eq, ne)\n- `depositDate` (gt, ge, lt, le, eq, ne)\n- `batchRecords` (gt, ge, lt, le, eq, ne)\n- `transferId` (ne, eq)\n- `transferDate` (gt, ge, lt, le, eq, ne)\n- `grossAmount` (gt, ge, lt, le, eq, ne)\n- `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n- `returnedAmount` (gt, ge, lt, le, eq, ne)\n- `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n- `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n- `netFundedAmount` (gt, ge, lt, le, eq, ne)\n- `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n- `processor` (ne, eq, ct, nct)\n- `transferStatus` (ne, eq, in, nin)\n\n**List of parameters accepted:**\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of batches for an org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get a list of settled and unsettled transactions in batches for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/batchDetails/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `settlementDate` (gt, ge, lt, le, eq, ne)\n- `depositDate` (gt, ge, lt, le, eq, ne)\n- `transId`  (ne, eq, ct, nct)\n- `gatewayTransId`  (ne, eq, ct, nct)\n- `method`   (in, nin, eq, ne)\n- `settledAmount`  (gt, ge, lt, le, eq, ne)\n- `operation`    (in, nin, eq, ne)\n- `source`   (in, nin, eq, ne)\n- `batchNumber`  (ct, nct, eq, ne)\n- `payaccountLastfour`   (nct, ct)\n- `payaccountType`   (ne, eq, in, nin)\n- `customerFirstname`   (ct, nct, eq, ne)\n- `customerLastname`    (ct, nct, eq, ne)\n- `customerName`   (ct, nct)\n- `customerId`  (eq, ne)\n- `customerNumber`  (ct, nct, eq, ne)\n- `customerCompanyname`    (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity`    (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity`    (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId`  (eq) *mandatory when entry=org*\n- `isHold` (eq, ne)\n- `paypointId`  (ne, eq)\n- `paypointLegal`  (ne, eq, ct, nct)\n- `paypointDba`  (ne, eq, ct, nct)\n- `orgName`  (ne, eq, ct, nct)\n- `batchId` (ct, nct, eq, neq)\n- `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `settledAmount(gt)=20` returns all records with a `settledAmount` greater than 20.00."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of batches and their details, including settled and\nunsettled transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of settled and unsettled transactions in batches for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/batchDetails/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `settlementDate` (gt, ge, lt, le, eq, ne)\n- `depositDate` (gt, ge, lt, le, eq, ne)\n- `transId`  (ne, eq, ct, nct)\n- `gatewayTransId`  (ne, eq, ct, nct)\n- `method`   (in, nin, eq, ne)\n- `settledAmount`  (gt, ge, lt, le, eq, ne)\n- `operation`    (in, nin, eq, ne)\n- `source`   (in, nin, eq, ne)\n- `batchNumber`  (ct, nct, eq, ne)\n- `payaccountLastfour`   (nct, ct)\n- `payaccountType`   (ne, eq, in, nin)\n- `customerFirstname`   (ct, nct, eq, ne)\n- `customerLastname`    (ct, nct, eq, ne)\n- `customerName`   (ct, nct)\n- `customerId`  (eq, ne)\n- `customerNumber`  (ct, nct, eq, ne)\n- `customerCompanyname`    (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity`    (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity`    (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId`  (eq) *mandatory when entry=org*\n- `isHold` (eq, ne)\n- `paypointId`  (ne, eq)\n- `paypointLegal`  (ne, eq, ct, nct)\n- `paypointDba`  (ne, eq, ct, nct)\n- `orgName`  (ne, eq, ct, nct)\n- `batchId` (ct, nct, eq, neq)\n- `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `settledAmount(gt)=20` returns all records with a `settledAmount` greater than 20.00."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of batches and their details, including settled and unsettled transactions for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of transfers for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transfers/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `transferDate` (gt, ge, lt, le, eq, ne)\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n  - `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n  - `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n  - `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n  - `processor` (ne, eq, ct, nct)\n  - `transferStatus` (ne, eq, in, nin)\n  - `batchNumber` (ne, eq, ct, nct)\n  - `batchId` (ne, eq, in, nin)\n  - `transferId` (in, nin, eq, ne)\n  - `bankAccountNumber` (ct, nct, ne, eq)\n  - `bankRoutingNumber` (ct, nct, ne, eq)\n  - `batchCurrency` (in, nin, ne, eq)\n  - `parentOrgName` (ct, nct, ne, eq)\n  - `parentOrgId` (ct, nct, ne, eq)\n  - `externalPaypointID` (ct, nct)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of transfers for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of transfers for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transfers/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization ID. Unique identifier assigned to an org by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `transferDate` (gt, ge, lt, le, eq, ne)\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n  - `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n  - `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n  - `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n  - `processor` (ne, eq, ct, nct)\n  - `transferStatus` (ne, eq, in, nin)\n  - `batchNumber` (ne, eq, ct, nct)\n  - `batchId` (ne, eq, in, nin)\n  - `transferId` (in, nin, eq, ne)\n  - `bankAccountNumber` (ct, nct, ne, eq)\n  - `bankRoutingNumber` (ct, nct, ne, eq)\n  - `batchCurrency` (in, nin, ne, eq)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of transfers for an org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get transfer details for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transferDetails/:entry/:transferId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "transferId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for the transfer, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records. Defaults to 20."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter\nthe query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions\nReference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference)\nfor more information.\n\n\n**List of field names accepted:**\n\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n  - `chargeBackAmount` (gt, ge, lt, le, eq, ne)\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n  - `thirdPartyPaidAmount` (gt, ge, lt, le, eq, ne)\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n  - `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n  - `splitFundingAmount` (gt, ge, lt, le, eq, ne)\n  - `operation` (in, nin, eq, ne)\n  - `transactionId` (eq, ne, in, nin)\n  - `category` (eq, ne, ct, nct)\n  - `type` (eq, ne, in, nin)\n  - `method` (eq, ne, in, nin)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of transfer details records for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of subscriptions for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/subscriptions/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `endDate` (gt, ge, lt, le, eq, ne)\n- `nextDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `untilcancelled` (eq, ne)\n- `subscriptionType` (eq, ne, in, nin). Filters by subscription type. Accepts `Regular` or `BalanceDriven`. Case-insensitive. Example: `subscriptionType(in)=Regular|BalanceDriven`.\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `payaccountCurrency` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `externalPaypointId` (ct, nct, ne, eq)\n- `subId` (eq, ne)\n- `idPmethod` (eq, ne, ct, nct, in, nin). Filters by the subscription's linked stored method identifier (the value returned in `StoredMethod.IdPmethod`). Case-insensitive. Subscriptions without a linked stored method are excluded from matches. Example: `idPmethod(eq,6edcbb56-9c0e-4003-b3d1-99abf149ba0e)`.\n- `orderDescription` (ct, nct)\n- `cycles` (eq, ne, gt, ge, lt, le)\n- `leftcycles` (eq, ne, gt, ge, lt, le)\n- `createdAt` (eq, ne, gt, ge, lt, le)\n- `updatedOn` (eq, ne, gt, ge, lt, le)\n- `invoiceNumber` (ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison operators accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of subscriptions for a single paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of subscriptions for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/subscriptions/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted:**\n\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `endDate` (gt, ge, lt, le, eq, ne)\n- `nextDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `untilcancelled` (eq, ne)\n- `subscriptionType` (eq, ne, in, nin). Filters by subscription type. Accepts `Regular` or `BalanceDriven`. Case-insensitive. Example: `subscriptionType(in)=Regular|BalanceDriven`.\n- `payaccountLastfour` (nct, ct)\n- `payaccountType` (ne, eq, in, nin)\n- `payaccountCurrency` (ne, eq, in, nin)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `externalPaypointId` (ct, nct, ne, eq)\n- `subId` (eq, ne)\n- `idPmethod` (eq, ne, ct, nct, in, nin). Filters by the subscription's linked stored method identifier (the value returned in `StoredMethod.IdPmethod`). Case-insensitive. Subscriptions without a linked stored method are excluded from matches. Example: `idPmethod(eq,6edcbb56-9c0e-4003-b3d1-99abf149ba0e)`.\n- `orderDescription` (ct, nct)\n- `cycles` (eq, ne, gt, ge, lt, le)\n- `leftcycles` (eq, ne, gt, ge, lt, le)\n- `createdAt` (eq, ne, gt, ge, lt, le)\n- `updatedOn` (eq, ne, gt, ge, lt, le)\n- `invoiceNumber` (ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison operators accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of subscriptions for a single org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of customers for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/customers/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more details.\n\n**List of Accepted Field Names:**\n\n- `createdDate` (gt, ge, lt, le, eq, ne)\n- `customernumber` (ne, eq, ct, nct)\n- `firstname` (ne, eq, ct, nct)\n- `lastname` (ne, eq, ct, nct)\n- `name` (ct, nct)\n- `address` (ne, eq, ct, nct)\n- `city` (ne, eq, ct, nct)\n- `country` (ne, eq, ct, nct)\n- `zip` (ne, eq, ct, nct)\n- `state` (ne, eq, ct, nct)\n- `shippingaddress` (ne, eq, ct, nct)\n- `shippingcity` (ne, eq, ct, nct)\n- `shippingcountry` (ne, eq, ct, nct)\n- `shippingzip` (ne, eq, ct, nct)\n- `shippingstate` (ne, eq, ct, nct)\n- `phone` (ne, eq, ct, nct)\n- `email` (ne, eq, ct, nct)\n- `company` (ne, eq, ct, nct)\n- `username` (ne, eq, ct, nct)\n- `balance` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\n**List of Accepted Comparisons:**\n\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**Accepted Parameters:**\n- `limitRecord`: Max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: Initial record in query\n\n**Example Usage:**\n`balance(gt)=20` will return all records with a balance greater than 20.00."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of customers for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of customers for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/customers/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more details.\n\n**List of Accepted Field Names:**\n\n- `createdDate` (gt, ge, lt, le, eq, ne)\n- `customernumber` (ne, eq, ct, nct)\n- `firstname` (ne, eq, ct, nct)\n- `lastname` (ne, eq, ct, nct)\n- `name` (ct, nct)\n- `address` (ne, eq, ct, nct)\n- `city` (ne, eq, ct, nct)\n- `country` (ne, eq, ct, nct)\n- `zip` (ne, eq, ct, nct)\n- `state` (ne, eq, ct, nct)\n- `shippingaddress` (ne, eq, ct, nct)\n- `shippingcity` (ne, eq, ct, nct)\n- `shippingcountry` (ne, eq, ct, nct)\n- `shippingzip` (ne, eq, ct, nct)\n- `shippingstate` (ne, eq, ct, nct)\n- `phone` (ne, eq, ct, nct)\n- `email` (ne, eq, ct, nct)\n- `company` (ne, eq, ct, nct)\n- `username` (ne, eq, ct, nct)\n- `balance` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n- `orgId` (eq) *mandatory when entry=org*\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\n**List of Accepted Comparisons:**\n\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**Accepted Parameters:**\n- `limitRecord`: Max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: Initial record in query\n\n**Example Usage:**\n`balance(gt)=20` will return all records with a balance greater than 20.00."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of customers for an org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of devices for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/devices/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter\nthe query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/devices/8cfec329267?parameters=status=1&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/devices/8cfec329267?status=1&limitRecord=20\n</Info>\n\nSee [Filters and Conditions\nReference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference)\nfor more information.\n\n**List of field names accepted:**\n\n\n- `deviceId` (eq, ne, ct, nct)\n\n- `serialNumber` (eq, ne, ct, nct)\n\n- `friendlyName` (eq, ne, ct, nct)\n\n- `description` (eq, ne, ct, nct)\n\n- `model` (eq, ne, ct, nct)\n\n- `make` (eq, ne, ct, nct)\n\n- `macAddress` (eq, ne, ct, nct)\n\n- `registrationCode` (eq, ne, ct, nct)\n\n- `status` (eq, ne, in, nin)\n\n- `deviceType` (eq, ne, in, nin)\n\n- `deviceOs` (eq, ne, in, nin)\n\n- `activationAttempts` (eq, ne, gt, ge, lt, le)\n\n- `createdDate` (gt, ge, lt, le, eq, ne)\n\n- `updatedDate` (gt, ge, lt, le, eq, ne)\n\n- `lastHealthCheck` (gt, ge, lt, le, eq, ne)\n\n- `activationExpiry` (gt, ge, lt, le, eq, ne). This filter corresponds to the `activationCodeExpiry` response field.\n\n- `paypointId` (eq, ne)\n\n- `paypointDba` (eq, ne, ct, nct)\n\n- `paypointLegal` (eq, ne, ct, nct)\n\n- `paypointEntry` (eq, ne, ct, nct)\n\n- `externalPaypointId` (eq, ne, ct, nct)\n\n- `parentOrgId` (eq, ne)\n\n- `parentOrgName` (eq, ne, ct, nct)\n\n\n**List of comparison operators accepted:**\n\n- `eq` or empty => equal\n\n- `gt` => greater than\n\n- `ge` => greater or equal\n\n- `lt` => less than\n\n- `le` => less or equal\n\n- `ne` => not equal\n\n- `ct` => contains\n\n- `nct` => not contains\n\n- `in` => inside array\n\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of cloud devices for a single paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of devices for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/devices/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter\nthe query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/devices/org/236?parameters=status=1&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/devices/org/236?status=1&limitRecord=20\n</Info>\n\nSee [Filters and Conditions\nReference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference)\nfor more information.\n\n**List of field names accepted:**\n\n\n- `deviceId` (eq, ne, ct, nct)\n\n- `serialNumber` (eq, ne, ct, nct)\n\n- `friendlyName` (eq, ne, ct, nct)\n\n- `description` (eq, ne, ct, nct)\n\n- `model` (eq, ne, ct, nct)\n\n- `make` (eq, ne, ct, nct)\n\n- `macAddress` (eq, ne, ct, nct)\n\n- `registrationCode` (eq, ne, ct, nct)\n\n- `status` (eq, ne, in, nin)\n\n- `deviceType` (eq, ne, in, nin)\n\n- `deviceOs` (eq, ne, in, nin)\n\n- `activationAttempts` (eq, ne, gt, ge, lt, le)\n\n- `createdDate` (gt, ge, lt, le, eq, ne)\n\n- `updatedDate` (gt, ge, lt, le, eq, ne)\n\n- `lastHealthCheck` (gt, ge, lt, le, eq, ne)\n\n- `activationExpiry` (gt, ge, lt, le, eq, ne). This filter corresponds to the `activationCodeExpiry` response field.\n\n- `paypointId` (eq, ne)\n\n- `paypointDba` (eq, ne, ct, nct)\n\n- `paypointLegal` (eq, ne, ct, nct)\n\n- `paypointEntry` (eq, ne, ct, nct)\n\n- `externalPaypointId` (eq, ne, ct, nct)\n\n- `parentOrgId` (eq, ne)\n\n- `parentOrgName` (eq, ne, ct, nct)\n\n\n**List of comparison operators accepted:**\n\n- `eq` or empty => equal\n\n- `gt` => greater than\n\n- `ge` => greater or equal\n\n- `lt` => less than\n\n- `le` => less or equal\n\n- `ne` => not equal\n\n- `ct` => contains\n\n- `nct` => not contains\n\n- `in` => inside array\n\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of cloud devices for a single organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of chargebacks and returned transactions for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/chargebacks/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n- `chargebackDate` (gt, ge, lt, le, eq, ne)\n- `transId`  (ne, eq, ct, nct)\n- `method`   (in, nin, eq, ne)\n- `netAmount`  (gt, ge, lt, le, eq, ne)\n- `reasonCode`   (in, nin, eq, ne)\n- `reason`  (ct, nct, eq, ne)\n- `replyDate` (gt, ge, lt, le, eq, ne)\n- `caseNumber`  (ct, nct, eq, ne)\n- `status`   (in, nin, eq, ne)\n- `accountType`   (in, nin, eq, ne)\n- `payaccountLastfour`   (nct, ct)\n- `payaccountType`   (ne, eq, in, nin)\n- `customerFirstname`   (ct, nct, eq, ne)\n- `customerLastname`    (ct, nct, eq, ne)\n- `customerName`   (ct, nct)\n- `customerId`  (eq, ne)\n- `customerNumber`  (ct, nct, eq, ne)\n- `customerCompanyname`    (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity`    (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity`    (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId`  (eq) *mandatory when entry=org*\n- `paypointId`  (ne, eq)\n- `paypointLegal`  (ne, eq, ct, nct)\n- `paypointDba`  (ne, eq, ct, nct)\n- `orgName`  (ne, eq, ct, nct)\n- `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison accepted - enclosed between parentheses:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of chargebacks and returned transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of chargebacks and returned transactions for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/chargebacks/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info> See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n\n- `chargebackDate` (gt, ge, lt, le, eq, ne)\n- `transId`  (ne, eq, ct, nct)\n- `method`   (in, nin, eq, ne)\n- `netAmount`  (gt, ge, lt, le, eq, ne)\n- `reasonCode`   (in, nin, eq, ne)\n- `reason`  (ct, nct, eq, ne)\n- `replyDate` (gt, ge, lt, le, eq, ne)\n- `caseNumber`  (ct, nct, eq, ne)\n- `status`   (in, nin, eq, ne)\n- `accountType`   (in, nin, eq, ne)\n- `payaccountLastfour`   (nct, ct)\n- `payaccountType`   (ne, eq, in, nin)\n- `customerFirstname`   (ct, nct, eq, ne)\n- `customerLastname`    (ct, nct, eq, ne)\n- `customerName`   (ct, nct)\n- `customerId`  (eq, ne)\n- `customerNumber`  (ct, nct, eq, ne)\n- `customerCompanyname`    (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity`    (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity`    (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId`  (eq) *mandatory when entry=org*\n- `paypointId`  (ne, eq)\n- `paypointLegal`  (ne, eq, ct, nct)\n- `paypointDba`  (ne, eq, ct, nct)\n- `orgName`  (ne, eq, ct, nct)\n- `additional-xxx`  (ne, eq, ct, nct) where xxx is the additional field name\n\n**List of comparison accepted - enclosed between parentheses:**\n\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of chargebacks and returned transactions for an org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of payout subscriptions for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/entry123?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/entry123?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n**List of field names accepted:**\n\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `endDate` (gt, ge, lt, le, eq, ne)\n- `nextDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `untilcancelled` (eq, ne)\n- `payaccountLastfour` (ct, nct)\n- `payaccountType` (ne, eq, in, nin)\n- `payaccountCurrency` (ne, eq, in, nin)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct, nin, in)\n- `parentOrgId` (ne, eq, nin, in)\n- `subscriptionId` (eq, ne)\n- `orderDescription` (ct, nct)\n- `cycles` (eq, ne, gt, ge, lt, le)\n- `leftcycles` (eq, ne, gt, ge, lt, le)\n- `createdAt` (eq, ne, gt, ge, lt, le)\n- `updatedOn` (eq, ne, gt, ge, lt, le)\n- `vendorNumber` (ne, eq, ct, nct)\n- `name` (ne, eq, ct, nct)\n- `phone` (ne, eq, ct, nct)\n- `email` (ne, eq, ct, nct)\n- `address` (ne, eq, ct, nct)\n- `remitAddress` (ct, nct)\n- `city` (ne, eq, ct, nct)\n- `state` (ne, eq, ct, nct)\n- `country` (ne, eq, ct, nct)\n- `zip` (ne, eq, ct, nct)\n\n**List of comparison operators accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of payout subscriptions for a single paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information."
+        },
+        {
+          "info": {
+            "name": "Get list of payout subscriptions for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n**List of field names accepted:**\n\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `endDate` (gt, ge, lt, le, eq, ne)\n- `nextDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin, ne, eq)\n- `method` (in, nin, eq, ne)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `netAmount` (gt, ge, lt, le, eq, ne)\n- `feeAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `untilcancelled` (eq, ne)\n- `payaccountLastfour` (ct, nct)\n- `payaccountType` (ne, eq, in, nin)\n- `payaccountCurrency` (ne, eq, in, nin)\n- `paypointId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct, nin, in)\n- `parentOrgId` (ne, eq, nin, in)\n- `subscriptionId` (eq, ne)\n- `orderDescription` (ct, nct)\n- `cycles` (eq, ne, gt, ge, lt, le)\n- `leftcycles` (eq, ne, gt, ge, lt, le)\n- `createdAt` (eq, ne, gt, ge, lt, le)\n- `updatedOn` (eq, ne, gt, ge, lt, le)\n- `vendorNumber` (ne, eq, ct, nct)\n- `name` (ne, eq, ct, nct)\n- `phone` (ne, eq, ct, nct)\n- `email` (ne, eq, ct, nct)\n- `address` (ne, eq, ct, nct)\n- `remitAddress` (ct, nct)\n- `city` (ne, eq, ct, nct)\n- `state` (ne, eq, ct, nct)\n- `country` (ne, eq, ct, nct)\n- `zip` (ne, eq, ct, nct)\n\n**List of comparison operators accepted:**\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of payout subscriptions for a single org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information."
+        },
+        {
+          "info": {
+            "name": "Get list of MoneyOut batches for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/batchesOut/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted**:\n\n- `batchDate` (gt, ge, lt, le, eq, ne)\n- `batchNumber` (ne, eq)\n- `batchAmount` (gt, ge, lt, le, eq, ne)\n- `parentOrgId` (ne, eq, nin, in)\n- `status` (in, nin, eq, ne)\n- `orgId` (eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `paypointId` (ne, eq)\n- `externalPaypointID` (ct, nct, eq, ne)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of MoneyOut batches for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of MoneyOut batches for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/batchesOut/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n\n**List of field names accepted**:\n\n- `batchDate` (gt, ge, lt, le, eq, ne)\n- `batchNumber` (ne, eq)\n- `batchAmount` (gt, ge, lt, le, eq, ne)\n- `parentOrgId` (ne, eq, nin, in)\n- `status` (in, nin, eq, ne)\n- `orgId` (eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `paypointId` (ne, eq)\n- `externalPaypointID` (ct, nct, eq, ne)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of MoneyOut batches for an org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of money out transactions for paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/payouts/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nList of field names accepted:\n\n  - `status` (in, nin, eq, ne)\n  - `transactionDate` (gt, ge, lt, le, eq, ne)\n  - `billNumber` (ct, nct)\n  - `vendorNumber` (ct, nct, eq, ne)\n  - `vendorName` (ct, nct, eq, ne)\n  - `paymentMethod` (ct, nct, eq, ne, in, nin)\n  - `paymentId` (ct, nct, eq, ne)\n  - `parentOrgId` (ne, eq, nin, in)\n  - `batchNumber` (ct, nct, eq, ne)\n  - `totalAmount` (gt, ge, lt, le, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `accountId` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, eq, ne)\n  - `paypointId` (eq, ne)\n  - `vendorId` (eq, ne)\n  - `vendorEIN` (ct, nct, eq, ne)\n  - `vendorPhone` (ct, nct, eq, ne)\n  - `vendorEmail` (ct, nct, eq, ne)\n  - `vendorAddress` (ct, nct, eq, ne)\n  - `vendorCity` (ct, nct, eq, ne)\n  - `vendorState` (ct, nct, eq, ne)\n  - `vendorCountry` (ct, nct, eq, ne)\n  - `vendorZip` (ct, nct, eq, ne)\n  - `vendorMCC` (ct, nct, eq, ne)\n  - `vendorLocationCode` (ct, nct, eq, ne)\n  - `vendorCustomField1` (ct, nct, eq, ne)\n  - `vendorCustomField2` (ct, nct, eq, ne)\n  - `comments` (ct, nct)\n  - `payaccountCurrency` (ne, eq, in, nin)\n  - `remitAddress` (ct, nct)\n  - `source` (ct, nct, eq, ne)\n  - `updatedOn` (gt, ge, lt, le, eq, ne)\n  - `feeAmount` (gt, ge, lt, le, eq, ne)\n  - `lotNumber` (ct, nct)\n  - `customerVendorAccount` (ct, nct, eq, ne)\n  - `batchId` (eq, ne)\n  - `AchTraceNumber` (eq, ne)\n  - `payoutProgram`(eq, ne) the options are `managed` or `odp`. For example, `payoutProgram(eq)=managed` returns all records with a `payoutProgram` equal to `managed`.\n\n  List of comparison accepted - enclosed between parentheses:\n  - eq or empty => equal\n  - gt => greater than\n  - ge => greater or equal\n  - lt => less than\n  - le => less or equal\n  - ne => not equal\n  - ct => contains\n  - nct => not contains\n  - in => inside array separated by \\\"|\\\"\n  - nin => not inside array separated by \\\"|\\\"\n\n  List of parameters accepted:\n\n  - limitRecord : max number of records for query (default=\\\"20\\\", \\\"0\\\" or negative value for all)\n  - fromRecord : initial record in query\n  - sortBy : indicate field name and direction to sort the results\n\n  Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00\n\n  Example: `sortBy=desc(netamount)` returns all records sorted by `netAmount` descending"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of money out transactions (payouts) for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of money out transactions for organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/payouts/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `status` (in, nin, eq, ne)\n  - `transactionDate` (gt, ge, lt, le, eq, ne)\n  - `billNumber` (ct, nct)\n  - `vendorNumber` (ct, nct, eq, ne)\n  - `vendorName` (ct, nct, eq, ne)\n  - `parentOrgId` (ne, eq, nin, in)\n  - `paymentMethod` (ct, nct, eq, ne, in, nin)\n  - `paymentId` (ct, nct, eq, ne)\n  - `batchNumber` (ct, nct, eq, ne)\n  - `totalAmount` (gt, ge, lt, le, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `accountId` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, eq, ne)\n  - `paypointId` (eq, ne)\n  - `vendorId` (eq, ne)\n  - `vendorEIN` (ct, nct, eq, ne)\n  - `vendorPhone` (ct, nct, eq, ne)\n  - `vendorEmail` (ct, nct, eq, ne)\n  - `vendorAddress` (ct, nct, eq, ne)\n  - `vendorCity` (ct, nct, eq, ne)\n  - `vendorState` (ct, nct, eq, ne)\n  - `vendorCountry` (ct, nct, eq, ne)\n  - `vendorZip` (ct, nct, eq, ne)\n  - `vendorMCC` (ct, nct, eq, ne)\n  - `vendorLocationCode` (ct, nct, eq, ne)\n  - `vendorCustomField1` (ct, nct, eq, ne)\n  - `vendorCustomField2` (ct, nct, eq, ne)\n  - `comments` (ct, nct)\n  - `payaccountCurrency` (ne, eq, in, nin)\n  - `remitAddress` (ct, nct)\n  - `source` (ct, nct, eq, ne)\n  - `updatedOn` (gt, ge, lt, le, eq, ne)\n  - `feeAmount` (gt, ge, lt, le, eq, ne)\n  - `lotNumber` (ct, nct)\n  - `customerVendorAccount` (ct, nct, eq, ne)\n  - `batchId` (eq, ne)\n  - `AchTraceNumber` (eq, ne)\n  - `payoutProgram`(eq, ne) the options are `managed` or `odp`. For example, `payoutProgram(eq)=managed` returns all records with a `payoutProgram` equal to `managed`.\n\n  List of comparison accepted - enclosed between parentheses:\n  - eq or empty => equal\n  - gt => greater than\n  - ge => greater or equal\n  - lt => less than\n  - le => less or equal\n  - ne => not equal\n  - ct => contains\n  - nct => not contains\n  - in => inside array separated by \\\"|\\\"\n  - nin => not inside array separated by \\\"|\\\"\n\n  List of parameters accepted:\n\n  - limitRecord : max number of records for query (default=\\\"20\\\", \\\"0\\\" or negative value for all)\n  - fromRecord : initial record in query\n  - sortBy : indicate field name and direction to sort the results\n\n  Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00\n\n  Example: `sortBy=desc(netamount)` returns all records sorted by `netAmount` descending"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of money out transactions (payouts) for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of virtual cards for entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/vcards/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `status` (eq, ne, ct, nct, sw, ew)\n  - `createdAt` (gt, ge, lt, le, eq, ne)\n  - `cardToken` (ct, nct, eq, ne)\n  - `lastFour` (ct, nct, eq, ne)\n  - `expirationDate` (ct, nct, eq, ne)\n  - `payoutId` (eq, ne, gt, ge, lt, le)\n  - `vendorId` (eq, ne, gt, ge, lt, le)\n  - `miscData1` (ct, nct, eq, ne)\n  - `miscData2` (ct, nct, eq, ne)\n  - `currentUses` (gt, ge, lt, le, eq, ne)\n  - `amount` (gt, ge, lt, le, eq, ne)\n  - `balance` (gt, ge, lt, le, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `orgName` (eq, ne, ct, nct, sw, ew)\n  - `externalPaypointId` (ct, nct, eq, ne)\n  - `paypointId` (eq, ne, gt, ge, lt, le)\n  - `cardType` (eq, ne, gt, ge, lt, le)\n\nList of comparison accepted - enclosed between parentheses:\n\n  - eq or empty => equal\n  - gt => greater than\n  - ge => greater or equal\n  - lt => less than\n  - le => less or equal\n  - ne => not equal\n  - ct => contains\n  - nct => not contains\n  - sw => starts with\n  - ew => ends with\n  - in => inside array separated by \"|\"\n  - nin => not inside array separated by \"|\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of vcards (virtual credit cards) issued for an entrypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of virtual cards for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/vcards/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `status` (eq, ne, ct, nct, sw, ew)\n  - `createdAt` (gt, ge, lt, le, eq, ne)\n  - `cardToken` (ct, nct, eq, ne)\n  - `lastFour` (ct, nct, eq, ne)\n  - `expirationDate` (ct, nct, eq, ne)\n  - `payoutId` (eq, ne, gt, ge, lt, le)\n  - `vendorId` (eq, ne, gt, ge, lt, le)\n  - `miscData1` (ct, nct, eq, ne)\n  - `miscData2` (ct, nct, eq, ne)\n  - `currentUses` (gt, ge, lt, le, eq, ne)\n  - `amount` (gt, ge, lt, le, eq, ne)\n  - `balance` (gt, ge, lt, le, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `orgName` (eq, ne, ct, nct, sw, ew)\n  - `externalPaypointId` (ct, nct, eq, ne)\n  - `paypointId` (eq, ne, gt, ge, lt, le)\n  - `cardType` (eq, ne, gt, ge, lt, le)\n\nList of comparison accepted - enclosed between parentheses:\n\n  - eq or empty => equal\n  - gt => greater than\n  - ge => greater or equal\n  - lt => less than\n  - le => less or equal\n  - ne => not equal\n  - ct => contains\n  - nct => not contains\n  - sw => starts with\n  - ew => ends with\n  - in => inside array separated by \"|\"\n  - nin => not inside array separated by \"|\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of vcards (virtual credit cards) issued for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of virtual card transactions for entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/vcardsTransactions/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/8cfec329267?parameters=transactionAmount(gt)=100&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/8cfec329267?transactionAmount(gt)=100&limitRecord=20\n</Info>\n\nList of field names accepted:\n\n  - `identifier` (eq, ne, ct, nct)\n  - `transactionType` (eq, ne, ct, nct)\n  - `transactionStatus` (eq, ne, ct, nct, in, nin)\n  - `transactionAmount` (eq, ne, gt, ge, lt, le, ct, nct)\n  - `transactionCreatedOn` (eq, ne, gt, ge, lt, le)\n  - `cardToken` (ct, nct, eq, ne)\n  - `lastFour` (ct, nct, eq, ne)\n  - `expirationDate` (ct, nct, eq, ne)\n  - `mcc` (ct, nct, eq, ne)\n  - `payoutId` (gt, lt, eq, ne)\n  - `customerId` (gt, lt, eq, ne)\n  - `vendorId` (gt, lt, eq, ne)\n  - `miscData1` (ct, nct, eq, ne)\n  - `miscData2` (ct, nct, eq, ne)\n  - `currentUses` (gt, ge, lt, le, eq, ne)\n  - `amount` (gt, ge, lt, le, eq, ne)\n  - `balance` (gt, ge, lt, le, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct, in, nin)\n  - `externalPaypointID` (ct, nct, eq, ne)\n  - `paypointId` (gt, lt, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n  - eq or empty => equal\n  - gt => greater than\n  - ge => greater or equal\n  - lt => less than\n  - le => less or equal\n  - ne => not equal\n  - ct => contains\n  - nct => not contains\n  - in => inside array separated by \"|\"\n  - nin => not inside array separated by \"|\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of virtual card transactions for an entrypoint. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of virtual card transactions for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/236?parameters=transactionAmount(gt)=100&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/236?transactionAmount(gt)=100&limitRecord=20\n</Info>\n\nList of field names accepted:\n\n  - `identifier` (eq, ne, ct, nct)\n  - `transactionType` (eq, ne, ct, nct)\n  - `transactionStatus` (eq, ne, ct, nct, in, nin)\n  - `transactionAmount` (eq, ne, gt, ge, lt, le, ct, nct)\n  - `transactionCreatedOn` (eq, ne, gt, ge, lt, le)\n  - `cardToken` (ct, nct, eq, ne)\n  - `lastFour` (ct, nct, eq, ne)\n  - `expirationDate` (ct, nct, eq, ne)\n  - `mcc` (ct, nct, eq, ne)\n  - `payoutId` (gt, lt, eq, ne)\n  - `customerId` (gt, lt, eq, ne)\n  - `vendorId` (gt, lt, eq, ne)\n  - `miscData1` (ct, nct, eq, ne)\n  - `miscData2` (ct, nct, eq, ne)\n  - `currentUses` (gt, ge, lt, le, eq, ne)\n  - `amount` (gt, ge, lt, le, eq, ne)\n  - `balance` (gt, ge, lt, le, eq, ne)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct, in, nin)\n  - `externalPaypointID` (ct, nct, eq, ne)\n  - `paypointId` (gt, lt, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n  - eq or empty => equal\n  - gt => greater than\n  - ge => greater or equal\n  - lt => less than\n  - le => less or equal\n  - ne => not equal\n  - ct => contains\n  - nct => not contains\n  - in => inside array separated by \"|\"\n  - nin => not inside array separated by \"|\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of virtual card transactions for an organization. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of outbound transfers for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transfersOut/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `transferDate` (gt, ge, lt, le, eq, ne)\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n  - `processor` (ne, eq, ct, nct)\n  - `transferStatus` (ne, eq, in, nin)\n  - `transferId` (ne, eq, in, nin)\n  - `paypointLegalName` (ne, eq, ct, nct)\n  - `paypointDbaName` (ne, eq, ct, nct)\n  - `batchNumber` (ne, eq, ct, nct)\n  - `batchId` (ne, eq, in, nin)\n  - `detailType` (eq, ne, in, nin, ct, nct)\n  - `detailMethod` (eq, ne, in, nin, ct, nct)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of outbound transfers for an organization. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of outbound transfers for a paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transfersOut/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `transferDate` (gt, ge, lt, le, eq, ne)\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n  - `processor` (ne, eq, ct, nct)\n  - `transferStatus` (ne, eq, in, nin)\n  - `transferId` (ne, eq, in, nin)\n  - `paypointLegalName` (ne, eq, ct, nct)\n  - `paypointDbaName` (ne, eq, ct, nct)\n  - `batchNumber` (ne, eq, ct, nct)\n  - `batchId` (ne, eq, in, nin)\n  - `detailType` (eq, ne, in, nin, ct, nct)\n  - `detailMethod` (eq, ne, in, nin, ct, nct)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of outbound transfers for a paypoint. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get outbound transfer details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/transferDetailsOut/:entry/:transferId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "transferId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for the transfer, assigned by Payabli."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nList of field names accepted:\n\n  - `grossAmount` (gt, ge, lt, le, eq, ne)\n  - `returnedAmount` (gt, ge, lt, le, eq, ne)\n  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)\n  - `netFundedAmount` (gt, ge, lt, le, eq, ne)\n  - `adjustmentAmount` (gt, ge, lt, le, eq, ne)\n  - `transactionId` (eq, ne, in, nin)\n  - `category` (eq, ne, ct, nct)\n  - `type` (eq, ne, in, nin)\n  - `method` (eq, ne, in, nin)\n  - `walletType` (eq, ne, in, nin)\n  - `splitFundingAmount` (gt, ge, lt, le, eq, ne)"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve details for a specific outbound transfer. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of vendors for entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/vendors/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `method` (in, nin, eq, ne)\n- `enrollmentStatus` (in,nin, eq, ne)\n- `status` (in, nin, eq, ne)\n- `vendorNumber` (ct, nct, eq, ne)\n- `name` (ct, nct, eq, ne)\n- `ein` (ct, nct, eq, ne)\n- `phone` (ct, nct, eq, ne)\n- `email` (ct, nct, eq, ne)\n- `remitEmail` (ct, nct, eq, ne)\n- `address` (ct, nct, eq, ne)\n- `city` (ct, nct, eq, ne)\n- `state` (ct, nct, eq, ne)\n- `country` (ct, nct, eq, ne)\n- `zip` (ct, nct, eq, ne)\n- `mcc` (ct, nct, eq, ne)\n- `locationCode` (ct, nct, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `parentOrgId` (ne, eq, nin, in)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of vendors for an entrypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of vendors for organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/vendors/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `method` (in, nin, eq, ne)\n- `enrollmentStatus` (in,nin, eq, ne)\n- `status` (in, nin, eq, ne)\n- `vendorNumber` (ct, nct, eq, ne)\n- `name` (ct, nct, eq, ne)\n- `ein` (ct, nct, eq, ne)\n- `phone` (ct, nct, eq, ne)\n- `email` (ct, nct, eq, ne)\n- `remitEmail` (ct, nct, eq, ne)\n- `address` (ct, nct, eq, ne)\n- `city` (ct, nct, eq, ne)\n- `state` (ct, nct, eq, ne)\n- `country` (ct, nct, eq, ne)\n- `zip` (ct, nct, eq, ne)\n- `mcc` (ct, nct, eq, ne)\n- `locationCode` (ct, nct, eq, ne)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `parentOrgId` (ne, eq, nin, in)\n- `orgName` (ne, eq, ct, nct)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of vendors for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of notifications for an entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/notifications/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `frequency` (in, nin,ne, eq)\n- `method` (in, nin, eq, ne)\n- `event` (in, nin, eq, ne)\n- `target` (ct, nct, eq, ne)\n- `status` (eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20  return all records with totalAmount greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of notifications for an entrypoint. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of notifications for organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/notifications/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `frequency` (in, nin,ne, eq)\n- `method` (in, nin, eq, ne)\n- `event` (in, nin, eq, ne)\n- `target` (ct, nct, eq, ne)\n- `status` (eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20  return all records with totalAmount greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Return a list of notifications for an organization. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of reports generated in last 60 days for entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/notificationReports/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `reportName` (ct, nct, eq, ne)\n- `createdAt` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: reportName(ct)=tr  return all records containing the string \"tr\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of all reports generated in the last 60 days for a single entrypoint. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of reports generated in last 60 days for organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/notificationReports/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query <Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n- `reportName` (ct, nct, eq, ne)\n- `createdAt` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: reportName(ct)=tr  return all records containing the string \"tr\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of all reports generated in the last 60 days for an organization. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of users for an org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/users/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n\n- `createdDate` (gt, ge, lt, le, eq, ne)\n- `name`  (ne, eq, ct, nct)\n- `email`  (ne, eq, ct, nct)\n- `status`   (in, nin, eq, ne)\n- `role.xxx`  (ne, eq, ct, nct) where xxx is the role field: `roleLabel` or `roleValue`\n\n**List of comparison accepted - enclosed between parentheses:**\n\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `name(ct)=john`  return all records with name containing 'john'."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Get list of users for an org. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of users for paypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/users/point/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\n**List of field names accepted:**\n\n- `createdDate` (gt, ge, lt, le, eq, ne)\n- `name`  (ne, eq, ct, nct)\n- `email`  (ne, eq, ct, nct)\n- `status`   (in, nin, eq, ne)\n- `role.xxx`  (ne, eq, ct, nct) where xxx is the role field: `roleLabel` or `roleValue`\n\n**List of comparison accepted - enclosed between parentheses:**\n\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array separated by \"|\"\n- `nin` => not inside array separated by \"|\"\n\n**List of parameters accepted:**\n- `limitRecord`: max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord`: initial record in query\n\nExample: `name(ct)=john`  return all records with name containing 'john'"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Get list of users for a paypoint. Use filters to limit results."
+        },
+        {
+          "info": {
+            "name": "Get list of organizations for a parent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/organizations/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query.\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n**List of field names accepted:**\n\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `dbaname`  (ct, nct)\n- `legalname`  (ct, nct)\n- `ein`  (ct, nct)\n- `address`  (ct, nct)\n- `city`  (ct, nct)\n- `state`  (ct, nct)\n- `phone`  (ct, nct)\n- `mcc`  (ct, nct)\n- `owntype`  (ct, nct)\n- `ownerName`  (ct, nct)\n- `contactName`  (ct, nct)\n- `orgParentname`  (ct, nct)\n- `boardingId` (eq, ne)\n- `entryName`  (ct, nct)\n\n**List of comparison accepted - enclosed between parentheses:**\n\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array\n\n**List of parameters accepted:**\n\n- `limitRecord` : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord` : initial record in query\n\nExample: `dbaname(ct)=hoa` returns all records with a `dbaname` containing \"hoa\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of an organization's suborganizations and their full details such as orgId, users, and settings. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of paypoints for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/paypoints/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n</Info>\n**List of field names accepted:**\n\n- `createdAt` (gt, ge, lt, le, eq, ne)\n- `lastModified` (gt, ge, lt, le, eq, ne)\n- `startDate` (gt, ge, lt, le, eq, ne)\n- `dbaname`  (ct, nct)\n- `status` (eq, ne)\n- `legalname`  (ct, nct)\n- `externalPaypointID` (ct, nct)\n- `ein`  (ct, nct)\n- `address`  (ct, nct)\n- `city`  (ct, nct)\n- `state`  (ct, nct)\n- `phone`  (ct, nct)\n- `mcc`  (ct, nct)\n- `owntype`  (ct, nct)\n- `ownerName`  (ct, nct)\n- `contactName`  (ct, nct)\n- `paypointId` (eq, ne)\n- `orgParentname`  (ct, nct, in, nin)\n- `boardingId` (eq, ne)\n- `entryName`  (ct, nct)\n- `externalOrgID` (ct, nct)\n\n**List of comparison accepted - enclosed between parentheses:**\n\n- `eq` or empty => equal\n- `gt` => greater than\n- `ge` => greater or equal\n- `lt` => less than\n- `le` => less or equal\n- `ne` => not equal\n- `ct` => contains\n- `nct` => not contains\n- `in` => inside array\n- `nin` => not inside array\n\n**List of parameters accepted:**\n\n- `limitRecord` : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- `fromRecord` : initial record in query\n\nExample: `dbaname(ct)=hoa` returns all records with a `dbaname` containing \"hoa\""
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of paypoints in an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill lineItem API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "lineItem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add item to entrypoint catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/LineItem/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds products and services to an entrypoint's catalog. These are used as line items for invoicing and transactions. In the response, \"responseData\" displays the item's code."
+        },
+        {
+          "info": {
+            "name": "Get item in entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/LineItem/:lineItemId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "lineItemId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the line item (also known as a product, service, or item)."
+              }
+            ]
+          },
+          "docs": "Gets an item by ID."
+        },
+        {
+          "info": {
+            "name": "Update item in entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/LineItem/:lineItemId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "lineItemId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the line item (also known as a product, service, or item)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an item."
+        },
+        {
+          "info": {
+            "name": "Delete item in entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/LineItem/:lineItemId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "lineItemId",
+                "value": "",
+                "type": "path",
+                "description": "ID for the line item (also known as a product, service, or item)."
+              }
+            ]
+          },
+          "docs": "Deletes an item."
+        },
+        {
+          "info": {
+            "name": "Get list of items for entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/lineitems/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n<Info>\n  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**\n\n  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.\n\n  For example:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20\n\n  should become:\n\n  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20\n\n</Info>\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n  - `categories` (ct, nct)\n  - `code` (ne, eq, ct, nct)\n  - `commodityCode` (ne, eq, ct, nct)\n  - `createdDate` (gt, ge, lt, le, eq, ne)\n  - `description` (ne, eq, ct, nct)\n  - `externalPaypointID` (ct, nct, ne, eq)\n  - `mode` (eq, ne)\n  - `name` (ne, eq, ct, nct)\n  - `orgName` (ne, eq, ct, nct)\n  - `paypointDba` (ne, eq, ct, nct)\n  - `paypointId` (ne, eq)\n  - `paypointLegal` (ne, eq, ct, nct)\n  - `quantity` (gt, ge, lt, le, eq, ne)\n  - `uom` (ne, eq, ct, nct)\n  - `updatedDate` (gt, ge, lt, le, eq, ne)\n  - `value` (gt, ge, lt, le, eq, ne)\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array separated by \"|\"\n- nin => not inside array separated by \"|\"\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: name(ct)=john return all records with name containing john"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of line items and their details from an entrypoint. Line items are also known as items, products, and services. Use filters to limit results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

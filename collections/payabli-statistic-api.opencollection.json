@@ -1,0 +1,208 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Statistic API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statistic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get subscription statistics for a paypoint or organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Statistic/subscriptions/:interval/:level/:entryId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier in Payabli for the entity."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "path",
+                "description": "Interval to get the data. Allowed values:\n\n- `all` - all intervals\n- `30` - 1-30 days\n- `60` - 31-60 days\n- `90` - 61-90 days\n- `plus` - +90 days"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "List of parameters"
+              }
+            ]
+          },
+          "docs": "Retrieves the subscription statistics for a given interval for a paypoint or organization."
+        },
+        {
+          "info": {
+            "name": "Get basic statistics for a customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Statistic/customerbasic/:mode/:freq/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+              },
+              {
+                "name": "freq",
+                "value": "",
+                "type": "path",
+                "description": "Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "path",
+                "description": "Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "List of parameters."
+              }
+            ]
+          },
+          "docs": "Retrieves the basic statistics for a customer for a specific time period, grouped by a selected frequency."
+        },
+        {
+          "info": {
+            "name": "Get basic statistics for a vendor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Statistic/vendorbasic/:mode/:freq/:idVendor",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "freq",
+                "value": "",
+                "type": "path",
+                "description": "Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+              },
+              {
+                "name": "idVendor",
+                "value": "",
+                "type": "path",
+                "description": "Vendor ID."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "path",
+                "description": "Mode for request. Allowed values:\n\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "List of parameters"
+              }
+            ]
+          },
+          "docs": "Retrieve the basic statistics about a vendor for a given time period, grouped by frequency."
+        },
+        {
+          "info": {
+            "name": "Get Basic statistics for a paypoint or organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Statistic/basic/:mode/:freq/:level/:entryId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier in Payabli for the entity."
+              },
+              {
+                "name": "freq",
+                "value": "",
+                "type": "path",
+                "description": "Frequency to group series. Allowed values:\n\n- `m` - monthly\n- `w` - weekly\n- `d` - daily\n- `h` - hourly\n\nFor example, `w` groups the results by week."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "path",
+                "description": "The entry level for the request:\n  - 0 for Organization\n  - 2 for Paypoint"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "path",
+                "description": "Mode for the request. Allowed values:\n\n- `custom` - Allows you to set a custom date range\n- `ytd` - Year To Date\n- `mtd` - Month To Date\n- `wtd` - Week To Date\n- `today` - All current day\n- `m12` - Last 12 months\n- `d30` - Last 30 days\n- `h24` - Last 24 hours\n- `lasty` - Last Year\n- `lastm` - Last Month\n- `lastw` - Last Week\n- `yesterday` - Last Day"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Used with `custom` mode. The end date for the range.\nValid formats:\n  - YYYY-mm-dd\n  - YYYY/mm/dd\n  - mm-dd-YYYY\n  - mm/dd/YYYY"
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "List of parameters."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Used with `custom` mode. The start date for the range.\nValid formats:\n   - YYYY-mm-dd\n   - YYYY/mm/dd\n   -  mm-dd-YYYY\n   - mm/dd/YYYY"
+              }
+            ]
+          },
+          "docs": "Retrieves the basic statistics for an organization or a paypoint, for a given time period, grouped by a particular frequency."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

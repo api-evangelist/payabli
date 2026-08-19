@@ -1,0 +1,407 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill Invoice API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoice",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an invoice in an entrypoint."
+        },
+        {
+          "info": {
+            "name": "Get invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/:idInvoice",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a single invoice by ID."
+        },
+        {
+          "info": {
+            "name": "Update invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/:idInvoice",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              },
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates details for a single invoice in an entrypoint."
+        },
+        {
+          "info": {
+            "name": "Delete invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/:idInvoice",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              }
+            ]
+          },
+          "docs": "Deletes a single invoice from an entrypoint."
+        },
+        {
+          "info": {
+            "name": "Send invoice via email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/send/:idInvoice",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              },
+              {
+                "name": "attachfile",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, attaches a PDF version of invoice to the email."
+              },
+              {
+                "name": "mail2",
+                "value": "",
+                "type": "query",
+                "description": "Email address where the invoice will be sent to. If this parameter isn't included, Payabli uses the email address on file for the customer owner of the invoice."
+              }
+            ]
+          },
+          "docs": "Sends an invoice from an entrypoint via email."
+        },
+        {
+          "info": {
+            "name": "Get attached file from an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/attachedFileFromInvoice/:idInvoice/:filename",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The filename in Payabli. Get this from the `zipName` field\nin the `DocumentsRef.filelist` array returned by\n`/api/Invoice/{idInvoice}`. Example: `0_Bill.pdf`."
+              },
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              },
+              {
+                "name": "returnObject",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request returns the file content as a Base64-encoded string."
+              }
+            ]
+          },
+          "docs": "Retrieves a file attached to an invoice."
+        },
+        {
+          "info": {
+            "name": "Delete attached file from invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/attachedFileFromInvoice/:idInvoice/:filename",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The filename in Payabli. Get this from the `zipName` field\nin the `DocumentsRef.filelist` array returned by\n`/api/Invoice/{idInvoice}`. Example: `0_Bill.pdf`."
+              },
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              }
+            ]
+          },
+          "docs": "Deletes a file attached to an invoice."
+        },
+        {
+          "info": {
+            "name": "Get next InvoiceNumber for entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Invoice/getNumber/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              }
+            ]
+          },
+          "docs": "Retrieves the next available invoice number for a paypoint."
+        },
+        {
+          "info": {
+            "name": "Get list of invoices for an entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/invoices/:entry",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entry",
+                "value": "",
+                "type": "path",
+                "description": "The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)"
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n- `invoiceDate` (gt, ge, lt, le, eq, ne)\n- `dueDate` (gt, ge, lt, le, eq, ne)\n- `sentDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin,ne, eq)\n- `invoiceType` (eq, ne)\n- `payTerms` (in, nin, eq, ne)\n- `paypointId` (ne, eq)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `paidAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `invoiceNumber` (ct, nct, eq, ne)\n- `purchaseOrder` (ct, nct, eq, ne)\n- `itemProductCode` (ct, nct)\n- `itemDescription` (ct, nct)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq)\n- `paylinkId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20 return all records with totalAmount greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of invoices for an entrypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Get list of invoices for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Query/invoices/org/:orgId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The numeric identifier for organization, assigned by Payabli."
+              },
+              {
+                "name": "exportFormat",
+                "value": "",
+                "type": "query",
+                "description": "Export format for file downloads. When specified, returns data as a file instead of JSON."
+              },
+              {
+                "name": "fromRecord",
+                "value": "",
+                "type": "query",
+                "description": "The number of records to skip before starting to collect the result set."
+              },
+              {
+                "name": "limitRecord",
+                "value": "",
+                "type": "query",
+                "description": "Max number of records to return for the query. Use `0` or negative value to return all records."
+              },
+              {
+                "name": "parameters",
+                "value": "",
+                "type": "query",
+                "description": "Collection of field names, conditions, and values used to filter the query\n\nSee [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.\n\nList of field names accepted:\n\n- `invoiceDate` (gt, ge, lt, le, eq, ne)\n- `dueDate` (gt, ge, lt, le, eq, ne)\n- `sentDate` (gt, ge, lt, le, eq, ne)\n- `frequency` (in, nin,ne, eq)\n- `invoiceType` (eq, ne)\n- `payTerms` (in, nin, eq, ne)\n- `paypointId` (ne, eq)\n- `totalAmount` (gt, ge, lt, le, eq, ne)\n- `paidAmount` (gt, ge, lt, le, eq, ne)\n- `status` (in, nin, eq, ne)\n- `invoiceNumber` (ct, nct, eq, ne)\n- `purchaseOrder` (ct, nct, eq, ne)\n- `itemProductCode` (ct, nct)\n- `itemDescription` (ct, nct)\n- `customerFirstname` (ct, nct, eq, ne)\n- `customerLastname` (ct, nct, eq, ne)\n- `customerName` (ct, nct)\n- `customerId` (eq, ne)\n- `customerNumber` (ct, nct, eq, ne)\n- `customerCompanyname` (ct, nct, eq, ne)\n- `customerAddress` (ct, nct, eq, ne)\n- `customerCity` (ct, nct, eq, ne)\n- `customerZip` (ct, nct, eq, ne)\n- `customerState` (ct, nct, eq, ne)\n- `customerCountry` (ct, nct, eq, ne)\n- `customerPhone` (ct, nct, eq, ne)\n- `customerEmail` (ct, nct, eq, ne)\n- `customerShippingAddress` (ct, nct, eq, ne)\n- `customerShippingCity` (ct, nct, eq, ne)\n- `customerShippingZip` (ct, nct, eq, ne)\n- `customerShippingState` (ct, nct, eq, ne)\n- `customerShippingCountry` (ct, nct, eq, ne)\n- `orgId` (eq)\n- `paylinkId` (ne, eq)\n- `paypointLegal` (ne, eq, ct, nct)\n- `paypointDba` (ne, eq, ct, nct)\n- `orgName` (ne, eq, ct, nct)\n- `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name\n\nList of comparison accepted - enclosed between parentheses:\n\n- eq or empty => equal\n- gt => greater than\n- ge => greater or equal\n- lt => less than\n- le => less or equal\n- ne => not equal\n- ct => contains\n- nct => not contains\n- in => inside array\n- nin => not inside array\n\nList of parameters accepted:\n- limitRecord : max number of records for query (default=\"20\", \"0\" or negative value for all)\n- fromRecord : initial record in query\n\nExample: totalAmount(gt)=20 return all records with totalAmount greater than 20.00"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`."
+              }
+            ]
+          },
+          "docs": "Returns a list of invoices for an org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response."
+        },
+        {
+          "info": {
+            "name": "Export Invoice PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/Export/invoicePdf/:idInvoice",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "idInvoice",
+                "value": "",
+                "type": "path",
+                "description": "Invoice ID"
+              }
+            ]
+          },
+          "docs": "Export a single invoice in PDF format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

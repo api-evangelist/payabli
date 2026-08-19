@@ -1,0 +1,2062 @@
+{
+  "item": [
+    {
+      "id": "1e8f3d02-be02-4237-a1d8-a3097ec5ca7a",
+      "name": "Customer",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "23512d9b-b03c-41a7-9d58-af725d1b0fbe",
+          "name": "Add customer",
+          "request": {
+            "name": "Add customer",
+            "description": {
+              "content": "Creates a customer in an entrypoint. An identifier is required to create customer records. Change your identifier settings in Settings > Custom Fields in the Payabli Portal.\nIf you don't include an identifier, the record is rejected.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Customer",
+                "single",
+                ":entry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceCustomerCreation",
+                  "value": "false",
+                  "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "replaceExisting",
+                  "value": "0",
+                  "description": "Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entry",
+                  "description": "(Required) The entrypoint identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                "key": "idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be8d79af-00a0-4061-9b55-0b55b02f38fc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "single",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "replaceExisting",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The entrypoint identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"isSuccess\": false,\n  \"responseData\": {\n    \"customerId\": 5347,\n    \"customerNumber\": \"string\",\n    \"customerUsername\": \"string\",\n    \"customerStatus\": 52,\n    \"Company\": \"string\",\n    \"Firstname\": \"string\",\n    \"Lastname\": \"string\",\n    \"Phone\": \"string\",\n    \"Email\": \"WddjQ@BnyJYdZPBAaCDmRWueaJBkDRREGo.heao\",\n    \"Address\": \"string\",\n    \"Address1\": \"string\",\n    \"City\": \"string\",\n    \"State\": \"string\",\n    \"Zip\": \"string\",\n    \"Country\": \"string\",\n    \"ShippingAddress\": \"string\",\n    \"ShippingAddress1\": \"string\",\n    \"ShippingCity\": \"string\",\n    \"ShippingState\": \"string\",\n    \"ShippingZip\": \"string\",\n    \"ShippingCountry\": \"string\",\n    \"Balance\": 6898.554191612791,\n    \"TimeZone\": 7750,\n    \"MFA\": true,\n    \"MFAMode\": 8213,\n    \"snProvider\": \"string\",\n    \"snIdentifier\": \"string\",\n    \"snData\": \"string\",\n    \"LastUpdated\": \"2005-09-30T07:13:19.647Z\",\n    \"Created\": \"2024-12-15T05:13:02.962Z\",\n    \"AdditionalFields\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"IdentifierFields\": [\n      \"string\",\n      \"string\"\n    ],\n    \"Subscriptions\": [\n      {\n        \"EndDate\": \"2015-07-04T15:26:27.917Z\",\n        \"LastRun\": \"1979-05-08T06:24:29.646Z\",\n        \"NextDate\": \"1992-09-04T05:55:54.491Z\",\n        \"StartDate\": \"1960-03-29T01:18:35.103Z\",\n        \"StoredMethod\": {\n          \"IdPmethod\": \"string\",\n          \"Method\": \"string\",\n          \"Descriptor\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"ExpDate\": \"string\",\n          \"HolderName\": \"string\",\n          \"AchSecCode\": \"string\",\n          \"AchHolderType\": \"string\",\n          \"IsValidatedACH\": false,\n          \"BIN\": \"string\",\n          \"binData\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ABA\": \"string\",\n          \"PostalCode\": \"string\",\n          \"MethodType\": \"string\",\n          \"WalletType\": \"string\",\n          \"LastUpdated\": \"1965-07-25T01:55:43.106Z\",\n          \"CardUpdatedOn\": \"2001-06-22T04:12:49.838Z\"\n        },\n        \"CreatedAt\": \"1992-03-31T08:58:30.766Z\",\n        \"Customer\": {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"CompanyName\": \"string\",\n          \"BillingAddress1\": \"string\",\n          \"BillingAddress2\": \"string\",\n          \"BillingCity\": \"string\",\n          \"BillingState\": \"string\",\n          \"BillingZip\": \"string\",\n          \"BillingCountry\": \"string\",\n          \"BillingPhone\": \"string\",\n          \"BillingEmail\": \"yK5UGPrm@FfexFQHlSaXEEDvUMvCXgmIZFoeY.sxyd\",\n          \"CustomerNumber\": \"string\",\n          \"ShippingAddress1\": \"string\",\n          \"ShippingAddress2\": \"string\",\n          \"ShippingCity\": \"string\",\n          \"ShippingState\": \"string\",\n          \"ShippingZip\": \"string\",\n          \"ShippingCountry\": \"string\",\n          \"customerId\": 2553,\n          \"customerStatus\": 1340,\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"EntrypageId\": 7468,\n        \"ExternalPaypointID\": \"string\",\n        \"FeeAmount\": 6077.998543322872,\n        \"Frequency\": \"string\",\n        \"IdSub\": 7842,\n        \"invoiceData\": {\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"attachments\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"company\": \"string\",\n          \"discount\": 58.51972496792368,\n          \"dutyAmount\": 204.72613568568664,\n          \"firstName\": \"string\",\n          \"freightAmount\": 995.4023841218129,\n          \"frequency\": \"monthly\",\n          \"invoiceAmount\": 4915.055200251952,\n          \"invoiceDate\": \"1968-01-15\",\n          \"invoiceDueDate\": \"1948-03-17\",\n          \"invoiceEndDate\": \"2003-12-01\",\n          \"invoiceNumber\": \"string\",\n          \"invoiceStatus\": 9272,\n          \"invoiceType\": 8234,\n          \"items\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"lastName\": \"string\",\n          \"notes\": \"string\",\n          \"paymentTerms\": \"NET90\",\n          \"purchaseOrder\": \"string\",\n          \"shippingAddress1\": \"string\",\n          \"shippingAddress2\": \"string\",\n          \"shippingCity\": \"string\",\n          \"shippingCountry\": \"string\",\n          \"shippingEmail\": \"D2j0p8s43N7AtX@ROl.ed\",\n          \"shippingFromZip\": \"string\",\n          \"shippingPhone\": \"string\",\n          \"shippingState\": \"string\",\n          \"shippingZip\": \"string\",\n          \"summaryCommodityCode\": \"string\",\n          \"tax\": 6936.944225444592,\n          \"termsConditions\": \"string\"\n        },\n        \"LastUpdated\": \"2002-10-30T15:37:43.154Z\",\n        \"LeftCycles\": 1751,\n        \"Method\": \"string\",\n        \"NetAmount\": 7111.797316261125,\n        \"ParentOrgName\": \"string\",\n        \"PaymentData\": {\n          \"AccountExp\": \"string\",\n          \"accountId\": \"string\",\n          \"AccountType\": \"string\",\n          \"AccountZip\": \"string\",\n          \"binData\": {\n            \"binMatchedLength\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardBrand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIsRegulated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardUseCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"HolderName\": \"string\",\n          \"Initiator\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"orderDescription\": \"string\",\n          \"paymentDetails\": {\n            \"totalAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkImage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"splitFunding\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkUniqueId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"Sequence\": \"string\",\n          \"SignatureData\": \"string\",\n          \"StoredId\": \"string\",\n          \"StoredMethodUsageType\": \"string\"\n        },\n        \"PaypointDbaname\": \"string\",\n        \"PaypointEntryname\": \"string\",\n        \"PaypointId\": 4578,\n        \"PaypointLegalname\": \"string\",\n        \"PlanId\": 7498,\n        \"Source\": \"string\",\n        \"SubEvents\": [\n          {\n            \"description\": \"string\",\n            \"eventTime\": \"1994-11-14T03:39:23.055Z\",\n            \"extraData\": \"string\",\n            \"refData\": \"string\",\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"description\": \"string\",\n            \"eventTime\": \"1957-09-08T06:41:56.753Z\",\n            \"extraData\": \"string\",\n            \"refData\": \"string\",\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"SubStatus\": 4933,\n        \"SubscriptionType\": \"Regular\",\n        \"TotalAmount\": 4028.837349362212,\n        \"TotalCycles\": 4618,\n        \"UntilCancelled\": false\n      },\n      {\n        \"EndDate\": \"1954-07-27T06:06:23.848Z\",\n        \"LastRun\": \"2013-06-17T10:07:11.760Z\",\n        \"NextDate\": \"1996-10-25T14:17:00.241Z\",\n        \"StartDate\": \"1999-08-01T18:53:20.309Z\",\n        \"StoredMethod\": {\n          \"IdPmethod\": \"string\",\n          \"Method\": \"string\",\n          \"Descriptor\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"ExpDate\": \"string\",\n          \"HolderName\": \"string\",\n          \"AchSecCode\": \"string\",\n          \"AchHolderType\": \"string\",\n          \"IsValidatedACH\": false,\n          \"BIN\": \"string\",\n          \"binData\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ABA\": \"string\",\n          \"PostalCode\": \"string\",\n          \"MethodType\": \"string\",\n          \"WalletType\": \"string\",\n          \"LastUpdated\": \"1984-04-13T16:31:05.496Z\",\n          \"CardUpdatedOn\": \"1955-12-30T04:39:19.807Z\"\n        },\n        \"CreatedAt\": \"1965-08-23T13:15:06.627Z\",\n        \"Customer\": {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"CompanyName\": \"string\",\n          \"BillingAddress1\": \"string\",\n          \"BillingAddress2\": \"string\",\n          \"BillingCity\": \"string\",\n          \"BillingState\": \"string\",\n          \"BillingZip\": \"string\",\n          \"BillingCountry\": \"string\",\n          \"BillingPhone\": \"string\",\n          \"BillingEmail\": \"Zmf3EU20m@wIG.gut\",\n          \"CustomerNumber\": \"string\",\n          \"ShippingAddress1\": \"string\",\n          \"ShippingAddress2\": \"string\",\n          \"ShippingCity\": \"string\",\n          \"ShippingState\": \"string\",\n          \"ShippingZip\": \"string\",\n          \"ShippingCountry\": \"string\",\n          \"customerId\": 3470,\n          \"customerStatus\": 9926,\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"EntrypageId\": 6193,\n        \"ExternalPaypointID\": \"string\",\n        \"FeeAmount\": 34.4457752177596,\n        \"Frequency\": \"string\",\n        \"IdSub\": 5529,\n        \"invoiceData\": {\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"attachments\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"company\": \"string\",\n          \"discount\": 8759.18819341733,\n          \"dutyAmount\": 2655.7448576696906,\n          \"firstName\": \"string\",\n          \"freightAmount\": 4657.7284424149175,\n          \"frequency\": \"every2weeks\",\n          \"invoiceAmount\": 8322.955471357685,\n          \"invoiceDate\": \"2022-08-31\",\n          \"invoiceDueDate\": \"1993-06-17\",\n          \"invoiceEndDate\": \"1997-04-15\",\n          \"invoiceNumber\": \"string\",\n          \"invoiceStatus\": 9967,\n          \"invoiceType\": 5072,\n          \"items\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"lastName\": \"string\",\n          \"notes\": \"string\",\n          \"paymentTerms\": \"PIA\",\n          \"purchaseOrder\": \"string\",\n          \"shippingAddress1\": \"string\",\n          \"shippingAddress2\": \"string\",\n          \"shippingCity\": \"string\",\n          \"shippingCountry\": \"string\",\n          \"shippingEmail\": \"hr604Fp4@hfYzqKxQWxZfzkEkPBzwWPDAhVDZwc.wyi\",\n          \"shippingFromZip\": \"string\",\n          \"shippingPhone\": \"string\",\n          \"shippingState\": \"string\",\n          \"shippingZip\": \"string\",\n          \"summaryCommodityCode\": \"string\",\n          \"tax\": 4314.659967288388,\n          \"termsConditions\": \"string\"\n        },\n        \"LastUpdated\": \"1980-03-13T10:35:24.182Z\",\n        \"LeftCycles\": 9788,\n        \"Method\": \"string\",\n        \"NetAmount\": 1311.8000681515318,\n        \"ParentOrgName\": \"string\",\n        \"PaymentData\": {\n          \"AccountExp\": \"string\",\n          \"accountId\": \"string\",\n          \"AccountType\": \"string\",\n          \"AccountZip\": \"string\",\n          \"binData\": {\n            \"binMatchedLength\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardBrand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIsRegulated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardUseCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"HolderName\": \"string\",\n          \"Initiator\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"orderDescription\": \"string\",\n          \"paymentDetails\": {\n            \"totalAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkImage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"splitFunding\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkUniqueId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"Sequence\": \"string\",\n          \"SignatureData\": \"string\",\n          \"StoredId\": \"string\",\n          \"StoredMethodUsageType\": \"string\"\n        },\n        \"PaypointDbaname\": \"string\",\n        \"PaypointEntryname\": \"string\",\n        \"PaypointId\": 6584,\n        \"PaypointLegalname\": \"string\",\n        \"PlanId\": 9578,\n        \"Source\": \"string\",\n        \"SubEvents\": [\n          {\n            \"description\": \"string\",\n            \"eventTime\": \"1987-10-19T18:02:10.462Z\",\n            \"extraData\": \"string\",\n            \"refData\": \"string\",\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"description\": \"string\",\n            \"eventTime\": \"1963-01-05T14:38:54.735Z\",\n            \"extraData\": \"string\",\n            \"refData\": \"string\",\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"SubStatus\": 9110,\n        \"SubscriptionType\": \"BalanceDriven\",\n        \"TotalAmount\": 6588.275947753367,\n        \"TotalCycles\": 9340,\n        \"UntilCancelled\": false\n      }\n    ],\n    \"StoredMethods\": [\n      {\n        \"IdPmethod\": \"string\",\n        \"Method\": \"string\",\n        \"Descriptor\": \"string\",\n        \"MaskedAccount\": \"string\",\n        \"ExpDate\": \"string\",\n        \"HolderName\": \"string\",\n        \"AchSecCode\": \"string\",\n        \"AchHolderType\": \"string\",\n        \"IsValidatedACH\": false,\n        \"BIN\": \"string\",\n        \"binData\": {\n          \"binMatchedLength\": \"string\",\n          \"binCardBrand\": \"string\",\n          \"binCardType\": \"string\",\n          \"binCardCategory\": \"string\",\n          \"binCardIssuer\": \"string\",\n          \"binCardIssuerCountry\": \"string\",\n          \"binCardIssuerCountryCodeA2\": \"string\",\n          \"binCardIssuerCountryNumber\": \"string\",\n          \"binCardIsRegulated\": \"string\",\n          \"binCardUseCategory\": \"string\",\n          \"binCardIssuerCountryCodeA3\": \"string\"\n        },\n        \"ABA\": \"string\",\n        \"PostalCode\": \"string\",\n        \"MethodType\": \"string\",\n        \"WalletType\": \"string\",\n        \"LastUpdated\": \"2018-08-25T02:48:18.417Z\",\n        \"CardUpdatedOn\": \"1953-12-20T04:58:17.604Z\"\n      },\n      {\n        \"IdPmethod\": \"string\",\n        \"Method\": \"string\",\n        \"Descriptor\": \"string\",\n        \"MaskedAccount\": \"string\",\n        \"ExpDate\": \"string\",\n        \"HolderName\": \"string\",\n        \"AchSecCode\": \"string\",\n        \"AchHolderType\": \"string\",\n        \"IsValidatedACH\": true,\n        \"BIN\": \"string\",\n        \"binData\": {\n          \"binMatchedLength\": \"string\",\n          \"binCardBrand\": \"string\",\n          \"binCardType\": \"string\",\n          \"binCardCategory\": \"string\",\n          \"binCardIssuer\": \"string\",\n          \"binCardIssuerCountry\": \"string\",\n          \"binCardIssuerCountryCodeA2\": \"string\",\n          \"binCardIssuerCountryNumber\": \"string\",\n          \"binCardIsRegulated\": \"string\",\n          \"binCardUseCategory\": \"string\",\n          \"binCardIssuerCountryCodeA3\": \"string\"\n        },\n        \"ABA\": \"string\",\n        \"PostalCode\": \"string\",\n        \"MethodType\": \"string\",\n        \"WalletType\": \"string\",\n        \"LastUpdated\": \"1949-05-11T19:31:51.710Z\",\n        \"CardUpdatedOn\": \"1989-11-27T00:06:15.214Z\"\n      }\n    ],\n    \"customerSummary\": {\n      \"NumberofTransactions\": 774,\n      \"RecentTransactions\": [\n        {\n          \"splitCount\": 9061,\n          \"TransactionTime\": \"1979-04-12T21:35:06.024Z\",\n          \"AchHolderType\": \"personal\",\n          \"AchSecCode\": \"string\",\n          \"BatchAmount\": 3070.8966303863604,\n          \"BatchNumber\": \"string\",\n          \"CfeeTransactions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"ConnectorName\": \"string\",\n          \"Customer\": {\n            \"Identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"FirstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CompanyName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingAddress1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingAddress2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CustomerNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingAddress1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingAddress2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customerId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customerStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AdditionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"DeviceId\": \"string\",\n          \"EntrypageId\": 3684,\n          \"ExternalProcessorInformation\": \"string\",\n          \"FeeAmount\": 7920.906429845449,\n          \"GatewayTransId\": \"string\",\n          \"invoiceData\": {\n            \"AdditionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"company\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"discount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dutyAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"freightAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"frequency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceDueDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceEndDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"items\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"notes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paymentTerms\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"purchaseOrder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingAddress1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingAddress2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingFromZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"summaryCommodityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tax\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"termsConditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"Method\": \"string\",\n          \"NetAmount\": 8253.363923598517,\n          \"Operation\": \"string\",\n          \"OrderId\": \"string\",\n          \"OrgId\": 1452,\n          \"ParentOrgName\": \"string\",\n          \"PaymentData\": {\n            \"AccountExp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AccountType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AccountZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"HolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Initiator\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"MaskedAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paymentDetails\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Sequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"SignatureData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"StoredId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"StoredMethodUsageType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"PaymentTransId\": \"string\",\n          \"PayorId\": 9783,\n          \"PaypointDbaname\": \"string\",\n          \"PaypointEntryname\": \"string\",\n          \"PaypointId\": 175,\n          \"PaypointLegalname\": \"string\",\n          \"PendingFeeAmount\": 3079.9507470250387,\n          \"RefundId\": 9512,\n          \"ResponseData\": {\n            \"authcode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avsresponse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avsresponse_text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvvresponse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvvresponse_text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emv_auth_response_data\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"response\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"response_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"response_code_text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"responsetext\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resultCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resultCodeText\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ReturnedId\": 326,\n          \"ScheduleReference\": 7157,\n          \"SettlementStatus\": 3659,\n          \"Source\": \"string\",\n          \"splitFundingInstructions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"TotalAmount\": 352.2378215260991,\n          \"TransactionEvents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"TransAdditionalData\": {},\n          \"TransStatus\": 6175\n        },\n        {\n          \"splitCount\": 1110,\n          \"TransactionTime\": \"2008-12-07T13:36:28.003Z\",\n          \"AchHolderType\": \"personal\",\n          \"AchSecCode\": \"string\",\n          \"BatchAmount\": 5038.437944239533,\n          \"BatchNumber\": \"string\",\n          \"CfeeTransactions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"ConnectorName\": \"string\",\n          \"Customer\": {\n            \"Identifiers\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"FirstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"LastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CompanyName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingAddress1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingAddress2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"BillingEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CustomerNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingAddress1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingAddress2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ShippingCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customerId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"customerStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AdditionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"DeviceId\": \"string\",\n          \"EntrypageId\": 9930,\n          \"ExternalProcessorInformation\": \"string\",\n          \"FeeAmount\": 6635.041546256281,\n          \"GatewayTransId\": \"string\",\n          \"invoiceData\": {\n            \"AdditionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"company\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"discount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dutyAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"firstName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"freightAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"frequency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceDueDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceEndDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"invoiceType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"items\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"notes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paymentTerms\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"purchaseOrder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingAddress1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingAddress2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingCity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingFromZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shippingZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"summaryCommodityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tax\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"termsConditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"Method\": \"string\",\n          \"NetAmount\": 2722.12437161004,\n          \"Operation\": \"string\",\n          \"OrderId\": \"string\",\n          \"OrgId\": 8014,\n          \"ParentOrgName\": \"string\",\n          \"PaymentData\": {\n            \"AccountExp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AccountType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"AccountZip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"HolderName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Initiator\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"MaskedAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paymentDetails\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Sequence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"SignatureData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"StoredId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"StoredMethodUsageType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"PaymentTransId\": \"string\",\n          \"PayorId\": 7436,\n          \"PaypointDbaname\": \"string\",\n          \"PaypointEntryname\": \"string\",\n          \"PaypointId\": 8416,\n          \"PaypointLegalname\": \"string\",\n          \"PendingFeeAmount\": 2154.8212304986546,\n          \"RefundId\": 7865,\n          \"ResponseData\": {\n            \"authcode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avsresponse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avsresponse_text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvvresponse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvvresponse_text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emv_auth_response_data\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"orderid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"response\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"response_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"response_code_text\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"responsetext\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resultCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resultCodeText\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transactionid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ReturnedId\": 8222,\n          \"ScheduleReference\": 2297,\n          \"SettlementStatus\": 4708,\n          \"Source\": \"string\",\n          \"splitFundingInstructions\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"TotalAmount\": 8022.320929363929,\n          \"TransactionEvents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"TransAdditionalData\": {},\n          \"TransStatus\": 4450\n        }\n      ],\n      \"TotalAmountTransactions\": 6336.473918601365,\n      \"TotalNetAmountTransactions\": 4100.304372877781\n    },\n    \"PaypointLegalname\": \"string\",\n    \"PaypointDbaname\": \"string\",\n    \"ParentOrgName\": \"string\",\n    \"ParentOrgId\": 6353,\n    \"PaypointEntryname\": \"string\",\n    \"pageidentifier\": \"string\",\n    \"externalPaypointID\": \"string\",\n    \"customerConsent\": {\n      \"eCommunication\": {\n        \"status\": 9640,\n        \"updatedAt\": \"1971-11-13T16:18:55.825Z\"\n      },\n      \"sms\": {\n        \"status\": 4186,\n        \"updatedAt\": \"1991-11-18T06:53:13.569Z\"\n      }\n    },\n    \"customerPortal\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8d831fe-537a-4538-8fc2-e1fc41268d03",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "single",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "replaceExisting",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The entrypoint identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b0e4420-c1c3-460b-bb4f-ade34226eb0b",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "single",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "replaceExisting",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The entrypoint identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3950b384-b575-4ca2-9634-dbb448e39991",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "single",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "replaceExisting",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The entrypoint identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43b72562-67ca-4e5b-b32e-06ad57f14dd4",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "single",
+                    ":entry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceCustomerCreation",
+                      "value": "false"
+                    },
+                    {
+                      "key": "replaceExisting",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry",
+                      "description": "(Required) The entrypoint identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "_Optional but recommended_ A unique ID that you can include to prevent duplicating objects or transactions in the case that a request is sent more than once. This key isn't generated in Payabli, you must generate it yourself. This key persists for 2 minutes. After 2 minutes, you can reuse the key if needed.",
+                    "key": "idempotencyKey",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1448a58f-b042-4c90-96d7-cf002711891d",
+          "name": "Get customer record",
+          "request": {
+            "name": "Get customer record",
+            "description": {
+              "content": "Retrieves a customer's record and details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Customer",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customerId",
+                  "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c6f6bfc-0ec0-49ce-af8f-6eb11dfe150b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customerId\": 7300,\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"string\",\n  \"customerStatus\": 9025,\n  \"Company\": \"string\",\n  \"Firstname\": \"string\",\n  \"Lastname\": \"string\",\n  \"Phone\": \"string\",\n  \"Email\": \"oo7r153kZe9Wp@gaWXvwdwiYQWzjEP.ji\",\n  \"Address\": \"string\",\n  \"Address1\": \"string\",\n  \"City\": \"string\",\n  \"State\": \"string\",\n  \"Zip\": \"string\",\n  \"Country\": \"string\",\n  \"ShippingAddress\": \"string\",\n  \"ShippingAddress1\": \"string\",\n  \"ShippingCity\": \"string\",\n  \"ShippingState\": \"string\",\n  \"ShippingZip\": \"string\",\n  \"ShippingCountry\": \"string\",\n  \"Balance\": 3786.511681916901,\n  \"TimeZone\": 728,\n  \"MFA\": false,\n  \"MFAMode\": 9747,\n  \"snProvider\": \"string\",\n  \"snIdentifier\": \"string\",\n  \"snData\": \"string\",\n  \"LastUpdated\": \"1963-05-18T15:29:47.304Z\",\n  \"Created\": \"1980-10-15T11:18:54.233Z\",\n  \"AdditionalFields\": {\n    \"key_0\": \"string\"\n  },\n  \"IdentifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Subscriptions\": [\n    {\n      \"EndDate\": \"1955-03-21T00:50:45.892Z\",\n      \"LastRun\": \"1962-12-15T17:19:14.616Z\",\n      \"NextDate\": \"1977-01-04T22:07:32.673Z\",\n      \"StartDate\": \"1984-12-03T09:15:24.652Z\",\n      \"StoredMethod\": {\n        \"IdPmethod\": \"string\",\n        \"Method\": \"string\",\n        \"Descriptor\": \"string\",\n        \"MaskedAccount\": \"string\",\n        \"ExpDate\": \"string\",\n        \"HolderName\": \"string\",\n        \"AchSecCode\": \"string\",\n        \"AchHolderType\": \"string\",\n        \"IsValidatedACH\": true,\n        \"BIN\": \"string\",\n        \"binData\": {\n          \"binMatchedLength\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardBrand\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuer\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountry\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountryCodeA2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountryNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIsRegulated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardUseCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountryCodeA3\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"ABA\": \"string\",\n        \"PostalCode\": \"string\",\n        \"MethodType\": \"string\",\n        \"WalletType\": \"string\",\n        \"LastUpdated\": \"1959-08-19T04:02:29.055Z\",\n        \"CardUpdatedOn\": \"1957-04-03T16:37:11.414Z\"\n      },\n      \"CreatedAt\": \"2021-07-04T16:34:21.127Z\",\n      \"Customer\": {\n        \"FirstName\": \"string\",\n        \"LastName\": \"string\",\n        \"CompanyName\": \"string\",\n        \"BillingAddress1\": \"string\",\n        \"BillingAddress2\": \"string\",\n        \"BillingCity\": \"string\",\n        \"BillingState\": \"string\",\n        \"BillingZip\": \"string\",\n        \"BillingCountry\": \"string\",\n        \"BillingPhone\": \"string\",\n        \"BillingEmail\": \"A6tIW5c-RgdXQ@gXMLQXoSnPqWgLRzjiINjVCbRjIMbNXlU.dpm\",\n        \"CustomerNumber\": \"string\",\n        \"ShippingAddress1\": \"string\",\n        \"ShippingAddress2\": \"string\",\n        \"ShippingCity\": \"string\",\n        \"ShippingState\": \"string\",\n        \"ShippingZip\": \"string\",\n        \"ShippingCountry\": \"string\",\n        \"customerId\": 6595,\n        \"customerStatus\": 8608,\n        \"AdditionalData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      \"EntrypageId\": 6236,\n      \"ExternalPaypointID\": \"string\",\n      \"FeeAmount\": 2367.6295176109106,\n      \"Frequency\": \"string\",\n      \"IdSub\": 6422,\n      \"invoiceData\": {\n        \"AdditionalData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"company\": \"string\",\n        \"discount\": 8420.477757575545,\n        \"dutyAmount\": 7937.606055521286,\n        \"firstName\": \"string\",\n        \"freightAmount\": 4350.828963828983,\n        \"frequency\": \"annually\",\n        \"invoiceAmount\": 791.7071749975823,\n        \"invoiceDate\": \"1956-08-31\",\n        \"invoiceDueDate\": \"2001-05-06\",\n        \"invoiceEndDate\": \"1961-07-11\",\n        \"invoiceNumber\": \"string\",\n        \"invoiceStatus\": 7609,\n        \"invoiceType\": 626,\n        \"items\": [\n          {\n            \"itemCategories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"itemCommodityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemCost\": 4245.929460691243,\n            \"itemDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemMode\": 3801,\n            \"itemProductCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemProductName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemQty\": 2284,\n            \"itemTaxAmount\": 152.2294811389868,\n            \"itemTaxRate\": 8785.374275795593,\n            \"itemTotalAmount\": 8001.412074510451,\n            \"itemUnitOfMeasure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"itemCategories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"itemCommodityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemCost\": 1990.7644655910383,\n            \"itemDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemMode\": 8803,\n            \"itemProductCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemProductName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemQty\": 2735,\n            \"itemTaxAmount\": 6874.58245244327,\n            \"itemTaxRate\": 7736.706064584487,\n            \"itemTotalAmount\": 8251.708433736747,\n            \"itemUnitOfMeasure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"lastName\": \"string\",\n        \"notes\": \"string\",\n        \"paymentTerms\": \"UF\",\n        \"purchaseOrder\": \"string\",\n        \"shippingAddress1\": \"string\",\n        \"shippingAddress2\": \"string\",\n        \"shippingCity\": \"string\",\n        \"shippingCountry\": \"string\",\n        \"shippingEmail\": \"HUlU5xLO@FtyLgjkLywuNK.wrl\",\n        \"shippingFromZip\": \"string\",\n        \"shippingPhone\": \"string\",\n        \"shippingState\": \"string\",\n        \"shippingZip\": \"string\",\n        \"summaryCommodityCode\": \"string\",\n        \"tax\": 6656.0501035521565,\n        \"termsConditions\": \"string\"\n      },\n      \"LastUpdated\": \"1958-09-12T16:07:18.753Z\",\n      \"LeftCycles\": 8744,\n      \"Method\": \"string\",\n      \"NetAmount\": 8670.918563262112,\n      \"ParentOrgName\": \"string\",\n      \"PaymentData\": {\n        \"AccountExp\": \"string\",\n        \"accountId\": \"string\",\n        \"AccountType\": \"string\",\n        \"AccountZip\": \"string\",\n        \"binData\": {\n          \"binMatchedLength\": \"string\",\n          \"binCardBrand\": \"string\",\n          \"binCardType\": \"string\",\n          \"binCardCategory\": \"string\",\n          \"binCardIssuer\": \"string\",\n          \"binCardIssuerCountry\": \"string\",\n          \"binCardIssuerCountryCodeA2\": \"string\",\n          \"binCardIssuerCountryNumber\": \"string\",\n          \"binCardIsRegulated\": \"string\",\n          \"binCardUseCategory\": \"string\",\n          \"binCardIssuerCountryCodeA3\": \"string\"\n        },\n        \"HolderName\": \"string\",\n        \"Initiator\": \"string\",\n        \"MaskedAccount\": \"string\",\n        \"orderDescription\": \"string\",\n        \"paymentDetails\": {\n          \"totalAmount\": 4408.14698676437,\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"checkImage\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"checkNumber\": \"string\",\n          \"currency\": \"string\",\n          \"serviceFee\": 6221.749233494153,\n          \"splitFunding\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"checkUniqueId\": \"string\"\n        },\n        \"Sequence\": \"string\",\n        \"SignatureData\": \"string\",\n        \"StoredId\": \"string\",\n        \"StoredMethodUsageType\": \"string\"\n      },\n      \"PaypointDbaname\": \"string\",\n      \"PaypointEntryname\": \"string\",\n      \"PaypointId\": 3892,\n      \"PaypointLegalname\": \"string\",\n      \"PlanId\": 1536,\n      \"Source\": \"string\",\n      \"SubEvents\": [\n        {\n          \"description\": \"string\",\n          \"eventTime\": \"1981-11-19T19:27:59.893Z\",\n          \"extraData\": \"string\",\n          \"refData\": \"string\",\n          \"source\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"eventTime\": \"2016-09-10T05:43:56.534Z\",\n          \"extraData\": \"string\",\n          \"refData\": \"string\",\n          \"source\": \"string\"\n        }\n      ],\n      \"SubStatus\": 471,\n      \"SubscriptionType\": \"Regular\",\n      \"TotalAmount\": 3070.7038244380246,\n      \"TotalCycles\": 3657,\n      \"UntilCancelled\": false\n    },\n    {\n      \"EndDate\": \"2001-07-26T05:57:05.410Z\",\n      \"LastRun\": \"1987-08-04T19:50:13.655Z\",\n      \"NextDate\": \"1977-07-10T16:45:59.940Z\",\n      \"StartDate\": \"2011-05-04T13:19:46.310Z\",\n      \"StoredMethod\": {\n        \"IdPmethod\": \"string\",\n        \"Method\": \"string\",\n        \"Descriptor\": \"string\",\n        \"MaskedAccount\": \"string\",\n        \"ExpDate\": \"string\",\n        \"HolderName\": \"string\",\n        \"AchSecCode\": \"string\",\n        \"AchHolderType\": \"string\",\n        \"IsValidatedACH\": false,\n        \"BIN\": \"string\",\n        \"binData\": {\n          \"binMatchedLength\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardBrand\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuer\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountry\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountryCodeA2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountryNumber\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIsRegulated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardUseCategory\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"binCardIssuerCountryCodeA3\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"ABA\": \"string\",\n        \"PostalCode\": \"string\",\n        \"MethodType\": \"string\",\n        \"WalletType\": \"string\",\n        \"LastUpdated\": \"1997-10-21T12:07:11.960Z\",\n        \"CardUpdatedOn\": \"2001-01-29T01:23:23.991Z\"\n      },\n      \"CreatedAt\": \"1981-04-08T13:26:59.244Z\",\n      \"Customer\": {\n        \"FirstName\": \"string\",\n        \"LastName\": \"string\",\n        \"CompanyName\": \"string\",\n        \"BillingAddress1\": \"string\",\n        \"BillingAddress2\": \"string\",\n        \"BillingCity\": \"string\",\n        \"BillingState\": \"string\",\n        \"BillingZip\": \"string\",\n        \"BillingCountry\": \"string\",\n        \"BillingPhone\": \"string\",\n        \"BillingEmail\": \"eook5B9@WUYXYUTlvQiPeVcvWiNIxlXVbLiv.yiq\",\n        \"CustomerNumber\": \"string\",\n        \"ShippingAddress1\": \"string\",\n        \"ShippingAddress2\": \"string\",\n        \"ShippingCity\": \"string\",\n        \"ShippingState\": \"string\",\n        \"ShippingZip\": \"string\",\n        \"ShippingCountry\": \"string\",\n        \"customerId\": 1688,\n        \"customerStatus\": 153,\n        \"AdditionalData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        }\n      },\n      \"EntrypageId\": 4011,\n      \"ExternalPaypointID\": \"string\",\n      \"FeeAmount\": 1915.7057452193726,\n      \"Frequency\": \"string\",\n      \"IdSub\": 3777,\n      \"invoiceData\": {\n        \"AdditionalData\": {\n          \"key_0\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"fContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"filename\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ftype\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"furl\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"company\": \"string\",\n        \"discount\": 9276.37253081427,\n        \"dutyAmount\": 3610.3854466949183,\n        \"firstName\": \"string\",\n        \"freightAmount\": 1521.4017701826365,\n        \"frequency\": \"endofmonth\",\n        \"invoiceAmount\": 5197.863459225908,\n        \"invoiceDate\": \"1953-08-02\",\n        \"invoiceDueDate\": \"1967-01-16\",\n        \"invoiceEndDate\": \"1959-11-29\",\n        \"invoiceNumber\": \"string\",\n        \"invoiceStatus\": 5538,\n        \"invoiceType\": 3756,\n        \"items\": [\n          {\n            \"itemCategories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"itemCommodityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemCost\": 7158.602252179204,\n            \"itemDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemMode\": 8647,\n            \"itemProductCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemProductName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemQty\": 9819,\n            \"itemTaxAmount\": 8771.053899174323,\n            \"itemTaxRate\": 4149.662292201412,\n            \"itemTotalAmount\": 1402.9070067029381,\n            \"itemUnitOfMeasure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"itemCategories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"itemCommodityCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemCost\": 2236.003226212395,\n            \"itemDescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemMode\": 8566,\n            \"itemProductCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemProductName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"itemQty\": 6039,\n            \"itemTaxAmount\": 2928.9686962127003,\n            \"itemTaxRate\": 1859.129304892596,\n            \"itemTotalAmount\": 131.39280995836612,\n            \"itemUnitOfMeasure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"lastName\": \"string\",\n        \"notes\": \"string\",\n        \"paymentTerms\": \"5MFI\",\n        \"purchaseOrder\": \"string\",\n        \"shippingAddress1\": \"string\",\n        \"shippingAddress2\": \"string\",\n        \"shippingCity\": \"string\",\n        \"shippingCountry\": \"string\",\n        \"shippingEmail\": \"RptwjmRULtwCLEf@eRTsnhwNMnylMaZdlRilzMzRuBmCVb.sov\",\n        \"shippingFromZip\": \"string\",\n        \"shippingPhone\": \"string\",\n        \"shippingState\": \"string\",\n        \"shippingZip\": \"string\",\n        \"summaryCommodityCode\": \"string\",\n        \"tax\": 5504.971032437955,\n        \"termsConditions\": \"string\"\n      },\n      \"LastUpdated\": \"1989-11-14T12:26:32.112Z\",\n      \"LeftCycles\": 6207,\n      \"Method\": \"string\",\n      \"NetAmount\": 5671.915095686843,\n      \"ParentOrgName\": \"string\",\n      \"PaymentData\": {\n        \"AccountExp\": \"string\",\n        \"accountId\": \"string\",\n        \"AccountType\": \"string\",\n        \"AccountZip\": \"string\",\n        \"binData\": {\n          \"binMatchedLength\": \"string\",\n          \"binCardBrand\": \"string\",\n          \"binCardType\": \"string\",\n          \"binCardCategory\": \"string\",\n          \"binCardIssuer\": \"string\",\n          \"binCardIssuerCountry\": \"string\",\n          \"binCardIssuerCountryCodeA2\": \"string\",\n          \"binCardIssuerCountryNumber\": \"string\",\n          \"binCardIsRegulated\": \"string\",\n          \"binCardUseCategory\": \"string\",\n          \"binCardIssuerCountryCodeA3\": \"string\"\n        },\n        \"HolderName\": \"string\",\n        \"Initiator\": \"string\",\n        \"MaskedAccount\": \"string\",\n        \"orderDescription\": \"string\",\n        \"paymentDetails\": {\n          \"totalAmount\": 3565.043679355011,\n          \"categories\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"checkImage\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"checkNumber\": \"string\",\n          \"currency\": \"string\",\n          \"serviceFee\": 9172.882454338582,\n          \"splitFunding\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"checkUniqueId\": \"string\"\n        },\n        \"Sequence\": \"string\",\n        \"SignatureData\": \"string\",\n        \"StoredId\": \"string\",\n        \"StoredMethodUsageType\": \"string\"\n      },\n      \"PaypointDbaname\": \"string\",\n      \"PaypointEntryname\": \"string\",\n      \"PaypointId\": 6152,\n      \"PaypointLegalname\": \"string\",\n      \"PlanId\": 8841,\n      \"Source\": \"string\",\n      \"SubEvents\": [\n        {\n          \"description\": \"string\",\n          \"eventTime\": \"1993-12-24T17:18:02.540Z\",\n          \"extraData\": \"string\",\n          \"refData\": \"string\",\n          \"source\": \"string\"\n        },\n        {\n          \"description\": \"string\",\n          \"eventTime\": \"2000-06-28T18:10:49.725Z\",\n          \"extraData\": \"string\",\n          \"refData\": \"string\",\n          \"source\": \"string\"\n        }\n      ],\n      \"SubStatus\": 661,\n      \"SubscriptionType\": \"BalanceDriven\",\n      \"TotalAmount\": 1005.672692015075,\n      \"TotalCycles\": 5127,\n      \"UntilCancelled\": true\n    }\n  ],\n  \"StoredMethods\": [\n    {\n      \"IdPmethod\": \"string\",\n      \"Method\": \"string\",\n      \"Descriptor\": \"string\",\n      \"MaskedAccount\": \"string\",\n      \"ExpDate\": \"string\",\n      \"HolderName\": \"string\",\n      \"AchSecCode\": \"string\",\n      \"AchHolderType\": \"string\",\n      \"IsValidatedACH\": false,\n      \"BIN\": \"string\",\n      \"binData\": {\n        \"binMatchedLength\": \"string\",\n        \"binCardBrand\": \"string\",\n        \"binCardType\": \"string\",\n        \"binCardCategory\": \"string\",\n        \"binCardIssuer\": \"string\",\n        \"binCardIssuerCountry\": \"string\",\n        \"binCardIssuerCountryCodeA2\": \"string\",\n        \"binCardIssuerCountryNumber\": \"string\",\n        \"binCardIsRegulated\": \"string\",\n        \"binCardUseCategory\": \"string\",\n        \"binCardIssuerCountryCodeA3\": \"string\"\n      },\n      \"ABA\": \"string\",\n      \"PostalCode\": \"string\",\n      \"MethodType\": \"string\",\n      \"WalletType\": \"string\",\n      \"LastUpdated\": \"1962-04-22T00:15:46.501Z\",\n      \"CardUpdatedOn\": \"2020-11-19T12:59:32.723Z\"\n    },\n    {\n      \"IdPmethod\": \"string\",\n      \"Method\": \"string\",\n      \"Descriptor\": \"string\",\n      \"MaskedAccount\": \"string\",\n      \"ExpDate\": \"string\",\n      \"HolderName\": \"string\",\n      \"AchSecCode\": \"string\",\n      \"AchHolderType\": \"string\",\n      \"IsValidatedACH\": true,\n      \"BIN\": \"string\",\n      \"binData\": {\n        \"binMatchedLength\": \"string\",\n        \"binCardBrand\": \"string\",\n        \"binCardType\": \"string\",\n        \"binCardCategory\": \"string\",\n        \"binCardIssuer\": \"string\",\n        \"binCardIssuerCountry\": \"string\",\n        \"binCardIssuerCountryCodeA2\": \"string\",\n        \"binCardIssuerCountryNumber\": \"string\",\n        \"binCardIsRegulated\": \"string\",\n        \"binCardUseCategory\": \"string\",\n        \"binCardIssuerCountryCodeA3\": \"string\"\n      },\n      \"ABA\": \"string\",\n      \"PostalCode\": \"string\",\n      \"MethodType\": \"string\",\n      \"WalletType\": \"string\",\n      \"LastUpdated\": \"1951-05-15T08:50:20.135Z\",\n      \"CardUpdatedOn\": \"2002-11-25T07:53:41.575Z\"\n    }\n  ],\n  \"customerSummary\": {\n    \"NumberofTransactions\": 828,\n    \"RecentTransactions\": [\n      {\n        \"splitCount\": 1732,\n        \"TransactionTime\": \"1951-12-08T00:18:09.194Z\",\n        \"AchHolderType\": \"personal\",\n        \"AchSecCode\": \"string\",\n        \"BatchAmount\": 7449.396714138208,\n        \"BatchNumber\": \"string\",\n        \"CfeeTransactions\": [\n          {\n            \"cFeeTransid\": \"string\",\n            \"feeAmount\": 901.287685496005,\n            \"operation\": \"string\",\n            \"refundId\": 7637,\n            \"responseData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"settlementStatus\": 5380,\n            \"transactionTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transStatus\": 2605\n          },\n          {\n            \"cFeeTransid\": \"string\",\n            \"feeAmount\": 1652.6313294689055,\n            \"operation\": \"string\",\n            \"refundId\": 206,\n            \"responseData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"settlementStatus\": 5340,\n            \"transactionTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transStatus\": 528\n          }\n        ],\n        \"ConnectorName\": \"string\",\n        \"Customer\": {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"CompanyName\": \"string\",\n          \"BillingAddress1\": \"string\",\n          \"BillingAddress2\": \"string\",\n          \"BillingCity\": \"string\",\n          \"BillingState\": \"string\",\n          \"BillingZip\": \"string\",\n          \"BillingCountry\": \"string\",\n          \"BillingPhone\": \"string\",\n          \"BillingEmail\": \"LGKhAC3@jxXnoQboyq.fes\",\n          \"CustomerNumber\": \"string\",\n          \"ShippingAddress1\": \"string\",\n          \"ShippingAddress2\": \"string\",\n          \"ShippingCity\": \"string\",\n          \"ShippingState\": \"string\",\n          \"ShippingZip\": \"string\",\n          \"ShippingCountry\": \"string\",\n          \"customerId\": 9669,\n          \"customerStatus\": 711,\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"DeviceId\": \"string\",\n        \"EntrypageId\": 1691,\n        \"ExternalProcessorInformation\": \"string\",\n        \"FeeAmount\": 1423.6726207466832,\n        \"GatewayTransId\": \"string\",\n        \"invoiceData\": {\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"attachments\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"company\": \"string\",\n          \"discount\": 5443.515869188697,\n          \"dutyAmount\": 6307.878544000692,\n          \"firstName\": \"string\",\n          \"freightAmount\": 8313.419327748841,\n          \"frequency\": \"endofmonth\",\n          \"invoiceAmount\": 9125.64720166332,\n          \"invoiceDate\": \"1993-12-26\",\n          \"invoiceDueDate\": \"2005-01-06\",\n          \"invoiceEndDate\": \"1947-01-02\",\n          \"invoiceNumber\": \"string\",\n          \"invoiceStatus\": 8821,\n          \"invoiceType\": 6234,\n          \"items\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"lastName\": \"string\",\n          \"notes\": \"string\",\n          \"paymentTerms\": \"NET10\",\n          \"purchaseOrder\": \"string\",\n          \"shippingAddress1\": \"string\",\n          \"shippingAddress2\": \"string\",\n          \"shippingCity\": \"string\",\n          \"shippingCountry\": \"string\",\n          \"shippingEmail\": \"sSCx-RV@ajONqYtaTkyZJKwHKKKVNwVmeXPDc.gmt\",\n          \"shippingFromZip\": \"string\",\n          \"shippingPhone\": \"string\",\n          \"shippingState\": \"string\",\n          \"shippingZip\": \"string\",\n          \"summaryCommodityCode\": \"string\",\n          \"tax\": 8522.174459178137,\n          \"termsConditions\": \"string\"\n        },\n        \"Method\": \"string\",\n        \"NetAmount\": 1731.1103271697637,\n        \"Operation\": \"string\",\n        \"OrderId\": \"string\",\n        \"OrgId\": 4325,\n        \"ParentOrgName\": \"string\",\n        \"PaymentData\": {\n          \"AccountExp\": \"string\",\n          \"accountId\": \"string\",\n          \"AccountType\": \"string\",\n          \"AccountZip\": \"string\",\n          \"binData\": {\n            \"binMatchedLength\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardBrand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIsRegulated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardUseCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"HolderName\": \"string\",\n          \"Initiator\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"orderDescription\": \"string\",\n          \"paymentDetails\": {\n            \"totalAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkImage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"splitFunding\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkUniqueId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"Sequence\": \"string\",\n          \"SignatureData\": \"string\",\n          \"StoredId\": \"string\",\n          \"StoredMethodUsageType\": \"string\"\n        },\n        \"PaymentTransId\": \"string\",\n        \"PayorId\": 9348,\n        \"PaypointDbaname\": \"string\",\n        \"PaypointEntryname\": \"string\",\n        \"PaypointId\": 3064,\n        \"PaypointLegalname\": \"string\",\n        \"PendingFeeAmount\": 8001.214529061579,\n        \"RefundId\": 5085,\n        \"ResponseData\": {\n          \"authcode\": \"string\",\n          \"avsresponse\": \"string\",\n          \"avsresponse_text\": \"string\",\n          \"cvvresponse\": \"string\",\n          \"cvvresponse_text\": \"string\",\n          \"emv_auth_response_data\": \"string\",\n          \"orderid\": \"string\",\n          \"response\": \"string\",\n          \"response_code\": \"string\",\n          \"response_code_text\": \"string\",\n          \"responsetext\": \"string\",\n          \"resultCode\": \"string\",\n          \"resultCodeText\": \"string\",\n          \"transactionid\": \"string\",\n          \"type\": \"string\"\n        },\n        \"ReturnedId\": 8270,\n        \"ScheduleReference\": 5461,\n        \"SettlementStatus\": 4640,\n        \"Source\": \"string\",\n        \"splitFundingInstructions\": [\n          {\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recipientEntryPoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recipientEntryPoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"TotalAmount\": 7264.977372329615,\n        \"TransactionEvents\": [\n          {\n            \"TransEvent\": \"string\",\n            \"EventData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EventTime\": \"1954-05-05T16:35:06.511Z\"\n          },\n          {\n            \"TransEvent\": \"string\",\n            \"EventData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EventTime\": \"1993-07-16T00:22:48.222Z\"\n          }\n        ],\n        \"TransAdditionalData\": {},\n        \"TransStatus\": 5541\n      },\n      {\n        \"splitCount\": 9524,\n        \"TransactionTime\": \"1964-11-28T19:44:01.475Z\",\n        \"AchHolderType\": \"personal\",\n        \"AchSecCode\": \"string\",\n        \"BatchAmount\": 7539.084075456071,\n        \"BatchNumber\": \"string\",\n        \"CfeeTransactions\": [\n          {\n            \"cFeeTransid\": \"string\",\n            \"feeAmount\": 2997.486626174091,\n            \"operation\": \"string\",\n            \"refundId\": 1787,\n            \"responseData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"settlementStatus\": 3549,\n            \"transactionTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transStatus\": 9871\n          },\n          {\n            \"cFeeTransid\": \"string\",\n            \"feeAmount\": 7859.939527265676,\n            \"operation\": \"string\",\n            \"refundId\": 4947,\n            \"responseData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"settlementStatus\": 9390,\n            \"transactionTime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transStatus\": 998\n          }\n        ],\n        \"ConnectorName\": \"string\",\n        \"Customer\": {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"CompanyName\": \"string\",\n          \"BillingAddress1\": \"string\",\n          \"BillingAddress2\": \"string\",\n          \"BillingCity\": \"string\",\n          \"BillingState\": \"string\",\n          \"BillingZip\": \"string\",\n          \"BillingCountry\": \"string\",\n          \"BillingPhone\": \"string\",\n          \"BillingEmail\": \"3bX1XYdpDucFnvr@hKomuKrDMlGhwAKtCydDaTjwFvjDTvW.hrk\",\n          \"CustomerNumber\": \"string\",\n          \"ShippingAddress1\": \"string\",\n          \"ShippingAddress2\": \"string\",\n          \"ShippingCity\": \"string\",\n          \"ShippingState\": \"string\",\n          \"ShippingZip\": \"string\",\n          \"ShippingCountry\": \"string\",\n          \"customerId\": 2602,\n          \"customerStatus\": 194,\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"DeviceId\": \"string\",\n        \"EntrypageId\": 9594,\n        \"ExternalProcessorInformation\": \"string\",\n        \"FeeAmount\": 9946.336835389777,\n        \"GatewayTransId\": \"string\",\n        \"invoiceData\": {\n          \"AdditionalData\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"attachments\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"company\": \"string\",\n          \"discount\": 2538.250598722872,\n          \"dutyAmount\": 8012.456547477751,\n          \"firstName\": \"string\",\n          \"freightAmount\": 157.78704010251167,\n          \"frequency\": \"onetime\",\n          \"invoiceAmount\": 3188.6570245785992,\n          \"invoiceDate\": \"1969-07-30\",\n          \"invoiceDueDate\": \"2022-08-21\",\n          \"invoiceEndDate\": \"1949-03-17\",\n          \"invoiceNumber\": \"string\",\n          \"invoiceStatus\": 3743,\n          \"invoiceType\": 749,\n          \"items\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"lastName\": \"string\",\n          \"notes\": \"string\",\n          \"paymentTerms\": \"NET10\",\n          \"purchaseOrder\": \"string\",\n          \"shippingAddress1\": \"string\",\n          \"shippingAddress2\": \"string\",\n          \"shippingCity\": \"string\",\n          \"shippingCountry\": \"string\",\n          \"shippingEmail\": \"y7aP@LuqZCIK.glac\",\n          \"shippingFromZip\": \"string\",\n          \"shippingPhone\": \"string\",\n          \"shippingState\": \"string\",\n          \"shippingZip\": \"string\",\n          \"summaryCommodityCode\": \"string\",\n          \"tax\": 603.1026275479201,\n          \"termsConditions\": \"string\"\n        },\n        \"Method\": \"string\",\n        \"NetAmount\": 1623.5095176735658,\n        \"Operation\": \"string\",\n        \"OrderId\": \"string\",\n        \"OrgId\": 4461,\n        \"ParentOrgName\": \"string\",\n        \"PaymentData\": {\n          \"AccountExp\": \"string\",\n          \"accountId\": \"string\",\n          \"AccountType\": \"string\",\n          \"AccountZip\": \"string\",\n          \"binData\": {\n            \"binMatchedLength\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardBrand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIsRegulated\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardUseCategory\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"binCardIssuerCountryCodeA3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"HolderName\": \"string\",\n          \"Initiator\": \"string\",\n          \"MaskedAccount\": \"string\",\n          \"orderDescription\": \"string\",\n          \"paymentDetails\": {\n            \"totalAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"categories\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkImage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"serviceFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"splitFunding\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"checkUniqueId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"Sequence\": \"string\",\n          \"SignatureData\": \"string\",\n          \"StoredId\": \"string\",\n          \"StoredMethodUsageType\": \"string\"\n        },\n        \"PaymentTransId\": \"string\",\n        \"PayorId\": 9728,\n        \"PaypointDbaname\": \"string\",\n        \"PaypointEntryname\": \"string\",\n        \"PaypointId\": 2148,\n        \"PaypointLegalname\": \"string\",\n        \"PendingFeeAmount\": 8326.015537940644,\n        \"RefundId\": 2972,\n        \"ResponseData\": {\n          \"authcode\": \"string\",\n          \"avsresponse\": \"string\",\n          \"avsresponse_text\": \"string\",\n          \"cvvresponse\": \"string\",\n          \"cvvresponse_text\": \"string\",\n          \"emv_auth_response_data\": \"string\",\n          \"orderid\": \"string\",\n          \"response\": \"string\",\n          \"response_code\": \"string\",\n          \"response_code_text\": \"string\",\n          \"responsetext\": \"string\",\n          \"resultCode\": \"string\",\n          \"resultCodeText\": \"string\",\n          \"transactionid\": \"string\",\n          \"type\": \"string\"\n        },\n        \"ReturnedId\": 5565,\n        \"ScheduleReference\": 6151,\n        \"SettlementStatus\": 5913,\n        \"Source\": \"string\",\n        \"splitFundingInstructions\": [\n          {\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recipientEntryPoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recipientEntryPoint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"TotalAmount\": 8680.45893436251,\n        \"TransactionEvents\": [\n          {\n            \"TransEvent\": \"string\",\n            \"EventData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EventTime\": \"1962-09-15T23:33:57.775Z\"\n          },\n          {\n            \"TransEvent\": \"string\",\n            \"EventData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"EventTime\": \"1955-01-18T00:55:57.164Z\"\n          }\n        ],\n        \"TransAdditionalData\": {},\n        \"TransStatus\": 393\n      }\n    ],\n    \"TotalAmountTransactions\": 2907.682185949041,\n    \"TotalNetAmountTransactions\": 358.74946441568744\n  },\n  \"PaypointLegalname\": \"string\",\n  \"PaypointDbaname\": \"string\",\n  \"ParentOrgName\": \"string\",\n  \"ParentOrgId\": 2943,\n  \"PaypointEntryname\": \"string\",\n  \"pageidentifier\": \"string\",\n  \"externalPaypointID\": \"string\",\n  \"customerConsent\": {\n    \"eCommunication\": {\n      \"status\": 2399,\n      \"updatedAt\": \"1960-12-03T19:59:02.103Z\"\n    },\n    \"sms\": {\n      \"status\": 8989,\n      \"updatedAt\": \"1948-05-25T13:03:12.645Z\"\n    }\n  },\n  \"customerPortal\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c35f0823-7cbc-4382-846d-2108fce1b62d",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f18f1f5-3766-491f-8e78-e51636b8a201",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93a45c62-f175-447a-92ed-7b91f177769f",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ee90a02-7096-4fcf-8460-a9417d377a72",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b572910-92c4-4628-bf3f-620f3def9426",
+          "name": "Update customer record",
+          "request": {
+            "name": "Update customer record",
+            "description": {
+              "content": "Update a customer record. Include only the fields you want to change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Customer",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customerId",
+                  "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerNumber\": \"<string>\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<email>\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"<string>\",\n  \"shippingAddress1\": \"<string>\",\n  \"shippingCity\": \"<string>\",\n  \"shippingState\": \"<string>\",\n  \"shippingZip\": \"<string>\",\n  \"shippingCountry\": \"<string>\",\n  \"balance\": \"<double>\",\n  \"timeZone\": \"<integer>\",\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "590af3ca-533f-461d-94c1-7cd7b0742d8f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseCode\": 4913,\n  \"pageIdentifier\": \"string\",\n  \"roomId\": 9916,\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe676bb-2a80-4df4-97cb-6b260513b2d2",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50cd19ea-20bf-41da-9085-14fa1ae6b07e",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3375bebe-806d-4efb-a7c2-59fa7fd9617c",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc9f5825-f754-4edb-b6a4-891108fe1f9f",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerNumber\": \"string\",\n  \"customerUsername\": \"<string>\",\n  \"customerPsw\": \"<string>\",\n  \"customerStatus\": 429,\n  \"company\": \"<string>\",\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"0b6N8o@kOJFBYPrtwhTSSgkOLnuqWJN.eiz\",\n  \"address\": \"<string>\",\n  \"address1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"shippingAddress\": \"string\",\n  \"shippingAddress1\": \"string\",\n  \"shippingCity\": \"string\",\n  \"shippingState\": \"string\",\n  \"shippingZip\": \"string\",\n  \"shippingCountry\": \"string\",\n  \"balance\": \"<double>\",\n  \"timeZone\": 6902,\n  \"additionalFields\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"identifierFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"2002-05-26T00:03:55.155Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6377451b-4d57-48e9-b0b6-ec91b72e4f07",
+          "name": "Delete customer record",
+          "request": {
+            "name": "Delete customer record",
+            "description": {
+              "content": "Delete a customer record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Customer",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customerId",
+                  "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45a3bc5d-d4a9-4ad2-9c95-81c861d3596a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseCode\": 4913,\n  \"pageIdentifier\": \"string\",\n  \"roomId\": 9916,\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60704e14-4839-41af-a9b1-4552e56732aa",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b47a108a-664d-4edb-8645-c1173cb5dc6c",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f008ca90-6844-4890-9d92-5b504df3d3f7",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5403683-6c40-481b-9e7c-4825612d0a92",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d540cff8-c1de-42d8-9bb9-53488db028dc",
+          "name": "Link Customer to Transaction",
+          "request": {
+            "name": "Link Customer to Transaction",
+            "description": {
+              "content": "Links a customer to a transaction by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Customer",
+                "link",
+                ":customerId",
+                ":transId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customerId",
+                  "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transId",
+                  "description": "(Required) ReferenceId for the transaction (PaymentId)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb632901-6489-44a1-8e31-e34c93283e24",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "link",
+                    ":customerId",
+                    ":transId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transId",
+                      "description": "(Required) ReferenceId for the transaction (PaymentId)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseCode\": 4913,\n  \"pageIdentifier\": \"string\",\n  \"roomId\": 9916,\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "884ef8ee-c52a-4ebd-bfa1-2f7366f3817f",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "link",
+                    ":customerId",
+                    ":transId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transId",
+                      "description": "(Required) ReferenceId for the transaction (PaymentId)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73efd926-03c8-434d-9171-df6196c9c241",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "link",
+                    ":customerId",
+                    ":transId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transId",
+                      "description": "(Required) ReferenceId for the transaction (PaymentId)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d7605d1-88e2-4fd1-883c-7dc8ed5aedf8",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "link",
+                    ":customerId",
+                    ":transId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transId",
+                      "description": "(Required) ReferenceId for the transaction (PaymentId)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97d14804-fee9-429d-a36f-a9687b105e4e",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    "link",
+                    ":customerId",
+                    ":transId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transId",
+                      "description": "(Required) ReferenceId for the transaction (PaymentId)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cad3c78-6cde-40fd-a2d8-c354469b89a6",
+          "name": "Request consent opt-in",
+          "request": {
+            "name": "Request consent opt-in",
+            "description": {
+              "content": "Sends the consent opt-in email to the customer email address in the customer record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Customer",
+                ":customerId",
+                "consent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customerId",
+                  "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a38459ec-ac0c-45ed-a5d7-7f1a17d32148",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseText\": \"string\",\n  \"responseCode\": 4913,\n  \"pageIdentifier\": \"string\",\n  \"roomId\": 9916,\n  \"isSuccess\": false,\n  \"responseData\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5687e03-d020-46c5-a0bb-8e30f779bd23",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed6a6cda-af5d-454f-aa2d-2543c04290a7",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be888c2b-6036-477c-942e-8e61c71bf16d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56573d3f-038c-4b5e-8831-db3a32b9687f",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Customer",
+                    ":customerId",
+                    "consent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customerId",
+                      "description": "(Required) Payabli-generated customer ID. Maps to \"Customer ID\" column in the Payabli Portal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 1743,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.payabli.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "91c8cac1-67f6-487b-96b1-16d04856be49",
+    "name": "API reference Bill Customer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

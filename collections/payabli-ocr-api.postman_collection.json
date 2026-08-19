@@ -1,0 +1,502 @@
+{
+  "item": [
+    {
+      "id": "d1a024fa-e184-4a9c-a841-aa3eca146776",
+      "name": "Ocr",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2c2ea99-5013-44f2-abda-e116d48648b2",
+          "name": "Ocr Document Form",
+          "request": {
+            "name": "Ocr Document Form",
+            "description": {
+              "content": "Use this endpoint to upload an image file for OCR processing. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Import",
+                "ocrDocumentForm",
+                ":typeResult"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "typeResult",
+                  "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ftype\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7a8aea8-900f-4b43-abc1-ba81c537f42b",
+              "name": "OCR document processing result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Import",
+                    "ocrDocumentForm",
+                    ":typeResult"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeResult",
+                      "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ftype\": \"pdf\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 5090,\n  \"responseData\": {\n    \"resultData\": {\n      \"billNumber\": \"string\",\n      \"netAmount\": 4249.030929615423,\n      \"billDate\": \"1984-03-24T02:16:21.230Z\",\n      \"dueDate\": \"1948-03-14T08:54:07.838Z\",\n      \"comments\": \"string\",\n      \"billItems\": [\n        {\n          \"itemTotalAmount\": 201.83224136498424,\n          \"itemTaxAmount\": 7048.772026613401,\n          \"itemTaxRate\": 7689.250109850671,\n          \"itemProductCode\": \"string\",\n          \"itemProductName\": \"string\",\n          \"itemDescription\": \"string\",\n          \"itemCommodityCode\": \"string\",\n          \"itemUnitOfMeasure\": \"string\",\n          \"itemCost\": 7003.577333397141,\n          \"itemQty\": 8012,\n          \"itemMode\": 6584,\n          \"itemCategories\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"itemTotalAmount\": 3797.664854363162,\n          \"itemTaxAmount\": 254.74229344073618,\n          \"itemTaxRate\": 7743.343686554529,\n          \"itemProductCode\": \"string\",\n          \"itemProductName\": \"string\",\n          \"itemDescription\": \"string\",\n          \"itemCommodityCode\": \"string\",\n          \"itemUnitOfMeasure\": \"string\",\n          \"itemCost\": 5747.282603571686,\n          \"itemQty\": 6559,\n          \"itemMode\": 5227,\n          \"itemCategories\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"mode\": 8865,\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": {\n        \"category\": \"string\",\n        \"currency_code\": \"string\",\n        \"type\": \"string\",\n        \"reference_number\": \"string\"\n      },\n      \"vendor\": {\n        \"vendorNumber\": \"string\",\n        \"name1\": \"string\",\n        \"name2\": \"string\",\n        \"ein\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\",\n        \"mcc\": \"string\",\n        \"locationCode\": \"string\",\n        \"contacts\": [\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTitle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTitle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingData\": {\n          \"id\": 5714,\n          \"bankName\": \"string\",\n          \"routingAccount\": \"string\",\n          \"accountNumber\": \"string\",\n          \"typeAccount\": \"string\",\n          \"bankAccountHolderName\": \"string\",\n          \"bankAccountHolderType\": \"string\",\n          \"bankAccountFunction\": 6500\n        },\n        \"paymentMethod\": \"string\",\n        \"vendorStatus\": 2780,\n        \"remitAddress1\": \"string\",\n        \"remitAddress2\": \"string\",\n        \"remitCity\": \"string\",\n        \"remitState\": \"string\",\n        \"remitZip\": \"string\",\n        \"remitCountry\": \"string\",\n        \"payeeName1\": \"string\",\n        \"payeeName2\": \"string\",\n        \"customerVendorAccount\": \"string\",\n        \"internalReferenceId\": 538,\n        \"customField1\": \"string\",\n        \"customField2\": \"string\",\n        \"additionalData\": {\n          \"web\": \"string\"\n        }\n      },\n      \"endDate\": \"1989-12-12T15:37:45.193Z\",\n      \"frequency\": \"string\",\n      \"terms\": \"string\",\n      \"status\": 267,\n      \"lotNumber\": \"string\",\n      \"attachments\": [\n        {\n          \"ftype\": \"string\",\n          \"filename\": \"string\",\n          \"fileDescriptor\": \"string\",\n          \"furl\": \"string\",\n          \"fContent\": \"string\"\n        },\n        {\n          \"ftype\": \"string\",\n          \"filename\": \"string\",\n          \"fileDescriptor\": \"string\",\n          \"furl\": \"string\",\n          \"fContent\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e36af4a5-7d57-4ff7-b208-53334552dfbe",
+              "name": "Bad request / invalid data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Import",
+                    "ocrDocumentForm",
+                    ":typeResult"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeResult",
+                      "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ftype\": \"pdf\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 7111,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fa568d5-3ebc-4a05-bf3f-9f6bc8cc900e",
+              "name": "Unauthorized request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Import",
+                    "ocrDocumentForm",
+                    ":typeResult"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeResult",
+                      "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ftype\": \"pdf\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 7111,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0769ee4-c3cd-4600-b19c-8968916e7bfe",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Import",
+                    "ocrDocumentForm",
+                    ":typeResult"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeResult",
+                      "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ftype\": \"pdf\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 7111,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bebf625-1ce9-4b41-9c91-d0c0403af7aa",
+              "name": "Database connection error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Import",
+                    "ocrDocumentForm",
+                    ":typeResult"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeResult",
+                      "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ftype\": \"pdf\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": false,\n  \"responseText\": \"string\",\n  \"responseCode\": 7111,\n  \"responseData\": {\n    \"explanation\": \"string\",\n    \"todoAction\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cfe70a0-ed10-433e-9650-2227147a0bc7",
+          "name": "Ocr Document Json",
+          "request": {
+            "name": "Ocr Document Json",
+            "description": {
+              "content": "Use this endpoint to submit a Base64-encoded image file for OCR processing. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Import",
+                "ocrDocumentJson",
+                ":typeResult"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "typeResult",
+                  "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ftype\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26002aaf-90a4-4272-bbf8-76b3db37a88e",
+              "name": "OCR document processing result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Import",
+                    "ocrDocumentJson",
+                    ":typeResult"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeResult",
+                      "description": "(Required) The type of object to create in Payabli. Accepted values are `bill` and `invoice`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) OAuth2 Bearer access token from the client-credentials flow. See [OAuth authentication](/developers/oauth-authentication).\n",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ftype\": \"pdf\",\n  \"filename\": \"<string>\",\n  \"furl\": \"<string>\",\n  \"fContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"string\",\n  \"responseCode\": 5090,\n  \"responseData\": {\n    \"resultData\": {\n      \"billNumber\": \"string\",\n      \"netAmount\": 4249.030929615423,\n      \"billDate\": \"1984-03-24T02:16:21.230Z\",\n      \"dueDate\": \"1948-03-14T08:54:07.838Z\",\n      \"comments\": \"string\",\n      \"billItems\": [\n        {\n          \"itemTotalAmount\": 201.83224136498424,\n          \"itemTaxAmount\": 7048.772026613401,\n          \"itemTaxRate\": 7689.250109850671,\n          \"itemProductCode\": \"string\",\n          \"itemProductName\": \"string\",\n          \"itemDescription\": \"string\",\n          \"itemCommodityCode\": \"string\",\n          \"itemUnitOfMeasure\": \"string\",\n          \"itemCost\": 7003.577333397141,\n          \"itemQty\": 8012,\n          \"itemMode\": 6584,\n          \"itemCategories\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"itemTotalAmount\": 3797.664854363162,\n          \"itemTaxAmount\": 254.74229344073618,\n          \"itemTaxRate\": 7743.343686554529,\n          \"itemProductCode\": \"string\",\n          \"itemProductName\": \"string\",\n          \"itemDescription\": \"string\",\n          \"itemCommodityCode\": \"string\",\n          \"itemUnitOfMeasure\": \"string\",\n          \"itemCost\": 5747.282603571686,\n          \"itemQty\": 6559,\n          \"itemMode\": 5227,\n          \"itemCategories\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"mode\": 8865,\n      \"accountingField1\": \"string\",\n      \"accountingField2\": \"string\",\n      \"additionalData\": {\n        \"category\": \"string\",\n        \"currency_code\": \"string\",\n        \"type\": \"string\",\n        \"reference_number\": \"string\"\n      },\n      \"vendor\": {\n        \"vendorNumber\": \"string\",\n        \"name1\": \"string\",\n        \"name2\": \"string\",\n        \"ein\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\",\n        \"mcc\": \"string\",\n        \"locationCode\": \"string\",\n        \"contacts\": [\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTitle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"contactEmail\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactPhone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTitle\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"additionalData\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"billingData\": {\n          \"id\": 5714,\n          \"bankName\": \"string\",\n          \"routingAccount\": \"string\",\n          \"accountNumber\": \"string\",\n          \"typeAccount\": \"string\",\n          \"bankAccountHolderName\": \"string\",\n          \"bankAccountHolderType\": \"string\",\n          \"bankAccountFunction\": 6500\n        },\n        \"paymentMethod\": \"string\",\n        \"vendorStatus\": 2780,\n        \"remitAddress1\": \"string\",\n        \"remitAddress2\": \"string\",\n        \"remitCity\": \"string\",\n        \"remitState\": \"string\",\n        \"remitZip\": \"string\",\n        \"remitCountry\": \"string\",\n        \"payeeName1\": \"string\",\n        \"payeeName2\": \"string\",\n        \"customerVendorAccount\": \"string\",\n        \"internalReferenceId\": 538,\n        \"customField1\": \"string\",\n        \"customField2\": \"string\",\n        \"additionalData\": {\n          \"web\": \"string\"\n        }\n      },\n      \"endDate\": \"1989-12-12T15:37:45.193Z\",\n      \"frequency\": \"string\",\n      \"terms\": \"string\",\n      \"status\": 267,\n      \"lotNumber\": \"string\",\n      \"attachments\": [\n        {\n          \"ftype\": \"string\",\n          \"filename\": \"string\",\n          \"fileDescriptor\": \"string\",\n          \"furl\": \"string\",\n          \"fContent\": \"string\"\n        },\n        {\n          \"ftype\": \"string\",\n          \"filename\": \"string\",\n          \"fileDescriptor\": \"string\",\n          \"furl\": \"string\",\n          \"fContent\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.payabli.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cff58f9e-cfd7-4bc4-bae8-9d559b116861",
+    "name": "API reference Bill Ocr API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

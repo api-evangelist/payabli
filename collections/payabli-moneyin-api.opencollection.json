@@ -1,0 +1,613 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API reference Bill moneyIn API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "moneyIn",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Make a transaction (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/MoneyIn/getpaid",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              },
+              {
+                "name": "validationCode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "achValidation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information."
+              },
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make a single transaction. This method authorizes and captures a payment in one step. This is the v2 version of the `api/MoneyIn/getpaid` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information."
+        },
+        {
+          "info": {
+            "name": "Authorize card transaction (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/MoneyIn/authorize",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authorize a card transaction. This returns an authorization code and reserves funds for the merchant. Authorized transactions aren't flagged for settlement until captured. This is the v2 version of the `api/MoneyIn/authorize` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.\n\n**Note**: Only card transactions can be authorized. This endpoint can't be used for ACH transactions."
+        },
+        {
+          "info": {
+            "name": "Capture an authorized transaction (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/MoneyIn/capture/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Capture an authorized transaction to complete the transaction and move funds from the customer to merchant account. This is the v2 version of the `api/MoneyIn/capture/{transId}` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information."
+        },
+        {
+          "info": {
+            "name": "Void a transaction (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/MoneyIn/void/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "Cancel a transaction that hasn't been settled yet. Voiding non-captured authorizations prevents future captures. This is the v2 version of the `api/MoneyIn/void/{transId}` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information."
+        },
+        {
+          "info": {
+            "name": "Refund a settled transaction (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/MoneyIn/refund/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Give a full refund for a transaction that has settled and send money back to the account holder. To perform a partial refund, see [Partially refund a transaction](/developers/api-reference/moneyinV2/partial-refund-a-settled-transaction).\n\nThis is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.\n\n<Note>\n  To refund a split-funded transaction, include "
+        },
+        {
+          "info": {
+            "name": "Partially refund a settled transaction (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/v2/MoneyIn/refund/:transId/:amount",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "path",
+                "description": "Amount to refund from original transaction, minus any service fees charged on the original transaction. If set to 0, performs a full refund."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refund a transaction that has settled and send money back to the account holder. If `amount` is set to 0, performs a full refund. When a non-zero `amount` is provided, this endpoint performs a partial refund.\n\nThis is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.\n\n<Note>\n  To refund a split-funded transaction, include split instructions in the req"
+        },
+        {
+          "info": {
+            "name": "Make a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/getpaid",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              },
+              {
+                "name": "validationCode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "achValidation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information."
+              },
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              },
+              {
+                "name": "includeDetails",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, transactionDetails object is returned in the response. See a full example of the `transactionDetails` object in the [Transaction integration guide](/developers/developer-guides/money-in-transaction-add#includedetailstrue-response)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated. New integrations should use the [Make a transaction endpoint](/developers/api-reference/moneyinV2/make-a-transaction) and manage the resulting transaction with the corresponding void or refund endpoints. Transactions created with this legacy endpoint must be managed with the legacy lifecycle endpoints — they aren't interchangeable with the current ones.\n</Warning>\n\nMake a single transaction. This method authorizes and captures a payment in one step.\n"
+        },
+        {
+          "info": {
+            "name": "Authorize card transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/authorize",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated. New integrations should use the [Authorize endpoint](/developers/api-reference/moneyinV2/authorize-a-transaction), then capture, void, or refund the resulting transaction with the corresponding endpoints. Transactions created with this legacy endpoint must be managed with the legacy lifecycle endpoints — they aren't interchangeable with the current ones.\n</Warning>\n\n\nAuthorize a card transaction. This returns an authorization code and reserves funds for t"
+        },
+        {
+          "info": {
+            "name": "Capture Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/capture/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated. Use it only to capture transactions originally authorized with the legacy [Authorize endpoint](/developers/api-reference/moneyin/authorize-a-transaction). New integrations should use the [Capture endpoint](/developers/api-reference/moneyinV2/capture-an-authorized-transaction), which only works on transactions authorized with the current [Authorize endpoint](/developers/api-reference/moneyinV2/authorize-a-transaction).\n</Warning>\n\nCapture an [authorized tr"
+        },
+        {
+          "info": {
+            "name": "Capture an authorized transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/capture/:transId/:amount",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "amount",
+                "value": "",
+                "type": "path",
+                "description": "Amount to be captured. The amount can't be greater the original total amount of the transaction. `0` captures the total amount authorized in the transaction. Partial captures aren't supported."
+              },
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated. Use [POST `/capture/{transId}`](/developers/api-reference/moneyin/capture-an-authorized-transaction) instead, which supports partial captures and service fee adjustments.\n</Warning>\n\n  Capture an [authorized\ntransaction](/developers/api-reference/moneyin/authorize-a-transaction) to complete the transaction and move funds from the customer to merchant account."
+        },
+        {
+          "info": {
+            "name": "Void a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/void/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated. Use it only to void transactions originally created with the legacy endpoints. New integrations should use the [Void endpoint](/developers/api-reference/moneyinV2/void-a-transaction), which only works on transactions created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction).\n</Warning>\n\nCancel a transaction that hasn't been settled yet. Voiding non-"
+        },
+        {
+          "info": {
+            "name": "Refund a settled transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/refund/:transId/:amount",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "amount",
+                "value": "",
+                "type": "path",
+                "description": "Amount to refund from original transaction, minus any service fees charged on the original transaction.\n\nThe amount provided can't be greater than the original total amount of the transaction, minus service fees. For example, if a transaction was \\$90 plus a \\$10 service fee, you can refund up to \\$90.\n\nAn amount equal to zero will refund the total amount authorized minus any service fee."
+              },
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated. Use it only to refund transactions originally created with the legacy endpoints. New integrations should use the [Refund endpoint](/developers/api-reference/moneyinV2/refund-a-settled-transaction), which only works on transactions created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction).\n</Warning>\n\nRefund a transaction that has settled and send mo"
+        },
+        {
+          "info": {
+            "name": "Refund a settled transaction with split instructions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/refund/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated. Use it only to refund transactions originally created with the legacy endpoints. To refund a split-funded transaction created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction), use the [Refund endpoint](/developers/api-reference/moneyinV2/refund-a-settled-transaction) with split instructions in the request body.\n</Warning>\n\nRefunds a settled transac"
+        },
+        {
+          "info": {
+            "name": "Reverse a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/reverse/:transId/:amount",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "amount",
+                "value": "",
+                "type": "path",
+                "description": "Amount to reverse from original transaction, minus any service fees charged on the original transaction.\n\nThe amount provided can't be greater than the original total amount of the transaction, minus service fees. For example, if a transaction was $90 plus a $10 service fee, you can reverse up to $90.\n\nAn amount equal to zero will refunds the total amount authorized minus any service fee."
+              },
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "<Warning>\n  This endpoint is deprecated and only works on transactions created with the legacy endpoints. There's no equivalent in the current endpoints. For transactions created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction), check the transaction's settlement status and call [Void](/developers/api-reference/moneyinV2/void-a-transaction) or [Refund](/developers/api-reference/moneyinV2/"
+        },
+        {
+          "info": {
+            "name": "Send receipt for transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/sendreceipt/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email address where the payment receipt should be sent.\n\nIf not provided, the email address on file for the user owner of the transaction is used."
+              }
+            ]
+          },
+          "docs": "Send a payment receipt for a transaction."
+        },
+        {
+          "info": {
+            "name": "Get details for a processed transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/details/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "Retrieve a processed transaction's details."
+        },
+        {
+          "info": {
+            "name": "Make an ACH credit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/makecredit",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "forceCustomerCreation",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make a temporary microdeposit in a customer account to verify the customer's ownership and access to the target account. Reverse the microdeposit with `reverseCredit`. Payabli doesn't automatically make microdeposits when you add a bank account, you must manually make the requests.\n\nThis feature must be enabled by Payabli on a per-merchant basis. Contact support for help."
+        },
+        {
+          "info": {
+            "name": "Reverse an ACH credit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/reverseCredit/:transId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transId",
+                "value": "",
+                "type": "path",
+                "description": "ReferenceId for the transaction (PaymentId)."
+              }
+            ]
+          },
+          "docs": "Reverse microdeposits that are used to verify customer account ownership and access. The `transId` value is returned in the success response for the original credit transaction made with `api/MoneyIn/makecredit`."
+        },
+        {
+          "info": {
+            "name": "Validate card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.payabli.com/api/MoneyIn/validate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "idempotencyKey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates a card number without running a transaction or authorizing a charge."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
