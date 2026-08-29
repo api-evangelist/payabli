@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill tokenStorage API
+  title: reference Token Storage API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -264,434 +264,81 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
-    AccountId:
+    ItemDescription:
       type: string
-      description: Custom identifier for payment connector.
-      title: AccountId
-    Shippingaddress:
-      type: string
-      description: The shipping address.
-      title: Shippingaddress
-    AvsResponse:
+      description: Item or product description. Max length of 250 characters.
+      title: ItemDescription
+    SplitFundingContent:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: The accountId for the account the split should be sent to.
+        amount:
+          type: number
+          format: double
+          description: Amount from the transaction to send to this recipient.
+        description:
+          type: string
+          description: A description for the split.
+        recipientEntryPoint:
+          type: string
+          description: The entrypoint the split should be sent to.
+      title: SplitFundingContent
+    AvsResponseText:
       type: string
       description: 'Text code describing the result for address validation (applies only for
 
         card transactions).
 
         '
-      title: AvsResponse
-    FreightAmount:
-      type: number
-      format: double
-      description: Freight/shipping amount.
-      title: FreightAmount
-    Maskedaccount:
+      title: AvsResponseText
+    ExternalPaypointId:
       type: string
-      description: 'Masked card or bank account used in transaction. In the case of Apple
-
-        Pay, this is a masked DPAN (device primary account number).
+      description: 'A custom identifier for the paypoint, if applicable.
 
         '
-      title: Maskedaccount
-    PayabliErrorBodyResponseData:
+      title: ExternalPaypointId
+    Dbaname:
+      type: string
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
+    Contacts:
       type: object
       properties:
-        explanation:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
           type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
+          description: Contact name.
+        contactPhone:
           type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    CvvResponseText:
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
+    Mcc:
       type: string
-      description: 'Text code describing the result for CVV validation (applies only for card
+      description: 'Business Merchant Category Code (MCC).
 
-        transactions).
+        [This resource](https://github.com/greggles/mcc-codes/blob/main/mcc_codes.csv)
+
+        lists MCC codes.
 
         '
-      title: CvvResponseText
-    BillDataPaymentTerms:
-      type: string
-      enum:
-      - PIA
-      - CIA
-      - UR
-      - NET10
-      - NET20
-      - NET30
-      - NET45
-      - NET60
-      - NET90
-      - EOM
-      - MFI
-      - 5MFI
-      - 10MFI
-      - 15MFI
-      - 20MFI
-      - 2/10NET30
-      - UF
-      - 10UF
-      - 20UF
-      - 25UF
-      - 50UF
-      description: 'Payment terms for invoice. If no terms are defined, then response data for
-
-        this field defaults to `NET30`. Mirrors the values in
-
-        [`Terms`](#schema-terms).
-
-        '
-      title: BillDataPaymentTerms
-    Email:
-      type: string
-      format: email
-      description: Email address.
-      title: Email
-    Accountexp:
-      type: string
-      description: Expiration date of card used in transaction.
-      title: Accountexp
-    BillingStateNullable:
-      type: string
-      description: Billing state. Must be a 2-letter state code for addresses in the US.
-      title: BillingStateNullable
-    MethodReferenceId:
-      type: string
-      description: 'The stored method''s identifier (sometimes referred to as ''token'') in
-
-        Payabli. When `null`, the method wasn''t created, or doesn''t exist,
-
-        depending on the operation performed.
-
-        '
-      title: MethodReferenceId
-    AddMethodResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          $ref: '#/components/schemas/AddMethodResponseResponseData'
-      required:
-      - responseText
-      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
-
-        the standard response envelope.
-
-        '
-      title: AddMethodResponse
-    SplitCount:
-      type: integer
-      description: 'Number of split funding instructions associated with the transaction.
-
-        Returns `0` when the transaction has no splits.
-
-        '
-      title: SplitCount
-    CvvResponse:
-      type: string
-      description: 'Text code describing the result for CVV validation (applies only for card
-
-        transactions).
-
-        '
-      title: CvvResponse
-    ResultCodeText:
-      type: string
-      description: 'Description of the result code. See
-
-        [Pay In unified response codes](/guides/pay-in-unified-response-codes-reference)
-
-        for more information.
-
-        '
-      title: ResultCodeText
-    BillingCountryNullable:
-      type: string
-      description: Billing address country.
-      title: BillingCountryNullable
-    Cardzip:
-      type: string
-      description: 'ZIP or postal code for the billing address of cardholder. We **strongly
-
-        recommend** that you include this field when using `card` as a method.
-
-        '
-      title: Cardzip
-    CustomerStatus:
-      type: integer
-      description: 'Customer Status. Possible values:
-
-
-        - `-99` Deleted
-
-        - `0` Inactive
-
-        - `1` Active
-
-        - `85` Locked (typically due to multiple failed login attempts)
-
-        '
-      title: CustomerStatus
-    Discount:
-      type: number
-      format: double
-      description: Discount applied to the invoice.
-      title: Discount
-    CreateAnonymous:
-      type: boolean
-      description: When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.
-      title: CreateAnonymous
-    ItemUnitofMeasure:
-      type: string
-      description: Unit of measurement. Max length of 100 characters.
-      title: ItemUnitofMeasure
+      title: Mcc
     SummaryCommodityCode:
       type: string
       description: Commodity code.
       title: SummaryCommodityCode
-    PayeeName:
-      type: string
-      description: Alternative name used to receive paper check.
-      title: PayeeName
-    TransactionTime:
-      type: string
-      format: date-time
-      description: Timestamp when transaction was submitted, in UTC.
-      title: TransactionTime
-    Entrypointfield:
-      type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
-    IdempotencyKey:
-      type: string
-      description: '_Optional but recommended._ A unique ID that you can include to prevent
-
-        duplicating objects or transactions in the case that a request is sent
-
-        more than once. This key isn''t generated in Payabli; you must generate it
-
-        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
-
-        the key if needed.
-
-        '
-      title: IdempotencyKey
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    QueryTransactionPayorData:
-      type: object
-      properties:
-        Identifiers:
-          type: array
-          items:
-            description: Any type
-          description: Array of field names to be used as identifiers.
-        FirstName:
-          type: string
-          description: Customer/Payor first name.
-        LastName:
-          type: string
-          description: Customer/Payor last name.
-        CompanyName:
-          type: string
-          description: Customer's company name.
-        BillingAddress1:
-          type: string
-          description: Customer's billing address.
-        BillingAddress2:
-          type: string
-          description: Additional line for Customer's billing address.
-        BillingCity:
-          type: string
-          description: Customer's billing city.
-        BillingState:
-          type: string
-          description: Customer's billing state. Must be 2-letter state code for address in US.
-        BillingZip:
-          $ref: '#/components/schemas/BillingZip'
-          description: Customer's billing ZIP code.
-        BillingCountry:
-          type: string
-          description: Customer's billing country.
-        BillingPhone:
-          type: string
-          description: Customer's phone number.
-        BillingEmail:
-          $ref: '#/components/schemas/Email'
-          description: Customer's email address.
-        CustomerNumber:
-          $ref: '#/components/schemas/CustomerNumberNullable'
-        ShippingAddress1:
-          $ref: '#/components/schemas/Shippingaddress'
-        ShippingAddress2:
-          $ref: '#/components/schemas/Shippingaddressadditional'
-        ShippingCity:
-          $ref: '#/components/schemas/Shippingcity'
-        ShippingState:
-          $ref: '#/components/schemas/Shippingstate'
-        ShippingZip:
-          $ref: '#/components/schemas/Shippingzip'
-        ShippingCountry:
-          $ref: '#/components/schemas/Shippingcountry'
-        customerId:
-          $ref: '#/components/schemas/CustomerId'
-        customerStatus:
-          $ref: '#/components/schemas/CustomerStatus'
-        AdditionalData:
-          $ref: '#/components/schemas/AdditionalDataMap'
-      title: QueryTransactionPayorData
-    DutyAmount:
-      type: number
-      format: double
-      description: Duty amount.
-      title: DutyAmount
-    Vendorid:
-      type: integer
-      description: Payabli identifier for vendor record.
-      title: Vendorid
-    Tax:
-      type: number
-      format: double
-      description: Tax rate in percent applied to the invoice.
-      title: Tax
-    FileContent:
-      type: object
-      properties:
-        fContent:
-          type: string
-          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
-
-            upload size is 30 MB.
-
-            '
-        filename:
-          type: string
-          description: The name of the attached file.
-        ftype:
-          $ref: '#/components/schemas/FileContentFtype'
-        furl:
-          type: string
-          description: Optional URL provided to show or download the file remotely.
-      description: Contains details about a file. Max upload size is 30 MB.
-      title: FileContent
-    AchSecCode:
-      type: string
-      description: "Standard Entry Class (SEC) code is a three letter code that describes\nhow an ACH payment was authorized. Supported values are:\n\n- **PPD** (Prearranged Payment and Deposit) — Used for credits or debits\n  where an accountholder authorizes a company to initiate either a single\n  or recurring transaction to their personal bank account. Common examples\n  include direct deposit of payroll, mortgage payments, or utility bills.\n  This is the default value for subscription payments.\n- **WEB** (Internet-Initiated/Mobile Entry) — Used for debit entries when\n  authorization is obtained from an accountholder via the internet or a\n  wireless network. Common examples are online bill payments, ecommerce\n  purchases, and mobile app payments where the consumer enters their\n  banking information online.\n- **TEL** (Telephone-Initiated Entry) — Used for one-time debit entries\n  where authorization is obtained from a consumer via telephone. Common\n  examples are phone-based purchases or bill payments where the consumer\n  provides their banking information over the phone.\n- **CCD** (Corporate Credit or Debit) — Used for fund transfers between\n  business accounts. This code is specifically for business-to-business\n  transactions. Common examples include vendor payments and other\n  business-to-business payments.\n- **BOC** (Back Office Conversion) — Used to convert paper checks received\n  in-person at a point-of-sale or staffed payment location into electronic\n  ACH debits. Required for Remote Deposit Capture (RDC) transactions. Only\n  supports consumer checks; business, government, and mailed checks\n  aren't eligible.\n"
-      title: AchSecCode
-    ItemDescription:
-      type: string
-      description: Item or product description. Max length of 250 characters.
-      title: ItemDescription
-    CreatedAt:
-      type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
-    BinData:
-      type: object
-      properties:
-        binMatchedLength:
-          type: string
-          description: 'The number of characters from the beginning of the card number that
-
-            were matched against a Bank Identification Number (BIN) or the Card
-
-            Range table.'
-        binCardBrand:
-          type: string
-          description: 'The card brand. For example, Visa, Mastercard, American Express,
-
-            Discover.'
-        binCardType:
-          type: string
-          description: 'The type of card: `Credit` or `Debit`. Case can vary between
-
-            processors, so compare this value case-insensitively.'
-        binCardCategory:
-          type: string
-          description: 'The category of the card, which indicates the card product. For example: Standard, Gold, Platinum, etc. The binCardCategory for prepaid cards is marked `PREPAID`.'
-        binCardIssuer:
-          type: string
-          description: The name of the financial institution that issued the card.
-        binCardIssuerCountry:
-          type: string
-          description: The issuing financial institution's country name.
-        binCardIssuerCountryCodeA2:
-          type: string
-          description: The issuing financial institution's two-character ISO country code. See [this resource](https://www.iso.org/obp/ui/#search) for a list of codes.
-        binCardIssuerCountryNumber:
-          type: string
-          description: The issuing financial institution's ISO standard numeric country code. See [this resource](https://www.iso.org/obp/ui/#search) for a list of codes.
-        binCardIsRegulated:
-          type: string
-          description: Indicates whether the card is regulated.
-        binCardUseCategory:
-          type: string
-          description: The use category classification for the card.
-        binCardIssuerCountryCodeA3:
-          type: string
-          description: 'The issuing financial institution''s three-character ISO country code.
-
-            See [this resource](https://www.iso.org/obp/ui/#search) for a list of
-
-            codes.'
-      description: 'Object containing information related to the card. This object is `null`
-
-        unless the payment method is card. If the payment method is Apple Pay, the
-
-        binData will be related to the DPAN (device primary account number), not
-
-        the card connected to Apple Pay.'
-      title: BinData
-    Holdername:
-      type: string
-      description: The cardholder name.
-      title: Holdername
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    Temporary:
-      type: boolean
-      description: Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.
-      title: Temporary
-    AchHolderType:
-      type: string
-      enum:
-      - personal
-      - business
-      default: personal
-      description: 'The bank''s accountholder type: personal or business.
-
-        '
-      title: AchHolderType
-    Cardnumber:
-      type: string
-      description: 'The card number. Required when method is `card` and a `storedMethodId`
-
-        isn''t included.
-
-        '
-      title: Cardnumber
-    Shippingstate:
-      type: string
-      description: Shipping state or province.
-      title: Shippingstate
-    Initiator:
-      type: string
-      description: 'The transaction''s initiator. Indicates who initiated the transaction.
-
-        '
-      title: Initiator
     Remitcountry:
       type: string
       description: 'Remittance address country. Used for mailing paper checks. Must be `US`
@@ -700,504 +347,66 @@ components:
 
         '
       title: Remitcountry
+    Sequence:
+      type: string
+      description: "The order of the transaction for cardholder-initiated transaction (CIT)\nand merchant-initiated transaction (MIT) purposes. This field is\nautomatically detected and populated by Payabli.\n\nAvailable values:\n\n- `first`: The first use of the payment method. This is almost always\n  a cardholder-initiated transaction.\n- `subsequent`: For merchant-initiated transactions after the first use\n  of the payment method.\n\nSee\n[Understanding CIT and MIT Indicators](/guides/pay-in-transactions-cit-mit-overview)\nfor more information.\n"
+      title: Sequence
+    QueryTransactionEventsEventData:
+      oneOf:
+      - type: object
+        additionalProperties:
+          description: Any type
+      - type: string
+      description: 'Any data associated to the event received from processor. Contents vary
+
+        by event type.
+
+        '
+      title: QueryTransactionEventsEventData
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    ResultCode:
+      type: integer
+      description: 'Result code for the operation. Value `1` indicates a successful
+
+        operation, values `2` and `3` indicate errors. A value of `10` indicates
+
+        that an operation has been initiated and is pending.
+
+        '
+      title: ResultCode
+    PaymentCategories:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Price/cost per unit of item or category.
+        description:
+          type: string
+          description: Description of item or category
+        label:
+          type: string
+          description: Name of item or category.
+        qty:
+          type: integer
+          default: 1
+          description: Quantity of item or category
+      required:
+      - amount
+      - label
+      title: PaymentCategories
     FeeAmount:
       type: number
       format: double
       description: Service fee or sub-charge applied.
       title: FeeAmount
-    CustomerId:
-      type: integer
-      format: int64
-      description: The Payabli-generated unique ID for the customer.
-      title: CustomerId
-    InternalReferenceId:
-      type: integer
-      format: int64
-      description: An internal reference ID.
-      title: InternalReferenceId
-    ExternalProcessorInformation:
-      type: string
-      description: Information from the external processor about the transaction.
-      title: ExternalProcessorInformation
-    BillingCityNullable:
-      type: string
-      description: Billing city.
-      title: BillingCityNullable
-    CustomerNumberNullable:
-      type: string
-      description: 'User-provided unique identifier for the customer. This is typically the
-
-        customer ID from your own system.
-
-        '
-      title: CustomerNumberNullable
-    GetMethodResponseResponseData:
-      type: object
-      properties:
-        aba:
-          type: string
-          description: Bank routing number
-        achHolderType:
-          $ref: '#/components/schemas/AchHolderType'
-          default: personal
-        achSecCode:
-          $ref: '#/components/schemas/AchSecCode'
-        bin:
-          type: string
-          description: The bank identification number (BIN)
-        binData:
-          $ref: '#/components/schemas/BinData'
-        cardUpdatedOn:
-          type: string
-          format: date-time
-          description: Timestamp for when card was last updated
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetMethodResponseResponseDataCustomersItem'
-        descriptor:
-          $ref: '#/components/schemas/Descriptor'
-        expDate:
-          type: string
-          description: Expiration date for card in stored method in format MM/YY
-        holderName:
-          $ref: '#/components/schemas/Holdername'
-          description: Account holder name in stored method
-        idPmethod:
-          type: string
-          description: The stored payment method's identifier in Payabli
-        isValidatedACH:
-          type: boolean
-          description: Whether the ACH account has been validated
-        lastUpdated:
-          type: string
-          format: date-time
-          description: Timestamp for last update of stored method, in UTC
-        maskedAccount:
-          $ref: '#/components/schemas/Maskedaccount'
-        method:
-          type: string
-          description: 'The saved method''s type: `card` or `ach`.'
-        methodType:
-          type: string
-          description: The payment method's token type
-        postalCode:
-          type: string
-          description: The payment method postal code
-        vendors:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetMethodResponseResponseDataVendorsItem'
-      title: GetMethodResponseResponseData
-    BillItem:
-      type: object
-      properties:
-        itemCategories:
-          type: array
-          items:
-            type: string
-          description: Array of tags classifying item or product.
-        itemCommodityCode:
-          $ref: '#/components/schemas/ItemCommodityCode'
-        itemCost:
-          type: number
-          format: double
-          description: Item or product price per unit.
-        itemDescription:
-          $ref: '#/components/schemas/ItemDescription'
-        itemMode:
-          type: integer
-          description: 'Internal class of item or product: value `0` is only for invoices,
-
-            `1` for bills, and `2` is common for both. Required on invoice line
-
-            items — invoice creation fails with `Invalid item data` if it''s omitted.
-
-            '
-        itemProductCode:
-          $ref: '#/components/schemas/ItemProductCode'
-        itemProductName:
-          $ref: '#/components/schemas/ItemProductName'
-        itemQty:
-          type: integer
-          description: Quantity of item or product.
-        itemTaxAmount:
-          type: number
-          format: double
-          description: Tax amount applied to item or product.
-        itemTaxRate:
-          type: number
-          format: double
-          description: Tax rate applied to item or product.
-        itemTotalAmount:
-          type: number
-          format: double
-          description: 'Per-line total for this item (unit cost times quantity). Distinct from
-
-            the invoice''s overall total, `invoiceAmount`. Required on invoice line items.
-
-            '
-        itemUnitOfMeasure:
-          $ref: '#/components/schemas/ItemUnitofMeasure'
-      title: BillItem
-    BillingAddressAddtlNullable:
-      type: string
-      description: Additional line for the billing address.
-      title: BillingAddressAddtlNullable
-    ItemProductCode:
-      type: string
-      description: Item or product code. Max length of 250 characters.
-      title: ItemProductCode
-    TransactionQueryRecords:
-      type: object
-      properties:
-        AchHolderType:
-          $ref: '#/components/schemas/AchHolderType'
-          default: personal
-        AchSecCode:
-          $ref: '#/components/schemas/AchSecCode'
-        BatchAmount:
-          type: number
-          format: double
-          description: Batch amount.
-        BatchNumber:
-          $ref: '#/components/schemas/BatchNumber'
-        CfeeTransactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryCFeeTransaction'
-          description: Service Fee or sub-charge transaction associated to the main transaction.
-        ConnectorName:
-          type: string
-          description: Connector used for transaction.
-        Customer:
-          $ref: '#/components/schemas/QueryTransactionPayorData'
-        DeviceId:
-          $ref: '#/components/schemas/Device'
-        EntrypageId:
-          $ref: '#/components/schemas/EntrypageId'
-        ExternalProcessorInformation:
-          $ref: '#/components/schemas/ExternalProcessorInformation'
-        FeeAmount:
-          $ref: '#/components/schemas/FeeAmount'
-        GatewayTransId:
-          type: string
-          description: Internal identifier used for processing.
-        invoiceData:
-          $ref: '#/components/schemas/BillData'
-        Method:
-          type: string
-          description: 'Payment method used: card, ach, or wallet.'
-        NetAmount:
-          $ref: '#/components/schemas/Netamountnullable'
-          description: Net amount paid.
-        Operation:
-          $ref: '#/components/schemas/Operation'
-        OrderId:
-          $ref: '#/components/schemas/OrderId'
-        OrgId:
-          $ref: '#/components/schemas/Orgid'
-          description: ID of immediate parent organization.
-        ParentOrgName:
-          $ref: '#/components/schemas/OrgParentName'
-        PaymentData:
-          $ref: '#/components/schemas/QueryPaymentData'
-        PaymentTransId:
-          type: string
-          description: Unique Transaction ID.
-        PayorId:
-          $ref: '#/components/schemas/PayorId'
-        PaypointDbaname:
-          $ref: '#/components/schemas/Dbaname'
-          description: Paypoint's DBA name.
-        PaypointEntryname:
-          $ref: '#/components/schemas/Entrypointfield'
-          description: Paypoint's entryname.
-        PaypointId:
-          type: integer
-          format: int64
-          description: InternalId for paypoint.
-        PaypointLegalname:
-          $ref: '#/components/schemas/Legalname'
-          description: Paypoint's legal name.
-        PendingFeeAmount:
-          $ref: '#/components/schemas/PendingFeeAmount'
-        RefundId:
-          $ref: '#/components/schemas/RefundId'
-        ResponseData:
-          $ref: '#/components/schemas/QueryResponseData'
-        ReturnedId:
-          $ref: '#/components/schemas/ReturnedId'
-        ScheduleReference:
-          type: integer
-          format: int64
-          description: Reference to the subscription that originated the transaction.
-        SettlementStatus:
-          type: integer
-          description: Settlement status for transaction. See [the docs](/developers/references/money-in-statuses#payment-funding-status) for a full reference.
-        Source:
-          $ref: '#/components/schemas/Source'
-        splitFundingInstructions:
-          $ref: '#/components/schemas/SplitFunding'
-        splitCount:
-          $ref: '#/components/schemas/SplitCount'
-        TotalAmount:
-          type: number
-          format: double
-          description: Transaction total amount (including service fee or sub-charge)
-        TransactionEvents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryTransactionEvents'
-          description: Events associated with this transaction.
-        TransactionTime:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Transaction date and time, in UTC.
-        TransAdditionalData:
-          description: Any type
-        TransStatus:
-          type: integer
-          description: Status of transaction. See [the docs](/developers/references/money-in-statuses#money-in-transaction-status) for a full reference.
-      required:
-      - splitCount
-      - TransactionTime
-      title: TransactionQueryRecords
-    Subdomain:
-      type: string
-      description: 'Refers to the payment page identifier. If provided, then the
-
-        transaction is linked to the payment page.
-
-        '
-      title: Subdomain
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
-    Achaccounttype:
-      type: string
-      enum:
-      - Checking
-      - Savings
-      description: 'Bank account type: Checking or Savings.'
-      title: Achaccounttype
-    BillData:
-      type: object
-      properties:
-        AdditionalData:
-          $ref: '#/components/schemas/AdditionalDataMap'
-        attachments:
-          $ref: '#/components/schemas/Attachments'
-        company:
-          type: string
-          description: Company name of the recipient of the invoice.
-        discount:
-          $ref: '#/components/schemas/Discount'
-        dutyAmount:
-          $ref: '#/components/schemas/DutyAmount'
-        firstName:
-          type: string
-          description: First name of the recipient of the invoice.
-        freightAmount:
-          $ref: '#/components/schemas/FreightAmount'
-        frequency:
-          $ref: '#/components/schemas/Frequency'
-          description: Frequency of scheduled invoice.
-        invoiceAmount:
-          $ref: '#/components/schemas/InvoiceAmount'
-        invoiceDate:
-          type: string
-          format: date
-          description: 'Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
-        invoiceDueDate:
-          type: string
-          format: date
-          description: 'Invoice due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
-        invoiceEndDate:
-          type: string
-          format: date
-          description: 'Indicate the date to finish a scheduled invoice cycle (`invoiceType`` = 1) in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
-        invoiceNumber:
-          $ref: '#/components/schemas/InvoiceNumber'
-          description: Invoice number. Identifies the invoice under a paypoint.
-        invoiceStatus:
-          $ref: '#/components/schemas/Invoicestatus'
-        invoiceType:
-          $ref: '#/components/schemas/InvoiceType'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillItem'
-          description: Array of line items included in the invoice.
-        lastName:
-          type: string
-          description: Last name of the recipient of the invoice.
-        notes:
-          type: string
-          description: Notes included in the invoice.
-        paymentTerms:
-          $ref: '#/components/schemas/BillDataPaymentTerms'
-        purchaseOrder:
-          $ref: '#/components/schemas/PurchaseOrder'
-        shippingAddress1:
-          $ref: '#/components/schemas/Shippingaddress'
-        shippingAddress2:
-          $ref: '#/components/schemas/Shippingaddressadditional'
-        shippingCity:
-          $ref: '#/components/schemas/Shippingcity'
-        shippingCountry:
-          $ref: '#/components/schemas/Shippingcountry'
-        shippingEmail:
-          $ref: '#/components/schemas/Email'
-          description: Shipping recipient's contact email address.
-        shippingFromZip:
-          $ref: '#/components/schemas/ShippingFromZip'
-        shippingPhone:
-          type: string
-          description: Recipient phone number.
-        shippingState:
-          $ref: '#/components/schemas/Shippingstate'
-        shippingZip:
-          $ref: '#/components/schemas/Shippingzip'
-        summaryCommodityCode:
-          $ref: '#/components/schemas/SummaryCommodityCode'
-        tax:
-          $ref: '#/components/schemas/Tax'
-        termsConditions:
-          $ref: '#/components/schemas/TermsConditions'
-      title: BillData
-    AddMethodResponseResponseData:
-      type: object
-      properties:
-        referenceId:
-          $ref: '#/components/schemas/MethodReferenceId'
-          description: Stored method identifier in Payabli platform. This ID is used to manage the stored method.
-        resultCode:
-          $ref: '#/components/schemas/ResultCode'
-        resultText:
-          $ref: '#/components/schemas/Resulttext'
-        customerId:
-          $ref: '#/components/schemas/CustomerId'
-          description: 'Internal unique ID of customer owner of the stored method.
-
-
-            Returns `0` if the method wasn''t assigned to an existing customer or no customer was created.'
-        methodReferenceId:
-          $ref: '#/components/schemas/MethodReferenceId'
-      title: AddMethodResponseResponseData
-    Vendorstatus:
-      type: integer
-      description: 'Vendor''s status. Allowed values:
-
-
-        - `0` Inactive
-
-        - `1` Active
-
-        - `-99` Deleted
-
-        '
-      title: Vendorstatus
-    PaypointId:
-      type: integer
-      format: int64
-      description: The paypoint's ID. Note that this is different than the entryname.
-      title: PaypointId
-    MethodQueryRecords:
-      type: object
-      properties:
-        IdPmethod:
-          type: string
-          description: Method internal ID
-        Method:
-          type: string
-          description: 'Type of payment vehicle: **ach** or **card**'
-        Descriptor:
-          $ref: '#/components/schemas/Descriptor'
-        MaskedAccount:
-          $ref: '#/components/schemas/Maskedaccount'
-        ExpDate:
-          type: string
-          description: Expiration date associated to the method (only for card) in format MMYY.
-        HolderName:
-          $ref: '#/components/schemas/Holdername'
-        AchSecCode:
-          type:
-          - string
-          - 'null'
-          description: Standard Entry Class (SEC) code for the ACH transaction.
-        AchHolderType:
-          type:
-          - string
-          - 'null'
-          description: 'Bank accountholder type: `personal` or `business`.'
-        IsValidatedACH:
-          type:
-          - boolean
-          - 'null'
-          description: Whether the ACH account has been validated.
-        BIN:
-          type: string
-          description: The bank identification number (BIN). Null when method is ACH.
-        binData:
-          $ref: '#/components/schemas/BinData'
-        ABA:
-          type:
-          - string
-          - 'null'
-          description: Bank routing number.
-        PostalCode:
-          type:
-          - string
-          - 'null'
-          description: The payment method postal code.
-        MethodType:
-          type:
-          - string
-          - 'null'
-          description: The payment method's token type.
-        WalletType:
-          type:
-          - string
-          - 'null'
-          description: Digital wallet type if applicable.
-        LastUpdated:
-          $ref: '#/components/schemas/LastModified'
-          description: Date of last update
-        CardUpdatedOn:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date and time the card was last updated.
-      title: MethodQueryRecords
     SubscriptionQueryRecords:
       type: object
       properties:
@@ -1328,204 +537,59 @@ components:
       - StartDate
       - StoredMethod
       title: SubscriptionQueryRecords
-    LocationCode:
-      type: string
-      description: A location code used to identify the vendor's location.
-      title: LocationCode
-    AdditionalDataString:
-      type: string
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalDataString
-    TokenizeCard:
+    AddMethodResponseResponseData:
       type: object
       properties:
-        method:
-          type: string
-          description: The type of payment method to tokenize. For cards, this is always `card`.
-        cardcvv:
-          $ref: '#/components/schemas/Cardcvv'
-        cardexp:
-          $ref: '#/components/schemas/Cardexp'
-        cardHolder:
-          $ref: '#/components/schemas/Cardholder'
-        cardnumber:
-          $ref: '#/components/schemas/Cardnumber'
-        cardzip:
-          $ref: '#/components/schemas/Cardzip'
-        device:
-          $ref: '#/components/schemas/Device'
-      required:
-      - method
-      - cardexp
-      - cardHolder
-      - cardnumber
-      title: TokenizeCard
-    CustomerSummaryRecord:
-      type: object
-      properties:
-        NumberofTransactions:
-          type: integer
-          description: Number total of transactions or payments
-        RecentTransactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionQueryRecords'
-          description: List of more recent 5 transactions belonging to the customer
-        TotalAmountTransactions:
-          type: number
-          format: double
-          description: Total amount in transactions
-        TotalNetAmountTransactions:
-          type: number
-          format: double
-          description: Total net amount in transactions
-      title: CustomerSummaryRecord
-    GeneralEvents:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Event description.
-        eventTime:
-          type: string
-          format: date-time
-          description: Event timestamp, in UTC.
-        extraData:
-          type:
-          - string
-          - 'null'
-          description: Extra data.
-        refData:
-          type: string
-          description: Reference data.
-        source:
-          $ref: '#/components/schemas/Source'
-          description: The event source.
-      title: GeneralEvents
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
+        referenceId:
+          $ref: '#/components/schemas/MethodReferenceId'
+          description: Stored method identifier in Payabli platform. This ID is used to manage the stored method.
+        resultCode:
+          $ref: '#/components/schemas/ResultCode'
+        resultText:
+          $ref: '#/components/schemas/Resulttext'
+        customerId:
+          $ref: '#/components/schemas/CustomerId'
+          description: 'Internal unique ID of customer owner of the stored method.
 
-        indicates success. A `false` value indicates failure.
+
+            Returns `0` if the method wasn''t assigned to an existing customer or no customer was created.'
+        methodReferenceId:
+          $ref: '#/components/schemas/MethodReferenceId'
+      title: AddMethodResponseResponseData
+    Storedmethodid:
+      type: string
+      description: 'Payabli identifier of a tokenized payment method. If this field is
+
+        used in a request, the `method` field is overridden and the payment
+
+        is made using the payment token.
 
         '
-      title: IsSuccess
-    BillingAddressNullable:
-      type: string
-      description: Billing address.
-      title: BillingAddressNullable
-    Dbaname:
-      type: string
-      description: 'The alternate or common name that this business is doing business under,
+      title: Storedmethodid
+    PayorId:
+      type: integer
+      format: int64
+      description: 'Unique ID for the customer linked to the transaction. This is the same
 
-        usually referred to as a DBA name.
+        value as the `customerId` used when creating or referencing a customer.
 
         '
-      title: Dbaname
-    Cardexp:
+      title: PayorId
+    IdempotencyKey:
       type: string
-      description: Card expiration date in format MMYY or MM/YY. Required for card transactions.
-      title: Cardexp
-    Shippingcountry:
-      type: string
-      description: Shipping address country.
-      title: Shippingcountry
-    BatchNumber:
-      type: string
-      description: 'A unique identifier for the batch. This is generated by Payabli when the
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
 
-        batch is created, and follows this format:
+        duplicating objects or transactions in the case that a request is sent
 
-        `paypointId + "_" + serviceName + "_" + batchDate:yyyyMMdd + "_" + Guid.NewGuid()`.
+        more than once. This key isn''t generated in Payabli; you must generate it
 
-        Payabli generates the GUID to ensure that the batch number is unique.
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
 
-
-        For example, in this batch number:
-
-        `123_card_20251008_3f2504e0-4f89-11d3-9a0c-0305e82c3301`, the paypointID
-
-        is `123`, the service is `card`, the batch date is `2025-10-08`, and
-
-        the GUID is `3f2504e0-4f89-11d3-9a0c-0305e82c3301`.
+        the key if needed.
 
         '
-      title: BatchNumber
-    Device:
-      type: string
-      description: Identifier of registered cloud device used in the transaction.
-      title: Device
-    VendorNumber:
-      type: string
-      description: 'Custom number identifying the vendor. Must be unique in paypoint. Can''t be
-
-        blank.
-
-        '
-      title: VendorNumber
-    PendingFeeAmount:
-      type: number
-      format: double
-      description: 'The difference between the configured pass-through fee and the fee amount
-
-        sent in the request. When transferring funds, Payabli uses this field to
-
-        deduct the fee difference and transfer the correct amount to the
-
-        merchant.
-
-
-        When a paypoint is set up to absorb fees, and the pass-through fee sent
-
-        with the request is less than the configured amount, the difference must
-
-        be covered by the merchant. See
-
-        [Fee Configuration](/guides/pay-in-fees-passthrough-overview#fee-configuration)
-
-        to learn more about pass-through fee settings.
-
-        '
-      title: PendingFeeAmount
-    PayabliApiResponsePaymethodDelete:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          $ref: '#/components/schemas/PayabliApiResponsePaymethodDeleteResponseData'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      description: Response body for payment method deletion.
-      title: PayabliApiResponsePaymethodDelete
-    GetMethodResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          $ref: '#/components/schemas/GetMethodResponseResponseData'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: GetMethodResponse
-    Remitzip:
-      type: string
-      description: 'Remittance address ZIP or postal code. Used for mailing paper checks.
-
-        Required if any remittance address field is provided. For US addresses,
-
-        use five digits or ZIP+4 format.
-
-        '
-      title: Remitzip
-    Signaturedata:
-      type: string
-      title: Signaturedata
-    GetMethodResponseResponseDataCustomersItem:
+      title: IdempotencyKey
+    PayorDataRequest:
       type: object
       properties:
         additionalData:
@@ -1574,158 +638,66 @@ components:
           $ref: '#/components/schemas/Shippingstate'
         shippingZip:
           $ref: '#/components/schemas/Shippingzip'
-        balance:
-          type: number
-          format: double
-          description: Customer's current balance
-        created:
-          type: string
-          format: date-time
-          description: Creation timestamp
-        customerConsent:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Customer consent information
-        customerStatus:
-          type: integer
-          description: Status code for the customer
-        customerSummary:
-          $ref: '#/components/schemas/CustomerSummaryRecord'
-        customerUsername:
-          type: string
-          description: Username of the customer
-        externalPaypointID:
-          $ref: '#/components/schemas/ExternalPaypointId'
-        lastUpdated:
-          type: string
-          format: date-time
-          description: Last update timestamp
-        mfa:
-          type: boolean
-          description: Multi-factor authentication status
-        mfaMode:
-          type: integer
-          description: MFA mode setting
-        pageindentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        parentOrgId:
-          type: integer
-          description: Parent organization ID
-        parentOrgName:
-          $ref: '#/components/schemas/OrgParentName'
-        paypointDbaname:
-          $ref: '#/components/schemas/Dbaname'
-        paypointEntryname:
-          type: string
-          description: The paypoint entryname the customer is associated with
-        paypointLegalname:
-          $ref: '#/components/schemas/Legalname'
-        snData:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Social network data
-        snIdentifier:
-          type: string
-          description: Social network identifier
-        snProvider:
-          type: string
-          description: Social network provider
-        storedMethods:
-          type: array
-          items:
-            $ref: '#/components/schemas/MethodQueryRecords'
-          description: List of payment methods associated to the customer
-        subscriptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionQueryRecords'
-          description: List of subscriptions associated to the customer
-        timeZone:
-          type: integer
-          description: Customer's timezone
       description: Customer information. May be required, depending on the paypoint's settings. Required for subscriptions.
-      title: GetMethodResponseResponseDataCustomersItem
-    Sequence:
+      title: PayorDataRequest
+    FileContentFtype:
       type: string
-      description: "The order of the transaction for cardholder-initiated transaction (CIT)\nand merchant-initiated transaction (MIT) purposes. This field is\nautomatically detected and populated by Payabli.\n\nAvailable values:\n\n- `first`: The first use of the payment method. This is almost always\n  a cardholder-initiated transaction.\n- `subsequent`: For merchant-initiated transactions after the first use\n  of the payment method.\n\nSee\n[Understanding CIT and MIT Indicators](/guides/pay-in-transactions-cit-mit-overview)\nfor more information.\n"
-      title: Sequence
-    Cardcvv:
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    Remitaddress2:
       type: string
-      description: 'Card Verification Value (CVV) associated with the card number. We
+      description: 'Remittance address additional line, such as a suite or unit number. Used
 
-        **strongly recommend** that you include this field when using `card`
-
-        as a method.
+        for mailing paper checks. Always optional.
 
         '
-      title: Cardcvv
-    Descriptor:
-      type: string
-      description: 'When the method is a card, this field displays card brand. When the
-
-        method is ACH, this field displays the account type for ACH (checking or
-
-        savings).
-
-        '
-      title: Descriptor
-    StoredMethodUsageType:
-      type: string
-      description: "**Strongly recommended.** The usage type for the stored method, used\nfor merchant-initiated transactions (MIT). If you don't specify a\nvalue, Payabli defaults to `unscheduled`.\n\nAvailable values:\n\n- `unscheduled`: One-time or otherwise not pre-scheduled.\n- `subscription`: Subscription payments. For example, monthly rental\n  fees or ongoing service subscriptions.\n- `recurring`: Recurring payments per a set plan. For example,\n  splitting an HOA special assessment over 6 monthly payments.\n\nSee\n[Understanding CIT and MIT Indicators](/guides/pay-in-transactions-cit-mit-overview)\nfor more information.\n"
-      title: StoredMethodUsageType
-    ForceCustomerCreation:
-      type: boolean
-      description: 'When `true`, the request creates a new customer record, regardless of
-
-        whether customer identifiers match an existing customer. Defaults to
-
-        `false`.
-
-        '
-      title: ForceCustomerCreation
-    SplitFundingContent:
-      type: object
-      properties:
-        accountId:
-          type: string
-          description: The accountId for the account the split should be sent to.
-        amount:
-          type: number
-          format: double
-          description: Amount from the transaction to send to this recipient.
-        description:
-          type: string
-          description: A description for the split.
-        recipientEntryPoint:
-          type: string
-          description: The entrypoint the split should be sent to.
-      title: SplitFundingContent
+      title: Remitaddress2
     AdditionalDataMap:
       type: object
       additionalProperties:
         type: string
       description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
       title: AdditionalDataMap
-    Resulttext:
+    BillingCountryNullable:
       type: string
-      description: 'Text describing the result. If `ResultCode` = 1, will return `Approved`
+      description: Billing address country.
+      title: BillingCountryNullable
+    Cardzip:
+      type: string
+      description: 'ZIP or postal code for the billing address of cardholder. We **strongly
 
-        or a general success message. If `ResultCode` = 2 or 3, will contain
-
-        the cause of the error or decline.
+        recommend** that you include this field when using `card` as a method.
 
         '
-      title: Resulttext
-    AdditionalData:
-      type: object
-      additionalProperties:
-        type: object
-        additionalProperties:
-          description: Any type
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalData
+      title: Cardzip
+    Cardholder:
+      type: string
+      description: Cardholder name.
+      title: Cardholder
+    SplitFunding:
+      type: array
+      items:
+        $ref: '#/components/schemas/SplitFundingContent'
+      description: Split funding instructions for the transaction. The total amount of the splits must match the total amount of the transaction.
+      title: SplitFunding
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    Operation:
+      type: string
+      description: The transaction's operation.
+      title: Operation
     PayabliApiResponsePaymethodDeleteResponseData:
       type: object
       properties:
@@ -1737,42 +709,531 @@ components:
         resultText:
           $ref: '#/components/schemas/Resulttext'
       title: PayabliApiResponsePaymethodDeleteResponseData
-    Storedmethodid:
+    InvoiceAmount:
+      type: number
+      format: double
+      description: The invoice amount.
+      title: InvoiceAmount
+    BillDataPaymentTerms:
       type: string
-      description: 'Payabli identifier of a tokenized payment method. If this field is
+      enum:
+      - PIA
+      - CIA
+      - UR
+      - NET10
+      - NET20
+      - NET30
+      - NET45
+      - NET60
+      - NET90
+      - EOM
+      - MFI
+      - 5MFI
+      - 10MFI
+      - 15MFI
+      - 20MFI
+      - 2/10NET30
+      - UF
+      - 10UF
+      - 20UF
+      - 25UF
+      - 50UF
+      description: 'Payment terms for invoice. If no terms are defined, then response data for
 
-        used in a request, the `method` field is overridden and the payment
+        this field defaults to `NET30`. Mirrors the values in
 
-        is made using the payment token.
+        [`Terms`](#schema-terms).
 
         '
-      title: Storedmethodid
-    Remitaddress2:
+      title: BillDataPaymentTerms
+    CreateAnonymous:
+      type: boolean
+      description: When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.
+      title: CreateAnonymous
+    ResultCodeText:
       type: string
-      description: 'Remittance address additional line, such as a suite or unit number. Used
+      description: 'Description of the result code. See
 
-        for mailing paper checks. Always optional.
+        [Pay In unified response codes](/guides/pay-in-unified-response-codes-reference)
+
+        for more information.
 
         '
-      title: Remitaddress2
+      title: ResultCodeText
+    BillingCityNullable:
+      type: string
+      description: Billing city.
+      title: BillingCityNullable
+    BatchNumber:
+      type: string
+      description: 'A unique identifier for the batch. This is generated by Payabli when the
+
+        batch is created, and follows this format:
+
+        `paypointId + "_" + serviceName + "_" + batchDate:yyyyMMdd + "_" + Guid.NewGuid()`.
+
+        Payabli generates the GUID to ensure that the batch number is unique.
+
+
+        For example, in this batch number:
+
+        `123_card_20251008_3f2504e0-4f89-11d3-9a0c-0305e82c3301`, the paypointID
+
+        is `123`, the service is `card`, the batch date is `2025-10-08`, and
+
+        the GUID is `3f2504e0-4f89-11d3-9a0c-0305e82c3301`.
+
+        '
+      title: BatchNumber
+    GeneralEvents:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Event description.
+        eventTime:
+          type: string
+          format: date-time
+          description: Event timestamp, in UTC.
+        extraData:
+          type:
+          - string
+          - 'null'
+          description: Extra data.
+        refData:
+          type: string
+          description: Reference data.
+        source:
+          $ref: '#/components/schemas/Source'
+          description: The event source.
+      title: GeneralEvents
+    BillItem:
+      type: object
+      properties:
+        itemCategories:
+          type: array
+          items:
+            type: string
+          description: Array of tags classifying item or product.
+        itemCommodityCode:
+          $ref: '#/components/schemas/ItemCommodityCode'
+        itemCost:
+          type: number
+          format: double
+          description: Item or product price per unit.
+        itemDescription:
+          $ref: '#/components/schemas/ItemDescription'
+        itemMode:
+          type: integer
+          description: 'Internal class of item or product: value `0` is only for invoices,
+
+            `1` for bills, and `2` is common for both. Required on invoice line
+
+            items — invoice creation fails with `Invalid item data` if it''s omitted.
+
+            '
+        itemProductCode:
+          $ref: '#/components/schemas/ItemProductCode'
+        itemProductName:
+          $ref: '#/components/schemas/ItemProductName'
+        itemQty:
+          type: integer
+          description: Quantity of item or product.
+        itemTaxAmount:
+          type: number
+          format: double
+          description: Tax amount applied to item or product.
+        itemTaxRate:
+          type: number
+          format: double
+          description: Tax rate applied to item or product.
+        itemTotalAmount:
+          type: number
+          format: double
+          description: 'Per-line total for this item (unit cost times quantity). Distinct from
+
+            the invoice''s overall total, `invoiceAmount`. Required on invoice line items.
+
+            '
+        itemUnitOfMeasure:
+          $ref: '#/components/schemas/ItemUnitofMeasure'
+      title: BillItem
+    Orderdescription:
+      type: string
+      description: Text description of the transaction.
+      title: Orderdescription
     Accounttype:
       type: string
       description: Bank account type or card brand.
       title: Accounttype
-    SubscriptionType:
+    AchHolderType:
       type: string
       enum:
-      - Regular
-      - BalanceDriven
-      description: 'Subscription type or category. Can''t be changed after the subscription is created; if sent to the update endpoint, it''s ignored.
-
-
-        - `Regular`: A standard recurring subscription that charges a fixed amount each cycle.
-
-        - `BalanceDriven`: A subscription that charges the payor''s outstanding balance at run time instead of a fixed amount. Each scheduled run reads the live balance and charges that amount; a zero balance is skipped, not charged. `BalanceDriven` subscriptions only accept the `firstofmonth`, `fifteenthofmonth`, and `endofmonth` frequencies, ignore any `startDate` and `endDate` you supply (start date is calculated from `frequency`; the schedule runs until cancelled), and don''t store a static `totalAmount` on the schedule.
+      - personal
+      - business
+      default: personal
+      description: 'The bank''s accountholder type: personal or business.
 
         '
-      title: SubscriptionType
+      title: AchHolderType
+    AdditionalData:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          description: Any type
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalData
+    ItemProductName:
+      type: string
+      description: Item or product name. Max length of 250 characters.
+      title: ItemProductName
+    Achrouting:
+      type: string
+      description: ABA/routing number of Bank account.
+      title: Achrouting
+    VendorResponseStoredMethod:
+      type: object
+      properties:
+        IdPmethod:
+          type:
+          - string
+          - 'null'
+        Method:
+          type:
+          - string
+          - 'null'
+        Descriptor:
+          type:
+          - string
+          - 'null'
+        MaskedAccount:
+          type:
+          - string
+          - 'null'
+        ExpDate:
+          type:
+          - string
+          - 'null'
+        HolderName:
+          type:
+          - string
+          - 'null'
+        AchSecCode:
+          type:
+          - string
+          - 'null'
+        AchHolderType:
+          type:
+          - string
+          - 'null'
+        IsValidatedACH:
+          type:
+          - boolean
+          - 'null'
+        BIN:
+          type:
+          - string
+          - 'null'
+        binData:
+          oneOf:
+          - $ref: '#/components/schemas/BinData'
+          - type: 'null'
+        ABA:
+          type:
+          - string
+          - 'null'
+        PostalCode:
+          type:
+          - string
+          - 'null'
+        MethodType:
+          type:
+          - string
+          - 'null'
+        WalletType:
+          type:
+          - string
+          - 'null'
+          description: Digital wallet type if applicable.
+        LastUpdated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        CardUpdatedOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date and time the card was last updated.
+      required:
+      - IdPmethod
+      - Method
+      - Descriptor
+      - MaskedAccount
+      - ExpDate
+      - HolderName
+      - AchSecCode
+      - AchHolderType
+      - IsValidatedACH
+      - BIN
+      - binData
+      - ABA
+      - PostalCode
+      - MethodType
+      - WalletType
+      - LastUpdated
+      - CardUpdatedOn
+      description: Stored payment method information
+      title: VendorResponseStoredMethod
+    OrderId:
+      type: string
+      description: Custom identifier for the transaction.
+      title: OrderId
+    TermsConditions:
+      type: string
+      description: Custom terms and conditions included in the invoice.
+      title: TermsConditions
+    ExternalProcessorInformation:
+      type: string
+      description: Information from the external processor about the transaction.
+      title: ExternalProcessorInformation
+    Attachments:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileContent'
+      description: 'Array of `fileContent` objects with attached documents. Max upload size is
+
+        30 MB.
+
+        '
+      title: Attachments
+    PendingFeeAmount:
+      type: number
+      format: double
+      description: 'The difference between the configured pass-through fee and the fee amount
+
+        sent in the request. When transferring funds, Payabli uses this field to
+
+        deduct the fee difference and transfer the correct amount to the
+
+        merchant.
+
+
+        When a paypoint is set up to absorb fees, and the pass-through fee sent
+
+        with the request is less than the configured amount, the difference must
+
+        be covered by the merchant. See
+
+        [Fee Configuration](/guides/pay-in-fees-passthrough-overview#fee-configuration)
+
+        to learn more about pass-through fee settings.
+
+        '
+      title: PendingFeeAmount
+    AchValidation:
+      type: boolean
+      description: 'When `true`, enables real-time validation of ACH account and routing
+
+        numbers. This is an add-on feature, contact Payabli for more information.
+
+        '
+      title: AchValidation
+    MethodQueryRecords:
+      type: object
+      properties:
+        IdPmethod:
+          type: string
+          description: Method internal ID
+        Method:
+          type: string
+          description: 'Type of payment vehicle: **ach** or **card**'
+        Descriptor:
+          $ref: '#/components/schemas/Descriptor'
+        MaskedAccount:
+          $ref: '#/components/schemas/Maskedaccount'
+        ExpDate:
+          type: string
+          description: Expiration date associated to the method (only for card) in format MMYY.
+        HolderName:
+          $ref: '#/components/schemas/Holdername'
+        AchSecCode:
+          type:
+          - string
+          - 'null'
+          description: Standard Entry Class (SEC) code for the ACH transaction.
+        AchHolderType:
+          type:
+          - string
+          - 'null'
+          description: 'Bank accountholder type: `personal` or `business`.'
+        IsValidatedACH:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the ACH account has been validated.
+        BIN:
+          type: string
+          description: The bank identification number (BIN). Null when method is ACH.
+        binData:
+          $ref: '#/components/schemas/BinData'
+        ABA:
+          type:
+          - string
+          - 'null'
+          description: Bank routing number.
+        PostalCode:
+          type:
+          - string
+          - 'null'
+          description: The payment method postal code.
+        MethodType:
+          type:
+          - string
+          - 'null'
+          description: The payment method's token type.
+        WalletType:
+          type:
+          - string
+          - 'null'
+          description: Digital wallet type if applicable.
+        LastUpdated:
+          $ref: '#/components/schemas/LastModified'
+          description: Date of last update
+        CardUpdatedOn:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date and time the card was last updated.
+      title: MethodQueryRecords
+    PhoneNumber:
+      type: string
+      description: Phone number.
+      title: PhoneNumber
+    CustomerNumberNullable:
+      type: string
+      description: 'User-provided unique identifier for the customer. This is typically the
+
+        customer ID from your own system.
+
+        '
+      title: CustomerNumberNullable
+    ResultCodev2:
+      type: string
+      description: 'Unified result code for the transaction. See
+
+        [Pay In unified response codes](/guides/pay-in-unified-response-codes-reference)
+
+        for more information.
+
+        '
+      title: ResultCodev2
+    MethodReferenceId:
+      type: string
+      description: 'The stored method''s identifier (sometimes referred to as ''token'') in
+
+        Payabli. When `null`, the method wasn''t created, or doesn''t exist,
+
+        depending on the operation performed.
+
+        '
+      title: MethodReferenceId
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    AccountId:
+      type: string
+      description: Custom identifier for payment connector.
+      title: AccountId
+    Invoicestatus:
+      type: integer
+      description: Invoice status code.
+      title: Invoicestatus
+    Shippingcountry:
+      type: string
+      description: Shipping address country.
+      title: Shippingcountry
+    InvoiceType:
+      type: integer
+      description: 'Invoice type. Value `0` is for single/one-time invoices, `1` for
+
+        scheduled invoices.
+
+        '
+      title: InvoiceType
+    BinData:
+      type: object
+      properties:
+        binMatchedLength:
+          type: string
+          description: 'The number of characters from the beginning of the card number that
+
+            were matched against a Bank Identification Number (BIN) or the Card
+
+            Range table.'
+        binCardBrand:
+          type: string
+          description: 'The card brand. For example, Visa, Mastercard, American Express,
+
+            Discover.'
+        binCardType:
+          type: string
+          description: 'The type of card: `Credit` or `Debit`. Case can vary between
+
+            processors, so compare this value case-insensitively.'
+        binCardCategory:
+          type: string
+          description: 'The category of the card, which indicates the card product. For example: Standard, Gold, Platinum, etc. The binCardCategory for prepaid cards is marked `PREPAID`.'
+        binCardIssuer:
+          type: string
+          description: The name of the financial institution that issued the card.
+        binCardIssuerCountry:
+          type: string
+          description: The issuing financial institution's country name.
+        binCardIssuerCountryCodeA2:
+          type: string
+          description: The issuing financial institution's two-character ISO country code. See [this resource](https://www.iso.org/obp/ui/#search) for a list of codes.
+        binCardIssuerCountryNumber:
+          type: string
+          description: The issuing financial institution's ISO standard numeric country code. See [this resource](https://www.iso.org/obp/ui/#search) for a list of codes.
+        binCardIsRegulated:
+          type: string
+          description: Indicates whether the card is regulated.
+        binCardUseCategory:
+          type: string
+          description: The use category classification for the card.
+        binCardIssuerCountryCodeA3:
+          type: string
+          description: 'The issuing financial institution''s three-character ISO country code.
+
+            See [this resource](https://www.iso.org/obp/ui/#search) for a list of
+
+            codes.'
+      description: 'Object containing information related to the card. This object is `null`
+
+        unless the payment method is card. If the payment method is Apple Pay, the
+
+        binData will be related to the DPAN (device primary account number), not
+
+        the card connected to Apple Pay.'
+      title: BinData
+    CustomerId:
+      type: integer
+      format: int64
+      description: The Payabli-generated unique ID for the customer.
+      title: CustomerId
+    Source:
+      type: string
+      description: Custom identifier to indicate the transaction or request source.
+      title: Source
+    ShippingFromZip:
+      type: string
+      description: Sender shipping ZIP code.
+      title: ShippingFromZip
     GetMethodResponseResponseDataVendorsItem:
       type: object
       properties:
@@ -1918,6 +1379,197 @@ components:
           type: string
           description: Vendor's ZIP code
       title: GetMethodResponseResponseDataVendorsItem
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    BillingStateNullable:
+      type: string
+      description: Billing state. Must be a 2-letter state code for addresses in the US.
+      title: BillingStateNullable
+    Resulttext:
+      type: string
+      description: 'Text describing the result. If `ResultCode` = 1, will return `Approved`
+
+        or a general success message. If `ResultCode` = 2 or 3, will contain
+
+        the cause of the error or decline.
+
+        '
+      title: Resulttext
+    Discount:
+      type: number
+      format: double
+      description: Discount applied to the invoice.
+      title: Discount
+    Shippingaddress:
+      type: string
+      description: The shipping address.
+      title: Shippingaddress
+    Legalname:
+      type: string
+      description: Business legal name.
+      title: Legalname
+    PaymentDetail:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCategories'
+          description: 'Array of payment categories/line items describing the amount to be paid.
+
+            **Note**: These categories are for information only and aren''t validated against the total amount provided.'
+        checkImage:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Object containing image of paper check.
+        checkNumber:
+          type: string
+          description: A check number to be used in the ach transaction. **Required** for payment method = 'check'.
+        currency:
+          type: string
+          description: The currency for the transaction, `USD` or `CAD`. If your paypoint is configured for CAD, you must send the `CAD` value in this field, otherwise it defaults to USD, which will cause the transaction to fail.
+        serviceFee:
+          type: number
+          format: double
+          description: Service fee to be deducted from the total amount. This amount must be a number, percentages aren't accepted. If you are using a percentage-based fee schedule, you must calculate the value manually.
+        splitFunding:
+          $ref: '#/components/schemas/SplitFunding'
+          description: Split funding instructions for the transaction. See [Split a Transaction](/developers/developer-guides/money-in-split-funding) for more.
+        checkUniqueId:
+          type: string
+          description: Unique identifier for a processed check image. Required for RDC (Remote Deposit Capture) transactions where `achCode` is `BOC`. Use the `id` value from the [check processing](/developers/api-reference/moneyin/check-capture) response.
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount to be charged. If a service fee is sent, then this amount should include the service fee."
+      required:
+      - totalAmount
+      description: Details about the payment.
+      title: PaymentDetail
+    BillingZip:
+      type: string
+      description: Billing address ZIP code.
+      title: BillingZip
+    BillingAddressNullable:
+      type: string
+      description: Billing address.
+      title: BillingAddressNullable
+    ItemProductCode:
+      type: string
+      description: Item or product code. Max length of 250 characters.
+      title: ItemProductCode
+    CustomerStatus:
+      type: integer
+      description: 'Customer Status. Possible values:
+
+
+        - `-99` Deleted
+
+        - `0` Inactive
+
+        - `1` Active
+
+        - `85` Locked (typically due to multiple failed login attempts)
+
+        '
+      title: CustomerStatus
+    AvsResponse:
+      type: string
+      description: 'Text code describing the result for address validation (applies only for
+
+        card transactions).
+
+        '
+      title: AvsResponse
+    Vendorstatus:
+      type: integer
+      description: 'Vendor''s status. Allowed values:
+
+
+        - `0` Inactive
+
+        - `1` Active
+
+        - `-99` Deleted
+
+        '
+      title: Vendorstatus
+    Remitzip:
+      type: string
+      description: 'Remittance address ZIP or postal code. Used for mailing paper checks.
+
+        Required if any remittance address field is provided. For US addresses,
+
+        use five digits or ZIP+4 format.
+
+        '
+      title: Remitzip
+    Shippingstate:
+      type: string
+      description: Shipping state or province.
+      title: Shippingstate
+    QueryCFeeTransaction:
+      type: object
+      properties:
+        cFeeTransid:
+          type: string
+        feeAmount:
+          type: number
+          format: double
+        operation:
+          type: string
+        refundId:
+          type: integer
+          format: int64
+        responseData:
+          type: object
+          additionalProperties:
+            description: Any type
+        settlementStatus:
+          type: integer
+        transactionTime:
+          $ref: '#/components/schemas/TransactionTime'
+        transStatus:
+          type: integer
+      title: QueryCFeeTransaction
+    ReturnedId:
+      type: integer
+      format: int64
+      description: Identifier of return/chargeback transaction linked to this payment.
+      title: ReturnedId
+    QueryTransactionEvents:
+      type: object
+      properties:
+        TransEvent:
+          type: string
+          description: Event descriptor. See [TransEvent Reference](/guides/pay-in-transevents-reference) for more details.
+        EventData:
+          $ref: '#/components/schemas/QueryTransactionEventsEventData'
+          description: Any data associated to the event received from processor. Contents vary by event type.
+        EventTime:
+          type: string
+          format: date-time
+          description: Date and time of event.
+      title: QueryTransactionEvents
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    EmvAuthResponseData:
+      type: string
+      description: EMV authorization response data, applicable for card transactions.
+      title: EmvAuthResponseData
     RequestTokenStoragePaymentMethod:
       oneOf:
       - $ref: '#/components/schemas/TokenizeCard'
@@ -1925,6 +1577,96 @@ components:
       - $ref: '#/components/schemas/ConvertToken'
       description: Information about the payment method for the transaction.
       title: RequestTokenStoragePaymentMethod
+    PayabliApiResponsePaymethodDelete:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/PayabliApiResponsePaymethodDeleteResponseData'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      description: Response body for payment method deletion.
+      title: PayabliApiResponsePaymethodDelete
+    PurchaseOrder:
+      type: string
+      description: Purchase order number.
+      title: PurchaseOrder
+    Tax:
+      type: number
+      format: double
+      description: Tax rate in percent applied to the invoice.
+      title: Tax
+    CvvResponseText:
+      type: string
+      description: 'Text code describing the result for CVV validation (applies only for card
+
+        transactions).
+
+        '
+      title: CvvResponseText
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
+    LocationCode:
+      type: string
+      description: A location code used to identify the vendor's location.
+      title: LocationCode
+    Accountzip:
+      type: string
+      description: ZIP code for card used in transaction.
+      title: Accountzip
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    Subdomain:
+      type: string
+      description: 'Refers to the payment page identifier. If provided, then the
+
+        transaction is linked to the payment page.
+
+        '
+      title: Subdomain
+    VendorNumber:
+      type: string
+      description: 'Custom number identifying the vendor. Must be unique in paypoint. Can''t be
+
+        blank.
+
+        '
+      title: VendorNumber
+    PayeeName:
+      type: string
+      description: Alternative name used to receive paper check.
+      title: PayeeName
     RequestTokenStorage:
       type: object
       properties:
@@ -1956,87 +1698,39 @@ components:
         subdomain:
           $ref: '#/components/schemas/Subdomain'
       title: RequestTokenStorage
-    Shippingcity:
+    BillingAddressAddtlNullable:
       type: string
-      description: Shipping city.
-      title: Shippingcity
-    EmvAuthResponseData:
-      type: string
-      description: EMV authorization response data, applicable for card transactions.
-      title: EmvAuthResponseData
-    FileContentFtype:
-      type: string
-      enum:
-      - pdf
-      - doc
-      - docx
-      - jpg
-      - jpeg
-      - png
-      - gif
-      - txt
-      description: The MIME type of the file (if content is provided).
-      title: FileContentFtype
-    Frequency:
-      type: string
-      enum:
-      - onetime
-      - weekly
-      - every2weeks
-      - every6months
-      - monthly
-      - every3months
-      - annually
-      - firstofmonth
-      - fifteenthofmonth
-      - endofmonth
-      description: 'Frequency for operation. The `firstofmonth`, `fifteenthofmonth`, and `endofmonth` values are only valid on subscriptions — they aren''t accepted by other endpoints (such as invoice scheduling) that use this enum.
-
-        '
-      title: Frequency
-    Mcc:
-      type: string
-      description: 'Business Merchant Category Code (MCC).
-
-        [This resource](https://github.com/greggles/mcc-codes/blob/main/mcc_codes.csv)
-
-        lists MCC codes.
-
-        '
-      title: Mcc
-    QueryPaymentData:
+      description: Additional line for the billing address.
+      title: BillingAddressAddtlNullable
+    FreightAmount:
+      type: number
+      format: double
+      description: Freight/shipping amount.
+      title: FreightAmount
+    TokenizeCard:
       type: object
       properties:
-        AccountExp:
-          $ref: '#/components/schemas/Accountexp'
-        accountId:
-          $ref: '#/components/schemas/AccountId'
-        AccountType:
-          $ref: '#/components/schemas/Accounttype'
-        AccountZip:
-          $ref: '#/components/schemas/Accountzip'
-        binData:
-          $ref: '#/components/schemas/BinData'
-        HolderName:
-          $ref: '#/components/schemas/Holdername'
-        Initiator:
-          $ref: '#/components/schemas/Initiator'
-        MaskedAccount:
-          $ref: '#/components/schemas/Maskedaccount'
-        orderDescription:
-          $ref: '#/components/schemas/Orderdescription'
-        paymentDetails:
-          $ref: '#/components/schemas/PaymentDetail'
-        Sequence:
-          $ref: '#/components/schemas/Sequence'
-        SignatureData:
-          $ref: '#/components/schemas/Signaturedata'
-        StoredId:
-          $ref: '#/components/schemas/Storedmethodid'
-          description: Identifier of stored payment method used in transaction.
-        StoredMethodUsageType:
-          $ref: '#/components/schemas/StoredMethodUsageType'
-      title: QueryPaymentData
+        method:
+          type: string
+          description: The type of payment method to tokenize. For cards, this is always `card`.
+        cardcvv:
+          $ref: '#/components/schemas/Cardcvv'
+        cardexp:
+          $ref: '#/components/schemas/Cardexp'
+        cardHolder:
+          $ref: '#/components/schemas/Cardholder'
+        cardnumber:
+          $ref: '#/components/schemas/Cardnumber'
+        cardzip:
+          $ref: '#/components/schemas/Cardzip'
+        device:
+          $ref: '#/components/schemas/Device'
+      required:
+      - method
+      - cardexp
+      - cardHolder
+      - cardnumber
+      title: TokenizeCard
     ConvertToken:
       type: object
       properties:
@@ -2051,75 +1745,46 @@ components:
       - tokenId
       description: Object containing the information needed to convert a temporary token to a permanent token.
       title: ConvertToken
-    InvoiceNumber:
-      type: string
-      description: Invoice number. Identifies the invoice under a paypoint.
-      title: InvoiceNumber
-    Shippingaddressadditional:
-      type: string
-      description: Additional line for shipping address.
-      title: Shippingaddressadditional
-    LastModified:
-      type: string
-      format: date-time
-      description: Timestamp of when record was last updated, in UTC.
-      title: LastModified
-    ShippingFromZip:
-      type: string
-      description: Sender shipping ZIP code.
-      title: ShippingFromZip
-    Invoicestatus:
-      type: integer
-      description: Invoice status code.
-      title: Invoicestatus
-    ExternalPaypointId:
-      type: string
-      description: 'A custom identifier for the paypoint, if applicable.
-
-        '
-      title: ExternalPaypointId
-    ResultCode:
-      type: integer
-      description: 'Result code for the operation. Value `1` indicates a successful
-
-        operation, values `2` and `3` indicate errors. A value of `10` indicates
-
-        that an operation has been initiated and is pending.
-
-        '
-      title: ResultCode
-    Remitcity:
-      type: string
-      description: 'Remittance address city. Used for mailing paper checks. Required if any
-
-        remittance address field is provided.
-
-        '
-      title: Remitcity
-    QueryCFeeTransaction:
+    GetMethodResponse:
       type: object
       properties:
-        cFeeTransid:
-          type: string
-        feeAmount:
-          type: number
-          format: double
-        operation:
-          type: string
-        refundId:
-          type: integer
-          format: int64
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
         responseData:
-          type: object
-          additionalProperties:
-            description: Any type
-        settlementStatus:
-          type: integer
-        transactionTime:
-          $ref: '#/components/schemas/TransactionTime'
-        transStatus:
-          type: integer
-      title: QueryCFeeTransaction
+          $ref: '#/components/schemas/GetMethodResponseResponseData'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: GetMethodResponse
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    Signaturedata:
+      type: string
+      title: Signaturedata
+    Device:
+      type: string
+      description: Identifier of registered cloud device used in the transaction.
+      title: Device
+    AddMethodResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/AddMethodResponseResponseData'
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: AddMethodResponse
     Remitaddress1:
       type: string
       description: 'Remittance street address. Used for mailing paper checks. Required if any
@@ -2128,47 +1793,344 @@ components:
 
         '
       title: Remitaddress1
-    Achaccount:
+    Authcode:
       type: string
-      description: Bank account number.
-      title: Achaccount
-    Cardholder:
+      description: Authorization code for the transaction.
+      title: Authcode
+    GetMethodResponseResponseData:
+      type: object
+      properties:
+        aba:
+          type: string
+          description: Bank routing number
+        achHolderType:
+          $ref: '#/components/schemas/AchHolderType'
+          default: personal
+        achSecCode:
+          $ref: '#/components/schemas/AchSecCode'
+        bin:
+          type: string
+          description: The bank identification number (BIN)
+        binData:
+          $ref: '#/components/schemas/BinData'
+        cardUpdatedOn:
+          type: string
+          format: date-time
+          description: Timestamp for when card was last updated
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetMethodResponseResponseDataCustomersItem'
+        descriptor:
+          $ref: '#/components/schemas/Descriptor'
+        expDate:
+          type: string
+          description: Expiration date for card in stored method in format MM/YY
+        holderName:
+          $ref: '#/components/schemas/Holdername'
+          description: Account holder name in stored method
+        idPmethod:
+          type: string
+          description: The stored payment method's identifier in Payabli
+        isValidatedACH:
+          type: boolean
+          description: Whether the ACH account has been validated
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Timestamp for last update of stored method, in UTC
+        maskedAccount:
+          $ref: '#/components/schemas/Maskedaccount'
+        method:
+          type: string
+          description: 'The saved method''s type: `card` or `ach`.'
+        methodType:
+          type: string
+          description: The payment method's token type
+        postalCode:
+          type: string
+          description: The payment method postal code
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetMethodResponseResponseDataVendorsItem'
+      title: GetMethodResponseResponseData
+    CvvResponse:
       type: string
-      description: Cardholder name.
-      title: Cardholder
+      description: 'Text code describing the result for CVV validation (applies only for card
+
+        transactions).
+
+        '
+      title: CvvResponse
+    SplitCount:
+      type: integer
+      description: 'Number of split funding instructions associated with the transaction.
+
+        Returns `0` when the transaction has no splits.
+
+        '
+      title: SplitCount
+    Descriptor:
+      type: string
+      description: 'When the method is a card, this field displays card brand. When the
+
+        method is ACH, this field displays the account type for ACH (checking or
+
+        savings).
+
+        '
+      title: Descriptor
+    VendorDataRequest:
+      type: object
+      properties:
+        vendorId:
+          type: integer
+          format: int64
+          description: The unique numeric ID assigned to the vendor in Payabli. Either `vendorId` or `vendorNumber` is required.
+        vendorNumber:
+          type: string
+          description: Custom vendor number assigned by the business. Either `vendorId` or `vendorNumber` is required.
+      description: Object describing the vendor owner of payment method. Required when saving an ACH payment method on behalf of a vendor (for Pay Out transactions).
+      title: VendorDataRequest
+    Accountexp:
+      type: string
+      description: Expiration date of card used in transaction.
+      title: Accountexp
     ItemCommodityCode:
       type: string
       description: Item or product commodity code. Max length of 250 characters.
       title: ItemCommodityCode
-    Orgid:
-      type: integer
-      format: int64
-      description: Organization ID. Unique identifier assigned to an org by Payabli.
-      title: Orgid
-    RefundId:
-      type: integer
-      format: int64
-      description: Identifier of refund transaction linked to this payment.
-      title: RefundId
-    ItemProductName:
+    Achaccounttype:
       type: string
-      description: Item or product name. Max length of 250 characters.
-      title: ItemProductName
-    Attachments:
-      type: array
-      items:
-        $ref: '#/components/schemas/FileContent'
-      description: 'Array of `fileContent` objects with attached documents. Max upload size is
-
-        30 MB.
+      enum:
+      - Checking
+      - Savings
+      description: 'Bank account type: Checking or Savings.'
+      title: Achaccounttype
+    InternalReferenceId:
+      type: integer
+      format: int64
+      description: An internal reference ID.
+      title: InternalReferenceId
+    Shippingaddressadditional:
+      type: string
+      description: Additional line for shipping address.
+      title: Shippingaddressadditional
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    Temporary:
+      type: boolean
+      description: Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.
+      title: Temporary
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
 
         '
-      title: Attachments
-    Accountzip:
+      title: ResponseText
+    Shippingzip:
       type: string
-      description: ZIP code for card used in transaction.
-      title: Accountzip
-    PayorDataRequest:
+      description: 'Shipping ZIP code. For Pay In functions, this field supports 5-digit
+
+        and 9-digit ZIP codes and alphanumeric Canadian postal codes. For
+
+        example: `37615-1234` or `37615`.
+
+        '
+      title: Shippingzip
+    QueryTransactionPayorData:
+      type: object
+      properties:
+        Identifiers:
+          type: array
+          items:
+            description: Any type
+          description: Array of field names to be used as identifiers.
+        FirstName:
+          type: string
+          description: Customer/Payor first name.
+        LastName:
+          type: string
+          description: Customer/Payor last name.
+        CompanyName:
+          type: string
+          description: Customer's company name.
+        BillingAddress1:
+          type: string
+          description: Customer's billing address.
+        BillingAddress2:
+          type: string
+          description: Additional line for Customer's billing address.
+        BillingCity:
+          type: string
+          description: Customer's billing city.
+        BillingState:
+          type: string
+          description: Customer's billing state. Must be 2-letter state code for address in US.
+        BillingZip:
+          $ref: '#/components/schemas/BillingZip'
+          description: Customer's billing ZIP code.
+        BillingCountry:
+          type: string
+          description: Customer's billing country.
+        BillingPhone:
+          type: string
+          description: Customer's phone number.
+        BillingEmail:
+          $ref: '#/components/schemas/Email'
+          description: Customer's email address.
+        CustomerNumber:
+          $ref: '#/components/schemas/CustomerNumberNullable'
+        ShippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        ShippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        ShippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        ShippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        ShippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+        ShippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        customerId:
+          $ref: '#/components/schemas/CustomerId'
+        customerStatus:
+          $ref: '#/components/schemas/CustomerStatus'
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+      title: QueryTransactionPayorData
+    Remitstate:
+      type: string
+      description: 'Remittance address state or province. Used for mailing paper checks.
+
+        Required if any remittance address field is provided. Must be a valid
+
+        US state or Canadian province abbreviation.
+
+        '
+      title: Remitstate
+    TransactionQueryRecords:
+      type: object
+      properties:
+        AchHolderType:
+          $ref: '#/components/schemas/AchHolderType'
+          default: personal
+        AchSecCode:
+          $ref: '#/components/schemas/AchSecCode'
+        BatchAmount:
+          type: number
+          format: double
+          description: Batch amount.
+        BatchNumber:
+          $ref: '#/components/schemas/BatchNumber'
+        CfeeTransactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryCFeeTransaction'
+          description: Service Fee or sub-charge transaction associated to the main transaction.
+        ConnectorName:
+          type: string
+          description: Connector used for transaction.
+        Customer:
+          $ref: '#/components/schemas/QueryTransactionPayorData'
+        DeviceId:
+          $ref: '#/components/schemas/Device'
+        EntrypageId:
+          $ref: '#/components/schemas/EntrypageId'
+        ExternalProcessorInformation:
+          $ref: '#/components/schemas/ExternalProcessorInformation'
+        FeeAmount:
+          $ref: '#/components/schemas/FeeAmount'
+        GatewayTransId:
+          type: string
+          description: Internal identifier used for processing.
+        invoiceData:
+          $ref: '#/components/schemas/BillData'
+        Method:
+          type: string
+          description: 'Payment method used: card, ach, or wallet.'
+        NetAmount:
+          $ref: '#/components/schemas/Netamountnullable'
+          description: Net amount paid.
+        Operation:
+          $ref: '#/components/schemas/Operation'
+        OrderId:
+          $ref: '#/components/schemas/OrderId'
+        OrgId:
+          $ref: '#/components/schemas/Orgid'
+          description: ID of immediate parent organization.
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        PaymentData:
+          $ref: '#/components/schemas/QueryPaymentData'
+        PaymentTransId:
+          type: string
+          description: Unique Transaction ID.
+        PayorId:
+          $ref: '#/components/schemas/PayorId'
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+          description: Paypoint's DBA name.
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+          description: Paypoint's entryname.
+        PaypointId:
+          type: integer
+          format: int64
+          description: InternalId for paypoint.
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+          description: Paypoint's legal name.
+        PendingFeeAmount:
+          $ref: '#/components/schemas/PendingFeeAmount'
+        RefundId:
+          $ref: '#/components/schemas/RefundId'
+        ResponseData:
+          $ref: '#/components/schemas/QueryResponseData'
+        ReturnedId:
+          $ref: '#/components/schemas/ReturnedId'
+        ScheduleReference:
+          type: integer
+          format: int64
+          description: Reference to the subscription that originated the transaction.
+        SettlementStatus:
+          type: integer
+          description: Settlement status for transaction. See [the docs](/developers/references/money-in-statuses#payment-funding-status) for a full reference.
+        Source:
+          $ref: '#/components/schemas/Source'
+        splitFundingInstructions:
+          $ref: '#/components/schemas/SplitFunding'
+        splitCount:
+          $ref: '#/components/schemas/SplitCount'
+        TotalAmount:
+          type: number
+          format: double
+          description: Transaction total amount (including service fee or sub-charge)
+        TransactionEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryTransactionEvents'
+          description: Events associated with this transaction.
+        TransactionTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Transaction date and time, in UTC.
+        TransAdditionalData:
+          description: Any type
+        TransStatus:
+          type: integer
+          description: Status of transaction. See [the docs](/developers/references/money-in-statuses#money-in-transaction-status) for a full reference.
+      required:
+      - splitCount
+      - TransactionTime
+      title: TransactionQueryRecords
+    GetMethodResponseResponseDataCustomersItem:
       type: object
       properties:
         additionalData:
@@ -2217,44 +2179,207 @@ components:
           $ref: '#/components/schemas/Shippingstate'
         shippingZip:
           $ref: '#/components/schemas/Shippingzip'
+        balance:
+          type: number
+          format: double
+          description: Customer's current balance
+        created:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        customerConsent:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Customer consent information
+        customerStatus:
+          type: integer
+          description: Status code for the customer
+        customerSummary:
+          $ref: '#/components/schemas/CustomerSummaryRecord'
+        customerUsername:
+          type: string
+          description: Username of the customer
+        externalPaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        mfa:
+          type: boolean
+          description: Multi-factor authentication status
+        mfaMode:
+          type: integer
+          description: MFA mode setting
+        pageindentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        parentOrgId:
+          type: integer
+          description: Parent organization ID
+        parentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        paypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+        paypointEntryname:
+          type: string
+          description: The paypoint entryname the customer is associated with
+        paypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+        snData:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Social network data
+        snIdentifier:
+          type: string
+          description: Social network identifier
+        snProvider:
+          type: string
+          description: Social network provider
+        storedMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/MethodQueryRecords'
+          description: List of payment methods associated to the customer
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionQueryRecords'
+          description: List of subscriptions associated to the customer
+        timeZone:
+          type: integer
+          description: Customer's timezone
       description: Customer information. May be required, depending on the paypoint's settings. Required for subscriptions.
-      title: PayorDataRequest
-    Contacts:
+      title: GetMethodResponseResponseDataCustomersItem
+    Holdername:
+      type: string
+      description: The cardholder name.
+      title: Holdername
+    QueryResponseData:
       type: object
       properties:
-        contactEmail:
-          $ref: '#/components/schemas/Email'
-          description: Contact email address.
-        contactName:
+        authcode:
+          $ref: '#/components/schemas/Authcode'
+        avsresponse:
+          $ref: '#/components/schemas/AvsResponse'
+        avsresponse_text:
+          $ref: '#/components/schemas/AvsResponseText'
+        cvvresponse:
+          $ref: '#/components/schemas/CvvResponse'
+        cvvresponse_text:
+          $ref: '#/components/schemas/CvvResponseText'
+        emv_auth_response_data:
+          $ref: '#/components/schemas/EmvAuthResponseData'
+        orderid:
+          $ref: '#/components/schemas/OrderId'
+        response:
           type: string
-          description: Contact name.
-        contactPhone:
+          description: 'Response text for operation: ''Success'' or ''Declined''.'
+        response_code:
           type: string
-          description: Contact phone number.
-        contactTitle:
+          description: Internal result code processing the transaction. Value 1 indicates successful operation, values 2 and 3 indicate errors.
+        response_code_text:
           type: string
-          description: Contact title.
-        additionalData:
-          $ref: '#/components/schemas/AdditionalDataString'
-      title: Contacts
-    OrgParentName:
+          description: Text describing the result. If resultCode = 1, will return 'Approved' or a general success message. If resultCode = 2 or 3, will contain the cause of the decline.
+        responsetext:
+          type: string
+          description: Text describing the result. If resultCode = 1, will return 'Approved' or a general success message. If resultCode = 2 or 3, will contain the cause of the decline.
+        resultCode:
+          $ref: '#/components/schemas/ResultCodev2'
+        resultCodeText:
+          $ref: '#/components/schemas/ResultCodeText'
+        transactionid:
+          type: string
+          description: The transaction identifier in Payabli.
+        type:
+          type: string
+          description: Type of transaction or operation.
+      description: The transaction's response data.
+      title: QueryResponseData
+    CreatedAt:
       type: string
-      description: The name of the parent organization.
-      title: OrgParentName
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    SubscriptionType:
+      type: string
+      enum:
+      - Regular
+      - BalanceDriven
+      description: 'Subscription type or category. Can''t be changed after the subscription is created; if sent to the update endpoint, it''s ignored.
+
+
+        - `Regular`: A standard recurring subscription that charges a fixed amount each cycle.
+
+        - `BalanceDriven`: A subscription that charges the payor''s outstanding balance at run time instead of a fixed amount. Each scheduled run reads the live balance and charges that amount; a zero balance is skipped, not charged. `BalanceDriven` subscriptions only accept the `firstofmonth`, `fifteenthofmonth`, and `endofmonth` frequencies, ignore any `startDate` and `endDate` you supply (start date is calculated from `frequency`; the schedule runs until cancelled), and don''t store a static `totalAmount` on the schedule.
+
+        '
+      title: SubscriptionType
+    Achaccount:
+      type: string
+      description: Bank account number.
+      title: Achaccount
+    InvoiceNumber:
+      type: string
+      description: Invoice number. Identifies the invoice under a paypoint.
+      title: InvoiceNumber
+    Frequency:
+      type: string
+      enum:
+      - onetime
+      - weekly
+      - every2weeks
+      - every6months
+      - monthly
+      - every3months
+      - annually
+      - firstofmonth
+      - fifteenthofmonth
+      - endofmonth
+      description: 'Frequency for operation. The `firstofmonth`, `fifteenthofmonth`, and `endofmonth` values are only valid on subscriptions — they aren''t accepted by other endpoints (such as invoice scheduling) that use this enum.
+
+        '
+      title: Frequency
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
     Netamountnullable:
       type: number
       format: double
       description: Net amount.
       title: Netamountnullable
-    EntrypageId:
-      type: integer
-      format: int64
-      description: 'If applicable, the internal reference ID to the payment page associated
+    Shippingcity:
+      type: string
+      description: Shipping city.
+      title: Shippingcity
+    Cardcvv:
+      type: string
+      description: 'Card Verification Value (CVV) associated with the card number. We
 
-        with the transaction.
+        **strongly recommend** that you include this field when using `card`
+
+        as a method.
 
         '
-      title: EntrypageId
+      title: Cardcvv
     VendorResponseSummary:
       type: object
       properties:
@@ -2300,57 +2425,232 @@ components:
           format: double
       description: Vendor bill summary statistics
       title: VendorResponseSummary
-    VendorDataRequest:
-      type: object
-      properties:
-        vendorId:
-          type: integer
-          format: int64
-          description: The unique numeric ID assigned to the vendor in Payabli. Either `vendorId` or `vendorNumber` is required.
-        vendorNumber:
-          type: string
-          description: Custom vendor number assigned by the business. Either `vendorId` or `vendorNumber` is required.
-      description: Object describing the vendor owner of payment method. Required when saving an ACH payment method on behalf of a vendor (for Pay Out transactions).
-      title: VendorDataRequest
-    Achrouting:
-      type: string
-      description: ABA/routing number of Bank account.
-      title: Achrouting
-    BillingZip:
-      type: string
-      description: Billing address ZIP code.
-      title: BillingZip
-    ResultCodev2:
-      type: string
-      description: 'Unified result code for the transaction. See
+    ForceCustomerCreation:
+      type: boolean
+      description: 'When `true`, the request creates a new customer record, regardless of
 
-        [Pay In unified response codes](/guides/pay-in-unified-response-codes-reference)
+        whether customer identifiers match an existing customer. Defaults to
 
-        for more information.
+        `false`.
 
         '
-      title: ResultCodev2
-    PaymentCategories:
+      title: ForceCustomerCreation
+    Maskedaccount:
+      type: string
+      description: 'Masked card or bank account used in transaction. In the case of Apple
+
+        Pay, this is a masked DPAN (device primary account number).
+
+        '
+      title: Maskedaccount
+    Cardexp:
+      type: string
+      description: Card expiration date in format MMYY or MM/YY. Required for card transactions.
+      title: Cardexp
+    BillData:
       type: object
       properties:
-        amount:
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+        company:
+          type: string
+          description: Company name of the recipient of the invoice.
+        discount:
+          $ref: '#/components/schemas/Discount'
+        dutyAmount:
+          $ref: '#/components/schemas/DutyAmount'
+        firstName:
+          type: string
+          description: First name of the recipient of the invoice.
+        freightAmount:
+          $ref: '#/components/schemas/FreightAmount'
+        frequency:
+          $ref: '#/components/schemas/Frequency'
+          description: Frequency of scheduled invoice.
+        invoiceAmount:
+          $ref: '#/components/schemas/InvoiceAmount'
+        invoiceDate:
+          type: string
+          format: date
+          description: 'Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceDueDate:
+          type: string
+          format: date
+          description: 'Invoice due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceEndDate:
+          type: string
+          format: date
+          description: 'Indicate the date to finish a scheduled invoice cycle (`invoiceType`` = 1) in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceNumber:
+          $ref: '#/components/schemas/InvoiceNumber'
+          description: Invoice number. Identifies the invoice under a paypoint.
+        invoiceStatus:
+          $ref: '#/components/schemas/Invoicestatus'
+        invoiceType:
+          $ref: '#/components/schemas/InvoiceType'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillItem'
+          description: Array of line items included in the invoice.
+        lastName:
+          type: string
+          description: Last name of the recipient of the invoice.
+        notes:
+          type: string
+          description: Notes included in the invoice.
+        paymentTerms:
+          $ref: '#/components/schemas/BillDataPaymentTerms'
+        purchaseOrder:
+          $ref: '#/components/schemas/PurchaseOrder'
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingEmail:
+          $ref: '#/components/schemas/Email'
+          description: Shipping recipient's contact email address.
+        shippingFromZip:
+          $ref: '#/components/schemas/ShippingFromZip'
+        shippingPhone:
+          type: string
+          description: Recipient phone number.
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+        summaryCommodityCode:
+          $ref: '#/components/schemas/SummaryCommodityCode'
+        tax:
+          $ref: '#/components/schemas/Tax'
+        termsConditions:
+          $ref: '#/components/schemas/TermsConditions'
+      title: BillData
+    ItemUnitofMeasure:
+      type: string
+      description: Unit of measurement. Max length of 100 characters.
+      title: ItemUnitofMeasure
+    Initiator:
+      type: string
+      description: 'The transaction''s initiator. Indicates who initiated the transaction.
+
+        '
+      title: Initiator
+    StoredMethodUsageType:
+      type: string
+      description: "**Strongly recommended.** The usage type for the stored method, used\nfor merchant-initiated transactions (MIT). If you don't specify a\nvalue, Payabli defaults to `unscheduled`.\n\nAvailable values:\n\n- `unscheduled`: One-time or otherwise not pre-scheduled.\n- `subscription`: Subscription payments. For example, monthly rental\n  fees or ongoing service subscriptions.\n- `recurring`: Recurring payments per a set plan. For example,\n  splitting an HOA special assessment over 6 monthly payments.\n\nSee\n[Understanding CIT and MIT Indicators](/guides/pay-in-transactions-cit-mit-overview)\nfor more information.\n"
+      title: StoredMethodUsageType
+    TransactionTime:
+      type: string
+      format: date-time
+      description: Timestamp when transaction was submitted, in UTC.
+      title: TransactionTime
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    DutyAmount:
+      type: number
+      format: double
+      description: Duty amount.
+      title: DutyAmount
+    CustomerSummaryRecord:
+      type: object
+      properties:
+        NumberofTransactions:
+          type: integer
+          description: Number total of transactions or payments
+        RecentTransactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionQueryRecords'
+          description: List of more recent 5 transactions belonging to the customer
+        TotalAmountTransactions:
           type: number
           format: double
-          description: Price/cost per unit of item or category.
-        description:
-          type: string
-          description: Description of item or category
-        label:
-          type: string
-          description: Name of item or category.
-        qty:
-          type: integer
-          default: 1
-          description: Quantity of item or category
-      required:
-      - amount
-      - label
-      title: PaymentCategories
+          description: Total amount in transactions
+        TotalNetAmountTransactions:
+          type: number
+          format: double
+          description: Total net amount in transactions
+      title: CustomerSummaryRecord
+    PaypointId:
+      type: integer
+      format: int64
+      description: The paypoint's ID. Note that this is different than the entryname.
+      title: PaypointId
+    Vendorid:
+      type: integer
+      description: Payabli identifier for vendor record.
+      title: Vendorid
+    Cardnumber:
+      type: string
+      description: 'The card number. Required when method is `card` and a `storedMethodId`
+
+        isn''t included.
+
+        '
+      title: Cardnumber
+    Identifierfields:
+      type: array
+      items:
+        type: string
+      description: List of fields acting as customer identifiers, to be used instead of CustomerNumber.
+      title: Identifierfields
+    RefundId:
+      type: integer
+      format: int64
+      description: Identifier of refund transaction linked to this payment.
+      title: RefundId
+    QueryPaymentData:
+      type: object
+      properties:
+        AccountExp:
+          $ref: '#/components/schemas/Accountexp'
+        accountId:
+          $ref: '#/components/schemas/AccountId'
+        AccountType:
+          $ref: '#/components/schemas/Accounttype'
+        AccountZip:
+          $ref: '#/components/schemas/Accountzip'
+        binData:
+          $ref: '#/components/schemas/BinData'
+        HolderName:
+          $ref: '#/components/schemas/Holdername'
+        Initiator:
+          $ref: '#/components/schemas/Initiator'
+        MaskedAccount:
+          $ref: '#/components/schemas/Maskedaccount'
+        orderDescription:
+          $ref: '#/components/schemas/Orderdescription'
+        paymentDetails:
+          $ref: '#/components/schemas/PaymentDetail'
+        Sequence:
+          $ref: '#/components/schemas/Sequence'
+        SignatureData:
+          $ref: '#/components/schemas/Signaturedata'
+        StoredId:
+          $ref: '#/components/schemas/Storedmethodid'
+          description: Identifier of stored payment method used in transaction.
+        StoredMethodUsageType:
+          $ref: '#/components/schemas/StoredMethodUsageType'
+      title: QueryPaymentData
+    EntrypageId:
+      type: integer
+      format: int64
+      description: 'If applicable, the internal reference ID to the payment page associated
+
+        with the transaction.
+
+        '
+      title: EntrypageId
     VendorResponseBillingData:
       type: object
       properties:
@@ -2413,318 +2713,18 @@ components:
       - achHolder
       - achRouting
       title: TokenizeACH
-    Shippingzip:
+    AchSecCode:
       type: string
-      description: 'Shipping ZIP code. For Pay In functions, this field supports 5-digit
+      description: "Standard Entry Class (SEC) code is a three letter code that describes\nhow an ACH payment was authorized. Supported values are:\n\n- **PPD** (Prearranged Payment and Deposit) — Used for credits or debits\n  where an accountholder authorizes a company to initiate either a single\n  or recurring transaction to their personal bank account. Common examples\n  include direct deposit of payroll, mortgage payments, or utility bills.\n  This is the default value for subscription payments.\n- **WEB** (Internet-Initiated/Mobile Entry) — Used for debit entries when\n  authorization is obtained from an accountholder via the internet or a\n  wireless network. Common examples are online bill payments, ecommerce\n  purchases, and mobile app payments where the consumer enters their\n  banking information online.\n- **TEL** (Telephone-Initiated Entry) — Used for one-time debit entries\n  where authorization is obtained from a consumer via telephone. Common\n  examples are phone-based purchases or bill payments where the consumer\n  provides their banking information over the phone.\n- **CCD** (Corporate Credit or Debit) — Used for fund transfers between\n  business accounts. This code is specifically for business-to-business\n  transactions. Common examples include vendor payments and other\n  business-to-business payments.\n- **BOC** (Back Office Conversion) — Used to convert paper checks received\n  in-person at a point-of-sale or staffed payment location into electronic\n  ACH debits. Required for Remote Deposit Capture (RDC) transactions. Only\n  supports consumer checks; business, government, and mailed checks\n  aren't eligible.\n"
+      title: AchSecCode
+    Remitcity:
+      type: string
+      description: 'Remittance address city. Used for mailing paper checks. Required if any
 
-        and 9-digit ZIP codes and alphanumeric Canadian postal codes. For
-
-        example: `37615-1234` or `37615`.
+        remittance address field is provided.
 
         '
-      title: Shippingzip
-    SplitFunding:
-      type: array
-      items:
-        $ref: '#/components/schemas/SplitFundingContent'
-      description: Split funding instructions for the transaction. The total amount of the splits must match the total amount of the transaction.
-      title: SplitFunding
-    PayorId:
-      type: integer
-      format: int64
-      description: 'Unique ID for the customer linked to the transaction. This is the same
-
-        value as the `customerId` used when creating or referencing a customer.
-
-        '
-      title: PayorId
-    Operation:
-      type: string
-      description: The transaction's operation.
-      title: Operation
-    Remitstate:
-      type: string
-      description: 'Remittance address state or province. Used for mailing paper checks.
-
-        Required if any remittance address field is provided. Must be a valid
-
-        US state or Canadian province abbreviation.
-
-        '
-      title: Remitstate
-    PhoneNumber:
-      type: string
-      description: Phone number.
-      title: PhoneNumber
-    VendorResponseStoredMethod:
-      type: object
-      properties:
-        IdPmethod:
-          type:
-          - string
-          - 'null'
-        Method:
-          type:
-          - string
-          - 'null'
-        Descriptor:
-          type:
-          - string
-          - 'null'
-        MaskedAccount:
-          type:
-          - string
-          - 'null'
-        ExpDate:
-          type:
-          - string
-          - 'null'
-        HolderName:
-          type:
-          - string
-          - 'null'
-        AchSecCode:
-          type:
-          - string
-          - 'null'
-        AchHolderType:
-          type:
-          - string
-          - 'null'
-        IsValidatedACH:
-          type:
-          - boolean
-          - 'null'
-        BIN:
-          type:
-          - string
-          - 'null'
-        binData:
-          oneOf:
-          - $ref: '#/components/schemas/BinData'
-          - type: 'null'
-        ABA:
-          type:
-          - string
-          - 'null'
-        PostalCode:
-          type:
-          - string
-          - 'null'
-        MethodType:
-          type:
-          - string
-          - 'null'
-        WalletType:
-          type:
-          - string
-          - 'null'
-          description: Digital wallet type if applicable.
-        LastUpdated:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        CardUpdatedOn:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date and time the card was last updated.
-      required:
-      - IdPmethod
-      - Method
-      - Descriptor
-      - MaskedAccount
-      - ExpDate
-      - HolderName
-      - AchSecCode
-      - AchHolderType
-      - IsValidatedACH
-      - BIN
-      - binData
-      - ABA
-      - PostalCode
-      - MethodType
-      - WalletType
-      - LastUpdated
-      - CardUpdatedOn
-      description: Stored payment method information
-      title: VendorResponseStoredMethod
-    QueryTransactionEventsEventData:
-      oneOf:
-      - type: object
-        additionalProperties:
-          description: Any type
-      - type: string
-      description: 'Any data associated to the event received from processor. Contents vary
-
-        by event type.
-
-        '
-      title: QueryTransactionEventsEventData
-    InvoiceAmount:
-      type: number
-      format: double
-      description: The invoice amount.
-      title: InvoiceAmount
-    Source:
-      type: string
-      description: Custom identifier to indicate the transaction or request source.
-      title: Source
-    InvoiceType:
-      type: integer
-      description: 'Invoice type. Value `0` is for single/one-time invoices, `1` for
-
-        scheduled invoices.
-
-        '
-      title: InvoiceType
-    OrderId:
-      type: string
-      description: Custom identifier for the transaction.
-      title: OrderId
-    QueryResponseData:
-      type: object
-      properties:
-        authcode:
-          $ref: '#/components/schemas/Authcode'
-        avsresponse:
-          $ref: '#/components/schemas/AvsResponse'
-        avsresponse_text:
-          $ref: '#/components/schemas/AvsResponseText'
-        cvvresponse:
-          $ref: '#/components/schemas/CvvResponse'
-        cvvresponse_text:
-          $ref: '#/components/schemas/CvvResponseText'
-        emv_auth_response_data:
-          $ref: '#/components/schemas/EmvAuthResponseData'
-        orderid:
-          $ref: '#/components/schemas/OrderId'
-        response:
-          type: string
-          description: 'Response text for operation: ''Success'' or ''Declined''.'
-        response_code:
-          type: string
-          description: Internal result code processing the transaction. Value 1 indicates successful operation, values 2 and 3 indicate errors.
-        response_code_text:
-          type: string
-          description: Text describing the result. If resultCode = 1, will return 'Approved' or a general success message. If resultCode = 2 or 3, will contain the cause of the decline.
-        responsetext:
-          type: string
-          description: Text describing the result. If resultCode = 1, will return 'Approved' or a general success message. If resultCode = 2 or 3, will contain the cause of the decline.
-        resultCode:
-          $ref: '#/components/schemas/ResultCodev2'
-        resultCodeText:
-          $ref: '#/components/schemas/ResultCodeText'
-        transactionid:
-          type: string
-          description: The transaction identifier in Payabli.
-        type:
-          type: string
-          description: Type of transaction or operation.
-      description: The transaction's response data.
-      title: QueryResponseData
-    AvsResponseText:
-      type: string
-      description: 'Text code describing the result for address validation (applies only for
-
-        card transactions).
-
-        '
-      title: AvsResponseText
-    AchValidation:
-      type: boolean
-      description: 'When `true`, enables real-time validation of ACH account and routing
-
-        numbers. This is an add-on feature, contact Payabli for more information.
-
-        '
-      title: AchValidation
-    Orderdescription:
-      type: string
-      description: Text description of the transaction.
-      title: Orderdescription
-    PurchaseOrder:
-      type: string
-      description: Purchase order number.
-      title: PurchaseOrder
-    Identifierfields:
-      type: array
-      items:
-        type: string
-      description: List of fields acting as customer identifiers, to be used instead of CustomerNumber.
-      title: Identifierfields
-    QueryTransactionEvents:
-      type: object
-      properties:
-        TransEvent:
-          type: string
-          description: Event descriptor. See [TransEvent Reference](/guides/pay-in-transevents-reference) for more details.
-        EventData:
-          $ref: '#/components/schemas/QueryTransactionEventsEventData'
-          description: Any data associated to the event received from processor. Contents vary by event type.
-        EventTime:
-          type: string
-          format: date-time
-          description: Date and time of event.
-      title: QueryTransactionEvents
-    PaymentDetail:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentCategories'
-          description: 'Array of payment categories/line items describing the amount to be paid.
-
-            **Note**: These categories are for information only and aren''t validated against the total amount provided.'
-        checkImage:
-          type: object
-          additionalProperties:
-            description: Any type
-          description: Object containing image of paper check.
-        checkNumber:
-          type: string
-          description: A check number to be used in the ach transaction. **Required** for payment method = 'check'.
-        currency:
-          type: string
-          description: The currency for the transaction, `USD` or `CAD`. If your paypoint is configured for CAD, you must send the `CAD` value in this field, otherwise it defaults to USD, which will cause the transaction to fail.
-        serviceFee:
-          type: number
-          format: double
-          description: Service fee to be deducted from the total amount. This amount must be a number, percentages aren't accepted. If you are using a percentage-based fee schedule, you must calculate the value manually.
-        splitFunding:
-          $ref: '#/components/schemas/SplitFunding'
-          description: Split funding instructions for the transaction. See [Split a Transaction](/developers/developer-guides/money-in-split-funding) for more.
-        checkUniqueId:
-          type: string
-          description: Unique identifier for a processed check image. Required for RDC (Remote Deposit Capture) transactions where `achCode` is `BOC`. Use the `id` value from the [check processing](/developers/api-reference/moneyin/check-capture) response.
-        totalAmount:
-          type: number
-          format: double
-          description: Total amount to be charged. If a service fee is sent, then this amount should include the service fee."
-      required:
-      - totalAmount
-      description: Details about the payment.
-      title: PaymentDetail
-    Authcode:
-      type: string
-      description: Authorization code for the transaction.
-      title: Authcode
-    ReturnedId:
-      type: integer
-      format: int64
-      description: Identifier of return/chargeback transaction linked to this payment.
-      title: ReturnedId
-    Legalname:
-      type: string
-      description: Business legal name.
-      title: Legalname
-    TermsConditions:
-      type: string
-      description: Custom terms and conditions included in the invoice.
-      title: TermsConditions
+      title: Remitcity
   securitySchemes:
     BearerAuth:
       type: http

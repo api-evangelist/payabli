@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill ghostCard API
+  title: reference Ghost Card API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -134,36 +134,33 @@ paths:
               $ref: '#/components/schemas/UpdateCardRequestBody'
 components:
   schemas:
-    UpdateCardRequestBody:
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    Resulttext:
+      type: string
+      description: 'Text describing the result. If `ResultCode` = 1, will return `Approved`
+
+        or a general success message. If `ResultCode` = 2 or 3, will contain
+
+        the cause of the error or decline.
+
+        '
+      title: Resulttext
+    CreateGhostCardResponseData:
       type: object
       properties:
-        cardToken:
+        ReferenceId:
           type: string
-          description: Token that uniquely identifies the card. This is the `ReferenceId` returned when the card was created.
-        status:
-          $ref: '#/components/schemas/CardStatus'
-          description: The new status to set on the card.
-      required:
-      - cardToken
-      title: UpdateCardRequestBody
-    ResultCode:
-      type: integer
-      description: 'Result code for the operation. Value `1` indicates a successful
-
-        operation, values `2` and `3` indicate errors. A value of `10` indicates
-
-        that an operation has been initiated and is pending.
-
-        '
-      title: ResultCode
-    Entry:
-      type: string
-      description: 'The entity''s entrypoint identifier.
-
-        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
-
-        '
-      title: Entry
+          description: Card token for the ghost card. Use this value to reference the card in subsequent operations (update, cancel, etc.).
+        ResultCode:
+          $ref: '#/components/schemas/ResultCode'
+        ResultText:
+          $ref: '#/components/schemas/Resulttext'
+      title: CreateGhostCardResponseData
     PayabliErrorBody:
       type: object
       properties:
@@ -192,55 +189,6 @@ components:
 
         '
       title: PayabliErrorBody
-    PayabliApiResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          $ref: '#/components/schemas/Responsedata'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponse
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    Responsedata:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: The object containing the response data.
-      title: Responsedata
-    CardStatus:
-      type: string
-      enum:
-      - Active
-      - Inactive
-      - Cancelled
-      - Expired
-      description: 'The status to set on the card. Not all transitions are valid: `Active` can change to `Inactive`, `Cancelled`, or `Expired`. `Inactive` can change to `Active`. `Expired` can change to `Active` (renews the card). `Cancelled` is terminal and can''t be changed.'
-      title: CardStatus
-    CreateGhostCardResponseData:
-      type: object
-      properties:
-        ReferenceId:
-          type: string
-          description: Card token for the ghost card. Use this value to reference the card in subsequent operations (update, cancel, etc.).
-        ResultCode:
-          $ref: '#/components/schemas/ResultCode'
-        ResultText:
-          $ref: '#/components/schemas/Resulttext'
-      title: CreateGhostCardResponseData
     CreateGhostCardRequestBody:
       type: object
       properties:
@@ -309,12 +257,25 @@ components:
       - dailyAmountLimit
       - transactionAmountLimit
       title: CreateGhostCardRequestBody
-    ResponseText:
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    Entry:
       type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
 
         '
-      title: ResponseText
+      title: Entry
     IsSuccess:
       type: boolean
       description: 'Boolean indicating whether the operation was successful. A `true` value
@@ -323,6 +284,55 @@ components:
 
         '
       title: IsSuccess
+    ResultCode:
+      type: integer
+      description: 'Result code for the operation. Value `1` indicates a successful
+
+        operation, values `2` and `3` indicate errors. A value of `10` indicates
+
+        that an operation has been initiated and is pending.
+
+        '
+      title: ResultCode
+    UpdateCardRequestBody:
+      type: object
+      properties:
+        cardToken:
+          type: string
+          description: Token that uniquely identifies the card. This is the `ReferenceId` returned when the card was created.
+        status:
+          $ref: '#/components/schemas/CardStatus'
+          description: The new status to set on the card.
+      required:
+      - cardToken
+      title: UpdateCardRequestBody
+    PayabliApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedata'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponse
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    CardStatus:
+      type: string
+      enum:
+      - Active
+      - Inactive
+      - Cancelled
+      - Expired
+      description: 'The status to set on the card. Not all transitions are valid: `Active` can change to `Inactive`, `Cancelled`, or `Expired`. `Inactive` can change to `Active`. `Expired` can change to `Active` (renews the card). `Cancelled` is terminal and can''t be changed.'
+      title: CardStatus
     CreateGhostCardResponse:
       type: object
       properties:
@@ -336,16 +346,6 @@ components:
       - responseText
       description: Response for creating a ghost card.
       title: CreateGhostCardResponse
-    Resulttext:
-      type: string
-      description: 'Text describing the result. If `ResultCode` = 1, will return `Approved`
-
-        or a general success message. If `ResultCode` = 2 or 3, will contain
-
-        the cause of the error or decline.
-
-        '
-      title: Resulttext
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill Statistic API
+  title: reference Statistic API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -458,6 +458,87 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    StatisticsVendorQueryRecord:
+      type: object
+      properties:
+        statX:
+          type: string
+          description: Statistical grouping identifier
+        active:
+          type: integer
+          description: Number of active transactions
+        activeVolume:
+          type: number
+          format: double
+          description: Volume of active transactions
+        sentToApproval:
+          type: integer
+          description: Number of transactions sent to approval
+        sentToApprovalVolume:
+          type: number
+          format: double
+          description: Volume of transactions sent to approval
+        toApproval:
+          type: integer
+          description: Number of transactions to approval
+        toApprovalVolume:
+          type: number
+          format: double
+          description: Volume of transactions to approval
+        approved:
+          type: integer
+          description: Number of approved transactions
+        approvedVolume:
+          type: number
+          format: double
+          description: Volume of approved transactions
+        disapproved:
+          type: integer
+          description: Number of disapproved transactions
+        disapprovedVolume:
+          type: number
+          format: double
+          description: Volume of disapproved transactions
+        cancelled:
+          type: integer
+          description: Number of cancelled transactions
+        cancelledVolume:
+          type: number
+          format: double
+          description: Volume of cancelled transactions
+        inTransit:
+          type: integer
+          description: Number of transactions in transit
+        inTransitVolume:
+          type: number
+          format: double
+          description: Volume of transactions in transit
+        paid:
+          type: integer
+          description: Number of paid transactions
+        paidVolume:
+          type: number
+          format: double
+          description: Volume of paid transactions
+      required:
+      - statX
+      - active
+      - activeVolume
+      - sentToApproval
+      - sentToApprovalVolume
+      - toApproval
+      - toApprovalVolume
+      - approved
+      - approvedVolume
+      - disapproved
+      - disapprovedVolume
+      - cancelled
+      - cancelledVolume
+      - inTransit
+      - inTransitVolume
+      - paid
+      - paidVolume
+      title: StatisticsVendorQueryRecord
     StatBasicQueryRecord:
       type: object
       properties:
@@ -513,17 +594,6 @@ components:
 
         '
       title: PayabliErrorBody
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
     StatBasicExtendedQueryRecord:
       type: object
       properties:
@@ -729,87 +799,17 @@ components:
       - count
       - volume
       title: SubscriptionStatsQueryRecord
-    StatisticsVendorQueryRecord:
+    PayabliErrorBodyResponseData:
       type: object
       properties:
-        statX:
+        explanation:
           type: string
-          description: Statistical grouping identifier
-        active:
-          type: integer
-          description: Number of active transactions
-        activeVolume:
-          type: number
-          format: double
-          description: Volume of active transactions
-        sentToApproval:
-          type: integer
-          description: Number of transactions sent to approval
-        sentToApprovalVolume:
-          type: number
-          format: double
-          description: Volume of transactions sent to approval
-        toApproval:
-          type: integer
-          description: Number of transactions to approval
-        toApprovalVolume:
-          type: number
-          format: double
-          description: Volume of transactions to approval
-        approved:
-          type: integer
-          description: Number of approved transactions
-        approvedVolume:
-          type: number
-          format: double
-          description: Volume of approved transactions
-        disapproved:
-          type: integer
-          description: Number of disapproved transactions
-        disapprovedVolume:
-          type: number
-          format: double
-          description: Volume of disapproved transactions
-        cancelled:
-          type: integer
-          description: Number of cancelled transactions
-        cancelledVolume:
-          type: number
-          format: double
-          description: Volume of cancelled transactions
-        inTransit:
-          type: integer
-          description: Number of transactions in transit
-        inTransitVolume:
-          type: number
-          format: double
-          description: Volume of transactions in transit
-        paid:
-          type: integer
-          description: Number of paid transactions
-        paidVolume:
-          type: number
-          format: double
-          description: Volume of paid transactions
-      required:
-      - statX
-      - active
-      - activeVolume
-      - sentToApproval
-      - sentToApprovalVolume
-      - toApproval
-      - toApprovalVolume
-      - approved
-      - approvedVolume
-      - disapproved
-      - disapprovedVolume
-      - cancelled
-      - cancelledVolume
-      - inTransit
-      - inTransitVolume
-      - paid
-      - paidVolume
-      title: StatisticsVendorQueryRecord
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
   securitySchemes:
     BearerAuth:
       type: http

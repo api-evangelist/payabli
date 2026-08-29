@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill Export API
+  title: reference Export API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -2553,6 +2553,18 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    ExportFormat1:
+      type: string
+      enum:
+      - csv
+      - xlsx
+      title: ExportFormat1
+    File:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: A file containing the response data, in the format specified in the request.
+      title: File
     PayabliErrorBody:
       type: object
       properties:
@@ -2592,18 +2604,6 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
-    File:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: A file containing the response data, in the format specified in the request.
-      title: File
-    ExportFormat1:
-      type: string
-      enum:
-      - csv
-      - xlsx
-      title: ExportFormat1
   securitySchemes:
     BearerAuth:
       type: http

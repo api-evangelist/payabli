@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill Templates API
+  title: reference Templates API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -263,6 +263,131 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    BoardingLinkId:
+      type: integer
+      description: 'The boarding link ID. This is found at the end of the boarding link
+
+        reference name. For example:
+
+        `https://boarding.payabli.com/boarding/app/myorgaccountname-00091`. The
+
+        ID is `91`.
+
+        '
+      title: BoardingLinkId
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    TemplateElement:
+      type: object
+      properties:
+        posCol:
+          $ref: '#/components/schemas/PosCol'
+        posRow:
+          $ref: '#/components/schemas/PosRow'
+        readOnly:
+          $ref: '#/components/schemas/ReadOnly'
+        value:
+          $ref: '#/components/schemas/ValueTemplates'
+        visible:
+          $ref: '#/components/schemas/Visible'
+        required:
+          $ref: '#/components/schemas/RequiredElement'
+      title: TemplateElement
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    SalesSection:
+      type: object
+      properties:
+        salesCode:
+          $ref: '#/components/schemas/SalesCode'
+        salesCRM:
+          type: string
+      title: SalesSection
+    AchFeeSection:
+      type: object
+      properties:
+        advancedSettlementAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        annualAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        chargebackAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        earlyTerminationAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        monthlyAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        quarterlyPCIAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        returnedAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        sameDayAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        sundayOriginationAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        verifyBankAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        verifyFundAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        verifyNegativeAchFee:
+          $ref: '#/components/schemas/TemplateElement'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: AchFeeSection
+    AcceptRegister:
+      type: boolean
+      title: AcceptRegister
+    AchTypesTiers:
+      type: object
+      properties:
+        ccd:
+          $ref: '#/components/schemas/TierItem'
+        ppd:
+          $ref: '#/components/schemas/TierItem'
+        web:
+          $ref: '#/components/schemas/TierItem'
+      title: AchTypesTiers
+    BankSection:
+      type: object
+      properties:
+        visible:
+          $ref: '#/components/schemas/Visible'
+        accountNumber:
+          $ref: '#/components/schemas/TemplateElement'
+        accountType:
+          $ref: '#/components/schemas/TemplateElement'
+        bankName:
+          $ref: '#/components/schemas/TemplateElement'
+        routingNumber:
+          $ref: '#/components/schemas/TemplateElement'
+      description: Details about a bank account.
+      title: BankSection
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    TemplateName:
+      type: string
+      description: The template name.
+      title: TemplateName
     TierItem:
       type: object
       properties:
@@ -279,54 +404,42 @@ components:
           type: number
           format: double
       title: TierItem
-    CardFlatSection:
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    SubHeader:
+      type: string
+      title: SubHeader
+    PosRow:
+      type: integer
+      description: The element's row position.
+      title: PosRow
+    TemplateAdditionalDataField:
       type: object
       properties:
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/CardType'
         visible:
           $ref: '#/components/schemas/Visible'
-      title: CardFlatSection
-    AchTypesTiers:
-      type: object
-      properties:
-        ccd:
-          $ref: '#/components/schemas/TierItem'
-        ppd:
-          $ref: '#/components/schemas/TierItem'
-        web:
-          $ref: '#/components/schemas/TierItem'
-      title: AchTypesTiers
-    BoardingLinkId:
-      type: integer
-      description: 'The boarding link ID. This is found at the end of the boarding link
-
-        reference name. For example:
-
-        `https://boarding.payabli.com/boarding/app/myorgaccountname-00091`. The
-
-        ID is `91`.
-
-        '
-      title: BoardingLinkId
-    CardAcceptanceElement:
-      type: object
-      properties:
-        types:
-          $ref: '#/components/schemas/CardTypes'
-        posCol:
-          $ref: '#/components/schemas/PosCol'
-        posRow:
-          $ref: '#/components/schemas/PosRow'
         readOnly:
           $ref: '#/components/schemas/ReadOnly'
+        required:
+          $ref: '#/components/schemas/RequiredElement'
+        posRow:
+          $ref: '#/components/schemas/PosRow'
+        posCol:
+          $ref: '#/components/schemas/PosCol'
         value:
+          $ref: '#/components/schemas/ValueTemplates'
+        label:
           type: string
-        visible:
-          $ref: '#/components/schemas/Visible'
-      title: CardAcceptanceElement
+        type:
+          type: string
+      title: TemplateAdditionalDataField
+    ReferenceTemplateId:
+      type: integer
+      format: int64
+      title: ReferenceTemplateId
     AchTypesPass:
       type: object
       properties:
@@ -337,62 +450,79 @@ components:
         web:
           $ref: '#/components/schemas/TierItemPass'
       title: AchTypesPass
-    IsRoot:
-      type: boolean
-      description: When `true`, indicates that this is the organization's root template.
-      title: IsRoot
-    PosCol:
-      type: integer
-      description: The element's column position.
-      title: PosCol
-    TemplateCode:
-      type: string
-      description: The internal code for the template.
-      title: TemplateCode
-    QuerySummary:
+    TemplateAdditionalDataSection:
       type: object
       properties:
+        visible:
+          $ref: '#/components/schemas/Visible'
+        fields:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TemplateAdditionalDataField'
+      required:
+      - fields
+      title: TemplateAdditionalDataSection
+    CardFeeSection:
+      type: object
+      properties:
+        achBatchCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        annualCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        avsCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        chargebackCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        ddaRejectsCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        earlyTerminationCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        minimumProcessingCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        monthlyPCICardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        montlyPlatformCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        retrievalCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        transactionCardFee:
+          $ref: '#/components/schemas/TemplateElement'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: CardFeeSection
+    CardTypes:
+      type: object
+      properties:
+        amex:
+          $ref: '#/components/schemas/BasicTemplateElement'
+        discover:
+          $ref: '#/components/schemas/BasicTemplateElement'
+        masterCard:
+          $ref: '#/components/schemas/BasicTemplateElement'
+        visa:
+          $ref: '#/components/schemas/BasicTemplateElement'
+      title: CardTypes
+    ReadOnly:
+      type: boolean
+      description: When `true`, the element is read-only.
+      title: ReadOnly
+    PayabliApiResponseTemplateId:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
         pageIdentifier:
           $ref: '#/components/schemas/PageIdentifier'
-        pageSize:
-          $ref: '#/components/schemas/Pagesize'
-        totalAmount:
-          type: number
-          format: double
-          description: Total amount for the records.
-        totalNetAmount:
-          type: number
-          format: double
-          description: Total net amount for the records.
-        totalPages:
-          $ref: '#/components/schemas/Totalrecords'
-        totalRecords:
-          $ref: '#/components/schemas/Totalrecords'
-      title: QuerySummary
-    SalesSection:
-      type: object
-      properties:
-        salesCode:
-          $ref: '#/components/schemas/SalesCode'
-        salesCRM:
-          type: string
-      title: SalesSection
-    OrgParentName:
-      type: string
-      description: The name of the parent organization.
-      title: OrgParentName
-    UnderwritingDataResponse:
-      type: object
-      properties:
-        method:
-          $ref: '#/components/schemas/UnderWritingMethod'
-        policyId:
-          $ref: '#/components/schemas/PolicyId'
-      description: Underwriting data is used to manage risk orchestration in the boarding application lifecycle.
-      title: UnderwritingDataResponse
-    ReferenceName:
-      type: string
-      title: ReferenceName
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: When the operation is successful, contains the template's ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseTemplateId
     BusinessSection:
       type: object
       properties:
@@ -448,149 +578,6 @@ components:
           $ref: '#/components/schemas/TemplateAdditionalDataSection'
       description: Details about a business.
       title: BusinessSection
-    CardTypePass:
-      type: object
-      properties:
-        amex:
-          $ref: '#/components/schemas/TierItemPass'
-        discover:
-          $ref: '#/components/schemas/TierItemPass'
-        masterCard:
-          $ref: '#/components/schemas/TierItemPass'
-        visa:
-          $ref: '#/components/schemas/TierItemPass'
-      title: CardTypePass
-    AchPassThroughSection:
-      type: object
-      properties:
-        multiTier:
-          type: boolean
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AchTypesPass'
-        visible:
-          $ref: '#/components/schemas/Visible'
-      title: AchPassThroughSection
-    PayabliApiResponseTemplateId:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-          description: When the operation is successful, contains the template's ID.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponseTemplateId
-    TemplateElement:
-      type: object
-      properties:
-        posCol:
-          $ref: '#/components/schemas/PosCol'
-        posRow:
-          $ref: '#/components/schemas/PosRow'
-        readOnly:
-          $ref: '#/components/schemas/ReadOnly'
-        value:
-          $ref: '#/components/schemas/ValueTemplates'
-        visible:
-          $ref: '#/components/schemas/Visible'
-        required:
-          $ref: '#/components/schemas/RequiredElement'
-      title: TemplateElement
-    DocumentSectionTermsAndConditions:
-      type: object
-      properties:
-        tcLinks:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentSectionTermsAndConditionsTcLinksItem'
-        visible:
-          $ref: '#/components/schemas/Visible'
-      title: DocumentSectionTermsAndConditions
-    ServicesSection:
-      type: object
-      properties:
-        ach:
-          $ref: '#/components/schemas/AchService'
-        card:
-          $ref: '#/components/schemas/CardService'
-        subFooter:
-          $ref: '#/components/schemas/SubFooter'
-        subHeader:
-          $ref: '#/components/schemas/SubHeader'
-        visible:
-          $ref: '#/components/schemas/Visible'
-      description: Details about pricing and payment services for a business.
-      title: ServicesSection
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    TemplateQueryRecord:
-      type: object
-      properties:
-        addPrice:
-          type: boolean
-        boardingLinks:
-          type: array
-          items:
-            $ref: '#/components/schemas/BoardingQueryLinks'
-        createdAt:
-          $ref: '#/components/schemas/CreatedAt'
-        idTemplate:
-          type: integer
-          format: int64
-        isRoot:
-          $ref: '#/components/schemas/IsRoot'
-        orgParentName:
-          $ref: '#/components/schemas/OrgParentName'
-        recipientEmailNotification:
-          $ref: '#/components/schemas/RecipientEmailNotification'
-        resumable:
-          $ref: '#/components/schemas/Resumable'
-        templateCode:
-          $ref: '#/components/schemas/TemplateCode'
-        templateContent:
-          $ref: '#/components/schemas/TemplateContentResponse'
-        templateDescription:
-          type: string
-        templateTitle:
-          type: string
-        usedBy:
-          type: integer
-      title: TemplateQueryRecord
-    CardIcpSection:
-      type: object
-      properties:
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/CardType'
-        visible:
-          $ref: '#/components/schemas/Visible'
-      title: CardIcpSection
-    CardTypes:
-      type: object
-      properties:
-        amex:
-          $ref: '#/components/schemas/BasicTemplateElement'
-        discover:
-          $ref: '#/components/schemas/BasicTemplateElement'
-        masterCard:
-          $ref: '#/components/schemas/BasicTemplateElement'
-        visa:
-          $ref: '#/components/schemas/BasicTemplateElement'
-      title: CardTypes
     PayabliErrorBody:
       type: object
       properties:
@@ -619,49 +606,32 @@ components:
 
         '
       title: PayabliErrorBody
-    PayabliErrorBodyResponseData:
+    BasicTemplateElement:
       type: object
       properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    CardFeeSection:
-      type: object
-      properties:
-        achBatchCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        annualCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        avsCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        chargebackCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        ddaRejectsCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        earlyTerminationCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        minimumProcessingCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        monthlyPCICardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        montlyPlatformCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        retrievalCardFee:
-          $ref: '#/components/schemas/TemplateElement'
-        transactionCardFee:
-          $ref: '#/components/schemas/TemplateElement'
+        readOnly:
+          $ref: '#/components/schemas/ReadOnly'
+        required:
+          $ref: '#/components/schemas/RequiredElement'
         visible:
           $ref: '#/components/schemas/Visible'
-      title: CardFeeSection
-    ReferenceTemplateId:
-      type: integer
-      format: int64
-      title: ReferenceTemplateId
+      title: BasicTemplateElement
+    CardType:
+      type: object
+      properties:
+        amex:
+          $ref: '#/components/schemas/TierItem'
+        discover:
+          $ref: '#/components/schemas/TierItem'
+        masterCard:
+          $ref: '#/components/schemas/TierItem'
+        visa:
+          $ref: '#/components/schemas/TierItem'
+      title: CardType
+    RequiredElement:
+      type: boolean
+      description: When `true`, the element is required.
+      title: RequiredElement
     DocumentSection:
       type: object
       properties:
@@ -690,9 +660,24 @@ components:
         withdrawalBank:
           $ref: '#/components/schemas/BankSection'
       title: DocumentSection
-    SubFooter:
+    ValueTemplates:
       type: string
-      title: SubFooter
+      title: ValueTemplates
+    ReferenceName:
+      type: string
+      title: ReferenceName
+    IsRoot:
+      type: boolean
+      description: When `true`, indicates that this is the organization's root template.
+      title: IsRoot
+    UnderWritingMethod:
+      type: string
+      enum:
+      - automatic
+      - manual
+      - bypass
+      description: "This field controls which method is used to handle risk orchestration.\n\n- `automatic`: Sends the application through the automatic\n  underwriting workflow using the provided `policyId`.\n- `manual`: Puts the application into the pending review status. An\n  analyst must manually change its final status to approved or\n  declined.\n- `bypass`: The application won't go through Payabli's review, and\n  proceeds directly to boarding products and services.\n"
+      title: UnderWritingMethod
     PolicyId:
       type: string
       description: 'Used to identify the risk workflow used to review this account. Policy
@@ -703,34 +688,48 @@ components:
 
         '
       title: PolicyId
+    AchTypes:
+      type: object
+      properties:
+        ccd:
+          $ref: '#/components/schemas/BasicTemplateElement'
+        ppd:
+          $ref: '#/components/schemas/BasicTemplateElement'
+        web:
+          $ref: '#/components/schemas/BasicTemplateElement'
+      title: AchTypes
+    CardPassThroughSection:
+      type: object
+      properties:
+        multiTier:
+          type: boolean
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CardTypePass'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: CardPassThroughSection
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    CardTypePass:
+      type: object
+      properties:
+        amex:
+          $ref: '#/components/schemas/TierItemPass'
+        discover:
+          $ref: '#/components/schemas/TierItemPass'
+        masterCard:
+          $ref: '#/components/schemas/TierItemPass'
+        visa:
+          $ref: '#/components/schemas/TierItemPass'
+      title: CardTypePass
     Visible:
       type: boolean
       description: When `true`, makes the section visible on the application.
       title: Visible
-    BoardingLinkApiResponse:
-      type: object
-      properties:
-        responseData:
-          type: string
-          description: 'Reference name for boarding link (if responseText = Success) or
-
-            List of empty fields separated by comma (if responseText = Fail)'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: BoardingLinkApiResponse
-    PosRow:
-      type: integer
-      description: The element's row position.
-      title: PosRow
-    AcceptOauth:
-      type: boolean
-      title: AcceptOauth
-    RequiredElement:
-      type: boolean
-      description: When `true`, the element is required.
-      title: RequiredElement
     OwnersSection:
       type: object
       properties:
@@ -788,18 +787,121 @@ components:
           $ref: '#/components/schemas/TemplateAdditionalDataSection'
       description: Information about a business owner.
       title: OwnersSection
-    CardType:
+    EntryAttributes:
+      type: string
+      title: EntryAttributes
+    PosCol:
+      type: integer
+      description: The element's column position.
+      title: PosCol
+    ServicesSection:
       type: object
       properties:
-        amex:
-          $ref: '#/components/schemas/TierItem'
-        discover:
-          $ref: '#/components/schemas/TierItem'
-        masterCard:
-          $ref: '#/components/schemas/TierItem'
-        visa:
-          $ref: '#/components/schemas/TierItem'
-      title: CardType
+        ach:
+          $ref: '#/components/schemas/AchService'
+        card:
+          $ref: '#/components/schemas/CardService'
+        subFooter:
+          $ref: '#/components/schemas/SubFooter'
+        subHeader:
+          $ref: '#/components/schemas/SubHeader'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      description: Details about pricing and payment services for a business.
+      title: ServicesSection
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    SalesCode:
+      type: string
+      title: SalesCode
+    CardFlatSection:
+      type: object
+      properties:
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CardType'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: CardFlatSection
+    Resumable:
+      type: boolean
+      description: 'When `true`, the applicant can save an incomplete application and
+
+        resume it later. When `false`, the applicant won''t have an option to
+
+        save their progress, and must complete the application in one session.
+
+        '
+      title: Resumable
+    TemplateQueryResponse:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateQueryRecord'
+        summary:
+          $ref: '#/components/schemas/QuerySummary'
+      title: TemplateQueryResponse
+    TemplateContentResponse:
+      type: object
+      properties:
+        businessData:
+          $ref: '#/components/schemas/BusinessSection'
+        documentsData:
+          $ref: '#/components/schemas/DocumentSection'
+        ownershipData:
+          $ref: '#/components/schemas/OwnersSection'
+        processingData:
+          $ref: '#/components/schemas/ProcessingSection'
+        salesData:
+          $ref: '#/components/schemas/SalesSection'
+        servicesData:
+          $ref: '#/components/schemas/ServicesSection'
+        underwritingData:
+          $ref: '#/components/schemas/UnderwritingDataResponse'
+      title: TemplateContentResponse
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    BoardingQueryLinks:
+      type: object
+      properties:
+        acceptOauth:
+          $ref: '#/components/schemas/AcceptOauth'
+        acceptRegister:
+          $ref: '#/components/schemas/AcceptRegister'
+        entryAttributes:
+          $ref: '#/components/schemas/EntryAttributes'
+        id:
+          $ref: '#/components/schemas/BoardingLinkId'
+        lastUpdated:
+          $ref: '#/components/schemas/LastModified'
+        orgParentName:
+          $ref: '#/components/schemas/OrgParentName'
+        referenceName:
+          $ref: '#/components/schemas/ReferenceName'
+        referenceTemplateId:
+          $ref: '#/components/schemas/ReferenceTemplateId'
+        templateCode:
+          $ref: '#/components/schemas/TemplateCode'
+        templateName:
+          $ref: '#/components/schemas/TemplateName'
+      title: BoardingQueryLinks
     ProcessingSection:
       type: object
       properties:
@@ -844,222 +946,37 @@ components:
         payoutCreditLimit:
           $ref: '#/components/schemas/TemplateElement'
       title: ProcessingSection
-    AchTypes:
+    DocumentSectionTermsAndConditions:
       type: object
       properties:
-        ccd:
-          $ref: '#/components/schemas/BasicTemplateElement'
-        ppd:
-          $ref: '#/components/schemas/BasicTemplateElement'
-        web:
-          $ref: '#/components/schemas/BasicTemplateElement'
-      title: AchTypes
-    TemplateContentResponse:
-      type: object
-      properties:
-        businessData:
-          $ref: '#/components/schemas/BusinessSection'
-        documentsData:
-          $ref: '#/components/schemas/DocumentSection'
-        ownershipData:
-          $ref: '#/components/schemas/OwnersSection'
-        processingData:
-          $ref: '#/components/schemas/ProcessingSection'
-        salesData:
-          $ref: '#/components/schemas/SalesSection'
-        servicesData:
-          $ref: '#/components/schemas/ServicesSection'
-        underwritingData:
-          $ref: '#/components/schemas/UnderwritingDataResponse'
-      title: TemplateContentResponse
-    AchFeeSection:
-      type: object
-      properties:
-        advancedSettlementAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        annualAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        chargebackAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        earlyTerminationAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        monthlyAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        quarterlyPCIAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        returnedAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        sameDayAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        sundayOriginationAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        verifyBankAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        verifyFundAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        verifyNegativeAchFee:
-          $ref: '#/components/schemas/TemplateElement'
-        visible:
-          $ref: '#/components/schemas/Visible'
-      title: AchFeeSection
-    UnderWritingMethod:
-      type: string
-      enum:
-      - automatic
-      - manual
-      - bypass
-      description: "This field controls which method is used to handle risk orchestration.\n\n- `automatic`: Sends the application through the automatic\n  underwriting workflow using the provided `policyId`.\n- `manual`: Puts the application into the pending review status. An\n  analyst must manually change its final status to approved or\n  declined.\n- `bypass`: The application won't go through Payabli's review, and\n  proceeds directly to boarding products and services.\n"
-      title: UnderWritingMethod
-    TemplateQueryResponse:
-      type: object
-      properties:
-        records:
+        tcLinks:
           type: array
           items:
-            $ref: '#/components/schemas/TemplateQueryRecord'
-        summary:
-          $ref: '#/components/schemas/QuerySummary'
-      title: TemplateQueryResponse
-    RecipientEmailNotification:
+            $ref: '#/components/schemas/DocumentSectionTermsAndConditionsTcLinksItem'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: DocumentSectionTermsAndConditions
+    AcceptOauth:
       type: boolean
-      description: 'When `true`, Payabli will send the applicant a boarding link. Set this
-
-        value to `false` if you are sending pre-filled applications via the API
-
-        and don''t want Payabli to send the applicant an email to complete the
-
-        boarding application.
-
-        '
-      title: RecipientEmailNotification
-    Totalrecords:
-      type: integer
-      description: Total number of records in response.
-      title: Totalrecords
-    Responsedatanonobject:
-      oneOf:
-      - type: string
-      - type: integer
-      description: The response data.
-      title: Responsedatanonobject
-    CardPassThroughSection:
+      title: AcceptOauth
+    CardIcpSection:
       type: object
       properties:
-        multiTier:
-          type: boolean
         tiers:
           type: array
           items:
-            $ref: '#/components/schemas/CardTypePass'
+            $ref: '#/components/schemas/CardType'
         visible:
           $ref: '#/components/schemas/Visible'
-      title: CardPassThroughSection
-    ValueTemplates:
+      title: CardIcpSection
+    SubFooter:
       type: string
-      title: ValueTemplates
-    SalesCode:
-      type: string
-      title: SalesCode
-    SubHeader:
-      type: string
-      title: SubHeader
-    LastModified:
-      type: string
-      format: date-time
-      description: Timestamp of when record was last updated, in UTC.
-      title: LastModified
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    BasicTemplateElement:
-      type: object
-      properties:
-        readOnly:
-          $ref: '#/components/schemas/ReadOnly'
-        required:
-          $ref: '#/components/schemas/RequiredElement'
-        visible:
-          $ref: '#/components/schemas/Visible'
-      title: BasicTemplateElement
-    AchAbsorbSection:
-      type: object
-      properties:
-        multiTier:
-          type: boolean
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AchTypesTiers'
-        visible:
-          $ref: '#/components/schemas/Visible'
-      title: AchAbsorbSection
-    BankSection:
-      type: object
-      properties:
-        visible:
-          $ref: '#/components/schemas/Visible'
-        accountNumber:
-          $ref: '#/components/schemas/TemplateElement'
-        accountType:
-          $ref: '#/components/schemas/TemplateElement'
-        bankName:
-          $ref: '#/components/schemas/TemplateElement'
-        routingNumber:
-          $ref: '#/components/schemas/TemplateElement'
-      description: Details about a bank account.
-      title: BankSection
-    SignerSection:
-      type: object
-      properties:
-        visible:
-          $ref: '#/components/schemas/Visible'
-        name:
-          $ref: '#/components/schemas/TemplateElement'
-        ssn:
-          $ref: '#/components/schemas/TemplateElement'
-        dob:
-          $ref: '#/components/schemas/TemplateElement'
-        phone:
-          $ref: '#/components/schemas/TemplateElement'
-        email:
-          $ref: '#/components/schemas/TemplateElement'
-        address:
-          $ref: '#/components/schemas/TemplateElement'
-        address1:
-          $ref: '#/components/schemas/TemplateElement'
-        city:
-          $ref: '#/components/schemas/TemplateElement'
-        country:
-          $ref: '#/components/schemas/TemplateElement'
-        state:
-          $ref: '#/components/schemas/TemplateElement'
-        zip:
-          $ref: '#/components/schemas/TemplateElement'
-        acceptance:
-          $ref: '#/components/schemas/TemplateElement'
-        signedDocumentReference:
-          $ref: '#/components/schemas/TemplateElement'
-        additionalData:
-          $ref: '#/components/schemas/TemplateAdditionalDataSection'
-      title: SignerSection
-    Pagesize:
-      type: integer
-      description: Number of records on each response page.
-      title: Pagesize
-    AchAcceptanceElement:
+      title: SubFooter
+    CardAcceptanceElement:
       type: object
       properties:
         types:
-          $ref: '#/components/schemas/AchTypes'
+          $ref: '#/components/schemas/CardTypes'
         posCol:
           $ref: '#/components/schemas/PosCol'
         posRow:
@@ -1067,100 +984,41 @@ components:
         readOnly:
           $ref: '#/components/schemas/ReadOnly'
         value:
-          $ref: '#/components/schemas/ValueTemplates'
+          type: string
         visible:
           $ref: '#/components/schemas/Visible'
-      title: AchAcceptanceElement
-    Responsecode:
-      type: integer
-      description: 'Code for the response. Learn more in
-
-        [API Response Codes](/developers/api-reference/api-responses).
-
-        '
-      title: Responsecode
-    AcceptRegister:
-      type: boolean
-      title: AcceptRegister
-    Resumable:
-      type: boolean
-      description: 'When `true`, the applicant can save an incomplete application and
-
-        resume it later. When `false`, the applicant won''t have an option to
-
-        save their progress, and must complete the application in one session.
-
-        '
-      title: Resumable
-    TierItemPass:
+      title: CardAcceptanceElement
+    QuerySummary:
       type: object
       properties:
-        amountFeeone-time:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalAmount:
           type: number
           format: double
-        amountFeeRecurring:
+          description: Total amount for the records.
+        totalNetAmount:
           type: number
           format: double
-        highPayRange:
-          type: number
-          format: double
-        lowPayRange:
-          type: number
-          format: double
-        percentFeeone-time:
-          type: number
-          format: double
-        percentFeeRecurring:
-          type: number
-          format: double
-      title: TierItemPass
-    TemplateAdditionalDataField:
+          description: Total net amount for the records.
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummary
+    PayabliErrorBodyResponseData:
       type: object
       properties:
-        visible:
-          $ref: '#/components/schemas/Visible'
-        readOnly:
-          $ref: '#/components/schemas/ReadOnly'
-        required:
-          $ref: '#/components/schemas/RequiredElement'
-        posRow:
-          $ref: '#/components/schemas/PosRow'
-        posCol:
-          $ref: '#/components/schemas/PosCol'
-        value:
-          $ref: '#/components/schemas/ValueTemplates'
-        label:
+        explanation:
           type: string
-        type:
+          description: Human-readable explanation of what happened.
+        todoAction:
           type: string
-      title: TemplateAdditionalDataField
-    BoardingQueryLinks:
-      type: object
-      properties:
-        acceptOauth:
-          $ref: '#/components/schemas/AcceptOauth'
-        acceptRegister:
-          $ref: '#/components/schemas/AcceptRegister'
-        entryAttributes:
-          $ref: '#/components/schemas/EntryAttributes'
-        id:
-          $ref: '#/components/schemas/BoardingLinkId'
-        lastUpdated:
-          $ref: '#/components/schemas/LastModified'
-        orgParentName:
-          $ref: '#/components/schemas/OrgParentName'
-        referenceName:
-          $ref: '#/components/schemas/ReferenceName'
-        referenceTemplateId:
-          $ref: '#/components/schemas/ReferenceTemplateId'
-        templateCode:
-          $ref: '#/components/schemas/TemplateCode'
-        templateName:
-          $ref: '#/components/schemas/TemplateName'
-      title: BoardingQueryLinks
-    EntryAttributes:
-      type: string
-      title: EntryAttributes
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
     AchService:
       type: object
       properties:
@@ -1209,11 +1067,64 @@ components:
         visible:
           $ref: '#/components/schemas/Visible'
       title: AchService
-    CreatedAt:
-      type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
+    UnderwritingDataResponse:
+      type: object
+      properties:
+        method:
+          $ref: '#/components/schemas/UnderWritingMethod'
+        policyId:
+          $ref: '#/components/schemas/PolicyId'
+      description: Underwriting data is used to manage risk orchestration in the boarding application lifecycle.
+      title: UnderwritingDataResponse
+    TemplateQueryRecord:
+      type: object
+      properties:
+        addPrice:
+          type: boolean
+        boardingLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/BoardingQueryLinks'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        idTemplate:
+          type: integer
+          format: int64
+        isRoot:
+          $ref: '#/components/schemas/IsRoot'
+        orgParentName:
+          $ref: '#/components/schemas/OrgParentName'
+        recipientEmailNotification:
+          $ref: '#/components/schemas/RecipientEmailNotification'
+        resumable:
+          $ref: '#/components/schemas/Resumable'
+        templateCode:
+          $ref: '#/components/schemas/TemplateCode'
+        templateContent:
+          $ref: '#/components/schemas/TemplateContentResponse'
+        templateDescription:
+          type: string
+        templateTitle:
+          type: string
+        usedBy:
+          type: integer
+      title: TemplateQueryRecord
+    AchAcceptanceElement:
+      type: object
+      properties:
+        types:
+          $ref: '#/components/schemas/AchTypes'
+        posCol:
+          $ref: '#/components/schemas/PosCol'
+        posRow:
+          $ref: '#/components/schemas/PosRow'
+        readOnly:
+          $ref: '#/components/schemas/ReadOnly'
+        value:
+          $ref: '#/components/schemas/ValueTemplates'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: AchAcceptanceElement
     CardService:
       type: object
       properties:
@@ -1282,26 +1193,115 @@ components:
         visible:
           $ref: '#/components/schemas/Visible'
       title: CardService
-    TemplateName:
-      type: string
-      description: The template name.
-      title: TemplateName
-    ReadOnly:
-      type: boolean
-      description: When `true`, the element is read-only.
-      title: ReadOnly
-    TemplateAdditionalDataSection:
+    AchAbsorbSection:
+      type: object
+      properties:
+        multiTier:
+          type: boolean
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchTypesTiers'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: AchAbsorbSection
+    BoardingLinkApiResponse:
+      type: object
+      properties:
+        responseData:
+          type: string
+          description: 'Reference name for boarding link (if responseText = Success) or
+
+            List of empty fields separated by comma (if responseText = Fail)'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: BoardingLinkApiResponse
+    SignerSection:
       type: object
       properties:
         visible:
           $ref: '#/components/schemas/Visible'
-        fields:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/TemplateAdditionalDataField'
-      required:
-      - fields
-      title: TemplateAdditionalDataSection
+        name:
+          $ref: '#/components/schemas/TemplateElement'
+        ssn:
+          $ref: '#/components/schemas/TemplateElement'
+        dob:
+          $ref: '#/components/schemas/TemplateElement'
+        phone:
+          $ref: '#/components/schemas/TemplateElement'
+        email:
+          $ref: '#/components/schemas/TemplateElement'
+        address:
+          $ref: '#/components/schemas/TemplateElement'
+        address1:
+          $ref: '#/components/schemas/TemplateElement'
+        city:
+          $ref: '#/components/schemas/TemplateElement'
+        country:
+          $ref: '#/components/schemas/TemplateElement'
+        state:
+          $ref: '#/components/schemas/TemplateElement'
+        zip:
+          $ref: '#/components/schemas/TemplateElement'
+        acceptance:
+          $ref: '#/components/schemas/TemplateElement'
+        signedDocumentReference:
+          $ref: '#/components/schemas/TemplateElement'
+        additionalData:
+          $ref: '#/components/schemas/TemplateAdditionalDataSection'
+      title: SignerSection
+    TierItemPass:
+      type: object
+      properties:
+        amountFeeone-time:
+          type: number
+          format: double
+        amountFeeRecurring:
+          type: number
+          format: double
+        highPayRange:
+          type: number
+          format: double
+        lowPayRange:
+          type: number
+          format: double
+        percentFeeone-time:
+          type: number
+          format: double
+        percentFeeRecurring:
+          type: number
+          format: double
+      title: TierItemPass
+    RecipientEmailNotification:
+      type: boolean
+      description: 'When `true`, Payabli will send the applicant a boarding link. Set this
+
+        value to `false` if you are sending pre-filled applications via the API
+
+        and don''t want Payabli to send the applicant an email to complete the
+
+        boarding application.
+
+        '
+      title: RecipientEmailNotification
+    TemplateCode:
+      type: string
+      description: The internal code for the template.
+      title: TemplateCode
+    AchPassThroughSection:
+      type: object
+      properties:
+        multiTier:
+          type: boolean
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchTypesPass'
+        visible:
+          $ref: '#/components/schemas/Visible'
+      title: AchPassThroughSection
     DocumentSectionTermsAndConditionsTcLinksItem:
       type: object
       properties:

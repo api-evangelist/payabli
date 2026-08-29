@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill Cloud API
+  title: reference Cloud API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -256,6 +256,26 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    CloudQueryApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoiDevice'
+          description: List of devices and history of registration.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      description: Object containing details about cloud devices and their registration history.
+      title: CloudQueryApiResponse
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
     DeviceEntry:
       type: object
       properties:
@@ -272,6 +292,26 @@ components:
 
             - PAX A920 device: This code is the serial number on the back of the device.'
       title: DeviceEntry
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
     PayabliErrorBody:
       type: object
       properties:
@@ -300,45 +340,6 @@ components:
 
         '
       title: PayabliErrorBody
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    RemoveDeviceResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          type: string
-          description: 'If `isSuccess` = true, this contains the device identifier.
-
-            If `isSuccess` = false, this contains the reason for the error.
-
-            '
-      required:
-      - responseText
-      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
-
-        the standard response envelope.
-
-        '
-      title: RemoveDeviceResponse
     IsSuccess:
       type: boolean
       description: 'Boolean indicating whether the operation was successful. A `true` value
@@ -371,6 +372,30 @@ components:
 
         '
       title: AddDeviceResponse
+    RemoveDeviceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          type: string
+          description: 'If `isSuccess` = true, this contains the device identifier.
+
+            If `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: RemoveDeviceResponse
     PoiDevice:
       type: object
       properties:
@@ -420,42 +445,17 @@ components:
           description: The device serial number.
       description: Information about the point of interaction device (also known as a terminal or cloud device) used to process the transaction.
       title: PoiDevice
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    IdempotencyKey:
-      type: string
-      description: '_Optional but recommended._ A unique ID that you can include to prevent
-
-        duplicating objects or transactions in the case that a request is sent
-
-        more than once. This key isn''t generated in Payabli; you must generate it
-
-        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
-
-        the key if needed.
-
-        '
-      title: IdempotencyKey
-    CloudQueryApiResponse:
+    PayabliErrorBodyResponseData:
       type: object
       properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseList:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoiDevice'
-          description: List of devices and history of registration.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      description: Object containing details about cloud devices and their registration history.
-      title: CloudQueryApiResponse
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
   securitySchemes:
     BearerAuth:
       type: http

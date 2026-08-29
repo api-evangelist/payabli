@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill Wallet API
+  title: reference Wallet API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -220,59 +220,94 @@ paths:
               $ref: '#/components/schemas/ConfigurePaypointRequestGooglePay'
 components:
   schemas:
-    ApplePayType:
-      type: string
-      description: The record type.
-      title: ApplePayType
-    AppleWalletData:
+    ConfigurePaypointRequestGooglePay:
       type: object
       properties:
         entry:
           $ref: '#/components/schemas/Entry'
-        applePayMerchantId:
-          type: string
-          description: The Apple Pay merchant identifier.
-        domainNames:
-          type: array
-          items:
-            $ref: '#/components/schemas/DomainName'
-          description: A list of domain names that are enabled for this paypoint.
-        paypointName:
-          $ref: '#/components/schemas/PaypointName'
-        paypointUrl:
-          type:
-          - string
-          - 'null'
-          description: The paypoint URL.
-        markedForDeletionAt:
-          type: string
-          format: date-time
-          description: The date and time a paypoint's Apple Pay registration was scheduled for deletion. The paypoint will be unregistered from Apple Pay permanently 30 days from this value.
-        createdAt:
-          $ref: '#/components/schemas/CreatedAt'
-        updatedAt:
-          $ref: '#/components/schemas/LastModified'
-        id:
-          $ref: '#/components/schemas/ApplePayId'
-          description: Internal ID for the Apple Pay paypoint registration update.
-        type:
-          $ref: '#/components/schemas/ApplePayType'
-          description: The record type, in this context it will always be `ApplePayRegistration`.
-      description: The wallet data.
-      title: AppleWalletData
-    JobStatus:
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+          description: When `true`, Google Pay is enabled.
+      title: ConfigurePaypointRequestGooglePay
+    WalletIsEnabled:
+      type: boolean
+      description: When `true`, wallet service is enabled.
+      title: WalletIsEnabled
+    PageIdentifier:
       type: string
-      enum:
-      - in_progress
-      - completed
-      - failed
-      description: The cascade process status.
-      title: JobStatus
-    ApplePayId:
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    ApplePayType:
       type: string
-      description: The internal identifier for Apple Pay-related information.
-      title: ApplePayId
-    ConfigureGooglePaypointApiResponse:
+      description: The record type.
+      title: ApplePayType
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    ApplePayPaypointRegistrationData:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/Entry'
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+        walletType:
+          type: string
+          description: The wallet type. In this context it will always be `applepay`.
+        walletData:
+          $ref: '#/components/schemas/AppleWalletData'
+      title: ApplePayPaypointRegistrationData
+    Cascade:
+      type: boolean
+      description: 'When `true`, the wallet service configuration cascades to all paypoints
+
+        and suborganizations belonging to the parent entity.
+
+        '
+      title: Cascade
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    JobId:
+      type: string
+      description: The cascade process ID.
+      title: JobId
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    GooglePayPaypointRegistrationData:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/Entry'
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+        walletType:
+          type: string
+          description: The wallet type. In this context it will always be `googlepay`.
+        walletData:
+          $ref: '#/components/schemas/GoogleWalletData'
+      title: GooglePayPaypointRegistrationData
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    IsEnabled:
+      type: boolean
+      description: When `true`, the service is enabled.
+      title: IsEnabled
+    ConfigureApplePayOrganizationApiResponse:
       type: object
       properties:
         isSuccess:
@@ -282,30 +317,12 @@ components:
         responseCode:
           $ref: '#/components/schemas/Responsecode'
         responseData:
-          $ref: '#/components/schemas/GooglePayPaypointRegistrationData'
+          $ref: '#/components/schemas/ApplePayOrganizationUpdateData'
         responseText:
           $ref: '#/components/schemas/ResponseText'
-        roomId:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: Field not in use on this endpoint
       required:
-      - isSuccess
-      - pageIdentifier
-      - responseCode
-      - responseData
       - responseText
-      title: ConfigureGooglePaypointApiResponse
-    IsEnabled:
-      type: boolean
-      description: When `true`, the service is enabled.
-      title: IsEnabled
-    JobId:
-      type: string
-      description: The cascade process ID.
-      title: JobId
+      title: ConfigureApplePayOrganizationApiResponse
     PayabliErrorBody:
       type: object
       properties:
@@ -334,106 +351,6 @@ components:
 
         '
       title: PayabliErrorBody
-    ConfigureOrganizationRequestApplePay:
-      type: object
-      properties:
-        cascade:
-          $ref: '#/components/schemas/Cascade'
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-        orgId:
-          $ref: '#/components/schemas/OrganizationId'
-      title: ConfigureOrganizationRequestApplePay
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    OrganizationUpdates:
-      type: object
-      properties:
-        cascade:
-          $ref: '#/components/schemas/WalletCascade'
-        isEnabled:
-          $ref: '#/components/schemas/WalletIsEnabled'
-      title: OrganizationUpdates
-    WalletIsEnabled:
-      type: boolean
-      description: When `true`, wallet service is enabled.
-      title: WalletIsEnabled
-    ConfigureApplePayOrganizationApiResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          $ref: '#/components/schemas/ApplePayOrganizationUpdateData'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: ConfigureApplePayOrganizationApiResponse
-    GooglePayPaypointRegistrationData:
-      type: object
-      properties:
-        entry:
-          $ref: '#/components/schemas/Entry'
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-        walletType:
-          type: string
-          description: The wallet type. In this context it will always be `googlepay`.
-        walletData:
-          $ref: '#/components/schemas/GoogleWalletData'
-      title: GooglePayPaypointRegistrationData
-    Entry:
-      type: string
-      description: 'The entity''s entrypoint identifier.
-
-        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
-
-        '
-      title: Entry
-    OrganizationId:
-      type: integer
-      format: int64
-      description: Organization ID for the target organization.
-      title: OrganizationId
-    Cascade:
-      type: boolean
-      description: 'When `true`, the wallet service configuration cascades to all paypoints
-
-        and suborganizations belonging to the parent entity.
-
-        '
-      title: Cascade
-    LastModified:
-      type: string
-      format: date-time
-      description: Timestamp of when record was last updated, in UTC.
-      title: LastModified
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
     ConfigureOrganizationRequestGooglePay:
       type: object
       properties:
@@ -444,6 +361,55 @@ components:
         orgId:
           $ref: '#/components/schemas/OrganizationId'
       title: ConfigureOrganizationRequestGooglePay
+    PaypointName:
+      type: string
+      description: The paypoint name.
+      title: PaypointName
+    ConfigureGooglePaypointApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/GooglePayPaypointRegistrationData'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        roomId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Field not in use on this endpoint
+      required:
+      - isSuccess
+      - pageIdentifier
+      - responseCode
+      - responseData
+      - responseText
+      title: ConfigureGooglePaypointApiResponse
+    GoogleWalletData:
+      type: object
+      properties:
+        gatewayMerchantId:
+          type: string
+          description: The Google Pay merchant identifier.
+        gatewayId:
+          type: string
+          description: The Google Pay gateway identifier.
+      description: The wallet data.
+      title: GoogleWalletData
+    OrganizationUpdates:
+      type: object
+      properties:
+        cascade:
+          $ref: '#/components/schemas/WalletCascade'
+        isEnabled:
+          $ref: '#/components/schemas/WalletIsEnabled'
+      title: OrganizationUpdates
     Responsecode:
       type: integer
       description: 'Code for the response. Learn more in
@@ -452,23 +418,15 @@ components:
 
         '
       title: Responsecode
-    WalletCascade:
-      type: boolean
-      description: 'When `true`, the wallet service configuration cascades to all paypoints
-
-        and suborganizations belonging to the parent entity.
-
-        '
-      title: WalletCascade
-    ConfigurePaypointRequestGooglePay:
+    ConfigurePaypointRequestApplePay:
       type: object
       properties:
         entry:
           $ref: '#/components/schemas/Entry'
         isEnabled:
           $ref: '#/components/schemas/IsEnabled'
-          description: When `true`, Google Pay is enabled.
-      title: ConfigurePaypointRequestGooglePay
+          description: When `true`, Apple Pay is enabled.
+      title: ConfigurePaypointRequestApplePay
     ApplePayOrganizationUpdateData:
       type: object
       properties:
@@ -513,6 +471,68 @@ components:
       required:
       - responseText
       title: ConfigureApplePaypointApiResponse
+    AppleWalletData:
+      type: object
+      properties:
+        entry:
+          $ref: '#/components/schemas/Entry'
+        applePayMerchantId:
+          type: string
+          description: The Apple Pay merchant identifier.
+        domainNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/DomainName'
+          description: A list of domain names that are enabled for this paypoint.
+        paypointName:
+          $ref: '#/components/schemas/PaypointName'
+        paypointUrl:
+          type:
+          - string
+          - 'null'
+          description: The paypoint URL.
+        markedForDeletionAt:
+          type: string
+          format: date-time
+          description: The date and time a paypoint's Apple Pay registration was scheduled for deletion. The paypoint will be unregistered from Apple Pay permanently 30 days from this value.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        updatedAt:
+          $ref: '#/components/schemas/LastModified'
+        id:
+          $ref: '#/components/schemas/ApplePayId'
+          description: Internal ID for the Apple Pay paypoint registration update.
+        type:
+          $ref: '#/components/schemas/ApplePayType'
+          description: The record type, in this context it will always be `ApplePayRegistration`.
+      description: The wallet data.
+      title: AppleWalletData
+    Entry:
+      type: string
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+
+        '
+      title: Entry
+    WalletCascade:
+      type: boolean
+      description: 'When `true`, the wallet service configuration cascades to all paypoints
+
+        and suborganizations belonging to the parent entity.
+
+        '
+      title: WalletCascade
+    ConfigureOrganizationRequestApplePay:
+      type: object
+      properties:
+        cascade:
+          $ref: '#/components/schemas/Cascade'
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+        orgId:
+          $ref: '#/components/schemas/OrganizationId'
+      title: ConfigureOrganizationRequestApplePay
     DomainName:
       type: string
       description: 'The domain. For example: `subdomain.domain.com` or `domain.com`. Must be
@@ -521,54 +541,34 @@ components:
 
         '
       title: DomainName
-    ApplePayPaypointRegistrationData:
+    PayabliErrorBodyResponseData:
       type: object
       properties:
-        entry:
-          $ref: '#/components/schemas/Entry'
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-        walletType:
+        explanation:
           type: string
-          description: The wallet type. In this context it will always be `applepay`.
-        walletData:
-          $ref: '#/components/schemas/AppleWalletData'
-      title: ApplePayPaypointRegistrationData
-    PaypointName:
-      type: string
-      description: The paypoint name.
-      title: PaypointName
-    GoogleWalletData:
-      type: object
-      properties:
-        gatewayMerchantId:
+          description: Human-readable explanation of what happened.
+        todoAction:
           type: string
-          description: The Google Pay merchant identifier.
-        gatewayId:
-          type: string
-          description: The Google Pay gateway identifier.
-      description: The wallet data.
-      title: GoogleWalletData
-    CreatedAt:
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    OrganizationId:
+      type: integer
+      format: int64
+      description: Organization ID for the target organization.
+      title: OrganizationId
+    ApplePayId:
       type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
-    ResponseText:
+      description: The internal identifier for Apple Pay-related information.
+      title: ApplePayId
+    JobStatus:
       type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    ConfigurePaypointRequestApplePay:
-      type: object
-      properties:
-        entry:
-          $ref: '#/components/schemas/Entry'
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-          description: When `true`, Apple Pay is enabled.
-      title: ConfigurePaypointRequestApplePay
+      enum:
+      - in_progress
+      - completed
+      - failed
+      description: The cascade process status.
+      title: JobStatus
   securitySchemes:
     BearerAuth:
       type: http

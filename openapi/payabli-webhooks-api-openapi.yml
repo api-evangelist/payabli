@@ -1,0 +1,2734 @@
+openapi: 3.2.0
+info:
+  title: Webhooks API
+  version: 1.0.0
+tags:
+- name: Webhooks
+paths: {}
+webhooks:
+  subpackage_payOutWebhooks.payoutTransactionVoidedCancelled:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionVoidedCancelled
+      summary: Transaction Voided
+      description: 'Triggered when a Pay Out transaction (a payout) is voided or canceled.
+
+
+        Notification name: `payout_transaction_voidedcancelled`
+
+        Legacy notification name: `PayOutCanceled`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionVoidedCancelledContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionProcessing:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionProcessing
+      summary: Pay Out Transaction Processing
+      description: 'Triggered when a pay out transaction enters processing status.
+
+
+        Notification name: `payout_transaction_processing`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionProcessingContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionProcessed:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionProcessed
+      summary: Pay Out Transaction Processed
+      description: 'Triggered when a pay out transaction is processed.
+
+
+        Notification name: `payout_transaction_processed`
+
+        Legacy notification name: `PayOutProcessed`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionProcessedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionOnHold:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionOnHold
+      summary: Pay Out Transaction On Hold
+      description: 'Triggered when a pay out transaction is placed on hold.
+
+
+        Notification name: `payout_transaction_onhold`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionOnHoldContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionReleased:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionReleased
+      summary: Pay Out Transaction Released
+      description: 'Triggered when a pay out transaction is released from hold.
+
+
+        Notification name: `payout_transaction_released`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionReleasedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionRecovered:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionRecovered
+      summary: Pay Out Transaction Recovered
+      description: 'Triggered when a pay out transaction is recovered.
+
+
+        Notification name: `payout_transaction_recovered`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionRecoveredContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionInitiated:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionInitiated
+      summary: Pay Out Transaction Initiated
+      description: 'Triggered when a pay out transaction is initiated.
+
+
+        Notification name: `payout_transaction_initiated`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionInitiatedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionAuthorized:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionAuthorized
+      summary: Pay Out Transaction Authorized
+      description: 'Triggered when a pay out transaction is authorized.
+
+
+        Notification name: `payout_transaction_authorized`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionAuthorizedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionApprovedCaptured:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionApprovedCaptured
+      summary: Pay Out Transaction Approved/Captured
+      description: 'Triggered when a pay out transaction is approved and captured.
+
+
+        Notification name: `payout_transaction_approvedcaptured`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionApprovedCapturedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionDeclined:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionDeclined
+      summary: Pay Out Transaction Declined
+      description: 'Triggered when a pay out transaction is declined.
+
+
+        On a failed capture, the payload includes a `Reason` field explaining why the capture didn''t succeed.
+
+
+        Notification name: `payout_transaction_declined`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionDeclinedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionTechnicalDecline:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionTechnicalDecline
+      summary: Pay Out Transaction Technical Decline
+      description: 'Triggered when a pay out transaction is declined due to technical reasons.
+
+
+        The payload includes a `Reason` field explaining why the capture didn''t succeed.
+
+
+        Notification name: `payout_transaction_technicaldecline`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionTechnicalDeclineContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionFailed:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionFailed
+      summary: Pay Out Transaction Failed
+      description: 'Triggered when a pay out transaction fails.
+
+
+        Notification name: `payout_transaction_failed`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionFailedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionError:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionError
+      summary: Pay Out Transaction Error
+      description: 'Triggered when a pay out transaction encounters an error.
+
+
+        On a failed capture, the payload includes a `Reason` field explaining why the capture didn''t succeed.
+
+
+        Notification name: `payout_transaction_error`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionErrorContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionPaid:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionPaid
+      summary: Pay Out Transaction Paid
+      description: 'Triggered when a pay out transaction is paid.
+
+
+        Notification name: `payout_transaction_paid`
+
+        Legacy notification name: `PayOutPaid`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionPaidContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionReturned:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionReturned
+      summary: Pay Out Transaction Returned
+      description: 'Triggered when a pay out transaction is returned.
+
+
+        Notification name: `payout_transaction_returned`
+
+        Legacy notification name: `PayOutReturned`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionReturnedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionRejected:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionRejected
+      summary: Pay Out Transaction Rejected
+      description: 'Triggered when a pay out transaction is rejected.
+
+
+        On a failed capture, the payload includes a `Reason` field explaining why the capture didn''t succeed.
+
+
+        Notification name: `payout_transaction_rejected`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionRejectedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutTransactionDuplicated:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutTransactionDuplicated
+      summary: Pay Out Transaction Duplicated
+      description: 'Triggered when Payabli''s duplicate detection flags a pay out transaction as a potential duplicate. The payload identifies the affected transactions and the details of the anomaly.
+
+
+        Notification name: `payout_transaction_duplicated`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutTransactionDuplicatedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementPending:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementPending
+      summary: Pay Out Batch Settlement Pending
+      description: 'Triggered when a pay out batch settlement is pending.
+
+
+        Notification name: `payout_batch_settlement_pending`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementPendingContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementInTransit:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementInTransit
+      summary: Pay Out Batch Settlement In Transit
+      description: 'Triggered when a pay out batch settlement is in transit.
+
+
+        Notification name: `payout_batch_settlement_intransit`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementInTransitContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementTransferred:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementTransferred
+      summary: Pay Out Batch Settlement Transferred
+      description: 'Triggered when a pay out batch settlement is transferred.
+
+
+        Notification name: `payout_batch_settlement_transferred`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementTransferredContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementFunded:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementFunded
+      summary: Pay Out Batch Settlement Funded
+      description: 'Triggered when a pay out batch settlement is funded.
+
+
+        Notification name: `payout_batch_settlement_funded`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementFundedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementResolved:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementResolved
+      summary: Pay Out Batch Settlement Resolved
+      description: 'Triggered when a pay out batch settlement is resolved.
+
+
+        Notification name: `payout_batch_settlement_resolved`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementResolvedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementException:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementException
+      summary: Pay Out Batch Settlement Exception
+      description: 'Triggered when a pay out batch settlement encounters an exception.
+
+
+        Notification name: `payout_batch_settlement_exception`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementExceptionContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementAchReturnChargeback:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementAchReturnChargeback
+      summary: Pay Out Batch Settlement ACH Return/Chargeback
+      description: 'Triggered when a pay out batch settlement has an ACH return or chargeback.
+
+
+        Notification name: `payout_batch_settlement_achreturnchargeback`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementAchReturnChargebackContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementHeld:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementHeld
+      summary: Pay Out Batch Settlement Held
+      description: 'Triggered when a pay out batch settlement is held.
+
+
+        Notification name: `payout_batch_settlement_held`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementHeldContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchSettlementReleased:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchSettlementReleased
+      summary: Pay Out Batch Settlement Released
+      description: 'Triggered when a pay out batch settlement is released from hold.
+
+
+        Notification name: `payout_batch_settlement_released`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchSettlementReleasedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchFunded:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchFunded
+      summary: Pay Out Batch Funded
+      description: 'Triggered when a pay out batch is funded (replaces payoutbatchfunded).
+
+
+        - Notification name: `payout_batch_funded`
+
+        - Legacy notification name: `payoutbatchfunded`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchFundedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchProcessed:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchProcessed
+      summary: Pay Out Batch Processed
+      description: 'Triggered when a pay out batch is processed (replaces payoutbatchprocessed).
+
+
+        - Notification name: `payout_batch_processed`
+
+        - Legacy notification name: `payoutbatchprocessed`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchProcessedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchPaid:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchPaid
+      summary: Pay Out Batch Paid
+      description: 'Triggered when a pay out batch is paid (replaces payoutbatchpaid).
+
+
+        - Notification name: `payout_batch_paid`
+
+        - Legacy notification name: `payoutbatchpaid`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchPaidContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchFundPending:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchFundPending
+      summary: Pay Out Batch Fund Pending
+      description: 'Triggered when a pay out batch has funding pending (replaces payoutbatchfundingpending).
+
+
+        - Notification name: `payout_batch_fundpending`
+
+        - Legacy notification name: `payoutbatchfundingpending`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchFundPendingContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchOpen:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchOpen
+      summary: Pay Out Batch Open
+      description: 'Triggered when a pay out batch is opened.
+
+
+        Notification name: `payout_batch_open`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchOpenContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchClosed:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchClosed
+      summary: Pay Out Batch Closed
+      description: 'Triggered when a pay out batch is closed.
+
+
+        - Notification name: `payout_batch_closed`
+
+        - Legacy notification name: `payoutbatchclosed`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchClosedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchNotClosed:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchNotClosed
+      summary: Pay Out Batch Not Closed
+      description: 'Triggered when a pay out batch is not closed.
+
+
+        Notification name: `payout_batch_notclosed`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchNotClosedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchCancelled:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchCancelled
+      summary: Pay Out Batch Cancelled
+      description: 'Triggered when a pay out batch is cancelled (replaces payoutbatchcancelled).
+
+
+        - Notification name: `payout_batch_cancelled`
+
+        - Legacy notification name: `payoutbatchcancelled`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchCancelledContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchTransferred:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchTransferred
+      summary: Pay Out Batch Transferred
+      description: 'Triggered when a pay out batch is transferred.
+
+
+        Notification name: `payout_batch_transferred`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchTransferredContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchResolved:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchResolved
+      summary: Pay Out Batch Resolved
+      description: 'Triggered when a pay out batch is resolved.
+
+
+        Notification name: `payout_batch_resolved`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchResolvedContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchOnHold:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchOnHold
+      summary: Pay Out Batch On Hold
+      description: 'Triggered when a pay out batch is placed on hold.
+
+
+        Notification name: `payout_batch_onhold`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchOnHoldContent'
+      tags:
+      - Webhooks
+  subpackage_payOutWebhooks.payoutBatchReleased:
+    post:
+      operationId: subpackage_payOutWebhooks.payoutBatchReleased
+      summary: Pay Out Batch Released
+      description: 'Triggered when a pay out batch is released from hold.
+
+
+        Notification name: `payout_batch_released`'
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutBatchReleasedContent'
+      tags:
+      - Webhooks
+components:
+  schemas:
+    PayoutTransactionReleasedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutReleased
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionReleasedContent
+    PayoutTransactionErrorContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutError
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+        FundingSource:
+          type: string
+          description: The funding source used to fund the payout.
+        PaymentStatus:
+          type: string
+          description: The resulting payment status for the transaction after the capture attempt.
+        Reason:
+          type: string
+          description: The reason the payout capture didn't succeed.
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - entryPoint
+      - RefundAmount
+      - FundingSource
+      - PaymentStatus
+      - Reason
+      title: PayoutTransactionErrorContent
+    PayoutBatchTransferredContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchTransferred
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchTransferredContent
+    PayoutBatchFundPendingContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchFundingPending
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchFundPendingContent
+    PayoutTransactionDeclinedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutDeclined
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+        FundingSource:
+          type: string
+          description: The funding source used to fund the payout.
+        PaymentStatus:
+          type: string
+          description: The resulting payment status for the transaction after the capture attempt.
+        Reason:
+          type: string
+          description: The reason the payout capture didn't succeed.
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      - FundingSource
+      - PaymentStatus
+      - Reason
+      title: PayoutTransactionDeclinedContent
+    PayoutBatchSettlementInTransitContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferInTransit
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementInTransitContent
+    PayoutTransactionTechnicalDeclineContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutTechnicalDecline
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+        FundingSource:
+          type: string
+          description: The funding source used to fund the payout.
+        PaymentStatus:
+          type: string
+          description: The resulting payment status for the transaction after the capture attempt.
+        Reason:
+          type: string
+          description: The reason the payout capture didn't succeed.
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      - FundingSource
+      - PaymentStatus
+      - Reason
+      title: PayoutTransactionTechnicalDeclineContent
+    PayoutTransactionFailedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutFailed
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionFailedContent
+    PayoutTransactionApprovedCapturedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutApprovedCaptured
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionApprovedCapturedContent
+    PayoutBatchCancelledContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchCancelled
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchCancelledContent
+    PayoutTransactionVoidedCancelledContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutVoidedCancelled
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - RefundAmount
+      title: PayoutTransactionVoidedCancelledContent
+    PayoutBatchSettlementExceptionContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferException
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementExceptionContent
+    PayoutBatchSettlementTransferredContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferTransferred
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementTransferredContent
+    PayoutBatchFundedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchFunded
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchFundedContent
+    PayoutBatchOnHoldContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchOnHold
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchOnHoldContent
+    PayoutBatchSettlementResolvedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferResolved
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementResolvedContent
+    PayoutBatchOpenContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchOpen
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchOpenContent
+    PayoutBatchResolvedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchResolved
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchResolvedContent
+    PayoutTransactionOnHoldContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutOnHold
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionOnHoldContent
+    PayoutTransactionDuplicatedContent:
+      type: object
+      properties:
+        anomalyType:
+          type: string
+          description: The type of anomaly detected. For a duplicated-transaction event, this is `DuplicateTransaction`.
+        anomalyStatus:
+          type: string
+          description: The review status of the anomaly, for example `Active`, `Reviewed`, or `Ignored`.
+        affectedIds:
+          type: string
+          description: A JSON-encoded array, sent as a string, of the IDs of the transactions flagged as duplicates.
+        gateway:
+          type: string
+          description: Identifier of the gateway associated with the affected transactions
+        duplicateCount:
+          type: integer
+          description: The number of transactions flagged as duplicates
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the anomaly was detected, in ISO 8601 format
+        paypointId:
+          type: integer
+          format: int64
+          description: The unique identifier of the paypoint
+        vendorId:
+          type: integer
+          format: int64
+          description: The unique identifier of the vendor
+        vendorName:
+          type: string
+          description: The vendor's name
+        vendorNumber:
+          type: string
+          description: The vendor's vendor number
+        event:
+          type: string
+          enum:
+          - PayoutTransactionDuplicated
+          description: Event type identifier
+        paypoint:
+          type: string
+          description: The legal name of the paypoint
+        text:
+          type: string
+          description: Human-readable description of the event
+        contactUs:
+          type: string
+          description: The paypoint's contact information
+        externalPaypointId:
+          type: string
+          description: External paypoint system identifier. Omitted when not set.
+        entryPoint:
+          type: string
+          description: The paypoint's entrypoint identifier
+      title: PayoutTransactionDuplicatedContent
+    PayoutTransactionInitiatedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutInitiated
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionInitiatedContent
+    PayoutTransactionProcessedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutProcessed
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionProcessedContent
+    PayoutTransactionReturnedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutReturned
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionReturnedContent
+    PayoutBatchClosedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchClosed
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchClosedContent
+    PayoutTransactionRecoveredContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutRecovered
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionRecoveredContent
+    PayoutTransactionRejectedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutRejected
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+        FundingSource:
+          type: string
+          description: The funding source used to fund the payout.
+        PaymentStatus:
+          type: string
+          description: The resulting payment status for the transaction after the capture attempt.
+        Reason:
+          type: string
+          description: The reason the payout capture didn't succeed.
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      - FundingSource
+      - PaymentStatus
+      - Reason
+      title: PayoutTransactionRejectedContent
+    PayoutBatchNotClosedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchNotClosed
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchNotClosedContent
+    PayoutBatchReleasedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchReleased
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchReleasedContent
+    PayoutBatchSettlementHeldContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferHeld
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementHeldContent
+    PayoutBatchSettlementReleasedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferReleased
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementReleasedContent
+    PayoutBatchProcessedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchProcessed
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchProcessedContent
+    PayoutBatchSettlementAchReturnChargebackContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferAchReturnChargeback
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementAchReturnChargebackContent
+    PayoutTransactionProcessingContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutProcessing
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionProcessingContent
+    PayoutBatchSettlementFundedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferFunded
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementFundedContent
+    PayoutTransactionPaidContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutPaid
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionPaidContent
+    PayoutTransactionAuthorizedContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutAuthorized
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        TransId:
+          type: string
+          description: Unique transaction identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        CustomerId:
+          type: string
+          description: The unique identifier for the customer
+        CustomerNumber:
+          type: string
+          description: Internal customer identifier
+        Method:
+          type: string
+          description: Payment processing method
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+        TraceNumber:
+          type:
+          - string
+          - 'null'
+          description: Trace number for the vendor ACH credit
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        RefundAmount:
+          type: string
+          description: Leftover amount not accepted by the vendor when a payout is partially accepted
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - TransId
+      - TotalAmount
+      - CustomerId
+      - CustomerNumber
+      - Method
+      - ExternalPaypointId
+      - TraceNumber
+      - entryPoint
+      - RefundAmount
+      title: PayoutTransactionAuthorizedContent
+    PayoutBatchSettlementPendingContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - TransferPending
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        transferId:
+          type: string
+          description: Unique transfer identifier
+        NetAmount:
+          type: string
+          description: Net transaction amount in currency format
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        RtAmount:
+          type: string
+          description: Return amount in currency format
+        transferTime:
+          type: string
+          description: Transfer timestamp in M/D/YYYY H:mm:ss format
+        batchId:
+          type: string
+          description: Unique batch identifier
+        ContactUs:
+          type: string
+          description: Contact information string
+        batchNumber:
+          type: string
+          description: Batch number identifier (UUID format)
+        entryPoint:
+          type: string
+          description: System entry point identifier
+        ExternalPaypointId:
+          type:
+          - string
+          - 'null'
+          description: External paypoint system identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - transferId
+      - NetAmount
+      - TotalAmount
+      - RtAmount
+      - transferTime
+      - batchId
+      - ContactUs
+      - batchNumber
+      - entryPoint
+      - ExternalPaypointId
+      title: PayoutBatchSettlementPendingContent
+    PayoutBatchPaidContent:
+      type: object
+      properties:
+        Event:
+          type: string
+          enum:
+          - PayOutBatchPaid
+          description: Event type identifier
+        Paypoint:
+          type: string
+          description: The name of the merchant/paypoint
+        Text:
+          type: string
+          description: Human-readable description of the event
+        BatchId:
+          type: string
+          description: Unique batch identifier
+        TotalAmount:
+          type: string
+          description: Total transaction amount including fees
+        Method:
+          type: string
+          description: Payment processing method
+        entryPoint:
+          type: string
+          description: System entry point identifier
+      required:
+      - Event
+      - Paypoint
+      - Text
+      - BatchId
+      - TotalAmount
+      - Method
+      - entryPoint
+      title: PayoutBatchPaidContent

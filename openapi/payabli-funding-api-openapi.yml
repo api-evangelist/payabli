@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill Funding API
+  title: reference Funding API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -64,36 +64,44 @@ paths:
               $ref: '#/components/schemas/DepositFundsBody'
 components:
   schemas:
-    DepositFundsBody:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: double
-          description: The amount to deposit, in dollars. Must be greater than zero.
-        entrypoint:
-          $ref: '#/components/schemas/Entrypointfield'
-          description: The entry point identifier for the paypoint receiving the deposit.
-        accountId:
-          type: string
-          description: The remittance account ID to withdraw funds from.
-        paypointId:
-          $ref: '#/components/schemas/PaypointId'
-          description: The paypoint ID. Optional if the entry point uniquely identifies the paypoint.
-        sameDayAch:
-          type: boolean
-          description: When `true` and the request is submitted before 2 PM ET, the deposit processes as same-day ACH. If the request is submitted after 2 PM ET, it processes as standard ACH regardless of this flag.
-      required:
-      - amount
-      - entrypoint
-      - accountId
-      description: Request body for depositing funds into a paypoint's available payout balance.
-      title: DepositFundsBody
     PaypointId:
       type: integer
       format: int64
       description: The paypoint's ID. Note that this is different than the entryname.
       title: PaypointId
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    DepositFundsResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          oneOf:
+          - $ref: '#/components/schemas/Responsedata'
+          - type: 'null'
+          description: The object containing the response data.
+        pageIdentifier:
+          oneOf:
+          - $ref: '#/components/schemas/PageIdentifier'
+          - type: 'null'
+          description: Auxiliary validation used internally by payment pages and components.
+      required:
+      - responseText
+      - responseData
+      - pageIdentifier
+      description: Response for a deposit funds request.
+      title: DepositFundsResponse
     PayabliErrorBody:
       type: object
       properties:
@@ -122,6 +130,49 @@ components:
 
         '
       title: PayabliErrorBody
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    DepositFundsBody:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The amount to deposit, in dollars. Must be greater than zero.
+        entrypoint:
+          $ref: '#/components/schemas/Entrypointfield'
+          description: The entry point identifier for the paypoint receiving the deposit.
+        accountId:
+          type: string
+          description: The remittance account ID to withdraw funds from.
+        paypointId:
+          $ref: '#/components/schemas/PaypointId'
+          description: The paypoint ID. Optional if the entry point uniquely identifies the paypoint.
+        sameDayAch:
+          type: boolean
+          description: When `true` and the request is submitted before 2 PM ET, the deposit processes as same-day ACH. If the request is submitted after 2 PM ET, it processes as standard ACH regardless of this flag.
+      required:
+      - amount
+      - entrypoint
+      - accountId
+      description: Request body for depositing funds into a paypoint's available payout balance.
+      title: DepositFundsBody
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -133,57 +184,6 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
-    Responsedata:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: The object containing the response data.
-      title: Responsedata
-    DepositFundsResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          oneOf:
-          - $ref: '#/components/schemas/Responsedata'
-          - type: 'null'
-          description: The object containing the response data.
-        pageIdentifier:
-          oneOf:
-          - $ref: '#/components/schemas/PageIdentifier'
-          - type: 'null'
-          description: Auxiliary validation used internally by payment pages and components.
-      required:
-      - responseText
-      - responseData
-      - pageIdentifier
-      description: Response for a deposit funds request.
-      title: DepositFundsResponse
-    Entrypointfield:
-      type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
   securitySchemes:
     BearerAuth:
       type: http

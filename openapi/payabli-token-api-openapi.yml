@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API reference Bill Token API
+  title: reference Token API
   version: 1.0.0
 servers:
 - url: https://api-sandbox.payabli.com/api
@@ -37,20 +37,29 @@ paths:
               $ref: '#/components/schemas/TokenExchangeByClientIdModel'
 components:
   schemas:
-    TokenErrorResponse:
+    PayabliAccessTokenResponse:
       type: object
       properties:
-        errorType:
+        token_type:
           type: string
-          description: The error category, for example `InvalidCredentials`.
-        errorMessage:
+          description: The token type. Send the access token in the `Authorization` header as `Bearer <access_token>`.
+        access_token:
           type: string
-          description: A human-readable error description.
+          description: The access token to send on subsequent API calls.
+        expires_in:
+          type: integer
+          description: The token's lifetime in seconds. Request a new token when it expires.
+        state:
+          type:
+          - string
+          - 'null'
+          description: The opaque value sent in the request, echoed back. Present only when you send `state` in the request.
       required:
-      - errorType
-      - errorMessage
-      description: Error response from the token endpoint when the request is invalid, for example when the client credentials are wrong.
-      title: TokenErrorResponse
+      - token_type
+      - access_token
+      - expires_in
+      description: Successful response from the token endpoint. Returns the access token, its lifetime, and any state echoed from the request.
+      title: PayabliAccessTokenResponse
     TokenExchangeByClientIdModel:
       type: object
       properties:
@@ -78,29 +87,20 @@ components:
       - clientSecret
       description: Request body for exchanging client credentials for an access token.
       title: TokenExchangeByClientIdModel
-    PayabliAccessTokenResponse:
+    TokenErrorResponse:
       type: object
       properties:
-        token_type:
+        errorType:
           type: string
-          description: The token type. Send the access token in the `Authorization` header as `Bearer <access_token>`.
-        access_token:
+          description: The error category, for example `InvalidCredentials`.
+        errorMessage:
           type: string
-          description: The access token to send on subsequent API calls.
-        expires_in:
-          type: integer
-          description: The token's lifetime in seconds. Request a new token when it expires.
-        state:
-          type:
-          - string
-          - 'null'
-          description: The opaque value sent in the request, echoed back. Present only when you send `state` in the request.
+          description: A human-readable error description.
       required:
-      - token_type
-      - access_token
-      - expires_in
-      description: Successful response from the token endpoint. Returns the access token, its lifetime, and any state echoed from the request.
-      title: PayabliAccessTokenResponse
+      - errorType
+      - errorMessage
+      description: Error response from the token endpoint when the request is invalid, for example when the client credentials are wrong.
+      title: TokenErrorResponse
   securitySchemes:
     BearerAuth:
       type: http
