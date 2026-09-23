@@ -76,6 +76,67 @@ paths:
               $ref: '#/components/schemas/VerifyAccountDetailsRequest'
 components:
   schemas:
+    VerifyAccountDetailsRequest:
+      type: object
+      properties:
+        routingNumber:
+          type: string
+          description: The bank routing number to verify.
+        accountNumber:
+          type: string
+          description: The bank account number to verify.
+        accountType:
+          type: string
+          description: The type of bank account, such as `Checking` or `Savings`.
+        country:
+          type: string
+          description: The ISO country code for the bank account, such as `US`.
+        accountHolderType:
+          type: string
+          description: The type of account holder. Accepted values are `personal` or `business`. Required when bank authentication is enabled for the paypoint's organization.
+        holderName:
+          type: string
+          description: The name of the bank account holder. For personal accounts, provide the holder's full name (for example, `Jane Doe`); the value is split on the first space into first and last name. For business accounts, provide the legal business name. Required when bank authentication is enabled for the paypoint's organization.
+      required:
+      - routingNumber
+      - accountNumber
+      title: VerifyAccountDetailsRequest
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     BankAccountVerificationDetailsResponse:
       type: object
       properties:
@@ -140,40 +201,6 @@ components:
       - accountClosedDate
       description: Detailed bank account verification results from the verification network.
       title: BankAccountVerificationDetailsResponse
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -185,39 +212,6 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    VerifyAccountDetailsRequest:
-      type: object
-      properties:
-        routingNumber:
-          type: string
-          description: The bank routing number to verify.
-        accountNumber:
-          type: string
-          description: The bank account number to verify.
-        accountType:
-          type: string
-          description: The type of bank account, such as `Checking` or `Savings`.
-        country:
-          type: string
-          description: The ISO country code for the bank account, such as `US`.
-        accountHolderType:
-          type: string
-          description: The type of account holder. Accepted values are `personal` or `business`. Required when bank authentication is enabled for the paypoint's organization.
-        holderName:
-          type: string
-          description: The name of the bank account holder. For personal accounts, provide the holder's full name (for example, `Jane Doe`); the value is split on the first space into first and last name. For business accounts, provide the legal business name. Required when bank authentication is enabled for the paypoint's organization.
-      required:
-      - routingNumber
-      - accountNumber
-      title: VerifyAccountDetailsRequest
     VerifyAccountDetailsResponse:
       type: object
       properties:
@@ -231,6 +225,12 @@ components:
       - responseText
       description: Response wrapper for the bank account verification details endpoint.
       title: VerifyAccountDetailsResponse
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
   securitySchemes:
     BearerAuth:
       type: http

@@ -8,7 +8,7 @@ servers:
 - url: https://api.payabli.com/api
   description: Production
 tags:
-- name: lineItem
+- name: Line Item
 paths:
   /LineItem/{entry}:
     post:
@@ -16,7 +16,7 @@ paths:
       summary: Add item to entrypoint catalog
       description: Adds products and services to an entrypoint's catalog. These are used as line items for invoicing and transactions. In the response, "responseData" displays the item's code.
       tags:
-      - lineItem
+      - Line Item
       parameters:
       - name: entry
         in: path
@@ -80,7 +80,7 @@ paths:
       summary: Get item in entrypoint
       description: Gets an item by ID.
       tags:
-      - lineItem
+      - Line Item
       parameters:
       - name: lineItemId
         in: path
@@ -132,7 +132,7 @@ paths:
       summary: Update item in entrypoint
       description: Updates an item.
       tags:
-      - lineItem
+      - Line Item
       parameters:
       - name: lineItemId
         in: path
@@ -189,7 +189,7 @@ paths:
       summary: Delete item in entrypoint
       description: Deletes an item.
       tags:
-      - lineItem
+      - Line Item
       parameters:
       - name: lineItemId
         in: path
@@ -242,7 +242,7 @@ paths:
       summary: Get list of items for entrypoint
       description: Retrieves a list of line items and their details from an entrypoint. Line items are also known as items, products, and services. Use filters to limit results.
       tags:
-      - lineItem
+      - Line Item
       parameters:
       - name: entry
         in: path
@@ -321,24 +321,39 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
-    ItemProductCode:
+    CreatedAt:
       type: string
-      description: Item or product code. Max length of 250 characters.
-      title: ItemProductCode
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
     ItemDescription:
       type: string
       description: Item or product description. Max length of 250 characters.
       title: ItemDescription
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
+    QuerySummary:
+      type: object
+      properties:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount for the records.
+        totalNetAmount:
+          type: number
+          format: double
+          description: Total net amount for the records.
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummary
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
     LineItem:
       type: object
       properties:
@@ -371,27 +386,10 @@ components:
       - itemCost
       - itemQty
       title: LineItem
-    LastModified:
+    ItemCommodityCode:
       type: string
-      format: date-time
-      description: Timestamp of when record was last updated, in UTC.
-      title: LastModified
-    ItemProductName:
-      type: string
-      description: Item or product name. Max length of 250 characters.
-      title: ItemProductName
-    Totalrecords:
-      type: integer
-      description: Total number of records in response.
-      title: Totalrecords
-    Dbaname:
-      type: string
-      description: 'The alternate or common name that this business is doing business under,
-
-        usually referred to as a DBA name.
-
-        '
-      title: Dbaname
+      description: Item or product commodity code. Max length of 250 characters.
+      title: ItemCommodityCode
     IsSuccess:
       type: boolean
       description: 'Boolean indicating whether the operation was successful. A `true` value
@@ -400,11 +398,6 @@ components:
 
         '
       title: IsSuccess
-    CreatedAt:
-      type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
     QueryResponseItems:
       type: object
       properties:
@@ -416,42 +409,101 @@ components:
           $ref: '#/components/schemas/QuerySummary'
       description: Response for line item queries
       title: QueryResponseItems
-    PayabliErrorBody:
+    ItemUnitofMeasure:
+      type: string
+      description: Unit of measurement. Max length of 100 characters.
+      title: ItemUnitofMeasure
+    QueryResponseItemsRecordsItem:
+      type: object
+      properties:
+        LineItem:
+          $ref: '#/components/schemas/LineItem'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+          description: The paypoint's DBA name.
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+          description: The paypoint's entry name (entrypoint).
+        PaypointLegalname:
+          $ref: '#/components/schemas/Legalname'
+          description: The paypoint's legal name.
+      title: QueryResponseItemsRecordsItem
+    OrgParentName:
+      type: string
+      description: The name of the parent organization.
+      title: OrgParentName
+    DeleteItemResponse:
       type: object
       properties:
         isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
+          $ref: '#/components/schemas/IsSuccess'
         responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
+          $ref: '#/components/schemas/ResponseText'
       required:
       - isSuccess
       - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
+      title: DeleteItemResponse
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    Legalname:
+      type: string
+      description: Business legal name.
+      title: Legalname
+    PayabliApiResponse6:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: If `isSuccess` = true, this contains the line item identifier. If `isSuccess` = false, this contains the reason for the error.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      description: Response schema for line item operations.
+      title: PayabliApiResponse6
+    ItemProductCode:
+      type: string
+      description: Item or product code. Max length of 250 characters.
+      title: ItemProductCode
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
 
         '
-      title: PayabliErrorBody
+      title: ResponseText
+    ItemProductName:
+      type: string
+      description: Item or product name. Max length of 250 characters.
+      title: ItemProductName
     Entrypointfield:
       type: string
       description: The entrypoint identifier.
       title: Entrypointfield
-    Pagesize:
-      type: integer
-      description: Number of records on each response page.
-      title: Pagesize
     LineItemQueryRecord:
       type: object
       properties:
@@ -508,103 +560,51 @@ components:
       - itemCost
       - itemQty
       title: LineItemQueryRecord
-    ItemUnitofMeasure:
+    PageIdentifier:
       type: string
-      description: Unit of measurement. Max length of 100 characters.
-      title: ItemUnitofMeasure
-    Responsedatanonobject:
-      oneOf:
-      - type: string
-      - type: integer
-      description: The response data.
-      title: Responsedatanonobject
-    OrgParentName:
-      type: string
-      description: The name of the parent organization.
-      title: OrgParentName
-    QuerySummary:
-      type: object
-      properties:
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        pageSize:
-          $ref: '#/components/schemas/Pagesize'
-        totalAmount:
-          type: number
-          format: double
-          description: Total amount for the records.
-        totalNetAmount:
-          type: number
-          format: double
-          description: Total net amount for the records.
-        totalPages:
-          $ref: '#/components/schemas/Totalrecords'
-        totalRecords:
-          $ref: '#/components/schemas/Totalrecords'
-      title: QuerySummary
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    QueryResponseItemsRecordsItem:
-      type: object
-      properties:
-        LineItem:
-          $ref: '#/components/schemas/LineItem'
-        ParentOrgName:
-          $ref: '#/components/schemas/OrgParentName'
-        PaypointDbaname:
-          $ref: '#/components/schemas/Dbaname'
-          description: The paypoint's DBA name.
-        PaypointEntryname:
-          $ref: '#/components/schemas/Entrypointfield'
-          description: The paypoint's entry name (entrypoint).
-        PaypointLegalname:
-          $ref: '#/components/schemas/Legalname'
-          description: The paypoint's legal name.
-      title: QueryResponseItemsRecordsItem
-    DeleteItemResponse:
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    PayabliErrorBody:
       type: object
       properties:
         isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
         responseText:
-          $ref: '#/components/schemas/ResponseText'
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
       required:
       - isSuccess
       - responseText
-      title: DeleteItemResponse
-    PayabliApiResponse6:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-          description: If `isSuccess` = true, this contains the line item identifier. If `isSuccess` = false, this contains the reason for the error.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      description: Response schema for line item operations.
-      title: PayabliApiResponse6
-    ItemCommodityCode:
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    LastModified:
       type: string
-      description: Item or product commodity code. Max length of 250 characters.
-      title: ItemCommodityCode
-    Legalname:
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    Dbaname:
       type: string
-      description: Business legal name.
-      title: Legalname
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
   securitySchemes:
     BearerAuth:
       type: http

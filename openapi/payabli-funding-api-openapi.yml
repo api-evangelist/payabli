@@ -64,21 +64,6 @@ paths:
               $ref: '#/components/schemas/DepositFundsBody'
 components:
   schemas:
-    PaypointId:
-      type: integer
-      format: int64
-      description: The paypoint's ID. Note that this is different than the entryname.
-      title: PaypointId
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
     DepositFundsResponse:
       type: object
       properties:
@@ -102,6 +87,11 @@ components:
       - pageIdentifier
       description: Response for a deposit funds request.
       title: DepositFundsResponse
+    PaypointId:
+      type: integer
+      format: int64
+      description: The paypoint's ID. Note that this is different than the entryname.
+      title: PaypointId
     PayabliErrorBody:
       type: object
       properties:
@@ -130,10 +120,18 @@ components:
 
         '
       title: PayabliErrorBody
-    Entrypointfield:
+    PageIdentifier:
       type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     DepositFundsBody:
       type: object
       properties:
@@ -159,14 +157,6 @@ components:
       - accountId
       description: Request body for depositing funds into a paypoint's available payout balance.
       title: DepositFundsBody
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
     Responsedata:
       type: object
       additionalProperties:
@@ -184,6 +174,16 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
   securitySchemes:
     BearerAuth:
       type: http

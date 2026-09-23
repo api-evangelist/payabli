@@ -14,7 +14,7 @@ paths:
     post:
       operationId: createServerSideToken
       summary: Get an access token (server-side)
-      description: 'Exchanges a client ID and client secret for a short-lived Bearer access token using the OAuth2 client-credentials flow. Designed for server-to-server use: the credentials and the returned token stay on your backend. Send the returned `access_token` in the `Authorization` header as `Bearer <access_token>` on subsequent API calls. See the [OAuth authentication guide](/developers/oauth-authentication) for the full flow.'
+      description: 'Exchanges a client ID and client secret for a short-lived Bearer access token using the OAuth2 client-credentials flow. Designed for server-to-server use: the credentials and the returned token stay on your backend. Send the returned `access_token` in the `Authorization` header as `Bearer ` on subsequent API calls. See the OAuth authentication guide for the full flow.'
       tags:
       - Token
       responses:
@@ -37,6 +37,20 @@ paths:
               $ref: '#/components/schemas/TokenExchangeByClientIdModel'
 components:
   schemas:
+    TokenErrorResponse:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: The error category, for example `InvalidCredentials`.
+        errorMessage:
+          type: string
+          description: A human-readable error description.
+      required:
+      - errorType
+      - errorMessage
+      description: Error response from the token endpoint when the request is invalid, for example when the client credentials are wrong.
+      title: TokenErrorResponse
     PayabliAccessTokenResponse:
       type: object
       properties:
@@ -87,20 +101,6 @@ components:
       - clientSecret
       description: Request body for exchanging client credentials for an access token.
       title: TokenExchangeByClientIdModel
-    TokenErrorResponse:
-      type: object
-      properties:
-        errorType:
-          type: string
-          description: The error category, for example `InvalidCredentials`.
-        errorMessage:
-          type: string
-          description: A human-readable error description.
-      required:
-      - errorType
-      - errorMessage
-      description: Error response from the token endpoint when the request is invalid, for example when the client credentials are wrong.
-      title: TokenErrorResponse
   securitySchemes:
     BearerAuth:
       type: http

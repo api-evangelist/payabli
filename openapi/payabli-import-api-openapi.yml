@@ -14,7 +14,7 @@ paths:
     post:
       operationId: ImportCustomer
       summary: Import list of customers
-      description: Import a list of customers from a CSV file. See the [Import Guide](/developers/developer-guides/entities-customers#import-customers) for more help and example files.
+      description: Import a list of customers from a CSV file. See the Import Guide for more help and example files.
       tags:
       - Import
       parameters:
@@ -85,7 +85,7 @@ paths:
     post:
       operationId: ImportVendor
       summary: Import list of vendors
-      description: Import a list of vendors from a CSV file. See the [Import Guide](/developers/developer-guides/entities-vendors#import-vendors) for more help and example files.
+      description: Import a list of vendors from a CSV file. See the Import Guide for more help and example files.
       tags:
       - Import
       parameters:
@@ -149,7 +149,7 @@ paths:
     post:
       operationId: ImportBills
       summary: Import list of bills
-      description: Import a list of bills from a CSV file. See the [Import Guide](/developers/developer-guides/bills-add#import-bills) for more help and an example file.
+      description: Import a list of bills from a CSV file. See the Import Guide for more help and an example file.
       tags:
       - Import
       parameters:
@@ -212,24 +212,6 @@ paths:
               - file
 components:
   schemas:
-    Responsecode:
-      type: integer
-      description: 'Code for the response. Learn more in
-
-        [API Response Codes](/developers/api-reference/api-responses).
-
-        '
-      title: Responsecode
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
     PayabliApiResponseImportResponseData:
       type: object
       properties:
@@ -246,23 +228,6 @@ components:
           description: The number of records that were rejected.
       description: The response data containing the result of the import operation.
       title: PayabliApiResponseImportResponseData
-    PayabliApiResponseImport:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          $ref: '#/components/schemas/PayabliApiResponseImportResponseData'
-          description: The response data containing the result of the import operation.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponseImport
     PayabliErrorBody:
       type: object
       properties:
@@ -291,10 +256,10 @@ components:
 
         '
       title: PayabliErrorBody
-    Entrypointfield:
+    PageIdentifier:
       type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
     IsSuccess:
       type: boolean
       description: 'Boolean indicating whether the operation was successful. A `true` value
@@ -303,6 +268,31 @@ components:
 
         '
       title: IsSuccess
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    PayabliApiResponseImport:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/PayabliApiResponseImportResponseData'
+          description: The response data containing the result of the import operation.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseImport
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -314,6 +304,16 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
   securitySchemes:
     BearerAuth:
       type: http

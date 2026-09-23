@@ -3,16 +3,23 @@ method: searched
 host: https://api.payabli.com
 also_probed:
 - https://payabli.com
-documents:
-- path: /.well-known/security.txt
-  status: 404
-- path: /.well-known/openid-configuration
-  status: 404
-- path: /.well-known/oauth-authorization-server
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
-notes: "No /.well-known/ discovery documents were served on the API or website hosts (all 404 as of the\
-  \ probe date). Absence is a valid recorded result \u2014 no WellKnown pointer wired."
+notes: No /.well-known/ discovery documents were served on the API or website hosts (all 404 as of the
+  probe date). Absence is a valid recorded result — no WellKnown pointer wired.
+hosts:
+- host: https://api.payabli.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

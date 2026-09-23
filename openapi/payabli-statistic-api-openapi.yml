@@ -539,33 +539,6 @@ components:
       - paid
       - paidVolume
       title: StatisticsVendorQueryRecord
-    StatBasicQueryRecord:
-      type: object
-      properties:
-        statX:
-          type: string
-          description: Statistical grouping identifier
-        inTransactions:
-          type: integer
-          description: Number of incoming transactions
-        inTransactionsVolume:
-          type: number
-          format: double
-          description: Volume of incoming transactions
-        inWalletTransactions:
-          type: integer
-          description: Number of incoming wallet transactions
-        inWalletVolume:
-          type: number
-          format: double
-          description: Volume of incoming wallet transactions
-      required:
-      - statX
-      - inTransactions
-      - inTransactionsVolume
-      - inWalletTransactions
-      - inWalletVolume
-      title: StatBasicQueryRecord
     PayabliErrorBody:
       type: object
       properties:
@@ -781,6 +754,17 @@ components:
       - inCardChargeBackVolume
       - inACHReturnsVolume
       title: StatBasicExtendedQueryRecord
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
     SubscriptionStatsQueryRecord:
       type: object
       properties:
@@ -799,17 +783,33 @@ components:
       - count
       - volume
       title: SubscriptionStatsQueryRecord
-    PayabliErrorBodyResponseData:
+    StatBasicQueryRecord:
       type: object
       properties:
-        explanation:
+        statX:
           type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
+          description: Statistical grouping identifier
+        inTransactions:
+          type: integer
+          description: Number of incoming transactions
+        inTransactionsVolume:
+          type: number
+          format: double
+          description: Volume of incoming transactions
+        inWalletTransactions:
+          type: integer
+          description: Number of incoming wallet transactions
+        inWalletVolume:
+          type: number
+          format: double
+          description: Volume of incoming wallet transactions
+      required:
+      - statX
+      - inTransactions
+      - inTransactionsVolume
+      - inWalletTransactions
+      - inWalletVolume
+      title: StatBasicQueryRecord
   securitySchemes:
     BearerAuth:
       type: http

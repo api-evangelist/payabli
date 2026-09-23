@@ -14,7 +14,14 @@ paths:
     post:
       operationId: searchNotificationLogs
       summary: Search Notification Logs
-      description: "Search notification logs with filtering and pagination.\n  - Start date and end date cannot be more than 30 days apart\n  - Either `orgId` or `paypointId` must be provided\n\nThis endpoint requires the `notifications_create` OR `notifications_read` permission."
+      description: 'Search notification logs with filtering and pagination.
+
+        - Start date and end date cannot be more than 30 days apart
+
+        - Either `orgId` or `paypointId` must be provided
+
+
+        This endpoint requires the `notifications_create` OR `notifications_read` permission.'
       tags:
       - Notificationlogs
       parameters:
@@ -224,31 +231,38 @@ paths:
               $ref: '#/components/schemas/BulkRetryRequest'
 components:
   schemas:
-    KeyValueArray:
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    PayabliErrorBody:
       type: object
       properties:
-        key:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
           type: string
-        value:
-          type: array
-          items:
-            type: string
-      title: KeyValueArray
-    StringStringKeyValuePair:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      title: StringStringKeyValuePair
-    BulkRetryRequest:
-      type: array
-      items:
-        type: string
-        format: uuid
-      description: A list of notification log IDs to retry. The maximum number of IDs that can be retried in a single request is 50.
-      title: BulkRetryRequest
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
     NotificationLogSearchRequest:
       type: object
       properties:
@@ -278,39 +292,88 @@ components:
       - startDate
       - endDate
       title: NotificationLogSearchRequest
-    PayabliErrorBody:
+    NotificationLog:
       type: object
       properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
+        id:
           type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
+          format: uuid
+          description: The unique identifier for the notification.
+        orgId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: The ID of the organization that the notification belongs to.
+        paypointId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: The ID of the paypoint that the notification is related to.
+        notificationEvent:
+          type:
+          - string
+          - 'null'
+          description: The event that triggered the notification.
+        target:
+          type:
+          - string
+          - 'null'
+          description: The target URL for the notification.
+        responseStatus:
+          type:
+          - string
+          - 'null'
+          description: The HTTP response status of the notification.
+        success:
+          type: boolean
+          description: Indicates whether the notification was successful.
+        jobData:
+          type:
+          - string
+          - 'null'
+          description: Contains the body of the notification.
+        createdDate:
+          type: string
+          format: date-time
+          description: The date and time when the notification was created.
+        successDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date and time when the notification was successfully delivered.
+        lastFailedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date and time when the notification last failed.
+        isInProgress:
+          type: boolean
+          description: Indicates whether the notification is currently in progress.
       required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
-    notificationlogs_bulkRetryNotificationLogs_Response_201:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: notificationlogs_bulkRetryNotificationLogs_Response_201
+      - id
+      - orgId
+      - paypointId
+      - notificationEvent
+      - target
+      - responseStatus
+      - success
+      - jobData
+      - createdDate
+      - successDate
+      - lastFailedDate
+      - isInProgress
+      title: NotificationLog
+    BulkRetryRequest:
+      type: array
+      items:
+        type: string
+        format: uuid
+      description: A list of notification log IDs to retry. The maximum number of IDs that can be retried in a single request is 50.
+      title: BulkRetryRequest
     NotificationLogDetail:
       type: object
       properties:
@@ -396,85 +459,6 @@ components:
       - lastFailedDate
       - isInProgress
       title: NotificationLogDetail
-    NotificationLog:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier for the notification.
-        orgId:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: The ID of the organization that the notification belongs to.
-        paypointId:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: The ID of the paypoint that the notification is related to.
-        notificationEvent:
-          type:
-          - string
-          - 'null'
-          description: The event that triggered the notification.
-        target:
-          type:
-          - string
-          - 'null'
-          description: The target URL for the notification.
-        responseStatus:
-          type:
-          - string
-          - 'null'
-          description: The HTTP response status of the notification.
-        success:
-          type: boolean
-          description: Indicates whether the notification was successful.
-        jobData:
-          type:
-          - string
-          - 'null'
-          description: Contains the body of the notification.
-        createdDate:
-          type: string
-          format: date-time
-          description: The date and time when the notification was created.
-        successDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date and time when the notification was successfully delivered.
-        lastFailedDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date and time when the notification last failed.
-        isInProgress:
-          type: boolean
-          description: Indicates whether the notification is currently in progress.
-      required:
-      - id
-      - orgId
-      - paypointId
-      - notificationEvent
-      - target
-      - responseStatus
-      - success
-      - jobData
-      - createdDate
-      - successDate
-      - lastFailedDate
-      - isInProgress
-      title: NotificationLog
-    Pagesize:
-      type: integer
-      description: Number of records on each response page.
-      title: Pagesize
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -486,6 +470,29 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
+    KeyValueArray:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: array
+          items:
+            type: string
+      title: KeyValueArray
+    notificationlogs_bulkRetryNotificationLogs_Response_201:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: notificationlogs_bulkRetryNotificationLogs_Response_201
+    StringStringKeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      title: StringStringKeyValuePair
   securitySchemes:
     BearerAuth:
       type: http

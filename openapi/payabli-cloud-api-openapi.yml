@@ -14,7 +14,7 @@ paths:
     post:
       operationId: addDevice
       summary: Register cloud device
-      description: Register a cloud device to an entrypoint. See [Devices Quickstart](/developers/developer-guides/devices-quickstart#devices-quickstart) for a complete guide.
+      description: Register a cloud device to an entrypoint. See Devices Quickstart for a complete guide.
       tags:
       - Cloud
       parameters:
@@ -78,7 +78,7 @@ paths:
     get:
       operationId: ListDevice
       summary: List registered devices in cloud
-      description: 'Use [List devices by paypoint](/developers/api-reference/cloud/get-list-of-devices-for-a-paypoint) instead, which supports filters, sorting, and pagination.
+      description: 'Use List devices by paypoint instead, which supports filters, sorting, and pagination.
 
 
         Get a list of cloud devices registered to an entrypoint.'
@@ -256,62 +256,34 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
-    CloudQueryApiResponse:
+    RemoveDeviceResponse:
       type: object
       properties:
         isSuccess:
           $ref: '#/components/schemas/IsSuccess'
-        responseList:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoiDevice'
-          description: List of devices and history of registration.
         responseText:
           $ref: '#/components/schemas/ResponseText'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          type: string
+          description: 'If `isSuccess` = true, this contains the device identifier.
+
+            If `isSuccess` = false, this contains the reason for the error.
+
+            '
       required:
       - responseText
-      description: Object containing details about cloud devices and their registration history.
-      title: CloudQueryApiResponse
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: RemoveDeviceResponse
     PageIdentifier:
       type: string
       description: Auxiliary validation used internally by payment pages and components.
       title: PageIdentifier
-    DeviceEntry:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description or name for the device. This can be anything, but Payabli recommends entering the name of the paypoint, or some other easy to identify descriptor. If you have several devices for one paypoint, you can give them descriptions like "Cashier 1" and "Cashier 2", or "Front Desk" and "Back Office"
-        registrationCode:
-          type: string
-          description: 'The device registration code or serial number, depending on the model.
-
-
-            - Ingenico devices: This is the activation code that''s displayed on the device screen during setup.
-
-
-            - PAX A920 device: This code is the serial number on the back of the device.'
-      title: DeviceEntry
-    IdempotencyKey:
-      type: string
-      description: '_Optional but recommended._ A unique ID that you can include to prevent
-
-        duplicating objects or transactions in the case that a request is sent
-
-        more than once. This key isn''t generated in Payabli; you must generate it
-
-        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
-
-        the key if needed.
-
-        '
-      title: IdempotencyKey
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
     PayabliErrorBody:
       type: object
       properties:
@@ -340,6 +312,12 @@ components:
 
         '
       title: PayabliErrorBody
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
     IsSuccess:
       type: boolean
       description: 'Boolean indicating whether the operation was successful. A `true` value
@@ -348,54 +326,20 @@ components:
 
         '
       title: IsSuccess
-    AddDeviceResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          type: string
-          description: 'If `isSuccess` = true, this contains the device identifier.
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
 
-            If `isSuccess` = false, this contains the reason for the error.
+        duplicating objects or transactions in the case that a request is sent
 
-            '
-      required:
-      - responseText
-      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+        more than once. This key isn''t generated in Payabli; you must generate it
 
-        the standard response envelope.
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
 
         '
-      title: AddDeviceResponse
-    RemoveDeviceResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          type: string
-          description: 'If `isSuccess` = true, this contains the device identifier.
-
-            If `isSuccess` = false, this contains the reason for the error.
-
-            '
-      required:
-      - responseText
-      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
-
-        the standard response envelope.
-
-        '
-      title: RemoveDeviceResponse
+      title: IdempotencyKey
     PoiDevice:
       type: object
       properties:
@@ -445,6 +389,30 @@ components:
           description: The device serial number.
       description: Information about the point of interaction device (also known as a terminal or cloud device) used to process the transaction.
       title: PoiDevice
+    AddDeviceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          type: string
+          description: 'If `isSuccess` = true, this contains the device identifier.
+
+            If `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: AddDeviceResponse
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -456,6 +424,38 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
+    CloudQueryApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoiDevice'
+          description: List of devices and history of registration.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      description: Object containing details about cloud devices and their registration history.
+      title: CloudQueryApiResponse
+    DeviceEntry:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description or name for the device. This can be anything, but Payabli recommends entering the name of the paypoint, or some other easy to identify descriptor. If you have several devices for one paypoint, you can give them descriptions like "Cashier 1" and "Cashier 2", or "Front Desk" and "Back Office"
+        registrationCode:
+          type: string
+          description: 'The device registration code or serial number, depending on the model.
+
+
+            - Ingenico devices: This is the activation code that''s displayed on the device screen during setup.
+
+
+            - PAX A920 device: This code is the serial number on the back of the device.'
+      title: DeviceEntry
   securitySchemes:
     BearerAuth:
       type: http
