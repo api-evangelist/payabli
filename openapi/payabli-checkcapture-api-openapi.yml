@@ -64,14 +64,38 @@ paths:
               $ref: '#/components/schemas/CheckCaptureRequestBody'
 components:
   schemas:
-    Entry:
+    PageIdentifier:
       type: string
-      description: 'The entity''s entrypoint identifier.
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
 
-        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
 
         '
-      title: Entry
+      title: PayabliErrorBody
     CheckCaptureResponse:
       type: object
       properties:
@@ -165,6 +189,14 @@ components:
       - checkType
       description: Response model for check capture processing.
       title: CheckCaptureResponse
+    Entry:
+      type: string
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+
+        '
+      title: Entry
     CheckCaptureRequestBody:
       type: object
       properties:
@@ -185,38 +217,6 @@ components:
       - rearImage
       - checkAmount
       title: CheckCaptureRequestBody
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
     PayabliErrorBodyResponseData:
       type: object
       properties:

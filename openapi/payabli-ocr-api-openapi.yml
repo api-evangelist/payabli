@@ -104,191 +104,10 @@ paths:
               $ref: '#/components/schemas/FileContentImageOnly'
 components:
   schemas:
-    Email:
-      type: string
-      format: email
-      description: Email address.
-      title: Email
-    OcrBillItem:
-      type: object
-      properties:
-        itemTotalAmount:
-          type: number
-          format: double
-        itemTaxAmount:
-          type: number
-          format: double
-        itemTaxRate:
-          type: number
-          format: double
-        itemProductCode:
-          type: string
-        itemProductName:
-          type: string
-        itemDescription:
-          type: string
-        itemCommodityCode:
-          type: string
-        itemUnitOfMeasure:
-          type: string
-        itemCost:
-          type: number
-          format: double
-        itemQty:
-          type: integer
-        itemMode:
-          type: integer
-        itemCategories:
-          type: array
-          items:
-            type: string
-      title: OcrBillItem
-    OcrVendorAdditionalData:
-      type: object
-      properties:
-        web:
-          type: string
-      title: OcrVendorAdditionalData
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    Contacts:
-      type: object
-      properties:
-        contactEmail:
-          $ref: '#/components/schemas/Email'
-          description: Contact email address.
-        contactName:
-          type: string
-          description: Contact name.
-        contactPhone:
-          type: string
-          description: Contact phone number.
-        contactTitle:
-          type: string
-          description: Contact title.
-        additionalData:
-          $ref: '#/components/schemas/AdditionalDataString'
-      title: Contacts
-    OcrBillItemAdditionalData:
-      type: object
-      properties:
-        category:
-          type: string
-        currency_code:
-          type: string
-        type:
-          type: string
-        reference_number:
-          type: string
-      title: OcrBillItemAdditionalData
-    FileContentFtype:
-      type: string
-      enum:
-      - pdf
-      - doc
-      - docx
-      - jpg
-      - jpeg
-      - png
-      - gif
-      - txt
-      description: The MIME type of the file (if content is provided).
-      title: FileContentFtype
-    OcrResultData:
-      type: object
-      properties:
-        billNumber:
-          type: string
-        netAmount:
-          type: number
-          format: double
-        billDate:
-          type: string
-          format: date-time
-        dueDate:
-          type: string
-          format: date-time
-        comments:
-          type: string
-        billItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/OcrBillItem'
-        mode:
-          type: integer
-        accountingField1:
-          type: string
-        accountingField2:
-          type: string
-        additionalData:
-          $ref: '#/components/schemas/OcrBillItemAdditionalData'
-        vendor:
-          $ref: '#/components/schemas/OcrVendor'
-        endDate:
-          type: string
-          format: date-time
-        frequency:
-          type: string
-        terms:
-          type: string
-        status:
-          type: integer
-        lotNumber:
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/OcrAttachment'
-      title: OcrResultData
-    typeResult:
-      type: string
-      description: The type of object to create in Payabli. Accepted values are `bill` and `invoice`.
-      title: typeResult
-    FileContentImageOnly:
-      type: object
-      properties:
-        ftype:
-          $ref: '#/components/schemas/FileContentFtype'
-        filename:
-          type: string
-          description: The name of the file to be uploaded
-        furl:
-          type: string
-          description: Optional URL link to the file
-        fContent:
-          type: string
-          description: Base64-encoded file content
-      title: FileContentImageOnly
     AdditionalDataString:
       type: string
       description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
       title: AdditionalDataString
-    OcrVendorBillingData:
-      type: object
-      properties:
-        id:
-          type: integer
-        bankName:
-          type: string
-        routingAccount:
-          type: string
-        accountNumber:
-          type: string
-        typeAccount:
-          type: string
-        bankAccountHolderName:
-          type: string
-        bankAccountHolderType:
-          type: string
-        bankAccountFunction:
-          type: integer
-      title: OcrVendorBillingData
     OcrVendor:
       type: object
       properties:
@@ -358,37 +177,6 @@ components:
         additionalData:
           $ref: '#/components/schemas/OcrVendorAdditionalData'
       title: OcrVendor
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    OcrAttachment:
-      type: object
-      properties:
-        ftype:
-          type: string
-        filename:
-          type: string
-        fileDescriptor:
-          type: string
-        furl:
-          type: string
-        fContent:
-          type: string
-      title: OcrAttachment
     PayabliErrorBody:
       type: object
       properties:
@@ -417,6 +205,167 @@ components:
 
         '
       title: PayabliErrorBody
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    FileContentImageOnly:
+      type: object
+      properties:
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        filename:
+          type: string
+          description: The name of the file to be uploaded
+        furl:
+          type: string
+          description: Optional URL link to the file
+        fContent:
+          type: string
+          description: Base64-encoded file content
+      title: FileContentImageOnly
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    OcrBillItem:
+      type: object
+      properties:
+        itemTotalAmount:
+          type: number
+          format: double
+        itemTaxAmount:
+          type: number
+          format: double
+        itemTaxRate:
+          type: number
+          format: double
+        itemProductCode:
+          type: string
+        itemProductName:
+          type: string
+        itemDescription:
+          type: string
+        itemCommodityCode:
+          type: string
+        itemUnitOfMeasure:
+          type: string
+        itemCost:
+          type: number
+          format: double
+        itemQty:
+          type: integer
+        itemMode:
+          type: integer
+        itemCategories:
+          type: array
+          items:
+            type: string
+      title: OcrBillItem
+    OcrResultData:
+      type: object
+      properties:
+        billNumber:
+          type: string
+        netAmount:
+          type: number
+          format: double
+        billDate:
+          type: string
+          format: date-time
+        dueDate:
+          type: string
+          format: date-time
+        comments:
+          type: string
+        billItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OcrBillItem'
+        mode:
+          type: integer
+        accountingField1:
+          type: string
+        accountingField2:
+          type: string
+        additionalData:
+          $ref: '#/components/schemas/OcrBillItemAdditionalData'
+        vendor:
+          $ref: '#/components/schemas/OcrVendor'
+        endDate:
+          type: string
+          format: date-time
+        frequency:
+          type: string
+        terms:
+          type: string
+        status:
+          type: integer
+        lotNumber:
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/OcrAttachment'
+      title: OcrResultData
+    OcrResponseData:
+      type: object
+      properties:
+        resultData:
+          $ref: '#/components/schemas/OcrResultData'
+      title: OcrResponseData
+    OcrVendorAdditionalData:
+      type: object
+      properties:
+        web:
+          type: string
+      title: OcrVendorAdditionalData
+    OcrVendorBillingData:
+      type: object
+      properties:
+        id:
+          type: integer
+        bankName:
+          type: string
+        routingAccount:
+          type: string
+        accountNumber:
+          type: string
+        typeAccount:
+          type: string
+        bankAccountHolderName:
+          type: string
+        bankAccountHolderType:
+          type: string
+        bankAccountFunction:
+          type: integer
+      title: OcrVendorBillingData
+    Contacts:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
     Responsecode:
       type: integer
       description: 'Code for the response. Learn more in
@@ -425,12 +374,51 @@ components:
 
         '
       title: Responsecode
-    OcrResponseData:
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    OcrAttachment:
       type: object
       properties:
-        resultData:
-          $ref: '#/components/schemas/OcrResultData'
-      title: OcrResponseData
+        ftype:
+          type: string
+        filename:
+          type: string
+        fileDescriptor:
+          type: string
+        furl:
+          type: string
+        fContent:
+          type: string
+      title: OcrAttachment
+    typeResult:
+      type: string
+      description: The type of object to create in Payabli. Accepted values are `bill` and `invoice`.
+      title: typeResult
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
     PayabliApiResponseOCR:
       type: object
       properties:
@@ -448,6 +436,18 @@ components:
       - responseText
       - responseCode
       title: PayabliApiResponseOCR
+    OcrBillItemAdditionalData:
+      type: object
+      properties:
+        category:
+          type: string
+        currency_code:
+          type: string
+        type:
+          type: string
+        reference_number:
+          type: string
+      title: OcrBillItemAdditionalData
   securitySchemes:
     BearerAuth:
       type: http

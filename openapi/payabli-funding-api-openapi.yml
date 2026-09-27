@@ -64,29 +64,18 @@ paths:
               $ref: '#/components/schemas/DepositFundsBody'
 components:
   schemas:
-    DepositFundsResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          oneOf:
-          - $ref: '#/components/schemas/Responsedata'
-          - type: 'null'
-          description: The object containing the response data.
-        pageIdentifier:
-          oneOf:
-          - $ref: '#/components/schemas/PageIdentifier'
-          - type: 'null'
-          description: Auxiliary validation used internally by payment pages and components.
-      required:
-      - responseText
-      - responseData
-      - pageIdentifier
-      description: Response for a deposit funds request.
-      title: DepositFundsResponse
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     PaypointId:
       type: integer
       format: int64
@@ -120,18 +109,35 @@ components:
 
         '
       title: PayabliErrorBody
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    DepositFundsResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          oneOf:
+          - $ref: '#/components/schemas/Responsedata'
+          - type: 'null'
+          description: The object containing the response data.
+        pageIdentifier:
+          oneOf:
+          - $ref: '#/components/schemas/PageIdentifier'
+          - type: 'null'
+          description: Auxiliary validation used internally by payment pages and components.
+      required:
+      - responseText
+      - responseData
+      - pageIdentifier
+      description: Response for a deposit funds request.
+      title: DepositFundsResponse
     DepositFundsBody:
       type: object
       properties:
@@ -157,12 +163,12 @@ components:
       - accountId
       description: Request body for depositing funds into a paypoint's available payout balance.
       title: DepositFundsBody
-    Responsedata:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: The object containing the response data.
-      title: Responsedata
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -174,12 +180,6 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
     Entrypointfield:
       type: string
       description: The entrypoint identifier.

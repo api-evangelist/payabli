@@ -212,22 +212,35 @@ paths:
               - file
 components:
   schemas:
-    PayabliApiResponseImportResponseData:
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    PayabliApiResponseImport:
       type: object
       properties:
-        added:
-          type: integer
-          description: The number of records successfully added.
-        errors:
-          type: array
-          items:
-            type: string
-          description: List of errors, if any.
-        rejected:
-          type: integer
-          description: The number of records that were rejected.
-      description: The response data containing the result of the import operation.
-      title: PayabliApiResponseImportResponseData
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/PayabliApiResponseImportResponseData'
+          description: The response data containing the result of the import operation.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseImport
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     PayabliErrorBody:
       type: object
       properties:
@@ -256,43 +269,16 @@ components:
 
         '
       title: PayabliErrorBody
-    PageIdentifier:
+    ResponseText:
       type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
+      description: 'Response text for operation: ''Success'' or ''Declined''.
 
         '
-      title: IsSuccess
-    Responsecode:
-      type: integer
-      description: 'Code for the response. Learn more in
-
-        [API Response Codes](/developers/api-reference/api-responses).
-
-        '
-      title: Responsecode
-    PayabliApiResponseImport:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          $ref: '#/components/schemas/PayabliApiResponseImportResponseData'
-          description: The response data containing the result of the import operation.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponseImport
+      title: ResponseText
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -304,16 +290,30 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
+    PayabliApiResponseImportResponseData:
+      type: object
+      properties:
+        added:
+          type: integer
+          description: The number of records successfully added.
+        errors:
+          type: array
+          items:
+            type: string
+          description: List of errors, if any.
+        rejected:
+          type: integer
+          description: The number of records that were rejected.
+      description: The response data containing the result of the import operation.
+      title: PayabliApiResponseImportResponseData
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
 
         '
-      title: ResponseText
-    Entrypointfield:
-      type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
+      title: Responsecode
   securitySchemes:
     BearerAuth:
       type: http
