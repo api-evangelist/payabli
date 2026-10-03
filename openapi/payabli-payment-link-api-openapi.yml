@@ -692,26 +692,195 @@ paths:
               $ref: '#/components/schemas/PaymentPageRequestBodyOut'
 components:
   schemas:
+    PageElement:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Page description in header
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        header:
+          type: string
+          description: Page header
+        order:
+          $ref: '#/components/schemas/Order'
+      title: PageElement
+    Element:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        order:
+          $ref: '#/components/schemas/Order'
+      title: Element
+    DisplayProperty:
+      type: object
+      properties:
+        display:
+          type: boolean
+          description: When `true`, the field is displayed on the receipt.
+        Fixed:
+          type: boolean
+          description: This field is unused.
+        name:
+          type: string
+          description: The field's name.
+      title: DisplayProperty
+    Order:
+      type: integer
+      description: Order of element or section in container.
+      title: Order
+    MethodElementSettingsApplePayButtonType:
+      type: string
+      enum:
+      - plain
+      - buy
+      - donate
+      - check-out
+      - book
+      - continue
+      - top-up
+      - order
+      - rent
+      - support
+      - contribute
+      - tip
+      - pay
+      default: pay
+      description: 'The text on Apple Pay button. See
+
+        [Apple Pay Button Type](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-type)
+
+        for more information.
+
+        '
+      title: MethodElementSettingsApplePayButtonType
+    Enabled:
+      type: boolean
+      description: Toggles whether the section or element is enabled.
+      title: Enabled
+    NoteElement:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        header:
+          type: string
+          description: Header text for section
+        order:
+          $ref: '#/components/schemas/Order'
+        placeholder:
+          type: string
+          description: Placeholder text for input field
+        value:
+          type: string
+          description: Pre-populated value for input field
+      title: NoteElement
+    MethodElement:
+      type: object
+      properties:
+        allMethodsChecked:
+          type: boolean
+          description: Flag indicating if all allowed payment methods will be pre-selected.
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        header:
+          type: string
+          description: Header text for section
+        methods:
+          $ref: '#/components/schemas/MethodsList'
+        order:
+          $ref: '#/components/schemas/Order'
+        paymentDescription:
+          type: string
+          description: Description text shown in the payment methods section.
+        settings:
+          $ref: '#/components/schemas/MethodElementSettings'
+          description: Settings for wallet payment methods.
+        showSaveMethod:
+          type: boolean
+          default: true
+          description: Controls whether the "Save payment details for future use" checkbox appears on the hosted payment page. Set to `false` to hide the checkbox. Defaults to `true`.
+      title: MethodElement
+    AdditionalData:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          description: Any type
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalData
+    Entry:
+      type: string
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+
+        '
+      title: Entry
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
     PageIdentifier:
       type: string
       description: Auxiliary validation used internally by payment pages and components.
       title: PageIdentifier
-    MethodElementSettingsApplePay:
+    ButtonElementSize:
+      type: string
+      enum:
+      - sm
+      - md
+      - lg
+      description: Specify the size of the custom payment button.
+      title: ButtonElementSize
+    Subdomain:
+      type: string
+      description: 'Refers to the payment page identifier. If provided, then the
+
+        transaction is linked to the payment page.
+
+        '
+      title: Subdomain
+    PagelinkSetting:
       type: object
       properties:
-        buttonStyle:
-          $ref: '#/components/schemas/MethodElementSettingsApplePayButtonStyle'
-          default: black
-          description: The Apple Pay button style. See [Apple Pay Button Style](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-style) for more information.
-        buttonType:
-          $ref: '#/components/schemas/MethodElementSettingsApplePayButtonType'
-          default: pay
-          description: The text on Apple Pay button. See [Apple Pay Button Type](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-type) for more information.
+        color:
+          type: string
+          description: 'An HTML color code in format #RRGGBB'
+        customCssUrl:
+          type: string
+          description: Complete URL to a custom CSS file to be loaded with the page
         language:
-          $ref: '#/components/schemas/MethodElementSettingsApplePayLanguage'
-          default: en-US
-          description: The Apple Pay button locale. See [Apple Pay Button Language](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-language) for more information.
-      title: MethodElementSettingsApplePay
+          type: string
+          description: Two-letter code following ISO 639-1
+        pageLogo:
+          $ref: '#/components/schemas/FileContent'
+          description: Object containing logo file to upload/ use in page
+        redirectAfterApprove:
+          type: boolean
+          description: Flag indicating if the capability for redirection in the page will be activated
+        redirectAfterApproveUrl:
+          type: string
+          description: Complete URL where the page will be redirected after completion
+      title: PagelinkSetting
     GetPayLinkFromIdResponseResponseData:
       type: object
       properties:
@@ -751,38 +920,215 @@ components:
           type: string
           description: Base64 encoded image of CAPTCHA associated to this page load
       title: GetPayLinkFromIdResponseResponseData
-    PayabliErrorBody:
+    PageSetting:
       type: object
       properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
+        color:
           type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
+          description: 'An HTML color code in format #RRGGBB'
+        customCssUrl:
+          type: string
+          description: Complete URL to a custom CSS file to be loaded with the page
+        language:
+          type: string
+          description: Two-letter code following ISO 639-1
+        pageLogo:
+          $ref: '#/components/schemas/FileContent'
+          description: Object containing logo file to upload/ use in page
+        paymentButton:
+          $ref: '#/components/schemas/ButtonElement'
+        redirectAfterApprove:
+          type: boolean
+          description: Flag indicating if the capability for redirection in the page will be activated
+        redirectAfterApproveUrl:
+          type: string
+          description: Complete URL where the page will be redirected after completion
+      title: PageSetting
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    LabelElement:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        label:
+          type: string
+          description: Label to display for section or element
+        order:
+          $ref: '#/components/schemas/Order'
+      title: LabelElement
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
 
-        object carries human-readable error context.
+        indicates success. A `false` value indicates failure.
 
         '
-      title: PayabliErrorBody
-    Enabled:
-      type: boolean
-      description: Toggles whether the section or element is enabled.
-      title: Enabled
+      title: IsSuccess
+    PayLinkUpdateData:
+      type: object
+      properties:
+        contactUs:
+          $ref: '#/components/schemas/ContactElement'
+          description: ContactUs section of payment link page
+        logo:
+          $ref: '#/components/schemas/Element'
+          description: Logo section of payment link page
+        messageBeforePaying:
+          $ref: '#/components/schemas/LabelElement'
+          description: Message section of payment link page
+        notes:
+          $ref: '#/components/schemas/NoteElement'
+          description: Notes section of payment link page
+        page:
+          $ref: '#/components/schemas/PageElement'
+          description: Page header section of payment link page
+        paymentButton:
+          $ref: '#/components/schemas/LabelElement'
+          description: Payment button section of payment link page
+        paymentMethods:
+          $ref: '#/components/schemas/MethodElement'
+          description: Payment methods section of payment link page
+        review:
+          $ref: '#/components/schemas/HeaderElement'
+          description: Review section of payment link page
+        settings:
+          $ref: '#/components/schemas/PagelinkSetting'
+          description: Settings section of payment link page
+      title: PayLinkUpdateData
+    AmountElement:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayCategory'
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        order:
+          $ref: '#/components/schemas/Order'
+      title: AmountElement
+    PageContent:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/AmountElement'
+          description: Amount section of payment page
+        autopay:
+          $ref: '#/components/schemas/AutoElement'
+          description: Autopay section of payment page
+        contactUs:
+          $ref: '#/components/schemas/ContactElement'
+          description: ContactUs section of payment page
+        entry:
+          type: string
+          description: Identifier of entry point owner of page
+        invoices:
+          $ref: '#/components/schemas/InvoiceElement'
+          description: Invoices section of payment page
+        logo:
+          $ref: '#/components/schemas/Element'
+          description: Logo section of payment page
+        messageBeforePaying:
+          $ref: '#/components/schemas/LabelElement'
+          description: Message section of payment page
+        name:
+          type: string
+          description: Descriptor of page
+        notes:
+          $ref: '#/components/schemas/NoteElement'
+          description: Notes section of payment page
+        page:
+          $ref: '#/components/schemas/PageElement'
+          description: Page header section of payment page
+        paymentButton:
+          $ref: '#/components/schemas/LabelElement'
+          description: Payment button section of payment page
+        paymentMethods:
+          $ref: '#/components/schemas/MethodElement'
+          description: Payment methods section of payment page
+        payor:
+          $ref: '#/components/schemas/PayorElement'
+          description: Customer/Payor section of payment page
+        review:
+          $ref: '#/components/schemas/HeaderElement'
+          description: Review section of payment page
+        subdomain:
+          $ref: '#/components/schemas/Subdomain'
+          description: Unique identifier assigned to the page.
+      title: PageContent
+    MethodElementSettingsApplePayButtonStyle:
+      type: string
+      enum:
+      - black
+      - white-outline
+      - white
+      default: black
+      description: 'The Apple Pay button style. See
+
+        [Apple Pay Button Style](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-style)
+
+        for more information.
+
+        '
+      title: MethodElementSettingsApplePayButtonStyle
+    MethodsList:
+      type: object
+      properties:
+        amex:
+          type: boolean
+          description: When `true`, American Express is accepted.
+        applePay:
+          type: boolean
+          description: When `true`, Apple Pay is accepted.
+        googlePay:
+          type: boolean
+          description: When `true`, Google Pay is accepted.
+        discover:
+          type: boolean
+          description: When `true`, Discover is accepted.
+        eCheck:
+          type: boolean
+          description: When `true`, ACH is accepted.
+        mastercard:
+          type: boolean
+          description: When `true`, Mastercard is accepted.
+        visa:
+          type: boolean
+          description: When `true`, Visa is accepted.
+        diners:
+          type: boolean
+          description: When `true`, Diners Club is accepted.
+        jcb:
+          type: boolean
+          description: When `true`, JCB is accepted.
+        rdc:
+          type: boolean
+          description: When `true`, Remote Deposit Capture (RDC) is accepted.
+      title: MethodsList
+    InvoiceElement:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        invoiceLink:
+          $ref: '#/components/schemas/LabelElement'
+          description: Link to invoice
+        order:
+          $ref: '#/components/schemas/Order'
+        viewInvoiceDetails:
+          $ref: '#/components/schemas/LabelElement'
+          description: Link to view invoice details
+      title: InvoiceElement
     PayabliCredentials:
       type: object
       properties:
@@ -823,6 +1169,317 @@ components:
         allowOverride:
           $ref: '#/components/schemas/AllowOverride'
       title: PayabliCredentials
+    GreaterValueAllowed:
+      type: boolean
+      description: 'When `true`, the customer can pay an amount greater than the invoice or
+
+        bill amount.
+
+        '
+      title: GreaterValueAllowed
+    GetPayLinkFromIdResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/GetPayLinkFromIdResponseResponseData'
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: GetPayLinkFromIdResponse
+    FrequencyList:
+      type: object
+      properties:
+        annually:
+          type: boolean
+          description: Enable or disable the annual frequency.
+        every2Weeks:
+          type: boolean
+          description: Enable or disable the every-two-weeks frequency.
+        every3Months:
+          type: boolean
+          description: Enable or disable the every-three-months frequency.
+        every6Months:
+          type: boolean
+          description: Enable or disable the every-six-months frequency.
+        monthly:
+          type: boolean
+          description: Enable or disable the monthly frequency.
+        onetime:
+          type: boolean
+          description: Enable or disable the one-time frequency.
+        weekly:
+          type: boolean
+          description: Enable or disable the weekly frequency.
+      title: FrequencyList
+    PushPayLinkRequest:
+      oneOf:
+      - type: object
+        properties:
+          channel:
+            type: string
+            enum:
+            - email
+            description: 'Discriminator value: email'
+          additionalEmails:
+            type: array
+            items:
+              type: string
+            description: 'List of additional email addresses you want to send the paylink to, formatted as an array.
+
+              Payment links and opt-in requests are sent to the customer email address on file, and additional
+
+              recipients can be specified here.'
+          attachFile:
+            type: boolean
+            description: When `true`, attaches a PDF version of the invoice to the email.
+        required:
+        - channel
+        description: email variant
+      - type: object
+        properties:
+          channel:
+            type: string
+            enum:
+            - sms
+            description: 'Discriminator value: sms'
+        required:
+        - channel
+        description: sms variant
+      discriminator:
+        propertyName: channel
+      description: Request body for the push paylink operation.
+      title: PushPayLinkRequest
+    PayorFields:
+      type: object
+      properties:
+        display:
+          type: boolean
+          description: Flag indicating if the input field will show in container
+        fixed:
+          type: boolean
+          description: Flag indicating if the value in input field is read-only or not.
+        identifier:
+          type: boolean
+          description: Flag indicating if the input field is a customer identifier
+        label:
+          type: string
+          description: Label to display for field
+        name:
+          type: string
+          description: Name of field to show. Should be one of the standard customer fields or a custom field name
+        order:
+          $ref: '#/components/schemas/Order'
+        required:
+          type: boolean
+          description: Flag indicating if the input field is required for validation
+        validation:
+          type: string
+          description: "Type of validation to apply to the input field Accepted values:\n\n  - alpha for alphabetical\n\n  - numbers for numeric\n\n  - text for alphanumeric\n\n  - email for masked email address input\n\n  - phone for US phone numbers"
+        value:
+          type: string
+          description: Pre-populated value for field
+        width:
+          type: integer
+          description: "Numeric value indicating the size of input relative to the container. Accepted values:\n\n    - 4 = 1/3\n\n    - 6 = 1/2\n\n    - 8 = 2/3\n\n    - 12 = 3/3"
+      title: PayorFields
+    PayabliApiResponsePaymentLinks:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          type: string
+          description: If `isSuccess` = true, this contains the payment link identifier. If `isSuccess` = false, this contains the reason of the error.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - isSuccess
+      - responseText
+      title: PayabliApiResponsePaymentLinks
+    ContactElement:
+      type: object
+      properties:
+        emailLabel:
+          type: string
+          description: Custom content for email
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        header:
+          type: string
+          description: Header text for section
+        order:
+          $ref: '#/components/schemas/Order'
+        paymentIcons:
+          type: boolean
+          description: Flag indicating if icons for accepted card brands will be shown
+        phoneLabel:
+          type: string
+          description: Custom content for phone number
+      title: ContactElement
+    PaymentLinkStatus:
+      type: string
+      enum:
+      - Active
+      - Expired
+      - Canceled
+      - Deleted
+      description: The status of a payment link.
+      title: PaymentLinkStatus
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    HeaderElement:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        header:
+          type: string
+          description: Header text for section
+        order:
+          $ref: '#/components/schemas/Order'
+      title: HeaderElement
+    PayorElement:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayorFields'
+          description: Array of Customer/Payor fields to show in section
+        header:
+          type: string
+          description: Custom header text for section
+        order:
+          $ref: '#/components/schemas/Order'
+      title: PayorElement
+    MethodsListOut:
+      type: object
+      properties:
+        ach:
+          type: boolean
+          description: When `true`, ACH bank transfer is offered as a payout method.
+        check:
+          type: boolean
+          description: When `true`, physical check is offered as a payout method.
+        vcard:
+          type: boolean
+          description: When `true`, virtual card (vCard) is offered as a payout method.
+      description: Payment methods available for Pay Out payment links. Controls which payout options are offered to the vendor.
+      title: MethodsListOut
+    Finishtype:
+      type: object
+      properties:
+        calendar:
+          type: boolean
+          description: Flag to enable the 'calendar' option.
+        untilCancelled:
+          type: boolean
+          description: Flag to enable the 'untilCancelled' option.
+      title: Finishtype
+    ReceiptContent:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Element'
+          description: Section amount of payment receipt
+        contactUs:
+          $ref: '#/components/schemas/Element'
+          description: Section contactUs of payment receipt
+        details:
+          $ref: '#/components/schemas/Element'
+          description: Section payment details of payment receipt
+        logo:
+          $ref: '#/components/schemas/Element'
+          description: Section logo of payment receipt
+        messageBeforeButton:
+          $ref: '#/components/schemas/LabelElement'
+          description: Section message of payment receipt
+        page:
+          $ref: '#/components/schemas/PageElement'
+          description: Section page of payment receipt
+        paymentButton:
+          $ref: '#/components/schemas/LabelElement'
+          description: Section payment button of payment receipt
+        paymentInformation:
+          $ref: '#/components/schemas/Element'
+          description: Section payment information of payment receipt
+        settings:
+          $ref: '#/components/schemas/SettingElement'
+          description: The receipt's settings.
+      description: Object containing receipt body configuration
+      title: ReceiptContent
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    PatchOutPaymentLinkRequest:
+      type: object
+      properties:
+        billPageData:
+          $ref: '#/components/schemas/PaymentPageRequestBodyOut'
+          description: Updated payment link page configuration.
+        expirationDate:
+          type: string
+          description: New expiration date for the payment link. Must be a future date. If null and the link is expired, uses the default expiration from settings. Updating the expiration date reactivates an expired payment link to Active status.
+        status:
+          $ref: '#/components/schemas/PaymentLinkStatus'
+          description: Updated status for the payment link.
+      description: Request body for partially updating a Pay Out payment link.
+      title: PatchOutPaymentLinkRequest
+    AbsorbDifference:
+      type: boolean
+      description: 'Whether the paypoint absorbs the difference between the configured service
+
+        fee and the actual fee charged to the customer.
+
+        '
+      title: AbsorbDifference
+    AutoElement:
+      type: object
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        finish:
+          $ref: '#/components/schemas/Finishtype'
+          description: Type of end date
+        frequency:
+          $ref: '#/components/schemas/FrequencyList'
+          description: accepted frequencies for autopay
+        frequencySelected:
+          type: string
+          description: Value of pre-selected frequency
+        header:
+          type: string
+          description: Header text for section
+        order:
+          $ref: '#/components/schemas/Order'
+        startDate:
+          type: string
+          description: Range of days enabled in calendar. Leave empty to enable all days.
+      title: AutoElement
     AllowOverride:
       type: boolean
       description: 'Whether the configured service fee can be overridden at the transaction
@@ -831,30 +1488,6 @@ components:
 
         '
       title: AllowOverride
-    PageSetting:
-      type: object
-      properties:
-        color:
-          type: string
-          description: 'An HTML color code in format #RRGGBB'
-        customCssUrl:
-          type: string
-          description: Complete URL to a custom CSS file to be loaded with the page
-        language:
-          type: string
-          description: Two-letter code following ISO 639-1
-        pageLogo:
-          $ref: '#/components/schemas/FileContent'
-          description: Object containing logo file to upload/ use in page
-        paymentButton:
-          $ref: '#/components/schemas/ButtonElement'
-        redirectAfterApprove:
-          type: boolean
-          description: Flag indicating if the capability for redirection in the page will be activated
-        redirectAfterApproveUrl:
-          type: string
-          description: Complete URL where the page will be redirected after completion
-      title: PageSetting
     MethodElementSettingsApplePayLanguage:
       type: string
       enum:
@@ -906,161 +1539,136 @@ components:
 
         '
       title: MethodElementSettingsApplePayLanguage
-    Entry:
+    MethodElementOut:
+      type: object
+      properties:
+        allMethodsChecked:
+          type: boolean
+          description: Flag indicating if all allowed payment methods will be pre-selected.
+        allowMultipleMethods:
+          type: boolean
+          description: When `true`, the vendor can select from multiple payment methods. When `false`, only the default method is shown.
+        defaultMethod:
+          type: string
+          description: The default payment method to highlight on the payment link page. For example, `"vcard"`, `"ach"`, or `"check"`.
+        enabled:
+          type: boolean
+          description: When `true`, the payment methods section is displayed on the payment link page.
+        header:
+          type: string
+          description: Header text for the payment methods section.
+        methods:
+          $ref: '#/components/schemas/MethodsListOut'
+        order:
+          type: integer
+          description: Display order of the payment methods section on the page.
+        showPreviewVirtualCard:
+          type: boolean
+          description: When `true`, a preview of the virtual card is shown on the payment link page.
+      description: Configuration for payment method selection on Pay Out payment links.
+      title: MethodElementOut
+    AccountId:
       type: string
-      description: 'The entity''s entrypoint identifier.
+      description: Custom identifier for payment connector.
+      title: AccountId
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
 
-        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
 
         '
-      title: Entry
-    PayabliErrorBodyResponseData:
+      title: PayabliErrorBody
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    SettingElement:
       type: object
       properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    AmountElement:
-      type: object
-      properties:
-        categories:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/PayCategory'
-        enabled:
-          $ref: '#/components/schemas/Enabled'
+            $ref: '#/components/schemas/DisplayProperty'
+          description: Fields to display on the reciept.
         order:
           $ref: '#/components/schemas/Order'
-      title: AmountElement
-    MethodElementSettingsApplePayButtonType:
-      type: string
-      enum:
-      - plain
-      - buy
-      - donate
-      - check-out
-      - book
-      - continue
-      - top-up
-      - order
-      - rent
-      - support
-      - contribute
-      - tip
-      - pay
-      default: pay
-      description: 'The text on Apple Pay button. See
-
-        [Apple Pay Button Type](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-type)
-
-        for more information.
-
-        '
-      title: MethodElementSettingsApplePayButtonType
-    ButtonElementSize:
-      type: string
-      enum:
-      - sm
-      - md
-      - lg
-      description: Specify the size of the custom payment button.
-      title: ButtonElementSize
-    AutoElement:
+        sendAuto:
+          type: boolean
+          default: true
+          description: When `true`, Payabli automatically sends the receipt to the payor email address.
+        sendManual:
+          type: boolean
+          default: false
+          description: When `true`, you must send the reciept to the payor manually using the [/MoneyIn/sendreceipt/\{transId\}](/developers/api-reference/moneyin/send-receipt-for-transaction) endpoint.
+      title: SettingElement
+    MethodElementSettingsApplePay:
       type: object
       properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        finish:
-          $ref: '#/components/schemas/Finishtype'
-          description: Type of end date
-        frequency:
-          $ref: '#/components/schemas/FrequencyList'
-          description: accepted frequencies for autopay
-        frequencySelected:
-          type: string
-          description: Value of pre-selected frequency
-        header:
-          type: string
-          description: Header text for section
-        order:
-          $ref: '#/components/schemas/Order'
-        startDate:
-          type: string
-          description: Range of days enabled in calendar. Leave empty to enable all days.
-      title: AutoElement
-    PageElement:
+        buttonStyle:
+          $ref: '#/components/schemas/MethodElementSettingsApplePayButtonStyle'
+          default: black
+          description: The Apple Pay button style. See [Apple Pay Button Style](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-style) for more information.
+        buttonType:
+          $ref: '#/components/schemas/MethodElementSettingsApplePayButtonType'
+          default: pay
+          description: The text on Apple Pay button. See [Apple Pay Button Type](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-type) for more information.
+        language:
+          $ref: '#/components/schemas/MethodElementSettingsApplePayLanguage'
+          default: en-US
+          description: The Apple Pay button locale. See [Apple Pay Button Language](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-language) for more information.
+      title: MethodElementSettingsApplePay
+    ButtonElement:
       type: object
       properties:
-        description:
-          type: string
-          description: Page description in header
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        header:
-          type: string
-          description: Page header
-        order:
-          $ref: '#/components/schemas/Order'
-      title: PageElement
-    PayorFields:
-      type: object
-      properties:
-        display:
-          type: boolean
-          description: Flag indicating if the input field will show in container
-        fixed:
-          type: boolean
-          description: Flag indicating if the value in input field is read-only or not.
-        identifier:
-          type: boolean
-          description: Flag indicating if the input field is a customer identifier
         label:
           type: string
-          description: Label to display for field
-        name:
-          type: string
-          description: Name of field to show. Should be one of the standard customer fields or a custom field name
-        order:
-          $ref: '#/components/schemas/Order'
-        required:
-          type: boolean
-          description: Flag indicating if the input field is required for validation
-        validation:
-          type: string
-          description: "Type of validation to apply to the input field Accepted values:\n\n  - alpha for alphabetical\n\n  - numbers for numeric\n\n  - text for alphanumeric\n\n  - email for masked email address input\n\n  - phone for US phone numbers"
-        value:
-          type: string
-          description: Pre-populated value for field
-        width:
-          type: integer
-          description: "Numeric value indicating the size of input relative to the container. Accepted values:\n\n    - 4 = 1/3\n\n    - 6 = 1/2\n\n    - 8 = 2/3\n\n    - 12 = 3/3"
-      title: PayorFields
-    AbsorbDifference:
-      type: boolean
-      description: 'Whether the paypoint absorbs the difference between the configured service
-
-        fee and the actual fee charged to the customer.
-
-        '
-      title: AbsorbDifference
-    DisplayProperty:
+          description: Label for custom payment button
+        size:
+          $ref: '#/components/schemas/ButtonElementSize'
+          description: Specify size of custom payment button
+      required:
+      - label
+      title: ButtonElement
+    MethodElementSettings:
       type: object
       properties:
-        display:
-          type: boolean
-          description: When `true`, the field is displayed on the receipt.
-        Fixed:
-          type: boolean
-          description: This field is unused.
-        name:
-          type: string
-          description: The field's name.
-      title: DisplayProperty
+        applePay:
+          $ref: '#/components/schemas/MethodElementSettingsApplePay'
+      description: Settings for wallet payment methods.
+      title: MethodElementSettings
     PaymentPageRequestBodyOut:
       type: object
       properties:
@@ -1096,321 +1704,6 @@ components:
           description: Settings section of payment link page.
       description: Configuration for the Pay Out payment link page. Controls branding, messaging, vendor fields, and which payout methods are offered to the vendor.
       title: PaymentPageRequestBodyOut
-    PaymentLinkStatus:
-      type: string
-      enum:
-      - Active
-      - Expired
-      - Canceled
-      - Deleted
-      description: The status of a payment link.
-      title: PaymentLinkStatus
-    GetPayLinkFromIdResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          $ref: '#/components/schemas/GetPayLinkFromIdResponseResponseData'
-      required:
-      - responseText
-      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
-
-        the standard response envelope.
-
-        '
-      title: GetPayLinkFromIdResponse
-    LabelElement:
-      type: object
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        label:
-          type: string
-          description: Label to display for section or element
-        order:
-          $ref: '#/components/schemas/Order'
-      title: LabelElement
-    PayorElement:
-      type: object
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/PayorFields'
-          description: Array of Customer/Payor fields to show in section
-        header:
-          type: string
-          description: Custom header text for section
-        order:
-          $ref: '#/components/schemas/Order'
-      title: PayorElement
-    PageContent:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/AmountElement'
-          description: Amount section of payment page
-        autopay:
-          $ref: '#/components/schemas/AutoElement'
-          description: Autopay section of payment page
-        contactUs:
-          $ref: '#/components/schemas/ContactElement'
-          description: ContactUs section of payment page
-        entry:
-          type: string
-          description: Identifier of entry point owner of page
-        invoices:
-          $ref: '#/components/schemas/InvoiceElement'
-          description: Invoices section of payment page
-        logo:
-          $ref: '#/components/schemas/Element'
-          description: Logo section of payment page
-        messageBeforePaying:
-          $ref: '#/components/schemas/LabelElement'
-          description: Message section of payment page
-        name:
-          type: string
-          description: Descriptor of page
-        notes:
-          $ref: '#/components/schemas/NoteElement'
-          description: Notes section of payment page
-        page:
-          $ref: '#/components/schemas/PageElement'
-          description: Page header section of payment page
-        paymentButton:
-          $ref: '#/components/schemas/LabelElement'
-          description: Payment button section of payment page
-        paymentMethods:
-          $ref: '#/components/schemas/MethodElement'
-          description: Payment methods section of payment page
-        payor:
-          $ref: '#/components/schemas/PayorElement'
-          description: Customer/Payor section of payment page
-        review:
-          $ref: '#/components/schemas/HeaderElement'
-          description: Review section of payment page
-        subdomain:
-          $ref: '#/components/schemas/Subdomain'
-          description: Unique identifier assigned to the page.
-      title: PageContent
-    MethodElementOut:
-      type: object
-      properties:
-        allMethodsChecked:
-          type: boolean
-          description: Flag indicating if all allowed payment methods will be pre-selected.
-        allowMultipleMethods:
-          type: boolean
-          description: When `true`, the vendor can select from multiple payment methods. When `false`, only the default method is shown.
-        defaultMethod:
-          type: string
-          description: The default payment method to highlight on the payment link page. For example, `"vcard"`, `"ach"`, or `"check"`.
-        enabled:
-          type: boolean
-          description: When `true`, the payment methods section is displayed on the payment link page.
-        header:
-          type: string
-          description: Header text for the payment methods section.
-        methods:
-          $ref: '#/components/schemas/MethodsListOut'
-        order:
-          type: integer
-          description: Display order of the payment methods section on the page.
-        showPreviewVirtualCard:
-          type: boolean
-          description: When `true`, a preview of the virtual card is shown on the payment link page.
-      description: Configuration for payment method selection on Pay Out payment links.
-      title: MethodElementOut
-    Element:
-      type: object
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        order:
-          $ref: '#/components/schemas/Order'
-      title: Element
-    MethodsListOut:
-      type: object
-      properties:
-        ach:
-          type: boolean
-          description: When `true`, ACH bank transfer is offered as a payout method.
-        check:
-          type: boolean
-          description: When `true`, physical check is offered as a payout method.
-        vcard:
-          type: boolean
-          description: When `true`, virtual card (vCard) is offered as a payout method.
-      description: Payment methods available for Pay Out payment links. Controls which payout options are offered to the vendor.
-      title: MethodsListOut
-    ButtonElement:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Label for custom payment button
-        size:
-          $ref: '#/components/schemas/ButtonElementSize'
-          description: Specify size of custom payment button
-      required:
-      - label
-      title: ButtonElement
-    SettingElement:
-      type: object
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/DisplayProperty'
-          description: Fields to display on the reciept.
-        order:
-          $ref: '#/components/schemas/Order'
-        sendAuto:
-          type: boolean
-          default: true
-          description: When `true`, Payabli automatically sends the receipt to the payor email address.
-        sendManual:
-          type: boolean
-          default: false
-          description: When `true`, you must send the reciept to the payor manually using the [/MoneyIn/sendreceipt/\{transId\}](/developers/api-reference/moneyin/send-receipt-for-transaction) endpoint.
-      title: SettingElement
-    NoteElement:
-      type: object
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        header:
-          type: string
-          description: Header text for section
-        order:
-          $ref: '#/components/schemas/Order'
-        placeholder:
-          type: string
-          description: Placeholder text for input field
-        value:
-          type: string
-          description: Pre-populated value for input field
-      title: NoteElement
-    AdditionalData:
-      type: object
-      additionalProperties:
-        type: object
-        additionalProperties:
-          description: Any type
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalData
-    Order:
-      type: integer
-      description: Order of element or section in container.
-      title: Order
-    MethodsList:
-      type: object
-      properties:
-        amex:
-          type: boolean
-          description: When `true`, American Express is accepted.
-        applePay:
-          type: boolean
-          description: When `true`, Apple Pay is accepted.
-        googlePay:
-          type: boolean
-          description: When `true`, Google Pay is accepted.
-        discover:
-          type: boolean
-          description: When `true`, Discover is accepted.
-        eCheck:
-          type: boolean
-          description: When `true`, ACH is accepted.
-        mastercard:
-          type: boolean
-          description: When `true`, Mastercard is accepted.
-        visa:
-          type: boolean
-          description: When `true`, Visa is accepted.
-        diners:
-          type: boolean
-          description: When `true`, Diners Club is accepted.
-        jcb:
-          type: boolean
-          description: When `true`, JCB is accepted.
-        rdc:
-          type: boolean
-          description: When `true`, Remote Deposit Capture (RDC) is accepted.
-      title: MethodsList
-    Finishtype:
-      type: object
-      properties:
-        calendar:
-          type: boolean
-          description: Flag to enable the 'calendar' option.
-        untilCancelled:
-          type: boolean
-          description: Flag to enable the 'untilCancelled' option.
-      title: Finishtype
-    ReceiptContent:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Element'
-          description: Section amount of payment receipt
-        contactUs:
-          $ref: '#/components/schemas/Element'
-          description: Section contactUs of payment receipt
-        details:
-          $ref: '#/components/schemas/Element'
-          description: Section payment details of payment receipt
-        logo:
-          $ref: '#/components/schemas/Element'
-          description: Section logo of payment receipt
-        messageBeforeButton:
-          $ref: '#/components/schemas/LabelElement'
-          description: Section message of payment receipt
-        page:
-          $ref: '#/components/schemas/PageElement'
-          description: Section page of payment receipt
-        paymentButton:
-          $ref: '#/components/schemas/LabelElement'
-          description: Section payment button of payment receipt
-        paymentInformation:
-          $ref: '#/components/schemas/Element'
-          description: Section payment information of payment receipt
-        settings:
-          $ref: '#/components/schemas/SettingElement'
-          description: The receipt's settings.
-      description: Object containing receipt body configuration
-      title: ReceiptContent
-    IdempotencyKey:
-      type: string
-      description: '_Optional but recommended._ A unique ID that you can include to prevent
-
-        duplicating objects or transactions in the case that a request is sent
-
-        more than once. This key isn''t generated in Payabli; you must generate it
-
-        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
-
-        the key if needed.
-
-        '
-      title: IdempotencyKey
-    HeaderElement:
-      type: object
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        header:
-          type: string
-          description: Header text for section
-        order:
-          $ref: '#/components/schemas/Order'
-      title: HeaderElement
     PaymentPageRequestBody:
       type: object
       properties:
@@ -1450,125 +1743,6 @@ components:
       required:
       - invoices
       title: PaymentPageRequestBody
-    MethodElementSettings:
-      type: object
-      properties:
-        applePay:
-          $ref: '#/components/schemas/MethodElementSettingsApplePay'
-      description: Settings for wallet payment methods.
-      title: MethodElementSettings
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    PayLinkUpdateData:
-      type: object
-      properties:
-        contactUs:
-          $ref: '#/components/schemas/ContactElement'
-          description: ContactUs section of payment link page
-        logo:
-          $ref: '#/components/schemas/Element'
-          description: Logo section of payment link page
-        messageBeforePaying:
-          $ref: '#/components/schemas/LabelElement'
-          description: Message section of payment link page
-        notes:
-          $ref: '#/components/schemas/NoteElement'
-          description: Notes section of payment link page
-        page:
-          $ref: '#/components/schemas/PageElement'
-          description: Page header section of payment link page
-        paymentButton:
-          $ref: '#/components/schemas/LabelElement'
-          description: Payment button section of payment link page
-        paymentMethods:
-          $ref: '#/components/schemas/MethodElement'
-          description: Payment methods section of payment link page
-        review:
-          $ref: '#/components/schemas/HeaderElement'
-          description: Review section of payment link page
-        settings:
-          $ref: '#/components/schemas/PagelinkSetting'
-          description: Settings section of payment link page
-      title: PayLinkUpdateData
-    PushPayLinkRequest:
-      oneOf:
-      - type: object
-        properties:
-          channel:
-            type: string
-            enum:
-            - email
-            description: 'Discriminator value: email'
-          additionalEmails:
-            type: array
-            items:
-              type: string
-            description: 'List of additional email addresses you want to send the paylink to, formatted as an array.
-
-              Payment links and opt-in requests are sent to the customer email address on file, and additional
-
-              recipients can be specified here.'
-          attachFile:
-            type: boolean
-            description: When `true`, attaches a PDF version of the invoice to the email.
-        required:
-        - channel
-        description: email variant
-      - type: object
-        properties:
-          channel:
-            type: string
-            enum:
-            - sms
-            description: 'Discriminator value: sms'
-        required:
-        - channel
-        description: sms variant
-      discriminator:
-        propertyName: channel
-      description: Request body for the push paylink operation.
-      title: PushPayLinkRequest
-    FileContentFtype:
-      type: string
-      enum:
-      - pdf
-      - doc
-      - docx
-      - jpg
-      - jpeg
-      - png
-      - gif
-      - txt
-      description: The MIME type of the file (if content is provided).
-      title: FileContentFtype
-    PayabliApiResponsePaymentLinks:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          type: string
-          description: If `isSuccess` = true, this contains the payment link identifier. If `isSuccess` = false, this contains the reason of the error.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - isSuccess
-      - responseText
-      title: PayabliApiResponsePaymentLinks
-    Subdomain:
-      type: string
-      description: 'Refers to the payment page identifier. If provided, then the
-
-        transaction is linked to the payment page.
-
-        '
-      title: Subdomain
     PayCategory:
       type: object
       properties:
@@ -1591,180 +1765,6 @@ components:
         value:
           type: string
       title: PayCategory
-    FileContent:
-      type: object
-      properties:
-        fContent:
-          type: string
-          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
-
-            upload size is 30 MB.
-
-            '
-        filename:
-          type: string
-          description: The name of the attached file.
-        ftype:
-          $ref: '#/components/schemas/FileContentFtype'
-        furl:
-          type: string
-          description: Optional URL provided to show or download the file remotely.
-      description: Contains details about a file. Max upload size is 30 MB.
-      title: FileContent
-    ContactElement:
-      type: object
-      properties:
-        emailLabel:
-          type: string
-          description: Custom content for email
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        header:
-          type: string
-          description: Header text for section
-        order:
-          $ref: '#/components/schemas/Order'
-        paymentIcons:
-          type: boolean
-          description: Flag indicating if icons for accepted card brands will be shown
-        phoneLabel:
-          type: string
-          description: Custom content for phone number
-      title: ContactElement
-    InvoiceElement:
-      type: object
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        invoiceLink:
-          $ref: '#/components/schemas/LabelElement'
-          description: Link to invoice
-        order:
-          $ref: '#/components/schemas/Order'
-        viewInvoiceDetails:
-          $ref: '#/components/schemas/LabelElement'
-          description: Link to view invoice details
-      title: InvoiceElement
-    FrequencyList:
-      type: object
-      properties:
-        annually:
-          type: boolean
-          description: Enable or disable the annual frequency.
-        every2Weeks:
-          type: boolean
-          description: Enable or disable the every-two-weeks frequency.
-        every3Months:
-          type: boolean
-          description: Enable or disable the every-three-months frequency.
-        every6Months:
-          type: boolean
-          description: Enable or disable the every-six-months frequency.
-        monthly:
-          type: boolean
-          description: Enable or disable the monthly frequency.
-        onetime:
-          type: boolean
-          description: Enable or disable the one-time frequency.
-        weekly:
-          type: boolean
-          description: Enable or disable the weekly frequency.
-      title: FrequencyList
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    MethodElement:
-      type: object
-      properties:
-        allMethodsChecked:
-          type: boolean
-          description: Flag indicating if all allowed payment methods will be pre-selected.
-        enabled:
-          $ref: '#/components/schemas/Enabled'
-        header:
-          type: string
-          description: Header text for section
-        methods:
-          $ref: '#/components/schemas/MethodsList'
-        order:
-          $ref: '#/components/schemas/Order'
-        paymentDescription:
-          type: string
-          description: Description text shown in the payment methods section.
-        settings:
-          $ref: '#/components/schemas/MethodElementSettings'
-          description: Settings for wallet payment methods.
-        showSaveMethod:
-          type: boolean
-          default: true
-          description: Controls whether the "Save payment details for future use" checkbox appears on the hosted payment page. Set to `false` to hide the checkbox. Defaults to `true`.
-      title: MethodElement
-    PatchOutPaymentLinkRequest:
-      type: object
-      properties:
-        billPageData:
-          $ref: '#/components/schemas/PaymentPageRequestBodyOut'
-          description: Updated payment link page configuration.
-        expirationDate:
-          type: string
-          description: New expiration date for the payment link. Must be a future date. If null and the link is expired, uses the default expiration from settings. Updating the expiration date reactivates an expired payment link to Active status.
-        status:
-          $ref: '#/components/schemas/PaymentLinkStatus'
-          description: Updated status for the payment link.
-      description: Request body for partially updating a Pay Out payment link.
-      title: PatchOutPaymentLinkRequest
-    GreaterValueAllowed:
-      type: boolean
-      description: 'When `true`, the customer can pay an amount greater than the invoice or
-
-        bill amount.
-
-        '
-      title: GreaterValueAllowed
-    PagelinkSetting:
-      type: object
-      properties:
-        color:
-          type: string
-          description: 'An HTML color code in format #RRGGBB'
-        customCssUrl:
-          type: string
-          description: Complete URL to a custom CSS file to be loaded with the page
-        language:
-          type: string
-          description: Two-letter code following ISO 639-1
-        pageLogo:
-          $ref: '#/components/schemas/FileContent'
-          description: Object containing logo file to upload/ use in page
-        redirectAfterApprove:
-          type: boolean
-          description: Flag indicating if the capability for redirection in the page will be activated
-        redirectAfterApproveUrl:
-          type: string
-          description: Complete URL where the page will be redirected after completion
-      title: PagelinkSetting
-    MethodElementSettingsApplePayButtonStyle:
-      type: string
-      enum:
-      - black
-      - white-outline
-      - white
-      default: black
-      description: 'The Apple Pay button style. See
-
-        [Apple Pay Button Style](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-style)
-
-        for more information.
-
-        '
-      title: MethodElementSettingsApplePayButtonStyle
-    AccountId:
-      type: string
-      description: Custom identifier for payment connector.
-      title: AccountId
   securitySchemes:
     BearerAuth:
       type: http

@@ -378,10 +378,123 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
-    PageIdentifier:
+    VendorNumber:
       type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
+      description: 'Custom number identifying the vendor. Must be unique in paypoint. Can''t be
+
+        blank.
+
+        '
+      title: VendorNumber
+    ContactsField:
+      type: array
+      items:
+        $ref: '#/components/schemas/Contacts'
+      description: List of contacts.
+      title: ContactsField
+    PayeeName:
+      type: string
+      description: Alternative name used to receive paper check.
+      title: PayeeName
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    VendorScheduleCallResponse:
+      type: object
+      properties:
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/VendorScheduleCallResponseData'
+      required:
+      - responseText
+      description: Response from the schedule outreach call endpoint.
+      title: VendorScheduleCallResponse
+    VendorCallStatusScheduled:
+      type: object
+      properties:
+        scheduledFor:
+          type: string
+          description: ISO-8601 timestamp of the next scheduled call attempt.
+        attemptsRemaining:
+          type: integer
+          description: Number of call attempts left before retries are exhausted.
+        maxAttempts:
+          type: integer
+          description: Maximum number of call attempts configured for this schedule.
+      description: Details of a queued or in-progress outreach call.
+      title: VendorCallStatusScheduled
+    Remitstate:
+      type: string
+      description: 'Remittance address state or province. Used for mailing paper checks.
+
+        Required if any remittance address field is provided. Must be a valid
+
+        US state or Canadian province abbreviation.
+
+        '
+      title: Remitstate
+    VendorName1:
+      type: string
+      description: 'Primary name for vendor. Required for new vendor.
+
+        '
+      title: VendorName1
+    CityNullable:
+      type: string
+      description: The city.
+      title: CityNullable
+    AccountNumber:
+      type: string
+      description: Account number for bank account. This value is returned masked in responses.
+      title: AccountNumber
+    Remitaddress1:
+      type: string
+      description: 'Remittance street address. Used for mailing paper checks. Required if any
+
+        remittance address field is provided.
+
+        '
+      title: Remitaddress1
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    AddressNullable:
+      type: string
+      description: The address.
+      title: AddressNullable
+    Remitaddress2:
+      type: string
+      description: 'Remittance address additional line, such as a suite or unit number. Used
+
+        for mailing paper checks. Always optional.
+
+        '
+      title: Remitaddress2
+    OrgParentId:
+      type: integer
+      format: int64
+      description: The ID of the org's parent organization.
+      title: OrgParentId
     VendorPaymentMethodString:
       type: string
       description: 'The vendor''s preferred payment method. Can be one of:
@@ -397,211 +510,62 @@ components:
 
         '
       title: VendorPaymentMethodString
-    InternalReferenceId:
-      type: integer
-      format: int64
-      description: An internal reference ID.
-      title: InternalReferenceId
-    VendorScheduleCallRequest:
-      type: object
-      properties:
-        vendorId:
-          type: integer
-          format: int64
-          description: ID of the vendor to call. Must be active and belong to the entrypoint in the path.
-        phone:
-          type: string
-          description: Vendor phone number to call, digits only. Optional. When omitted, Payabli uses the phone number on the vendor's record. If the vendor has no phone on record, the request returns an error.
-        enrichmentId:
-          type: string
-          description: ID of the originating enrichment run to associate with this call. Optional. When omitted, Payabli generates a standalone call schedule and skips the enrichment lookup. The bill due-date check only runs when both `enrichmentId` and `billId` are supplied.
-        billId:
-          type: integer
-          format: int64
-          description: Bill ID used for the due-date check. When the bill is due in fewer than three days, the call is skipped and the fallback method is applied. Only evaluated when `enrichmentId` is also supplied.
-        fallbackMethod:
-          type: string
-          description: Payment method to apply to the vendor record if the call can't determine a preference or all retries are exhausted. Values are `check` (the default) or `managed`.
-        maxRetries:
-          type: integer
-          description: Number of times to retry the call if the vendor doesn't answer. Defaults to 3. Maximum is 5. The get outreach call status response reports this value as `maxAttempts`.
-        timezone:
-          type: string
-          description: IANA timezone identifier used to schedule the call in the vendor's local time. Defaults to `America/New_York`.
-        sendNow:
-          type: boolean
-          description: When `true`, dispatches the call immediately and bypasses the business-hours window and the bill due-date check. Defaults to `false`.
-      required:
-      - vendorId
-      description: Request body for scheduling an AI outreach call to a vendor.
-      title: VendorScheduleCallRequest
-    Remitcity:
-      type: string
-      description: 'Remittance address city. Used for mailing paper checks. Required if any
-
-        remittance address field is provided.
-
-        '
-      title: Remitcity
-    BankName:
-      type: string
-      description: Name of bank for account.
-      title: BankName
-    CreatedAt:
-      type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
-    RemitEmail:
-      type: string
-      format: email
-      description: 'Remittance email address. Used for sending virtual cards and other
-
-        information about payouts.
-
-        '
-      title: RemitEmail
-    VendorCallStatusExtractedData:
-      type: object
-      properties:
-        selectedPaymentMethod:
-          type: string
-          description: Payment method the vendor said they accept. Values are `card`, `ach`, or `check`.
-        contactEmail:
-          type: string
-          description: Contact email collected during the call.
-      description: Data extracted from a completed outreach call.
-      title: VendorCallStatusExtractedData
-    Contacts:
-      type: object
-      properties:
-        contactEmail:
-          $ref: '#/components/schemas/Email'
-          description: Contact email address.
-        contactName:
-          type: string
-          description: Contact name.
-        contactPhone:
-          type: string
-          description: Contact phone number.
-        contactTitle:
-          type: string
-          description: Contact title.
-        additionalData:
-          $ref: '#/components/schemas/AdditionalDataString'
-      title: Contacts
-    VendorCallStatusCompleted:
-      type: object
-      properties:
-        completedAt:
-          type: string
-          description: ISO-8601 timestamp when the call ended.
-        durationSeconds:
-          type: integer
-          description: Call duration in seconds.
-        summary:
-          type: string
-          description: Short summary of the call.
-        callId:
-          type: string
-          description: Reference identifier for the call.
-        transcript:
-          type:
-          - string
-          - 'null'
-          description: Full call transcript. `null` when no transcript is available.
-        extractedData:
-          $ref: '#/components/schemas/VendorCallStatusExtractedData'
-          description: Payment and contact details collected during the call.
-      description: Details of a completed outreach call that returned data.
-      title: VendorCallStatusCompleted
-    AdditionalDataMap:
-      type: object
-      additionalProperties:
-        type: string
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalDataMap
     Legalname:
       type: string
       description: Business legal name.
       title: Legalname
-    AddressAddtlNullable:
-      type: string
-      description: Additional line for the address.
-      title: AddressAddtlNullable
-    BillingData:
+    VendorSummary:
       type: object
       properties:
-        accountNumber:
-          type: string
-          description: Account number for bank account.
-        bankAccountFunction:
+        ActiveBills:
           type: integer
-          description: "Describes whether the bank account is used for deposits or withdrawals in Payabli:\n  - `0`: Deposit\n  - `1`: Withdrawal\n  - `2`: Deposit and withdrawal"
-        bankAccountHolderName:
-          $ref: '#/components/schemas/BankAccountHolderName'
-        bankAccountHolderType:
-          $ref: '#/components/schemas/BankAccountHolderType'
-        bankName:
-          $ref: '#/components/schemas/BankName'
-        id:
+        PendingBills:
           type: integer
-          description: The bank's ID in Payabli.
-        routingAccount:
-          $ref: '#/components/schemas/RoutingAccount'
-        typeAccount:
-          $ref: '#/components/schemas/TypeAccount'
-      title: BillingData
-    Dbaname:
-      type: string
-      description: 'The alternate or common name that this business is doing business under,
-
-        usually referred to as a DBA name.
-
-        '
-      title: Dbaname
-    ExternalPaypointId:
-      type: string
-      description: 'A custom identifier for the paypoint, if applicable.
-
-        '
-      title: ExternalPaypointId
-    Remitcountry:
-      type: string
-      description: 'Remittance address country. Used for mailing paper checks. Must be `US`
-
-        or `CA`. Defaults to `US` if not provided.
-
-        '
-      title: Remitcountry
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
+        InTransitBills:
           type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
+        PaidBills:
+          type: integer
+        OverdueBills:
+          type: integer
+        ApprovedBills:
+          type: integer
+        DisapprovedBills:
+          type: integer
+        TotalBills:
+          type: integer
+        ActiveBillsAmount:
+          type: number
+          format: double
+        PendingBillsAmount:
+          type: number
+          format: double
+        InTransitBillsAmount:
+          type: number
+          format: double
+        PaidBillsAmount:
+          type: number
+          format: double
+        OverdueBillsAmount:
+          type: number
+          format: double
+        ApprovedBillsAmount:
+          type: number
+          format: double
+        DisapprovedBillsAmount:
+          type: number
+          format: double
+        TotalBillsAmount:
+          type: number
+          format: double
+      title: VendorSummary
+    EnrollmentStatus:
+      type: string
+      description: Enrollment status of vendor in payables program.
+      title: EnrollmentStatus
+    BankAccountHolderName:
+      type: string
+      description: The accountholder's name.
+      title: BankAccountHolderName
     BinData:
       type: object
       properties:
@@ -658,176 +622,30 @@ components:
 
         the card connected to Apple Pay.'
       title: BinData
-    VendorEnrichmentWebSearch:
+    ContactsResponse:
       type: object
       properties:
-        phone:
+        ContactName:
           type: string
-          description: Phone number found through web search. Format isn't guaranteed.
-        phoneType:
+          description: Contact name.
+        ContactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        ContactTitle:
           type: string
-          description: Phone classification. Values are `main`, `billing`, or `customer_service`.
-        email:
+          description: Contact title.
+        ContactPhone:
           type: string
-          description: Email address.
-        emailType:
-          type: string
-          description: Email classification. Values are `billing`, `general`, or `customer_service`.
-        street:
-          type: string
-          description: Street address.
-        city:
-          type: string
-          description: City.
-        state:
-          type: string
-          description: State (two-letter abbreviation).
-        zipCode:
-          type: string
-          description: ZIP code.
-        country:
-          type: string
-          description: Country code.
-        addressType:
-          type: string
-          description: Address classification. Values are `business`, `headquarters`, or `mailing`.
-        paymentLink:
-          type: string
-          description: Payment portal URL.
-        paymentLinkType:
-          type: string
-          description: Link classification. Values are `payment_portal`, `billing_page`, or `general_website`.
-        cardAccepted:
-          type: string
-          description: Whether the vendor accepts card payments. Values are `yes`, `no`, or `unable to determine`.
-        achAccepted:
-          type: string
-          description: Whether the vendor accepts ACH payments. Values are `yes`, `no`, or `unable to determine`.
-        checkAccepted:
-          type: string
-          description: Whether the vendor accepts check payments. Values are `yes`, `no`, or `unable to determine`.
-      description: Vendor contact information and payment acceptance info found through web search.
-      title: VendorEnrichmentWebSearch
-    Email:
-      type: string
-      format: email
-      description: Email address.
-      title: Email
-    VendorCallStatusScheduled:
-      type: object
-      properties:
-        scheduledFor:
-          type: string
-          description: ISO-8601 timestamp of the next scheduled call attempt.
-        attemptsRemaining:
-          type: integer
-          description: Number of call attempts left before retries are exhausted.
-        maxAttempts:
-          type: integer
-          description: Maximum number of call attempts configured for this schedule.
-      description: Details of a queued or in-progress outreach call.
-      title: VendorCallStatusScheduled
-    VendorCallStatusFailed:
-      type: object
-      properties:
-        lastAttemptAt:
-          type: string
-          description: ISO-8601 timestamp of the most recent call attempt.
-        reason:
-          type: string
-          description: Reason the call didn't complete, as reported by the calling system (for example, `No answer`).
-        attemptsRemaining:
-          type: integer
-          description: Number of call attempts left before retries are exhausted.
-        maxAttempts:
-          type: integer
-          description: Maximum number of call attempts configured for this schedule.
-        nextRetryScheduledFor:
-          type:
-          - string
-          - 'null'
-          description: ISO-8601 timestamp of the next scheduled retry, or `null` when no further retries are scheduled.
-      description: Details of an outreach call that didn't complete successfully.
-      title: VendorCallStatusFailed
-    VendorName2:
-      type: string
-      description: 'Secondary name for vendor. If provided, allowed characters are the
+          description: Contact phone number.
+      title: ContactsResponse
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
 
-        same as the `name1` field.
+        indicates success. A `false` value indicates failure.
 
         '
-      title: VendorName2
-    VendorEnrichResponse:
-      type: object
-      properties:
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        roomId:
-          $ref: '#/components/schemas/RoomIdNotInUse'
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          $ref: '#/components/schemas/VendorEnrichResponseData'
-      required:
-      - responseText
-      description: Response from the vendor enrichment endpoint.
-      title: VendorEnrichResponse
-    ContactsField:
-      type: array
-      items:
-        $ref: '#/components/schemas/Contacts'
-      description: List of contacts.
-      title: ContactsField
-    Zip:
-      type: string
-      description: ZIP code for address.
-      title: Zip
-    CityNullable:
-      type: string
-      description: The city.
-      title: CityNullable
-    Remitstate:
-      type: string
-      description: 'Remittance address state or province. Used for mailing paper checks.
-
-        Required if any remittance address field is provided. Must be a valid
-
-        US state or Canadian province abbreviation.
-
-        '
-      title: Remitstate
-    Remitaddress2:
-      type: string
-      description: 'Remittance address additional line, such as a suite or unit number. Used
-
-        for mailing paper checks. Always optional.
-
-        '
-      title: Remitaddress2
-    BankAccountHolderName:
-      type: string
-      description: The accountholder's name.
-      title: BankAccountHolderName
-    VendorNumber:
-      type: string
-      description: 'Custom number identifying the vendor. Must be unique in paypoint. Can''t be
-
-        blank.
-
-        '
-      title: VendorNumber
-    Responsecode:
-      type: integer
-      description: 'Code for the response. Learn more in
-
-        [API Response Codes](/developers/api-reference/api-responses).
-
-        '
-      title: Responsecode
+      title: IsSuccess
     VendorEnrichmentInvoiceScan:
       type: object
       properties:
@@ -879,63 +697,108 @@ components:
           description: Payment due date. Format is `YYYY-MM-DD`.
       description: Vendor contact information and payment acceptance info extracted from an invoice.
       title: VendorEnrichmentInvoiceScan
-    VendorSummary:
+    VendorCallStatusExtractedData:
       type: object
       properties:
-        ActiveBills:
-          type: integer
-        PendingBills:
-          type: integer
-        InTransitBills:
-          type: integer
-        PaidBills:
-          type: integer
-        OverdueBills:
-          type: integer
-        ApprovedBills:
-          type: integer
-        DisapprovedBills:
-          type: integer
-        TotalBills:
-          type: integer
-        ActiveBillsAmount:
-          type: number
-          format: double
-        PendingBillsAmount:
-          type: number
-          format: double
-        InTransitBillsAmount:
-          type: number
-          format: double
-        PaidBillsAmount:
-          type: number
-          format: double
-        OverdueBillsAmount:
-          type: number
-          format: double
-        ApprovedBillsAmount:
-          type: number
-          format: double
-        DisapprovedBillsAmount:
-          type: number
-          format: double
-        TotalBillsAmount:
-          type: number
-          format: double
-      title: VendorSummary
-    FileContentFtype:
+        selectedPaymentMethod:
+          type: string
+          description: Payment method the vendor said they accept. Values are `card`, `ach`, or `check`.
+        contactEmail:
+          type: string
+          description: Contact email collected during the call.
+      description: Data extracted from a completed outreach call.
+      title: VendorCallStatusExtractedData
+    Vendorstatus:
+      type: integer
+      description: 'Vendor''s status. Allowed values:
+
+
+        - `0` Inactive
+
+        - `1` Active
+
+        - `-99` Deleted
+
+        '
+      title: Vendorstatus
+    StateNullable:
+      type: string
+      description: The state or province.
+      title: StateNullable
+    BankAccountHolderType:
       type: string
       enum:
-      - pdf
-      - doc
-      - docx
-      - jpg
-      - jpeg
-      - png
-      - gif
-      - txt
-      description: The MIME type of the file (if content is provided).
-      title: FileContentFtype
+      - Personal
+      - Business
+      description: Describes whether the bank is a personal or business account.
+      title: BankAccountHolderType
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    VendorScheduleCallRequest:
+      type: object
+      properties:
+        vendorId:
+          type: integer
+          format: int64
+          description: ID of the vendor to call. Must be active and belong to the entrypoint in the path.
+        phone:
+          type: string
+          description: Vendor phone number to call, digits only. Optional. When omitted, Payabli uses the phone number on the vendor's record. If the vendor has no phone on record, the request returns an error.
+        enrichmentId:
+          type: string
+          description: ID of the originating enrichment run to associate with this call. Optional. When omitted, Payabli generates a standalone call schedule and skips the enrichment lookup. The bill due-date check only runs when both `enrichmentId` and `billId` are supplied.
+        billId:
+          type: integer
+          format: int64
+          description: Bill ID used for the due-date check. When the bill is due in fewer than three days, the call is skipped and the fallback method is applied. Only evaluated when `enrichmentId` is also supplied.
+        fallbackMethod:
+          type: string
+          description: Payment method to apply to the vendor record if the call can't determine a preference or all retries are exhausted. Values are `check` (the default) or `managed`.
+        maxRetries:
+          type: integer
+          description: Number of times to retry the call if the vendor doesn't answer. Defaults to 3. Maximum is 5. The get outreach call status response reports this value as `maxAttempts`.
+        timezone:
+          type: string
+          description: IANA timezone identifier used to schedule the call in the vendor's local time. Defaults to `America/New_York`.
+        sendNow:
+          type: boolean
+          description: When `true`, dispatches the call immediately and bypasses the business-hours window and the bill due-date check. Defaults to `false`.
+      required:
+      - vendorId
+      description: Request body for scheduling an AI outreach call to a vendor.
+      title: VendorScheduleCallRequest
+    VendorEnrichmentData:
+      type: object
+      properties:
+        invoiceScan:
+          $ref: '#/components/schemas/VendorEnrichmentInvoiceScan'
+          description: Results from the invoice scan stage, if it ran.
+        webSearch:
+          $ref: '#/components/schemas/VendorEnrichmentWebSearch'
+          description: Results from the web search stage, if it ran.
+      description: Container for enrichment stage results.
+      title: VendorEnrichmentData
+    LastModified:
+      type: string
+      format: date-time
+      description: Timestamp of when record was last updated, in UTC.
+      title: LastModified
+    RoomIdNotInUse:
+      type: integer
+      format: int64
+      description: Field not in use on this endpoint. It always returns `0`.
+      title: RoomIdNotInUse
+    Remitcountry:
+      type: string
+      description: 'Remittance address country. Used for mailing paper checks. Must be `US`
+
+        or `CA`. Defaults to `US` if not provided.
+
+        '
+      title: Remitcountry
     VendorEnrichRequest:
       type: object
       properties:
@@ -968,6 +831,75 @@ components:
       - vendorId
       description: Request body for the vendor enrichment endpoint.
       title: VendorEnrichRequest
+    AddressAddtlNullable:
+      type: string
+      description: Additional line for the address.
+      title: AddressAddtlNullable
+    VendorCallStatusResponse:
+      type: object
+      properties:
+        vendorId:
+          type: integer
+          format: int64
+          description: ID of the vendor this status applies to.
+        state:
+          type: string
+          description: 'Current call state. Values are: `none` (no call activity for the vendor), `scheduled` (a call is queued or being retried), `successful` (a call completed and returned data), or `failed` (the call didn''t complete successfully).'
+        scheduled:
+          $ref: '#/components/schemas/VendorCallStatusScheduled'
+          description: Populated when `state` is `scheduled`.
+        completed:
+          $ref: '#/components/schemas/VendorCallStatusCompleted'
+          description: Populated when `state` is `successful`.
+        failed:
+          $ref: '#/components/schemas/VendorCallStatusFailed'
+          description: Populated when `state` is `failed`.
+      description: Latest AI outreach call activity for a vendor. The populated block depends on the `state` discriminator.
+      title: VendorCallStatusResponse
+    TypeAccount:
+      type: string
+      enum:
+      - Checking
+      - Savings
+      description: 'Type of bank account: Checking or Savings.'
+      title: TypeAccount
+    VendorEin:
+      type: string
+      description: 'EIN/Tax ID for vendor. Must be nine digits formatted as `XX-XXXXXXX`
+
+        (for example, `12-3456789`).
+
+        '
+      title: VendorEin
+    VendorCallStatusCompleted:
+      type: object
+      properties:
+        completedAt:
+          type: string
+          description: ISO-8601 timestamp when the call ended.
+        durationSeconds:
+          type: integer
+          description: Call duration in seconds.
+        summary:
+          type: string
+          description: Short summary of the call.
+        callId:
+          type: string
+          description: Reference identifier for the call.
+        transcript:
+          type:
+          - string
+          - 'null'
+          description: Full call transcript. `null` when no transcript is available.
+        extractedData:
+          $ref: '#/components/schemas/VendorCallStatusExtractedData'
+          description: Payment and contact details collected during the call.
+      description: Details of a completed outreach call that returned data.
+      title: VendorCallStatusCompleted
+    BankName:
+      type: string
+      description: Name of bank for account.
+      title: BankName
     FileContent:
       type: object
       properties:
@@ -988,10 +920,10 @@ components:
           description: Optional URL provided to show or download the file remotely.
       description: Contains details about a file. Max upload size is 30 MB.
       title: FileContent
-    Entrypointfield:
+    PageIdentifier:
       type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
     VendorEnrichResponseData:
       type: object
       properties:
@@ -1014,27 +946,284 @@ components:
           description: Raw extraction results from the enrichment stages that ran.
       description: Enrichment result details.
       title: VendorEnrichResponseData
-    AddressNullable:
+    PayabliApiResponseVendors:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          type: integer
+          description: If the request was successful, this field contains the identifier for the vendor.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseVendors
+    AdditionalDataMap:
+      type: object
+      additionalProperties:
+        type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataMap
+    VendorEnrichmentWebSearch:
+      type: object
+      properties:
+        phone:
+          type: string
+          description: Phone number found through web search. Format isn't guaranteed.
+        phoneType:
+          type: string
+          description: Phone classification. Values are `main`, `billing`, or `customer_service`.
+        email:
+          type: string
+          description: Email address.
+        emailType:
+          type: string
+          description: Email classification. Values are `billing`, `general`, or `customer_service`.
+        street:
+          type: string
+          description: Street address.
+        city:
+          type: string
+          description: City.
+        state:
+          type: string
+          description: State (two-letter abbreviation).
+        zipCode:
+          type: string
+          description: ZIP code.
+        country:
+          type: string
+          description: Country code.
+        addressType:
+          type: string
+          description: Address classification. Values are `business`, `headquarters`, or `mailing`.
+        paymentLink:
+          type: string
+          description: Payment portal URL.
+        paymentLinkType:
+          type: string
+          description: Link classification. Values are `payment_portal`, `billing_page`, or `general_website`.
+        cardAccepted:
+          type: string
+          description: Whether the vendor accepts card payments. Values are `yes`, `no`, or `unable to determine`.
+        achAccepted:
+          type: string
+          description: Whether the vendor accepts ACH payments. Values are `yes`, `no`, or `unable to determine`.
+        checkAccepted:
+          type: string
+          description: Whether the vendor accepts check payments. Values are `yes`, `no`, or `unable to determine`.
+      description: Vendor contact information and payment acceptance info found through web search.
+      title: VendorEnrichmentWebSearch
+    Mcc:
       type: string
-      description: The address.
-      title: AddressNullable
+      description: 'Business Merchant Category Code (MCC).
+
+        [This resource](https://github.com/greggles/mcc-codes/blob/main/mcc_codes.csv)
+
+        lists MCC codes.
+
+        '
+      title: Mcc
     OrgParentName:
       type: string
       description: The name of the parent organization.
       title: OrgParentName
-    StateNullable:
+    CreatedAt:
       type: string
-      description: The state or province.
-      title: StateNullable
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    ExternalPaypointId:
+      type: string
+      description: 'A custom identifier for the paypoint, if applicable.
+
+        '
+      title: ExternalPaypointId
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    RemitEmail:
+      type: string
+      format: email
+      description: 'Remittance email address. Used for sending virtual cards and other
+
+        information about payouts.
+
+        '
+      title: RemitEmail
     RoutingAccount:
       type: string
       description: Routing number of bank account.
       title: RoutingAccount
-    LastModified:
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    VendorScheduleCallResponseData:
+      type: object
+      properties:
+        callScheduleId:
+          type: integer
+          description: Identifier for the scheduled call.
+        enrichmentId:
+          type: string
+          description: ID of the enrichment run associated with this call. When the request omits `enrichmentId`, Payabli generates one and returns it here.
+        scheduledCallDate:
+          type: string
+          description: ISO-8601 timestamp of the next scheduled call attempt.
+        status:
+          type: string
+          description: Status of the call schedule. Values are `pending`, `dispatched`, `retry_scheduled`, `completed`, and `fallback_applied`.
+      description: Scheduled call details.
+      title: VendorScheduleCallResponseData
+    Dbaname:
       type: string
-      format: date-time
-      description: Timestamp of when record was last updated, in UTC.
-      title: LastModified
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
+    Contacts:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
+    VendorEnrichResponse:
+      type: object
+      properties:
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/VendorEnrichResponseData'
+      required:
+      - responseText
+      description: Response from the vendor enrichment endpoint.
+      title: VendorEnrichResponse
+    InternalReferenceId:
+      type: integer
+      format: int64
+      description: An internal reference ID.
+      title: InternalReferenceId
+    Vendorid:
+      type: integer
+      description: Payabli identifier for vendor record.
+      title: Vendorid
+    VendorName2:
+      type: string
+      description: 'Secondary name for vendor. If provided, allowed characters are the
+
+        same as the `name1` field.
+
+        '
+      title: VendorName2
+    BillingDataResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The bank's ID in Payabli.
+        accountId:
+          $ref: '#/components/schemas/AccountId'
+          description: An identifier for the bank account. If not provided during creation or update, the system generates one in the format `acct-{first_digit}xxxxx{last_4_digits}` based on the account number. If a duplicate exists within the same service at the paypoint, a numeric suffix is appended, such as `-2`. This value is also used as the identifier for the bank account's associated payment connector.
+        nickname:
+          type: string
+        bankName:
+          $ref: '#/components/schemas/BankName'
+        routingAccount:
+          $ref: '#/components/schemas/RoutingAccount'
+        accountNumber:
+          $ref: '#/components/schemas/AccountNumber'
+        typeAccount:
+          $ref: '#/components/schemas/TypeAccount'
+        bankAccountHolderName:
+          $ref: '#/components/schemas/BankAccountHolderName'
+        bankAccountHolderType:
+          $ref: '#/components/schemas/BankAccountHolderType'
+        bankAccountFunction:
+          type: integer
+          description: "Describes whether the bank account is used for deposits or withdrawals in Payabli:\n  - `0`: Deposit\n  - `1`: Withdrawal\n  - `2`: Deposit and withdrawal"
+        verified:
+          type: boolean
+        status:
+          type: integer
+        services:
+          type: array
+          items:
+            description: Any type
+        default:
+          type: boolean
+      required:
+      - id
+      - nickname
+      - bankName
+      - routingAccount
+      - accountNumber
+      - typeAccount
+      - bankAccountHolderName
+      - bankAccountHolderType
+      - bankAccountFunction
+      - verified
+      - status
+      - services
+      - default
+      title: BillingDataResponse
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    Remitcity:
+      type: string
+      description: 'Remittance address city. Used for mailing paper checks. Required if any
+
+        remittance address field is provided.
+
+        '
+      title: Remitcity
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
     VendorResponseStoredMethod:
       type: object
       properties:
@@ -1130,10 +1319,29 @@ components:
       - CardUpdatedOn
       description: Stored payment method information
       title: VendorResponseStoredMethod
-    Vendorid:
-      type: integer
-      description: Payabli identifier for vendor record.
-      title: Vendorid
+    BillingData:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Account number for bank account.
+        bankAccountFunction:
+          type: integer
+          description: "Describes whether the bank account is used for deposits or withdrawals in Payabli:\n  - `0`: Deposit\n  - `1`: Withdrawal\n  - `2`: Deposit and withdrawal"
+        bankAccountHolderName:
+          $ref: '#/components/schemas/BankAccountHolderName'
+        bankAccountHolderType:
+          $ref: '#/components/schemas/BankAccountHolderType'
+        bankName:
+          $ref: '#/components/schemas/BankName'
+        id:
+          type: integer
+          description: The bank's ID in Payabli.
+        routingAccount:
+          $ref: '#/components/schemas/RoutingAccount'
+        typeAccount:
+          $ref: '#/components/schemas/TypeAccount'
+      title: BillingData
     Remitzip:
       type: string
       description: 'Remittance address ZIP or postal code. Used for mailing paper checks.
@@ -1144,12 +1352,130 @@ components:
 
         '
       title: Remitzip
-    VendorName1:
+    LocationCode:
       type: string
-      description: 'Primary name for vendor. Required for new vendor.
+      description: A location code used to identify the vendor's location.
+      title: LocationCode
+    VendorData:
+      type: object
+      properties:
+        vendorNumber:
+          $ref: '#/components/schemas/VendorNumber'
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        address1:
+          $ref: '#/components/schemas/AddressNullable'
+          description: Vendor's street address. If any address field is provided, this field is required along with `city`, `state`, and `zip`. Allowed characters are letters, numbers, spaces, and `. ,
+        address2:
+          $ref: '#/components/schemas/AddressAddtlNullable'
+          description: Additional line for vendor's address, such as a suite or unit number. Always optional.
+        billingData:
+          $ref: '#/components/schemas/BillingData'
+          description: Object containing vendor's bank information.
+        city:
+          type: string
+          description: Vendor's city. Required if any address field is provided.
+        contacts:
+          $ref: '#/components/schemas/ContactsField'
+          description: Array of objects describing the vendor's contacts.
+        country:
+          type: string
+          description: Vendor's country. Must be `US` or `CA`. Defaults to `US` if not provided.
+        customField1:
+          type: string
+          description: Custom field 1 for vendor
+        customField2:
+          type: string
+          description: Custom field 2 for vendor
+        customerVendorAccount:
+          type: string
+          description: Account number of paypoint in the vendor side.
+        ein:
+          $ref: '#/components/schemas/VendorEin'
+        email:
+          $ref: '#/components/schemas/Email'
+          description: Vendor's email address. Required for vCard.
+        internalReferenceId:
+          type: integer
+          format: int64
+          description: Internal identifier for global vendor account.
+        locationCode:
+          $ref: '#/components/schemas/LocationCode'
+        mcc:
+          $ref: '#/components/schemas/Mcc'
+        name1:
+          $ref: '#/components/schemas/VendorName1'
+        name2:
+          $ref: '#/components/schemas/VendorName2'
+        payeeName1:
+          $ref: '#/components/schemas/PayeeName'
+        payeeName2:
+          $ref: '#/components/schemas/PayeeName'
+        paymentMethod:
+          $ref: '#/components/schemas/VendorPaymentMethodString'
+        phone:
+          $ref: '#/components/schemas/VendorPhone'
+        remitAddress1:
+          $ref: '#/components/schemas/Remitaddress1'
+        remitAddress2:
+          $ref: '#/components/schemas/Remitaddress2'
+        remitCity:
+          $ref: '#/components/schemas/Remitcity'
+        remitCountry:
+          $ref: '#/components/schemas/Remitcountry'
+        remitEmail:
+          $ref: '#/components/schemas/RemitEmail'
+        remitState:
+          $ref: '#/components/schemas/Remitstate'
+        remitZip:
+          $ref: '#/components/schemas/Remitzip'
+        state:
+          type: string
+          description: Vendor's state or province. Required if any address field is provided. Must be a valid US state abbreviation (such as `CA`, `NY`) or Canadian province abbreviation (such as `ON`, `BC`), depending on the `country` value.
+        vendorStatus:
+          $ref: '#/components/schemas/Vendorstatus'
+        zip:
+          type: string
+          description: Vendor's ZIP or postal code. Required if any address field is provided. For US addresses, use five digits (`12345`) or ZIP+4 format (`12345-6789`).
+        defaultMethodId:
+          type: string
+          description: Identifier for the vendor's default stored payment method.
+        attachment:
+          $ref: '#/components/schemas/FileContent'
+          description: 'PDF invoice attachment for AI-powered vendor enrichment.
 
-        '
-      title: VendorName1
+            When this feature is enabled and you include an attachment, the invoice is scanned and extracted vendor information is merged into the request.
+
+            Fields in the request body take precedence over extracted data.
+
+            If the scan fails, vendor creation proceeds with the original request data.
+
+            See the [vendor enrichment guide](/guides/pay-out-vendor-enrichment-overview) for details.
+
+            Contact Payabli to enable this feature.'
+      title: VendorData
+    VendorCallStatusFailed:
+      type: object
+      properties:
+        lastAttemptAt:
+          type: string
+          description: ISO-8601 timestamp of the most recent call attempt.
+        reason:
+          type: string
+          description: Reason the call didn't complete, as reported by the calling system (for example, `No answer`).
+        attemptsRemaining:
+          type: integer
+          description: Number of call attempts left before retries are exhausted.
+        maxAttempts:
+          type: integer
+          description: Maximum number of call attempts configured for this schedule.
+        nextRetryScheduledFor:
+          type:
+          - string
+          - 'null'
+          description: ISO-8601 timestamp of the next scheduled retry, or `null` when no further retries are scheduled.
+      description: Details of an outreach call that didn't complete successfully.
+      title: VendorCallStatusFailed
     VendorQueryRecord:
       type: object
       properties:
@@ -1284,237 +1610,10 @@ components:
           items:
             $ref: '#/components/schemas/VendorResponseStoredMethod'
       title: VendorQueryRecord
-    ContactsResponse:
-      type: object
-      properties:
-        ContactName:
-          type: string
-          description: Contact name.
-        ContactEmail:
-          $ref: '#/components/schemas/Email'
-          description: Contact email address.
-        ContactTitle:
-          type: string
-          description: Contact title.
-        ContactPhone:
-          type: string
-          description: Contact phone number.
-      title: ContactsResponse
-    Remitaddress1:
+    Zip:
       type: string
-      description: 'Remittance street address. Used for mailing paper checks. Required if any
-
-        remittance address field is provided.
-
-        '
-      title: Remitaddress1
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    AdditionalDataString:
-      type: string
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalDataString
-    Vendorstatus:
-      type: integer
-      description: 'Vendor''s status. Allowed values:
-
-
-        - `0` Inactive
-
-        - `1` Active
-
-        - `-99` Deleted
-
-        '
-      title: Vendorstatus
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    BillingDataResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The bank's ID in Payabli.
-        accountId:
-          $ref: '#/components/schemas/AccountId'
-          description: An identifier for the bank account. If not provided during creation or update, the system generates one in the format `acct-{first_digit}xxxxx{last_4_digits}` based on the account number. If a duplicate exists within the same service at the paypoint, a numeric suffix is appended, such as `-2`. This value is also used as the identifier for the bank account's associated payment connector.
-        nickname:
-          type: string
-        bankName:
-          $ref: '#/components/schemas/BankName'
-        routingAccount:
-          $ref: '#/components/schemas/RoutingAccount'
-        accountNumber:
-          $ref: '#/components/schemas/AccountNumber'
-        typeAccount:
-          $ref: '#/components/schemas/TypeAccount'
-        bankAccountHolderName:
-          $ref: '#/components/schemas/BankAccountHolderName'
-        bankAccountHolderType:
-          $ref: '#/components/schemas/BankAccountHolderType'
-        bankAccountFunction:
-          type: integer
-          description: "Describes whether the bank account is used for deposits or withdrawals in Payabli:\n  - `0`: Deposit\n  - `1`: Withdrawal\n  - `2`: Deposit and withdrawal"
-        verified:
-          type: boolean
-        status:
-          type: integer
-        services:
-          type: array
-          items:
-            description: Any type
-        default:
-          type: boolean
-      required:
-      - id
-      - nickname
-      - bankName
-      - routingAccount
-      - accountNumber
-      - typeAccount
-      - bankAccountHolderName
-      - bankAccountHolderType
-      - bankAccountFunction
-      - verified
-      - status
-      - services
-      - default
-      title: BillingDataResponse
-    EnrollmentStatus:
-      type: string
-      description: Enrollment status of vendor in payables program.
-      title: EnrollmentStatus
-    Ein:
-      type: string
-      description: Business EIN or tax ID. This value is masked in API responses.
-      title: Ein
-    VendorCallStatusResponse:
-      type: object
-      properties:
-        vendorId:
-          type: integer
-          format: int64
-          description: ID of the vendor this status applies to.
-        state:
-          type: string
-          description: 'Current call state. Values are: `none` (no call activity for the vendor), `scheduled` (a call is queued or being retried), `successful` (a call completed and returned data), or `failed` (the call didn''t complete successfully).'
-        scheduled:
-          $ref: '#/components/schemas/VendorCallStatusScheduled'
-          description: Populated when `state` is `scheduled`.
-        completed:
-          $ref: '#/components/schemas/VendorCallStatusCompleted'
-          description: Populated when `state` is `successful`.
-        failed:
-          $ref: '#/components/schemas/VendorCallStatusFailed'
-          description: Populated when `state` is `failed`.
-      description: Latest AI outreach call activity for a vendor. The populated block depends on the `state` discriminator.
-      title: VendorCallStatusResponse
-    AccountNumber:
-      type: string
-      description: Account number for bank account. This value is returned masked in responses.
-      title: AccountNumber
-    Mcc:
-      type: string
-      description: 'Business Merchant Category Code (MCC).
-
-        [This resource](https://github.com/greggles/mcc-codes/blob/main/mcc_codes.csv)
-
-        lists MCC codes.
-
-        '
-      title: Mcc
-    VendorScheduleCallResponseData:
-      type: object
-      properties:
-        callScheduleId:
-          type: integer
-          description: Identifier for the scheduled call.
-        enrichmentId:
-          type: string
-          description: ID of the enrichment run associated with this call. When the request omits `enrichmentId`, Payabli generates one and returns it here.
-        scheduledCallDate:
-          type: string
-          description: ISO-8601 timestamp of the next scheduled call attempt.
-        status:
-          type: string
-          description: Status of the call schedule. Values are `pending`, `dispatched`, `retry_scheduled`, `completed`, and `fallback_applied`.
-      description: Scheduled call details.
-      title: VendorScheduleCallResponseData
-    VendorScheduleCallResponse:
-      type: object
-      properties:
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        roomId:
-          $ref: '#/components/schemas/RoomIdNotInUse'
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          $ref: '#/components/schemas/VendorScheduleCallResponseData'
-      required:
-      - responseText
-      description: Response from the schedule outreach call endpoint.
-      title: VendorScheduleCallResponse
-    LocationCode:
-      type: string
-      description: A location code used to identify the vendor's location.
-      title: LocationCode
-    OrgParentId:
-      type: integer
-      format: int64
-      description: The ID of the org's parent organization.
-      title: OrgParentId
-    RoomIdNotInUse:
-      type: integer
-      format: int64
-      description: Field not in use on this endpoint. It always returns `0`.
-      title: RoomIdNotInUse
-    PayabliApiResponseVendors:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          type: integer
-          description: If the request was successful, this field contains the identifier for the vendor.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponseVendors
-    VendorEin:
-      type: string
-      description: 'EIN/Tax ID for vendor. Must be nine digits formatted as `XX-XXXXXXX`
-
-        (for example, `12-3456789`).
-
-        '
-      title: VendorEin
-    PayeeName:
-      type: string
-      description: Alternative name used to receive paper check.
-      title: PayeeName
+      description: ZIP code for address.
+      title: Zip
     VendorPhone:
       type: string
       description: 'Vendor''s phone number. Phone number can''t contain non-digit characters
@@ -1523,141 +1622,42 @@ components:
 
         '
       title: VendorPhone
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    VendorEnrichmentData:
-      type: object
-      properties:
-        invoiceScan:
-          $ref: '#/components/schemas/VendorEnrichmentInvoiceScan'
-          description: Results from the invoice scan stage, if it ran.
-        webSearch:
-          $ref: '#/components/schemas/VendorEnrichmentWebSearch'
-          description: Results from the web search stage, if it ran.
-      description: Container for enrichment stage results.
-      title: VendorEnrichmentData
-    VendorData:
-      type: object
-      properties:
-        vendorNumber:
-          $ref: '#/components/schemas/VendorNumber'
-        AdditionalData:
-          $ref: '#/components/schemas/AdditionalDataMap'
-        address1:
-          $ref: '#/components/schemas/AddressNullable'
-          description: Vendor's street address. If any address field is provided, this field is required along with `city`, `state`, and `zip`. Allowed characters are letters, numbers, spaces, and `. ,
-        address2:
-          $ref: '#/components/schemas/AddressAddtlNullable'
-          description: Additional line for vendor's address, such as a suite or unit number. Always optional.
-        billingData:
-          $ref: '#/components/schemas/BillingData'
-          description: Object containing vendor's bank information.
-        city:
-          type: string
-          description: Vendor's city. Required if any address field is provided.
-        contacts:
-          $ref: '#/components/schemas/ContactsField'
-          description: Array of objects describing the vendor's contacts.
-        country:
-          type: string
-          description: Vendor's country. Must be `US` or `CA`. Defaults to `US` if not provided.
-        customField1:
-          type: string
-          description: Custom field 1 for vendor
-        customField2:
-          type: string
-          description: Custom field 2 for vendor
-        customerVendorAccount:
-          type: string
-          description: Account number of paypoint in the vendor side.
-        ein:
-          $ref: '#/components/schemas/VendorEin'
-        email:
-          $ref: '#/components/schemas/Email'
-          description: Vendor's email address. Required for vCard.
-        internalReferenceId:
-          type: integer
-          format: int64
-          description: Internal identifier for global vendor account.
-        locationCode:
-          $ref: '#/components/schemas/LocationCode'
-        mcc:
-          $ref: '#/components/schemas/Mcc'
-        name1:
-          $ref: '#/components/schemas/VendorName1'
-        name2:
-          $ref: '#/components/schemas/VendorName2'
-        payeeName1:
-          $ref: '#/components/schemas/PayeeName'
-        payeeName2:
-          $ref: '#/components/schemas/PayeeName'
-        paymentMethod:
-          $ref: '#/components/schemas/VendorPaymentMethodString'
-        phone:
-          $ref: '#/components/schemas/VendorPhone'
-        remitAddress1:
-          $ref: '#/components/schemas/Remitaddress1'
-        remitAddress2:
-          $ref: '#/components/schemas/Remitaddress2'
-        remitCity:
-          $ref: '#/components/schemas/Remitcity'
-        remitCountry:
-          $ref: '#/components/schemas/Remitcountry'
-        remitEmail:
-          $ref: '#/components/schemas/RemitEmail'
-        remitState:
-          $ref: '#/components/schemas/Remitstate'
-        remitZip:
-          $ref: '#/components/schemas/Remitzip'
-        state:
-          type: string
-          description: Vendor's state or province. Required if any address field is provided. Must be a valid US state abbreviation (such as `CA`, `NY`) or Canadian province abbreviation (such as `ON`, `BC`), depending on the `country` value.
-        vendorStatus:
-          $ref: '#/components/schemas/Vendorstatus'
-        zip:
-          type: string
-          description: Vendor's ZIP or postal code. Required if any address field is provided. For US addresses, use five digits (`12345`) or ZIP+4 format (`12345-6789`).
-        defaultMethodId:
-          type: string
-          description: Identifier for the vendor's default stored payment method.
-        attachment:
-          $ref: '#/components/schemas/FileContent'
-          description: 'PDF invoice attachment for AI-powered vendor enrichment.
-
-            When this feature is enabled and you include an attachment, the invoice is scanned and extracted vendor information is merged into the request.
-
-            Fields in the request body take precedence over extracted data.
-
-            If the scan fails, vendor creation proceeds with the original request data.
-
-            See the [vendor enrichment guide](/guides/pay-out-vendor-enrichment-overview) for details.
-
-            Contact Payabli to enable this feature.'
-      title: VendorData
-    BankAccountHolderType:
-      type: string
-      enum:
-      - Personal
-      - Business
-      description: Describes whether the bank is a personal or business account.
-      title: BankAccountHolderType
-    TypeAccount:
-      type: string
-      enum:
-      - Checking
-      - Savings
-      description: 'Type of bank account: Checking or Savings.'
-      title: TypeAccount
     AccountId:
       type: string
       description: Custom identifier for payment connector.
       title: AccountId
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    Ein:
+      type: string
+      description: Business EIN or tax ID. This value is masked in API responses.
+      title: Ein
   securitySchemes:
     BearerAuth:
       type: http

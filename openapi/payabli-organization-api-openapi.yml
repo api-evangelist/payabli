@@ -392,33 +392,189 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    BillingZip:
+      type: string
+      description: Billing address ZIP code.
+      title: BillingZip
+    ContactsField:
+      type: array
+      items:
+        $ref: '#/components/schemas/Contacts'
+      description: List of contacts.
+      title: ContactsField
+    DeleteOrganizationResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: Returns the organization ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: DeleteOrganizationResponse
+    BillingCityNullable:
+      type: string
+      description: Billing city.
+      title: BillingCityNullable
+    Language:
+      type: string
+      description: The language code.
+      title: Language
+    Enabled:
+      type: boolean
+      description: Toggles whether the section or element is enabled.
+      title: Enabled
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
+    UsrAccess:
+      type: object
+      properties:
+        roleLabel:
+          type: string
+        roleValue:
+          type: boolean
+      title: UsrAccess
     PageIdentifier:
       type: string
       description: Auxiliary validation used internally by payment pages and components.
       title: PageIdentifier
-    BillingStateNullable:
+    Achaccount:
       type: string
-      description: Billing state. Must be a 2-letter state code for addresses in the US.
-      title: BillingStateNullable
+      description: Bank account number.
+      title: Achaccount
+    ReplyToEmail:
+      type: string
+      format: email
+      description: 'Email address for organization-level communications, such as messages
+
+        about why an application was declined. This is required by commerce
+
+        laws in the US.
+
+        '
+      title: ReplyToEmail
+    AddOrganizationResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: Returns the organization ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: AddOrganizationResponse
+    Orgwebsite:
+      type: string
+      description: The organization's website.
+      title: Orgwebsite
+    Orgtype:
+      type: integer
+      description: The organization type. Currently, this must be `0`.
+      title: Orgtype
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    BillingAddressNullable:
+      type: string
+      description: Billing address.
+      title: BillingAddressNullable
     AdditionalDataString:
       type: string
       description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
       title: AdditionalDataString
+    BillingStateNullable:
+      type: string
+      description: Billing state. Must be a 2-letter state code for addresses in the US.
+      title: BillingStateNullable
+    ReadOnly:
+      type: boolean
+      description: When `true`, the element is read-only.
+      title: ReadOnly
+    Orgzip:
+      type: string
+      description: The organization's ZIP code.
+      title: Orgzip
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    Mfa:
+      type: boolean
+      description: When `true`, multi-factor authentication (MFA) is enabled.
+      title: Mfa
+    NameUser:
+      type: string
+      title: NameUser
+    KeyValue:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key name.
+        readOnly:
+          $ref: '#/components/schemas/ReadOnly'
+        value:
+          type: string
+          description: Key value.
+      title: KeyValue
     Orgtimezone:
       type: integer
       description: 'The org''s timezone, in UTC offset. For example, -5 is Eastern time.
 
         '
       title: Orgtimezone
-    IsRoot:
-      type: boolean
-      description: When `true`, indicates that this is the organization's root template.
-      title: IsRoot
-    Achrouting:
+    Orgstate:
       type: string
-      description: ABA/routing number of Bank account.
-      title: Achrouting
-    AddOrganizationRequest:
+      description: The organization's state.
+      title: Orgstate
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    OrganizationData:
       type: object
       properties:
         services:
@@ -461,18 +617,11 @@ components:
           $ref: '#/components/schemas/Orgzip'
         replyToEmail:
           $ref: '#/components/schemas/ReplyToEmail'
-      required:
-      - orgName
-      - orgType
-      - replyToEmail
-      title: AddOrganizationRequest
-    Orgaddress:
+      title: OrganizationData
+    OrgParentName:
       type: string
-      description: The organization's address.
-      title: Orgaddress
-    MfaMode:
-      type: integer
-      title: MfaMode
+      description: The name of the parent organization.
+      title: OrgParentName
     OrganizationQueryRecord:
       type: object
       properties:
@@ -535,147 +684,77 @@ components:
           items:
             $ref: '#/components/schemas/UserQueryRecord'
       title: OrganizationQueryRecord
-    PayabliErrorBody:
+    BillingCountryNullable:
+      type: string
+      description: Billing address country.
+      title: BillingCountryNullable
+    Instrument:
       type: object
       properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
+        achAccount:
+          $ref: '#/components/schemas/Achaccount'
+        achRouting:
+          $ref: '#/components/schemas/Achrouting'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressNullable'
+        billingCity:
+          $ref: '#/components/schemas/BillingCityNullable'
+        billingCountry:
+          $ref: '#/components/schemas/BillingCountryNullable'
+        billingState:
+          $ref: '#/components/schemas/BillingStateNullable'
+        billingZip:
+          $ref: '#/components/schemas/BillingZip'
       required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
+      - achAccount
+      - achRouting
+      title: Instrument
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
 
         '
-      title: PayabliErrorBody
-    OrganizationData:
+      title: ResponseText
+    OrgXScope:
       type: object
       properties:
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceCost'
-        billingInfo:
-          $ref: '#/components/schemas/Instrument'
-        contacts:
-          $ref: '#/components/schemas/ContactsField'
-        hasBilling:
-          type: boolean
-        hasResidual:
-          type: boolean
-        orgAddress:
-          $ref: '#/components/schemas/Orgaddress'
-        orgCity:
-          $ref: '#/components/schemas/Orgcity'
-        orgCountry:
-          $ref: '#/components/schemas/Orgcountry'
-        orgEntryName:
+        orgEntry:
           $ref: '#/components/schemas/Orgentryname'
         orgId:
-          $ref: '#/components/schemas/Orgidstring'
-        orgLogo:
-          $ref: '#/components/schemas/FileContent'
-        orgName:
-          $ref: '#/components/schemas/Orgname'
-        orgParentId:
-          $ref: '#/components/schemas/OrgParentId'
-        orgState:
-          $ref: '#/components/schemas/Orgstate'
-        orgTimezone:
-          $ref: '#/components/schemas/Orgtimezone'
+          $ref: '#/components/schemas/Orgid'
         orgType:
           $ref: '#/components/schemas/Orgtype'
-        orgWebsite:
-          $ref: '#/components/schemas/Orgwebsite'
-        orgZip:
-          $ref: '#/components/schemas/Orgzip'
-        replyToEmail:
-          $ref: '#/components/schemas/ReplyToEmail'
-      title: OrganizationData
-    Enabled:
+      title: OrgXScope
+    RecipientEmailNotification:
       type: boolean
-      description: Toggles whether the section or element is enabled.
-      title: Enabled
-    Orgentryname:
-      type: string
-      description: 'The entryname for the org, in string format. If you leave this blank,
+      description: 'When `true`, Payabli will send the applicant a boarding link. Set this
 
-        Payabli uses the DBA name.
+        value to `false` if you are sending pre-filled applications via the API
+
+        and don''t want Payabli to send the applicant an email to complete the
+
+        boarding application.
 
         '
-      title: Orgentryname
-    OrgParentName:
-      type: string
-      description: The name of the parent organization.
-      title: OrgParentName
-    Responsedatanonobject:
-      oneOf:
-      - type: string
-      - type: integer
-      description: The response data.
-      title: Responsedatanonobject
-    Email:
-      type: string
-      format: email
-      description: Email address.
-      title: Email
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    Orgwebsite:
-      type: string
-      description: The organization's website.
-      title: Orgwebsite
-    Timezone:
-      type: integer
-      description: Timezone, in UTC offset. For example, -5 is Eastern time.
-      title: Timezone
-    Orgid:
-      type: integer
-      format: int64
-      description: Organization ID. Unique identifier assigned to an org by Payabli.
-      title: Orgid
-    Orgname:
-      type: string
-      description: The name of the organization.
-      title: Orgname
-    BillingAddressNullable:
-      type: string
-      description: Billing address.
-      title: BillingAddressNullable
-    Resumable:
+      title: RecipientEmailNotification
+    IsRoot:
       type: boolean
-      description: 'When `true`, the applicant can save an incomplete application and
+      description: When `true`, indicates that this is the organization's root template.
+      title: IsRoot
+    Orgidstring:
+      type: string
+      description: 'An alternate ID for the organization, in string format. This can be your
 
-        resume it later. When `false`, the applicant won''t have an option to
+        internal identifier for an org, and is typically a name, like "My
 
-        save their progress, and must complete the application in one session.
+        Suborganization".
 
         '
-      title: Resumable
+      title: Orgidstring
+    PhoneNumber:
+      type: string
+      description: Phone number.
+      title: PhoneNumber
     UserQueryRecord:
       type: object
       properties:
@@ -728,28 +807,24 @@ components:
         UsrStatus:
           $ref: '#/components/schemas/UsrStatus'
       title: UserQueryRecord
-    EditOrganizationResponse:
+    SummaryOrg:
       type: object
       properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-          description: Returns the organization ID.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseCode
-      - responseText
-      title: EditOrganizationResponse
-    BillingCityNullable:
-      type: string
-      description: Billing city.
-      title: BillingCityNullable
+        amountSubs:
+          type: number
+          format: double
+        amountTx:
+          type: number
+          format: double
+        childOrgs:
+          type: integer
+        childPaypoints:
+          type: integer
+        countSubs:
+          type: integer
+        countTx:
+          type: integer
+      title: SummaryOrg
     UsrStatus:
       type: integer
       description: 'The user''s status:
@@ -765,42 +840,211 @@ components:
 
         '
       title: UsrStatus
-    ReplyToEmail:
+    Achrouting:
       type: string
-      format: email
-      description: 'Email address for organization-level communications, such as messages
-
-        about why an application was declined. This is required by commerce
-
-        laws in the US.
-
-        '
-      title: ReplyToEmail
-    NameUser:
-      type: string
-      title: NameUser
-    BillingCountryNullable:
-      type: string
-      description: Billing address country.
-      title: BillingCountryNullable
-    DeleteOrganizationResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-          description: Returns the organization ID.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: DeleteOrganizationResponse
+      description: ABA/routing number of Bank account.
+      title: Achrouting
     CreatedAt:
       type: string
       format: date-time
       description: Timestamp of when record was created, in UTC.
       title: CreatedAt
+    MfaMode:
+      type: integer
+      title: MfaMode
+    FileContentFtype:
+      type: string
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    AddOrganizationRequest:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceCost'
+        billingInfo:
+          $ref: '#/components/schemas/Instrument'
+        contacts:
+          $ref: '#/components/schemas/ContactsField'
+        hasBilling:
+          type: boolean
+        hasResidual:
+          type: boolean
+        orgAddress:
+          $ref: '#/components/schemas/Orgaddress'
+        orgCity:
+          $ref: '#/components/schemas/Orgcity'
+        orgCountry:
+          $ref: '#/components/schemas/Orgcountry'
+        orgEntryName:
+          $ref: '#/components/schemas/Orgentryname'
+        orgId:
+          $ref: '#/components/schemas/Orgidstring'
+        orgLogo:
+          $ref: '#/components/schemas/FileContent'
+        orgName:
+          $ref: '#/components/schemas/Orgname'
+        orgParentId:
+          $ref: '#/components/schemas/OrgParentId'
+        orgState:
+          $ref: '#/components/schemas/Orgstate'
+        orgTimezone:
+          $ref: '#/components/schemas/Orgtimezone'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+        orgWebsite:
+          $ref: '#/components/schemas/Orgwebsite'
+        orgZip:
+          $ref: '#/components/schemas/Orgzip'
+        replyToEmail:
+          $ref: '#/components/schemas/ReplyToEmail'
+      required:
+      - orgName
+      - orgType
+      - replyToEmail
+      title: AddOrganizationRequest
+    Orgname:
+      type: string
+      description: The name of the organization.
+      title: Orgname
+    Contacts:
+      type: object
+      properties:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
+          type: string
+          description: Contact name.
+        contactPhone:
+          type: string
+          description: Contact phone number.
+        contactTitle:
+          type: string
+          description: Contact title.
+        additionalData:
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
+    OrganizationQueryRecordServicesItem:
+      type: object
+      properties:
+        description:
+          type: string
+        enabled:
+          type: boolean
+        monthlyCost:
+          type: number
+          format: double
+        name:
+          type: string
+        reseller:
+          type: boolean
+        setupCost:
+          type: number
+          format: double
+        txCost:
+          type: number
+          format: double
+        txPercentCost:
+          type: number
+          format: double
+      title: OrganizationQueryRecordServicesItem
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    Timezone:
+      type: integer
+      description: Timezone, in UTC offset. For example, -5 is Eastern time.
+      title: Timezone
+    Orgaddress:
+      type: string
+      description: The organization's address.
+      title: Orgaddress
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    Resumable:
+      type: boolean
+      description: 'When `true`, the applicant can save an incomplete application and
+
+        resume it later. When `false`, the applicant won''t have an option to
+
+        save their progress, and must complete the application in one session.
+
+        '
+      title: Resumable
+    OrgParentId:
+      type: integer
+      format: int64
+      description: The ID of the org's parent organization.
+      title: OrgParentId
+    Orgentryname:
+      type: string
+      description: 'The entryname for the org, in string format. If you leave this blank,
+
+        Payabli uses the DBA name.
+
+        '
+      title: Orgentryname
     SettingsQueryRecord:
       type: object
       properties:
@@ -831,230 +1075,10 @@ components:
           items:
             $ref: '#/components/schemas/KeyValue'
       title: SettingsQueryRecord
-    Achaccount:
-      type: string
-      description: Bank account number.
-      title: Achaccount
     Orgcountry:
       type: string
       description: The organization's country.
       title: Orgcountry
-    ContactsField:
-      type: array
-      items:
-        $ref: '#/components/schemas/Contacts'
-      description: List of contacts.
-      title: ContactsField
-    Instrument:
-      type: object
-      properties:
-        achAccount:
-          $ref: '#/components/schemas/Achaccount'
-        achRouting:
-          $ref: '#/components/schemas/Achrouting'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddressNullable'
-        billingCity:
-          $ref: '#/components/schemas/BillingCityNullable'
-        billingCountry:
-          $ref: '#/components/schemas/BillingCountryNullable'
-        billingState:
-          $ref: '#/components/schemas/BillingStateNullable'
-        billingZip:
-          $ref: '#/components/schemas/BillingZip'
-      required:
-      - achAccount
-      - achRouting
-      title: Instrument
-    Contacts:
-      type: object
-      properties:
-        contactEmail:
-          $ref: '#/components/schemas/Email'
-          description: Contact email address.
-        contactName:
-          type: string
-          description: Contact name.
-        contactPhone:
-          type: string
-          description: Contact phone number.
-        contactTitle:
-          type: string
-          description: Contact title.
-        additionalData:
-          $ref: '#/components/schemas/AdditionalDataString'
-      title: Contacts
-    Mfa:
-      type: boolean
-      description: When `true`, multi-factor authentication (MFA) is enabled.
-      title: Mfa
-    Orgcity:
-      type: string
-      description: The organization's city.
-      title: Orgcity
-    IdempotencyKey:
-      type: string
-      description: '_Optional but recommended._ A unique ID that you can include to prevent
-
-        duplicating objects or transactions in the case that a request is sent
-
-        more than once. This key isn''t generated in Payabli; you must generate it
-
-        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
-
-        the key if needed.
-
-        '
-      title: IdempotencyKey
-    UsrAccess:
-      type: object
-      properties:
-        roleLabel:
-          type: string
-        roleValue:
-          type: boolean
-      title: UsrAccess
-    OrganizationQueryRecordServicesItem:
-      type: object
-      properties:
-        description:
-          type: string
-        enabled:
-          type: boolean
-        monthlyCost:
-          type: number
-          format: double
-        name:
-          type: string
-        reseller:
-          type: boolean
-        setupCost:
-          type: number
-          format: double
-        txCost:
-          type: number
-          format: double
-        txPercentCost:
-          type: number
-          format: double
-      title: OrganizationQueryRecordServicesItem
-    AddOrganizationResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-          description: Returns the organization ID.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: AddOrganizationResponse
-    OrgParentId:
-      type: integer
-      format: int64
-      description: The ID of the org's parent organization.
-      title: OrgParentId
-    BillingZip:
-      type: string
-      description: Billing address ZIP code.
-      title: BillingZip
-    Responsecode:
-      type: integer
-      description: 'Code for the response. Learn more in
-
-        [API Response Codes](/developers/api-reference/api-responses).
-
-        '
-      title: Responsecode
-    RecipientEmailNotification:
-      type: boolean
-      description: 'When `true`, Payabli will send the applicant a boarding link. Set this
-
-        value to `false` if you are sending pre-filled applications via the API
-
-        and don''t want Payabli to send the applicant an email to complete the
-
-        boarding application.
-
-        '
-      title: RecipientEmailNotification
-    Language:
-      type: string
-      description: The language code.
-      title: Language
-    Orgtype:
-      type: integer
-      description: The organization type. Currently, this must be `0`.
-      title: Orgtype
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    Orgidstring:
-      type: string
-      description: 'An alternate ID for the organization, in string format. This can be your
-
-        internal identifier for an org, and is typically a name, like "My
-
-        Suborganization".
-
-        '
-      title: Orgidstring
-    SummaryOrg:
-      type: object
-      properties:
-        amountSubs:
-          type: number
-          format: double
-        amountTx:
-          type: number
-          format: double
-        childOrgs:
-          type: integer
-        childPaypoints:
-          type: integer
-        countSubs:
-          type: integer
-        countTx:
-          type: integer
-      title: SummaryOrg
-    FileContentFtype:
-      type: string
-      enum:
-      - pdf
-      - doc
-      - docx
-      - jpg
-      - jpeg
-      - png
-      - gif
-      - txt
-      description: The MIME type of the file (if content is provided).
-      title: FileContentFtype
-    PhoneNumber:
-      type: string
-      description: Phone number.
-      title: PhoneNumber
-    OrgXScope:
-      type: object
-      properties:
-        orgEntry:
-          $ref: '#/components/schemas/Orgentryname'
-        orgId:
-          $ref: '#/components/schemas/Orgid'
-        orgType:
-          $ref: '#/components/schemas/Orgtype'
-      title: OrgXScope
-    Orgstate:
-      type: string
-      description: The organization's state.
-      title: Orgstate
     ServiceCost:
       type: object
       properties:
@@ -1079,52 +1103,28 @@ components:
           type: number
           format: double
       title: ServiceCost
-    FileContent:
+    EditOrganizationResponse:
       type: object
       properties:
-        fContent:
-          type: string
-          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
-
-            upload size is 30 MB.
-
-            '
-        filename:
-          type: string
-          description: The name of the attached file.
-        ftype:
-          $ref: '#/components/schemas/FileContentFtype'
-        furl:
-          type: string
-          description: Optional URL provided to show or download the file remotely.
-      description: Contains details about a file. Max upload size is 30 MB.
-      title: FileContent
-    KeyValue:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Key name.
-        readOnly:
-          $ref: '#/components/schemas/ReadOnly'
-        value:
-          type: string
-          description: Key value.
-      title: KeyValue
-    ReadOnly:
-      type: boolean
-      description: When `true`, the element is read-only.
-      title: ReadOnly
-    ResponseText:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: Returns the organization ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseCode
+      - responseText
+      title: EditOrganizationResponse
+    Orgcity:
       type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    Orgzip:
-      type: string
-      description: The organization's ZIP code.
-      title: Orgzip
+      description: The organization's city.
+      title: Orgcity
   securitySchemes:
     BearerAuth:
       type: http

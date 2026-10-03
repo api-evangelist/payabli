@@ -76,27 +76,6 @@ paths:
               $ref: '#/components/schemas/VerifyAccountDetailsRequest'
 components:
   schemas:
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    VerifyAccountDetailsResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          $ref: '#/components/schemas/BankAccountVerificationDetailsResponse'
-      required:
-      - responseText
-      description: Response wrapper for the bank account verification details endpoint.
-      title: VerifyAccountDetailsResponse
     PayabliErrorBody:
       type: object
       properties:
@@ -125,12 +104,6 @@ components:
 
         '
       title: PayabliErrorBody
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -206,6 +179,14 @@ components:
       - accountClosedDate
       description: Detailed bank account verification results from the verification network.
       title: BankAccountVerificationDetailsResponse
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     VerifyAccountDetailsRequest:
       type: object
       properties:
@@ -231,6 +212,25 @@ components:
       - routingNumber
       - accountNumber
       title: VerifyAccountDetailsRequest
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    VerifyAccountDetailsResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/BankAccountVerificationDetailsResponse'
+      required:
+      - responseText
+      description: Response wrapper for the bank account verification details endpoint.
+      title: VerifyAccountDetailsResponse
   securitySchemes:
     BearerAuth:
       type: http

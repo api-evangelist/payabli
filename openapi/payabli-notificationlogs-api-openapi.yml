@@ -231,6 +231,96 @@ paths:
               $ref: '#/components/schemas/BulkRetryRequest'
 components:
   schemas:
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    KeyValueArray:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: array
+          items:
+            type: string
+      title: KeyValueArray
+    NotificationLogSearchRequest:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+          description: The start date for the search.
+        endDate:
+          type: string
+          format: date-time
+          description: The end date for the search.
+        notificationEvent:
+          type: string
+          description: The type of notification event to filter by.
+        succeeded:
+          type: boolean
+          description: Indicates whether the notification was successful.
+        orgId:
+          type: integer
+          format: int64
+          description: The ID of the organization to filter by.
+        paypointId:
+          type: integer
+          format: int64
+          description: The ID of the paypoint to filter by.
+      required:
+      - startDate
+      - endDate
+      title: NotificationLogSearchRequest
+    BulkRetryRequest:
+      type: array
+      items:
+        type: string
+        format: uuid
+      description: A list of notification log IDs to retry. The maximum number of IDs that can be retried in a single request is 50.
+      title: BulkRetryRequest
+    notificationlogs_bulkRetryNotificationLogs_Response_201:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: notificationlogs_bulkRetryNotificationLogs_Response_201
     NotificationLogDetail:
       type: object
       properties:
@@ -316,42 +406,10 @@ components:
       - lastFailedDate
       - isInProgress
       title: NotificationLogDetail
-    StringStringKeyValuePair:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      title: StringStringKeyValuePair
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
     NotificationLog:
       type: object
       properties:
@@ -427,72 +485,14 @@ components:
       - lastFailedDate
       - isInProgress
       title: NotificationLog
-    BulkRetryRequest:
-      type: array
-      items:
-        type: string
-        format: uuid
-      description: A list of notification log IDs to retry. The maximum number of IDs that can be retried in a single request is 50.
-      title: BulkRetryRequest
-    NotificationLogSearchRequest:
-      type: object
-      properties:
-        startDate:
-          type: string
-          format: date-time
-          description: The start date for the search.
-        endDate:
-          type: string
-          format: date-time
-          description: The end date for the search.
-        notificationEvent:
-          type: string
-          description: The type of notification event to filter by.
-        succeeded:
-          type: boolean
-          description: Indicates whether the notification was successful.
-        orgId:
-          type: integer
-          format: int64
-          description: The ID of the organization to filter by.
-        paypointId:
-          type: integer
-          format: int64
-          description: The ID of the paypoint to filter by.
-      required:
-      - startDate
-      - endDate
-      title: NotificationLogSearchRequest
-    KeyValueArray:
+    StringStringKeyValuePair:
       type: object
       properties:
         key:
           type: string
         value:
-          type: array
-          items:
-            type: string
-      title: KeyValueArray
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
           type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    notificationlogs_bulkRetryNotificationLogs_Response_201:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: notificationlogs_bulkRetryNotificationLogs_Response_201
-    Pagesize:
-      type: integer
-      description: Number of records on each response page.
-      title: Pagesize
+      title: StringStringKeyValuePair
   securitySchemes:
     BearerAuth:
       type: http

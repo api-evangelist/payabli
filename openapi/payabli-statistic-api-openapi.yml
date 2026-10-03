@@ -458,6 +458,72 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    StatBasicQueryRecord:
+      type: object
+      properties:
+        statX:
+          type: string
+          description: Statistical grouping identifier
+        inTransactions:
+          type: integer
+          description: Number of incoming transactions
+        inTransactionsVolume:
+          type: number
+          format: double
+          description: Volume of incoming transactions
+        inWalletTransactions:
+          type: integer
+          description: Number of incoming wallet transactions
+        inWalletVolume:
+          type: number
+          format: double
+          description: Volume of incoming wallet transactions
+      required:
+      - statX
+      - inTransactions
+      - inTransactionsVolume
+      - inWalletTransactions
+      - inWalletVolume
+      title: StatBasicQueryRecord
     StatBasicExtendedQueryRecord:
       type: object
       properties:
@@ -645,52 +711,6 @@ components:
       - inCardChargeBackVolume
       - inACHReturnsVolume
       title: StatBasicExtendedQueryRecord
-    SubscriptionStatsQueryRecord:
-      type: object
-      properties:
-        interval:
-          type: string
-          description: Time interval identifier
-        count:
-          type: integer
-          description: Number of subscriptions
-        volume:
-          type: number
-          format: double
-          description: Subscription volume
-      required:
-      - interval
-      - count
-      - volume
-      title: SubscriptionStatsQueryRecord
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
     StatisticsVendorQueryRecord:
       type: object
       properties:
@@ -772,44 +792,24 @@ components:
       - paid
       - paidVolume
       title: StatisticsVendorQueryRecord
-    StatBasicQueryRecord:
+    SubscriptionStatsQueryRecord:
       type: object
       properties:
-        statX:
+        interval:
           type: string
-          description: Statistical grouping identifier
-        inTransactions:
+          description: Time interval identifier
+        count:
           type: integer
-          description: Number of incoming transactions
-        inTransactionsVolume:
+          description: Number of subscriptions
+        volume:
           type: number
           format: double
-          description: Volume of incoming transactions
-        inWalletTransactions:
-          type: integer
-          description: Number of incoming wallet transactions
-        inWalletVolume:
-          type: number
-          format: double
-          description: Volume of incoming wallet transactions
+          description: Subscription volume
       required:
-      - statX
-      - inTransactions
-      - inTransactionsVolume
-      - inWalletTransactions
-      - inWalletVolume
-      title: StatBasicQueryRecord
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
+      - interval
+      - count
+      - volume
+      title: SubscriptionStatsQueryRecord
   securitySchemes:
     BearerAuth:
       type: http

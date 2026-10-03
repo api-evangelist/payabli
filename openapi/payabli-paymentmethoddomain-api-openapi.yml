@@ -384,10 +384,78 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    QuerySummaryNoAmt:
+      type: object
+      properties:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummaryNoAmt
+    OwnerEntityId:
+      type: integer
+      format: int64
+      description: 'The domain''s owning entity''s ID in Payabli. This value might be different
+
+        than the `entityId`, depending on whether the domain is cascaded and
+
+        whether it''s inherited.
+
+        '
+      title: OwnerEntityId
+    AddPaymentMethodDomainRequestApplePay:
+      type: object
+      properties:
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      description: Apple Pay configuration information.
+      title: AddPaymentMethodDomainRequestApplePay
+    AddPaymentMethodDomainApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageidentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
+        responseText:
+          type: string
+      required:
+      - isSuccess
+      - pageidentifier
+      - responseData
+      - responseText
+      description: Response for the add payment method domain operation.
+      title: AddPaymentMethodDomainApiResponse
     PageIdentifier:
       type: string
       description: Auxiliary validation used internally by payment pages and components.
       title: PageIdentifier
+    CascadeJobDetails:
+      type: object
+      properties:
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        jobErrorMessage:
+          type: string
+          description: Error message for a failed cascade process.
+        jobId:
+          $ref: '#/components/schemas/JobId'
+        jobStatus:
+          $ref: '#/components/schemas/JobStatus'
+        updatedAt:
+          $ref: '#/components/schemas/LastModified'
+      description: Details about the cascade process.
+      title: CascadeJobDetails
+    JobId:
+      type: string
+      description: The cascade process ID.
+      title: JobId
     GooglePayMetadata:
       type: object
       properties:
@@ -416,10 +484,171 @@ components:
 
         '
       title: GooglePayMetadata
-    IsEnabled:
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    UpdatePaymentMethodDomainRequest:
+      type: object
+      properties:
+        applePay:
+          $ref: '#/components/schemas/UpdatePaymentMethodDomainRequestWallet'
+        googlePay:
+          $ref: '#/components/schemas/UpdatePaymentMethodDomainRequestWallet'
+      title: UpdatePaymentMethodDomainRequest
+    GooglePayStatusData:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: Any error message related to Google Pay's activation status.
+        metadata:
+          $ref: '#/components/schemas/GooglePayMetadata'
+      description: Details about the Google Pay service status.
+      title: GooglePayStatusData
+    ApplePayData:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplePayStatusData'
+          description: 'This object is only returned when the domain verification check
+
+            fails. If a domain has failed validation, this object contains
+
+            information about the failure.
+
+            '
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      description: Details about the status of the Apple Pay service.
+      title: ApplePayData
+    AddPaymentMethodDomainRequest:
+      type: object
+      properties:
+        applePay:
+          $ref: '#/components/schemas/AddPaymentMethodDomainRequestApplePay'
+          description: Apple Pay configuration information.
+        googlePay:
+          $ref: '#/components/schemas/AddPaymentMethodDomainRequestGooglePay'
+          description: Google Pay configuration information.
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        entityId:
+          $ref: '#/components/schemas/EntityId'
+        entityType:
+          $ref: '#/components/schemas/EntityType'
+      title: AddPaymentMethodDomainRequest
+    IsSuccess:
       type: boolean
-      description: When `true`, the service is enabled.
-      title: IsEnabled
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    OwnerEntityType:
+      type: string
+      description: 'The domain''s owner''s entity type. Available values:
+
+
+        - `paypoint`
+
+        - `organization`
+
+        - `psp` (payment service provider)
+
+        '
+      title: OwnerEntityType
+    AddPaymentMethodDomainRequestGooglePay:
+      type: object
+      properties:
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      description: Google Pay configuration information.
+      title: AddPaymentMethodDomainRequestGooglePay
+    PaymentMethodDomainId:
+      type: string
+      description: The payment method domain's ID in Payabli.
+      title: PaymentMethodDomainId
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    ApplePayStatusData:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: Any error message related to Apple Pay's activation status.
+        metadata:
+          $ref: '#/components/schemas/ApplePayMetadata'
+      description: Details about the Apple Pay service status.
+      title: ApplePayStatusData
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    EntityType:
+      type: string
+      description: 'The entity type. Available values:
+
+
+        - `paypoint`
+
+        - `organization`
+
+        - `psp` (payment service provider)
+
+        '
+      title: EntityType
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    ListPaymentMethodDomainsResponse:
+      type: object
+      properties:
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
+        summary:
+          $ref: '#/components/schemas/QuerySummaryNoAmt'
+      required:
+      - records
+      - summary
+      title: ListPaymentMethodDomainsResponse
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    EntityId:
+      type: integer
+      format: int64
+      description: 'The entity''s ID in Payabli. If the entity is a paypoint, this is the
+
+        paypoint ID. If the entity is an organization, this is the organization
+
+        ID.
+
+        '
+      title: EntityId
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
     GooglePayData:
       type: object
       properties:
@@ -436,6 +665,46 @@ components:
           $ref: '#/components/schemas/IsEnabled'
       description: Details about the status of the Google Pay service.
       title: GooglePayData
+    DomainName:
+      type: string
+      description: 'The domain. For example: `subdomain.domain.com` or `domain.com`. Must be
+
+        public. Can''t be `localhost`, hidden by a VPN, or protected by a password.
+
+        '
+      title: DomainName
+    JobStatus:
+      type: string
+      enum:
+      - in_progress
+      - completed
+      - failed
+      description: The cascade process status.
+      title: JobStatus
+    DeletePaymentMethodDomainResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: The deleted domain's domain ID.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - isSuccess
+      - pageIdentifier
+      - responseData
+      - responseText
+      title: DeletePaymentMethodDomainResponse
+    UpdatePaymentMethodDomainRequestWallet:
+      type: object
+      properties:
+        isEnabled:
+          $ref: '#/components/schemas/IsEnabled'
+      title: UpdatePaymentMethodDomainRequestWallet
     PayabliErrorBody:
       type: object
       properties:
@@ -464,130 +733,10 @@ components:
 
         '
       title: PayabliErrorBody
-    UpdatePaymentMethodDomainRequest:
-      type: object
-      properties:
-        applePay:
-          $ref: '#/components/schemas/UpdatePaymentMethodDomainRequestWallet'
-        googlePay:
-          $ref: '#/components/schemas/UpdatePaymentMethodDomainRequestWallet'
-      title: UpdatePaymentMethodDomainRequest
-    ApplePayStatusData:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-          description: Any error message related to Apple Pay's activation status.
-        metadata:
-          $ref: '#/components/schemas/ApplePayMetadata'
-      description: Details about the Apple Pay service status.
-      title: ApplePayStatusData
-    CascadeJobDetails:
-      type: object
-      properties:
-        createdAt:
-          $ref: '#/components/schemas/CreatedAt'
-        jobErrorMessage:
-          type: string
-          description: Error message for a failed cascade process.
-        jobId:
-          $ref: '#/components/schemas/JobId'
-        jobStatus:
-          $ref: '#/components/schemas/JobStatus'
-        updatedAt:
-          $ref: '#/components/schemas/LastModified'
-      description: Details about the cascade process.
-      title: CascadeJobDetails
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    EntityId:
-      type: integer
-      format: int64
-      description: 'The entity''s ID in Payabli. If the entity is a paypoint, this is the
-
-        paypoint ID. If the entity is an organization, this is the organization
-
-        ID.
-
-        '
-      title: EntityId
-    AddPaymentMethodDomainRequestApplePay:
-      type: object
-      properties:
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-      description: Apple Pay configuration information.
-      title: AddPaymentMethodDomainRequestApplePay
-    AddPaymentMethodDomainRequest:
-      type: object
-      properties:
-        applePay:
-          $ref: '#/components/schemas/AddPaymentMethodDomainRequestApplePay'
-          description: Apple Pay configuration information.
-        googlePay:
-          $ref: '#/components/schemas/AddPaymentMethodDomainRequestGooglePay'
-          description: Google Pay configuration information.
-        domainName:
-          $ref: '#/components/schemas/DomainName'
-        entityId:
-          $ref: '#/components/schemas/EntityId'
-        entityType:
-          $ref: '#/components/schemas/EntityType'
-      title: AddPaymentMethodDomainRequest
-    UpdatePaymentMethodDomainRequestWallet:
-      type: object
-      properties:
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-      title: UpdatePaymentMethodDomainRequestWallet
-    PaymentMethodDomainId:
-      type: string
-      description: The payment method domain's ID in Payabli.
-      title: PaymentMethodDomainId
-    ListPaymentMethodDomainsResponse:
-      type: object
-      properties:
-        records:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
-        summary:
-          $ref: '#/components/schemas/QuerySummaryNoAmt'
-      required:
-      - records
-      - summary
-      title: ListPaymentMethodDomainsResponse
-    JobId:
-      type: string
-      description: The cascade process ID.
-      title: JobId
-    AddPaymentMethodDomainApiResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageidentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          $ref: '#/components/schemas/PaymentMethodDomainApiResponse'
-        responseText:
-          type: string
-      required:
-      - isSuccess
-      - pageidentifier
-      - responseData
-      - responseText
-      description: Response for the add payment method domain operation.
-      title: AddPaymentMethodDomainApiResponse
+    IsEnabled:
+      type: boolean
+      description: When `true`, the service is enabled.
+      title: IsEnabled
     LastModified:
       type: string
       format: date-time
@@ -607,108 +756,52 @@ components:
       required:
       - responseText
       title: PaymentMethodDomainGeneralResponse
-    EntityType:
-      type: string
-      description: 'The entity type. Available values:
-
-
-        - `paypoint`
-
-        - `organization`
-
-        - `psp` (payment service provider)
-
-        '
-      title: EntityType
-    CreatedAt:
-      type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
-    OwnerEntityId:
-      type: integer
-      format: int64
-      description: 'The domain''s owning entity''s ID in Payabli. This value might be different
-
-        than the `entityId`, depending on whether the domain is cascaded and
-
-        whether it''s inherited.
-
-        '
-      title: OwnerEntityId
-    ApplePayData:
+    PaymentMethodDomainApiResponse:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/ApplePayStatusData'
-          description: 'This object is only returned when the domain verification check
-
-            fails. If a domain has failed validation, this object contains
-
-            information about the failure.
-
-            '
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-      description: Details about the status of the Apple Pay service.
-      title: ApplePayData
-    GooglePayStatusData:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-          description: Any error message related to Google Pay's activation status.
-        metadata:
-          $ref: '#/components/schemas/GooglePayMetadata'
-      description: Details about the Google Pay service status.
-      title: GooglePayStatusData
-    OwnerEntityType:
-      type: string
-      description: 'The domain''s owner''s entity type. Available values:
-
-
-        - `paypoint`
-
-        - `organization`
-
-        - `psp` (payment service provider)
-
-        '
-      title: OwnerEntityType
-    DomainName:
-      type: string
-      description: 'The domain. For example: `subdomain.domain.com` or `domain.com`. Must be
-
-        public. Can''t be `localhost`, hidden by a VPN, or protected by a password.
-
-        '
-      title: DomainName
-    DeletePaymentMethodDomainResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-          description: The deleted domain's domain ID.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
+        type:
+          type:
+          - string
+          - 'null'
+          description: The record type. For payment method domains, this is always `PaymentMethodDomain`.
+        applePay:
+          $ref: '#/components/schemas/ApplePayData'
+        googlePay:
+          $ref: '#/components/schemas/GooglePayData'
+        cascades:
+          type: array
+          items:
+            $ref: '#/components/schemas/CascadeJobDetails'
+          description: Data about the domain's cascade status.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        entityId:
+          $ref: '#/components/schemas/EntityId'
+        entityType:
+          $ref: '#/components/schemas/EntityType'
+        id:
+          $ref: '#/components/schemas/PaymentMethodDomainId'
+        ownerEntityId:
+          $ref: '#/components/schemas/OwnerEntityId'
+        ownerEntityType:
+          $ref: '#/components/schemas/OwnerEntityType'
+        updatedAt:
+          $ref: '#/components/schemas/LastModified'
       required:
-      - isSuccess
-      - pageIdentifier
-      - responseData
-      - responseText
-      title: DeletePaymentMethodDomainResponse
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
+      - type
+      - applePay
+      - googlePay
+      - createdAt
+      - domainName
+      - entityId
+      - entityType
+      - id
+      - ownerEntityId
+      - ownerEntityType
+      description: Data related to the payment method domain.
+      title: PaymentMethodDomainApiResponse
     ApplePayMetadata:
       type: object
       properties:
@@ -757,99 +850,6 @@ components:
 
         '
       title: ApplePayMetadata
-    Totalrecords:
-      type: integer
-      description: Total number of records in response.
-      title: Totalrecords
-    AddPaymentMethodDomainRequestGooglePay:
-      type: object
-      properties:
-        isEnabled:
-          $ref: '#/components/schemas/IsEnabled'
-      description: Google Pay configuration information.
-      title: AddPaymentMethodDomainRequestGooglePay
-    PaymentMethodDomainApiResponse:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-          description: The record type. For payment method domains, this is always `PaymentMethodDomain`.
-        applePay:
-          $ref: '#/components/schemas/ApplePayData'
-        googlePay:
-          $ref: '#/components/schemas/GooglePayData'
-        cascades:
-          type: array
-          items:
-            $ref: '#/components/schemas/CascadeJobDetails'
-          description: Data about the domain's cascade status.
-        createdAt:
-          $ref: '#/components/schemas/CreatedAt'
-        domainName:
-          $ref: '#/components/schemas/DomainName'
-        entityId:
-          $ref: '#/components/schemas/EntityId'
-        entityType:
-          $ref: '#/components/schemas/EntityType'
-        id:
-          $ref: '#/components/schemas/PaymentMethodDomainId'
-        ownerEntityId:
-          $ref: '#/components/schemas/OwnerEntityId'
-        ownerEntityType:
-          $ref: '#/components/schemas/OwnerEntityType'
-        updatedAt:
-          $ref: '#/components/schemas/LastModified'
-      required:
-      - type
-      - applePay
-      - googlePay
-      - createdAt
-      - domainName
-      - entityId
-      - entityType
-      - id
-      - ownerEntityId
-      - ownerEntityType
-      description: Data related to the payment method domain.
-      title: PaymentMethodDomainApiResponse
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    JobStatus:
-      type: string
-      enum:
-      - in_progress
-      - completed
-      - failed
-      description: The cascade process status.
-      title: JobStatus
-    QuerySummaryNoAmt:
-      type: object
-      properties:
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        pageSize:
-          $ref: '#/components/schemas/Pagesize'
-        totalPages:
-          $ref: '#/components/schemas/Totalrecords'
-        totalRecords:
-          $ref: '#/components/schemas/Totalrecords'
-      title: QuerySummaryNoAmt
-    Responsedatanonobject:
-      oneOf:
-      - type: string
-      - type: integer
-      description: The response data.
-      title: Responsedatanonobject
-    Pagesize:
-      type: integer
-      description: Number of records on each response page.
-      title: Pagesize
   securitySchemes:
     BearerAuth:
       type: http

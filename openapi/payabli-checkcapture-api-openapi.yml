@@ -64,10 +64,6 @@ paths:
               $ref: '#/components/schemas/CheckCaptureRequestBody'
 components:
   schemas:
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
     PayabliErrorBody:
       type: object
       properties:
@@ -96,6 +92,25 @@ components:
 
         '
       title: PayabliErrorBody
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    Entry:
+      type: string
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+
+        '
+      title: Entry
     CheckCaptureResponse:
       type: object
       properties:
@@ -189,14 +204,10 @@ components:
       - checkType
       description: Response model for check capture processing.
       title: CheckCaptureResponse
-    Entry:
+    PageIdentifier:
       type: string
-      description: 'The entity''s entrypoint identifier.
-
-        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
-
-        '
-      title: Entry
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
     CheckCaptureRequestBody:
       type: object
       properties:
@@ -217,17 +228,6 @@ components:
       - rearImage
       - checkAmount
       title: CheckCaptureRequestBody
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
   securitySchemes:
     BearerAuth:
       type: http
