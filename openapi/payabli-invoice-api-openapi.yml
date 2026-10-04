@@ -967,1072 +967,6 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
-    BillingCityNullable:
-      type: string
-      description: Billing city.
-      title: BillingCityNullable
-    AdditionalData:
-      type: object
-      additionalProperties:
-        type: object
-        additionalProperties:
-          description: Any type
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalData
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    BillingAddressNullable:
-      type: string
-      description: Billing address.
-      title: BillingAddressNullable
-    TermsConditions:
-      type: string
-      description: Custom terms and conditions included in the invoice.
-      title: TermsConditions
-    BillingStateNullable:
-      type: string
-      description: Billing state. Must be a 2-letter state code for addresses in the US.
-      title: BillingStateNullable
-    File:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: A file containing the response data, in the format specified in the request.
-      title: File
-    CustomerStatus:
-      type: integer
-      description: 'Customer Status. Possible values:
-
-
-        - `-99` Deleted
-
-        - `0` Inactive
-
-        - `1` Active
-
-        - `85` Locked (typically due to multiple failed login attempts)
-
-        '
-      title: CustomerStatus
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    PayorDataRequest:
-      type: object
-      properties:
-        additionalData:
-          $ref: '#/components/schemas/AdditionalData'
-        billingAddress1:
-          $ref: '#/components/schemas/BillingAddressNullable'
-        billingAddress2:
-          $ref: '#/components/schemas/BillingAddressAddtlNullable'
-        billingCity:
-          $ref: '#/components/schemas/BillingCityNullable'
-        billingCountry:
-          $ref: '#/components/schemas/BillingCountryNullable'
-        billingEmail:
-          $ref: '#/components/schemas/Email'
-        billingPhone:
-          $ref: '#/components/schemas/PhoneNumber'
-        billingState:
-          $ref: '#/components/schemas/BillingStateNullable'
-        billingZip:
-          $ref: '#/components/schemas/BillingZip'
-          description: 'Customer''s billing ZIP code. For Pay In functions, this field supports 5-digit and 9-digit ZIP codes and alphanumeric Canadian postal codes. For example: "37615-1234" or "37615".'
-        company:
-          type: string
-          description: Customer's company name.
-        customerId:
-          $ref: '#/components/schemas/CustomerId'
-        customerNumber:
-          $ref: '#/components/schemas/CustomerNumberNullable'
-        firstName:
-          type: string
-          description: Customer/Payor first name.
-        identifierFields:
-          $ref: '#/components/schemas/Identifierfields'
-        lastName:
-          type: string
-          description: Customer/Payor last name.
-        shippingAddress1:
-          $ref: '#/components/schemas/Shippingaddress'
-        shippingAddress2:
-          $ref: '#/components/schemas/Shippingaddressadditional'
-        shippingCity:
-          $ref: '#/components/schemas/Shippingcity'
-        shippingCountry:
-          $ref: '#/components/schemas/Shippingcountry'
-        shippingState:
-          $ref: '#/components/schemas/Shippingstate'
-        shippingZip:
-          $ref: '#/components/schemas/Shippingzip'
-      description: Customer information. May be required, depending on the paypoint's settings. Required for subscriptions.
-      title: PayorDataRequest
-    BillingAddressAddtlNullable:
-      type: string
-      description: Additional line for the billing address.
-      title: BillingAddressAddtlNullable
-    CustomerId:
-      type: integer
-      format: int64
-      description: The Payabli-generated unique ID for the customer.
-      title: CustomerId
-    InvoiceId:
-      type: integer
-      format: int64
-      description: Identifier of invoice.
-      title: InvoiceId
-    Invoicestatus:
-      type: integer
-      description: Invoice status code.
-      title: Invoicestatus
-    Discount:
-      type: number
-      format: double
-      description: Discount applied to the invoice.
-      title: Discount
-    Legalname:
-      type: string
-      description: Business legal name.
-      title: Legalname
-    Identifierfields:
-      type: array
-      items:
-        type: string
-      description: List of fields acting as customer identifiers, to be used instead of CustomerNumber.
-      title: Identifierfields
-    InvoiceAmount:
-      type: number
-      format: double
-      description: The invoice amount.
-      title: InvoiceAmount
-    ItemUnitofMeasure:
-      type: string
-      description: Unit of measurement. Max length of 100 characters.
-      title: ItemUnitofMeasure
-    InvoiceType:
-      type: integer
-      description: 'Invoice type. Value `0` is for single/one-time invoices, `1` for
-
-        scheduled invoices.
-
-        '
-      title: InvoiceType
-    DutyAmount:
-      type: number
-      format: double
-      description: Duty amount.
-      title: DutyAmount
-    InvoiceDataRequest:
-      type: object
-      properties:
-        customerData:
-          $ref: '#/components/schemas/PayorDataRequest'
-          description: Object describing the customer/payor. Required for POST requests. Which fields are required depends on the paypoint's custom identifier settings.
-        invoiceData:
-          $ref: '#/components/schemas/BillData'
-          description: Object describing the invoice. Required for POST requests.
-        scheduledOptions:
-          $ref: '#/components/schemas/BillOptions'
-          description: Object with options for scheduled invoices.
-      title: InvoiceDataRequest
-    DocumentsRef:
-      type: object
-      properties:
-        filelist:
-          type: array
-          items:
-            $ref: '#/components/schemas/PairFiles'
-          description: Array of objects describing files contained in the ZIP file.
-        zipfile:
-          type: string
-          description: Zip file containing attachments.
-      title: DocumentsRef
-    Shippingcity:
-      type: string
-      description: Shipping city.
-      title: Shippingcity
-    ItemDescription:
-      type: string
-      description: Item or product description. Max length of 250 characters.
-      title: ItemDescription
-    ShippingFromZip:
-      type: string
-      description: Sender shipping ZIP code.
-      title: ShippingFromZip
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    GeneralEvents:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Event description.
-        eventTime:
-          type: string
-          format: date-time
-          description: Event timestamp, in UTC.
-        extraData:
-          type:
-          - string
-          - 'null'
-          description: Extra data.
-        refData:
-          type: string
-          description: Reference data.
-        source:
-          $ref: '#/components/schemas/Source'
-          description: The event source.
-      title: GeneralEvents
-    Totalrecords:
-      type: integer
-      description: Total number of records in response.
-      title: Totalrecords
-    Shippingstate:
-      type: string
-      description: Shipping state or province.
-      title: Shippingstate
-    PhoneNumber:
-      type: string
-      description: Phone number.
-      title: PhoneNumber
-    Email:
-      type: string
-      format: email
-      description: Email address.
-      title: Email
-    RoomIdNotInUse:
-      type: integer
-      format: int64
-      description: Field not in use on this endpoint. It always returns `0`.
-      title: RoomIdNotInUse
-    ForceCustomerCreation:
-      type: boolean
-      description: 'When `true`, the request creates a new customer record, regardless of
-
-        whether customer identifiers match an existing customer. Defaults to
-
-        `false`.
-
-        '
-      title: ForceCustomerCreation
-    BillData:
-      type: object
-      properties:
-        AdditionalData:
-          $ref: '#/components/schemas/AdditionalDataMap'
-        attachments:
-          $ref: '#/components/schemas/Attachments'
-        company:
-          type: string
-          description: Company name of the recipient of the invoice.
-        discount:
-          $ref: '#/components/schemas/Discount'
-        dutyAmount:
-          $ref: '#/components/schemas/DutyAmount'
-        firstName:
-          type: string
-          description: First name of the recipient of the invoice.
-        freightAmount:
-          $ref: '#/components/schemas/FreightAmount'
-        frequency:
-          $ref: '#/components/schemas/Frequency'
-          description: Frequency of scheduled invoice.
-        invoiceAmount:
-          $ref: '#/components/schemas/InvoiceAmount'
-        invoiceDate:
-          type: string
-          format: date
-          description: 'Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
-        invoiceDueDate:
-          type: string
-          format: date
-          description: 'Invoice due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
-        invoiceEndDate:
-          type: string
-          format: date
-          description: 'Indicate the date to finish a scheduled invoice cycle (`invoiceType`` = 1) in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
-        invoiceNumber:
-          $ref: '#/components/schemas/InvoiceNumber'
-          description: Invoice number. Identifies the invoice under a paypoint.
-        invoiceStatus:
-          $ref: '#/components/schemas/Invoicestatus'
-        invoiceType:
-          $ref: '#/components/schemas/InvoiceType'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillItem'
-          description: Array of line items included in the invoice.
-        lastName:
-          type: string
-          description: Last name of the recipient of the invoice.
-        notes:
-          type: string
-          description: Notes included in the invoice.
-        paymentTerms:
-          $ref: '#/components/schemas/BillDataPaymentTerms'
-        purchaseOrder:
-          $ref: '#/components/schemas/PurchaseOrder'
-        shippingAddress1:
-          $ref: '#/components/schemas/Shippingaddress'
-        shippingAddress2:
-          $ref: '#/components/schemas/Shippingaddressadditional'
-        shippingCity:
-          $ref: '#/components/schemas/Shippingcity'
-        shippingCountry:
-          $ref: '#/components/schemas/Shippingcountry'
-        shippingEmail:
-          $ref: '#/components/schemas/Email'
-          description: Shipping recipient's contact email address.
-        shippingFromZip:
-          $ref: '#/components/schemas/ShippingFromZip'
-        shippingPhone:
-          type: string
-          description: Recipient phone number.
-        shippingState:
-          $ref: '#/components/schemas/Shippingstate'
-        shippingZip:
-          $ref: '#/components/schemas/Shippingzip'
-        summaryCommodityCode:
-          $ref: '#/components/schemas/SummaryCommodityCode'
-        tax:
-          $ref: '#/components/schemas/Tax'
-        termsConditions:
-          $ref: '#/components/schemas/TermsConditions'
-      title: BillData
-    Frequency:
-      type: string
-      enum:
-      - onetime
-      - weekly
-      - every2weeks
-      - every6months
-      - monthly
-      - every3months
-      - annually
-      - firstofmonth
-      - fifteenthofmonth
-      - endofmonth
-      description: 'Frequency for operation. The `firstofmonth`, `fifteenthofmonth`, and `endofmonth` values are only valid on subscriptions — they aren''t accepted by other endpoints (such as invoice scheduling) that use this enum.
-
-        '
-      title: Frequency
-    ItemProductCode:
-      type: string
-      description: Item or product code. Max length of 250 characters.
-      title: ItemProductCode
-    BillingZip:
-      type: string
-      description: Billing address ZIP code.
-      title: BillingZip
-    SendInvoiceResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - isSuccess
-      - responseText
-      title: SendInvoiceResponse
-    Shippingaddress:
-      type: string
-      description: The shipping address.
-      title: Shippingaddress
-    Shippingcountry:
-      type: string
-      description: Shipping address country.
-      title: Shippingcountry
-    FileContent:
-      type: object
-      properties:
-        fContent:
-          type: string
-          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
-
-            upload size is 30 MB.
-
-            '
-        filename:
-          type: string
-          description: The name of the attached file.
-        ftype:
-          $ref: '#/components/schemas/FileContentFtype'
-        furl:
-          type: string
-          description: Optional URL provided to show or download the file remotely.
-      description: Contains details about a file. Max upload size is 30 MB.
-      title: FileContent
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
-    CustomerNumberNullable:
-      type: string
-      description: 'User-provided unique identifier for the customer. This is typically the
-
-        customer ID from your own system.
-
-        '
-      title: CustomerNumberNullable
-    BillOptions:
-      type: object
-      properties:
-        includePaylink:
-          type: boolean
-          description: Flag to indicate if the scheduled invoice includes a payment link.
-        includePdf:
-          type: boolean
-          description: Flag to indicate if the scheduled invoice includes a PDF version of invoice
-      title: BillOptions
-    Attachments:
-      type: array
-      items:
-        $ref: '#/components/schemas/FileContent'
-      description: 'Array of `fileContent` objects with attached documents. Max upload size is
-
-        30 MB.
-
-        '
-      title: Attachments
-    AdditionalDataMap:
-      type: object
-      additionalProperties:
-        type: string
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalDataMap
-    QuerySummary:
-      type: object
-      properties:
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        pageSize:
-          $ref: '#/components/schemas/Pagesize'
-        totalAmount:
-          type: number
-          format: double
-          description: Total amount for the records.
-        totalNetAmount:
-          type: number
-          format: double
-          description: Total net amount for the records.
-        totalPages:
-          $ref: '#/components/schemas/Totalrecords'
-        totalRecords:
-          $ref: '#/components/schemas/Totalrecords'
-      title: QuerySummary
-    Shippingaddressadditional:
-      type: string
-      description: Additional line for shipping address.
-      title: Shippingaddressadditional
-    GetInvoiceRecord:
-      type: object
-      properties:
-        invoiceId:
-          $ref: '#/components/schemas/InvoiceId'
-        customerId:
-          $ref: '#/components/schemas/CustomerId'
-        paypointId:
-          $ref: '#/components/schemas/PaypointId'
-        invoiceNumber:
-          $ref: '#/components/schemas/InvoiceNumber'
-        invoiceDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        invoiceDueDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        invoiceSentDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        invoiceEndDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        lastPaymentDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        createdAt:
-          $ref: '#/components/schemas/CreatedAt'
-        invoiceStatus:
-          $ref: '#/components/schemas/Invoicestatus'
-        invoiceType:
-          $ref: '#/components/schemas/InvoiceType'
-        frequency:
-          $ref: '#/components/schemas/Frequency'
-        paymentTerms:
-          $ref: '#/components/schemas/Terms'
-        termsConditions:
-          oneOf:
-          - $ref: '#/components/schemas/TermsConditions'
-          - type: 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        tax:
-          $ref: '#/components/schemas/Tax'
-        discount:
-          $ref: '#/components/schemas/Discount'
-        invoiceAmount:
-          $ref: '#/components/schemas/InvoiceAmount'
-        invoicePaidAmount:
-          $ref: '#/components/schemas/InvoicePaidAmount'
-        freightAmount:
-          $ref: '#/components/schemas/FreightAmount'
-        dutyAmount:
-          $ref: '#/components/schemas/DutyAmount'
-        purchaseOrder:
-          $ref: '#/components/schemas/PurchaseOrder'
-        firstName:
-          type: string
-          description: First name of the recipient of the invoice.
-        lastName:
-          type: string
-          description: Last name of the recipient of the invoice.
-        company:
-          type: string
-          description: Company name of the recipient of the invoice.
-        shippingAddress1:
-          $ref: '#/components/schemas/Shippingaddress'
-        shippingAddress2:
-          $ref: '#/components/schemas/Shippingaddressadditional'
-        shippingCity:
-          $ref: '#/components/schemas/Shippingcity'
-        shippingState:
-          $ref: '#/components/schemas/Shippingstate'
-        shippingZip:
-          $ref: '#/components/schemas/Shippingzip'
-        shippingFromZip:
-          $ref: '#/components/schemas/ShippingFromZip'
-        shippingCountry:
-          $ref: '#/components/schemas/Shippingcountry'
-        shippingEmail:
-          $ref: '#/components/schemas/Email'
-        shippingPhone:
-          type: string
-        summaryCommodityCode:
-          $ref: '#/components/schemas/SummaryCommodityCode'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillItem'
-        Customer:
-          $ref: '#/components/schemas/PayorDataResponse'
-        paylinkId:
-          $ref: '#/components/schemas/PaylinkId'
-        billEvents:
-          $ref: '#/components/schemas/BillEvents'
-        scheduledOptions:
-          $ref: '#/components/schemas/BillOptions'
-        PaypointLegalname:
-          type: string
-        PaypointDbaname:
-          $ref: '#/components/schemas/Dbaname'
-        PaypointEntryname:
-          $ref: '#/components/schemas/Entrypointfield'
-        ParentOrgName:
-          $ref: '#/components/schemas/OrgParentName'
-        AdditionalData:
-          $ref: '#/components/schemas/AdditionalDataMap'
-        DocumentsRef:
-          $ref: '#/components/schemas/DocumentsRef'
-        externalPaypointID:
-          $ref: '#/components/schemas/ExternalPaypointId'
-      required:
-      - invoiceId
-      - customerId
-      - paypointId
-      - invoiceNumber
-      - invoiceDate
-      - invoiceDueDate
-      - invoiceSentDate
-      - invoiceEndDate
-      - lastPaymentDate
-      - createdAt
-      - invoiceStatus
-      - invoiceType
-      - frequency
-      - paymentTerms
-      - termsConditions
-      - notes
-      - invoiceAmount
-      - invoicePaidAmount
-      - purchaseOrder
-      - shippingAddress1
-      - shippingAddress2
-      - shippingCity
-      - shippingState
-      - shippingZip
-      - shippingFromZip
-      - shippingCountry
-      - shippingEmail
-      - shippingPhone
-      - summaryCommodityCode
-      - items
-      - Customer
-      - paylinkId
-      - scheduledOptions
-      - PaypointLegalname
-      - PaypointDbaname
-      - PaypointEntryname
-      - ParentOrgName
-      - DocumentsRef
-      title: GetInvoiceRecord
-    PairFiles:
-      type: object
-      properties:
-        originalName:
-          type: string
-          description: Original filename
-        zipName:
-          type: string
-          description: Filename assigned to zipped file. This is the name to use for reference in the API functions to get files in attachments.
-        descriptor:
-          type: string
-          description: Descriptor of the file.
-      title: PairFiles
-    OrgParentName:
-      type: string
-      description: The name of the parent organization.
-      title: OrgParentName
-    FreightAmount:
-      type: number
-      format: double
-      description: Freight/shipping amount.
-      title: FreightAmount
-    BillingCountryNullable:
-      type: string
-      description: Billing address country.
-      title: BillingCountryNullable
-    Tax:
-      type: number
-      format: double
-      description: Tax rate in percent applied to the invoice.
-      title: Tax
-    SummaryCommodityCode:
-      type: string
-      description: Commodity code.
-      title: SummaryCommodityCode
-    Source:
-      type: string
-      description: Custom identifier to indicate the transaction or request source.
-      title: Source
-    CreatedAt:
-      type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
-    ExternalPaypointId:
-      type: string
-      description: 'A custom identifier for the paypoint, if applicable.
-
-        '
-      title: ExternalPaypointId
-    FileContentFtype:
-      type: string
-      enum:
-      - pdf
-      - doc
-      - docx
-      - jpg
-      - jpeg
-      - png
-      - gif
-      - txt
-      description: The MIME type of the file (if content is provided).
-      title: FileContentFtype
-    PayorDataResponse:
-      type: object
-      properties:
-        AdditionalData:
-          oneOf:
-          - $ref: '#/components/schemas/AdditionalDataMap'
-          - type: 'null'
-        BillingAddress1:
-          oneOf:
-          - $ref: '#/components/schemas/BillingAddressNullable'
-          - type: 'null'
-        BillingAddress2:
-          oneOf:
-          - $ref: '#/components/schemas/BillingAddressAddtlNullable'
-          - type: 'null'
-        BillingCity:
-          oneOf:
-          - $ref: '#/components/schemas/BillingCityNullable'
-          - type: 'null'
-        BillingCountry:
-          oneOf:
-          - $ref: '#/components/schemas/BillingCountryNullable'
-          - type: 'null'
-        BillingEmail:
-          oneOf:
-          - $ref: '#/components/schemas/Email'
-          - type: 'null'
-        BillingPhone:
-          oneOf:
-          - $ref: '#/components/schemas/PhoneNumber'
-          - type: 'null'
-        BillingState:
-          oneOf:
-          - $ref: '#/components/schemas/BillingStateNullable'
-          - type: 'null'
-        BillingZip:
-          oneOf:
-          - $ref: '#/components/schemas/BillingZip'
-          - type: 'null'
-          description: 'Customer''s billing ZIP code. For Pay In functions, this field supports 5-digit and 9-digit ZIP codes and alphanumeric Canadian postal codes. For example: "37615-1234" or "37615".'
-        CompanyName:
-          type:
-          - string
-          - 'null'
-          description: Customer's company name.
-        customerId:
-          oneOf:
-          - $ref: '#/components/schemas/CustomerId'
-          - type: 'null'
-        CustomerNumber:
-          oneOf:
-          - $ref: '#/components/schemas/CustomerNumberNullable'
-          - type: 'null'
-        customerStatus:
-          oneOf:
-          - $ref: '#/components/schemas/CustomerStatus'
-          - type: 'null'
-          description: Customer status. This is used to determine if the customer is active or inactive.
-        FirstName:
-          type:
-          - string
-          - 'null'
-          description: Customer/Payor first name.
-        Identifiers:
-          oneOf:
-          - $ref: '#/components/schemas/Identifierfields'
-          - type: 'null'
-        LastName:
-          type:
-          - string
-          - 'null'
-          description: Customer/Payor last name.
-        ShippingAddress1:
-          oneOf:
-          - $ref: '#/components/schemas/Shippingaddress'
-          - type: 'null'
-        ShippingAddress2:
-          oneOf:
-          - $ref: '#/components/schemas/Shippingaddressadditional'
-          - type: 'null'
-        ShippingCity:
-          oneOf:
-          - $ref: '#/components/schemas/Shippingcity'
-          - type: 'null'
-        ShippingCountry:
-          oneOf:
-          - $ref: '#/components/schemas/Shippingcountry'
-          - type: 'null'
-        ShippingState:
-          oneOf:
-          - $ref: '#/components/schemas/Shippingstate'
-          - type: 'null'
-        ShippingZip:
-          oneOf:
-          - $ref: '#/components/schemas/Shippingzip'
-          - type: 'null'
-      required:
-      - AdditionalData
-      - BillingAddress1
-      - BillingAddress2
-      - BillingCity
-      - BillingCountry
-      - BillingEmail
-      - BillingPhone
-      - BillingState
-      - BillingZip
-      - CompanyName
-      - customerId
-      - CustomerNumber
-      - customerStatus
-      - FirstName
-      - Identifiers
-      - LastName
-      - ShippingAddress1
-      - ShippingAddress2
-      - ShippingCity
-      - ShippingCountry
-      - ShippingState
-      - ShippingZip
-      description: Customer information.
-      title: PayorDataResponse
-    Responsecode:
-      type: integer
-      description: 'Code for the response. Learn more in
-
-        [API Response Codes](/developers/api-reference/api-responses).
-
-        '
-      title: Responsecode
-    IdempotencyKey:
-      type: string
-      description: '_Optional but recommended._ A unique ID that you can include to prevent
-
-        duplicating objects or transactions in the case that a request is sent
-
-        more than once. This key isn''t generated in Payabli; you must generate it
-
-        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
-
-        the key if needed.
-
-        '
-      title: IdempotencyKey
-    BillDataPaymentTerms:
-      type: string
-      enum:
-      - PIA
-      - CIA
-      - UR
-      - NET10
-      - NET20
-      - NET30
-      - NET45
-      - NET60
-      - NET90
-      - EOM
-      - MFI
-      - 5MFI
-      - 10MFI
-      - 15MFI
-      - 20MFI
-      - 2/10NET30
-      - UF
-      - 10UF
-      - 20UF
-      - 25UF
-      - 50UF
-      description: 'Payment terms for invoice. If no terms are defined, then response data for
-
-        this field defaults to `NET30`. Mirrors the values in
-
-        [`Terms`](#schema-terms).
-
-        '
-      title: BillDataPaymentTerms
-    Dbaname:
-      type: string
-      description: 'The alternate or common name that this business is doing business under,
-
-        usually referred to as a DBA name.
-
-        '
-      title: Dbaname
-    Shippingzip:
-      type: string
-      description: 'Shipping ZIP code. For Pay In functions, this field supports 5-digit
-
-        and 9-digit ZIP codes and alphanumeric Canadian postal codes. For
-
-        example: `37615-1234` or `37615`.
-
-        '
-      title: Shippingzip
-    PaypointId:
-      type: integer
-      format: int64
-      description: The paypoint's ID. Note that this is different than the entryname.
-      title: PaypointId
-    Terms:
-      type: string
-      enum:
-      - PIA
-      - CIA
-      - UR
-      - NET10
-      - NET20
-      - NET30
-      - NET45
-      - NET60
-      - NET90
-      - EOM
-      - MFI
-      - 5MFI
-      - 10MFI
-      - 15MFI
-      - 20MFI
-      - 2/10NET30
-      - UF
-      - 10UF
-      - 20UF
-      - 25UF
-      - 50UF
-      description: 'Payment terms for invoice. If no terms are defined, then response data for
-
-        this field defaults to `NET30`.
-
-        '
-      title: Terms
-    ExportFormat:
-      type: string
-      enum:
-      - csv
-      - xlsx
-      description: 'Export format for file downloads. When specified, returns data as a file
-
-        instead of JSON.
-
-        '
-      title: ExportFormat
-    Entrypointfield:
-      type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
-    InvoiceNumberResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          type: string
-          description: If `isSuccess` = true, this contains the next available invoice number in the format defined by paypoint settings. If `isSuccess` = false, this contains the reason for the error.
-      required:
-      - isSuccess
-      - responseText
-      - responseData
-      description: Response schema for operations for sending invoices or getting next invoice number.
-      title: InvoiceNumberResponse
-    Orgid:
-      type: integer
-      format: int64
-      description: Organization ID. Unique identifier assigned to an org by Payabli.
-      title: Orgid
-    PaylinkId:
-      type: string
-      description: Identifier of payment link associated to the invoice or bill.
-      title: PaylinkId
-    BillEvents:
-      type: array
-      items:
-        $ref: '#/components/schemas/GeneralEvents'
-      description: Array of event objects with information related to events associated to the invoice.
-      title: BillEvents
-    BillItem:
-      type: object
-      properties:
-        itemCategories:
-          type: array
-          items:
-            type: string
-          description: Array of tags classifying item or product.
-        itemCommodityCode:
-          $ref: '#/components/schemas/ItemCommodityCode'
-        itemCost:
-          type: number
-          format: double
-          description: Item or product price per unit.
-        itemDescription:
-          $ref: '#/components/schemas/ItemDescription'
-        itemMode:
-          type: integer
-          description: 'Internal class of item or product: value `0` is only for invoices,
-
-            `1` for bills, and `2` is common for both. Required on invoice line
-
-            items — invoice creation fails with `Invalid item data` if it''s omitted.
-
-            '
-        itemProductCode:
-          $ref: '#/components/schemas/ItemProductCode'
-        itemProductName:
-          $ref: '#/components/schemas/ItemProductName'
-        itemQty:
-          type: integer
-          description: Quantity of item or product.
-        itemTaxAmount:
-          type: number
-          format: double
-          description: Tax amount applied to item or product.
-        itemTaxRate:
-          type: number
-          format: double
-          description: Tax rate applied to item or product.
-        itemTotalAmount:
-          type: number
-          format: double
-          description: 'Per-line total for this item (unit cost times quantity). Distinct from
-
-            the invoice''s overall total, `invoiceAmount`. Required on invoice line items.
-
-            '
-        itemUnitOfMeasure:
-          $ref: '#/components/schemas/ItemUnitofMeasure'
-      title: BillItem
-    Responsedatanonobject:
-      oneOf:
-      - type: string
-      - type: integer
-      description: The response data.
-      title: Responsedatanonobject
-    InvoiceResponseWithoutData:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-          description: If `isSuccess` = true, this contains the identifier of the invoice. If `isSuccess` = false, this contains the reason for the failure.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        pageidentifier:
-          oneOf:
-          - $ref: '#/components/schemas/PageIdentifier'
-          - type: 'null'
-        roomId:
-          $ref: '#/components/schemas/RoomIdNotInUse'
-      required:
-      - isSuccess
-      - responseCode
-      - responseData
-      - responseText
-      - pageidentifier
-      - roomId
-      description: Response schema for invoice operations.
-      title: InvoiceResponseWithoutData
-    Pagesize:
-      type: integer
-      description: Number of records on each response page.
-      title: Pagesize
     QueryInvoiceResponseRecordsItem:
       type: object
       properties:
@@ -2239,10 +1173,589 @@ components:
       - externalPaypointID
       - pageIdentifier
       title: QueryInvoiceResponseRecordsItem
+    PairFiles:
+      type: object
+      properties:
+        originalName:
+          type: string
+          description: Original filename
+        zipName:
+          type: string
+          description: Filename assigned to zipped file. This is the name to use for reference in the API functions to get files in attachments.
+        descriptor:
+          type: string
+          description: Descriptor of the file.
+      title: PairFiles
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    CustomerStatus:
+      type: integer
+      description: 'Customer Status. Possible values:
+
+
+        - `-99` Deleted
+
+        - `0` Inactive
+
+        - `1` Active
+
+        - `85` Locked (typically due to multiple failed login attempts)
+
+        '
+      title: CustomerStatus
+    GeneralEvents:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Event description.
+        eventTime:
+          type: string
+          format: date-time
+          description: Event timestamp, in UTC.
+        extraData:
+          type:
+          - string
+          - 'null'
+          description: Extra data.
+        refData:
+          type: string
+          description: Reference data.
+        source:
+          $ref: '#/components/schemas/Source'
+          description: The event source.
+      title: GeneralEvents
+    InvoiceDataRequest:
+      type: object
+      properties:
+        customerData:
+          $ref: '#/components/schemas/PayorDataRequest'
+          description: Object describing the customer/payor. Required for POST requests. Which fields are required depends on the paypoint's custom identifier settings.
+        invoiceData:
+          $ref: '#/components/schemas/BillData'
+          description: Object describing the invoice. Required for POST requests.
+        scheduledOptions:
+          $ref: '#/components/schemas/BillOptions'
+          description: Object with options for scheduled invoices.
+      title: InvoiceDataRequest
+    InvoiceId:
+      type: integer
+      format: int64
+      description: Identifier of invoice.
+      title: InvoiceId
+    BillingCityNullable:
+      type: string
+      description: Billing city.
+      title: BillingCityNullable
+    BillItem:
+      type: object
+      properties:
+        itemCategories:
+          type: array
+          items:
+            type: string
+          description: Array of tags classifying item or product.
+        itemCommodityCode:
+          $ref: '#/components/schemas/ItemCommodityCode'
+        itemCost:
+          type: number
+          format: double
+          description: Item or product price per unit.
+        itemDescription:
+          $ref: '#/components/schemas/ItemDescription'
+        itemMode:
+          type: integer
+          description: 'Internal class of item or product: value `0` is only for invoices,
+
+            `1` for bills, and `2` is common for both. Required on invoice line
+
+            items — invoice creation fails with `Invalid item data` if it''s omitted.
+
+            '
+        itemProductCode:
+          $ref: '#/components/schemas/ItemProductCode'
+        itemProductName:
+          $ref: '#/components/schemas/ItemProductName'
+        itemQty:
+          type: integer
+          description: Quantity of item or product.
+        itemTaxAmount:
+          type: number
+          format: double
+          description: Tax amount applied to item or product.
+        itemTaxRate:
+          type: number
+          format: double
+          description: Tax rate applied to item or product.
+        itemTotalAmount:
+          type: number
+          format: double
+          description: 'Per-line total for this item (unit cost times quantity). Distinct from
+
+            the invoice''s overall total, `invoiceAmount`. Required on invoice line items.
+
+            '
+        itemUnitOfMeasure:
+          $ref: '#/components/schemas/ItemUnitofMeasure'
+      title: BillItem
+    FileContent:
+      type: object
+      properties:
+        fContent:
+          type: string
+          description: 'Content of file, Base64-encoded. Ignored if `furl` is specified. Max
+
+            upload size is 30 MB.
+
+            '
+        filename:
+          type: string
+          description: The name of the attached file.
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        furl:
+          type: string
+          description: Optional URL provided to show or download the file remotely.
+      description: Contains details about a file. Max upload size is 30 MB.
+      title: FileContent
+    Legalname:
+      type: string
+      description: Business legal name.
+      title: Legalname
+    ItemCommodityCode:
+      type: string
+      description: Item or product commodity code. Max length of 250 characters.
+      title: ItemCommodityCode
+    SendInvoiceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - isSuccess
+      - responseText
+      title: SendInvoiceResponse
+    Shippingstate:
+      type: string
+      description: Shipping state or province.
+      title: Shippingstate
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    PurchaseOrder:
+      type: string
+      description: Purchase order number.
+      title: PurchaseOrder
+    ExternalPaypointId:
+      type: string
+      description: 'A custom identifier for the paypoint, if applicable.
+
+        '
+      title: ExternalPaypointId
+    DocumentsRef:
+      type: object
+      properties:
+        filelist:
+          type: array
+          items:
+            $ref: '#/components/schemas/PairFiles'
+          description: Array of objects describing files contained in the ZIP file.
+        zipfile:
+          type: string
+          description: Zip file containing attachments.
+      title: DocumentsRef
     InvoiceNumber:
       type: string
       description: Invoice number. Identifies the invoice under a paypoint.
       title: InvoiceNumber
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    ItemProductName:
+      type: string
+      description: Item or product name. Max length of 250 characters.
+      title: ItemProductName
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    Frequency:
+      type: string
+      enum:
+      - onetime
+      - weekly
+      - every2weeks
+      - every6months
+      - monthly
+      - every3months
+      - annually
+      - firstofmonth
+      - fifteenthofmonth
+      - endofmonth
+      description: 'Frequency for operation. The `firstofmonth`, `fifteenthofmonth`, and `endofmonth` values are only valid on subscriptions — they aren''t accepted by other endpoints (such as invoice scheduling) that use this enum.
+
+        '
+      title: Frequency
+    PayorDataRequest:
+      type: object
+      properties:
+        additionalData:
+          $ref: '#/components/schemas/AdditionalData'
+        billingAddress1:
+          $ref: '#/components/schemas/BillingAddressNullable'
+        billingAddress2:
+          $ref: '#/components/schemas/BillingAddressAddtlNullable'
+        billingCity:
+          $ref: '#/components/schemas/BillingCityNullable'
+        billingCountry:
+          $ref: '#/components/schemas/BillingCountryNullable'
+        billingEmail:
+          $ref: '#/components/schemas/Email'
+        billingPhone:
+          $ref: '#/components/schemas/PhoneNumber'
+        billingState:
+          $ref: '#/components/schemas/BillingStateNullable'
+        billingZip:
+          $ref: '#/components/schemas/BillingZip'
+          description: 'Customer''s billing ZIP code. For Pay In functions, this field supports 5-digit and 9-digit ZIP codes and alphanumeric Canadian postal codes. For example: "37615-1234" or "37615".'
+        company:
+          type: string
+          description: Customer's company name.
+        customerId:
+          $ref: '#/components/schemas/CustomerId'
+        customerNumber:
+          $ref: '#/components/schemas/CustomerNumberNullable'
+        firstName:
+          type: string
+          description: Customer/Payor first name.
+        identifierFields:
+          $ref: '#/components/schemas/Identifierfields'
+        lastName:
+          type: string
+          description: Customer/Payor last name.
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+      description: Customer information. May be required, depending on the paypoint's settings. Required for subscriptions.
+      title: PayorDataRequest
+    Attachments:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileContent'
+      description: 'Array of `fileContent` objects with attached documents. Max upload size is
+
+        30 MB.
+
+        '
+      title: Attachments
+    PhoneNumber:
+      type: string
+      description: Phone number.
+      title: PhoneNumber
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    AdditionalDataMap:
+      type: object
+      additionalProperties:
+        type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataMap
+    BillData:
+      type: object
+      properties:
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        attachments:
+          $ref: '#/components/schemas/Attachments'
+        company:
+          type: string
+          description: Company name of the recipient of the invoice.
+        discount:
+          $ref: '#/components/schemas/Discount'
+        dutyAmount:
+          $ref: '#/components/schemas/DutyAmount'
+        firstName:
+          type: string
+          description: First name of the recipient of the invoice.
+        freightAmount:
+          $ref: '#/components/schemas/FreightAmount'
+        frequency:
+          $ref: '#/components/schemas/Frequency'
+          description: Frequency of scheduled invoice.
+        invoiceAmount:
+          $ref: '#/components/schemas/InvoiceAmount'
+        invoiceDate:
+          type: string
+          format: date
+          description: 'Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceDueDate:
+          type: string
+          format: date
+          description: 'Invoice due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceEndDate:
+          type: string
+          format: date
+          description: 'Indicate the date to finish a scheduled invoice cycle (`invoiceType`` = 1) in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.'
+        invoiceNumber:
+          $ref: '#/components/schemas/InvoiceNumber'
+          description: Invoice number. Identifies the invoice under a paypoint.
+        invoiceStatus:
+          $ref: '#/components/schemas/Invoicestatus'
+        invoiceType:
+          $ref: '#/components/schemas/InvoiceType'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillItem'
+          description: Array of line items included in the invoice.
+        lastName:
+          type: string
+          description: Last name of the recipient of the invoice.
+        notes:
+          type: string
+          description: Notes included in the invoice.
+        paymentTerms:
+          $ref: '#/components/schemas/BillDataPaymentTerms'
+        purchaseOrder:
+          $ref: '#/components/schemas/PurchaseOrder'
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingEmail:
+          $ref: '#/components/schemas/Email'
+          description: Shipping recipient's contact email address.
+        shippingFromZip:
+          $ref: '#/components/schemas/ShippingFromZip'
+        shippingPhone:
+          type: string
+          description: Recipient phone number.
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+        summaryCommodityCode:
+          $ref: '#/components/schemas/SummaryCommodityCode'
+        tax:
+          $ref: '#/components/schemas/Tax'
+        termsConditions:
+          $ref: '#/components/schemas/TermsConditions'
+      title: BillData
+    Shippingcity:
+      type: string
+      description: Shipping city.
+      title: Shippingcity
+    BillDataPaymentTerms:
+      type: string
+      enum:
+      - PIA
+      - CIA
+      - UR
+      - NET10
+      - NET20
+      - NET30
+      - NET45
+      - NET60
+      - NET90
+      - EOM
+      - MFI
+      - 5MFI
+      - 10MFI
+      - 15MFI
+      - 20MFI
+      - 2/10NET30
+      - UF
+      - 10UF
+      - 20UF
+      - 25UF
+      - 50UF
+      description: 'Payment terms for invoice. If no terms are defined, then response data for
+
+        this field defaults to `NET30`. Mirrors the values in
+
+        [`Terms`](#schema-terms).
+
+        '
+      title: BillDataPaymentTerms
+    Totalrecords:
+      type: integer
+      description: Total number of records in response.
+      title: Totalrecords
+    Tax:
+      type: number
+      format: double
+      description: Tax rate in percent applied to the invoice.
+      title: Tax
+    BillingStateNullable:
+      type: string
+      description: Billing state. Must be a 2-letter state code for addresses in the US.
+      title: BillingStateNullable
+    AdditionalData:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          description: Any type
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalData
+    ItemProductCode:
+      type: string
+      description: Item or product code. Max length of 250 characters.
+      title: ItemProductCode
+    ItemUnitofMeasure:
+      type: string
+      description: Unit of measurement. Max length of 100 characters.
+      title: ItemUnitofMeasure
+    QueryInvoiceResponse:
+      type: object
+      properties:
+        Records:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryInvoiceResponseRecordsItem'
+        Summary:
+          $ref: '#/components/schemas/QuerySummary'
+      required:
+      - Records
+      - Summary
+      title: QueryInvoiceResponse
+    ShippingFromZip:
+      type: string
+      description: Sender shipping ZIP code.
+      title: ShippingFromZip
+    BillingAddressNullable:
+      type: string
+      description: Billing address.
+      title: BillingAddressNullable
+    QuerySummary:
+      type: object
+      properties:
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        pageSize:
+          $ref: '#/components/schemas/Pagesize'
+        totalAmount:
+          type: number
+          format: double
+          description: Total amount for the records.
+        totalNetAmount:
+          type: number
+          format: double
+          description: Total net amount for the records.
+        totalPages:
+          $ref: '#/components/schemas/Totalrecords'
+        totalRecords:
+          $ref: '#/components/schemas/Totalrecords'
+      title: QuerySummary
+    Shippingzip:
+      type: string
+      description: 'Shipping ZIP code. For Pay In functions, this field supports 5-digit
+
+        and 9-digit ZIP codes and alphanumeric Canadian postal codes. For
+
+        example: `37615-1234` or `37615`.
+
+        '
+      title: Shippingzip
+    DutyAmount:
+      type: number
+      format: double
+      description: Duty amount.
+      title: DutyAmount
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    Shippingaddress:
+      type: string
+      description: The shipping address.
+      title: Shippingaddress
+    Dbaname:
+      type: string
+      description: 'The alternate or common name that this business is doing business under,
+
+        usually referred to as a DBA name.
+
+        '
+      title: Dbaname
+    FreightAmount:
+      type: number
+      format: double
+      description: Freight/shipping amount.
+      title: FreightAmount
+    PaypointId:
+      type: integer
+      format: int64
+      description: The paypoint's ID. Note that this is different than the entryname.
+      title: PaypointId
+    Shippingcountry:
+      type: string
+      description: Shipping address country.
+      title: Shippingcountry
+    TermsConditions:
+      type: string
+      description: Custom terms and conditions included in the invoice.
+      title: TermsConditions
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    InvoiceAmount:
+      type: number
+      format: double
+      description: The invoice amount.
+      title: InvoiceAmount
     PayabliErrorBody:
       type: object
       properties:
@@ -2271,36 +1784,523 @@ components:
 
         '
       title: PayabliErrorBody
-    ItemProductName:
+    OrgParentName:
       type: string
-      description: Item or product name. Max length of 250 characters.
-      title: ItemProductName
-    QueryInvoiceResponse:
+      description: The name of the parent organization.
+      title: OrgParentName
+    Source:
+      type: string
+      description: Custom identifier to indicate the transaction or request source.
+      title: Source
+    BillingAddressAddtlNullable:
+      type: string
+      description: Additional line for the billing address.
+      title: BillingAddressAddtlNullable
+    BillingCountryNullable:
+      type: string
+      description: Billing address country.
+      title: BillingCountryNullable
+    PayorDataResponse:
       type: object
       properties:
-        Records:
+        AdditionalData:
+          oneOf:
+          - $ref: '#/components/schemas/AdditionalDataMap'
+          - type: 'null'
+        BillingAddress1:
+          oneOf:
+          - $ref: '#/components/schemas/BillingAddressNullable'
+          - type: 'null'
+        BillingAddress2:
+          oneOf:
+          - $ref: '#/components/schemas/BillingAddressAddtlNullable'
+          - type: 'null'
+        BillingCity:
+          oneOf:
+          - $ref: '#/components/schemas/BillingCityNullable'
+          - type: 'null'
+        BillingCountry:
+          oneOf:
+          - $ref: '#/components/schemas/BillingCountryNullable'
+          - type: 'null'
+        BillingEmail:
+          oneOf:
+          - $ref: '#/components/schemas/Email'
+          - type: 'null'
+        BillingPhone:
+          oneOf:
+          - $ref: '#/components/schemas/PhoneNumber'
+          - type: 'null'
+        BillingState:
+          oneOf:
+          - $ref: '#/components/schemas/BillingStateNullable'
+          - type: 'null'
+        BillingZip:
+          oneOf:
+          - $ref: '#/components/schemas/BillingZip'
+          - type: 'null'
+          description: 'Customer''s billing ZIP code. For Pay In functions, this field supports 5-digit and 9-digit ZIP codes and alphanumeric Canadian postal codes. For example: "37615-1234" or "37615".'
+        CompanyName:
+          type:
+          - string
+          - 'null'
+          description: Customer's company name.
+        customerId:
+          oneOf:
+          - $ref: '#/components/schemas/CustomerId'
+          - type: 'null'
+        CustomerNumber:
+          oneOf:
+          - $ref: '#/components/schemas/CustomerNumberNullable'
+          - type: 'null'
+        customerStatus:
+          oneOf:
+          - $ref: '#/components/schemas/CustomerStatus'
+          - type: 'null'
+          description: Customer status. This is used to determine if the customer is active or inactive.
+        FirstName:
+          type:
+          - string
+          - 'null'
+          description: Customer/Payor first name.
+        Identifiers:
+          oneOf:
+          - $ref: '#/components/schemas/Identifierfields'
+          - type: 'null'
+        LastName:
+          type:
+          - string
+          - 'null'
+          description: Customer/Payor last name.
+        ShippingAddress1:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingaddress'
+          - type: 'null'
+        ShippingAddress2:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingaddressadditional'
+          - type: 'null'
+        ShippingCity:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingcity'
+          - type: 'null'
+        ShippingCountry:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingcountry'
+          - type: 'null'
+        ShippingState:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingstate'
+          - type: 'null'
+        ShippingZip:
+          oneOf:
+          - $ref: '#/components/schemas/Shippingzip'
+          - type: 'null'
+      required:
+      - AdditionalData
+      - BillingAddress1
+      - BillingAddress2
+      - BillingCity
+      - BillingCountry
+      - BillingEmail
+      - BillingPhone
+      - BillingState
+      - BillingZip
+      - CompanyName
+      - customerId
+      - CustomerNumber
+      - customerStatus
+      - FirstName
+      - Identifiers
+      - LastName
+      - ShippingAddress1
+      - ShippingAddress2
+      - ShippingCity
+      - ShippingCountry
+      - ShippingState
+      - ShippingZip
+      description: Customer information.
+      title: PayorDataResponse
+    Identifierfields:
+      type: array
+      items:
+        type: string
+      description: List of fields acting as customer identifiers, to be used instead of CustomerNumber.
+      title: Identifierfields
+    InvoiceType:
+      type: integer
+      description: 'Invoice type. Value `0` is for single/one-time invoices, `1` for
+
+        scheduled invoices.
+
+        '
+      title: InvoiceType
+    Invoicestatus:
+      type: integer
+      description: Invoice status code.
+      title: Invoicestatus
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    Terms:
+      type: string
+      enum:
+      - PIA
+      - CIA
+      - UR
+      - NET10
+      - NET20
+      - NET30
+      - NET45
+      - NET60
+      - NET90
+      - EOM
+      - MFI
+      - 5MFI
+      - 10MFI
+      - 15MFI
+      - 20MFI
+      - 2/10NET30
+      - UF
+      - 10UF
+      - 20UF
+      - 25UF
+      - 50UF
+      description: 'Payment terms for invoice. If no terms are defined, then response data for
+
+        this field defaults to `NET30`.
+
+        '
+      title: Terms
+    Discount:
+      type: number
+      format: double
+      description: Discount applied to the invoice.
+      title: Discount
+    SummaryCommodityCode:
+      type: string
+      description: Commodity code.
+      title: SummaryCommodityCode
+    GetInvoiceRecord:
+      type: object
+      properties:
+        invoiceId:
+          $ref: '#/components/schemas/InvoiceId'
+        customerId:
+          $ref: '#/components/schemas/CustomerId'
+        paypointId:
+          $ref: '#/components/schemas/PaypointId'
+        invoiceNumber:
+          $ref: '#/components/schemas/InvoiceNumber'
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        invoiceDueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        invoiceSentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        invoiceEndDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        lastPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+        invoiceStatus:
+          $ref: '#/components/schemas/Invoicestatus'
+        invoiceType:
+          $ref: '#/components/schemas/InvoiceType'
+        frequency:
+          $ref: '#/components/schemas/Frequency'
+        paymentTerms:
+          $ref: '#/components/schemas/Terms'
+        termsConditions:
+          oneOf:
+          - $ref: '#/components/schemas/TermsConditions'
+          - type: 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        tax:
+          $ref: '#/components/schemas/Tax'
+        discount:
+          $ref: '#/components/schemas/Discount'
+        invoiceAmount:
+          $ref: '#/components/schemas/InvoiceAmount'
+        invoicePaidAmount:
+          $ref: '#/components/schemas/InvoicePaidAmount'
+        freightAmount:
+          $ref: '#/components/schemas/FreightAmount'
+        dutyAmount:
+          $ref: '#/components/schemas/DutyAmount'
+        purchaseOrder:
+          $ref: '#/components/schemas/PurchaseOrder'
+        firstName:
+          type: string
+          description: First name of the recipient of the invoice.
+        lastName:
+          type: string
+          description: Last name of the recipient of the invoice.
+        company:
+          type: string
+          description: Company name of the recipient of the invoice.
+        shippingAddress1:
+          $ref: '#/components/schemas/Shippingaddress'
+        shippingAddress2:
+          $ref: '#/components/schemas/Shippingaddressadditional'
+        shippingCity:
+          $ref: '#/components/schemas/Shippingcity'
+        shippingState:
+          $ref: '#/components/schemas/Shippingstate'
+        shippingZip:
+          $ref: '#/components/schemas/Shippingzip'
+        shippingFromZip:
+          $ref: '#/components/schemas/ShippingFromZip'
+        shippingCountry:
+          $ref: '#/components/schemas/Shippingcountry'
+        shippingEmail:
+          $ref: '#/components/schemas/Email'
+        shippingPhone:
+          type: string
+        summaryCommodityCode:
+          $ref: '#/components/schemas/SummaryCommodityCode'
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/QueryInvoiceResponseRecordsItem'
-        Summary:
-          $ref: '#/components/schemas/QuerySummary'
+            $ref: '#/components/schemas/BillItem'
+        Customer:
+          $ref: '#/components/schemas/PayorDataResponse'
+        paylinkId:
+          $ref: '#/components/schemas/PaylinkId'
+        billEvents:
+          $ref: '#/components/schemas/BillEvents'
+        scheduledOptions:
+          $ref: '#/components/schemas/BillOptions'
+        PaypointLegalname:
+          type: string
+        PaypointDbaname:
+          $ref: '#/components/schemas/Dbaname'
+        PaypointEntryname:
+          $ref: '#/components/schemas/Entrypointfield'
+        ParentOrgName:
+          $ref: '#/components/schemas/OrgParentName'
+        AdditionalData:
+          $ref: '#/components/schemas/AdditionalDataMap'
+        DocumentsRef:
+          $ref: '#/components/schemas/DocumentsRef'
+        externalPaypointID:
+          $ref: '#/components/schemas/ExternalPaypointId'
       required:
-      - Records
-      - Summary
-      title: QueryInvoiceResponse
-    PurchaseOrder:
+      - invoiceId
+      - customerId
+      - paypointId
+      - invoiceNumber
+      - invoiceDate
+      - invoiceDueDate
+      - invoiceSentDate
+      - invoiceEndDate
+      - lastPaymentDate
+      - createdAt
+      - invoiceStatus
+      - invoiceType
+      - frequency
+      - paymentTerms
+      - termsConditions
+      - notes
+      - invoiceAmount
+      - invoicePaidAmount
+      - purchaseOrder
+      - shippingAddress1
+      - shippingAddress2
+      - shippingCity
+      - shippingState
+      - shippingZip
+      - shippingFromZip
+      - shippingCountry
+      - shippingEmail
+      - shippingPhone
+      - summaryCommodityCode
+      - items
+      - Customer
+      - paylinkId
+      - scheduledOptions
+      - PaypointLegalname
+      - PaypointDbaname
+      - PaypointEntryname
+      - ParentOrgName
+      - DocumentsRef
+      title: GetInvoiceRecord
+    CustomerId:
+      type: integer
+      format: int64
+      description: The Payabli-generated unique ID for the customer.
+      title: CustomerId
+    FileContentFtype:
       type: string
-      description: Purchase order number.
-      title: PurchaseOrder
+      enum:
+      - pdf
+      - doc
+      - docx
+      - jpg
+      - jpeg
+      - png
+      - gif
+      - txt
+      description: The MIME type of the file (if content is provided).
+      title: FileContentFtype
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
+
+        [API Response Codes](/developers/api-reference/api-responses).
+
+        '
+      title: Responsecode
+    ForceCustomerCreation:
+      type: boolean
+      description: 'When `true`, the request creates a new customer record, regardless of
+
+        whether customer identifiers match an existing customer. Defaults to
+
+        `false`.
+
+        '
+      title: ForceCustomerCreation
+    BillOptions:
+      type: object
+      properties:
+        includePaylink:
+          type: boolean
+          description: Flag to indicate if the scheduled invoice includes a payment link.
+        includePdf:
+          type: boolean
+          description: Flag to indicate if the scheduled invoice includes a PDF version of invoice
+      title: BillOptions
+    RoomIdNotInUse:
+      type: integer
+      format: int64
+      description: Field not in use on this endpoint. It always returns `0`.
+      title: RoomIdNotInUse
+    Shippingaddressadditional:
+      type: string
+      description: Additional line for shipping address.
+      title: Shippingaddressadditional
+    Pagesize:
+      type: integer
+      description: Number of records on each response page.
+      title: Pagesize
+    ExportFormat:
+      type: string
+      enum:
+      - csv
+      - xlsx
+      description: 'Export format for file downloads. When specified, returns data as a file
+
+        instead of JSON.
+
+        '
+      title: ExportFormat
     InvoicePaidAmount:
       type: number
       format: double
       description: Amount partially paid to the invoice.
       title: InvoicePaidAmount
-    ItemCommodityCode:
+    CustomerNumberNullable:
       type: string
-      description: Item or product commodity code. Max length of 250 characters.
-      title: ItemCommodityCode
+      description: 'User-provided unique identifier for the customer. This is typically the
+
+        customer ID from your own system.
+
+        '
+      title: CustomerNumberNullable
+    BillingZip:
+      type: string
+      description: Billing address ZIP code.
+      title: BillingZip
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    ItemDescription:
+      type: string
+      description: Item or product description. Max length of 250 characters.
+      title: ItemDescription
+    File:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: A file containing the response data, in the format specified in the request.
+      title: File
+    InvoiceNumberResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          type: string
+          description: If `isSuccess` = true, this contains the next available invoice number in the format defined by paypoint settings. If `isSuccess` = false, this contains the reason for the error.
+      required:
+      - isSuccess
+      - responseText
+      - responseData
+      description: Response schema for operations for sending invoices or getting next invoice number.
+      title: InvoiceNumberResponse
+    PaylinkId:
+      type: string
+      description: Identifier of payment link associated to the invoice or bill.
+      title: PaylinkId
+    BillEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/GeneralEvents'
+      description: Array of event objects with information related to events associated to the invoice.
+      title: BillEvents
+    InvoiceResponseWithoutData:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
+          description: If `isSuccess` = true, this contains the identifier of the invoice. If `isSuccess` = false, this contains the reason for the failure.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageidentifier:
+          oneOf:
+          - $ref: '#/components/schemas/PageIdentifier'
+          - type: 'null'
+        roomId:
+          $ref: '#/components/schemas/RoomIdNotInUse'
+      required:
+      - isSuccess
+      - responseCode
+      - responseData
+      - responseText
+      - pageidentifier
+      - roomId
+      description: Response schema for invoice operations.
+      title: InvoiceResponseWithoutData
   securitySchemes:
     BearerAuth:
       type: http

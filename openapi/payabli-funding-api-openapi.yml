@@ -64,39 +64,6 @@ paths:
               $ref: '#/components/schemas/DepositFundsBody'
 components:
   schemas:
-    PaypointId:
-      type: integer
-      format: int64
-      description: The paypoint's ID. Note that this is different than the entryname.
-      title: PaypointId
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -108,34 +75,11 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
-    Entrypointfield:
-      type: string
-      description: The entrypoint identifier.
-      title: Entrypointfield
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    Responsedata:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: The object containing the response data.
-      title: Responsedata
-    PageIdentifier:
-      type: string
-      description: Auxiliary validation used internally by payment pages and components.
-      title: PageIdentifier
+    PaypointId:
+      type: integer
+      format: int64
+      description: The paypoint's ID. Note that this is different than the entryname.
+      title: PaypointId
     DepositFundsResponse:
       type: object
       properties:
@@ -184,6 +128,62 @@ components:
       - accountId
       description: Request body for depositing funds into a paypoint's available payout balance.
       title: DepositFundsBody
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    PageIdentifier:
+      type: string
+      description: Auxiliary validation used internally by payment pages and components.
+      title: PageIdentifier
+    Entrypointfield:
+      type: string
+      description: The entrypoint identifier.
+      title: Entrypointfield
   securitySchemes:
     BearerAuth:
       type: http

@@ -649,36 +649,22 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
-    MfaValidationCode:
-      type: string
-      description: 'The validation code for multi-factor authentication, typically a hash or
-
-        similar encrypted format.
-
-        '
-      title: MfaValidationCode
-    EditMfaUserResponse:
+    Orgtype:
+      type: integer
+      description: The organization type. Currently, this must be `0`.
+      title: Orgtype
+    Orgid:
+      type: integer
+      format: int64
+      description: Organization ID. Unique identifier assigned to an org by Payabli.
+      title: Orgid
+    UserAuthPswResetRequest:
       type: object
       properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: EditMfaUserResponse
-    Language:
-      type: string
-      description: The language code.
-      title: Language
-    AdditionalData:
-      type: object
-      additionalProperties:
-        type: object
-        additionalProperties:
-          description: Any type
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalData
+        psw:
+          type: string
+          description: New User password
+      title: UserAuthPswResetRequest
     UsrAccess:
       type: object
       properties:
@@ -687,76 +673,14 @@ components:
         roleValue:
           type: boolean
       title: UsrAccess
-    AddUserResponse:
+    MfaValidationData:
       type: object
       properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
+        mfaCode:
           type: string
-          description: The response data.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: AddUserResponse
-    Orgtype:
-      type: integer
-      description: The organization type. Currently, this must be `0`.
-      title: Orgtype
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    UserAuthRequest:
-      type: object
-      properties:
-        email:
-          $ref: '#/components/schemas/Email'
-        entry:
-          type: string
-          description: Identifier for entry point originating the request (used by front-end apps)
-        entryType:
-          type: integer
-          description: 'Type of entry identifier: 0 - partner, 2 - paypoint. This is used by front-end apps, required if an Entry is indicated.'
-        psw:
-          type: string
-        userId:
-          type: integer
-          format: int64
-        userTokenId:
-          type: string
-      title: UserAuthRequest
-    AdditionalDataString:
-      type: string
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalDataString
-    Responsedata:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: The object containing the response data.
-      title: Responsedata
-    Orgid:
-      type: integer
-      format: int64
-      description: Organization ID. Unique identifier assigned to an org by Payabli.
-      title: Orgid
+        mfaValidationCode:
+          $ref: '#/components/schemas/MfaValidationCode'
+      title: MfaValidationData
     UserAuthResetRequest:
       type: object
       properties:
@@ -770,135 +694,6 @@ components:
           type: integer
           description: 'Type of entry identifier: 0 - partner, 2 - paypoint. This is used by front-end apps, required if an Entry is indicated.'
       title: UserAuthResetRequest
-    Mfa:
-      type: boolean
-      description: When `true`, multi-factor authentication (MFA) is enabled.
-      title: Mfa
-    NameUser:
-      type: string
-      title: NameUser
-    MfaValidationData:
-      type: object
-      properties:
-        mfaCode:
-          type: string
-        mfaValidationCode:
-          $ref: '#/components/schemas/MfaValidationCode'
-      title: MfaValidationData
-    OrgScope:
-      type: object
-      properties:
-        orgId:
-          $ref: '#/components/schemas/Orgid'
-        orgType:
-          $ref: '#/components/schemas/Orgtype'
-      title: OrgScope
-    UserData:
-      type: object
-      properties:
-        access:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsrAccess'
-        additionalData:
-          $ref: '#/components/schemas/AdditionalData'
-        email:
-          $ref: '#/components/schemas/Email'
-          description: The user's email address.
-        language:
-          $ref: '#/components/schemas/Language'
-        mfaData:
-          $ref: '#/components/schemas/MfaData'
-        name:
-          $ref: '#/components/schemas/NameUser'
-        phone:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: The user's phone number.
-        pwd:
-          type: string
-        scope:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrgScope'
-        timeZone:
-          $ref: '#/components/schemas/Timezone'
-        usrStatus:
-          $ref: '#/components/schemas/UsrStatus'
-      title: UserData
-    Responsedatanonobject:
-      oneOf:
-      - type: string
-      - type: integer
-      description: The response data.
-      title: Responsedatanonobject
-    PayabliApiResponseUserMfa:
-      type: object
-      properties:
-        inactiveTokenTime:
-          type: integer
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        remaining:
-          type: integer
-        responseData:
-          $ref: '#/components/schemas/Responsedatanonobject'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponseUserMfa
-    PayabliApiResponseMfaBasic:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        mfa:
-          $ref: '#/components/schemas/Mfa'
-        mfaMode:
-          type: string
-          description: The mode of multi-factor authentication used.
-        mfaValidationCode:
-          $ref: '#/components/schemas/MfaValidationCode'
-        responseData:
-          type: string
-          description: Data returned by the response, masked for security.
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponseMfaBasic
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    OrgXScope:
-      type: object
-      properties:
-        orgEntry:
-          $ref: '#/components/schemas/Orgentryname'
-        orgId:
-          $ref: '#/components/schemas/Orgid'
-        orgType:
-          $ref: '#/components/schemas/Orgtype'
-      title: OrgXScope
-    PayabliApiResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          $ref: '#/components/schemas/Responsedata'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponse
-    PhoneNumber:
-      type: string
-      description: Phone number.
-      title: PhoneNumber
     UserQueryRecord:
       type: object
       properties:
@@ -951,6 +746,124 @@ components:
         UsrStatus:
           $ref: '#/components/schemas/UsrStatus'
       title: UserQueryRecord
+    AddUserResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          type: string
+          description: The response data.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: AddUserResponse
+    EditMfaUserResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: EditMfaUserResponse
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
+    PayabliApiResponseMfaBasic:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        mfa:
+          $ref: '#/components/schemas/Mfa'
+        mfaMode:
+          type: string
+          description: The mode of multi-factor authentication used.
+        mfaValidationCode:
+          $ref: '#/components/schemas/MfaValidationCode'
+        responseData:
+          type: string
+          description: Data returned by the response, masked for security.
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponseMfaBasic
+    DeleteUserResponse:
+      type: object
+      properties:
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: DeleteUserResponse
+    UserData:
+      type: object
+      properties:
+        access:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsrAccess'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalData'
+        email:
+          $ref: '#/components/schemas/Email'
+          description: The user's email address.
+        language:
+          $ref: '#/components/schemas/Language'
+        mfaData:
+          $ref: '#/components/schemas/MfaData'
+        name:
+          $ref: '#/components/schemas/NameUser'
+        phone:
+          $ref: '#/components/schemas/PhoneNumber'
+          description: The user's phone number.
+        pwd:
+          type: string
+        scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrgScope'
+        timeZone:
+          $ref: '#/components/schemas/Timezone'
+        usrStatus:
+          $ref: '#/components/schemas/UsrStatus'
+      title: UserData
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    MfaMode:
+      type: integer
+      title: MfaMode
+    Orgentryname:
+      type: string
+      description: 'The entryname for the org, in string format. If you leave this blank,
+
+        Payabli uses the DBA name.
+
+        '
+      title: Orgentryname
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     UsrStatus:
       type: integer
       description: 'The user''s status:
@@ -966,36 +879,89 @@ components:
 
         '
       title: UsrStatus
-    UserAuthPswResetRequest:
+    OrgScope:
       type: object
       properties:
-        psw:
-          type: string
-          description: New User password
-      title: UserAuthPswResetRequest
-    CreatedAt:
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+      title: OrgScope
+    PhoneNumber:
       type: string
-      format: date-time
-      description: Timestamp of when record was created, in UTC.
-      title: CreatedAt
-    MfaMode:
-      type: integer
-      title: MfaMode
-    Email:
-      type: string
-      format: email
-      description: Email address.
-      title: Email
-    ChangePswUserResponse:
+      description: Phone number.
+      title: PhoneNumber
+    MfaData:
       type: object
       properties:
+        mfa:
+          type: boolean
+        mfaMode:
+          $ref: '#/components/schemas/MfaMode'
+      title: MfaData
+    Language:
+      type: string
+      description: The language code.
+      title: Language
+    PayabliApiResponseUserMfa:
+      type: object
+      properties:
+        inactiveTokenTime:
+          type: integer
         isSuccess:
           $ref: '#/components/schemas/IsSuccess'
+        remaining:
+          type: integer
+        responseData:
+          $ref: '#/components/schemas/Responsedatanonobject'
         responseText:
           $ref: '#/components/schemas/ResponseText'
       required:
       - responseText
-      title: ChangePswUserResponse
+      title: PayabliApiResponseUserMfa
+    AdditionalData:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          description: Any type
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. If you are using\n[custom identifiers](/developers/developer-guides/entities-customers),\npass those in this object. Max length for a value is 100 characters.\nExample usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalData
+    OrgXScope:
+      type: object
+      properties:
+        orgEntry:
+          $ref: '#/components/schemas/Orgentryname'
+        orgId:
+          $ref: '#/components/schemas/Orgid'
+        orgType:
+          $ref: '#/components/schemas/Orgtype'
+      title: OrgXScope
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
+    Responsedatanonobject:
+      oneOf:
+      - type: string
+      - type: integer
+      description: The response data.
+      title: Responsedatanonobject
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    NameUser:
+      type: string
+      title: NameUser
     PayabliErrorBody:
       type: object
       properties:
@@ -1024,6 +990,10 @@ components:
 
         '
       title: PayabliErrorBody
+    Mfa:
+      type: boolean
+      description: When `true`, multi-factor authentication (MFA) is enabled.
+      title: Mfa
     AuthResetUserResponse:
       type: object
       properties:
@@ -1034,18 +1004,16 @@ components:
       required:
       - responseText
       title: AuthResetUserResponse
-    Timezone:
-      type: integer
-      description: Timezone, in UTC offset. For example, -5 is Eastern time.
-      title: Timezone
-    DeleteUserResponse:
+    ChangePswUserResponse:
       type: object
       properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
         responseText:
           $ref: '#/components/schemas/ResponseText'
       required:
       - responseText
-      title: DeleteUserResponse
+      title: ChangePswUserResponse
     LogoutUserResponse:
       type: object
       properties:
@@ -1056,22 +1024,54 @@ components:
       required:
       - responseText
       title: LogoutUserResponse
-    MfaData:
+    UserAuthRequest:
       type: object
       properties:
-        mfa:
-          type: boolean
-        mfaMode:
-          $ref: '#/components/schemas/MfaMode'
-      title: MfaData
-    Orgentryname:
+        email:
+          $ref: '#/components/schemas/Email'
+        entry:
+          type: string
+          description: Identifier for entry point originating the request (used by front-end apps)
+        entryType:
+          type: integer
+          description: 'Type of entry identifier: 0 - partner, 2 - paypoint. This is used by front-end apps, required if an Entry is indicated.'
+        psw:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        userTokenId:
+          type: string
+      title: UserAuthRequest
+    PayabliApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedata'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponse
+    MfaValidationCode:
       type: string
-      description: 'The entryname for the org, in string format. If you leave this blank,
+      description: 'The validation code for multi-factor authentication, typically a hash or
 
-        Payabli uses the DBA name.
+        similar encrypted format.
 
         '
-      title: Orgentryname
+      title: MfaValidationCode
+    CreatedAt:
+      type: string
+      format: date-time
+      description: Timestamp of when record was created, in UTC.
+      title: CreatedAt
+    Timezone:
+      type: integer
+      description: Timezone, in UTC offset. For example, -5 is Eastern time.
+      title: Timezone
   securitySchemes:
     BearerAuth:
       type: http

@@ -104,74 +104,35 @@ paths:
               $ref: '#/components/schemas/FileContentImageOnly'
 components:
   schemas:
-    typeResult:
-      type: string
-      description: The type of object to create in Payabli. Accepted values are `bill` and `invoice`.
-      title: typeResult
     OcrVendorAdditionalData:
       type: object
       properties:
         web:
           type: string
       title: OcrVendorAdditionalData
-    OcrBillItemAdditionalData:
+    Contacts:
       type: object
       properties:
-        category:
+        contactEmail:
+          $ref: '#/components/schemas/Email'
+          description: Contact email address.
+        contactName:
           type: string
-        currency_code:
+          description: Contact name.
+        contactPhone:
           type: string
-        type:
+          description: Contact phone number.
+        contactTitle:
           type: string
-        reference_number:
-          type: string
-      title: OcrBillItemAdditionalData
-    OcrResultData:
-      type: object
-      properties:
-        billNumber:
-          type: string
-        netAmount:
-          type: number
-          format: double
-        billDate:
-          type: string
-          format: date-time
-        dueDate:
-          type: string
-          format: date-time
-        comments:
-          type: string
-        billItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/OcrBillItem'
-        mode:
-          type: integer
-        accountingField1:
-          type: string
-        accountingField2:
-          type: string
+          description: Contact title.
         additionalData:
-          $ref: '#/components/schemas/OcrBillItemAdditionalData'
-        vendor:
-          $ref: '#/components/schemas/OcrVendor'
-        endDate:
-          type: string
-          format: date-time
-        frequency:
-          type: string
-        terms:
-          type: string
-        status:
-          type: integer
-        lotNumber:
-          type: string
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/OcrAttachment'
-      title: OcrResultData
+          $ref: '#/components/schemas/AdditionalDataString'
+      title: Contacts
+    Email:
+      type: string
+      format: email
+      description: Email address.
+      title: Email
     OcrVendor:
       type: object
       properties:
@@ -241,75 +202,6 @@ components:
         additionalData:
           $ref: '#/components/schemas/OcrVendorAdditionalData'
       title: OcrVendor
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    AdditionalDataString:
-      type: string
-      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
-      title: AdditionalDataString
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    OcrAttachment:
-      type: object
-      properties:
-        ftype:
-          type: string
-        filename:
-          type: string
-        fileDescriptor:
-          type: string
-        furl:
-          type: string
-        fContent:
-          type: string
-      title: OcrAttachment
-    OcrResponseData:
-      type: object
-      properties:
-        resultData:
-          $ref: '#/components/schemas/OcrResultData'
-      title: OcrResponseData
-    FileContentImageOnly:
-      type: object
-      properties:
-        ftype:
-          $ref: '#/components/schemas/FileContentFtype'
-        filename:
-          type: string
-          description: The name of the file to be uploaded
-        furl:
-          type: string
-          description: Optional URL link to the file
-        fContent:
-          type: string
-          description: Base64-encoded file content
-      title: FileContentImageOnly
-    Email:
-      type: string
-      format: email
-      description: Email address.
-      title: Email
     FileContentFtype:
       type: string
       enum:
@@ -323,51 +215,71 @@ components:
       - txt
       description: The MIME type of the file (if content is provided).
       title: FileContentFtype
-    PayabliApiResponseOCR:
+    PayabliErrorBodyResponseData:
       type: object
       properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseCode:
-          $ref: '#/components/schemas/Responsecode'
-        responseData:
-          $ref: '#/components/schemas/OcrResponseData'
-          description: Details of the OCR processing result
-      required:
-      - isSuccess
-      - responseText
-      - responseCode
-      title: PayabliApiResponseOCR
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
+        explanation:
           type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    OcrResultData:
+      type: object
+      properties:
+        billNumber:
+          type: string
+        netAmount:
+          type: number
+          format: double
+        billDate:
+          type: string
+          format: date-time
+        dueDate:
+          type: string
+          format: date-time
+        comments:
+          type: string
+        billItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OcrBillItem'
+        mode:
+          type: integer
+        accountingField1:
+          type: string
+        accountingField2:
+          type: string
+        additionalData:
+          $ref: '#/components/schemas/OcrBillItemAdditionalData'
+        vendor:
+          $ref: '#/components/schemas/OcrVendor'
+        endDate:
+          type: string
+          format: date-time
+        frequency:
+          type: string
+        terms:
+          type: string
+        status:
+          type: integer
+        lotNumber:
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/OcrAttachment'
+      title: OcrResultData
+    Responsecode:
+      type: integer
+      description: 'Code for the response. Learn more in
 
-        object carries human-readable error context.
+        [API Response Codes](/developers/api-reference/api-responses).
 
         '
-      title: PayabliErrorBody
+      title: Responsecode
     OcrBillItem:
       type: object
       properties:
@@ -402,32 +314,26 @@ components:
           items:
             type: string
       title: OcrBillItem
-    Responsecode:
-      type: integer
-      description: 'Code for the response. Learn more in
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
 
-        [API Response Codes](/developers/api-reference/api-responses).
+        indicates success. A `false` value indicates failure.
 
         '
-      title: Responsecode
-    Contacts:
+      title: IsSuccess
+    OcrBillItemAdditionalData:
       type: object
       properties:
-        contactEmail:
-          $ref: '#/components/schemas/Email'
-          description: Contact email address.
-        contactName:
+        category:
           type: string
-          description: Contact name.
-        contactPhone:
+        currency_code:
           type: string
-          description: Contact phone number.
-        contactTitle:
+        type:
           type: string
-          description: Contact title.
-        additionalData:
-          $ref: '#/components/schemas/AdditionalDataString'
-      title: Contacts
+        reference_number:
+          type: string
+      title: OcrBillItemAdditionalData
     OcrVendorBillingData:
       type: object
       properties:
@@ -448,6 +354,100 @@ components:
         bankAccountFunction:
           type: integer
       title: OcrVendorBillingData
+    PayabliApiResponseOCR:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseCode:
+          $ref: '#/components/schemas/Responsecode'
+        responseData:
+          $ref: '#/components/schemas/OcrResponseData'
+          description: Details of the OCR processing result
+      required:
+      - isSuccess
+      - responseText
+      - responseCode
+      title: PayabliApiResponseOCR
+    AdditionalDataString:
+      type: string
+      description: "Custom dictionary of key:value pairs. You can use this field to store any\ndata related to the object or for your system. Example usage:\n\n```json\n{\n  \"additionalData\": {\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n  }\n}\n```\n"
+      title: AdditionalDataString
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    typeResult:
+      type: string
+      description: The type of object to create in Payabli. Accepted values are `bill` and `invoice`.
+      title: typeResult
+    PayabliErrorBody:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
+          type: integer
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
+      required:
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
+    FileContentImageOnly:
+      type: object
+      properties:
+        ftype:
+          $ref: '#/components/schemas/FileContentFtype'
+        filename:
+          type: string
+          description: The name of the file to be uploaded
+        furl:
+          type: string
+          description: Optional URL link to the file
+        fContent:
+          type: string
+          description: Base64-encoded file content
+      title: FileContentImageOnly
+    OcrAttachment:
+      type: object
+      properties:
+        ftype:
+          type: string
+        filename:
+          type: string
+        fileDescriptor:
+          type: string
+        furl:
+          type: string
+        fContent:
+          type: string
+      title: OcrAttachment
+    OcrResponseData:
+      type: object
+      properties:
+        resultData:
+          $ref: '#/components/schemas/OcrResultData'
+      title: OcrResponseData
   securitySchemes:
     BearerAuth:
       type: http

@@ -458,34 +458,6 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
-    PayabliErrorBody:
-      type: object
-      properties:
-        isSuccess:
-          type: boolean
-          description: Always `false` for error responses.
-        responseCode:
-          type: integer
-          description: 'Code for the response. Learn more in
-
-            [API Response Codes](/developers/api-reference/api-responses).
-
-            '
-        responseText:
-          type: string
-          description: Error text describing what went wrong.
-        responseData:
-          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
-          description: Object with detailed error context.
-      required:
-      - isSuccess
-      - responseText
-      description: 'Shape returned by every Payabli API error response. The `responseData`
-
-        object carries human-readable error context.
-
-        '
-      title: PayabliErrorBody
     PayabliErrorBodyResponseData:
       type: object
       properties:
@@ -497,33 +469,105 @@ components:
           description: Suggested resolution.
       description: Object with detailed error context.
       title: PayabliErrorBodyResponseData
-    StatBasicQueryRecord:
+    SubscriptionStatsQueryRecord:
+      type: object
+      properties:
+        interval:
+          type: string
+          description: Time interval identifier
+        count:
+          type: integer
+          description: Number of subscriptions
+        volume:
+          type: number
+          format: double
+          description: Subscription volume
+      required:
+      - interval
+      - count
+      - volume
+      title: SubscriptionStatsQueryRecord
+    StatisticsVendorQueryRecord:
       type: object
       properties:
         statX:
           type: string
           description: Statistical grouping identifier
-        inTransactions:
+        active:
           type: integer
-          description: Number of incoming transactions
-        inTransactionsVolume:
+          description: Number of active transactions
+        activeVolume:
           type: number
           format: double
-          description: Volume of incoming transactions
-        inWalletTransactions:
+          description: Volume of active transactions
+        sentToApproval:
           type: integer
-          description: Number of incoming wallet transactions
-        inWalletVolume:
+          description: Number of transactions sent to approval
+        sentToApprovalVolume:
           type: number
           format: double
-          description: Volume of incoming wallet transactions
+          description: Volume of transactions sent to approval
+        toApproval:
+          type: integer
+          description: Number of transactions to approval
+        toApprovalVolume:
+          type: number
+          format: double
+          description: Volume of transactions to approval
+        approved:
+          type: integer
+          description: Number of approved transactions
+        approvedVolume:
+          type: number
+          format: double
+          description: Volume of approved transactions
+        disapproved:
+          type: integer
+          description: Number of disapproved transactions
+        disapprovedVolume:
+          type: number
+          format: double
+          description: Volume of disapproved transactions
+        cancelled:
+          type: integer
+          description: Number of cancelled transactions
+        cancelledVolume:
+          type: number
+          format: double
+          description: Volume of cancelled transactions
+        inTransit:
+          type: integer
+          description: Number of transactions in transit
+        inTransitVolume:
+          type: number
+          format: double
+          description: Volume of transactions in transit
+        paid:
+          type: integer
+          description: Number of paid transactions
+        paidVolume:
+          type: number
+          format: double
+          description: Volume of paid transactions
       required:
       - statX
-      - inTransactions
-      - inTransactionsVolume
-      - inWalletTransactions
-      - inWalletVolume
-      title: StatBasicQueryRecord
+      - active
+      - activeVolume
+      - sentToApproval
+      - sentToApprovalVolume
+      - toApproval
+      - toApprovalVolume
+      - approved
+      - approvedVolume
+      - disapproved
+      - disapprovedVolume
+      - cancelled
+      - cancelledVolume
+      - inTransit
+      - inTransitVolume
+      - paid
+      - paidVolume
+      title: StatisticsVendorQueryRecord
     StatBasicExtendedQueryRecord:
       type: object
       properties:
@@ -711,105 +755,61 @@ components:
       - inCardChargeBackVolume
       - inACHReturnsVolume
       title: StatBasicExtendedQueryRecord
-    StatisticsVendorQueryRecord:
+    StatBasicQueryRecord:
       type: object
       properties:
         statX:
           type: string
           description: Statistical grouping identifier
-        active:
+        inTransactions:
           type: integer
-          description: Number of active transactions
-        activeVolume:
+          description: Number of incoming transactions
+        inTransactionsVolume:
           type: number
           format: double
-          description: Volume of active transactions
-        sentToApproval:
+          description: Volume of incoming transactions
+        inWalletTransactions:
           type: integer
-          description: Number of transactions sent to approval
-        sentToApprovalVolume:
+          description: Number of incoming wallet transactions
+        inWalletVolume:
           type: number
           format: double
-          description: Volume of transactions sent to approval
-        toApproval:
-          type: integer
-          description: Number of transactions to approval
-        toApprovalVolume:
-          type: number
-          format: double
-          description: Volume of transactions to approval
-        approved:
-          type: integer
-          description: Number of approved transactions
-        approvedVolume:
-          type: number
-          format: double
-          description: Volume of approved transactions
-        disapproved:
-          type: integer
-          description: Number of disapproved transactions
-        disapprovedVolume:
-          type: number
-          format: double
-          description: Volume of disapproved transactions
-        cancelled:
-          type: integer
-          description: Number of cancelled transactions
-        cancelledVolume:
-          type: number
-          format: double
-          description: Volume of cancelled transactions
-        inTransit:
-          type: integer
-          description: Number of transactions in transit
-        inTransitVolume:
-          type: number
-          format: double
-          description: Volume of transactions in transit
-        paid:
-          type: integer
-          description: Number of paid transactions
-        paidVolume:
-          type: number
-          format: double
-          description: Volume of paid transactions
+          description: Volume of incoming wallet transactions
       required:
       - statX
-      - active
-      - activeVolume
-      - sentToApproval
-      - sentToApprovalVolume
-      - toApproval
-      - toApprovalVolume
-      - approved
-      - approvedVolume
-      - disapproved
-      - disapprovedVolume
-      - cancelled
-      - cancelledVolume
-      - inTransit
-      - inTransitVolume
-      - paid
-      - paidVolume
-      title: StatisticsVendorQueryRecord
-    SubscriptionStatsQueryRecord:
+      - inTransactions
+      - inTransactionsVolume
+      - inWalletTransactions
+      - inWalletVolume
+      title: StatBasicQueryRecord
+    PayabliErrorBody:
       type: object
       properties:
-        interval:
-          type: string
-          description: Time interval identifier
-        count:
+        isSuccess:
+          type: boolean
+          description: Always `false` for error responses.
+        responseCode:
           type: integer
-          description: Number of subscriptions
-        volume:
-          type: number
-          format: double
-          description: Subscription volume
+          description: 'Code for the response. Learn more in
+
+            [API Response Codes](/developers/api-reference/api-responses).
+
+            '
+        responseText:
+          type: string
+          description: Error text describing what went wrong.
+        responseData:
+          $ref: '#/components/schemas/PayabliErrorBodyResponseData'
+          description: Object with detailed error context.
       required:
-      - interval
-      - count
-      - volume
-      title: SubscriptionStatsQueryRecord
+      - isSuccess
+      - responseText
+      description: 'Shape returned by every Payabli API error response. The `responseData`
+
+        object carries human-readable error context.
+
+        '
+      title: PayabliErrorBody
   securitySchemes:
     BearerAuth:
       type: http

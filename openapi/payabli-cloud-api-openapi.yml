@@ -256,6 +256,109 @@ paths:
                 $ref: '#/components/schemas/PayabliErrorBody'
 components:
   schemas:
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    IdempotencyKey:
+      type: string
+      description: '_Optional but recommended._ A unique ID that you can include to prevent
+
+        duplicating objects or transactions in the case that a request is sent
+
+        more than once. This key isn''t generated in Payabli; you must generate it
+
+        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
+
+        the key if needed.
+
+        '
+      title: IdempotencyKey
+    DeviceEntry:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description or name for the device. This can be anything, but Payabli recommends entering the name of the paypoint, or some other easy to identify descriptor. If you have several devices for one paypoint, you can give them descriptions like "Cashier 1" and "Cashier 2", or "Front Desk" and "Back Office"
+        registrationCode:
+          type: string
+          description: 'The device registration code or serial number, depending on the model.
+
+
+            - Ingenico devices: This is the activation code that''s displayed on the device screen during setup.
+
+
+            - PAX A920 device: This code is the serial number on the back of the device.'
+      title: DeviceEntry
+    AddDeviceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          type: string
+          description: 'If `isSuccess` = true, this contains the device identifier.
+
+            If `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: AddDeviceResponse
+    RemoveDeviceResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        pageIdentifier:
+          $ref: '#/components/schemas/PageIdentifier'
+        responseData:
+          type: string
+          description: 'If `isSuccess` = true, this contains the device identifier.
+
+            If `isSuccess` = false, this contains the reason for the error.
+
+            '
+      required:
+      - responseText
+      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
+
+        the standard response envelope.
+
+        '
+      title: RemoveDeviceResponse
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     PayabliErrorBody:
       type: object
       properties:
@@ -284,69 +387,6 @@ components:
 
         '
       title: PayabliErrorBody
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    IdempotencyKey:
-      type: string
-      description: '_Optional but recommended._ A unique ID that you can include to prevent
-
-        duplicating objects or transactions in the case that a request is sent
-
-        more than once. This key isn''t generated in Payabli; you must generate it
-
-        yourself. The key persists for 2 minutes. After 2 minutes, you can reuse
-
-        the key if needed.
-
-        '
-      title: IdempotencyKey
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    AddDeviceResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          type: string
-          description: 'If `isSuccess` = true, this contains the device identifier.
-
-            If `isSuccess` = false, this contains the reason for the error.
-
-            '
-      required:
-      - responseText
-      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
-
-        the standard response envelope.
-
-        '
-      title: AddDeviceResponse
     CloudQueryApiResponse:
       type: object
       properties:
@@ -367,46 +407,6 @@ components:
       type: string
       description: Auxiliary validation used internally by payment pages and components.
       title: PageIdentifier
-    DeviceEntry:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description or name for the device. This can be anything, but Payabli recommends entering the name of the paypoint, or some other easy to identify descriptor. If you have several devices for one paypoint, you can give them descriptions like "Cashier 1" and "Cashier 2", or "Front Desk" and "Back Office"
-        registrationCode:
-          type: string
-          description: 'The device registration code or serial number, depending on the model.
-
-
-            - Ingenico devices: This is the activation code that''s displayed on the device screen during setup.
-
-
-            - PAX A920 device: This code is the serial number on the back of the device.'
-      title: DeviceEntry
-    RemoveDeviceResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        pageIdentifier:
-          $ref: '#/components/schemas/PageIdentifier'
-        responseData:
-          type: string
-          description: 'If `isSuccess` = true, this contains the device identifier.
-
-            If `isSuccess` = false, this contains the reason for the error.
-
-            '
-      required:
-      - responseText
-      description: 'Minimal response wrapper used by approval-style endpoints that don''t carry
-
-        the standard response envelope.
-
-        '
-      title: RemoveDeviceResponse
     PoiDevice:
       type: object
       properties:

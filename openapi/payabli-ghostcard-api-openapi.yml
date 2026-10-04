@@ -134,6 +134,61 @@ paths:
               $ref: '#/components/schemas/UpdateCardRequestBody'
 components:
   schemas:
+    PayabliErrorBodyResponseData:
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: Human-readable explanation of what happened.
+        todoAction:
+          type: string
+          description: Suggested resolution.
+      description: Object with detailed error context.
+      title: PayabliErrorBodyResponseData
+    ResultCode:
+      type: integer
+      description: 'Result code for the operation. Value `1` indicates a successful
+
+        operation, values `2` and `3` indicate errors. A value of `10` indicates
+
+        that an operation has been initiated and is pending.
+
+        '
+      title: ResultCode
+    PayabliApiResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseData:
+          $ref: '#/components/schemas/Responsedata'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+      required:
+      - responseText
+      title: PayabliApiResponse
+    Entry:
+      type: string
+      description: 'The entity''s entrypoint identifier.
+
+        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
+
+        '
+      title: Entry
+    ResponseText:
+      type: string
+      description: 'Response text for operation: ''Success'' or ''Declined''.
+
+        '
+      title: ResponseText
+    IsSuccess:
+      type: boolean
+      description: 'Boolean indicating whether the operation was successful. A `true` value
+
+        indicates success. A `false` value indicates failure.
+
+        '
+      title: IsSuccess
     PayabliErrorBody:
       type: object
       properties:
@@ -162,122 +217,6 @@ components:
 
         '
       title: PayabliErrorBody
-    PayabliErrorBodyResponseData:
-      type: object
-      properties:
-        explanation:
-          type: string
-          description: Human-readable explanation of what happened.
-        todoAction:
-          type: string
-          description: Suggested resolution.
-      description: Object with detailed error context.
-      title: PayabliErrorBodyResponseData
-    CreateGhostCardResponseData:
-      type: object
-      properties:
-        ReferenceId:
-          type: string
-          description: Card token for the ghost card. Use this value to reference the card in subsequent operations (update, cancel, etc.).
-        ResultCode:
-          $ref: '#/components/schemas/ResultCode'
-        ResultText:
-          $ref: '#/components/schemas/Resulttext'
-      title: CreateGhostCardResponseData
-    IsSuccess:
-      type: boolean
-      description: 'Boolean indicating whether the operation was successful. A `true` value
-
-        indicates success. A `false` value indicates failure.
-
-        '
-      title: IsSuccess
-    ResponseText:
-      type: string
-      description: 'Response text for operation: ''Success'' or ''Declined''.
-
-        '
-      title: ResponseText
-    UpdateCardRequestBody:
-      type: object
-      properties:
-        cardToken:
-          type: string
-          description: Token that uniquely identifies the card. This is the `ReferenceId` returned when the card was created.
-        status:
-          $ref: '#/components/schemas/CardStatus'
-          description: The new status to set on the card.
-      required:
-      - cardToken
-      title: UpdateCardRequestBody
-    PayabliApiResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseData:
-          $ref: '#/components/schemas/Responsedata'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-      required:
-      - responseText
-      title: PayabliApiResponse
-    Responsedata:
-      type: object
-      additionalProperties:
-        description: Any type
-      description: The object containing the response data.
-      title: Responsedata
-    ResultCode:
-      type: integer
-      description: 'Result code for the operation. Value `1` indicates a successful
-
-        operation, values `2` and `3` indicate errors. A value of `10` indicates
-
-        that an operation has been initiated and is pending.
-
-        '
-      title: ResultCode
-    Entry:
-      type: string
-      description: 'The entity''s entrypoint identifier.
-
-        [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry).
-
-        '
-      title: Entry
-    CardStatus:
-      type: string
-      enum:
-      - Active
-      - Inactive
-      - Cancelled
-      - Expired
-      description: 'The status to set on the card. Not all transitions are valid: `Active` can change to `Inactive`, `Cancelled`, or `Expired`. `Inactive` can change to `Active`. `Expired` can change to `Active` (renews the card). `Cancelled` is terminal and can''t be changed.'
-      title: CardStatus
-    CreateGhostCardResponse:
-      type: object
-      properties:
-        isSuccess:
-          $ref: '#/components/schemas/IsSuccess'
-        responseText:
-          $ref: '#/components/schemas/ResponseText'
-        responseData:
-          $ref: '#/components/schemas/CreateGhostCardResponseData'
-      required:
-      - responseText
-      description: Response for creating a ghost card.
-      title: CreateGhostCardResponse
-    Resulttext:
-      type: string
-      description: 'Text describing the result. If `ResultCode` = 1, will return `Approved`
-
-        or a general success message. If `ResultCode` = 2 or 3, will contain
-
-        the cause of the error or decline.
-
-        '
-      title: Resulttext
     CreateGhostCardRequestBody:
       type: object
       properties:
@@ -346,6 +285,67 @@ components:
       - dailyAmountLimit
       - transactionAmountLimit
       title: CreateGhostCardRequestBody
+    Responsedata:
+      type: object
+      additionalProperties:
+        description: Any type
+      description: The object containing the response data.
+      title: Responsedata
+    CardStatus:
+      type: string
+      enum:
+      - Active
+      - Inactive
+      - Cancelled
+      - Expired
+      description: 'The status to set on the card. Not all transitions are valid: `Active` can change to `Inactive`, `Cancelled`, or `Expired`. `Inactive` can change to `Active`. `Expired` can change to `Active` (renews the card). `Cancelled` is terminal and can''t be changed.'
+      title: CardStatus
+    CreateGhostCardResponseData:
+      type: object
+      properties:
+        ReferenceId:
+          type: string
+          description: Card token for the ghost card. Use this value to reference the card in subsequent operations (update, cancel, etc.).
+        ResultCode:
+          $ref: '#/components/schemas/ResultCode'
+        ResultText:
+          $ref: '#/components/schemas/Resulttext'
+      title: CreateGhostCardResponseData
+    Resulttext:
+      type: string
+      description: 'Text describing the result. If `ResultCode` = 1, will return `Approved`
+
+        or a general success message. If `ResultCode` = 2 or 3, will contain
+
+        the cause of the error or decline.
+
+        '
+      title: Resulttext
+    CreateGhostCardResponse:
+      type: object
+      properties:
+        isSuccess:
+          $ref: '#/components/schemas/IsSuccess'
+        responseText:
+          $ref: '#/components/schemas/ResponseText'
+        responseData:
+          $ref: '#/components/schemas/CreateGhostCardResponseData'
+      required:
+      - responseText
+      description: Response for creating a ghost card.
+      title: CreateGhostCardResponse
+    UpdateCardRequestBody:
+      type: object
+      properties:
+        cardToken:
+          type: string
+          description: Token that uniquely identifies the card. This is the `ReferenceId` returned when the card was created.
+        status:
+          $ref: '#/components/schemas/CardStatus'
+          description: The new status to set on the card.
+      required:
+      - cardToken
+      title: UpdateCardRequestBody
   securitySchemes:
     BearerAuth:
       type: http
