@@ -1,0 +1,151 @@
+{
+  "endpoint": "https://mcp.inkeep.com/payabli/mcp",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "inkeep-mcp-payabli-server",
+    "version": "1.12.3"
+  },
+  "result": {
+    "tools": [
+      {
+        "name": "search-payabli-docs",
+        "description": "Use this tool to do a semantic search for reference content related to Payabli. The results provided will be extracts from documentation sites and other public sources like GitHub. The content may not fully answer your question -- be circumspect when reviewing and interpreting these extracts before using them in your response.",
+        "inputSchema": {
+          "properties": {
+            "query": {
+              "title": "Query",
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "title": "mcp_rag_toolArguments",
+          "type": "object"
+        },
+        "outputSchema": {
+          "$defs": {
+            "InkeepRAGDocument": {
+              "properties": {
+                "type": {
+                  "title": "Type",
+                  "type": "string"
+                },
+                "source": {
+                  "additionalProperties": true,
+                  "title": "Source",
+                  "type": "object"
+                },
+                "title": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Title"
+                },
+                "context": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Context"
+                },
+                "record_type": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Record Type"
+                },
+                "url": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Url"
+                }
+              },
+              "required": [
+                "type",
+                "source"
+              ],
+              "title": "InkeepRAGDocument",
+              "type": "object"
+            }
+          },
+          "properties": {
+            "content": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/InkeepRAGDocument"
+              },
+              "title": "Content",
+              "type": "array"
+            }
+          },
+          "title": "InkeepRAGResponse",
+          "type": "object"
+        }
+      },
+      {
+        "name": "ask-question-about-payabli",
+        "description": "Use this tool to ask a question about Payabli to an AI Support Agent that is knowledgeable about Payabli. Use this tool to ask specific troubleshooting, feature capability, or conceptual questions. Be specific and provide the minimum context needed to address your question in full",
+        "inputSchema": {
+          "properties": {
+            "query": {
+              "title": "Query",
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "title": "mcp_qa_toolArguments",
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "result": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Result"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "title": "mcp_qa_toolOutput",
+          "type": "object"
+        }
+      }
+    ]
+  }
+}
